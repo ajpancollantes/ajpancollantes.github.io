@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><p>$\newcommand{\deriv}[2] {\frac{\partial #1}{\partial #2}}$</p>
+<h1 style="margin-left:0px;" id="Lagrangian_Mechanics">Lagrangian Mechanics</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="Classical_approach">Classical approach</h2>
+<p>Is another formulation of <a href="./Classical Mechanics.md.html">Classical Mechanics</a>. </p>
+<p>This approach is very different to <a href="./axiomatic Newtonian mechanics.md.html">that of Newton</a>, aunque da lugar a una teoría equivalente, y soluciona los mismos problemas. En primer lugar, los problemas se reescriben en términos de coordenadas generalizadas, no necesariamente espaciales (pueden ser distancias, ángulos, etcétera) y no necesariamente cartesianas (polares, cilíndricas o cualquier otra que convenga a la resolución del problema).</p>
+<p></p>
+<p>Tales coordenadas dan lugar a una variedad abstracta denotada normalmente $M$ o $\mathcal{C}$ (<b>configuration space</b>) particular para cada problema, en la que cada punto representa un estado del sistema estudiado (una combinación de posiciones de partículas, posiciones y ángulos de sólidos rígidos, velocidades...). Una curva $\alpha: I\subseteq \mathbb{R} \to M$ representa una evolución posible del sistema, y <b>el problema genérico de la mecánica es encontrar cuál es esa curva</b> para un punto $(Q,v)\in TM$ del espacio tangente, siendo $\alpha(0)=Q$ y $\alpha'(0)=v$. </p>
+<p></p>
+<p>Pues bien, el principio de Lagrange y Hamilton, or <a href="./../♾️ CONCEPTS/principle of least action.md.html">principle of least action</a>, es que tal curva será aquella que minimice la cantidad de "Lagrangiano global". Es decir, <b>para el sistema en cuestión</b> se define una función </p>
+$$
+L: TM \to \mathbb{R}
+$$
+<p>que mide, para cada $(p,v) \in TM$, el "peaje a pagar" por pasar por un punto $p$ con velocidad $v$. </p>
+<p></p>
+<p>Una curva-evolución $\alpha$ cualquiera tiene una "acumulación de lagrangiano" dada por </p>
+$$
+J(\alpha)=\int_I L(\alpha(t), \alpha'(t)) dt
+$$
+<p>Pues bien, por principio <b>asumimos</b> que <b>la curva solución es aquélla con menor o mayor</b> $J(\alpha)$ (this is the <a href="./../♾️ CONCEPTS/principle of least action.md.html">principle of least action</a>). Y también asumimos la forma de la función $L$. Estas asunciones surgen, como todo en física, de la <b>observación de la Naturaleza</b>.</p>
+<p></p>
+<p><b>Personal idea</b>: Visualizo el Lagrangiano como un peaje que hay que pagar por coger un determinado camino a una determinada velocidad. Hay que intentar minimizar el pago (ojo, o maximizar). From this point of view, the Lagrangian is like a kind of <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> and we are computing a <a href="./../♾️ CONCEPTS/GEOMETRY/geodesic curve.md.html">geodesic curve</a>. This is not, of course, the case except in some cases. I think this has to do with <a href="./Finsler manifold.md.html">Finsler manifold</a>s.</p>
+<p></p>
+<p>Therefore, every model of Lagrangian Mechanics is a particular case of a <a href="./../♾️ CONCEPTS/variational problem.md.html">variational problem</a>.</p>
+<p></p>
+<p>A way to find the minimum or maximum of $J$ is resolve the <a href="./../♾️ CONCEPTS/Euler-Lagrange.md.html">Euler-Lagrange</a> equations:</p>
+$$
+\frac{d}{dt}\left(  \deriv{L}{\dot{q}^k} \right)=\deriv{L}{q^k}
+$$
+<p>This equation implies Newton second law when we take $L=\dfrac{1}{2} m \dot{x}^2-V(x)$, where $V$ is the potential of the force:</p>
+$$
+\deriv{L}{\dot{x}}=m\dot{x}
+$$
+$$
+\deriv{L}{x}=-\deriv{V}{x}=F
+$$
+<p>so</p>
+$$
+m\ddot{x}=F
+$$
+<h1 style="margin-left:0px;" id="Jet_space_approach">Jet space approach</h1>
+<p>From the point of view of the <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a>s, we have what follows. </p>
+<p>We have the configuration manifold $M$ and the infinite jet bundle $J^{\infty} (\mathbb{R},M)$. We have the <a href="./../♾️ CONCEPTS/GEOMETRY/Cartan distribution.md.html#Vector_fields_description">total derivative operator</a> $D_t$.</p>
+<p></p>
+<p>Physics is introduced by the Lagrangian, which is an horizontal $1$-form  on the first order <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> $J^1(\mathbb{R},\mathbb{R})$:</p>
+$$
+\lambda=L(t,u,u_1)dt.
+$$
+<p>(See the annotation <a href="./../♾️ CONCEPTS/variational bicomplex.md.html">variational bicomplex</a>.)</p>
+<p></p>
+<p>The important sections $\phi$ are those which extremize the functional</p>
+$$
+S[\phi]=\int_T (j^1\phi)^*(\lambda)
+$$
+<p>being $T$ a closed interval of $\mathbb{R}$.</p>
+<p></p>
+<p>The condition of $\phi$ extremizing this functional is equivalent to satisfying <a href="./../♾️ CONCEPTS/Euler-Lagrange.md.html">Euler-Lagrange</a> equation, a second order <a href="./../♾️ CONCEPTS/DEs/ODE.md.html">ODE</a>.</p>
+<p></p>
+<p>So we can define a map</p>
+$$
+\Delta: J^2 (\mathbb{R},M) \longmapsto \mathbb{R}
+$$
+<p>that codifies the Euler-Lagrange equations associated to a Lagrangian $\lambda.$ (I think the actual object is not a "map" but a 2-form called the <a href="./Poincare-Cartan form.md.html">Poincare-Cartan form</a> $\Omega_{\lambda}$.)</p>
+<p></p>
+<p>Therefore, our Lagrangian (and the <a href="./../♾️ CONCEPTS/principle of least action.md.html">principle of least action</a>) defines a submanifold $S_{\Delta} \subset J^2(\mathbb{R},M)$ given by </p>
+$$
+\Delta(t,u,u_1,u_2)=0.
+$$
+<p>Given a curve $\alpha: \mathbb{R} \mapsto M$, its <a href="./../♾️ CONCEPTS/GEOMETRY/prolongation of a section.md.html">prolongation</a></p>
+$$
+pr(\alpha): \mathbb{R} \longmapsto J^2 (\mathbb{R},M)
+$$
+<p>may or may not live inside $S_{\Delta}$. Of course, $\alpha$ is a critical curve when it does.</p>
+<p><img src="./../imagenes/Pasted image 20220424110227.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>(pizarra_016)</p>
+<p></p>
+<p>I have a visualization of the relation of minimizing the action with satisfying <a href="./../♾️ CONCEPTS/Euler-Lagrange.md.html">Euler-Lagrange</a> in xournal_154, although it is done from a "discrete point of view".</p>
+<p></p>
+<p>On the other hand, I guess that a group symmetry for the Lagrangian $L: J^1 (\mathbb{R},M)\mapsto \mathbb{R}$ implies that this group leaves invariant the submanifold $S_{\Delta}$, but I have to proof it. I have to learn more on <a href="./../♾️ CONCEPTS/variational symmetry.md.html">variational symmetry</a>s.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Other_facts">Other facts</h1>
+<p>Besides the equations of motion you have <a href="./../♾️ CONCEPTS/holonomic constraint.md.html">holonomic constraint</a>s or <a href="./../♾️ CONCEPTS/nonholonomic constraint.md.html">nonholonomic constraint</a>s.</p>
+<p></p>
+<p>Several Lagrangians can give rise to the same theory: <a href="./../♾️ CONCEPTS/equivalent Lagrangians.md.html">equivalent Lagrangians</a> </p>
+<p></p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

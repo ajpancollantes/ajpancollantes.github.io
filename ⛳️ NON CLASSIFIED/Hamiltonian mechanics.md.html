@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Hamiltonian_mechanics">Hamiltonian mechanics</h1>
+<p>Los estados de un sistema vienen determinados por variables generalizadas y sus derivadas. Es decir, trabajamos en el fibrado tangente del espacio de la configuración, o el <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> de orden 1. Eso forma parte de la formulación: <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>.</p>
+<p></p>
+<p>La <a href="./../♾️ CONCEPTS/Legendre transform.md.html">Legendre transform</a> nos permite pasar todo al <b>fibrado cotangente</b>. Los estados del sistema van a venir determinados por las variables y los momentos generalizados. Puede parecer muy incómodo, pero tiene ventajas en la interpretación geométrica.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Symplectic_form">Symplectic form</h2>
+<p>In any cotangent bundle $T^*Q$ we have a canonical 1-form known as tautological 1-form, Poincaré 1-form, Liouville 1-form, symplectic potential or canonical 1-form. Let's see how is defined. We are looking for an element $\lambda \in \Omega^1(T^*Q)$, so consider an element (in any local chart, it doesn't have to be the special one provide by the lagrangian) $(q,p)\in T^*Q.$ We want a definition for a map</p>
+$$\lambda_{(q,p)}: T_{(q,p)}(T^*Q)\longmapsto \mathbb{R}
+$$
+<p>Since in local chart we see elements in the form </p>
+$$
+(q,p,v,\eta)\in T_{(q,p)}(T^*Q)
+$$
+<p>it seems natural to forget $\eta$ and take</p>
+$$
+\lambda_{(q,p)}(q,p,v,\eta)=p(v)
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>But we can define it without coordinates.</p>
+<p></p>
+<p>Consider</p>
+$$
+\pi: T^*Q\longmapsto Q
+$$
+<p>and</p>
+$$
+d\pi: T(T^*Q)\longmapsto TQ
+$$
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So we can define </p>
+$$
+\lambda: T^*Q \longmapsto T^*(T^*Q)
+$$
+<p>by</p>
+$$
+\lambda_{\alpha}=\pi^*(\alpha)
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p></p>
+<p>Now, we can take the exterior derivative, $\omega:=d\lambda$. This is called the Poincaré 2-form, or symplectic 2-form. It is canonical for every cotangent bundle and verifies:</p>
+<p><ul style="margin-left:0px;"><li>- It is closed.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- It is nondegenerate. That is, for every vector $X\in T(T^*Q)$, the 1-form $i_X \omega=\omega(X,-)$ is not null</li></ul></p>
+<p></p>
+<p></p>
+<p>Any manifold equipped with a 2-form satisfying both conditions is called a <b>symplectic manifold</b>.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<h2 style="margin-left:0px;" id="Hamiltonian_vector_fields">Hamiltonian vector fields	</h2>
+<p></p>
+<p><b>This symplectic form has a main use</b>: to convert the differential of the hamiltonian, $dH$, into a vector field called the <b>symplectic gradient</b>: the only vector field $X_H$ such that $\omega(X_H,-)=dH$. If we have also a <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> $g$, it turns out that this symplectic gradient and the usual gradient are orthogonal: remember that given a function $H$ the gradient is the only vector field $\nabla H$ such that $dH=g(\nabla H,-)$. Therefore</p>
+$$
+g(\nabla H, X_H)=dH(X_H)=\omega(X_H,X_H)=0
+$$
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>It's important to observe that:</p>
+<p><ul style="margin-left:0px;"><li>1. $i_{X_H} \omega=dH$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>2. $\mathcal{L}_{X_H} \omega=0$. It is proven by Cartan's formula.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>3. $\mathcal{L}_{X_H}\omega^n=0$. This $2n$- form is a volume form. So the flow over the Hamiltonian vector field conserve the volume. This fact is known as <b>Liouville theorem</b>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li>More things about:</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- $T^*Q$ is a space that represents the <b>states</b> of the system. The function $H: T^*Q \mapsto \mathbb{R}$ determines the <b>dynamic</b> of the system. $H$ produces a vector field, $X$, the symplectic gradient, that yields the dynamic itself. Its flow, $\phi$, is again the dynamic.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>- $X$ is tangent to hypersurfaces $H=cte$:</li></ul></p>
+$$
+ X(H)=dH(X)=i_X(\omega)(X)=0
+$$ 
+<p>(maybe with a minus sign?)</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>So $H$ is constant along the $\phi$ curves:</li></ul></p>
+$$
+ X(H)=\frac{d}{dt}H\circ \phi
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li>- The one-parameter group $\phi$ is the evolution of the system. This privileged parameter $t$ will be called <b>time</b>.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>- Imagine other function $F:T^*Q\mapsto \mathbb{R}$. Possibly you want to know how it changes with _time_. Fix a initial point $P$:</li></ul></p>
+$$
+ D=\frac{d}{dt}(F\circ \phi)=X(F)=dF(X)
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li>But observe that if we take $Y$ such that $i_Y \omega=-dF$ then</li></ul></p>
+$$
+ dF(X)=-i_Y \omega (X)=-\omega(Y,X)=
+$$
+$$
+=\omega(X,Y)=i_X\omega(Y)=-dH(Y)=-Y(H)
+$$
+<p><ul style="margin-left:0px;"><li>So the interesting quantity $D$ can be computed in two ways</li></ul></p>
+$$
+ X(F)=-Y(H)
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li>This motivate a new definition. Remove, temporarily, the special paper to $H$. For the functions $F, H$ we define the Poisson brackets as the new function:</li></ul></p>
+$$
+ \{F,H\}=X(F)=-Y(H)=\omega(X,Y) 
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li>- $\left\{q_{i}, p_{j}\right\}=\delta_{i j}$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>- Observe that if we leave a slot $\{-,H\}$ we have an operator that acts over functions. In fact, is the vector field $X$! So the Poisson bracket let us to find the symplectic gradient \textbf{directly}, without the use of $d$ and $\omega$. More explicitly</li></ul></p>
+$$
+ X_f=\{-,f\}
+ $$
+<p></p>
+<p><ul style="margin-left:0px;"><li>From $d\omega=0$ it can be deduced the  Jacobi identity:</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+ \{f,\{g, h\}\}=\{\{f, h\}, g\}+\{h,\{f, g\}\}
+$$
+<p><ul style="margin-left:0px;"><li>for any three functions $f, g, h$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Leaving an slot instead of $f$ we get</li></ul></p>
+$$
+ \{-,\{g,h\}\}=\left[ \{-,g\}, \{-,h\}\right]
+$$
+<p><ul style="margin-left:0px;"><li>expression that can be rewritten as</li></ul></p>
+$$
+ X_{\{g,h\}}=[X_g,X_h]=X_{\omega(X_g,X_h)}
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li>- Taking the Poisson bracket of any function with a moment $p_i$ gives us how the function varies along the associated coordinate $q_i$:</li></ul></p>
+$$
+ \{F,p_i\}=X_{p_i}(F)
+$$
+<p><ul style="margin-left:0px;"><li>but $X_{p_i}$ is just $\partial q_i$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>- $\{f,g\}$ can be interpreted as the area of the paralelogram made of $X_f$ and $X_g$</li></ul></p>
+$$
+ \{f,g\}=X_g(f)=df(X_g)=\nabla f \cdot X_g
+$$ 
+<p></p>
+<p><ul style="margin-left:0px;"><li>Any function $f \in \mathcal{C}^{\infty}(T^*Q)$ is called an \textbf{observable}. They constitute a commutative algebra that is, in fact, a \textbf{Poisson algebra} due to the existence of the Poisson bracket $\{-,-\}$. If you fix any $f\in \mathcal{C}^{\infty}(T^*Q)$ then you get a one-parameter local tranformation group for $\mathcal{C}^{\infty}(T^*Q)$ in the following way.</li></ul></p>
+<p>First, you have the vector field $X_f$ given by</p>
+$$
+X_f=\{-,f\}
+$$
+<p>Then, the <a href="./../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">flow theorem for vector fields</a> let you assure that there exists the local flow</p>
+$$
+\phi_s:T^*Q \mapsto T^*Q
+$$
+<p>such that</p>
+<p></p>
+<p>1. $\phi_0=id$</p>
+<p></p>
+<p>1. $\frac{d}{ds} \phi_s (m)|_{s=0}=X_f$</p>
+<p></p>
+<p>1. $\phi_s \circ \phi_t=\phi_{s+t}$</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>Now, we can define a family of transformations</p>
+$$
+F^{\phi_s}: \mathcal{C}^{\infty}(T^*Q) \longmapsto \mathcal{C}^{\infty}(T^*Q)
+$$
+<p>by means of</p>
+$$
+g \longmapsto F^{\phi_s}(g)=g \circ \phi_s 
+$$
+<p></p>
+<p>I interpret observables as little machines that you can place where you want (in a broad sense of the meaning of "where", because this includes time and any other variable properties like temperature or energy, but we are treating them as "space") and then you can read a number in their screen. What this is telling to us is that given any of those machines, say \(f\), we can construct a \textit{modifier of machines} that depends on one parameter and that yields a group. Observe that the definition of the modifier use the symplectic form, or the Poisson bracket, which is a bit annoying for me. I think that this would be removed if we go to the \(C^*-\)algebra formulation...</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>On the other hand, we have that </p>
+$$
+\frac{d}{ds} F^{\phi_s}(g)=\frac{d}{ds}(g\circ \phi_s)=dg_{\phi_{s}(-)} \cdot X_f=X_f(g\circ \phi_s)=\{F^{\phi_s}(g),f\}
+$$
+<p>and</p>
+$$
+F^{\phi_0}(g)=g.
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>And also, $F^{\phi_s}$ respect the Poisson algebra structure.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Reciprocally, if we start with a function $f$ and an associated family of transformations of $\mathcal{C}^{\infty}(T^*Q)$ to $\mathcal{C}^{\infty}(T^*Q)$ that preserve the structure of Poisson algebra and such that</p>
+<p><ul style="margin-left:0px;"><li>$\frac{d}{d s} F_{s}^{f}(g)=\left\{F_{s}^{f}(g),f \right\}$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$F_{0}^{f}(g)=g$</li></ul></p>
+<p></p>
+<p>we can define a flow $\phi_s$ in $T^*Q$ such that</p>
+$$
+F_s^f(g)=F^{\phi_s}(g)
+$$
+<p></p>
+<p>We proceed by taking the vector field $\{-,f\}$ and the associated flow $\phi_t$, and using the two required properties, above. Since </p>
+$$
+\frac{d}{ds} F^{\phi_s}(g)=\frac{d}{d s} F_{s}^{f}(g)
+$$
+<p>and</p>
+$$
+F^{\phi_0}(g)=F_{0}^{f}(g)
+$$
+<p>we can show that $F_s^f(g)=F^{\phi_s}(g)$ by fixing a point $P\in T^*Q$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>We indeed have a duality, between transformations in $T^* Q$ and transformation in $\mathcal{C}^{\infty}(T^* Q)$. Why do we pass from the flow in the phase space $T^*Q$ to the "flow of observables"? Because this way, I guess, we can formulate everything in terms of algebras, and we get a deeper insight in the connection with QM.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

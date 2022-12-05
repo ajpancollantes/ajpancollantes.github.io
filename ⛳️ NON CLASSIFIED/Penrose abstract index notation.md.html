@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Penrose_abstract_index_notation">Penrose abstract index notation</h1>
+<p>Todo esto está en [Malament 2012]</p>
+<p></p>
+<p>Sea $V$ un espacio vectorial y $V^a, V^b, \ldots$ una colección indeterminada de espacios isomorfos a $V$ con isomorfismos concretados. Sea $V^*$ su dual, y $V_a, V_b, \ldots$ una colección análoga a la anterior pero para $V^*$. Ojo, $a,b,c,\ldots$ no son números, sino etiquetas.</p>
+<p></p>
+<p>En lo que sigue, $v^a$ será un elemento de $V^a$, para cualquier índice $a$, y $v_a$ lo será de $V_a$. Además, el isomorfismo concretado entre $V^a$ y $V^b$ enviará $v^a$ a $v^b$ (análogamente para los duales).</p>
+<p></p>
+<p>Vamos a definir una familia de espacios vectoriales $V^{abc\ldots}_{xyz\ldots}$ y una serie de operaciones con ellos. Pero lo haremos con un ejemplo concreto: $V_c^{ab}$ para mayor simplicidad (es fácil generalizarlo luego).</p>
+<p></p>
+<p>El espacio $V_c^{ab}$ está definido como el espacio vectorial de todas las aplicaciones lineales que envían ternas no ordenadas $\{u_a,u_b,u^c\}$ a $\mathbb{R}$. Coinciden con los tensores de $V$ de tipo $(2,1)$ de la sección tensoreslineales (anotaciones Latex antiguas, pasar a obsidian).</p>
+<p></p>
+<p>¿Qué forma tienen los elementos de $V_c^{ab}$?</p>
+<p>Son aplicaciones lineales $T(-_a,-_b,-^c)$. Dados $\psi^a \in V^a, \varphi^b \in V^b, \phi_c \in V_c$, determinan un elemento de $V_c^{ab}$ denotado $\psi^a\varphi^b\phi_c$ de la siguiente forma:</p>
+$$
+\psi^a\varphi^b\phi_c(\{u_a,u_b,u^c\})=\psi^a(u_a)\varphi^b(u_b)\phi_c(u^c) \in \mathbb{R}
+$$
+<p>cantidad que será denotada indistintamente por</p>
+$$
+\psi^a u_a\varphi^b u_b \phi_c u^c =u_a\psi^a\varphi^b u^c u_b\phi^c=\cdots
+$$
+<p>Es decir, obviaremos los paréntesis y permitiremos cualquier conmutatividad entre los elementos de los espacios vectoriales implicados.</p>
+<p></p>
+<p>¿Hay más elementos en $V_c^{ab}$?</p>
+<p>Sí. Denotemos por $\{\stackrel{_1}{\xi^a}, \stackrel{_2}{\xi^a},\cdots \}$ una base de $V^a$ y $\{\stackrel{_1}{\alpha_a}, \stackrel{_2}{\alpha_a},\cdots \}$ su correspondiente base dual en $V_a$ para cada $a$. Entonces las ternas $\stackrel{_i}{\xi^a}\stackrel{_j}{\xi^b}\stackrel{_k}{\alpha_c}$ forman una base de $V_c^{ab}$. Es decir, cualquier $\lambda_c^{ab} \in V_c^{ab}$ es</p>
+$$
+\lambda_c^{ab}=\sum \stackrel{ijk}{c} \cdot  \stackrel{_i}{\xi^a}\stackrel{_j}{\xi^b}\stackrel{_k}{\alpha_c}
+$$
+<p>Observaciones:</p>
+<p><ul style="margin-left:0px;"><li>Aunque la notación es conmutativa en cuanto a los "elementos" no lo es en cuanto a los índices. Se ve fácilmente que $\lambda_{ab}$ no es lo mismo que $\lambda_{ba}$ si las expresamos en la base. Ambas son aplicaciones lineales sobre parejas no ordenadas de elementos de $V_a$ y $V_b$ pero no producen la misma respuesta.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Multiplicación. Podemos multiplicar tensores teniendo en cuenta que, para la coherencia en la notación, todo se deja indicado excepto si aparecen, en cualquier posición, un vector y un covector del mismo $a$, en cuyo caso se transforman en un número real. El orden no importa.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Sustituir índices. Los índices son puramente símbolos, sólo importa el lugar que ocupen. Se puede formalizar esto (ver \cite{malament} página 29).</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Contracción. Dado un tensor, WLOG, $\lambda_{abc}^{def} \in V_{abc}^{def}$, podemos construir otro como por ejemplo $\lambda_{abc}^{aef} \in V_{bc}^{ef}$ usando el isomorfismo que vincula $V^d$ y $V^a$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Lo del $\delta_a^b$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Simetrización y antisimetrización.</li></ul></p>
+<p></p>
+<p>En resumen, la clave está en usar unas etiquetas (los índices abstractos) para señalar qué vector se aplica a qué 1-forma, o para que una operación se deje sin hacer. Por ejemplo: $\alpha_a v^a$ es un  <b>número real</b>, pero $\alpha_a v^b$ es <b>una aplicación lineal</b>.</p>
+<p>Se complementa muy bien con la <a href="./Penrose diagramatic notation.md.html">Penrose diagramatic notation</a>.</p>
+<p></p>
+<p></p>
+<p><b>Kepp an eye:</b></p>
+<p>In the absence of derivatives this is nearly identical to <a href="./Einstein index notation.md.html">Einstein index notation</a>, but distinctions between the two notational systems become more apparent in the presence of covariant derivatives ($\nabla_\alpha$ in Penrose notation, or a combination of $\partial_i$ and Christoffel symbols in Einstein notation)</p>
+<p></p>
+<p>See <a href="https://mathoverflow.net/questions/366070/what-are-the-benefits-of-writing-vector-inner-products-as-langle-u-v-rangle/366118#366118" target="_blank">this MathOverflow answer</a> the Terence Tao.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

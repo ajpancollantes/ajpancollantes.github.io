@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Newtonian_Mechanics_from_"axioms"">Newtonian Mechanics from "axioms"</h1>
+<p></p>
+<p>We begin with the following principles-postulates</p>
+<p>1. (First Newton law) Among all the possible reference frames there is a class of them, called inertial frames, in which physical laws are in their simplest form.</p>
+<p>2. (Second Newton law) In particular, in any inertial frame we have for any particle over which is acting a force $F$:</p>
+$$
+F=m\cdot a
+$$
+<p>where $m$ is a constant of the particle that we will call mass.</p>
+<p></p>
+<p>3. (Third Newton law) For every force there exist other with opposite direction acting in the particle that originated the first one.</p>
+<p>4. (Galilean transformation) A particle with constant velocity in an inertial frame originate other one of which is its origin, and reciprocally. To change coordinates between inertial frames we use the Galilean matrices $G_v$, with $v$ being the velocity of one to the other. The physical laws remain the same in different inertial frames.</p>
+<p>5. All the forces in Nature come from the gradient of a potencial or, in mathematical terms, every force is an exact differential 1-form in $\mathbb{R}^3$.</p>
+<p></p>
+<p>From here we can conclude several results, some of them considered, wrongly, "principles", by the physicists:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Conservation of momentum. Can be derived from the third Newton law. Also, if we started with principle of least action instead, it is concluded from it, expressing the system in the following generalized coordinates: the centre of mass and the distances of every particle to it.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Conservation of energy. It can be derived from Newton second law and postulate 5 (forces are conservative). It is shown in <a href="./../♾️ CONCEPTS/work and energy.md.html">work and energy</a>. Also, I think is a bit like cheating, because kinetic energy is just defined to get this working.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Principle of least action. From Newton's laws you can deduce the Euler-Lagrange equations and, therefore, the least action principle. You must assume, too, that all the forces are conservative. Conversely, from <a href="./../♾️ CONCEPTS/principle of least action.md.html">principle of least action</a> you could proof Newton laws, so they are equivalent under some assumptions. In the end, it will be taken as the main principle to derive almost everything: in <a href="./Special Relativity.md.html">Special Relativity</a> and <a href="./general relativity theory.md.html">general relativity theory</a>, in <a href="./Quantum Mechanics.md.html">Quantum Mechanics</a>,... For that reason, the only interesting part of this equivalence is that least action principle implies Newton law, because it shows that Newtonian mechanics is a particular case of physics. Moreover, Noether's theorem let us see the conservation theorems follow directly from here, from the simmetries of the Lagrangian.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Conservation of angular momentum. It is concluded using the least action principle applied to the lagrangian of a free particle in polar coordinates.</li></ul></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
