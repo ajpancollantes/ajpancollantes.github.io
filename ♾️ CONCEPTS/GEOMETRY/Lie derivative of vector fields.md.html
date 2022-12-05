@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Lie_derivative">Lie derivative</h1>
+<p></p>
+<p>Es una forma de derivar en variedades diferenciales cualesquiera. Consideremos un campo vectorial $X$ en una variedad $M$. Usando el flujo garantizado por <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">flow theorem for vector fields</a>, $X_t$, para cierto $t$ pequeño, y más concretamente su diferencial $d X_t$ podemos trasladar vectores de otro campo $Y$ entre las fibras tangentes de $p$ y $X_t(p)$. El vector de llegada $d X_t(Y(p))$ y el vector $Y(X_t(p))$ podrán coincidir o no. Si coincinden es que hay cierta compatibilidad entre ambos campos.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>También podemos tirar hacia atrás con $d X_{-t}$ para comparar el vector $Y(p)$ con el que ha ido y ha vuelto, $d X_{-t}(Y(X_t(p)))$. La diferencia entre estos vectores dividido entre $t$ es la tasa de variación del campo $Y$ fijando como referencia el campo $X$. A esa cantidad se le llama derivada de Lie:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>$$ \mathcal{L}_X(Y)=\lim_{t \rightarrow 0} \frac{d X_{-t}(Y(X_t(p)))-Y(p)}{t}$$</p>
+<p></p>
+<hr>
+<p></p>
+<h3 style="margin-left:0px;" id="Personal_interpretation:">Personal interpretation:</h3>
+<p>Think of a "discretized" version of the <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">flow</a> of $X$, if we move $Y$ along the flow of $X$ from one position to the next one, the vector field $Y$ pass from being $Y$ to $Y+\mathcal{L}_X Y$</p>
+<p><img src="./../../imagenes/Pasted image 20211204091958.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>$\blacksquare$</p>
+<p></p>
+<hr>
+<p></p>
+<p>Se puede demostrar que </p>
+$$
+\mathcal{L}_X(Y)= \frac{d}{dt}\left( d X_{-t}(Y(X_t(p))) \right)_{t=0}
+$$
+<p>Or with other notation:</p>
+$$
+\mathcal{L}_X(Y)_p=\frac{d}{dt}|_{t=0}((Fl^X_{-t})_* (Y_{q}))
+$$
+<p>being $q=Fl_t^X(p)$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Y también que coincide con el corchete de Lie definido en <a href="./Lie bracket.md.html">Lie bracket</a>:</p>
+$$
+\mathcal{L}_X(Y)=[X,Y]
+$$
+<p>De hecho, allí hay una discusión acerca de que la anulación del corchete implica la conmutatividad de los flujos, lo cual es una idea muy parecida a la presentada más arriba.</p>
+<p></p>
+<p>That is, Lie bracket of two vector fields, $[u,v]$, <b>measures how is the gap when we try to draw a rectangle along flow lines</b> of $u$ and $v$ (see <a href="./Lie bracket.md.html">Lie bracket</a>)</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Lie_transport">Lie transport</h2>
+<p>Se puede hablar también de transporte de Lie (Lie transport) de un vector $Y$ a través de un campo $X$. Consistiría en aplicar $d X_t( \cdot )$ al vector $Y$ para llevarlo a distintos sitios. Aunque puede parecer similar al transporte paralelo, hay muchas diferencias:</p>
+<p><ul style="margin-left:0px;"><li>El transporte de Lie se puede visualizar como el transporte de un río. No tiene que conservar el paralelismo real, sino que depende de la corriente de ese río particular, o sea, del campo $X$ seleccionado. De hecho, no tiene por qué haber una idea de paralelismo de fondo, ya que la variedad no tiene por qué contar con un producto escalar o algo para medir ángulos ni distancias...</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Siguiendo con la interpretación del río, la derivada de Lie $\mathcal{L}_X(Y)$ nos mide cómo varía el campo $Y$ para un observador que está fluyendo en el río.</li></ul></p>
+<p><ul style="margin-left:0px;"><li><img src="./../../imagenes/Pasted image 20211028194153.png" style="width:80vw; border-radius: 3px;" ></li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>No permite transportar un vector $Y$ en $p\in M$ a un punto arbitrario $q\in M$, sino que sólo lo lleva a puntos de la órbita $\{X_t(p), t \in (a(p), b(p))\}$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>El transporte de Lie no sólo depende de la curva uniendo los puntos, sino de todo el campo de vectores de alrededor, de todo el flujo. En cambio para el transporte paralelo sólo influye la curva seleccionada para unir los puntos.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>UN RESUMEN: Desde un punto de vista más operacional, la derivada de Lie es una forma natural de generalizar la derivada direccional de $\mathbb{R}^n$ a cualquier variedad. Es decir, al igual que la derivada direccional usual verifica la regla de Leibniz:</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+\mathcal { L } _ { X } ( f Y ) = \left( \mathcal { L } _ { X } f \right) Y + f \mathcal { L } _ { X } Y
+ $$
+<p><ul style="margin-left:0px;"><li>Pero carece de una propiedad de la derivada usual: no es tensorial. ¿En qué sentido? Pues en que en la dependencia con respecto al vector que aporta la dirección de derivación, $X$, es solamente $\mathbb{R}$-lineal, y lo suyo es que fuese $C^{\infty}(U)$-lineal</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+Der _ { f X } Y = f \cdot Der _ { X } Y
+ $$
+<p><ul style="margin-left:0px;"><li>como le sucede a los tensores. Hay otras formas de generalizar la derivada direccional que sí tienen esa propiedad, de hecho se asemejan a tensores {\it covariantes}. Reciben, por ello, el nombre de {\bf derivadas covariantes} y se denotan por $\nabla$. Su problema es que no hay ninguna que lo sea de manera natural: hay muchas.</li></ul></p>
+<p></p>
+<hr>
+<h1 style="margin-left:0px;" id="More_about_Lie_derivative_and_connections:">More about Lie derivative and connections:</h1>
+<p></p>
+<p>Given any <a href="./../covariant derivative operator.md.html">covariant derivative operator</a> $\nabla_m$ we have that, if it is <a href="./../torsion of a connection.md.html">torsion</a> free.</p>
+$$
+\mathcal { L } _ { X } ( Y^a )=[X,Y]=X^m\nabla_m Y^a-Y^m\nabla_m X^a
+$$
+<p>See also <a href="./Lie bracket.md.html#Other_remarks">Lie bracket#Other remarks</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

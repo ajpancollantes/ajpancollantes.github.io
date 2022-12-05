@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Involutive_distribution">Involutive distribution</h1>
+<p></p>
+<p>Se dice que la <a href="./distribution.md.html">distribution</a> $D$ on a manifold $M$ es <a href="./involutive distribution.md.html">involutive</a> cuando el $\mathcal{C}^{\infty}(M)$-<a href="./../module.md.html">module</a> de secciones $\Gamma[M,D]$ es cerrado bajo el <a href="./Lie bracket.md.html">Lie bracket</a>, es decir, $[X_i,X_j]\in \Gamma[M,D]$. Este módulo constituye así un <a href="./Lie algebra.md.html">álgebra de Lie</a>, posiblemente infinito-dimensional. Es subálgebra de Lie de $\mathfrak{X}(M)$, en particular, es el <a href="./normalizer.md.html">normalizer</a> (ver [Molino 1988] página 35).</p>
+<p></p>
+<p>Equivalentemente, se tiene que es involutive cuando su <a href="./curvature of a distribution.md.html">curvature of a distribution</a> es 0.</p>
+<p></p>
+<p>Also can be characterized as those <a href="./distribution.md.html">distribution</a>s such that every $X\in \Gamma(D)$ is a <a href="./symmetry of a distribution.md.html#Infinitesimal_symmetry_of_mathcal_Z">characteristic symmetry</a>. ([Vitagliano 2017] exercise 3.12)</p>
+<p></p>
+<p>Se pueden caracterizar de manera dual: <a href="./../../✏️ THEOREMS/DG/dual charaterization involutiveness.md.html">dual charaterization involutiveness</a>.</p>
+<p></p>
+<p>El <a href="./../../✏️ THEOREMS/DG/Frobenius theorem.md.html">Frobenius theorem</a> en dimensión finita dice que las distribuciones involutivas son <a href="./completely integrable distribution.md.html">completamente integrables</a>, lo cual implica trivialmente que son integrables, es decir, que tienen <a href="./integral submanifold.md.html">integral submanifold</a>s. Por tanto, las distribuciones involutivas definen localmente en $M$ una <a href="./foliation.md.html">foliation</a>.</p>
+<p></p>
+<p>Según se dice en [Morando 2015] página 4, una distribución integrable permite definir una <a href="./projection map.md.html">projection map</a></p>
+$$
+q:U\subseteq M \longrightarrow U/D
+$$
+<p>tal que asocia a cada $x\in U$ la integral submanifold $q(x)$ de $D$ que pasa por $x$.</p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

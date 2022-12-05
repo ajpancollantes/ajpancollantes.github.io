@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Flag">Flag</h1>
+<p>(from Wikipedia)</p>
+<p>A flag is an increasing sequence of subspaces of a finite-dimensional vector space $v$. Here "increasing" means each is a proper subspace of the next:</p>
+$$
+\{0\}=V_{0} \subset V_{1} \subset V_{2} \subset \cdots \subset V_{k}=V
+$$
+<p>Etymology: suppose I have an actual flag in the sense of a piece of fabric, and I want to explain to someone how to attach it properly to a flagpole. First I need to say which of the four sides should be attached to the flagpole, lest the flag be flown sideways or backwards. Then, on that distinguished side, I need to specify one corner as the top corner, lest the flag be flown upside down. So we have a rectangle with a distinguished edge, and the distinguished edge has a distinguished endpoint.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Bases">Bases</h2>
+<p>An ordered basis for _V_ is said to be <b>adapted</b> to a flag _V_0 ⊂ _V_1 ⊂ ... ⊂ V_k if the first d_i basis vectors form a basis for V_i_ for each 0 ≤ _i_ ≤ _k_. Standard arguments from linear algebra can show that any flag has an adapted basis.</p>
+<p></p>
+<p>Any ordered basis gives rise to a complete flag by letting the _V__i_ be the span of the first _i_ basis vectors. For example, the <b>standard flag</b> in <b>R</b>_n_ is induced from the standard basis $(e_1, ..., e_n)$ where $e_i$ denotes the vector with a 1 in the $i$th entry and 0's elsewhere. Concretely, the standard flag is the sequence of subspaces:</p>
+$$
+0<\left\langle e_{1}\right\rangle <\left\langle e_{1},e_{2}\right\rangle <\cdots <\left\langle e_{1},\ldots ,e_{n}\right\rangle =K^{n}
+$$
+<p></p>
+<p>An adapted basis is almost never unique (the counterexamples are trivial).</p>
+<p></p>
+<p>A complete flag on an [inner product space](https://en.wikipedia.org/wiki/Inner_product_space "Inner product space") has an essentially unique [orthonormal basis](https://en.wikipedia.org/wiki/Orthonormal_basis "Orthonormal basis"): it is unique up to multiplying each vector by a unit (scalar of unit length, e.g. 1, −1, _i_). Such a basis can be constructed using the [Gram-Schmidt process](https://en.wikipedia.org/wiki/Gram-Schmidt_process "Gram-Schmidt process"). The uniqueness up to units follows [inductively](https://en.wikipedia.org/wiki/Mathematical_induction "Mathematical induction"), by noting that $v_i$ lies in the one-dimensional space $V_{i-1}^{\perp }\cap V_{i}$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

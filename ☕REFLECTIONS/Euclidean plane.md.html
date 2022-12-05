@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Euclidean_plane">Euclidean plane</h1>
+<h2 style="margin-left:0px;" id="From_the_point_of_view_of_classical_differential_geometry">From the point of view of classical differential geometry</h2>
+<p>The Euclidean plane is the manifold $M=\mathbb{R}^2$, with coordinates $(x_1,x_2)$, together with the natural <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> </p>
+$$
+g=dx_1\otimes dx_1+dx_2\otimes dx_2.
+$$
+<p>It is, therefore, a <a href="./../♾️ CONCEPTS/GEOMETRY/(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian manifold</a>.</p>
+<p></p>
+<p>Seen as a plain manifold we can consider that $M$ is endowed with a natural <a href="./../♾️ CONCEPTS/GEOMETRY/linear connection.md.html">linear connection</a> $\nabla$, such that $\nabla_{\partial_{x_i}}\partial_{x_j}=0\partial_{x_1}+0\partial_{x_2}$. The <a href="./../♾️ CONCEPTS/GEOMETRY/associated connection.md.html#Example">induced</a> <a href="./../♾️ CONCEPTS/GEOMETRY/principal connection on a principal bundle.md.html">principal connection</a> on the <a href="./../♾️ CONCEPTS/GEOMETRY/frame bundle.md.html">frame bundle</a> is given by the 1-form</p>
+$$
+\omega=
+\begin{pmatrix}
+c_{11}&c_{12}\\
+c_{21}&c_{22}\\
+\end{pmatrix}^{-1}\cdot\begin{pmatrix}
+dc_{11}&dc_{12}\\
+dc_{21}&dc_{22}\\
+\end{pmatrix}\in \Omega(\mathbb R^2,\mathfrak{gl}(2))
+$$
+<p>at </p>
+$$
+f=
+\begin{pmatrix}
+c_{11} & c_{12}& x_1\\
+c_{21} & c_{22}& x_2\\
+0 & 0& 1\\
+\end{pmatrix}\in FM
+$$
+<p><a href="./../♾️ CONCEPTS/GEOMETRY/associated connection.md.html#Example">Here</a> it is shown how to construct $\omega$ is constructed from an arbitrary $\nabla$.</p>
+<p></p>
+<p>On the other hand, if we think of $M$ as a Riemannian manifold we can consider the <a href="./../♾️ CONCEPTS/GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a> $\nabla_{LC}$. Since the metric is constant, the covariant derivative $\nabla_{LC}$ coincides with the natural covariant derivative $\nabla$, so it induces the same connection $\omega$ on $FM$.</p>
+<p>But the metric $g$ also specifies a orthonormal frame bundle $OM$ (<a href="./../♾️ CONCEPTS/orthonormal frame bundle.md.html">see here why</a>). The elements of this principal bundle are</p>
+$$
+f=
+\begin{pmatrix}
+c & -\sqrt{1-c^2}& x_1\\
+\sqrt{1-c^2} & c& x_2\\
+0 & 0& 1\\
+\end{pmatrix}\in OM
+$$
+<p>with $c\in [-1,1]$. </p>
+<p>Since</p>
+$$
+\omega|_{OM}=\begin{pmatrix}
+c&\sqrt{1-c^2}\\
+-\sqrt{1-c^2}&c\\
+\end{pmatrix}\cdot\begin{pmatrix}
+dc&\frac{c}{\sqrt{1-c^2}}dc\\
+\frac{-c}{\sqrt{1-c^2}}dc&dc\\
+\end{pmatrix}=
+$$
+$$
+=\begin{pmatrix}
+0&\frac{dc}{\sqrt{1-c^2}}\\
+-\frac{dc}{\sqrt{1-c^2}}&0\\
+\end{pmatrix} \in \Omega(\mathbb R^2,\mathfrak{o}(2)),
+$$
+<p>according to Proposition 4.7. in [vicenteBundles](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj-w6a2xYj7AhVJ3hoKHVDpAMQQFnoECAsQAQ&url=<a href="http%3A%2F%2Fwww.mat.ucm.es%2F~vmunozve%2FNotas-fibrados.pdf&usg=AOvVaw2EmcybsLZEb16epRLqS8z8)," target="_blank">http%3A%2F%2Fwww.mat.ucm.es%2F~vmunozve%2FNotas-fibrados.pdf&usg=AOvVaw2EmcybsLZEb16epRLqS8z8),</a> this connection can be reduced to a connection on the <a href="./../♾️ CONCEPTS/orthonormal frame bundle.md.html">orthonormal frame bundle</a> determined by the metric $g$. </p>
+<p></p>
+<p>If we parameterize this principal bundle $OM$ with</p>
+$$
+(x_1,x_2,\theta)\mapsto \begin{pmatrix}
+\cos(\theta) & -\sin(\theta)& x_1\\
+\sin(\theta) & \cos(\theta)& x_2\\
+0 & 0& 1\\
+\end{pmatrix}
+$$
+<p>we obtain the more famous expression for $\omega$:</p>
+$$
+\begin{pmatrix}
+0&d\theta\\
+-d\theta&0\\
+\end{pmatrix}
+$$
+<p>Remember: this 1-form <b>tells us how much the bases at $f$ and $f'$ "fail to be constant"</b> when we pass from the frame $f$ to a nearby frame $f'$, but expressing this mistake with respect to the frame $f$ itself.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="From_the_point_of_view_of_Cartan_geometry">From the point of view of Cartan geometry</h2>
+<p></p>
+<p>The Euclidean plane is a <a href="./../♾️ CONCEPTS/GEOMETRY/Cartan geometry.md.html">Cartan geometry</a> modeled over $(E(2),O(2))$ , indeed <b>is</b> the <a href="./../♾️ CONCEPTS/GEOMETRY/Klein geometry.md.html">Klein geometry</a> $(E(2),O(2))$. Moreover, it is a <a href="./../♾️ CONCEPTS/reductive Klein geometry.md.html">reductive Klein geometry</a> since</p>
+$$
+\mathfrak e(2)=\left\{\begin{pmatrix}
+C & v\\
+0 & 0\\
+\end{pmatrix} 
+:C\in \mathfrak{o}(2), v\in \mathbb R^2\right\}=\mathfrak o(2)\oplus \mathfrak p
+$$
+<p>We have a natural choice for $\mathfrak p$</p>
+$$
+\mathfrak{p}=\left\{\begin{pmatrix}
+0 & p\\
+0 & 0\\
+\end{pmatrix} 
+:p\in \mathbb R^2\right\}.
+$$
+<p></p>
+<p>With this in mind, remember that the <a href="./../♾️ CONCEPTS/GEOMETRY/Maurer-Cartan form.md.html">Maurer-Cartan form</a> describes all possible "infinitesimal displacements" of the frame $f$, but from the point of view of the frame $f$ itself (see <a href="./../✏️ THEOREMS/MC form for a matrix group.md.html#Interpretation">this</a>). That is, if we pass from the frame $f$ to another frame $f'$, the Maurer-Cartan form at $f$ applied to the "vector" $\vec{ff'}=(dx_1,dx_2,d\theta)$ is a packet of information</p>
+$$
+A=\begin{pmatrix}
+0&-d\theta&cos(\theta)dx_1+sin(\theta)dx_2\\
+d\theta&0&-sin(\theta)dx_1+cos(\theta)dx_2\\
+0&0&0&\\
+\end{pmatrix}\in \mathfrak e(2)
+$$
+<p>Here is encoded, on the one hand, how much have we moved the base point of $f$ to the base point of $f'$ and, on the other, how much have we changed the basis itself. The natural choice of $\mathfrak p$ let us think that the information about the change of base point is in the $v$ part (the projection of the Maurer-Cartan form on $\mathfrak p$), and so the projection of the Maurer-Cartan form on $\mathfrak o(2)$, $\begin{pmatrix}0&d\theta\\-d\theta&0\\\end{pmatrix}$, tell us how much has the basis changed. That is, the same as the connection 1-form of the connection on the orthonormal bundle induced by the metric $g$ (which is the Levi-Civita connection).</p>
+<p></p>
+<p><b>To summarize:</b></p>
+<p>In other words, in the orthonormal frame bundle induced by the metric $g$ we consider a displacement from a frame $f=\begin{pmatrix}C & p\\0 & 1\\\end{pmatrix}$ to a frame $f'=\begin{pmatrix}C' & p'\\0 & 1\\\end{pmatrix}$ . </p>
+<p>The principal connection $\omega$ induced by the Levi-Civita connection measures the change from $C$ to $C'$ as an element of $\mathfrak o(2)$. </p>
+<p>The Cartan connection (Maurer-Cartan form) measures the change from $f$ to $f'$ as an element of $\mathfrak e(2)$. This change can be decomposed like the union of a change from $C$ to $C'$ and a change from $p$ to $p'$. This is reflected in the fact that  $\mathfrak e(2)=\mathfrak o(2)\oplus \mathfrak p$. If we focus on the change from $C$ to $C'$ we have the principal connection $\omega$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

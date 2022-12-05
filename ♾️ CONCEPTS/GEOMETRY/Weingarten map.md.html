@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Weingarten_map">Weingarten map</h1>
+<p>It is the differential of the <a href="./Gauss map.md.html">Gauss map</a> $N$:</p>
+$$
+p\in S \longmapsto \left\{dN_p:T_pS\rightarrow T_{N(p)}\mathbb{S}^2\right\}
+$$
+<p>For every $p$, $dN_p$ transforms a little circle in $T_pS$ in an ellipse in $T_{N(p)}\mathbb{S}^2$, and is an useful way to measure <a href="./../extrinsic curvature.md.html">extrinsic curvature</a>. Indeed, since $dN_p(X)$ measures how it changes $N(p)$ in the direction $X$ (think of $dN_p(X)=\frac{d}{dt}(N\circ \alpha_X(t))$) and $N(p)$ has constant module equals to 1, it turns out that $dN_p(X)$ is orthogonal to $N_p$ itself, so $dN_p(X) \in T_{f(p)} f(S)$. So we can think about the <a href="./Weingarten map.md.html">Weingarten map</a> as</p>
+$$
+dN_p:T_pS\rightarrow T_{f(p)} f(S)
+$$
+<p></p>
+<p>It let us to speak about <a href="./../principal direction.md.html">principal direction</a>s and <a href="./principal curvatures.md.html">principal curvatures</a> (see the picture below obtained from a [Youtube video](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjB7fybh633AhVLUxoKHfZFDjEQtwJ6BAgHEAI&url=<a href="https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dmas-PUA3OvA&usg=AOvVaw3Yvk2NUJGThCkggFKzJBjR)):" target="_blank">https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dmas-PUA3OvA&usg=AOvVaw3Yvk2NUJGThCkggFKzJBjR)):</a></p>
+<p><img src="./../../imagenes/Pasted image 20211005072900.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>From the <a href="./Gauss map.md.html">Gauss map</a> we can define the <a href="./normal curvature of an immersed surface.md.html">normal curvature of an immersed surface</a>.</p>
+<p></p>
+<p>The Weingarten map is related to the <a href="./shape operator.md.html">shape operator</a>. </p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

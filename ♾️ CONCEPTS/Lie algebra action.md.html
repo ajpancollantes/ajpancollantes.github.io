@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Lie_algebra_action">Lie algebra action</h1>
+<p><b>Definition</b></p>
+<p>The action of a Lie algebra $\mathfrak{g}$ on a manifold $M$ is a Lie algebra homomorphism</p>
+$$
+\mathcal{A}: \mathfrak{g} \to \mathfrak{X}(M)
+$$
+<p>such that the map</p>
+$$
+\mathfrak{g}\times M \to TM
+$$
+<p>defined by</p>
+$$
+(v,p)\mapsto \mathcal{A}(v)_p \in T_p M
+$$
+<p>is smooth.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>Given the <a href="./GEOMETRY/group action.md.html">group action</a> of a <a href="./Lie group.md.html">Lie group</a> $G$ on $M$ it induces a Lie algebra action via <a href="./GEOMETRY/fundamental vector field.md.html">fundamental vector field</a>s. But I think that the converse is not true. I guess there must be problems of "completeness". Maybe this is related to the notion of <a href="./pseudogroup.md.html">pseudogroup</a> or <a href="./local group of transformations.md.html">local group of transformations</a> (are they the same?).</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Infinitesimal_action">Infinitesimal action</h2>
+<p>A Lie algebra action is also called an <b>infinitesimal action</b>. Why?</p>
+<p>Let's consider the Lie algebra action induced by a <a href="./GEOMETRY/group action.md.html#Lie_group_action">Lie group action</a> of $G$ over a manifold $M$. Given $V\in \mathfrak{g}$ we can identify it, loosely speaking, with</p>
+$$
+e+\delta V \in G
+$$
+<p>if $\delta$ is small. In the same way, if $X_V$ is the <a href="./GEOMETRY/fundamental vector field.md.html">fundamental vector field</a> on $M$ then for $p\in M$ we can imagine the point $q$ that results of adding to $p$ a bit of $X_V(p)$, that is,</p>
+$$
+q=p+\delta X_V(p)=p(e+\delta V)
+$$
+<p>We can think of all of this as the action on $M$ of elements of $G$ that live very near to the identity element, that of course when applied to $p\in M$ yields elements of $M$ that live near $p$.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Recovering_of_the_group_action">Recovering of the group action</h2>
+<p>Surprisingly, the infinitesimal action let us recover the <a href="./GEOMETRY/group action.md.html">group action</a>. Intuitively it goes in this way. Define</p>
+$$
+T_{\delta}(p):=p(e+\delta V)
+$$
+<p>We can apply the idea of "adding a bit of $X_V$" successively, with smaller and smaller $\delta$s. This way</p>
+$$
+T_{\frac{1}{N}}(T_{\frac{1}{N}}(T_{\frac{1}{N}}(...T_{\frac{1}{N}}(p))))=p\cdot (e+{\frac{1}{N}} V)^N \equiv p\cdot exp(V)
+$$
+<p>This is strongly related to <a href="./GEOMETRY/exponential map.md.html#Motivation_new_version">exponential map#Motivation new version</a>.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Example">Example</h2>
+<p>Let's see an example</p>
+<p></p>
+<p>When you have a relatively complicated active coordinate transformation, for example </p>
+$$
+\begin{align*}
+x & \mapsto cos(\theta) x+sin(\theta) y\\
+y & \mapsto -sin(\theta) x+cos(\theta) y
+\end{align*}
+$$
+<p>we can change $\theta$ by a small $\delta$ and take approximation to first order in $\delta$</p>
+<p></p>
+<p>So you can replace $cos(\delta)$ with $1$ and $sin(\delta)$ with $\delta$, first order approximation. So we obtain</p>
+$$
+\begin{align*}
+
+x & \mapsto x+\delta y\\
+
+y & \mapsto -\delta x+y
+
+\end{align*}
+$$
+<p>That can be rewrited as</p>
+$$
+(x,y) \longmapsto (x,y)+\delta \cdot(y,-x)
+$$
+<p>This is justified because </p>
+<p></p>
+$$
+d\tau_e(\partial_{\delta})=X_{\partial_{\delta}}=(y,-x)
+$$
+<p>To understand this a bit more, let us restrict to $\mathbb{R}^2$ but with a general transformation $F_{\lambda}: \mathbb{R}^2 \mapsto \mathbb{R}^2$, and being $\lambda \in \mathbb{R}$ a parameter. It could be think as an action of the group $(\mathbb{R},+)$ over $\mathbb{R}^2$. So, for every $\lambda$:</p>
+$$
+(x,y)\longmapsto F_{\lambda}(x,y)=(F^1_{\lambda}(x,y),F^2_{\lambda}(x,y))
+$$
+<p>being $F_0=id$.</p>
+<p>Since $\mathbb{R}^2$ is an affine space we can take the vector $(F^1_{\lambda}(x,y),F^2_{\lambda}(x,y))-(x,y)$. As a first order approximation we would assume:</p>
+$$
+\left(\frac{F^1_{\lambda}(x,y)-x}{\lambda},\frac{F^2_{\lambda}(x,y)-y}{\lambda}\right)\cong 
+\left(\frac{d F^1_{\lambda}(x,y)}{d\lambda}|_{\lambda=0},\frac{d F^2_{\lambda}(x,y)}{d\lambda}|_{\lambda=0}\right)    
+$$
+<p>so the transformation, for a small $\lambda$, could be considered as</p>
+$$
+(x,y)\longmapsto (x,y)+ \lambda\cdot  \left(\frac{d F^1_{\lambda}(x,y)}{d\lambda}|_{\lambda=0},\frac{d F^2_{\lambda}(x,y)}{d\lambda}|_{\lambda=0}\right)
+$$
+<p>The approximation taken in \ref{aproximacion} could be interpreted like a Taylor expansion, since</p>
+$$
+\begin{align*}
+
+x & \mapsto F^1_{\lambda}(x,y)=F^1_0+\deriv{F^1_{\lambda}}{\lambda}|_{\lambda=0}\cdot \lambda+\cdots\cong x+\deriv{F^1_{\lambda}}{\lambda}|_{\lambda=0}\cdot \lambda\\
+
+y & \mapsto F^2_{\lambda}(x,y)=F^2_0+\deriv{F^2_{\lambda}}{\lambda}|_{\lambda=0}\cdot \lambda+\cdots\cong y+\deriv{F^2_{\lambda}}{\lambda}|_{\lambda=0}\cdot \lambda
+
+\end{align*}
+$$
+<p>as most physics books do.</p>
+<p></p>
+<p>Several considerations:</p>
+<p><ul style="margin-left:0px;"><li>If $F$ depends on more parameters, we can choose what direction are we moving in inside the "parameter space". It corresponds to being in an multidimensional Lie group $G$ and choosing an specific element of $\mathfrak{g}$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>If we are not in an affine space we cannot define the vector at this way. But anyway, $\lambda\mapsto F_{\lambda}$ defines a curve, and we can take the tangent vector at $\lambda=0$ as usual and proceed.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\mathfrak{X}(M)$ is a Lie algebra (more or less). Its subalgebras determine the Lie groups that can act over $M$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The iterative process $(e+\delta V)^N=exp(tV)$ could be formal if $G$ is inside an $\mathbb{R}^M$, likewise $p+\delta X_V(p)$ would have sense if $M$ was inmersed in $\mathbb{R}^K$. But the fact is that $G$ is always inside a matrix space, and I think that $(e+\delta V)^N=exp(tV)$ is formalized with the exponential of matrices.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>If $M$ is a vector space ($\mathbb{R}^n$) then linear automorphisms of $M$ are included in $Diff(M)$. It turns out that infinitesimal generators of subgroups of $Aut(M)$ corresponds to elements of the Lie algebra $\Gamma(TM)$ (vector fields) with linear coefficients. Indeed, given $X$ a vector field in $M$ such that</li></ul></p>
+$$
+X=\sum [\sum a_{ij}] x_i \partial x_j
+$$
+<p>we can identify $X$ with a matrix also named $X$ and</p>
+$$
+exp(\delta X)\cdot m=e^{\delta X}\cdot m
+$$
+<p>(the LHS is the general exponential map and the RHS is the matrix exponential map).</p>
+<p>For $dim(M)=1$ we recover the usual exponential map in $\mathbb{R}$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Given a function $F:M\rightarrow \mathbb{R}$ we have that it is invariant by a group $G\subseteq Diff(M)$ (that is $F(g(x))=F(x)$) if every of its infinitesimal generator seen as a vector field $X$ satisfies:</li></ul></p>
+$$
+X(F)=0
+$$
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

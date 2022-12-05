@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Tensor_product">Tensor product</h1>
+<p>Sean $E$ y $F$ dos $K$-espacios vectoriales de dimensión finita:</p>
+<p>Se define el espacio vectorial $E\otimes F$ como el espacio vectorial generado por los símbolos $\{e\otimes f ,e \in E, f\in F\}$ junto con las relaciones</p>
+$$
+(ae+bf)\otimes (a'e'+b'f')=
+$$
+$$
+=aa'e\otimes e'+ab'e\otimes f'+ba'f\otimes e'+bb'f\otimes f'
+$$
+<p>Esta definición encierra la idea de la bilinealidad pero desde un punto de vista dual, es decir, sobre los "objetos", no sobre las aplicaciones. Ello se aprecia en la siguiente proposición:</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>$Bil(E,F;K)=(E \otimes F)^*$</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>Y la siguiente consigue que quede todo más compacto y elegante:</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>$(E \otimes F)^*=E^* \otimes F^*$</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>Es decir, que $E^* \otimes F^*$ es una forma de interpretar las aplicaciones bilineales de dos espacios vectoriales de manera separada.</p>
+<p></p>
+<p>Por otra parte, si tenemos aplicaciones lineales de $E$ con coeficientes en $K$ y queremos ampliar los coeficientes utilizamos el producto tensorial:</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>It is satisfied that</p>
+$$
+E^* \otimes F=\mathcal{L}(E,F) \tag{1}
+$$
+<p>$\blacksquare$</p>
+<p></p>
+<p>Dado un espacio vectorial $E$, se definen los tensores de tipo $(r,s)$ como los elementos del espacio vectorial $E^*\otimes \stackrel{s}{...} \otimes E^*\otimes E\otimes \stackrel{r}{...} \otimes E$, que se pueden interpretar como aplicaciones </p>
+$$
+T:E\times \stackrel{s}{...} \times E \to E\otimes \stackrel{r}{...} \otimes E
+$$
+<p>como se deduce de la proposición anterior.</p>
+<p></p>
+<p>También podemos interpretar al tensor $T$ como una forma multilineal:</p>
+$$
+T: E\times \stackrel{s}{...} \times E\times E^*\times \stackrel{r}{...} \times E^* \to \mathbb{R}
+$$
+<p>(OJO AL CAMBIO DE PAPELES DE r y s!!!)</p>
+<p></p>
+<p>Los tensores generalizan a las matrices en el siguiente sentido:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Una aplicación lineal hacia $\mathbb{R}$  desde un espacio $E$ es un elemento de $E^*$ y al mismo tiempo una matriz "unidimensional" (matriz fila).</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Una aplicación bilineal hacia $\mathbb{R}$  desde $E$ es un elemento de  $E^* \otimes E^*$ y al mismo tiempo una matriz de "dimensión 2" (las de toda la vida): dada $f \in Bil(E,E;K)$, y fijando una base $\{e_i\}$ de $E$, tenemos la matriz $A=(f(e_i,e_j))$. Es un cálculo sencillo comprobar que para $v,w\in E$, $f(v,w)= (v1, \dots, v_n) \cdot A \cdot (w1, \dots, w_n)^t$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Una aplicación trilineal será al mismo tiempo un elemento de  $E^* \otimes E^* \otimes E^*$ y un "objeto" tridimensional, como una matriz pero de dimensión 3.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Etcétera...</li></ul></p>
+<p></p>
+<p>Pero no solo modelizan formas multilineales, sino cualquier aplicación multilineal de s copias de E en r copias de E, como se ha dicho más arriba. Veámoslo con un ejemplo concreto.</p>
+<p>Consideremos un tensor $T$ de tipo (1,2). Esto significa que es un elemento de $E^*\otimes E^* \otimes E$. Por (1) tenemos que $T$ se puede interpretar como una aplicación lineal de $E \times E$ en $E$.</p>
+<p>Según la <a href="./../⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html">Penrose abstract index notation</a> diríamos que $T$ es $T_{ab}^c$ y con la <a href="./../⛳️ NON CLASSIFIED/Penrose diagramatic notation.md.html">Penrose diagramatic notation</a> sería:</p>
+<p></p>
+<p></p>
+<p><img src="./../imagenes/Pasted image 20220620073621.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Kronecker_product">Kronecker product</h1>
+<p>If we have two linear maps between vector spaces: $S : V \rightarrow X$ and $T : W \rightarrow Y$, we can define a new linear map on the tensor product of the domains</p>
+$$ 
+S \otimes T : V \otimes W \rightarrow X \otimes Y
+$$
+<p>by means of the expression</p>
+$$
+(S \otimes T)(v \otimes w)=S(v) \otimes T(w)
+$$
+<p>The matrix of this map (respect to the corresponding basis) is called the Kronecker product of the matrices</p>
+$$ 
+\left[ \begin{array}{ll}{a_{1,1}} & {a_{1,2}} \\ {a_{2,1}} & {a_{2,2}}\end{array}\right] \otimes \left[ \begin{array}{ll}{b_{1,1}} & {b_{1,2}} \\ {b_{2,1}} & {b_{2,2}}\end{array}\right]=
+$$
+$$
+=\left[ \begin{array}{cc}{a_{1,1} \left[ \begin{array}{cc}{b_{1,1}} & {b_{1,2}} \\ {b_{2,1}} & {b_{2,2}}\end{array}\right] \quad a_{1,2} \left[ \begin{array}{cc}{b_{1,1}} & {b_{1,2}} \\ {b_{2,1}} & {b_{2,2}}\end{array}\right]} \\ {a_{2,1} \left[ \begin{array}{cc}{b_{1,1}} & {b_{1,2}} \\ {b_{2,1}} & {b_{2,2}}\end{array}\right] \quad a_{2,2} \left[ \begin{array}{cc}{b_{1,1}} & {b_{1,2}} \\ {b_{2,1}} & {b_{2,2}}\end{array}\right]}\end{array}\right]=
+$$
+$$
+=\left[ \begin{array}{llll}{a_{1,1} b_{1,1}} & {a_{1,1} b_{1,2}} & {a_{1,2} b_{1,1}} & {a_{1,2} b_{1,2}} \\ {a_{1,1} b_{2,1}} & {a_{1,1} b_{2,2}} & {a_{1,2} b_{2,1}} & {a_{1,2} b_{2,2}} \\ {a_{2,1} b_{1,1}} & {a_{2,1} b_{1,2}} & {a_{2,2} b_{1,1}} & {a_{2,2} b_{1,2}} \\ {a_{2,1} b_{2,1}} & {a_{2,1} b_{2,2}} & {a_{2,2} b_{2,1}} & {a_{2,2} b_{2,2}}\end{array}\right]
+$$
+<p></p>
+<h1 style="margin-left:0px;" id="Quantum_mechanics">Quantum mechanics</h1>
+<p>It is important the use of the tensor product in <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>. I think it appears when you have observables that are "totally independent" (in a sense that I must formalize), for example, $x$ position and $y$ position (maybe "commuting observables" is the correct name). It let us "expand" the set of possibilities. It is the counterpart of cartesian product. See <a href="./../☕REFLECTIONS/On Quantum Mechanics in general from the beginning.md.html">On Quantum Mechanics in general from the beginning</a> </p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

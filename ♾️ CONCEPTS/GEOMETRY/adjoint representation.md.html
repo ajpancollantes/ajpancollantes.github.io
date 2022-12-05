@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Adjoint_representation_of_a_Lie_group">Adjoint representation of a Lie group</h1>
+<p>Every <a href="./../Lie group.md.html">Lie group</a> have a canonical <a href="./group representation.md.html">group representation</a>.</p>
+<p></p>
+<p>Given a Lie group $G$, every $g\in G$ determines a smooth group homomorphism of $G$ onto itself, $C_g \in \mbox{Aut}(G)$, by means of the assignation</p>
+$$
+L_g \circ R_{g^{-1}}:h \mapsto ghg^{-1}
+$$
+<p>If we consider the differential of this map at the identity we can define:</p>
+$$
+Ad_g:=d(L_g \circ R_{g^{-1}})_e:T_e G \cong \mathfrak{g} \longrightarrow T_e G \cong \mathfrak{g}
+$$
+<p>And so we have defined an morphism $G \longmapsto GL(\mathfrak{g})$, and we have a <a href="./group representation.md.html">group representation</a> of $G$.</p>
+<p></p>
+<p>Explicitly, and taking into account the <a href="./exponential map.md.html">exponential map</a>, we have</p>
+$$
+\begin{array}{rcl}
+Ad_g:\mathfrak{g}& \longrightarrow & \mathfrak{g}\\
+V  & \longrightarrow & \frac{d}{dt}(g e^{tV}g^{-1})|_{t=0}\\
+\end{array}
+$$
+<h2 style="margin-left:0px;" id="Idea">Idea</h2>
+<p>Given $V \in \mathfrak{g}$, we can think of it like a curve $\alpha(t)$ emanating from $e\in G$ with velocity $V$. Then, for $g\in G$ we have another curve $\beta(t)=g\alpha(t) g^{-1}$. The assignation </p>
+$$
+V\mapsto \beta'(0)
+$$
+<p>is a linear map from $\mathfrak{g}$ to $\mathfrak{g}$, that is, a representation.</p>
+<p></p>
+<p>To _see the action_ of $g$ over $V$ think of the action of $g$ over any space $M$ it acts (you can choose the proper $G$). In a point $P \in M$ you can act with $V$ to begin a little curve that arrive to a very near point $Q$. But you can, instead, begin at $P$, go back to $g^{-1} P$, start the little curve produced with $h$ and apply $g$ to the final point. You will have obtained a another point different from $Q$, say $Q'$. The little curve starting at $P$ toward $Q'$ is that produced by $gVg^{-1}$. </p>
+<p></p>
+<p><img src="./../../imagenes/Pasted image 20220104100158.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<h2 style="margin-left:0px;" id="AdG-module_structure">Ad(G)-module structure</h2>
+<p>Since $Ad(G)=\{Ad_g: g\in G\}$ is a subring of $End(\mathfrak{g})$ then $\mathfrak{g}$ has the structure of a $Ad(G)$-<a href="./../module.md.html">module</a>.</p>
+<p>If $H$ is a subgroup of $G$ then it has also the structure of a $Ad(H)$-<a href="./../module.md.html">module</a>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Adjoint_representation_of_a_Lie_algebra">Adjoint representation of a Lie algebra</h1>
+<p>Given the adjoint representation of the Lie group $G$ as above, we have</p>
+$$
+Ad: G \rightarrow GL(\mathfrak{g})
+$$
+<p>which is a Lie group homomorphism. So we can think of the differential at identity</p>
+$$
+d(Ad)_e:T_e G \rightarrow T_{id} GL(\mathfrak{g}),
+$$
+<p>expression that, after defining $ad:=d(Ad)_e,$ can be rewritten as</p>
+$$
+ad: \mathfrak{g} \rightarrow \mathfrak{gl(g)}
+$$
+<p>Explicitly, given $X,Y \in \mathfrak{g}$, and by using the <a href="./exponential map.md.html">exponential map</a></p>
+$$
+ad(X)(Y)=\frac{d}{ds}|_{s=0} \left(Ad_{e^{sX}}(Y)\right)=\frac{d}{ds}|_{s=0} \left(Ad_{e^{sX}}(\frac{d}{dt}|_{t=0}e^{tY})\right)=
+$$
+$$
+=\frac{d}{ds} \frac{d}{dt}|_{s,t=0} \left(e^{sX}e^{tY}e^{-sX}\right)
+$$
+<p>This expression can be simplified even further. Since $ad(X)(Y) \in T_e G$ consider a smooth function $f$ defined in an open neighbourhood of $e\in G$. Then</p>
+$$
+ad(X)(Y)(f)=\frac{d}{ds} \frac{d}{dt}|_{s,t=0} \left(f(e^{sX}e^{tY}e^{-sX})\right) \tag{1}
+$$
+<p>Now, observe that if $F(t_1,t_2)$ is a function of two real variables, by the chain rule</p>
+$$
+\frac{d}{ds}|_{s=0}F(s,-s)=\partial_{t_1}F(t_1,0)|_{t_1=0}-\partial_{t_2}F(0,t_2)|_{t_2=0}
+$$
+<p>So now,  if we fix $t$ in $(1)$ and apply the chain rule to $s$ we obtain</p>
+$$
+\frac{d}{dt}|_{t=0}\left(\frac{d}{ds}|_{s=0} f(e^{sX}e^{tY})-\frac{d}{ds}|_{s=0} f(e^{tY}e^{sX})\right)
+$$
+<p>Remember that for a smooth function $g$ and $\hat{X}$ a left invariant vector field extending $X\in \mathfrak{g}$</p>
+$$
+\frac{d}{ds}|_{s=0}(g(h e^{sX}))=\hat{X}(g)(h)
+$$
+<p>(see <a href="./exponential map.md.html">exponential map</a>). Therefore</p>
+$$
+\frac{d}{dt}|_{t=0}\frac{d}{ds}|_{s=0} f(e^{sX}e^{tY})=\frac{d}{ds}|_{s=0}(\hat{Y}(f)(e^{sX}))=
+$$
+$$
+=\hat{X}(\hat{Y}(f)(e))
+$$
+<p>and</p>
+$$
+\frac{d}{dt}|_{t=0}\frac{d}{ds}|_{s=0} f(e^{tY}e^{sX})=\frac{d}{dt}|_{t=0}(\hat{X}(f)(e^{tY}))=
+$$
+$$
+=\hat{Y}(\hat{X}(f)(e))
+$$
+<p>and so </p>
+$$
+ad(X)(Y)(f)=[X,Y](f).
+$$
+<p>(Reference: Bump, Lie Groups, proposition 8.2, page 49.)</p>
+<p></p>
+<p>Finally, I think that the adjoint representation of a Lie algebra is a particular case of <a href="./../Lie algebra action.md.html">Lie algebra action</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

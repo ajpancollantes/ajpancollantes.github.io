@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Lie_algebras">Lie algebras</h1>
+<h2 style="margin-left:0px;" id="Idea">Idea</h2>
+<p>When a <a href="./../Lie group.md.html">Lie group</a> $G$ acts on a manifold, it is interesting to study the infinitesimal generators, that is, the tangent vectors at the identity $e\in G.$ They correspond to vector fields at the manifold and they are called the <a href="./fundamental vector field.md.html">fundamental vector field</a> $X^{\sharp}$ associated to $X\in \mathfrak{g}$.</p>
+<p></p>
+<p>This is related to the <a href="./Maurer-Cartan form.md.html">Maurer-Cartan form</a>.</p>
+<p></p>
+<p></p>
+<p>When two <a href="./../Lie group.md.html">Lie group</a>s share the same Lie algebra they are locally the same. See <a href="./../../☕REFLECTIONS/relation SO(3) and SU(2).md.html">relation SO(3) and SU(2)</a> for an important example.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Definition">Definition</h2>
+<p>A Lie algebra is a vector space $\mathfrak{g}$ together with a bilinear operation </p>
+$$
+[\cdot, \cdot]: \mathfrak{g} \times \mathfrak{g} \rightarrow \mathfrak{g}
+$$
+<p>obeying the following identities</p>
+<p><ul style="margin-left:0px;"><li>Alternativity: $[x, x]=0$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Jacobi identity: $[x,[y, z]]=[[x, y], z]+[y,[x, z]]$</li></ul></p>
+<p></p>
+<p>Bilinearity makes equivalent alternativity and anticommutativity:</p>
+$$
+[x, y]=-[y, x]
+$$
+<p>$\blacksquare$</p>
+<p></p>
+<p>On an <a href="./associative algebra.md.html">associative algebra</a> $A$ over a field $F$ with multiplication $( x , y ) \mapsto x y$, a Lie bracket may be defined by the commutator $[x,y]=xy-yx$.</p>
+<p><ul style="margin-left:0px;"><li>With this bracket, $A$ is a Lie algebra. The associative algebra $A$ is called an enveloping algebra of the Lie algebra $(A,[\,\cdot \,,\cdot \,])$. Every Lie algebra can be embedded into one that arises from an associative algebra in this fashion; see universal enveloping algebra in wikipedia.</li></ul></p>
+<p></p>
+<p></p>
+<p>In abstract, a Lie algebra is a vector space (finite or infinite dimensional). See <a href="./../../☕REFLECTIONS/about solvable algebras and solvable structures.md.html">about solvable algebras and solvable structures</a> to understand things about the finite dimensional and infinite dimensional cases.</p>
+<p></p>
+<p>Examples:</p>
+<p><ul style="margin-left:0px;"><li>Vector fields on a manifold: infinite dimensional Lie algebra. We can think of it, loosely speaking, as the Lie algebra of the group $\mbox{Diff}(M)$ of all the diffeomorphisms of $M$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li><a href="./../Killing vector field.md.html">Killing vector field</a>s on a <a href="./(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian manifold</a>. It is a subalgebra of the previous one. Analogously, it can be thought as the Lie algebra of the group of isometries of $M$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li><a href="./symmetry of a distribution.md.html">Symmetries of a given distribution</a> on a manifold: infinite dimensional Lie algebra.</li></ul></p>
+<p></p>
+<hr>
+<p>Important cases: <a href="./../ALGEBRA/solvable Lie algebra.md.html">solvable Lie algebra</a>s, <a href="./../simple Lie algebra.md.html">simple Lie algebra</a>s,...</p>
+<p></p>
+<p></p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

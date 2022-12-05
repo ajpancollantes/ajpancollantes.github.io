@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Prolongation_of_a_diffeomorphism">Prolongation of a diffeomorphism</h1>
+<p>Consider a diffeomorphism of the total space of a smooth vector bundle $E$</p>
+$$
+\varphi: E \to E
+$$
+<p>We can define a transformation $\varphi^{(k)}:J^kE \to J^kE$ following the same ideas as <a href="./prolongation of a diffeomorphism.md.html#Prolongation_of_a_group_action">below</a> .</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Prolongation_of_a_group_action">Prolongation of a group action</h1>
+<p>[Olver 1986] page 98</p>
+<p></p>
+<p>Suppose a group $G$ <a href="./../GEOMETRY/group action.md.html">acting</a> on a the total space of a <a href="./../GEOMETRY/bundle.md.html">smooth vector bundle</a> </p>
+$$
+\pi: E \rightarrow M
+$$
+<p>We are going to define a new action on the <a href="./../GEOMETRY/jet bundle.md.html">jet bundle</a>. </p>
+<p></p>
+<p>Let $g\in G$, $g: E\rightarrow E$. Then we define</p>
+$$
+pr^n g: J^n(E)\rightarrow J^n(E)
+$$
+<p>in the following way. Consider $P=[s]_x^n\in J^n(E)$ and $p=\pi_0(P)=s(x)\in E$ (see <a href="./../GEOMETRY/jet bundle.md.html">here</a> the definition of $\pi_1$).</p>
+<p></p>
+<p>Suppose we can shrink the domain of $s$ to $U\subseteq M$ in such a way that the set $g(s(U))$ is the image of another section $\widetilde{s}$ (that is, $\widetilde{s}(\widetilde{U})=g(s(U))$) and denote $\widetilde{x}=\pi(g\cdot p)$. Then we define</p>
+$$
+pr^n g(P)=[\widetilde{s}]_{\widetilde{x}}^n
+$$
+<p></p>
+<p><img src="./../../imagenes/Pasted image 20211023130228.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<h1 style="margin-left:0px;" id="In_coordinates">In coordinates</h1>
+<p>Anco_2002 page 62. I think is <b>BETTER</b> in  xournal_041. Also in Mansfield_2010 page 32.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

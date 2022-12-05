@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Connection_on_a_fiber_bundle">Connection on a fiber bundle</h1>
+<p>(Ehresmann connection)</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Definition_and_motivation">Definition and motivation</h2>
+<p>Let $E\rightarrow M$ be a <a href="./bundle.md.html">fibre bundle</a>, and let $V$ be the <a href="./vertical bundle.md.html">vertical bundle</a> (subbundle of $TE$). We call a connection on $E$ to any subbundle (<a href="./distribution.md.html">distribution</a>) $H$ of $TE$ complementary to $V$ in the sense that</p>
+$$
+TE=V\oplus H
+$$
+<p>(and therefore $H$ is called a horizontal bundle).</p>
+<p></p>
+<p>La cuestión de fondo es que aunque el vertical bundle es natural, ya que tenemos una proyección horizontal sobre $M$, hay muchos posibles fibrados horizontales, y hay que fijar uno. En un fibrado trivial $M \times F$, por ejemplo, sí tenemos ambas proyecciones, por lo que tenemos de manera natural ambos subfibrados vertical y horizontal. A la conexión fibrada resultante se le llama conexión trivial. </p>
+<p>Si un fibrado tiene una trivialización local en un entorno de $u\in E$ que envía la conexión de Ehresmann a la conexión trivial, se dice que esa conexión es plana en $u$.</p>
+<p></p>
+<p>Tangent vectors mean directions. A vector in the vertical bundle specifies a vertical direction, that is to say, in the direction of the fiber. If you move like that, you don't leave the fiber. On the contrary, an horizontal vector will tell you how to travel from one fiber to another one. This brings us to the idea of <a href="./../parallel transport.md.html">parallel transport</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Connection_1-form">Connection 1-form</h2>
+<p>Other way to specify a connection consists, therefore, of a projection, i.e., a map $v:TE\mapsto TE$ such that $v^2=v$, and with $v(T_u E)=V_u$. In this case, $H_u=ker(v|_{T_u E})$. Remember that in any vector space $W$, a map such tat $p^2=p$ lets you decompose $W=ker(p)\oplus im(p)$ (see <a href="./../projection.md.html">projection</a>). The idea behind is that you can comprise $W$ to $p(W)$ in so many ways as horizontal subspaces choices. </p>
+<p>So equivalently, the horizontal subbundle can be described by a $TE$-valued 1-form on $E$, called <b>the connection form</b>. It is the same as the <a href="./structure 1-form of a distribution.md.html">structure 1-form</a> of the subjacent <a href="./distribution.md.html">distribution</a> on $E$.</p>
+<p></p>
+<p>If the bundle is a $G$-<a href="./principal bundle.md.html">principal bundle</a> then the connection could be a <a href="./principal connection on a principal bundle.md.html">principal connection on a principal bundle</a> an the connection 1-form would be a $\mathfrak{g}$-valued 1-form.</p>
+<p></p>
+<hr>
+<p></p>
+<p></p>
+<p></p>
+<p>___</p>
+<p>In more technical terms, a connection is precisely a smooth section of the <a href="./jet bundle.md.html">jet bundle</a></p>
+$$
+J^1 E\rightarrow E
+$$
+<p></p>
+<hr>
+<p></p>
+<p><b>Particular case</b>: <a href="./vector bundle connection.md.html">vector bundle connection</a>. (A kind of bundle are $G$-<a href="./principal bundle.md.html">principal bundle</a>s that have principal connections, and could have also associated bundles, which inherit the connection . If $G=GL_n$ the associated bundle is a vector bundle. See the <a href="./../../☕REFLECTIONS/connections summary.md.html">connections summary</a>.)</p>
+<p></p>
+<p>___</p>
+<h2 style="margin-left:0px;" id="Curvature">Curvature</h2>
+<p>An important feature of a connection is the <a href="./curvature of a connection.md.html">curvature</a>.</p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

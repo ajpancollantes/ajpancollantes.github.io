@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Localization_of_a_ring">Localization of a ring  </h1>
+<p>We will denote by $S^{-1}R$, where $S$ is a multiplicatively closed subset of $R$, the ring of fractions of $R$ with respect to $S$ (see definition \cite{atiyah} page 36).</p>
+<p>(By the way, if $R$ is an <a href="./integrity domain.md.html">integrity domain</a>, $S=R-\{0\}$ is multiplicatively closed and $S^{-1}R$ is the <a href="./field of fractions.md.html">field of fractions</a> of $R$.)</p>
+<p>If $\mathfrak{p}$ is a prime ideal of $R$ then $S=R-\mathfrak{p}$ is multiplicatively closed, and we denote </p>
+$$
+R_{\mathfrak{p}}=S^{-1}R.
+$$
+<p>It is called the  <b>localization</b> of $R$ at $\mathfrak{p}$. The elements of the form $a/s$ with $a\in \mathfrak{p}$ and $s\notin \mathfrak{p}$ form an ideal $\mathfrak{m}$ of $R_{\mathfrak{p}}$ which is maximal. Take $b/s\notin \mathfrak{m}$, i.e., $b\notin \mathfrak{p}$. </p>
+<p>Then, clearly, $b/s$ is a unit so $\mathfrak{m}$ is maximal and is unique. In other words: $R_{\mathfrak{p}}$ is a <a href="./local ring.md.html">local ring</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

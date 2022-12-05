@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Matrix_diagonalization">Matrix diagonalization</h1>
+<p>A diagonalizable matrix $A$ can be written as</p>
+$$
+A=P \Delta P^{-1}
+$$
+<p>where $\Delta$ is a diagonal matrix (the eigenvalues at the diagonal) and $P$ is a matrix which columns are the eigenvectors.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Idea">Idea</h2>
+<p>The idea is that we have a basis of the vector space in which the transformation given by $A$ is simply made of scale changes (even negative or null) in the main axes. When the basis change is by mean of an <a href="./../♾️ CONCEPTS/orthogonal matrix.md.html">orthogonal matrix</a> then the matrix $A$ is <a href="./symmetric matrix.md.html">symmetric</a>. That is, we have</p>
+<p><ul style="margin-left:0px;"><li>Diagonal matrix: scale changes in the main axes.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Symmetric matrix: scale changes in the main axes, but seen from a different point of view obtained by a rigid transformation (element of <a href="./../♾️ CONCEPTS/orthogonal matrix.md.html">O(n)</a>)</li></ul></p>
+<p><ul style="margin-left:0px;"><li>General diagonalizable matrix: scale changes in the main axes, but seen from a different point of view obtained by a general linear transformation (element of the <a href="./../♾️ CONCEPTS/general linear group.md.html">general linear group</a>).</li></ul></p>
+<p></p>
+<p>It is related to <a href="./singular value decomposition.md.html">singular value decomposition</a>. Indeed they are equal when the matrix is <a href="./symmetric matrix.md.html">symmetric</a> and positive-semidefinite. See <a href="https://math.stackexchange.com/a/365020/601797" target="_blank">MSE</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Diagonalization_method">Diagonalization method</h2>
+<p>1. Solve $det(A-\lambda I)=0$. The solutions $\lambda_i$ are called eigenvalues.</p>
+<p>2. For every $\lambda_i$ we look for a basis of the subspace $V_{\lambda_i}$</p>
+$$
+(A-\lambda_i I)\begin{pmatrix}
+x_1\\
+x_2\\
+\vdots\\
+\end{pmatrix}=
+\begin{pmatrix}
+0\\
+0\\
+\vdots\\
+\end{pmatrix}
+$$
+<p>They are the eigenvectors associated to the eigenvalue $\lambda_i$.</p>
+<p>3. If we have enough eigenvectors to complete a basis of $\mathbb R^N$ then the matrix $A$ is diagonalizable, and $\Lambda$ is made with the eigenvectors (repeated if necessary, according to the dimension of $V_{\lambda_i}$. The $P$ matrix is made with the eigenvectors. If we don't have enough eigenvectors, the matrix is not diagonalizable and we look for the <a href="./../♾️ CONCEPTS/Jordan canonical form of a matrix.md.html">Jordan canonical form of a matrix</a>. The reasons could be:</p>
+<p>a. There are complex solutions in step 1.</p>
+<p>b. Any $V_{\lambda_i}$ has not dimension enough "to fill" the multiplicity of $\lambda_i$ in step 1.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Orthogonal_matrix">Orthogonal matrix</h1>
+<p>...Depurar...</p>
+<p></p>
+<p>They constitute the group $O(n)$, called orthogonal group.</p>
+<p>Son las isometrías de $\mathbb{R}^n$ que dejan fijo $O$. Son aplicaciones lineales (ver \cite{stilwell} página 37, ejercicios). Se puede demostrar también (ver \cite{stilwell} página 37) que cualquiera de sus elementos es el producto de menos de $n$ reflexiones.</p>
+<p>It is satisfied that</p>
+$$
+O(n)=S O(n) \times \mathbb{Z}_2.
+$$
+<p>where $SO(n)$ are $n$-dimensional rotations and $\mathbb{Z}_2$ corresponds to reflections.</p>
+<p>On the other hand,</p>
+$$
+dim SO(n)=\frac{1}{2}n (n-1)
+$$(ways of choosing two axis out of $n$).
+<p></p>
+<p><ul style="margin-left:0px;"><li>$SO(2)$</li></ul></p>
+<p>Son las rotaciones del plano. Se puede ver como los números complejos de módulo 1 o como el subgrupo de matrices de la forma:</p>
+$$
+\left(
+\begin{array}{cc}
+cos(\theta) & -sin(\theta)\\
+sin(\theta) & cos(\theta) \\
+\end{array}
+\right)
+$$
+<p></p>
+<p>It's an abelian group, so every subgroup is normal. It has lots of finite subgroups (rotations of regular polygons).</p>
+<p><ul style="margin-left:0px;"><li>$O(3)$</li></ul></p>
+<p>Es el grupo de matrices 3x3 ortogonales, es decir, tales que $A \cdot A^t=I$. Su determinante puede ser 1 o -1. Constituyen las transformaciones de $\mathbb{R}^3$, visto como espacio vectorial con una base ortonormal, que no cambian ni las distancias ni los ángulos, es decir, que conservan el producto escalar. Es decir: las aplicaciones lineales de $\mathbb{R}^3$ en $\mathbb{R}^3$ que conservan el producto escalar, al expresarlas en una base ortonormal, dan lugar a una matriz ortogonal. Son los giros y las simetrías (y sus composiciones).</p>
+<p>It is not a connected space. The component which contains the identity is <a href="./SO(3).md.html">SO(3)</a>.</p>
+<p></p>
+<p></p>
+<p>The Lie algebra is the set of skew-symmetric matrices (see <a href="./SO(3).md.html#And_what_about_the_Lie_algebra_so_3">SO(3)#And what about the Lie algebra so 3</a>). </p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

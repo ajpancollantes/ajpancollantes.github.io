@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="$n$-volume_in_$\mathbb{R}^m$">$n$-volume in $\mathbb{R}^m$</h1>
+<p>(Original source: this <a href="https://math.stackexchange.com/a/1882451/601797)" target="_blank">answer in Mathstackexchange</a></p>
+<p></p>
+<p>In $\mathbb{R}^m$ we have a natural basis, the canonical one, and we have a natural volume form, the classical determinant. Indeed, we can think that the choice of this basis gives rise to an <a href="./../☕REFLECTIONS/Hermitian form, inner product and symplectic form relationship.md.html">inner product</a> (by establishing this basis as orthonormal) whose <a href="./GEOMETRY/Riemannian volume form.md.html">associated volume form</a> is the determinant. That is, the determinant measures the same volume on parallelepipeds that we would obtain by measuring the edges and angles with the inner product. The volume form is not determined, therefore, by the basis but by a class of basis with the same associated inner product (one basis can be obtained from the other by an orthogonal transformation).</p>
+<p></p>
+<p>But we want also to compute "intermediate volumes": lengths, areas, 3-volumes,... up to the $m$-volume, and this can be done by using the inner product (classical scalar product). But there is a formula to compute them directly. If $A$ is the matrix whose columns are the $n$ vectors $v_1,\ldots,v_n \in \mathbb{R}^m$ whose $n$-volume want to be computed then the $n$-volume is</p>
+$$
+D(A):=\sqrt{\det(A^T A)}.
+$$
+<p></p>
+<p>Observe that this formula includes as particular cases the 1-volume or "length", and the $m$-volume (determinant of a square matrix).</p>
+<p></p>
+<p>In order to prove this formula, we can consider that the $n$ vectors $v_1,\ldots,v_n \in \mathbb{R}^m$  are linearly independent (if not,  their $n$-volume would be zero) and look for an orthogonal transformation $T$ of $\mathbb{R}^m$ (with matrix $U$ in the canonical basis) that sends the $n$-dimensional subspace spanned by them to $span(e_1,\ldots,e_n)$ being $\{e_i\}$ the canonical basis of $\mathbb{R}^m$. Since the transformation is orthogonal, the $n$-volume should be the same, that is, </p>
+$$
+Vol(A)=Vol(UA).
+$$
+<p>But this volume, since is "inside" $\mathbb{R}^n\subset \mathbb{R}^m$ can be computed classically as</p>
+$$
+\det(trunc(UA))
+$$
+<p>where $trunc$ means selecting the first $n$ rows (the others are null).</p>
+<p></p>
+<p>And finally, observe that</p>
+$$
+\det(trunc(UA))=\sqrt{\det(trunc(UA)^Ttrunc(UA))}=
+$$
+$$
+=\sqrt{\det((UA)^T UA)}=\sqrt{\det(A^T A)}
+$$
+<p>since the truncated part is a 0 block matrix and since $U^T U=Id$.</p>
+<p></p>
+<p>So $Vol(A)=\sqrt{\det(A^T A)}$.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="With_a_different_metric">With a different metric</h2>
+<p>I we had started with a different inner product $\langle-,-\rangle$ (or with another basis, not corresponding to an orthogonal transformation of the canonical one), I think the formula would be nearly the same:</p>
+$$
+Vol(A)=\sqrt{\det(A^T G A)}
+$$
+<p>where $G$ is the matrix of the inner product, that is, $G=(g_{ij})$ with $g_{ij}=\langle e_i, e_j \rangle$.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Another_approach_messy_ideas">Another approach (messy ideas)</h1>
+<p>Well, indeed we must define first what is the "volume determined by the classical scalar product". Let's call it the metric volume $Vol(A)$. I would do it inductively: the metric volume of $v_1,\ldots,v_n$ is the metric volume of $v_1,\ldots,v_{n-1}$ multiplied by the projection of $v_n$ over the orthogonal complement of $v_1,\ldots,v_{n-1}$ in $v_1,\ldots,v_n$.</p>
+<p></p>
+<p>With this in mind, the result is evident when the given vectors are multiples of the basis vector. If we assume that they are given in the correct order then the matrix $A=\Sigma$ is  a diagonal matrix whose entries are the factors and therefore $D(\Sigma)=Vol(\Sigma)$.</p>
+<p></p>
+<p>On the other hand, observe that if $U$ is an orthogonal transformation and $D(B)=Vol(B)$ then $D(UB)=D(B)=Vol(B)=Vol(UB)$, where the last equality holds because $U$ preserves angles and distances. So if the given vectors are multiples of the result of an orthogonal transformation (reflection-rotation) applied to the basis vectors of $\mathbb{R}^m$ then $D(A)=Vol(A)$, since $A=U\Sigma$, where $U$ is a orthogonal matrix of order $m.$</p>
+<p></p>
+<p>In the general case, the matrix $A$ can be seen like the matrix of a transformation $T$ sending the canonical basis of $\mathbb{R}^n$ to the vectors $v_1,\ldots,v_n.$ </p>
+<p>Taking into account the <a href="./../✏️ THEOREMS/singular value decomposition.md.html#Non_square_matrices">SVD</a> of this matrix</p>
+$$
+A=U\Sigma V,
+$$
+<p>we can think in $T$ like a sequence of:</p>
+<p><ul style="margin-left:0px;"><li>An orthogonal transformation on $\mathbb{R}^n$ (given by $V$) that sends the basis vectors of $\mathbb{R}^n$ to another orthonormal basis of $\mathbb{R}^n$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>A transformation (given by the diagonal matrix $\Sigma$) that sends each of the new basis vectors to a canonical basis vector of $\mathbb{R}^m$ stretched by a factor (non-negative, see <a href="./../✏️ THEOREMS/singular value decomposition.md.html">singular value decomposition</a>) specified in the diagonal.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>An orthogonal transformation in $\mathbb{R}^m$ specified by $U$.</li></ul></p>
+<p></p>
+<p></p>
+<p>We only need to show that $D(\Sigma V)=Vol(\Sigma V)$.  We can check that </p>
+$$
+D(\Sigma V)=\sqrt{\det((\Sigma V)^T \Sigma V)}=\sqrt{\det\Sigma^T\Sigma}=D(\Sigma)=\prod \sigma_{ii}
+$$
+<p>But on the other hand, we can think of $\Sigma V$ as a transformation of $\mathbb{R}^n$ into the first $n$ components of $\mathbb{R}^m$, simply by truncating the first $n$ rows. And</p>
+$$
+\det(\mbox{Trunc}(\Sigma V))=\prod \sigma_{ii}
+$$
+<p>is nothing but the expansion factor of the volume of parallelepipeds for this linear transformation. So $Vol(\Sigma V)=Vol(\mbox{Trunc}(\Sigma V))=\prod \sigma_{ii}$ </p>
+<p>since if we restrict to the first $n$ basis vectors of $\mathbb{R}^m$, $\det(trunc(\Sigma V ))$ is the expansion coefficient, and the original parallelepiped in $\mathbb{R}^n$ had volume 1.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

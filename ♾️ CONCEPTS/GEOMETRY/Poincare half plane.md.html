@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Poincare_half_plane">Poincare half plane</h1>
+<p>It is a model for the axiomatic <a href="./hyperbolic geometry.md.html">hyperbolic geometry</a>. </p>
+<p>It consists of the upper half complex plane</p>
+$$
+\mathbb{H}=\{x+yi : y>0\}
+$$
+<p>together with the metric </p>
+$$
+d\hat{s}=\frac{ds}{y}.
+$$
+<p>On it, it acts a subgroup of the <a href="./Moebius transformations.md.html#Relation_to_hyperbolic_geometry">Moebius transformations</a> of the <a href="./../Riemann sphere.md.html">Riemann sphere</a>.</p>
+<p></p>
+<p>There is a conformal map from the <a href="./pseudosphere.md.html">pseudosphere</a> to it. </p>
+<p></p>
+<p>What about their geodesics? Since this is a conformal map (in the usual sense of the word "map") the metric can be seen like this</p>
+<p><img src="./../../imagenes/Pasted image 20220105094022.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p><img src="./../../imagenes/Pasted image 20220105094807.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>See <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 55-57 for details. Every little circle in the map represent a unit of length in the <a href="./pseudosphere.md.html">pseudosphere</a>. The conformal requirement is for the circles not to be ellipses. With this picture in mind, <b>geodesics will be lines which go through the fewest amount of circles</b>.</p>
+<p>It is related to <a href="./Snell law.md.html">Snell law</a> for the relation between the angles of light going through two different materials.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Infinite_parallels">Infinite parallels</h1>
+<p>See <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 61:</p>
+<p><img src="./../../imagenes/Pasted image 20220614173015.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Map_to_the_Poincare_disk">Map to the Poincare disk</h1>
+<p>Define the complex coordinate $z=x+iy\in \mathbb{H}$, and define the new complex coordinate $u$ by the relation $$iu = \frac{1+iz}{1-iz} \qquad \Leftrightarrow \qquad iz = \frac{-1+iu}{1+iu} \, . $$ It is easy to check that this establishes a bijection between $\mathbb{H}$ parametrized by $z$ and the Poincaré disk $$\mathbb{D} = \{ u \in \mathbb{C} \mid |u|<1 \} \, . $$ The metric on the hyperbolic plane and the Poincaré disk in complex coordinates are</p>
+$$
+g_{\mathbb{H}} = \frac{\mathrm{d}  z \mathrm{d}  \bar{z}}{(\mathrm{Im} \, z)^2} = \frac{4 \mathrm{d} u \mathrm{d} \bar{u}}{(1-|u|^2)^2} \, .
+$$
+<p>One can check that the <a href="./Ricci scalar.md.html">Ricci scalar</a> is again constant and equal to $R=-2$.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Tridimensional_version">Tridimensional version</h1>
+<p><img src="./../../imagenes/Pasted image 20220116214636.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>See <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 80.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

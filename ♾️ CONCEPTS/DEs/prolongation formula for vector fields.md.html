@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Prolongation_formula_vector_fields">Prolongation formula vector fields</h1>
+<p>A vector field </p>
+$$
+Y=\xi_{i} \partial x^{i}+\eta^{J}_{a} \partial u^{\alpha}_{J} 
+$$
+<p>in the <a href="./../GEOMETRY/jet bundle.md.html">jet bundle</a> $J^k(E)$ (think of $E$ as a generalization of the trivial bundle of dependent and independent variables $X\times U$) may be a <a href="./../GEOMETRY/symmetry of a distribution.md.html">symmetry of a distribution</a> of the <a href="./../GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>. From the characterization of symmetries from the point of view of Lie derivative of 1-forms (see <a href="./../GEOMETRY/symmetry of a distribution.md.html">here</a>), it can be shown  that this vector field satisfies the formula:</p>
+$$
+\eta^{J, i}_{a}=D_{i} \eta^{J}_{a}-u_{J, m}^{a}\left(D_{i} \xi_{m}\right)
+$$
+<p>where $D_i$ is the total derivative operator associated to $x_i$ (it is said in Gaeta_2005 page 2).</p>
+<p></p>
+<p>Reciprocally, any vector field satisfying the prolongation formula is such that </p>
+$$
+L_Y(\theta)\in \mathcal{E}^*
+$$
+<p>being $\mathcal{E}$ the <a href="./../GEOMETRY/Cartan distribution.md.html">Cartan distribution</a> and $\mathcal{E}^*$ its <a href="./../../✏️ THEOREMS/DG/dual description of the distribution.md.html">dual description</a>.</p>
+<p></p>
+<p>If the projection to the independent and dependent variable space $E$ is a vector field $V\in \mathfrak{X}(E)$ which does not depend on derivatives, we obtain a proper vector field on $E$, which is candidate to be a <a href="./Lie point symmetry.md.html#Lie_point_symmetry_of_a_DE_system">Lie symmetry</a> of a <a href="./system of DEs.md.html">system of DEs</a>. We say that $Y$ is the prolongation of $V$. It can be shown that every vector field in $E$ has an unique prolongation (stated in Anderson_1992 Definition 2.2, but for $J^{\infty}(E)$).</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Meaning">Meaning</h2>
+<p></p>
+<p>The idea behind this is that given the <a href="./../GEOMETRY/bundle.md.html">bundle</a> $E\rightarrow M$, a vector field $X\in \mathfrak{X}(M)$ is the infinitesimal generator of a one-parameter <a href="./../local group of transformations.md.html">local group of transformations</a>. The action of this group can be <a href="./prolongation of a diffeomorphism.md.html">prolonged</a> to act on $J^kE.$ The infinitesimal generator os this action is the <a href="./prolongation formula for vector fields.md.html">prolonged vector field</a>.</p>
+<p></p>
+<p>So if a vector field in the jet space is a prolonged one what we know is that it carries <a href="./../GEOMETRY/Cartan distribution.md.html">Cartan distribution</a> to the Cartan distribution. Since vector fields corresponding to <a href="./ODE.md.html">ODE</a>s <a href="./../GEOMETRY/Cartan distribution.md.html#Interpretation">"live inside" Cartan distribution</a>, the <a href="./prolongation formula for vector fields.md.html">prolonged vector fields</a> are candidates to be <a href="./Lie point symmetry.md.html">Lie point symmetry</a>s of the ODE.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

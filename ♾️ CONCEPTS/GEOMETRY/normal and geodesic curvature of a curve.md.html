@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Normal_and_geodesic_curvature">Normal and geodesic curvature</h1>
+<p></p>
+<p>When we have a curve $\gamma:[0,L]\rightarrow \mathbb{R}^3$ contained in a <a href="./immersed manifold.md.html">immersed surface</a> $f(M)$ we can define two notions related to the usual <a href="./curvature of a curve.md.html">curvature of a curve</a> and <a href="./torsion of a curve.md.html">torsion of a curve</a>. If we name $N_M$ to the unit normal to the surface and $B_M$ to the product $T\times N_M$, we can define:</p>
+<p><ul style="margin-left:0px;"><li>$\kappa_n:=\langle N_M, \frac{d}{ds}T\rangle$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\kappa_g:=\langle B_M, \frac{d}{ds}T\rangle$</li></ul></p>
+<p><img src="./../../imagenes/Pasted image 20211004183648.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<hr>
+<p></p>
+<p><b>Another approach (with other notation)</b> (<a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 116), if the curve is $C$ and the tangent vector at the point of study is $T$ we can consider the normal $n$ to the surface $S$, and the planes $T_pS$ (the tangent plane to $S$) and $\Pi_T$ the normal plane to the surface spanned by $T$  and $n$.</p>
+<p><img src="./../../imagenes/Pasted image 20220207191435.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Suppose the osculating plane to $C$ at $p$ is inclined an angle $\gamma$ ($\gamma$ is the angle between the binormal $B$ of $C$ and the normal $n$ to $S$). Then $\kappa_n$ and $\kappa_g$ are the curvatures of the projections of $C$ onto $\Pi_T$ and $T_pS$ respectively. If the curvature of $C$ is $\kappa$ it is satisfied that</p>
+$$
+\kappa_n=\kappa \mbox{sin}(\gamma)
+$$
+$$
+\kappa_g=\kappa \mbox{cos}(\gamma)
+$$
+<p></p>
+<p>Related to this notions is the <a href="./../../✏️ THEOREMS/Meusnier's theorem.md.html">Meusnier's theorem</a>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Intrinsic_measurement_of_the_geodesic_curvature">Intrinsic measurement of the geodesic curvature</h1>
+<p>As might be expected, the geodesic curvature can be obtained intrinsically. The inhabitants of the surface $S$ do not know that they live in a surface so they can try to measure the usual <a href="./curvature of a curve.md.html">curvature</a> by their own means, for example, by the measuring the change in the angle, as is outlined <a href="./curvature of a curve.md.html#Angle_variation">here</a>.</p>
+<p><img src="./../../imagenes/Pasted image 20220221074459.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>They weren't using tangent lines, indeed, but "tangent <a href="./geodesic curve.md.html">geodesics</a>". The result is: what for them is the curvature, for us is the geodesic curvature.</p>
+<p>See <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 119.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Relationship_with_covariant_derivative">Relationship with covariant derivative</h1>
+<p></p>
+<p>According to <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 243</p>
+$$
+\nabla_v v=\kappa=\kappa_g+\kappa_n
+$$
+<p>Defining the <a href="./../covariant derivative operator.md.html">covariant derivative</a> inherited from the ambient $\mathbb{R}^3$ as the projection on the tangent space to the surface in every point $D_v v=P[\nabla_v v]=\nabla_v v-(n\cdot \nabla_v v)n$ it turns out that</p>
+$$
+\kappa_g=D_v v,
+$$
+<p>since $\kappa_n=(n\cdot \nabla_v v)n$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

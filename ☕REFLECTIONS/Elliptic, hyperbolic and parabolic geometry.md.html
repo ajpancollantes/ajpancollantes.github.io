@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Elliptic,_hyperbolic_and_parabolic_geometry">Elliptic, hyperbolic and parabolic geometry</h1>
+<p>The three models of <a href="./../♾️ CONCEPTS/GEOMETRY/surface.md.html">surface</a>s can be seen within a common framework.</p>
+<p>Let's consider the space $\mathbb{M}^4$, that is, the manifold $\mathbb{R}^4$ with coordinates $(x,y,z,t)$ but with the pseudo-<a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> given in each tangent space by</p>
+$$
+ds^2=dx^2+dy^2+dz^2-dt^2.
+$$
+<p>This space with this pseudo-metric is called <a href="./../♾️ CONCEPTS/Minkowski space.md.html">Minkowski space</a>, and can be also denoted by $\mathbb{R}^{3,1}$.</p>
+<p>This metric is left invariant by the group $O(3,1)$ when acting on $\mathbb{M}^4$. It also leaves invariant the cone</p>
+$$
+t^2-x^2-y^2-z^2=0
+$$
+<p>so is logical that we pay attention to it, because it is very "physical": the group $O(3,1)$ represents all the change of point of view of a physical observer, that is, rotations and Lorentz boost.</p>
+<p>Now, following [TRTR] from Penrose page 423, we can consider the family of hyperplanes inside $\mathbb{M}^4$ given by</p>
+$$
+z+t+\lambda(t-z)=2
+$$
+<p>intersecting our cone in different 2-dimensional submanifolds $P_{\lambda}$ of $\mathbb{M}^4$.</p>
+<p>Here we have a picture from that book, where we consider only $(x,z,t)$ for purposes of drawability.</p>
+<p><img src="./../imagenes/conicgeometry.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>If we analyse the case $\lambda=0$, we observe that we obtain the submanifold $P_0$, $E$ in the picture with a shape of a parabola, given by the embedding</p>
+$$
+\phi \colon \mathbb{R}^2 \longrightarrow \mathbb{M}^4
+$$
+$$
+(u_1,u_2) \mapsto (u_1, u_2, 1-\frac{u_1^2+u_2^2}{4},1+\frac{u_1^2+u_2^2}{4})
+$$
+<p>We can look for the (possibly pseudo) <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> inherited by $P_0$. Since</p>
+$$
+d\phi=\begin{pmatrix}
+
+1 & 0 \\ 
+
+0 & 1\\ 
+
+-\frac{u_1}{2} &-\frac{u_2}{2}\\
+
+\frac{u_1}{2} &\frac{u_2}{2} 
+
+\end{pmatrix}
+
+$$
+<p>we conclude that $P_0$ consists of $\mathbb{R}^2$ with the euclidean metric:</p>
+<p></p>
+$$
+
+g=\begin{pmatrix}
+
+1 & 0 \\ 
+
+0 & 1\\ 
+
+\end{pmatrix}
+
+$$
+<p>That is, although we see it like a parabola, intrinsically is only the Euclidean plane, and that is the reason the latter is sometimes called parabolic geometry.</p>
+<p>But, what happens for others $\lambda$? Let's see. We have a far more complicated parametrization of our embedded manifold:</p>
+$$
+\phi(u_1,u_2)=(u_1,u_2, \frac{-1+{ \lambda }+\sqrt{-(1+{ \lambda })^{2}\left(-1+{\lambda}\left(u_1^{2}+u_2^{2}\right)\right)}}{2{ \lambda }},
+$$
+$$
+\frac{2+{ \lambda }+\sqrt{-(1+{\lambda })^{2}\left(-1+{\lambda}\left(u_1^{2}+u_2^{2}\right)\right)+\frac{1-\sqrt{-(1+{\lambda})^{2}\left(-1+{\lambda}\left(u_1^{2}+u_2^{2}\right)\right)}}{{ \lambda }}}}{2(1+{ \lambda })})
+$$
+<p>(computations made with Mathematica).</p>
+<p>If we compute the (possibly pseudo) <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> in this chart we obtain the inherited metric in $\mathbb{R}^2$</p>
+$$
+g_{\lambda}=\begin{pmatrix}
+\frac{1-{ \lambda } u_2^{2}}{1-{ \lambda }\left(u_1^{2}+u_2^{2}\right)} & \frac{\lambda u_1 u_2}{1-{ \lambda }\left(u_1^{2}+u_2^{2}\right)} \\ 
+\frac{\lambda u_1 u_2}{1-{ \lambda }\left(u_1^{2}+u_2^{2}\right)} & \frac{1-{ \lambda } u_1^{2}}{1-{ \lambda }\left(u_1^{2}+u_2^{2}\right)}\\ 
+\end{pmatrix}
+$$
+<p>Next step is to show that for $\lambda>0$ we have an isometry into the usual sphere (a model for <a href="./spherical geoemtry.md.html">spherical geoemtry</a>), and that for $\lambda<0$ we have an isometry into a model for  <a href="./../♾️ CONCEPTS/GEOMETRY/hyperbolic geometry.md.html">hyperbolic geometry</a>. This would justify the terms elliptic and hyperbolic for those geometries, as you can see at the picture above ($S$ and $H$ respectively). In order to keep it simple we can work with $\lambda=1$ and $\lambda=-1$. </p>
+<p>For $\lambda=1$, we have</p>
+$$
+g=\begin{pmatrix}
+
+\frac{1- u_2^{2}}{1-\left(u_1^{2}+u_2^{2}\right)} & \frac{ u_1 u_2}{1-\left(u_1^{2}+u_2^{2}\right)} \\ 
+
+\frac{u_1 u_2}{1-\left(u_1^{2}+u_2^{2}\right)} & \frac{1- u_1^{2}}{1-\left(u_1^{2}+u_2^{2}\right)}\\ 
+
+\end{pmatrix}
+$$
+<p>But if we look at a typical chart of the usual sphere in $\mathbb{E}^3$</p>
+$$
+
+\psi: (x,y)\longmapsto (x,y,\sqrt{1-x^2-y^2})
+
+$$
+<p>and compute the metric we obtain just</p>
+$$
+
+g=\begin{pmatrix}
+
+\frac{1- y^{2}}{1-\left(x^{2}+y^{2}\right)} & \frac{ xy}{1-\left(x^{2}+y^{2}\right)} \\ 
+
+\frac{xy}{1-\left(x^{2}+y^{2}\right)} & \frac{1- x^{2}}{1-\left(x^{2}+y^{2}\right)}\\ 
+
+\end{pmatrix}
+$$
+<p>so they are the same.</p>
+<p>And for $\lambda=-1$ we have</p>
+<p></p>
+$$
+
+g=\begin{pmatrix}
+
+\frac{1+ u_2^{2}}{1+u_1^{2}+u_2^{2}} & \frac{ -u_1 u_2}{1+u_1^{2}+u_2^{2}} \\ 
+
+\frac{-u_1 u_2}{1+u_1^{2}+u_2^{2}} & \frac{1+ u_1^{2}}{1+u_1^{2}+u_2^{2}}\\ 
+
+\end{pmatrix}
+
+$$
+<p>But if we look at the typical model for hyperbolic plane that consists of the <a href="./../♾️ CONCEPTS/GEOMETRY/pseudosphere.md.html">pseudosphere</a> embedded in $\mathbb{M}^3$:</p>
+$$
+x^2+y^2-z^2=-1
+$$
+<p>with a chart given by</p>
+$$
+\psi: (x,y)\longmapsto (x,y,\sqrt{1+x^2+y^2})
+$$
+<p>we obtain the inherited metric in $\mathbb{R}^2$ (keep an eye: inherited from the Minkowski metric, not the Euclidean one):</p>
+$$
+g=\begin{pmatrix}
+\frac{1+ y^{2}}{1+x^{2}+y^{2}} & \frac{ -xy}{1+x^{2}+y^{2}} \\ 
+\frac{-xy}{1+x^{2}+y^{2}} & \frac{1+ x^{2}}{1+x^{2}+y^{2}}\\ 
+\end{pmatrix}
+$$
+<p>so we are done.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

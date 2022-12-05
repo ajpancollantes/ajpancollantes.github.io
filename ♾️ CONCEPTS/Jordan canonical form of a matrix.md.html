@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Jordan_canonical_form">Jordan canonical form</h1>
+<p>This is a basic fact of <a href="./../⛳️ NON CLASSIFIED/Linear Algebra.md.html">Linear Algebra</a>.</p>
+<p></p>
+<p>In general, we have that for an endomorphism $f:V\mapsto V$</p>
+$$
+Im(f)\cong V/Ker(f)
+$$
+<p>and so $dim (V)=dim(Ker(f))+dim (Im(f))$.</p>
+<p></p>
+<p>But we don't always have <b>that  $V=Ker(f)\oplus Im(f)$</b>. Now,  <b>if $f\circ f=f$</b>, i.e., $f$ <b>is  idempotent</b>, the previous formula holds: for every $v\in V$ we have that $v=v-f(v)+f(v)=(v-f(v),f(v))$ and conversely, for $(h,w)\in Ker(f)\oplus Im(f)$ we can take $h+w \in V$ such that $(h+w-f(h+w),f(h+w))=(h,w)$</p>
+<p><img src="./../imagenes/Pasted image 20211017184359.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>This is the same as being a <a href="./projection.md.html">projection</a>.</p>
+<p></p>
+<p>More generally, we have</p>
+<p><b>Proposition</b></p>
+<p>If $f$ is such that $Im(f)=Im(f^2)$, we have </p>
+$$
+V=Ker(f)\oplus Im(f)
+$$
+<p><b>Proof</b></p>
+<p>First, let's observe that $f|_{Im(f)}$ is an isomorphismm. This is so because it is surjective and dimensions are equals.</p>
+<p>We can construct an isomorphism $V\rightarrow Ker(f)\times Im(f)$ at the following way:</p>
+$$
+v\mapsto (v-f(x),f(x))
+$$
+<p>where $x$ is such that $f^2(x)=f(v)$ ($x$ exists because $Im(f)=Im(f^2)$).</p>
+<p></p>
+<p>It is easy to prove injectivity and surjectivity. Only rest to show that is well defined. Let us suppose that, for $v\in V$ we get $x\neq y$ such that $f^2(x)=f^2(y)=f(v)$. Then, since the restriction of $f$ is an isomorphism, $f(x)=f(y)$. </p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>At the same way, we can prove</p>
+<p><b>Propostion</b></p>
+<p>For any endomorphism $f: V\rightarrow V$ there exists $m\geq 1$ such that </p>
+$$
+Ker(f^m)\oplus Im(f^m)
+$$
+<p><b>Proof</b></p>
+<p>Observe that $Im(f)\supseteq Im(f^2)\supseteq Im(f^3) \supseteq \cdots$</p>
+<p>And therefore, there exist $m$ such that $Im(f^m)=Im(f^{m+1})=\cdots=Im(f^{2m})=\cdots$.</p>
+<p>At this point, we only have to apply the previous proposition to the transformation $h=f^m$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>Now, we are ready to show the <b>Jordan canonical form</b>. Let $V$ be a <b>complex vector space</b>, and $f\in end(V)$. If $f$ is decomposable, we take a decomposition $V=\bigoplus_i U_i$, with $f(U_i) \subseteq U_i$ and proceed with every $f_i=f|_{U_i}$. So assume $f$ is indecomposable.</p>
+<p>Consider $\lambda \in \mathbb{C}$ such that $f(v)=\lambda v$. It exists, because we can choose a </p>
+<p>basis and contruct the polynomic equation $det(A-\lambda I)=0$, and $\mathbb{C}$ is algebraically closed. So, for certain $\lambda$, $Ker(f-\lambda id)$ as, at least, dimension 1. Moreover, observe that $\lambda$ is the only (possibly multiple) solution to the previous polynomial equation</p>
+<p></p>
+<p>We define $h=f-\lambda id$, and apply the previous proposition, so we get </p>
+<p>$$V=ker(h^m) \oplus im(h^m)$$</p>
+<p>for $m \geq 1$.</p>
+<p>Since $f$ is indecomposable and $v\in ker(h^m)$ (since $f(v)-\lambda v=0$) we have that $V=ker(h^m)$, and therefore $h^m:V\mapsto V$ is the null transformation and $h$ is \emph{nilpotent}. Let $k$ be the nilpotency index, and $w \in V$ such that $h^{k-1}(w)\neq 0$ but $h^{k}(w)= 0$.</p>
+<p></p>
+<p>We can show that $\{w, h(w), h^2(w), \ldots , h^k(w)\}$ is a basis for $V$. First, observe that they are independent because if </p>
+$$
+
+\sum_i a_i h^i(w)=0
+
+$$
+<p>we can apply $h$ several times to show that every $a_i=0$.</p>
+<p></p>
+<p>And second, we can show that they span $V$. In fact, let $E=span\{w, h(w), h^2(w), \ldots , h^k(w)\}$. Observe that:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$f(w)\in E$, since $h(w)=f(w)-\lambda w$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$f^2(w) \in E$, since $h^2(w)=f^2(w)-2\lambda f(w)+\lambda^2 w$. Therefore, $f(h(w)) \in E$, because $f(h(w))=f^2(w)-\lambda f(w)$ and so $h^2(w)=f(h(w))-\lambda h(w)$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$f^3(w) \in E$ and therefore $f(h^2(w)) \in E$. In fact, $f(h^2(w))=h(f(h(w)))=h(h^2(w)+\lambda h(w))=h^3(w)+\lambda h^2(w)$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>In general, $f(h^i(w))=h(f(h^{i-1}(w)))=h(h^{i}+\lambda h^{i-1}))=h^{i+1}(w)+\lambda h^i(w)$.</li></ul></p>
+<p></p>
+<p>Since $f(E)\subseteq E$ and $f$ is, by hypothesis, indecomposable, we conclude that $V=E$. </p>
+<p>It only rests to show the form of the matrix of $f$ respect to the basis $\{w, h(w), h^2(w), \ldots , h^k(w)\}$. But because of the facts of the above enumeration we conclude that</p>
+<p></p>
+$$
+
+f\equiv \left(
+
+\begin{array}{cccc}
+
+\lambda & 0       & 0 &\ldots\\
+
+1       & \lambda & 0 & \ldots\\
+
+0       & 1       & \lambda &\ldots\\
+
+\ldots & \ldots  &\ldots &\ldots
+
+\end{array}
+
+\right)
+
+$$
+<p><b>In conclusion</b>: For any endomorphism $f$ of $V$ we can find a partition $U_i$ of $f$-stables vector subspaces of $V$. </p>
+<p>In each of one, $f_i$ has the form of the matrix above (in a particular basis). This is so because, either $f_i$ is a escalar matrix ($f_i=\lambda Id$) or $f_i-\lambda Id$ is nilpotent, and for nilpotent operators we have the special basis $\{h^k(w), h^{k-1}(w), \ldots, w\}$.</p>
+<p></p>
+<p>By the way: it there exists other decomposition in $f$-stables subspaces, but not satisfying that matrix form.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

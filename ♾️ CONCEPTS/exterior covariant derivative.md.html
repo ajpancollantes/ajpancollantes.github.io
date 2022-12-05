@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Exterior_covariant_derivative">Exterior covariant derivative</h1>
+<p>Schuller_2013 page 197</p>
+<p>Olver_2014 page 31</p>
+<p>Olver_1995 page 123-124</p>
+<p></p>
+<p>Idea: when we have a decomposition of the cotangent bundle in horizontal and vertical subspaces, we can use the usual <a href="./exterior derivative.md.html">exterior derivative</a> operator $d$ and then project the result on the horizontal subspace. This leads to a new operator $d_H$.</p>
+<p></p>
+<p>I think that it has to do with the typical situation of a function with parameters (like in high school). Consider $f(x)=ax^3+x^2-3x+1$. We have variables $x$ and $a$, but they are not of the same "status". Students ask why we derive $x$ but not $a$...</p>
+<p></p>
+<p>Even in function of several variables</p>
+$$
+f(x,y)=ax^2+y^2
+$$
+<p>they don't have the same "status": $x$ and $y$ are more "variables" and $a$ is more fixed. </p>
+<p>I think that the exterior covariant derivative is an "external device" that we introduce in order to specify this distinction. Indeed I guess that the <a href="./GEOMETRY/principal connection on a principal bundle.md.html">connection</a> itself has this goal...</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

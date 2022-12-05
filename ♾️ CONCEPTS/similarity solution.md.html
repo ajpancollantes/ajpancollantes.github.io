@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Similarity_solutions">Similarity solutions</h1>
+<p>Also known as invariant solutions. Although I think that the name similarity solutions refers mainly to one particular group: the scaling group.</p>
+<p></p>
+<p>Given a scalar <a href="./PDE.md.html">PDE</a> in $J^1(\mathbb{R}^2,\mathbb{R})$ (wlog)</p>
+$$
+F(x,t,u,u_x,u_t)=0
+$$
+<p>Suppose we have a one-parameter subgroup of symmetries of the PDE (see <a href="./DEs/symmetry group of a DE system.md.html">symmetry group of a DE system</a>)</p>
+$$
+\begin{align}
+\bar{x}=X(x,t,u;\varepsilon)\\
+\bar{t}=T(x,t,u;\varepsilon)\\
+\bar{u}=U(x,t,u;\varepsilon)
+\end{align}
+$$
+<p>That is, the <a href="./DEs/prolongation of a diffeomorphism.md.html#In_coordinates">prolongation</a> of it leaves invariant the hypersurface given by $F=0$. Then it transforms solutions into solutions.</p>
+<p>The infinitesimal generator $X$ of the group, which does satisfy $X(F)=0$ mod $F=0$, can be transformed into $\partial_y$ with a coordinate change</p>
+$$
+(x,t,u)\to (y,s,w)
+$$
+<p>such that $X(y)=1,X(s)=0,X(w)=0$ . In this coordinates the PDE is</p>
+$$
+G(s,w,w_y,w_s)=0
+$$
+<p>but since $G$ doesn't depend on $y$ we can assume $w_y=0$, so we obtain the <a href="./DEs/ODE.md.html">ODE</a></p>
+$$
+G(s,w,w_s)=0
+$$
+<p>This change of variables is called similarity variables, and the solutions of the original PDE obtained are called similarity solutions. See <a href="./../Bibliography/@Stephani.md.html">@Stephani</a> page 172.</p>
+<p></p>
+<p><b>Keep an eye</b>: A problem arises if the variable $y$ needs to be the dependent variable. See <a href="./../Bibliography/@Stephani.md.html">@Stephani</a> page 172. I think that what is happening here is that you have to distinguish the cases where the flow of the symmetry lies inside solutions $u=u(x,t)$ or transform one solution into another one. I think that this is explained in <a href="./../Bibliography/@blumanlibro.md.html">@blumanlibro</a> page 303, where they call them invariant solutions. Even more, I think that invariant solutions have to do with characteristic lines (see <a href="./transport equation.md.html">transport equation</a>).</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

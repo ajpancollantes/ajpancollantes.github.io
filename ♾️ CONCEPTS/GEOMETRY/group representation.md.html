@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Group_representation_or_linear_representation">Group representation or linear representation</h1>
+<p>It is an <a href="./group action.md.html">action</a> of the group on a vector space by means of linear maps. It can be seen like a <a href="./../CATEGORY THEORY/functor.md.html">functor</a> if we think of a <a href="./../CATEGORY THEORY/group as a category.md.html">group as a category</a>.</p>
+<p>Given a group $G$, a representation is then a homomorphism $\rho: G \to GL(V)$ where $V$ is a vector space. If we fix a basis we can say it is a matrix representation.</p>
+<p></p>
+<p>A vector subspace $W\subset V$ is $G$-invariant if $\rho(g)v\in W$ for every $g\in G$ and $v\in W$. It can lead to a <a href="./../subrepresentation.md.html">subrepresentation</a> or a <a href="./../quotient representation.md.html">quotient representation</a>.</p>
+<p></p>
+<p>A representation $\rho:G\to GL(V)$ is <b>irreducible</b> if do not have non-trivial subrepresentations. Otherwise it is called reducible.</p>
+<p></p>
+<p>If the action of $G$ on $V-\{0\}$ is transitive then the representation is irreducible.</p>
+<p></p>
+<p>Since $\rho(G)$ is a subring of $End(V)$ then $V$ is a $\rho(G)$-<a href="./../module.md.html">module</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

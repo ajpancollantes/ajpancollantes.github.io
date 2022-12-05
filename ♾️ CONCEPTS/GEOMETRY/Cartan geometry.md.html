@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Origins_and_motivation">Origins and motivation</h1>
+<p></p>
+<h3 style="margin-left:0px;" id="History">History</h3>
+<p>Differential geometers in the late 19th and early 20th centuries were very interested in using collections of model spaces (such as planes or spheres) to describe the geometry of surfaces. A family of model spaces attached to each point of a surface $S$ is called a <b>congruence</b>. For example, the collection of tangent planes to a surface, or a collection of tangent spheres (one in every point of the surface). The idea, I guess, was to substitute the complicated object $S$ by a collection of simpler objects (model spaces).</p>
+<p>A <a href="./Cartan geometry.md.html#Definition_and_remarks">Cartan connection</a> provides an identification between the model spaces in the congruence along any curve in $S$. An important feature of these identifications is that the point of contact of the model space with $S$ _always moves_ with the curve. This generic condition is characteristic of Cartan connections.</p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Generalization_of_manifolds_with_affine_connections">Generalization of manifolds with affine connections</h3>
+<p>To understand the idea of a Cartan connection, a good starting point is to analyse first the particular case of a smooth manifold with an <a href="./linear connection.md.html">affine connection</a>. An affine connection on a manifold $M$ is vinculated to a <a href="./principal connection on a principal bundle.md.html">principal connection</a> $\omega$ on the <a href="./frame bundle.md.html">frame bundle</a> $P$ of $M$ (see <a href="./associated connection.md.html#Conversely">here</a>). This device let us speak about <a href="./geodesic curve.md.html">geodesic curve</a>s, <a href="./../parallel transport.md.html">parallel transport</a>, and so on. </p>
+<p></p>
+<p><b>Now, let's think: what is a vector $v\in T_pP$?</b> </p>
+<p>The point $p\in P$ represents a point $x$ in the manifold together with a choice of a basis for $T_x M$, and $v$ represents the beginning of a curve $\alpha$ in $M$ leaving $x$ and a choice of a basis for every $T_{\alpha(t)}M$. <b>The value of $\omega_p(v)$ is an "extra data" that tells us how the basis is changing when we move along</b> $\alpha$ .  This is "not natural", and must be introduced by hand. </p>
+<p></p>
+<p>But observe that, in addition, the projection of $v$, the vector $d\pi_p(v)=\alpha'(0)\in T_xM$, have (tautological) coordinates $(v_1,\ldots,v_n)$ in the basis represented by $p$. </p>
+<p><img src="./../../imagenes/Pasted image 20220111071639.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Moreover, this assignation </p>
+$$
+v\mapsto (v_1,\ldots,v_n)
+$$
+<p>is linear. That is, the frame bundle has a natural $\mathbb{R}^n$-valued 1-form $\theta$ that is horizontal, in the sense that for a vertical vector $v$ we have $\theta(v)=0$. And it is right equivariant, that is, </p>
+$$
+R_g^*\theta=g^{-1} \theta.
+$$
+<p>(Think of this last expression as a coordinate change. In the left hand side we are applying the matrix $g$ to the basis elements, and in the right hand side to the coordinates of the vector).</p>
+<p></p>
+<p>This additional structure of the <a href="./frame bundle.md.html">frame bundle</a> is what is usually called a <a href="./solder form.md.html">solder form</a>. <b>The value of $\theta_p(v)$ tells us how much are we moving in $M$ independently of the change in the basis.</b></p>
+<p></p>
+<p><b>The pair $(\omega,\theta)$ is the geometry of the manifold. In what sense?</b></p>
+<p>Suppose I am situated in a point $x\in M$ with a choice of a basis of $T_xM$ (to do Physics, for example). So I have chosen a point $p\in P=FM$. If I move to other configurations (point+basis) I am describing a curve $\gamma(t)$ with $\gamma(0)=p$. Suppose a small (but not infinitesimal) time $t$. Since for any $p\in P$ we have $p=point+basis$, we will denote $X(p)=point$ and $B(p)=basis$. All of this is "loosely speaking", of course. We can consider the following approximations (since $t$ is small):</p>
+<p><ul style="margin-left:0px;"><li>$\gamma(t) \asymp p+v$, $v\in T_p P$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$B(\gamma(t))\asymp B(p)+\omega_p(v)$. Observe that, in some sense, $B(p)\in GL(n)$ and $\omega_p(v)\in \mathfrak{gl}(n)$, so it would be something like $B(p)+\omega_p(v)\approx B(p) e^{t\omega_p(v)}$...</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$X(\gamma(t))=X(p)+\theta_p(v)$. So $\theta_p(v)$ is a kind of translation [^1].</li></ul></p>
+<p></p>
+<p>What we are doing here is to treat $M$ and their "configurations" as if after zooming it on $p$ it behaves like $\mathbb{R}^n$ together with $GL(n)$. The construction above let us formalize these approximations.</p>
+<p></p>
+<p>Finally, observe that the pair $(\omega,\theta)$ (the principal connection and the solder form) defines a 1-form $\eta$ on $P$, with values in the Lie algebra $\mathfrak {g}$ of the semidirect product $G=\mathbb{R}^n \rtimes H$, which provides us with an isomorphism of each tangent space $T_pP$ with $\mathfrak{g}$. It induces a principal connection α on the associated principal $G$-bundle $P \times_{H} G$. <b>This is what is called a Cartan connection</b>. </p>
+<p>The trivialization of $TP$ achieved in this way </p>
+$$\begin{array}{ccc}TP&\to & P\times \mathfrak{h} \times \mathbb{R}^n\\v\in T_pP & \to &(p,\omega_p(v),\theta_p(v))
+\end{array}
+$$
+<p>provides an absolute parallelism of $P$ or, in other words, a <a href="./../parallelizable manifold.md.html">parallelization</a> of $P$.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Generalization_of_Riemannian_manifolds">Generalization of Riemannian manifolds</h3>
+<p></p>
+<p>Important: see <a href="./Cartan geometry.md.html#Generalization_of_affine_connections">this section first</a>.</p>
+<p>There are two kind of Cartan geometries related to the classical point of view of <a href="./(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian manifold</a>s. They are <a href="./../Euclidean geometry.md.html">Euclidean geometry</a>s and <a href="./../Riemannian geometry.md.html">Riemannian geometry</a>s.</p>
+<p></p>
+<p>Given a <a href="./../Riemannian geometry.md.html">Riemannian geometry</a> on $M$, it determines a (pseudo)-<a href="./Riemannian metric.md.html">Riemannian metric</a> on $M$ up to constant scale factor (see <a href="./../../Bibliography/@sharpe2000differential.md.html">@sharpe2000differential</a> Proposition 3.2 page 238). </p>
+<p></p>
+<p>Conversely, given a <a href="./(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian manifold</a> $(M,g)$ there is exactly one <a href="./../Riemannian geometry.md.html">Riemannian geometry</a> whose associated metric is, up to scale, the original $g$ (Theorem 3.5 in <a href="./../../Bibliography/@sharpe2000differential.md.html">@sharpe2000differential</a>).</p>
+<p><img src="./../../imagenes/Pasted image 20221029115659.png" style="width:43vw; border-radius: 3px;" ></p>
+<p>Idea of the converse: </p>
+<p>A <a href="./(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian manifold</a> has a "natural" torsion-free connection, the <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a>. As it is said above, a <a href="./linear connection.md.html">linear connection</a> on a manifold induces a <a href="./principal connection on a principal bundle.md.html">principal connection</a> on the <a href="./frame bundle.md.html">frame bundle</a> and, together with the <a href="./solder form.md.html">solder form</a>, a Cartan geometry. But in this particular case this linear connection also defines a principal connection on the <a href="./../orthonormal frame bundle.md.html">orthonormal frame bundle</a> (see condition 1 in <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a>). And because of condition 2 in <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a> this Cartan geometry is <a href="./../torsion of a Cartan geometry.md.html">torsion-free</a>. <b>In conclusion</b>: a Riemannian manifold induces a <a href="./../Riemannian geometry.md.html">Riemannian geometry</a>. </p>
+<p></p>
+<h3 style="margin-left:0px;" id="Generalization_of_G-structures">Generalization of G-structures</h3>
+<p>The idea of <a href="./../G-structure.md.html">G-structure</a> is a generalization of <a href="./Cartan geometry.md.html#Generalization_of_Riemannian_manifolds">the construction above</a>. If we take a general subgroup $G$ of $GL(n)$ instead of $O(n)$ we get a $G$-structure on $M$ and if we again add a connection $\omega$ we obtain a Cartan geometry on $M$ modelled on $(\mathbb{R}^n \rtimes G,G)$ with Cartan connection given by $(\omega,\theta)$, begin $\theta$ the <a href="./solder form.md.html">solder form</a>. See also <a href="./../G-structure.md.html#Relation_to_Cartan_geometries">G-structure#Relation to Cartan geometries</a>.</p>
+<p></p>
+<p>I think every <a href="./../G-structure.md.html">G-structure</a> on a manifold $M$ is a Cartan geometry modelled on $(\mathbb{R}^n \rtimes G,G)$.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Generalization_of_Klein_geometries">Generalization of Klein geometries</h3>
+<p>A <a href="./Klein geometry.md.html">Klein geometry</a> $(G,H)$ can be seen like an $H$-<a href="./principal bundle.md.html">principal bundle</a> (with $P=G)$. Let's call $\eta$ to the <a href="./Maurer-Cartan form.md.html">Maurer-Cartan form</a> of $G$ , and $\eta_H$ to the <a href="./Maurer-Cartan form.md.html#Maurer-Cartan_form_on_a_principal_bundle">Maurer-Cartan form of the principal bundle</a> $G\to G/H$. They satisfy special properties:</p>
+<p>1. For every $h\in H$, $R_h^*\eta_H=Ad_{h^{-1}}\eta_H$.</p>
+<p>2. $\eta_H$ is the inverse of the map </p>
+$$
+v\in \mathfrak{h} \to v^{\sharp}_p\in V_pP
+$$
+<p>3. For $g\in P$, $\eta_g|_{VgP}=(\eta_H)_g$.</p>
+<p>4. For $g\in P$, $\eta_g$ is a linear isomorphism $T_gP \to \mathfrak{g}$, and so it defines a trivialization of $TP$ (that is, $P$ is a <a href="./../parallelizable manifold.md.html">parallelizable manifold</a>, or equivalently, it has a absolute parallelism).</p>
+<p>5. $d\eta+\frac{1}{2}[\eta,\eta]=0$ (<a href="./Maurer-Cartan form.md.html#Structural_equation">Maurer-Cartan form#Structural equation</a>).</p>
+<p></p>
+<p>Observe that in a general $H$-<a href="./principal bundle.md.html">principal bundle</a> $P$ the Maurer-Cartan form $\theta^P$ satisfies 1. and 2. If we manage to find a group $G$ and 1-form $\eta$ in $P$ that restrict to $\theta^P$ and that satisfies 3. we have a Cartan geometry. Observe that $P$ is not necessarily equal to $G$, but has the same dimension. Condition 5 do not need to be satisfied and the output is called the <a href="./../curvature of a Cartan geometry.md.html">curvature</a>.</p>
+<p></p>
+<p>Wikipedia Cartan Geometries</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Definition_and_remarks">Definition and remarks </h1>
+<p>[Wise 2009]</p>
+<p>A <b>Cartan geometry modeled on</b> the <a href="./Klein geometry.md.html">Klein geometry</a> $(G,H)$ is a $H$-<a href="./principal bundle.md.html">principal bundle</a> </p>
+$$
+\pi: P \rightarrow M
+$$
+<p>equipped with a $\mathfrak{g}$-valued 1-form $A$ on $P$ called the Cartan connection and satisfying</p>
+<p>1. For every $p\in P$,</p>
+$$
+A_p:T_pP \rightarrow \mathfrak{g}
+$$
+<p>is a linear isomorphism.</p>
+<p>2. For every $h\in H$, $R_h^*A=Ad_{h^{-1}}A$.</p>
+<p>3. For every $p\in P$, the restriction of $A_p$ to the subspace $V_pP\subseteq T_pP$ coincides with the <a href="./Maurer-Cartan form.md.html#Maurer-Cartan_form_on_a_principal_bundle">Maurer-Cartan form of the H-bundle</a>. So it takes values on $\mathfrak{h}\subseteq \mathfrak{g}$.</p>
+<p></p>
+<p>We highlight the following remarks:</p>
+<p><ul style="margin-left:0px;"><li>The Cartan connection is an extension of the <a href="./Maurer-Cartan form.md.html#Maurer-Cartan_form_on_a_principal_bundle">Maurer-Cartan form</a> of $P$ which takes values in a bigger Lie algebra $\mathfrak{g}$. The usual <a href="./principal connection on a principal bundle.md.html">principal connection on a principal bundle</a> is also an extension but take values in $\mathfrak{h}$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The group $G$ must have the same dimension than the manifold $P$. In other words, $G/H$ must have the same dimension than $M$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>In the same way that the inverse at every point of the <a href="./Maurer-Cartan form.md.html#Maurer-Cartan_form_on_a_principal_bundle">Maurer-Cartan form</a> of $P$ (the so denoted $i_p$) give rise to a vertical vector field associated to every $v\in \mathfrak{h}$, the inverse at every point of $A_p$ gives us an injection</li></ul></p>
+$$
+\mathfrak{g}\rightarrow \mathfrak{X}(P)
+$$
+<p>If $v\in \mathfrak{h}$ we obtain a vertical vector field;  if not, it yields a vector field transverse to the fibres.</p>
+<p><ul style="margin-left:0px;"><li>In a <a href="./Klein geometry.md.html">Klein geometry</a> the <a href="./Maurer-Cartan form.md.html#Maurer-Cartan_form_of_a_Lie_group">Maurer-Cartan form</a> satisfies the <a href="./Maurer-Cartan form.md.html#Structural_equation">structural equation</a>, but this is not the case for a Cartan geometry. This fail is called the <a href="./../curvature of a Cartan geometry.md.html">curvature of a Cartan geometry</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Contrary to <a href="./Klein geometry.md.html">Klein geometry</a>s, Cartan geometries no longer have a well-defined action of G on them. However, a Cartan connection supplies a way of connecting the infinitesimal model spaces within the manifold by means of parallel transport. (I have to see how, yet).</li></ul></p>
+<p></p>
+<p><img src="./../../imagenes/Pasted image 20220914175232.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>Important case: <a href="./../reductive Cartan geometry.md.html">reductive Cartan geometry</a>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Example:_hamster_in_a_ball">Example: hamster in a ball</h1>
+<p>[Wise 2009]</p>
+<p><img src="./../../imagenes/Pasted image 20220109122314.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p></p>
+<p>Consider a manifold $M$, explored by a hamster inside a ball. For the hamster, there is a group of posible movements: $G=SO(3)$ but some of them do not let it to change the point of $M$ where it stands: the rotations over itself $H=SO(2)$. This is the <a href="./Klein geometry.md.html">Klein geometry</a> $(G,H)$ used to model the manifold.</p>
+<p></p>
+<p>What would be $P$ in this context?  It would be a $SO(2)$-principal bundle over $M$ representing the set of posible "hamster configurations", that is, combinations of "positions-orientations" of the hamster.</p>
+<p></p>
+<p>And what about the Cartan connection $A$? For every configuration $p\in P$ we can consider "infinitesimal changes", that is, vectors leaving $p$, for example $v\in T_pP$. This change could be only a change of "orientation", but not of position. And this would mean that $v$ is a vertical vector and </p>
+$$
+A_p(v)\in\mathfrak{h}=\mathfrak{so}(2)
+$$
+<p>An infinitesimal change $v$ that implies a change of position would have an image</p>
+$$
+A_p(v)\in \mathfrak{so}(3) \backslash \mathfrak{so}(2)
+$$
+<p>The maps $A_p$ must be isomorphisms in order to exist a total correspondence between changes in $S^2=G/H$ (the world as perceived by the hamster) and changes in $P$. </p>
+<p></p>
+<h1 style="margin-left:0px;" id="Example:_An_explorer_of_th_15th_century">Example: An explorer of th 15th century</h1>
+<p></p>
+<p>Consider a person standing on a flat planar 'model Earth', tangent to the actual spherical Earth. The plane rolls as he walks. This rolling gives a $E(2)/SO(2)$ Cartan geometry of the Earth's surface. He could use the rolling motion  to try drawing  a local map of the Earth on the plane</p>
+<p></p>
+<p></p>
+<p>[^1]: Do we have a kind of exponential map here similar to the previous point? Or in other words: if we choose a direction $\widetilde{v}=\theta_p(v)$ in $M$ is there a "canonical" point $y\in M$ to which do we arrive after moving during a time $t$? I don't think so, unless the whole $P$ is a group (in this case it would be $\mathbb{R}^n\rtimes GL(n)$). Although, on the other hand, we have the notion of geodesic. So we could move along the geodesic with direction given by $\widetilde{v}$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

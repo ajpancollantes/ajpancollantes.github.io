@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Unitary_matrix">Unitary matrix</h1>
+<h2 style="margin-left:0px;" id="The_case_n=2">The case n=2</h2>
+<p>We call unitary matrices, and denote by $U(2)$ (unitary group) the collection made of them, to those $U\in \mathcal{M}_2(\mathbb{C})$ such that</p>
+$$
+U\cdot U^*=I
+$$
+<p>i.e., their <a href="./conjugate transpose.md.html">conjugate transpose</a> and their inverse coincide. They are the complex counterpart of <a href="./orthogonal matrix.md.html">orthogonal matrices</a> $O(2)$.</p>
+<p>Obviously, they satisfy $|det(U)|=1$, since $det(U^*)=det(U)^*$. And it can be shown (doing simple computations) that they take the form:</p>
+$$
+U=\left[ \begin{array}{cc}{a} & {b} \\ {-e^{i \varphi} b^{*}} & {e^{i \varphi} a^{*}}\end{array}\right], \quad|a|^{2}+|b|^{2}=1
+$$
+<p>Moreover, the linear transformations of $\mathbb{C}^2$ such that they conserve a hermitian inner product defined on it take the form of an unitary matrix when expressed on an orthogonal basis. </p>
+<p></p>
+<p>If we look at those which specifically verify $det(U)=1$, we get $SU(2)$ (special unitary group), the complex counterpart of rotations $SO(2)$, Any matrix in $SU(2)$ that take the form</p>
+$$
+U=\left[\begin{array}{cc}{a+i d} & {c+i b} \\ {-c+i b} & {a-i d}\end{array}\right]
+$$
+<p>with $a^2+b^2+c^2+d^2=1$, as can be shown by taking any generic matrix and imposing $U\cdot U^{\dagger}=Id$ and $det(U)=1$.</p>
+<p></p>
+<p>Observe that any such $U$ can be decomposed as</p>
+$$
+\left[\begin{array}{cc}{a+i d} & {c+i b} \\ {-c+i b} & {a-i d}\end{array}\right]=
+$$
+$$
+=a\left[\begin{array}{cc}{1} & {0} \\ {0} & {1}\end{array}\right]+b\left[\begin{array}{cc}{0} & {i} \\ {i} & {0}\end{array}\right]+c\left[\begin{array}{cc}{0} & {1} \\ {-1} & {0}\end{array}\right]+d\left[\begin{array}{cc}{i} & {0} \\ {0} & {-i}\end{array}\right]
+$$
+<p>Since the matrices above verify the same product rules as basis <a href="./quaternions.md.html">quaternions</a> $1, i, j, k$, it turns out that the group $SU(2)$ is isomorphic to unitary quaternions. So, there is a 2 to 1 morphism from $SU(2)$ to $SO(3)$). See <a href="./../☕REFLECTIONS/relation SO(3) and SU(2).md.html">relation SO(3) and SU(2)</a>. </p>
+<p></p>
+<h3 style="margin-left:0px;" id="What_is_the_Lie_algebra_of_$U2$?">What is the Lie algebra of $U(2)$?</h3>
+<p>Since $U(2)$ is a group, we can wonder by its <a href="./GEOMETRY/Lie algebra.md.html">Lie algebra</a>, $\mathfrak{u}(2)$.</p>
+<p>Considering a curve $A(t)\in U(2)$ with $A(0)=Id$ and differentiating the expression at $t=0$:</p>
+$$
+A(t)\cdot A(t)^{\dagger}=Id
+$$
+<p>we obtain that </p>
+$$
+A'(0)+A'(0)^{\dagger}=0
+$$
+<p>that is, the elements of $\mathfrak{u}(2)$ <b>are the anti-Hermitian matrices</b>, defined as those which satisfy $B=-B^{\dagger}$. By the way, observe that $B$ is anti-Hermitian if and only if $iB$ is <a href="./Hermitian matrix.md.html">Hermitian matrix</a>. </p>
+<p></p>
+<h3 style="margin-left:0px;" id="What_is_the_Lie_algebra_of_$SU2$?">What is the Lie algebra of $SU(2)$?</h3>
+<p>Observe that if $A(0)=Id$, then $\left.\frac{d \operatorname{det} A(t)}{d t}\right|_{t=0}=\operatorname{tr} A^{\prime}(0)$ (it can be shown expanding by minors). </p>
+<p>Then, if $\det(A(t))=1$, </p>
+$$
+\operatorname{tr} A^{\prime}(0)=0
+$$
+<p>So the Lie algebra $\mathfrak{su}(2)$ <b>consists of anti-Hermitian traceless matrices</b>.</p>
+<p></p>
+<p>Any anti-Hermitian matrix can be written as </p>
+$$
+\left[\begin{array}{cc}
+{i(a+d)} & {c+i b} \\
+{-c+i b} & {i(a-d)}
+\end{array}\right]=
+$$
+$$
+=a\left[\begin{array}{cc}
+{i} & {0} \\
+{0} & {i}
+\end{array}\right]+b\left[\begin{array}{cc}
+{0} & {i} \\
+{i} & {0}
+\end{array}\right]+c\left[\begin{array}{cc}
+{0} & {1} \\
+{-1} & {0}
+\end{array}\right]+d\left[\begin{array}{cc}
+{i} & {0} \\
+{0} & {-i}
+\end{array}\right]=
+$$
+$$
+=a i \mathbf{1}+b \mathbf{i}+c \mathbf{j}+d \mathbf{k}
+$$
+<p>and it is traceless if and only if $a=0$, so $su(2)$ corresponds to $\mathbb{R}^3$, and so with $so(3)$, the <a href="./SO(3).md.html#And_what_about_the_Lie_algebra_so_3">Lie algebra of SO(3)</a>.</p>
+<p><img src="./../imagenes/Pasted image 20220618164648.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>These generators </p>
+$$
+\left[\begin{array}{cc}
+{0} & {i} \\
+{i} & {0}
+\end{array}\right], \left[\begin{array}{cc}
+{0} & {1} \\
+{-1} & {0}
+\end{array}\right], \left[\begin{array}{cc}
+{i} & {0} \\
+{0} & {-i}
+\end{array}\right]
+$$
+<p>are called the Pauli matrices, although sometimes they appear multiplied by $-i$.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="What_is_$SU2$_topologically?">What is $SU(2)$ topologically?</h3>
+<p>We have said that $SU(2)$ is isomorphic to quaternions, but we know nothing about it as a manifold or as a topological space. But if we consider the map</p>
+$$
+U=\left[\begin{array}{cc}{a+i d} & {c+i b} \\ {-c+i b} & {a-i d}\end{array}\right] \longmapsto (a,b,c,d)\in \mathbb{R}^4
+$$
+<p>we have that $SU(2)$ is diffeomorphic to $S^3$ because</p>
+$$
+det(U)=a^{2}+b^{2}+c^{2}+d^{2}=1
+$$
+<p>So $SU(2)$ is simply connected.</p>
+<p></p>
+<hr>
+<p></p>
+<h2 style="margin-left:0px;" id="The_general_case">The general case</h2>
+<p></p>
+<h3 style="margin-left:0px;" id="General_facts">General facts</h3>
+<p>The group $U(n)$ consist of complex matrices of rank $n$ ($\mathcal{M}_n(\mathbb{C})$) such that </p>
+$$
+U\cdot U^*=I
+$$
+<p>It can be easily shown that $|det(U)|=1$. But since $det(U)$ is a complex number, the manifold $SU(n)=\{U\in U(n) : det(U)=1\}$ differs in dimension by one with respect to $U(n)$ (unlike the case of <a href="./orthogonal matrix.md.html">orthogonal matrices</a> $O(n)$!!).</p>
+<p></p>
+<p>The columns of an unitary matrix $U$ form an <a href="./FUNCTIONAL ANALYSIS/inner product space.md.html#Orthonormal_basis">orthonormal basis</a> of $\mathbb{C}^n$ with the usual <a href="./FUNCTIONAL ANALYSIS/inner product space.md.html">Hermitian inner product</a>.</p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="The_Lie_algebras">The Lie algebras</h3>
+<p>Their Lie algebras are denoted, respectively, by $u(n)$ and $su(n)$. Considering $A(t)\in U(n)$ with $A(0)=Id$ and differentiating the expression</p>
+$$
+A(t)\cdot A(t)^{\dagger}=Id
+$$we obtain that 
+$$
+A'(0)+A'(0)^{\dagger}=0
+$$
+<p>that is, the elements of $\mathfrak{u}(n)$ <b>are the anti-Hermitian matrices</b>, defined as those which satisfy $B=-B^{\dagger}$. By the way, observe that $B$ is anti-Hermitian if and only if $iB$ is <a href="./Hermitian matrix.md.html">Hermitian matrix</a>.</p>
+<p></p>
+<p>What about $\mathfrak{su}(n)$?</p>
+<p>Observe that if $A(0)=Id$, then $\left.\frac{d \operatorname{det} A(t)}{d t}\right|_{t=0}=\operatorname{tr} A^{\prime}(0)$ (it can be shown expanding by minors). Then, if $\det(A(t))=1$, </p>
+$$
+\operatorname{tr} A^{\prime}(0)=0
+$$
+<p>So the Lie algebra $\mathfrak{su}(n)$ <b>consists of anti-Hermitian traceless matrices</b>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

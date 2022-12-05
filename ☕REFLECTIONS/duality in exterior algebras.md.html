@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Duality_in">Duality in </h1>
+<p></p>
+<p>To fix ideas, let $V$ be an $n$-dimensional real vector space. A $k$-vector is an element of $\bigwedge^k V$ (the <a href="./../♾️ CONCEPTS/exterior algebra.md.html">exterior algebra</a>) and a $k$-form is an element of $\bigwedge^k V^*$. These spaces are dual to one another but not in a natural way.</p>
+<p></p>
+<p>Now, the top exterior power of a finite-dimensional vector space is one-dimensional, so both $\bigwedge^n V$ and $\bigwedge^n V^*$ are of dimension one. We also see (this time by direct computation) that there are nondegenerate bilinear pairings</p>
+$$
+\bigwedge^k V \times \bigwedge^{n-k} V \to \bigwedge^n V
+\quad\hbox{and}\quad
+\bigwedge^k V^* \times \bigwedge^{n-k} V^* \to \bigwedge^n V^*
+$$
+<p>for all $k$.</p>
+<p></p>
+<p>The problem is that while the top exterior powers are of dimension one, we do not have a canonical isomorphism between them. To get one, we fix an <a href="./../♾️ CONCEPTS/FUNCTIONAL ANALYSIS/inner product space.md.html">inner product</a> $g$ on $V$. Its determinant (or volume form) is a nonzero element of $\bigwedge^n V^*$ and thus gives an isomorphism of that space with the ground field $\mathbb R$. We get a compatible isomorphism of $\bigwedge^n V$ with $\mathbb R$ by considering the dual metric. Composing these isomorphisms with the above nondegenerate pairings induces isomorphisms</p>
+$$
+\bigwedge^k V \cong \bigwedge^{n-k} V^*
+\quad\hbox{and}\quad
+\bigwedge^k V^* \cong \bigwedge^{n-k} V.
+$$
+<p>We finally get the correspondence between $k$-forms and $(n-k)$-vectors by following this last <b>noncanonical</b> isomorphism:</p>
+$$
+\bigwedge^k V^* \to \bigwedge^{n-k} V.
+$$
+<p></p>
+<p><b>Keep an eye:</b> technically speaking we only need <b>to fix a volume form</b> on the space $V$ to get these isomorphisms, because such a form will induce the necessary isomorphisms of the top exterior powers with $\mathbb R$, which in turn will identify $\bigwedge^k V^*$ and $\bigwedge^{n-k} V$ via the (now non-) canonical nondegenerate pairings. Sloppy, awful people sometimes do this silently by fixing a basis of $V$, which they then either define to be orthonormal or use to define a nonzero element of $\bigwedge^n V$, which then brings us to this kind of confusion later on.</p>
+<p></p>
+<p>On the other hand, the inner product let us go further an define the <a href="./../♾️ CONCEPTS/GEOMETRY/Hodge star operator.md.html">Hodge star operator</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

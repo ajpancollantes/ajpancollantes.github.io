@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Fourier_transform">Fourier transform</h1>
+<p>Fourier transform of a complex-valued function $f(t)$ is a another complex-valued function $\hat{f}(w)$ that codifies the same information that $f(z)$ in the following way: for every $w\in \mathbb{R}$, the value $\hat{f}(w)$ represent the weight of the function $e^{2\pi iwt}$ in the decomposition of $f(t)$ as a sum of exponential</p>
+$$
+f(t)=\cdots+\hat{f}(1)e^{2\pi it}+\hat{f}(1.1)e^{2\pi i1.1t}+\hat{f}(2)e^{2\pi i2t}+\cdots
+$$
+$$
+\cdots+\hat{f}(w)e^{2\pi iwt}+\cdots=
+$$
+$$
+=\int_{-\infty}^{+\infty}\hat{f}(w)e^{iwt} dw
+$$
+<p>It is a particular case of the <a href="./Laplace transform.md.html">Laplace transform</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

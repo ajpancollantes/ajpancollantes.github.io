@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Bilinear_forms_diagonalization">Bilinear forms diagonalization</h1>
+<p>Let $V$ be a vector space, and let $\phi$ be a bilinear form</p>
+$$
+\phi: V\times V \longrightarrow \mathbb{R}
+$$
+<p>If $\phi$ is symmetric, then given a basis $B$ we get a matrix $M_B$ that is symmetric. For $v,w\in V$, and following the characterization <a href="./../♾️ CONCEPTS/basis and change of basis.md.html">here</a> we get:</p>
+$$
+\phi(v,w)=b^{-1}(v)^t\cdot M_B \cdot b^{-1}(w)
+$$
+<p>Since $M_B$ is symmetric, we can apply successive transformations like</p>
+$$
+\left( \begin{array} { c c c c } { 1 } & { 0 } & { \dots } & { 0 } \\ { - \frac { a _ { 12 } } { a _ { 11 } } } & { 1 } & { } & { \vdots } \\ { \vdots } & { } & { \ddots } & { 0 } \\ { - \frac { a _ { 1 n } } { a _ { 11 } } } & { 0 } & { \dots } & { 1 } \end{array} \right) \cdot 
+
+\left( \begin{array} { c c c c } { a _ { 11 } } & { a _ { 12 } } & { \dots } & { a _ { 1 n } } \\ { a _ { 12 } } & { } & { } \\ { \vdots } & { } & { M } \\ { a _ { 1 n } } \end{array} \right) \cdot \left( \begin{array} { c c c c } { 1 } & { - \frac { a _ { 12 } } { a _ { 11 } } } & { \dots } & { - \frac { a _ { 1 n } } { a _ { 11 } } } \\ { 0 } & { 1 } & { } & { 0 } \\ { \vdots } & { } & { \ddots } & { \vdots } \\ { 0 } & { \ldots } & { 0 } & { 1 } \end{array} \right)=
+
+\left( \begin{array} { c c c c c } { a _ { 11 } } & { 0 } & { \dots } & { 0 } \\ { 0 } & { } & { } \\ { \vdots } & { } & { M ^ { \prime } } \\ { 0 } & { } & { } & { } \end{array} \right)
+$$
+<p>And so we get a diagonal matrix $D$ that verify:</p>
+$$
+D=P^t M_B P
+$$
+<p>If we considerate a new basis $N$ such that $n=b\circ P$, it is clear that the coordinates of $v$ and $w$ are $n^{-1}(v)=P^{-1}b^{-1}(v)$ and $n^{-1}(w)=P^{-1}b^{-1}(w)$. Since</p>
+$$
+\phi(v,w)=b^{-1}(v)^t\cdot M_B \cdot b^{-1}(w)=n^{-1}(v)^t\cdot D \cdot n^{-1}(w)
+$$
+<p>we conclude that $D$ is the matrix of $\phi$ in the new basis $N$.</p>
+<p></p>
+<p>From here, with an easy change of basis, rearranging the elements and scaling them by $\frac{1}{\sqrt{a_{ii}}}$, we obtain that the matrix is of the form:</p>
+$$
+\left( D \right) _ { i j } = \left\{ \begin{array} { c l } { 1 } & { \text { si } 1 \leq i \leq r , j = i } \\ { - 1 } & { \text { si } r + 1 \leq i \leq s , j = i } \\ { 0 } & { \text { otherwise} } \end{array} \right.
+$$
+<p>The integers $r$ and $s$ are constant through base changes and they allow us to define the signature of the bilinear forms.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

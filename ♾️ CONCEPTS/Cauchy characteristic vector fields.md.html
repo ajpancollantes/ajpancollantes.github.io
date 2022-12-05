@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Cauchy_characteristic_vector_fields">Cauchy characteristic vector fields</h1>
+<p><b>Definition</b></p>
+<p>Given an <a href="./exterior differential system.md.html">exterior differential system</a> $\mathcal{I}$ a Cauchy characteristic vector field is a vector field $X$ such that $X\,\lrcorner\, \omega\in \mathcal{I}$ for every $\omega\in \mathcal{I}$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>Cauchy characteristic vector fields constitute a Lie subalgebra of $\mathfrak{X}(M)$ .</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b></p>
+<p>It can be shown using formula 4 in <a href="./../✏️ THEOREMS/DG/formulas for Lie derivative, exterior derivatives, bracket, interior product.md.html">formulas for Lie derivative, exterior derivatives, bracket, interior product</a>.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p></p>
+<hr>
+<p></p>
+<p>In <a href="./../Bibliography/@bryant2013exterior.md.html">@bryant2013exterior</a> page 30 it is defined at a point $x\in M$</p>
+$$
+A(\mathcal{I})_x=\{\xi_x \in T_xM: \xi_x\,\lrcorner\,\mathcal{I}_x\subset \mathcal{I}_x\}
+$$
+<p>and </p>
+$$
+C(\mathcal{I})_x=A(\mathcal{I})_x^{\perp}\subset T^*M
+$$
+<p>This is called the <b>retracting space</b> at $x$.</p>
+<p></p>
+<p>The differential system defined by $C(\mathcal{I})$ or, what is the same, the distribution $A(\mathcal{I})$ is <a href="./GEOMETRY/completely integrable distribution.md.html">completely integrable</a> (see <a href="./../Bibliography/@bryant2013exterior.md.html">@bryant2013exterior</a> Proposition 2.1. page 31, although is a conclusion of Proposition above).</p>
+<p></p>
+<p>I think that $A(\mathcal{I})$ is a generalization to <a href="./exterior differential system.md.html">exterior differential system</a> of the associated distribution to a completely integrable <a href="./GEOMETRY/Pfaffian system.md.html">Pfaffian system</a>.</p>
+<p>Observe that given $\omega \in \mathcal{I}$, for every $\xi\in A(\mathcal{I})$ we have $\xi \,\lrcorner \, \omega \in \mathcal{I}$, so $\xi \,\lrcorner \, \omega=0$ since the contraction is a 0-form, and they are usually not considered in <a href="./exterior differential system.md.html">exterior differential system</a>s (if they are present, we can restrict to the manifold defined by its zeros). Therefore $\omega \in C(\mathcal{I})$ and </p>
+$$
+\mathcal{I}\subset C(\mathcal{I})
+$$
+<p>A <b>Cauchy characteristic</b> is an integral manifold of the retracting space. They are a special kind of integral manifold of the original EDS.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

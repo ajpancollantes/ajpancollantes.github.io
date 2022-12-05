@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Gauge_theory">Gauge theory</h1>
+<p>See the key example <a href="./../☕REFLECTIONS/Time zones example.md.html">Time zones example</a>.</p>
+<p></p>
+<p>Gauge theory is a term that refers to a quite general type of theories in physics which share some key concepts. In this note we are going to name them, relating them with their mathematical counterpart.</p>
+<p></p>
+<p>In a gauge theory we start with a manifold $M$ that represents, usually, space, time or spacetime, and a <a href="./GEOMETRY/G-bundle.md.html">G-bundle</a> over it </p>
+$$
+\pi: E\longrightarrow M
+$$
+<p>with typical fibre $S$. The physical situation that we are dealing with determines an atlas $\{(U_{\alpha},\phi_{\alpha})\}$. The fibre $E_m$ is called the internal space for $m\in M$ and $G$ is called the gauge group of the theory. A section $\sigma: M\rightarrow E$ is called a matter field and represents an observable quantity. </p>
+<p></p>
+<p>A local (global) section of the associated principal bundle $P$,</p>
+$$
+p:U\longrightarrow P
+$$
+<p>is called a local (global) <b>gauge</b>, and the choice of such a section is called <b>gauge fixing</b>. As it is said <a href="./GEOMETRY/principal bundle.md.html#Components_of_a_section">here</a>, it let us to speak of the components of the matter field respect to this gauge fixing. In a sense, fixing a gauge is like specifying a reference frame in $E_m$ for every point $m$ of the manifold.</p>
+<p></p>
+<p>Given any other gauge $p'$ defined on $U$ we can define a map</p>
+$$
+\gamma: U \longrightarrow G
+$$
+<p>such that $p(m)=p'(m) \cdot \gamma(m)$, and we call it a <b>gauge transformation</b>.</p>
+<p></p>
+<p>Observe that given a trivialization $(U_{\alpha},\phi_{\alpha})$ of $E$ we have the associated local $G$-frame</p>
+$$
+p_{\alpha}:U_{\alpha}\longrightarrow P
+$$
+<p>and then, any local matter field</p>
+$$
+\sigma: U_{\alpha}\longrightarrow E
+$$
+<p>can be expressed by</p>
+$$
+\tilde{\sigma}_{\alpha}:U_{\alpha}\longrightarrow S
+$$
+<p>given by the components of $\sigma$ respect to the $G$-frame $p_{\alpha}$:</p>
+$$
+\tilde{\sigma}_{\alpha}(m)=p_{\alpha}(m)^{-1}(\sigma(m))
+$$
+<p>See the note <a href="./GEOMETRY/principal bundle.md.html">principal bundle</a> for more details.</p>
+<p></p>
+<p>A <a href="./GEOMETRY/principal connection on a principal bundle.md.html">principal connection</a> in $P$, given by an horizontal distribution $H$ or a global $\mathfrak{g}$-valued 1-form $\omega$, both related by $H_u P=Ker(\omega(u))$, is called a <b>gauge connection</b>. It provides us with a mechanism to identify $G$-bases at different points of $M$ as being the same.</p>
+<p></p>
+<p>We can express $\omega$ respect to a chosen local gauge $p$, obtaining the 1-form $p^*(\omega)$ called the <b>gauge potential</b> (or Yang-Mills field, following [Schuller 2013] page 185). The 2-form obtained by exterior differentiation is called the <b>gauge field</b> or <b>gauge strength tensor</b>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Examples">Examples</h1>
+<p>1. The time zone model. See me paper attempt.</p>
+<p>2. Physical gauge theories describe fermions ("particles") as complex-valued functions on a <a href="./GEOMETRY/principal bundle.md.html">principal bundle</a> over space-time, and bosons ("forces") as <a href="./GEOMETRY/principal connection on a principal bundle.md.html">principal connection on a principal bundle</a> (see [Sharpe 1991] page 172).</p>
+<p>3. See the meteor tracking problem at [Sharpe 1991] and [xournal 130]</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Enfoque_Gauge_on_a_point">Enfoque Gauge on a point</h1>
+<p></p>
+<p><img src="./../imagenes/gaugeonapoint.jpg" style="width:80vw; border-radius: 3px;" ></p>
+<p>	<img src="./../imagenes/gaugeonapointimagen.jpg" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

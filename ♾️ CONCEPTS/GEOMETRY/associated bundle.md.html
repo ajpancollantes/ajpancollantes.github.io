@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Associated_bundles">Associated bundles</h1>
+<p><b>In general, we have the following idea</b>: if we have a fiber bundle $E \mapsto M$ with any typical fibre (say $F$), we have $G$-valued functions satisfying the cocycle condition for the overlaps of the trivializations. The fibre itself is not so important because the important informations is in these functions, and given any space $F'$ over which the group $G$ acts in a nice way, we can construct a new bundle with fibre $F'$ with the information given by the transition functions. This new bundle has the same gist that the old one. Example: the Mobius strip with fibre the real line (the group is $GL(1)$) or the interval $[-1,1]$ (the group is $\mathbb{Z}_2$).</p>
+<p></p>
+<p></p>
+<p><b>Associated bundle to a principal bundle.</b></p>
+<p>For every <a href="./principal bundle.md.html">principal bundle</a> $\xi = P \stackrel { \pi } { \longrightarrow } M$ with group $G$, one can define associated bundles if there is a left action of the group $G$ over a new space $F$.</p>
+<p>We take the space $P\times F$ with an action:</p>
+$$
+(p,f)\cdot g=(p\cdot g, g^{-1}\cdot f)
+$$
+<p>If we take the orbits as equivalence class we obtain a new space </p>
+$$
+E=P\times_G F :=(P\times F )/G
+$$
+<p>that has, again, a projection map over $M$:</p>
+$$
+\tilde{\pi}: [p,f]\longrightarrow \pi (p)
+$$
+<p>Moreover, the fibers $\tilde{\pi}^{-1}(m)$ are isomorphic to $F$. To see it, think that $[p\cdot g,f]=[p,g\cdot f]$.</p>
+<p></p>
+<p>In short:</p>
+<p><img src="./../../imagenes/Pasted image 20211231173959.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><b>Important case: the frame bundle</b></p>
+<p>Is important to remake an special case: if we have the <a href="./principal bundle.md.html">principal bundle</a> of frames of $TM$, the <a href="./frame bundle.md.html">frame bundle</a>, with group $GL(\mathbb{R}^n)$, the associated bundle if we take $F=\mathbb{R}^n$ is, of course, $TM$:</p>
+<p><img src="./../../imagenes/associatedbundle.jpg" style="width:80vw; border-radius: 3px;" ></p>
+<p><img src="./../../imagenes/associatedbundle2.jpg" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p></p>
+<p>If we had a <a href="./principal connection on a principal bundle.md.html">principal connection on a principal bundle</a>, the <a href="./associated bundle.md.html">associated bundle</a> inherits an <a href="./associated connection.md.html">associated connection</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

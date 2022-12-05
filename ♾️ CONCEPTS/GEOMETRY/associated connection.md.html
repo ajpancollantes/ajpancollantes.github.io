@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Associated_or_induced_$G$-connection">Associated or induced $G$-connection</h1>
+<p>Now, observe that a principal bundle connection $\Gamma$ in a <a href="./principal bundle.md.html">principal bundle</a> produces a fiber bundle connection in the <a href="./associated bundle.md.html">associated bundle</a>s. Take the context given in the latter note. Given $w \in E=(P\times F)/G$, take a representative $w=[u,\xi]$. We have a map</p>
+$$
+\beta_{\xi}: P\longrightarrow E
+$$
+<p>being $\beta_{\xi}(v)=[v,\xi]$. Now, take as definition:</p>
+$$
+H_w:=d(\beta_{\xi})_u(H_u)
+$$
+<p>At this way, we also carry the parallel transport concept to the associated bundle. \cite{goldberg}</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Conversely">Conversely</h2>
+<p>In the case of $G=GL(n)$ there is  <b>a converse</b>. Any <a href="./linear connection.md.html">linear connection</a> on a vector bundle $E$ is induced from a unique <a href="./principal connection on a principal bundle.md.html">principal connection</a> on the <a href="./frame bundle.md.html">frame bundle</a>. See <a href="https://math.stackexchange.com/a/47931/601797" target="_blank">this answer</a> in Mathstackexchange or <a href="./../../Bibliography/@cap2009parabolic.md.html">@cap2009parabolic</a> page 42. </p>
+<p></p>
+<p><b>Special (and important) case</b>: when the <a href="./principal bundle.md.html">principal bundle</a> is the <a href="./frame bundle.md.html">frame bundle</a> and the <a href="./associated bundle.md.html">associated bundle</a> is the <a href="./tangent bundle.md.html">tangent bundle</a>. There is an good reflection in the note <a href="./../../☕REFLECTIONS/connections summary.md.html">connections summary</a>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Example">Example</h1>
+<p>(xournal 197)</p>
+<p>Consider the worked example <a href="./vector bundle connection.md.html#Worked_example_1">here</a>, where we construct the connection 1-form of a connection on the tangent bundle of $\mathbb R^2$ from a <a href="./../covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$. Now, let's see how to express the induced principal connection on the frame bundle in terms of its <a href="./principal connection on a principal bundle.md.html#Connection_1-form">1-form</a>. Consider a frame $f\in FM$ at $p=(x_1,x_2)$. Since $FM$ is in this case $Aff(2)=\mathbb R^2\rtimes GL(2)$ it can be seen as a subgroup of $GL(3)$ and then</p>
+$$
+f=
+\begin{pmatrix}
+c_{11} & c_{12}& x_1\\
+c_{21} & c_{22}& x_2\\
+0 & 0& 1\\
+\end{pmatrix}
+$$
+<p>The first components of the columns are elements of $\mathbb R^2$. If we pass from a frame $f$ at $p$ to a frame $f'$ at $p'$ the 1-form of the connection measures how this change fails to be constant.</p>
+<p><img src="./../../imagenes/Pasted image 20221030123959.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>To compute the 1-form we apply the 1-form of the original vector bundle connection (see <a href="./vector bundle connection.md.html#Worked_example_1">here</a>) to the vectors </p>
+$$
+\begin{array}{c}
+e_1:=(dx_1,dx_2,dc_{11},dc_{21})\\
+e_2:=(dx_1,dx_2,dc_{12},dc_{22})\\
+\end{array}
+$$
+<p>to see how every vector in the frame fails to be constant.</p>
+<p><img src="./../../imagenes/Pasted image 20221030124742.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>These "mistakes" are expressed like an element of $V_f FM$. But in order to compare the mistakes, we "send them" to a common place, $V_e FM$ being $e$ the origin with the canonical basis, or, equivalently, to $\mathfrak{gl}(2)$. I  have to think this better. Anyway, what we are doing is to express these mistakes with respect to the frame $f$ itself, so we multiply the matrix</p>
+<p><img src="./../../imagenes/Pasted image 20221031093156.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>made with the mistakes by $C^{-1}$ obtaining $\omega\in \Omega(FM)\otimes \mathfrak{gl}(2)$:</p>
+<p><img src="./../../imagenes/Pasted image 20221031093742.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>being $C$ such that</p>
+$$
+f=
+\begin{pmatrix}
+C &  p\\
+0 &  1\\
+\end{pmatrix}
+$$
+<p>Remember: this 1-form <b>tells us how much do we "fail to be constant"</b> when we pass from the frame $f$ to a nearby frame $f'$, but expressing this mistake with respect to the frame $f$ itself.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

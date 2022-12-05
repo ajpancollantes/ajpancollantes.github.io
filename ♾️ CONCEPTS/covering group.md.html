@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Covering_groups">Covering groups</h1>
+<p>Given a Lie group $G$ with Lie algebra $\mathfrak{g}$ we can construct a new group $\tilde{G}$ with the same Lie algebra in the following way: first, one forms the path group comprised of paths in $G$ emanating from $\mathrm{id}$ (not ending anywhere in particular), then identifies paths which are equivalent by an endpoint-preserving homotopy and obtain</p>
+$$
+\tilde{G}=\{[\gamma]: [0,1]\stackrel{\gamma}{\mapsto} G, \gamma(0)=id\}
+$$
+<p>One may multiply these paths pointwise, which is well-defined on homotopy classes again, and obtain a group.</p>
+<p>There is an obvious homomorphism </p>
+$$
+p:\tilde{G}\to G
+$$
+<p>which just forgets the path and keeps its endpoint. </p>
+<p></p>
+<p>We can topologize $\tilde{G}$ correctly, simply taking sufficiently small connected neighbourhoods in $G$ and lift them to connected neighbourhoods in $\tilde{G}$.</p>
+<p></p>
+<p>This group is called the <b>universal covering group</b> of $G$. It turns out that the kernel of $p$ is a discrete subgroup $K$ of $Z(\tilde{G})$, the center of the group (see result in <a href="./Lie group.md.html">Lie group</a>). In fact, for every discrete subgroup $K'$ of $Z(\tilde{G})$, $\tilde{G}$ is the universal covering of</p>
+$$
+\tilde{G}/K' 
+$$
+<p>That is, the set of all the groups with the same universal covering group forms a lattice, in correspondence with the lattices of discrete subgroups of $Z(\tilde{G})$. The maximal element is the proper $\tilde{G}=\tilde{G}/\{e\}$ and the minimal element is $\tilde{G}/Z(\tilde{G})$.</p>
+<p>Also, we have that the first homotopy group let us recover the subgroup of $Z(\tilde{G})$:</p>
+$$
+\pi_{1}(\tilde{G} / K, e) \cong K
+$$
+<p>Important examples are:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$(\mathbb{R},+)$ is the universal covering group of $SO(2)=SU(1)$. The covering map is</li></ul></p>
+$$
+exp:\mathbb{R} \longrightarrow SO(2)
+$$
+<p>with </p>
+$$
+exp(t)=\begin{pmatrix}
+cos(t) &-sin(t) \\ 
+sin(t) & cos(t) 
+\end{pmatrix} \in SO(2)
+$$
+<p>or $exp(t)=e^{it}\in SU(1)$.</p>
+<p></p>
+<p>It can be shown that $\pi_1(SO(2),id)=\mathbb{Z}$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>The universal covering group for $SO(3)$ is $SU(2)$. The plate trick shows that it is a double cover ($\pi_1(SO(3),id)=\mathbb{Z}_2$). We can watch it if we think in topological terms. Represent $SO(3)$ like a half sphere (filled). We have axis of rotation (direction of the arrow) and angle of rotation (length of the arrow up to $2\pi$). The half shell and the center point are identified (the identity element).</li></ul></p>
+<p><img src="./../imagenes/Pasted image 20220918131015.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>On the left, the green path represents a full rotation. It cannot be deformed to the identity. But on the right, the red path represents twice a full rotation. We can move the bottom point to the upper one, along the shell, and then contract to the identity at the center of the sphere. </p>
+<p>The universal covering for $SO(3)$ , say $\tilde{SO(3)}$, can also be pictured as $S^3$, that is, a filled sphere with the whole shell identified with one point.</p>
+<p><img src="./../imagenes/Pasted image 20220918131123.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><ul style="margin-left:0px;"><li>In general, the universal covering group for $SO(n)$, for $n>2$, is denoted by $Sp(n)$ and is a <b>double covering</b>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>More interesting examples at Wikipedia (universal covering group).</li></ul></p>
+<p></p>
+<p>On the other hand, when we want to visualize a group (see <a href="./../☕REFLECTIONS/visualization of Lie groups.md.html">visualization of Lie groups</a>), I unconsciously think of a manifold invariant over the group action, say $M$,</p>
+$$
+G \times M \mapsto M
+$$
+<p>and keep track of how a single point change by the group action (piece of the orbit). With even more imagination we can imagine the simultaneous orbits of all the points $m \in M$. Keep an eye: the action must be <b>transitive and free</b>.</p>
+<p><img src="./../imagenes/Pasted image 20220918131625.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>But what about the universal covering group? If we imagine the action of $\tilde{G}$ over $M$, we have nothing new respect to $G$, so to visualize $\tilde{G}$ we must consider the action of $\tilde{G}$ over a broader manifold $\tilde{M}$.</p>
+<p>My idea is something like:</p>
+<p><ul style="margin-left:0px;"><li>Assume that the action of $G$ over $M$ is transitive and free: given $m\in M$, for every other $m'\in M$ we have $g\in G$ such that $m'=gm$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Give a piece of bread to a point $m\in M$ and apply to it all the paths in $\tilde{G}$ before taking classes (denote it $\bigsqcup \tilde{G}$).</li></ul></p>
+<p><ul style="margin-left:0px;"><li>In the movement of every point, we leave bread crumbs like Hansel and Gretel. We obtain a very big set: the paths followed by every $m$ when we apply $\bigsqcup \tilde{G}$</li></ul></p>
+$$
+\sigma_m :[0,1]\mapsto M
+$$
+<p>with $\sigma_m(t)=\gamma(t) m$.</p>
+<p><ul style="margin-left:0px;"><li>We take equivalence class here: we identify  bread-crumbs-paths that can be continuously deformed to each other</li></ul></p>
+$$
+\tilde{M}=\{[\sigma_m] \}
+$$
+<p>For example, we can consider $SO(2)$ acting over $S^1$. The universal covering group $\mathbb{R}$ acts over a spring, a 3D spiral. A doubled covering would have yield the square root Riemann surface.</p>
+<p><img src="./../imagenes/so2covering.jpg" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>In the case of $SO(3)$, that naturally acts over $S^2$ but not in a free way, this expanded manifold is difficult to visualize. Remember that $SO(3)$ does act in a free and transitive way over $S(S^2)$... See <a href="./../☕REFLECTIONS/visualization of Lie groups.md.html">visualization of Lie groups</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

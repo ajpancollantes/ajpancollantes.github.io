@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Travelling_wave_solution_of_a_PDE">Travelling wave solution of a PDE</h1>
+<p>A function $u(x,t)$ is a travelling wave solution for a given <a href="./PDE.md.html">PDE</a> if it has the form</p>
+$$
+u(x,t)=f(x-ct)
+$$
+<p>It is a fact that so many <a href="./PDE.md.html">PDE</a>s have solutions of this type, mainly the <a href="./DEs/wave equation.md.html">wave equation</a>. </p>
+<p><ul style="margin-left:0px;"><li>Example: The equation $u_t+cu_x=0$ admits any function of this type as a solution, as it is easy to check. This is the <a href="./transport equation.md.html">transport equation</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Example of non-existence: there are equations which don't have solutions of this kind. For example, the diffusion equation</li></ul></p>
+$$
+u_t=Du_{xx}
+$$
+<p></p>
+<p>They are the <a href="./similarity solution.md.html">similarity solution</a>s associated to the symmetry </p>
+$$
+c\partial_x+\partial_t
+$$
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

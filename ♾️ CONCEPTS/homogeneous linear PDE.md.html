@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Homogeneous_linear_PDE">Homogeneous linear PDE</h1>
+<p>Are <a href="./PDE.md.html">PDE</a>s that satisfy the principle of superposition: if $u$ and $v$ are solutions then any linear combination $au+bv$ is also a solution. In other words, the solution space (by the way, check <a href="./../❓MY RESEARCH/☕REFLECTIONS/solution space of an ODE.md.html">solution space of an ODE</a>) is a vector space. If the space of solutions is an affine space then it is a <a href="./inhomogeneous linear PDE.md.html">inhomogeneous linear PDE</a>. In any other case it is a <b>nonlinear PDE</b>.</p>
+<p></p>
+<p>They can be expressed in the form $\mathcal{P}[u(x)]=0$, where $\mathcal{P}$ is a linear <a href="./GEOMETRY/differential operator.md.html">differential operator</a>.</p>
+<p>When the coefficients of this differential operator are constant it has translation invariance: $\mathcal{P}[u(x-a)]=\mathcal{P}<a href="x-a" target="_blank">u</a>$. From here can be shown that solutions of these equations can be translated and still remain solutions.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

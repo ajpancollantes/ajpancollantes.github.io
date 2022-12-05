@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Principal_bundle">Principal bundle</h1>
+<p>We come from the context <a href="./G-bundle.md.html">G-bundle</a>s.</p>
+<p>Given a <a href="./G-bundle.md.html">G-bundle</a> $P\stackrel{\pi}{\rightarrow} M$ we will call it a principal $G$-bundle if the standard fibre is $S=G$ and there exists a free <b>right</b> action $\rho$ of $G$ on $P$ such that</p>
+<p><ul style="margin-left:0px;"><li>The orbits of $\rho$ are the fibres of $P$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>For every local trivialization</li></ul></p>
+$$
+\psi: U_{}\times G\longrightarrow \pi^{-1}(U)
+$$
+<p>we have that for every $m\in U$ and $h,g\in G$</p>
+$$
+\tilde{\psi}(m)(hg)=\rho(\tilde{\psi}(m)(h),g)
+$$
+<p></p>
+<p>Observe that this is <b>equivalent to saying that we have a fibrewise right action of $G$ over $P$ that is free and transitive over each fibre</b>. Each fibre is, then, a <a href="./../ALGEBRA/homogeneous space.md.html">G-torsor</a>. We will denote $\rho_g(-)=\rho(-,g)$ when needed for clarity.</p>
+<p></p>
+<p>We will write  </p>
+<p><img src="./../../imagenes/Pasted image 20211231171000.png" style="width:24vw; border-radius: 3px;" ></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Alternative_approach">Alternative approach</h1>
+<p>Given a <a href="./G-bundle.md.html">G-bundle</a> $E\to M$ with standard fibre $S$, the associated principal $G$-bundle $P$ <b>is, in a sense, a generalized frame bundle</b> for the original bundle. To see this, observe that the principal $G$-bundle can be obtained in the following way. Given a trivializing atlas $\{(U_{\alpha},\phi_{\alpha})\}$ of $E$, we can define for every $m\in M$ the set</p>
+$$
+P_m:=\{\tilde{\phi}_{\alpha}(m) \circ g: \alpha \text{ such that }m\in U_{\alpha}, g\in G\}
+$$
+<p>Their elements are the different ways of express the fibre $E_m$ (maybe an "uncomfortable" space) in terms of the standard fibre $S$ (a "comfortable space), "preserving" the structure provided by $G$. We can call them the <b>$G$-bases</b> for $E_m$ (when $E_m$ is a vector space, $S$ is $\mathbb{R}^n$ and $G=GL(n)$ the set $P_m$ is made of the different basis of $E_m$ . See the note <a href="./../basis and change of basis.md.html">basis and change of basis</a>). </p>
+<p></p>
+<p>Observe that for $m\in U_{\alpha\beta}$ it could happen</p>
+$$
+\tilde{\phi}_{\alpha}(m) \circ g=\tilde{\phi}_{\beta}(m) \circ g'\in P_m
+$$
+<p>and then must be $g=g_{\alpha\beta}(m) g'.$</p>
+<p></p>
+<p>So if we consider the space</p>
+$$
+P=\bigsqcup_{m\in M} P_m
+$$
+<p>we can provide maps</p>
+$$
+\begin{array}{cccc}
+\psi_{\alpha}:&U_{\alpha}\times G & \longrightarrow & P\\
+& (m,g) &\longmapsto & \tilde{\phi}_{\alpha}(m) \circ g
+\end{array}
+$$
+<p>such that it can be proven that $P$ is a principal $G$-bundle with atlas $\{(U_{\alpha},\Psi_{\alpha})\}$. </p>
+<p></p>
+<p>(It can be proven with the final topology and the fact of $G$ being a Lie group...)</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Components_of_a_section">Components of a section</h2>
+<p>Thus, given a <a href="./G-bundle.md.html">G-bundle</a> and its associated principal $G$-bundle constructed in this way, we can define the <b>components</b> of $v\in E_m$ with respect to any $\phi \in P_m$:</p>
+$$
+\phi^{-1}(v)\in S.
+$$
+<p>Then, any local section of $P$ can be <b>called a $G$-frame</b>, and therefore every local trivialization $(U,\psi)$ is equivalent to a distinguished $G$-frame:</p>
+$$
+p(m)=\psi(m,e), \text{ for } m\in U
+$$
+<p>and $e$ being the identity in $G$.</p>
+<p>In some context they are called <a href="./moving frame.md.html">moving frame</a>s or choice of a <a href="./../gauge theory.md.html">gauge</a>. In case that the <a href="./G-bundle.md.html">G-bundle</a> $E$ is the tangent bundle of the manifold, the concept of $G$-frame is the usual <a href="./frame on a manifold.md.html">frame</a>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Trivializations_vs_sections">Trivializations vs sections</h1>
+<p></p>
+<p>The orbit of $G$ at $p\in P$ is just the fiber $\pi^{-1}(\pi(p))$ and, moreover, $\pi^{-1}(\pi(p))\cong G$. We can imagine $\pi^{-1}(\pi(p))$ like $G$ but without a ditinguished point $e$. For example, a circle bundle ($G=S^1=\{e^{i\cdot t}\}$) has a fiber wich could be rotated but no point is matched with the identity.  That is, every fiber is a $G$-torsor or principal <a href="./../ALGEBRA/homogeneous space.md.html">homogeneous space</a>.</p>
+<p></p>
+<p>In this context we can speak of the <b>translation map</b> (or <a href="./../gauge theory.md.html">gauge transformation</a>) </p>
+$$
+\tau :\pi^{-1}(\pi(p)) \times \pi^{-1}(\pi(p)) \rightarrow G.
+$$
+<p>Given $q, q' \in \pi^{-1}(\pi(p)),$ since the action is free, there exist one and only one $\tau(p,p')\in G$ such that </p>
+<p></p>
+$$
+p'=p\cdot \tau(p,p')
+$$
+<p>and we will write $p^{-1}p'=\tau(p,p')$. Think of it like the subtraction of points in affine space.</p>
+<p></p>
+<h4 style="margin-left:0px;" id="Proposition">Proposition</h4>
+<p>Local sections of a $G$-principal bundle are in one to one correspondence with local trivializations.</p>
+<p></p>
+<h4 style="margin-left:0px;" id="Proof">Proof</h4>
+<p>The idea is that sections mark a distinguished point in every fiber. Then it only rest to use the translation function defined above. $\blacksquare$</p>
+<p></p>
+<p>It turns out that a $G$-principal bundle is <b>trivial if and only if has a global section</b>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Connections">Connections</h2>
+<p>A fundamental idea is that of a <a href="./principal connection on a principal bundle.md.html">principal connection on a principal bundle</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Generalities_on_bundles">Generalities on bundles</h1>
+<p>Some definitions and facts:</p>
+<p><ul style="margin-left:0px;"><li>A fibred manifold consists of a pair of manifolds $M$ and $E$ together with a surjective <a href="./../ANALYSIS/submersion.md.html">submersion</a></li></ul></p>
+$$
+\pi: E \longrightarrow M
+$$
+<p>see <a href="./../../Bibliography/@saunders1989geometry.md.html">@saunders1989geometry</a> page 2. By the <a href="./../ANALYSIS/canonical submersion theorem.md.html">canonical submersion theorem</a>, we can use in $E$ <b>adapted coordinate systems</b>, that is, if $dim (E)=q+p$ and $dim (M)=q$ we can use in $E$ coordinates</p>
+$$
+(x^i,u^a): U \subseteq E \longrightarrow \mathbb{R}^{q+p}; \textrm{    } i=1\ldots q, a=1\ldots p
+$$
+<p>such that for $a,b\in U$ with $\pi(a)=\pi(b)$ we have</p>
+$$
+x^i(a)=x^i(b)
+$$
+<p><ul style="margin-left:0px;"><li>A fibre (or fiber) bundle is a fibred manifold such that every point $p$ has a local trivialization, that is, a triple $\left(W_{p}, F_{p}, t_{p}\right)$ being $W_p$ a neighbourhood of $p$, $F_p$ a manifold and</li></ul></p>
+$$
+t_{p}: \pi^{-1}\left(W_{p}\right) \longrightarrow W_{p} \times F_{p}
+$$
+<p>a diffeomorphism such that </p>
+$$
+p r_{1} \circ t_{p}=\left.\pi\right|_{\pi^{-1}\left(W_{p}\right)}
+$$
+<p>It can be shown that $F_p$ is always the same, let's say $F$ (see <a href="./../../Bibliography/@saunders1989geometry.md.html">@saunders1989geometry</a> page 7), and is called the typical fibre.</p>
+<p></p>
+<p>________________________________________</p>
+<p></p>
+<p>Alternative approach: the <a href="./G-bundle.md.html">G-bundle</a>s</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

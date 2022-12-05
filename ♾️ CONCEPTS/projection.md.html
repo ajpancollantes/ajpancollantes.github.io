@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Projections">Projections  </h1>
+<p>Given a vector space $V$, a projection is a map</p>
+<p></p>
+$$
+
+P:V \longmapsto V
+
+$$
+<p></p>
+<p>such that $P^2=P$.</p>
+<p><img src="./../imagenes/Pasted image 20211017184359.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Informally speaking, for a projection you not only need to specify the "target" subspace, but also a "direction" along which to project (the red vectors in the picture above). So, in some sense, a projection gives us a decomposition of the vector space $V$ in horizontal and vertical subspace.</p>
+<p></p>
+<p>In <b>finite dimensional</b> vector spaces $V$, the subspaces $U=Im(P)$ and $W=Ker(P)$ satisfies:</p>
+<p><ul style="margin-left:0px;"><li>$P|_U$ is the identity operator.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$V=U \oplus W$. Every $x\in V$ can be decomposed</li></ul></p>
+$$
+x=Px \oplus (x-Px)
+$$
+<p>Other properties, valid even for <b>infinite dimension</b>:</p>
+<p><ul style="margin-left:0px;"><li>The only <a href="./eigenvalues.md.html">eigenvalues</a> allowed for a projection are $0$ and 1, even in complex vector spaces.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The product of two projection is not, in general, another projection. But it is true when they commute.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Even more generally, projections are maps that have a right inverse: $P\circ f=id_{im(P)}$</li></ul></p>
+<p></p>
+<p>When we work in a <a href="./FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> $H$ instead of in a plain vector space $V$, we can say that $P$ is an <b>orthogonal projection</b> if</p>
+$$
+\langle Px,y\rangle=\langle x,Py \rangle
+$$
+<p>that is, is <a href="./self adjoint.md.html">self adjoint</a>.</p>
+<p>They satisfy the following properties:</p>
+<p><ul style="margin-left:0px;"><li>Being orthogonal is equivalent to the fact that the image $U$ and the kernel $W$ are orthogonal subspaces: let $u\in U$ and $w\in W$ then $u=Pu'$ and $Pw=0$ so</li></ul></p>
+$$
+\langle u,w\rangle=\langle Pu',w\rangle=\langle u',Pw\rangle
+$$
+<p>Reciprocally, any projection $P$ such that $U$ and $W$ are orthogonal satisfies, assuming $x=u_1+w_1$ and $y=u_2+w_2$</p>
+$$
+\langle{Px},{y}\rangle=\langle{P(u_1+w_1)},{u_2+w_2}\rangle=\langle{u_1},{u_2}\rangle
+$$
+<p>and</p>
+$$
+\langle{x},{Py}\rangle=\langle{u_1+w_1},{P(u_2+w_2)}\rangle=\langle{u_1},{u_2}\rangle
+$$
+<p>and therefore $P$ is self-adjoint.</p>
+<p><ul style="margin-left:0px;"><li>Given any closed subspace $U$ of $H$ it there exist an orthogonal projection $P$ such that $im(P)=U$. The proof (wikipedia) goes through taking the infimum of the distance...</li></ul></p>
+<p><ul style="margin-left:0px;"><li>If $P$ is an orthogonal projection, $I-P$ is an orthogonal projection and</li></ul></p>
+$$
+im(I-P)=Ker(P)
+$$
+<p><b>Proof:</b></p>
+<p>First,</p>
+$$
+(I-P)^2=I^2-2P+P^2=I-P
+$$
+<p>And secondly, $x\in H$, $(I-P)(x)\in Ker(P)$ since</p>
+$$
+P(I-P)(x)=Px-Px=0
+$$
+<p>$\blacksquare$</p>
+<p><ul style="margin-left:0px;"><li>Orthogonal projections are bounded operators. From Cauchy-Swarth</li></ul></p>
+$$
+\|P v\|^{2}=\langle P v, P v\rangle=\langle P v, v\rangle \leq\|P v\| \cdot\|v\|
+$$
+<p>and so</p>
+$$
+\|P v\| \leq\|v\|
+$$
+<p>This is similar, in some sense, to saying that is continue.</p>
+<p><ul style="margin-left:0px;"><li>Suppose $U=im(P)$ has dimension 1, and we take a length 1 vector $u\in U$. If we fix an orthogonal basis we can express</li></ul></p>
+$$
+P=u\cdot u^*
+$$
+<p>or</p>
+$$
+P=|u\rangle\bra{u}
+$$
+<p>in <a href="./Dirac bracket notation.md.html">Dirac bracket notation</a>. I guess that is like taking an element of the tensor product $H\otimes H^*$.</p>
+<p>This formula can be generalized for a projection on a subspace $U$ of any dimension $k$. Choose an orthonormal basis of $U$, and take their coordinates with respect to the main orthonormal basis to form a matrix $A$. Then</p>
+$$
+P=A\cdot A^*
+$$
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

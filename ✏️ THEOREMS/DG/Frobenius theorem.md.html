@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Frobenius_theorem">Frobenius theorem</h1>
+<p>A rank $r$ <a href="./../../♾️ CONCEPTS/GEOMETRY/distribution.md.html">distribution</a> $D$ on an $n$-dimensional <a href="./manifold.md.html">manifold</a> $M$ is <a href="./../../♾️ CONCEPTS/GEOMETRY/involutive distribution.md.html">involutive</a> if and only if for every $p\in M$ there exists a coordinate chart $\left(U, \varphi=(x_1,\ldots,x_n)\right)$ such that </p>
+$$
+D=\mathcal{S}(\{\varphi_*^{-1}(\partial x_1),\ldots,\varphi_*^{-1}(\partial x_{r})\})
+$$
+<p>(that is, is <a href="./../../♾️ CONCEPTS/GEOMETRY/completely integrable distribution.md.html">completely integrable distribution</a>).</p>
+<p>Equivalently, the <a href="./dual description of the distribution.md.html">dual description of the distribution</a> would be</p>
+$$
+D^*=\mathcal{S}(\{dx_{r+1},\ldots,dx_n\})
+$$
+<p></p>
+<p></p>
+<p>Therefore, Frobenius theorem nos dice que las <a href="./../../♾️ CONCEPTS/GEOMETRY/involutive distribution.md.html">involutive distribution</a> tienen neighbourhoods en los que existen <a href="./../../♾️ CONCEPTS/GEOMETRY/integral submanifold.md.html">integral submanifold</a>s que pasan por cualquier punto dado con la mayor dimensión posible, y vienen dadas por</p>
+$$
+N_{(c_{r+1},\ldots,c_n)}:=\{q\in U: x_i(q)=c_i \text{, for } i=r+1,\ldots,n\}
+$$
+<p>In infinite dimension, i.e., a <a href="./Banach manifold.md.html">Banach manifold</a>, Frobenius theorem states that a subundle of the tangent bundle is integrable iff it is <a href="./../../♾️ CONCEPTS/GEOMETRY/involutive distribution.md.html">involutive</a>. Ver <a href="https://en.wikipedia.org/wiki/Frobenius_theorem_(differential_topology)" target="_blank">este enlace</a> en la sección <b>Banach manifolds</b>.</p>
+<p></p>
+<p>As a particular case we have the rank 1 distributions, that are always involutive and, therefore, always have integral manifolds called, in this case, integral lines. See <a href="./canonical form of a regular vector field.md.html">canonical form of a regular vector field</a>.</p>
+<p></p>
+<p><b>Poof</b>. It uses the <a href="./canonical form of commuting vector fields.md.html">canonical form of commuting vector fields</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

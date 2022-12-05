@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><p>Particular case of <a href="./system of first order differential equations.md.html">system of first order differential equations</a>.</p>
+<p></p>
+<p>It is useful in order to study the <a href="./system of first order linear differential equations- real case.md.html">real case</a>.</p>
+<p></p>
+<p>Consider the equation</p>
+<p></p>
+<p>$$\dot{\boldsymbol{z}}=A \boldsymbol{z}, \quad \boldsymbol{z} \in \mathbb{C}^{n}$$</p>
+<p></p>
+<p>with $A: \mathbb{C}^n\mapsto \mathbb{C}^n$. If we want to study a real system, we deal with the <a href="./../../☕REFLECTIONS/complexification of a vector space.md.html">complexificated</a> one.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>A solution for this equation with initial condition $\varphi\left(t_{0}\right)=z_{0}$ is any </p>
+<p></p>
+<p>$$\varphi : I \rightarrow \mathbb{C}^{n}$$</p>
+<p></p>
+<p>such that</p>
+<p></p>
+<p>$$\left.\frac{d \varphi}{d t}\right|_{t=\tau}=A \varphi(\tau)$$ </p>
+<p></p>
+<p>for every $\tau\in I$, and $\varphi\left(t_{0}\right)=z_{0}$.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Theorem">Theorem</h3>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>The solution of the previous equation with initial condition $\varphi(0)=z_0\in \mathbb{C}^n$ is given by</p>
+<p></p>
+<p>$$\varphi(t)=e^{A t} z_{0}$$</p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Proof">Proof</h3>
+<p></p>
+<p>Properties of exponential gives that $\varphi$ verifies the equation.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Also, observe that there can not be solutions of other form. Consider $\psi(t)$ other solution. Then $\varphi(t)=e^{At}\psi(0)$ has the same initial value, so they are the same. $\blacksquare$</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So the only problem is to compute $e^{At}$, which is the <a href="./../matrix exponential.md.html">matrix exponential</a>. We compute the roots of the characteristic polynomial of $A$ and distinguish several cases:</p>
+<p></p>
+<h2 style="margin-left:0px;" id="1._All_roots_are_distinct">1. All roots are distinct</h2>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>In this case, $A$ is diagonalizable, i.e., we can write $A=M\cdot D\cdot M^{-1}$. By <a href="./../matrix exponential.md.html">matrix exponential</a> properties we have that</p>
+$$
+e^A=M\cdot e^D \cdot M^{-1}
+$$
+<p></p>
+<p>where $e^{D}=diag(e^{\lambda_1}, e^{\lambda_2}, \ldots)$. </p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So solutions $\varphi(t)$ has the form in every component of linear combinations of exponentials $e^{\lambda_1}, e^{\lambda_2}, \ldots$</p>
+<p></p>
+<p>Can we "separate" these exponential maps? Yes. Observe that an operator $A$ with all eigenvalues different gives a decomposition of $\mathbb{C}^n=\bigoplus \mathbb{C}_i$ in invariant complex lines.</p>
+<p></p>
+<p>Also,</p>
+<p></p>
+$$
+A|_{\mathbb{C}_i}=\lambda_i Id
+$$
+<p></p>
+<p>and moreover,</p>
+<p></p>
+$$
+e^{A}|_{\mathbb{C}_i}=e^{\lambda_i} Id
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>From here we can conclude:</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<h3 style="margin-left:0px;" id="Theorem">Theorem</h3>
+<p></p>
+<p></p>
+<p>[Arnold, page 185]</p>
+<p></p>
+<p>If the eigenvalues of $A$ are all distinct then</p>
+<p></p>
+<p>$$\varphi(t)=\sum_{k=1}^{n} c_{k} e^{\lambda_{k} t} \xi_{k}$$</p>
+<p></p>
+<p>where $\xi_{k}$ are the eigenvectors, and $c_k$ are constants to be determined by the initial conditions.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="2._$A$_is_a_Jordan_block">2. $A$ is a Jordan block</h2>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>If $A$ is a Jordan block, we write $A=\lambda Id+N$, as usual. Observe that $\lambda Id\cdot N=N\cdot \lambda Id$ so </p>
+<p></p>
+$$
+
+e^{\lambda Id+N}=e^{\lambda Id}\cdot e^{N}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>By properties of <a href="./../matrix exponential.md.html">matrix exponential</a> we get that</p>
+<p></p>
+$$
+e^{At}=e^{\lambda t}\cdot \left( \begin{array}{ccccc}{1} & {t} & {t^{2} / 2} & {\dots} & {t^{n-1} /(n-1) !} \\ 
+
+ & {1} & {t} & {\cdots} & {\vdots} \\ 
+
+ & { } & {1} & {\cdots} & {t^{2} / 2} \\ 
+
+ &{ } & { } & {\ddots} & {t} \\ 
+
+ &{ } & { } & {\ddots} & {1}\end{array}\right)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Suppose that $A$ is a Jordan block but in other basis, that is, $A=M(\lambda Id+N)M^{-1}$. What we can conclude is that solutions of $\dot{z}=Az$ are</p>
+<p></p>
+$$
+\varphi(t)=Me^{\lambda t}e^Nt M^{-1}\cdot v
+$$
+<p></p>
+<p>with $v\in \mathbb{C}^n$. If we define:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<h3 style="margin-left:0px;" id="Definition">Definition</h3>
+<p></p>
+<p>A quasi-polynomial with exponent $\lambda$ is an expression of the form $e^{\lambda t} p(t)$ where $p$ is a polynomial in $t$. $\blacksquare$</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>...we conclude that if $A$ could be carried to a Jordan block, $\varphi(t)$ has the form, in every component, of a sum of quasi-polynomials with exponent $\lambda$ and degree less than $n$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<h2 style="margin-left:0px;" id="3._The_rest_of_the_cases">3. The rest of the cases</h2>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>In general, matrix $A$ can be carried to a <a href="./../Jordan canonical form of a matrix.md.html">Jordan canonical form of a matrix</a>, $$A=M J M^{-1}$$ </p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Let's focus in the case $A=J$ and then follow with the general one. $J$ is made of blocks, and for each eigenvalue $\lambda_i$ we have two of such blocks: a diagonal block with size $d_i$ and a Jordan block of size $j_i$ (maybe $d_i=0$ or $j_i=0$!).</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Then, observe that the algebraic multiplicity of $\lambda_i$ is $$n_i=d_i+j_i$$ and the geometric muliplicity of $\lambda_i$ is $$k_i=d_i+1$$. This is deduced by the form we proof the decomposition, view <a href="./../Jordan canonical form of a matrix.md.html">Jordan canonical form of a matrix</a>.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>Now, observe that matrix $e^{Jt}$, with $t\in \mathbb{R}$, is itself a block matrix, because of the following</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Lemma">Lemma</h3>
+<p></p>
+<p>Let $B:V\mapsto V$ a linear map. Then, if $B(U)\subseteq U$ we have </p>
+<p></p>
+$$
+e^B(U)\subseteq U
+$$
+<p>$\blacksquare$</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<h3 style="margin-left:0px;" id="Proof">Proof</h3>
+<p></p>
+<p>If $v\in V$, then $B(v)\in U$ and therefore</p>
+<p></p>
+$$
+
+e^B(v)=(Id+B+\frac{B^2}{2!}+\cdots)(v)=v+B(v)+\frac{B^2(v)}{2!}+\cdots
+
+$$
+<p></p>
+<p>belongs to $U$ (I guess is a result of convergence...)</p>
+<p>$\blacksquare$</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>It turns out then that if $B_i$ is a block of matrix $J$ then $e^{B_i t}$ is a block of $e^{J t}$. </p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Moreover, for each $\lambda_i$ we see that $e^{Jt}$ has possibly two blocks: </p>
+<p></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>A scalar block, $e^{\lambda_i t} Id$, of size $d_i$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>A quasipolynomial block (see the <a href="./system of first order linear differential equations- complex case.md.html#2_A_is_a_Jordan_block">previous case</a>) of exponent $\lambda_i$, degree $j_i -1$ and size $j_i$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>In conclusion, for a matrix made of Jordan blocks $J$ we get that $e^{Jt}$ is a block matrix with elements of the form $e^{\lambda} \cdot t^k$. If $A$ is \textbf{any matrix} then </p>
+<p></p>
+$$
+
+A=M J M^{-1}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>And so, </p>
+$$
+e^{At}=M e^{Jt} M^{-1} 
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But $M$ and $M^{-1}$ are made of (complex) constants and so only "mix" the elements of $e^{Jt}$. We can state that</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Proposition">Proposition</h3>
+<p></p>
+<p>Let $\dot{z}=Az$ a system of first order linear equations, with $A:\mathbb{C}^n \mapsto \mathbb{C}^n$ a linear operator. Then, if $A$ has eigenvalues $\lambda_i$ with algebraic multiplicities $n_i$ and geometric multiplicities $k_i$ then every component of a solution $\varphi(t)$ is \textbf{a sum of quasi-polynomials with exponent $\lambda_i$ and degree less or equal than $n_i-k_i$}. I. e., it has the form:</p>
+<p></p>
+$$
+
+\varphi_{j}(t)=\sum_{i=1}^{k} e^{\lambda_{i} t} p_{j, i}(t)$$
+<p></p>
+<p>where $p_{j,i}(t)$ has degree less or equal than $n_i-k_i$ with constant complex coefficients. $\blacksquare$</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<h3 style="margin-left:0px;" id="Proof">Proof</h3>
+<p>It is all above, since</p>
+<p></p>
+$$
+\varphi(t)=M e^{Jt} M^{-1}\cdot v
+$$
+<p></p>
+<p>for $v\in \mathbb{C}^n$.</p>
+<p></p>
+<p>It only remains to show the degree of the quasipolynomials, but it is a simple computation. For every $\lambda_i$:</p>
+<p></p>
+$$
+
+j_i-1=n_i-d_i-1=n_i-(k_i-1)-1=n_i-k_i
+
+$$
+<p>$\blacksquare$</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

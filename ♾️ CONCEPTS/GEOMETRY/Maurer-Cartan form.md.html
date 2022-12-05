@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><p><b>Keep an eye</b>: I think there are two versions of Maurer-Cartan form: for Lie groups and for principal bundles. Probably they can be seen like the same, considering the Lie group as a principal bundle over a point...</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Maurer-Cartan_form_of_a_Lie_group">Maurer-Cartan form of a Lie group</h1>
+<p>Given a <a href="./../Lie group.md.html">Lie group</a> $G$ with <a href="./Lie algebra.md.html">Lie algebra</a> $\mathfrak{g}$, we call (left-invariant) Maurer-Cartan form to the map:</p>
+$$
+\theta_g:=d(L_{g^{-1}})_g: T_g G \longrightarrow T_e G\cong \mathfrak{g}
+$$
+<p>for every $g\in G$, and where $L_g$ denote the left-multiplication by $g$. It is a $\mathfrak{g}$-valued 1-form: $\theta \in T^* G \otimes \mathfrak{g}$. Its meaning is that identifies every $T_g G$ with $\mathfrak{g}$ (via left invariants vector fields), and so does with every two $T_g G$ and $T_h G.$ At this way, we have a sense of <a href="./../parallel transport.md.html">parallel transport</a>.  </p>
+<p></p>
+<p></p>
+<p>Another point of view for Maurer-Cartan form:</p>
+<p><img src="./../../imagenes/mcform.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Given a basis $\{V_i\}$ for $T_e G=\mathfrak{g}$ we can extend it to a global <a href="./frame on a manifold.md.html">frame</a> of $G$ by means of left translations (see <a href="./../../☕REFLECTIONS/example left invariants vector fields and Maurer-Cartan form.md.html">examples here</a>). Now, given $X\in T_g G$, the components $\mu_i(X)$ of $X$ in this frame are the Maurer-Cartan forms respect to the chosen basis. And the vector $\mu_i(X) V_i \in \mathfrak{g}$ is also called the result of the Maurer-Cartan form. The individual Maurer-Cartan forms depend on the basis, but the "joint" one don't!</p>
+<p></p>
+<p>If the group is a matrix group then <a href="./../../✏️ THEOREMS/MC form for a matrix group.md.html">it can be computed with the expression</a> $\mu=g^{-1}dg$.</p>
+<p></p>
+<p>It is relevant for the <a href="./../../☕REFLECTIONS/method of moving frames.md.html">method of moving frames</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Interpretation">Interpretation</h2>
+<p>See <a href="./../../✏️ THEOREMS/MC form for a matrix group.md.html#Interpretation">MC form for a matrix group#Interpretation</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Example">Example</h2>
+<p>See <a href="./../../☕REFLECTIONS/example left invariants vector fields and Maurer-Cartan form.md.html">example left invariants vector fields and Maurer-Cartan form</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="MC_form_and_left_and_right_actions">MC form and left and right actions</h2>
+<p>What is the relation between left and right actions and the Maurer-Cartan form? </p>
+<p>Suppose an element $g\in G$. For a vector $V\in T_e G$ we have two vectors in $T_gG$: the left translated $\hat{V}^l=d(L_g)_e(V)$ and the right translated $\hat{V}^r=d(R_g)_e(V)$. </p>
+<p><img src="./../../imagenes/Pasted image 20220105100432.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Since $d(L_g)_e$ is a vector space isomorphism, we can wonder what vector in $T_e G$ corresponds to $\hat{V}^r$ be means of it, i.e.,  the vector $W$ such that:</p>
+$$
+d(L_g)_e(W)=\hat{V}^r=d(R_g)_e(V)
+$$
+<p>so obviously</p>
+$$
+W=(d(L_g)_e)^{-1} d(R_g)_e(V)=d(L_{g^{-1}}\circ R_g)_e(V)=
+$$
+$$
+=Ad_{g^{-1}} (V),
+$$
+<p>the <a href="./adjoint representation.md.html">adjoint representation</a>. </p>
+<p></p>
+<p>So since the Maurer-Cartan form $\theta_g$ is an inverse for $d(L_g)_e$:</p>
+<p>1. $\theta_g\circ d(L_g)_e=id_{\mathfrak{g}}$</p>
+<p>2. $\theta_g\circ d(R_g)_e=Ad_{g^{-1}}$</p>
+<p></p>
+<p>From 1 it can be deduced that</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>The Maurer-Cartan form is a <a href="./../left-invariant differential form.md.html">left-invariant differential form</a>. Moreover, it is the only left-invariant form such that $\theta_e=id$.</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b> </p>
+<p>Let $V\in T_{a^{-1}g}G$, </p>
+$$
+L_a^*(\theta_g)(V)=\theta_{g}(((L_a)_*)_{a^{-1}g}(V))=\theta_{g}(((L_g)_*)_e(\theta_{a^{-1}g}(V))=\theta_{a^{-1}g}(V)
+$$
+<p><img src="./../../imagenes/Pasted image 20220925200416.png" style="width:43vw; border-radius: 3px;" ></p>
+<p>So it is left-invariant.</p>
+<p></p>
+<p>Now, if $\alpha$ is another left-invariant 1-form with $\alpha_e=id=L_g^*(\theta_g)$ then</p>
+$$
+L_{g^{-1}}^*(\alpha_e)=L^*_{g^{-1}}(L_g^*(\theta_g))
+$$
+<p>and so</p>
+$$
+\alpha_g=\theta_g.
+$$
+<p>$\blacksquare$</p>
+<p></p>
+<p></p>
+<p></p>
+<p>From 2, we can write, treating $\theta$ like a 1-form ($\mathfrak{g}$-valued):</p>
+$$
+R_g^*(\theta)=Ad_{g^{-1}}\theta \tag {1}
+$$
+<p>for any $h\in G$.</p>
+<p></p>
+<p>This can be seen from the following picture:</p>
+<p><img src="./../../imagenes/Pasted image 20220105105255.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Let $\tilde{V}^l=d(L_h)_e(V) \in T_h G$ (it could have been an arbitrary $W\in T_hG$, but I found more visual this way). The right hand side of (1) would be telling to us that</p>
+<p></p>
+$$
+\tilde{V}^l \stackrel{\theta_h}{\longmapsto} V\stackrel{Ad_{g^{-1}}}{\longmapsto} Ad_{g^{-1}}(V)
+$$
+<p>and the left hand side:</p>
+$$
+\tilde{V}^l \stackrel{d(R_g)_h}{\longmapsto} d(R_g)_h(\tilde{V}^l)\stackrel{\theta_{hg}}{\longmapsto} Ad_{g^{-1}}(V)
+$$
+<p>But that would be true if $d(R_g)_h(\tilde{V}^l)=d(R_{hg})_e(V)$, but this is true because</p>
+$$
+d(R_g)_h(\tilde{V}^l)=d(R_g)_h(d(L_h)_e(V))=d(R_g\circ L_h)_e(V)=
+$$
+$$
+=d(R_{hg})_e(V)
+$$
+<p>Keep an eye: I am not sure about how to proof the last equality, but it must be true...</p>
+<p></p>
+<p></p>
+<p>On the other hand, the Maurer-Cartan form</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Structural_equation">Structural equation</h1>
+<p>Given a <a href="./../Lie group.md.html">Lie group</a> $G$ with <a href="./Lie algebra.md.html">Lie algebra</a> $\mathfrak{g}$, the Maurer-Cartan form satisfies the following condition</p>
+<p></p>
+$$
+
+d\theta(X,Y)+[\theta(X),\theta(Y)]=0
+
+$$
+<p>where $X,Y$ are vector fields (any) on $G$.</p>
+<p></p>
+<p>It is also written </p>
+<p></p>
+$$
+d\theta+\frac{1}{2}[\theta,\theta]=0
+$$
+<p></p>
+<p>for a Lie bracket defined for $\mathfrak{g}$-valued 1-forms that yields $\mathfrak{g}$-valued 2-forms (look at Wikipedia Lie algebra-valued differential forms).</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>See [Sharpe 1991] page 108. $\blacksquare$</p>
+<p></p>
+<p>It is similar to the <a href="./curvature of a connection.md.html#Principal_G_-bundles">curvature of a principal connection</a>. Indeed, this structural equation is saying that a <a href="./Klein geometry.md.html">Klein geometry</a> is a flat <a href="./Cartan geometry.md.html">Cartan geometry</a>.</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Maurer-Cartan_form_on_a_principal_bundle">Maurer-Cartan form on a principal bundle</h1>
+<p>Suppose $P\rightarrow M$ is a $H$-<a href="./principal bundle.md.html">principal bundle</a>. Then, given $v\in \mathfrak{h}$ we can consider the <a href="./fundamental vector field.md.html">fundamental vector field</a> $v^{\sharp}$. For $p\in P$, $v^{\sharp}_p$ is a <a href="./vertical bundle.md.html">vertical vector</a> since the action of $G$ leaves the fibres invariant. So for every $p$ we have a linear isomorphism (need to be proven)</p>
+$$
+\begin{array}{rcl}
+i_p:\mathfrak{h} & \rightarrow  & V_pP \subseteq T_pP\\
+             v    &\rightarrow  &v^{\sharp}_p=\frac{d}{dt}|_{t=0}(p\cdot e^{tv})
+\end{array}
+$$
+<p>The inverse $(i_p)^{-1}$, is like a Maurer-Cartan form, which acts only on vertical vector fields. That is, we can define a kind of $\mathfrak{h}$-valued 1-form $\theta^P$ by</p>
+$$
+\theta^P_p(V)=v
+$$
+<p>where $V=\frac{d}{dt}|_{t=0}(p\cdot e^{tv})\in V_pP$, linear.</p>
+<p></p>
+<p>In the particular case of a <a href="./Klein geometry.md.html">Klein geometry</a> seen as a <a href="./principal bundle.md.html">principal bundle</a>, the <a href="./Maurer-Cartan form.md.html">Maurer-Cartan form</a> on the principal bundle in the sense described in this subsection coincides with the one <a href="./Maurer-Cartan form.md.html#Maurer-Cartan_form_of_a_Lie_group">of the beginning</a>. See <a href="./Klein geometry.md.html#Remarks">here</a> for details.</p>
+<p></p>
+<p>(By the way, I think that  giving a <a href="./connection on a fiber bundle.md.html">connection</a> to $P$ is "the same as" extending this 1-form $\theta^P$ to any vector, not only the vertical ones. In the case of a <a href="./Cartan geometry.md.html#Generalization_of_affine_connections">Cartan connection</a> we are doing the same, but the values are taken in an extended Lie algebra...)</p>
+<p></p>
+<p></p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

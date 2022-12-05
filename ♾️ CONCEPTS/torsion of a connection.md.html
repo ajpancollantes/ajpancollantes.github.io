@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Torsion">Torsion</h1>
+<p>Given a manifold with a <a href="./covariant derivative operator.md.html">covariant derivative operator</a> $(M,\nabla)$, we can define a tensor named torsion as</p>
+$$
+T (u, v)= \nabla_u v- \nabla_v u-[u,v]
+$$
+<p>Or, in <a href="./../⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html">Penrose abstract index notation</a>:</p>
+$$
+T_{ab}^c X^a Y^b=X^m \nabla_m Y^c-Y^m \nabla_m X^c-[X,Y]^c
+$$
+<p></p>
+<p>Since we know that the <a href="./GEOMETRY/Lie bracket.md.html">Lie bracket</a> $[u,v]$ measures the fail to close a rectangle along flow lines of $u$ and $v$, $T (u, v)$ measures the fail to close a rectangle made of <b>parallel transported vectors</b> along the flow, as you can observe in the picture (taken from <a href="https://math.stackexchange.com/questions/3179501/visualizing-the-lie-bracket-in-connection-with-torsion/3364286#3364286)" target="_blank">here</a>:</p>
+<p><img src="./../imagenes/Pasted image 20220703105722.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Explanation: observe that, as it has been said <a href="./parallel transport.md.html#Covariant_derivative">here</a>,</p>
+$$
+\nabla_u v=\lim_{\epsilon \to 0} \dfrac{(v_Q)_{\parallel}(Q\to P)-v_P}{\epsilon} =
+$$
+$$
+=\lim_{\epsilon\to 0}\dfrac{v_Q-(v_P)_{\parallel}(P\to Q)}{\epsilon}\asymp \dfrac{v_Q-(v_P)_{\parallel}(P\to Q)}{\epsilon}
+$$
+<p>and so</p>
+$$
+\nabla_{\epsilon u} v\asymp v_Q-(v_P)_{\parallel}(P\to Q)
+$$
+<p>In the (schematic) picture above, since $Q$ is considered infinitesimally near to $P$, this is translated as</p>
+$$
+\nabla_u v =v_Q-v^{\|}_Q
+$$
+<p>And analogously</p>
+$$
+\nabla_v u =u_R-u^{\|}_R
+$$
+<p>On the other hand, observe that according to <a href="./GEOMETRY/Lie bracket.md.html#Visualization">this</a>, we have </p>
+$$
+[u,v] \asymp u_P+v_Q-(v_P+u_R)
+$$
+<p>and therefore the quantity</p>
+$$
+T (u, v)= \nabla_u v- \nabla_v u-[u,v]\asymp
+$$
+$$
+\asymp v_Q-v_Q^{\|}-(u_R-u^{\|}_R)-(u_P+v_Q-(v_P+u_R))=
+$$
+$$
+=v_P+u_R^{\|}-(u_P+v_Q^{\|}),
+$$
+<p>which is the gap of the parallelogram made of parallel transported vectors (along infinitesimally short curves $PQ$ and $PR$!). This can be fully formalized working in a local chart and using Taylor expansion (see xournal_166).</p>
+<p></p>
+<p>Almost always, the given connection is torsion free (for example, the <a href="./GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a>). So it turns out that </p>
+$$
+[u,v]=\nabla_u v- \nabla_v u
+$$
+<p></p>
+<hr>
+<h2 style="margin-left:0px;" id="Expression_in_coordinates">Expression in coordinates</h2>
+<p>It can be shown that for any connection, in coordinates, </p>
+$$
+T_{i j}^{k}=\Gamma_{i j}^{k}-\Gamma_{j i}^{k}
+$$
+<p>i.e., the difference of the Christoffel symbols.</p>
+<p>So in a torsion free connection, Christoffel symbols are symmetric.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

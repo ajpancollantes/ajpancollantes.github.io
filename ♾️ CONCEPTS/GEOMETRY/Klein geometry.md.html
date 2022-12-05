@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Klein_geometry">Klein geometry</h1>
+<p>A Klein geometry is a pair $(G,H)$ where $G$ is a Lie group and $H$ is a closed Lie subgroup of $G$ such that the coset space</p>
+$$
+X=G/H
+$$
+<p>is connected. We can call $X$ the "underlying geometrical space" (non-standard terminology). (If $X$ were not connected it would be say that we have a Klein geometry non geometrically oriented. This has nothing to do with being an <a href="./oriented manifold.md.html">oriented manifold</a>).</p>
+<p></p>
+<p>A Klein geometry is <b>effective</b> if the largest subgroup $K\subseteq H$ that is normal in $G$ is $\{id\}$. The idea is that in this case the action of $G$ on $X$ is <a href="./group action.md.html">effective</a>, that is, $G$ can be injected in the bijections group of $X$.</p>
+<p></p>
+<p>Another important class of Klein geometries are the <a href="./../reductive Klein geometry.md.html">reductive Klein geometry</a>s.</p>
+<p></p>
+<p></p>
+<p>Observe that $G$ acts transitively on $X$ and $H$ is the <a href="./group action.md.html">isotropy group</a> of a point $x\in X.$ This construction can therefore be reversed and say that a Klein geometry is a <a href="./../ALGEBRA/homogeneous space.md.html">homogeneous space</a> $(X,G)$, and $H$ appears as the isotropy group of certain $x_0 \in X$. The choice of $x_0$ is not important, because all the isotropy groups are conjugate.</p>
+<p></p>
+<p>This theorem shows that this reversed construction is fine even in the smooth manifolds category:</p>
+<p><img src="./../../imagenes/Pasted image 20211231182647.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>What this theorem says is that if there is a Lie group and a Lie subgroup, their quotient is a smooth manifold. On the other hand, it also says that if there is a Lie group that acts smoothly and transitively on a smooth manifold, then the stabilizer of any point (which is closed) can be quoted with the Lie group which then becomes the manifold in question.</p>
+<p><b>Observation</b>: if the group is not closed the action is not <a href="./../proper action.md.html">proper</a> and the quotient is not a manifold. See example in <a href="./../../Bibliography/@sharpe2000differential.md.html">@sharpe2000differential</a> page 146.</p>
+<p></p>
+<p><b>Examples</b>: </p>
+<p>1. The pair $(E(2), O(2))$, that is the same as the homogeneous space $(\mathbb{R}^2,E(2)).$</p>
+<p>2. Given a <a href="./(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian manifold</a> $(M,g)$, if we denote $G=Isom(M,g)$ the group of its isometries and take $H=Stab_G(x)$ for certain $x\in M$ the pair $(G,H)$ is a Klein geometry (I think). And also I think that we can recover the metric $g$ from the pair $(G,H)$(????)</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Relation_with_Cartan_geometry">Relation with Cartan geometry</h1>
+<p>A Klein geometry $(G,H)$ gives rise to a principal $H$-<a href="./principal bundle.md.html">bundle</a> </p>
+<p></p>
+$$
+
+G \rightarrow G/H
+$$
+<p></p>
+<p>with standard fibre $H.$ See Theorem 2.4 in <a href="./../../Bibliography/@sharpe2000differential.md.html">@sharpe2000differential</a> together with the fact that the right action of $H$ on $G$ is <a href="./../proper action.md.html">proper action</a> and <a href="./../free action.md.html">free action</a>.</p>
+<p></p>
+<p>The <a href="./Maurer-Cartan form.md.html">Maurer-Cartan form</a> of $G$ as a Lie group and the <a href="./Maurer-Cartan form.md.html#Maurer-Cartan_form_on_a_principal_bundle">Maurer-Cartan form as principal bundle</a> of $H$ are related. That is to say, since $G$ is a Lie group itself, then we can think of the "global" Maurer-Cartan form $\theta$. And since it is a principal bundle we can think of the "fibrewise" Maurer-Cartan form $\theta^P$ (the $P$ stands for "principal bundle"). For any $V\in T_pP$ we have $\theta(V)\in \mathfrak{g}$ <b>but if</b> $V\in V_pP$ then also</p>
+$$
+\theta(V)=\theta^P(V)\in \mathfrak{h}
+$$
+<p><b>Proof</b></p>
+<p>Suppose  $\theta(V)=v$, then $V=d(L_p)_e(v)$ by definition.  But since $v=\frac{d}{dt}|_{t=0} e^{tv}$, by definition of the <a href="./exponential map.md.html">exponential map</a>, then</p>
+$$
+V=d(L_p)_e(\frac{d}{dt}|_{t=0} e^{tv})=\frac{d}{dt}|_{t=0}(L_p (e^{tv}))=
+$$
+$$
+=\frac{d}{dt}|_{t=0}(p\cdot e^{tv})=i_p(v)
+$$
+<p>and so $\theta^P(V)=v$. But we need to show that $v\in \mathfrak{h}$ in order to apply $i_p$. I think that this must be easily deduced from $i_p=d(L_p)_e|_{\mathfrak{h}}$... $\blacksquare$</p>
+<p></p>
+<p>In this sense, the Maurer-Cartan form of $G$ is a Cartan connection and therefore the Klein geometry $(G,H)$ gives rise to a <a href="./Cartan geometry.md.html">Cartan geometry</a>.</p>
+<p></p>
+<p>The <a href="./Maurer-Cartan form.md.html#Structural_equation">structural equation</a> of the Maurer-Cartan form is satisfied, so the <a href="./../curvature of a Cartan geometry.md.html">curvature of this Cartan geometry</a> is 0. That is, Klein geometries are flat Cartan geometries.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Personal_approach">Personal approach</h1>
+<p>Given a Klein geometry or homogeneous space $(X,G)\equiv (G,H)$ with $H=Stab_G(x)$, we can construct others. For example, consider a subset $S\subseteq X$, and the stabilizer $\widetilde{H}=Stab_G (S)$, which I think is closed. Then $(G,\widetilde{H})$ is a new Klein geometry with underlying geometrical space</p>
+$$
+\widetilde{X}=\{gS: g\in G\}
+$$
+<p>being $gS=\{gx:x\in S\}$. So we have the homogeneous space $(\widetilde{X},G).$ The points of this space are "copies" of the subset $S$ under the transformations given by $G$. </p>
+<p>Observe that there is a bijection between $\widetilde{X}$ and $G/\widetilde{H}$, given trivially by </p>
+$$
+gS \mapsto g\widetilde{H}
+$$
+<p></p>
+<p>For example, consider $(\mathbb{R}^2,E(2)^+)$, being $E(2)^+$ the direct motions, for simplicity. We can consider $S$ an equilateral triangle with side 2 units. Then we can think that we are studying a space $\widetilde{X}$ whose points are the different equilateral triangles with side 2 units that you can put in $\mathbb{R}^2$. This corresponds to shrink $H=SO(2)$ to $\widetilde{H}=\langle r_{\pi/3}\rangle$ . The points in space $\widetilde{X}$ are not "so rounded" as those ones in $X$, since now they are sensible to some rotations.</p>
+<p>On the other hand, If we shrink $H$ to $\widetilde{H}=\{id\}$ then we obtain $\widetilde{X}$ being the whole $E(2)^+$ but no natural choice of identity $e$, that is, a $E(2)^+$-torsor. The points of $X$ have became the most sensitive posible. It is as if we stick a rotation sensor to every point in the plane, so no motion in $SO(2)$ leaves them invariant.</p>
+<p></p>
+<p>On the contrary, if we extend $H$ instead of shrink it, we obtain less points. An extreme example: suppose we take $\widetilde{H}=G$, then $\widetilde{X}$ has only one element, the whole $X$.</p>
+<p></p>
+<p>So given a group $G$ (which Klein called _principal group_) that we can think as acting over a $G$-torsor $\widetilde{G},$ we have that every subgroup $K$ of $G$ is associated with a "basic object of study", a "feature", and a space that is the collection of all these "features" that appear by applying elements of $G$ to the basic "feature" (see [Wise 2009] page 7). </p>
+<p><img src="./../../imagenes/Pasted image 20211231104123.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p><b>Another approach</b></p>
+<p>The group $G$ establishes what kind of transformations do we start with (continuous, smooth, rigid,...?). The torsor $\widetilde{G}$ is the bigger _geometrical space_ in relation with $G$ (I think that in a bigger space the action wouldn't be transitive). And by fixing subgroups $K$ of $G$ we are creating smaller geometrical spaces, the space of $K$-orbits, that can be more interesting. For example, the group of direct rigid motions $E(2)^+$, when we consider the subgroup of rotations, gives rise to the usual euclidean plane. It is like if $\widetilde{G}$ are the different states of a "being", and when we deactivate some "senses" of that "being" appear smaller spaces.</p>
+<p></p>
+<p>This can be thought in the following way. Consider your smartphone but in a flat 2-dimensional world. Thanks to the GPS and orientation sensor, there are lots of posible "states" for the phone: every position and every orientation is different for it. If we "disconnect" the orientation sensor in our phone, then the different states are only the positions, and this is equivalent to consider as a whole the entire orbit of a point rotated over itself. That is to say, taking $H=SO(2)$, the rotations around a base point $x\in \mathbb{R}^2$.</p>
+<p><img src="./../../imagenes/Pasted image 20211231131723.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Observe that in the picture, if we fix a point $x\in \mathbb{R}^2$ we have an identification between points and cosets</p>
+$$
+z\in \mathbb{R}^2 \rightarrow gH \in G/H
+$$
+<p>being $g\in E(2)$ such that $g(x)=z$. Also, observe that given $h\in H=SO(2)$</p>
+$$
+gh=(ghg^{-1})g
+$$
+<p>and $ghg^{-1}\in gHg^{-1}$ is a "rotation" around the point $z=g(x)$. This way is easier to understand the picture.</p>
+<p></p>
+<p>Anyway, I think this is a special case, because the group has structure of <a href="./../ALGEBRA/semidirect product.md.html">semidirect product</a>. When this happens, that is, when we have a Klein geometry $(G,H)$ in such a way that $G=N\rtimes H$, then the geometrical space $X=G/H$ is bijective to $N$, and $N$ acts on $X$ in a free and transitive way, that is, $X$ is a $N$-torsor. Proof:</p>
+<p><img src="./../../imagenes/Pasted image 20211231132659.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>In this case, $X$ is also a principal <a href="./../ALGEBRA/homogeneous space.md.html">homogeneous space</a>.</p>
+<p></p>
+<p>Another example: bugs living in a plane that can translate horizontally and vertically but which cannot rotate. For them, the relevant transformations are $(\mathbb{R}^2,+)$ and the geometrical space is, in principle, the whole $\mathbb{R}^2.$ Suppose that a kind of translations is less important than other, those performed in a certain direction $V$ (maybe because of the shape of their bodies they are easier to perform, or consume less energy to them...). Let $H$ be the subgroup of $(\mathbb{R}^2,+)$ given by this easier translations. Then their consciousness may be focus on a smaller space $\mathbb{R}^2/H$ (a real line) because is what is important for their survival.</p>
+<p>Related idea: sweeping the porch of my little cabin. Since is much easier to sweep in one direction (is almost "free") my sub consciousness treat the porch like being 1-dimensional.</p>
+<p><img src="./../../imagenes/Pasted image 20220101101808.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<h1 style="margin-left:0px;" id="About_recovering_the_geometric_properties_of_$X$_from_the_pair_$G,H$">About recovering the geometric properties of $X$ from the pair $(G,H)$</h1>
+<p></p>
+<p>I have found that the key is in the <a href="./adjoint representation.md.html">adjoint representation</a> of $H$ over $\mathfrak{g}$. Because in this context we can look for invariant subspaces and I guess that "inside" is hidden the information for the geometry. I have seen a good explanation in *Parabolic Geometries*, by Andreas Cap and  Jan Slovak, page 6, but I don't fully understand yet.</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>I have also found useful the foreword of *Differential geometry, Cartan's generalization of Klein Erlangen program*, by Sharpe and Chern; although I cannot see yet how the Maurer-Cartan form let us recover the metric.</p>
+<p></p>
+<p>Another clue: <a href="https://math.stackexchange.com/questions/302197/induced-metric-via-mathbb-c-pn-cong-sun-1-sun-times-u1?noredirect=1&lq=1" target="_blank">this question and answer</a> in mathstackexchange.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

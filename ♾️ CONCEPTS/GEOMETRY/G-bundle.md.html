@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="$G$-bundles">$G$-bundles</h1>
+<p>An alternative approach to fibre bundles is that one of the $G$-bundles:</p>
+<p></p>
+<p><b>Definition</b></p>
+<p>Let $M$, $S$ be manifolds. We say $E\stackrel{\pi}{\rightarrow}M$ is a $G$-bundle over $M$ if we can find an open covering $\{U_{\alpha}\}$ for $M$, together with a collection of homeomorphisms (local trivializations)</p>
+$$
+\phi_{\alpha}: U_{\alpha}\times S\longrightarrow \pi^{-1}(U_{\alpha})
+$$
+<p>such that</p>
+<p><ul style="margin-left:0px;"><li>For $m\in U_{\alpha}$, we have a map</li></ul></p>
+$$
+\tilde{\phi}_{\alpha}(m)(s):=\phi_{\alpha}(m,s)
+$$
+<p>for $s\in S$ such that is a diffeomorphism from $S$ to $\pi^{-1}(\{m\})$.</p>
+<p><ul style="margin-left:0px;"><li>If $U_{\alpha\beta}:=U_{\alpha}\cap U_{\beta}\neq 0$ the transition functions</li></ul></p>
+$$
+g_{\alpha \beta}(m):=\tilde{\phi}_{\alpha}^{-1}(m)\circ \tilde{\phi}_{\beta}(m)
+$$
+<p>satisfy $g_{\alpha\beta}(m)\in G \subseteq \textrm{Diff}(S)$. </p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>We remark the following observations:</p>
+<p><ul style="margin-left:0px;"><li>For $m\in M$, $E_m:=\pi^{-1}(\{m\})$ is called the fibre of $E$ over $m$. Since $S$ is diffeomorphic to every fibre $E_m$, is usually called the <b>standard fibre</b>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The collection $\{(U_{\alpha},\phi_{\alpha})\}$ is called a trivializing atlas for $E\rightarrow M$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>We have considered $G$ as a subgroup of $\textrm{Diff}(S)$, but often is more convenient to think of $G$ as an abstract group with a faithful left action $\lambda$ over $S$. We often denote the action  by</li></ul></p>
+$$
+\lambda(g_{\alpha\beta}(m),s) =g_{\alpha\beta}(m)\cdot s
+$$
+<p>or even by</p>
+$$
+\lambda(g_{\alpha\beta}(m),s) =g_{\alpha\beta}(m) (s)
+$$
+<p>when it does not result in confusion.</p>
+<p><ul style="margin-left:0px;"><li>For an open set $U\subseteq M$, any  map</li></ul></p>
+$$
+\sigma: U \longrightarrow E
+$$
+<p>such that $\pi \circ \sigma=id_M$ is called a local section of the fibre bundle $E\stackrel{\pi}{\rightarrow} M$. A local section $\sigma$ defined on a trivializing open set $U_{\alpha}$ can be identified with a map</p>
+$$
+\tilde{\sigma}_{\alpha}:U_{\alpha}\longrightarrow S
+$$
+<p>such that $\sigma(x)=\phi_{\alpha}(x,\tilde{\sigma}_{\alpha}(x))$.</p>
+<p></p>
+<p>The best example for a $G$-bundle is a <b>vector bundle</b>, where $S$ is a vector space $V$ and we take $G=\textrm{GL}(V)$.</p>
+<p>Another important case: <a href="./principal bundle.md.html">principal bundle</a>s.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

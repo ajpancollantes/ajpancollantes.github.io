@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Exponential_map">Exponential map</h1>
+<h2 style="margin-left:0px;" id="Motivation_old_version,_delete?">Motivation (old version, delete?)</h2>
+<p>Let $G$ be a group acting over a manifold $X$. Let $V \in T_e G$ and $n\in \mathbb{N}$. Then, since $e+\frac{1}{n} V \notin G$, for $p \in X$ we can not define:</p>
+$$
+q=p \cdot (e+\frac{1}{n} V)
+$$
+<p>But if we take $n$ big enough we can take a blind eye. Let's apply such transformation several times, say $\lambda\cdot n$ times, to get a new transformation.</p>
+$$
+q=p \cdot (e+\frac{1}{n} V)\cdot (e+\frac{1}{n} V)\cdot (e+\frac{1}{n} V)\cdot \ldots=p\cdot (e+\frac{1}{n} V)^{\lambda\cdot n}
+$$
+<p><img src="./../../imagenes/exponoentialmap.jpg" style="width:30vw; border-radius: 3px;" ></p>
+<p></p>
+<p>As we has said, this is not actually defined. But if we take limit in the expression above:</p>
+$$
+q=\lim _{n\rightarrow + \infty} [ p\cdot (e+\frac{1}{n} V)^{\lambda\cdot n}]
+$$
+<p>it could be something real.</p>
+<p></p>
+<p>Because of the form of this expression, we can identify:</p>
+$$
+q=p\cdot e^{\lambda\cdot V}
+$$
+<h2 style="margin-left:0px;" id="Motivation_new_version">Motivation (new version)</h2>
+<p>See [Xournal_134].</p>
+<p>Given a manifold $M$ we can think of a "procedure" that takes a point $p\in M$, a real number $t\in \mathbb{R}$ and a vector field $X$ on $M$ and returns a new point of $M$, working at this way: </p>
+<p>1. we start at $p$ and move a little along $X_p$. That is, we compute $q_1=p+X_p/10$. </p>
+<p>2. we move a little from $q_1$ along the direction of $X_{q_1}$, that is, we compute $q_2=q_1+X_{q_2}/10$.</p>
+<p>3. We finish after 10 steps.</p>
+<p></p>
+<p>Of course, we have better precision if we do this in more steps. In the limit (steps $\to \infty$) we would obtain the true output that we will denote by</p>
+$$
+q=pe^{tX}
+$$
+<p>and is nothing but the <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">flow</a> of $X$. See also <a href="./../Lie algebra action.md.html">Lie algebra action</a>.</p>
+<p><img src="./../../imagenes/Pasted image 20220212092330.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>This is a very general construction. What has to do with the usual exponential and, moreover, with the number $e$?</p>
+<p>Suppose the manifold $M=\mathbb{R}$ and the vector field given in the canonical coordinates by $X_x=x$.</p>
+<p><img src="./../../imagenes/Pasted image 20220212092648.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Then the number $e$ appears when we move from 1 a time 1 by means of that particular vector field. </p>
+<p></p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Formal_definition">Formal definition</h2>
+<p>But, <b>what is $e^{\lambda\cdot V}$ in reality?</b> (watch out, not to mistake this $e$ with the identity $e\in G$).  </p>
+<p>Let us observe that, when we consider $G$ acting on itself, every vector $v\in \mathfrak{g}=T_e G$ gives rise to a left invariant vector field $V$ associated to $v$:</p>
+$$
+V_g=d(L_g)_e(v)
+$$
+<p>(it is nothing but the <a href="./fundamental vector field.md.html">fundamental vector field</a>).</p>
+<p>Then, if we consider the flow $\phi_V$ of this vector field on $G$, we have a <a href="./../one-parameter subgroup.md.html">one-parameter subgroup</a> of $\mbox{Diff}(G)$ (ey, we are assuming that it is a complete vector field. It is proven <a href="https://math.stackexchange.com/a/3549632/601797)" target="_blank">here</a>. Since $G\subseteq \mbox{Diff}(G)$ we can wonder: is it, in fact, a one-parameter subgroup of $G$? Or in other words, does every diffeomorphism $\phi_V(t,-)$ correspond to left translation by an certain element $g_t \in G$?</p>
+<p>The answer is yes. We can take $g_t=\phi_V(t,e)\in G$, and define $\tilde{\phi}(t,m)=m\cdot g_t$. But we can show that </p>
+$$
+\phi_V=\tilde{\phi}
+$$
+<p>because of the <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">uniqueness of the flow</a>, since:</p>
+<p><ul style="margin-left:0px;"><li>$\tilde{\phi}(0,m)=m=\phi_V(0,m)$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\tilde{\phi}(t,-)$ are integral curves of $V$:</li></ul></p>
+$$\frac{d}{dt} \tilde{\phi}(t,m)=\frac{d (m\cdot g_t)}{dt}=\frac{d}{dt}(L_m(g_t))=\frac{d}{dt}(L_m(\phi_V(t,e)))=
+$$
+$$
+=d(L_m)_{\phi_V(t,e)}(V_{\phi_V(t,e)})=d(L_m)_{g_t}(d(L_{g_t})_e(v))=d(L_{mg_t})_e(v)=
+$$
+$$
+=V_{mg_t}=V_{\tilde{\phi}(t,m)}
+$$
+<p></p>
+<p>With this set up, the exponential map is defined by</p>
+$$
+exp(v)=g_1=\phi_V(1,e)
+$$
+<p>and is usually also denoted by $e^v$. </p>
+<p></p>
+<h1 style="margin-left:0px;" id="Inverse_relation_with_"differentiation"">Inverse relation with "differentiation"</h1>
+<p>It is important to note that $\phi_V(t,e)=e^{tv}$. But this is obvious from <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html#Important_property">flow theorem for vector fields#Important property</a>. Indeed</p>
+$$
+e^{tv}=\phi_{tV}(1,e)=\phi_V(t,e).
+$$
+<p>Therefore we have</p>
+$$
+v=\frac{d}{dt}|_{t=0} e^{tv}
+$$
+<p>expression that I like to call <b>inverse relation between exponential and differentiation at the origin</b>. In a sense, is like saying that exponentiation is like an "integration process" (see the picture of the section Motivation).</p>
+<p></p>
+<hr>
+<p>Now, think of </p>
+$$
+exp: \mathfrak{g} \mapsto G
+$$
+<p>and its differential at $0$</p>
+$$
+d (exp)_o: T_o \mathfrak{g} \mapsto \mathfrak{g}
+$$
+<p></p>
+<p>Since this is the identity map, by inverse function theorem $exp$ is a diffeomorphism in a neighbourhood of $0\in \mathfrak{g}$ and $e\in G$, say $U_e$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Proposition 1.24 in Peter Olver says that any $g\in G$ is product of $g_i\in U_e$. So \textbf{for any $g\in G$}:</p>
+<p></p>
+$$
+
+g=g_1\cdot g_2\cdot \cdots=exp(v_1)\cdot exp(v_2)\cdot \cdots
+
+$$
+<p></p>
+<p>for certain $v_i \in \mathfrak{g}$.</p>
+<p></p>
+<hr>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<h1 style="margin-left:0px;" id="Surjectivity_of_the_exponential_map">Surjectivity of the exponential map</h1>
+<p></p>
+<p><b>Proposition</b></p>
+<p>If ${G}$ is a compact connected Lie group, then the exponential map is surjective. </p>
+<p></p>
+<p><b>Proof</b></p>
+<p>The proof is not trivial. Ver aquí:</p>
+<p></p>
+<p><a href="https://terrytao.wordpress.com/2011/06/25/two-small-facts-about-lie-groups/" target="_blank">https://terrytao.wordpress.com/2011/06/25/two-small-facts-about-lie-groups/</a></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Projectable_vector_field">Projectable vector field</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="Classical_setup">Classical setup</h2>
+<p>Consider a map $f:M\to N$. We say that a vector field $X\in \mathfrak{X}(M)$ projects on $Y\in \mathfrak{X}(N)$ if they are $f$-<a href="./../f-related vector fields.md.html">related</a> vector fields. We will say that $X\in \mathfrak{X}(M)$ is projectable if it projects to some vector field on $N$. See <a href="./../../Bibliography/@saunders1989geometry.md.html">@saunders1989geometry</a> page 67.</p>
+<p></p>
+<p>By the way, if $f$ is a smooth <a href="./../ANALYSIS/submersion.md.html">submersion</a>, giving a vector field $Y\in \mathfrak{X}(N)$ there is at least one projectable vector field $X$ which is $f$-related to $Y$. See <a href="https://math.stackexchange.com/a/3919308/601797" target="_blank">this answer in math.stackexchange</a></p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Along_distributions">Along distributions</h2>
+<p>Given an involutive <a href="./distribution.md.html">distribution</a> $\mathcal{X}$ (i.e., a <a href="./foliation.md.html">foliation</a>) on a manifold $M$, a vector field $Y$ is said to be projectable with respect to $\mathcal{X}$ (in the sense of <a href="./../../Bibliography/@paola.frobenius.md.html">@paola.frobenius</a>) if for every $X\in \Gamma(M,\mathcal{X})$ we have</p>
+$$
+[Y,X]\in \Gamma(M,\mathcal{X})
+$$
+<p>They are also known as foliate vector fields, basic vector fields, base-like vector fields, foliated vector fields,... (see [Molino 1988] page 35)</p>
+<p></p>
+<p>In particular, it may happen that $\mathcal{X}=\mathcal{S}(\{X\})$, and the requirement becomes</p>
+$$
+[Y,X]=\rho X
+$$
+<p>We can say that $Y$ is a $X$-projectable vector field.</p>
+<p></p>
+<p>But, <b>what is happening when we reduce an ODE with a symmetry</b>? I.e., when we have a vector field $A$ associated to an ODE and</p>
+$$
+[A,X]=\xi A
+$$
+<p>The point here is that the vector field is not $X$-projectable, but <b>the distribution</b> $\{A\}$ is. The projection converts the vector field $A$ in <b>a nonlocal vector field!?</b></p>
+<p>But we would have had the same phenomenon if $[A,X]=\xi A+\rho X$, i.e., if $X$ were a cinf-symmetry.</p>
+<p></p>
+<p>This open the door to: a distribution $\mathcal{A}=\mathcal{S}(\{A_1,A_2\ldots\})$ is $X$-projectable if $\mathcal{S}(\{A_1,A_2\ldots,X\})$ is involutive, that is, $X$ is a <a href="./../../❓MY RESEARCH/♾️ ❗CONCEPTS/cinf-symmetry of distribution.md.html">cinf-symmetry of distribution</a> $\mathcal{A}$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Homogeneous_space">Homogeneous space</h1>
+<p>It is a set $X$ together with a transitive <a href="./../GEOMETRY/group action.md.html">group action</a> of a group $G$. There is only one orbit and so $X$ is isomorphic to the space of cosets $G/H$ being $H$ the <a href="./../GEOMETRY/group action.md.html">stabilizer or isotropy group</a> $Stab_G(x)$ for an arbitrary $x\in X$: the map</p>
+$$
+\varphi: G/H \rightarrow X,
+$$
+<p>being $\varphi(gH)=ghx$ for any $h\in H,$ is bijective.</p>
+<p></p>
+<p>The choice of $x$ has no influence since the isotropy groups are conjugate.</p>
+<p></p>
+<p><b>Basic examples:</b> </p>
+<p>1. $X=\mathbb{R}^2$ and $G=E(2)$</p>
+<p></p>
+<p>2. Any connected topological manifold $X$ is homogeneous with $G=Homeom(X)$, see <a href="https://math.stackexchange.com/a/89736/601797" target="_blank">this answer in Mathstackexchange</a>. The same is true for any connected smooth manifold and its group of diffeomorphisms. But keep an eye: these groups are infinite dimensional.</p>
+<p>3. Any finite set $S$ of cardinal $n$ is homogeneous with $G=S_n$ the <a href="./../symmetric group.md.html">symmetric group</a>. Indeed, <b>any set</b> is homogeneous with respect to its bijections, I guess.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>I think they are the same as <a href="./../GEOMETRY/Klein geometry.md.html">Klein geometry</a>s.</p>
+<p></p>
+<p>When the isotropy group is the identity, $G\equiv X$, and $X$ is called a <b>principal homogeneous space</b> or $G$-<b>torsor</b>. This happens if the <a href="./../GEOMETRY/group action.md.html">group action</a> is also free, as well as transitive, that is, <a href="./../GEOMETRY/group action.md.html">regular</a>.</p>
+<p></p>
+<p>Homogeneous spaces are used, to my knowledge, in two different ways:</p>
+<p><ul style="margin-left:0px;"><li>They can be attached to a manifold by means of a <a href="./../GEOMETRY/solder form.md.html">solder form</a>, to produce a <a href="./../GEOMETRY/Cartan geometry.md.html">Cartan geometry</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>We can be interested in the submanifolds contained in them, which can be studied by means of <a href="./../GEOMETRY/moving frame.md.html#Extrinsic_moving_frame">extrinsic moving frames</a>.</li></ul></p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Intuitive_approach">Intuitive approach</h2>
+<p>Suppose we have a complicated (real-world) object $X$ which we can describe by means of a well known (mathematical-world) object $S$. Examples:</p>
+<p><ul style="margin-left:0px;"><li>A plane piece of land $X$ described by $\mathbb{R}^2$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>A list of students $X=\{Antonio, Carlos,\ldots,Rodrigo\}$ described by the set $\{1,2,,\ldots,32\}$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>...</li></ul></p>
+<p></p>
+<p>The object $X$ is homogeneous with respect to the group $Bij(S)$ in the sense that:</p>
+<p>1. There is a physical linkage, or external linkage, from $S$ to $X$, that is introduced externally. Let's call it $\phi: S\to X$.</p>
+<p>2. All the possible descriptions of $X$ are given by $P=\{\phi\circ g: g\in Bij(S)\}$.</p>
+<p>3. Suppose we have a distinguished point in $s\in S$ (for example $(0,0)\in \mathbb{R}^2$ or $1\in \{1,\ldots,32\}$). At first it may seem that the point $x=\phi(s)\in X$ is a privileged point, since it is described by the "main point" of $S$. But it turns out that </p>
+$$
+P=\sqcup_{y\in X} P_y
+$$
+<p>being $P_y=\{\phi\circ h:h\in H\}$ (with $H$ the isotropy group of $s$ in $Bij(S)$) all the descriptions of $X$ "centered at" $y$. That is, $P_y$ consist of descriptions of $X$ in which $y$ is described by the distinguished point $s\in S$. It is clear that all $P_y$ are "equal" (conjugates), and so we say that $X$ is homogeneous. For example, no point of the land is special, all of them can be chosen to be the center of the world, a no student is special, all of them can be chosen to be associated with the label 1.</p>
+<p></p>
+<p>Now, it is interesting to now if we can shrink $Bij(S)$ to a subgroup $G$ in such a way that $X$ still conserve this property. Why do we want to restrict? Because there are descriptions which are more important than others. For example, any "crazy" bijection $g\in Bij(\mathbb{R}^2)$ my not give rise to an interesting description $\phi \circ g:\mathbb{R}^2\to X$. We are interested in bijections that do not clutter the set too much. The choice of $G$ is again an external data, which depends on the nature of the problem we are interested in. But the group needs to be transitive, in order to conserve homogeneity.</p>
+<p></p>
+<p>An element $\phi\circ g\in P$ is a $G$-basis or $G$-description of $X$ in the sense that we can define the coordinates of a point $y\in X$ as </p>
+$$
+(\phi \circ g)^{-1}(y)\in S
+$$
+<p></p>
+<p>The group $G$ not only serves to parameterize the "$G$-descriptions" of $X$. It also defines an action on $X$ through $\phi:S\to X$. The action of $g\in G$ on $y\in X$ is $gy=\phi(g(\phi^{-1}(y)))$. If we fix a point $x\in X$ (corresponding to certain $s\in S$ by means of $\phi$) we get a bijection $\Psi:X\to G/H$ (being $H$ the isotropy group of $x$) given by</p>
+$$
+\Psi:y\mapsto g_y H
+$$
+$$
+gx \style{display:inline-block; transform:scale(-1,1);}{\mapsto} gH
+$$
+<p></p>
+<p>being $g_y$ an element of $G$ carrying $x$ to $y$. So many times we identify $X$ with $G/H$, or even start the construction with $G/H$.</p>
+<p></p>
+<p>This bijection $\Psi$ let us to express the points of $G/H$ in "coordinates" in $S$. Given $\bar{g} \in G$, the element $\bar{g}H$ have coordinates </p>
+$$
+(\phi \circ g)^{-1}(\Psi^{-1}(\bar{g}H))=(\phi \circ g)^{-1}(\bar{g}x)=
+$$
+$$
+=(\phi \circ g)^{-1}(\phi(\bar{g}(\phi^{-1}(x))))=(g^{-1}\bar{g})\phi^{-1}(x)=
+$$
+$$
+=(g^{-1}\bar{g})s
+$$
+<p></p>
+<p>In particular, if we think in $X=G/H$ described by the set $S=G/H$ by means of the identity and with selected points $s=x=H$, then an abstract point $\bar{g}H \in G/H$ is expressed in a frame $g\in G$ as</p>
+$$
+g^{-1}\bar{g}H
+$$
+<p><b>Example</b></p>
+<p>$G=\mathbb{R}^2 \rtimes GL(2)$, $H=GL(2)$, $G/H=\mathbb{R}^2$, $x=s=\tau_{(0,0)}H$</p>
+<p>An element $g=\tau \circ A\in G$ is a translation $\tau$ following a linear transformation $A$, and sends the canonical reference system $((0,0),(1,0),(0,1))$ to a new one. The coordinates of a point $y\in \mathbb{R}^2$ in the new reference system are computed by means of $A^{-1}\tau^{-1}y$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>In particular $G$ itself is a homogeneous space ($H=1$). Every element $f_1\in G$ is, at the same time, a "point", a "movement" and a "frame". Movements and frames are the same, see <a href="./../../☕REFLECTIONS/general covariance and contravariance.md.html">general covariance and contravariance</a>. Now, given any other point $f_2\in G$, how it is described from the frame $f_1$? Well, according to <a href="./../../☕REFLECTIONS/general covariance and contravariance.md.html">this</a> we take</p>
+$$
+f_1^{-1}f_2
+$$
+<p>See also xournal 190 and maple 071.</p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="What_if_the_action_is_not_transitive?">What if the action is not transitive?</h3>
+<p>Well, in this case we can decompose the space in the orbits $S=\sqcup_i \mathcal{O}_i$. The group acts transitively in every $\mathcal{O}_i$ so we have bijections</p>
+$$
+\Psi_i: \mathcal{O}_i\to G/H_i
+$$
+<p>where $H_i$ is the isotropy group of some point in $\mathcal{O}_i$. Then we have several principal bundles $G\to \mathcal{O}_i$, not only one. I think this has to do with <a href="./../GEOMETRY/group representation.md.html">subrepresentations</a> of groups, but I have to think more on this.</p>
+$$
+
+$$
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

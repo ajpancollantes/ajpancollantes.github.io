@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Relativistic_Field_Theory">Relativistic Field Theory</h1>
+<p>(Probably this note has to be unified with <a href="./../⛳️ NON CLASSIFIED/Classical Field Theory.md.html">Classical Field Theory</a>)</p>
+<p></p>
+<p>Overview: </p>
+<p>We generalize <a href="./../⛳️ NON CLASSIFIED/Lagrangian Mechanics.md.html">Lagrangian Mechanics</a> formalism of classical particles in two ways:</p>
+<p><ul style="margin-left:0px;"><li>To include relativistic particles. The action is changed, chosen to be Lorentz invariant (although the previous were not galilean invariant!). When we take Taylor polynomial to approximate for slow particles we obtain the classical Lagrangian...</li></ul></p>
+<p><ul style="margin-left:0px;"><li>To include fields, both classical and, mainly, relativistic ones. A field is a measurable quantity that depends on position in space and may also vary with time: $\phi(t,x_1,x_2,x_3)$. The field can be a scalar field (temperature) or a vector field (wind).</li></ul></p>
+<p></p>
+<p>A particle can be seen as a field applied in one point (0-dimensional space). The measurable quantity of the field (scalar or vectorial) is the position of the particle. So a general field is nothing but infinite particles evolving together. It is totally analogous to passing from one harmonic oscillator to a continuous oscillating string.</p>
+<p>Consider one particle in 1 dimension in <a href="./../⛳️ NON CLASSIFIED/Classical Mechanics.md.html">Classical Mechanics</a>, whose position in time is described by $\phi(t)$. This would be a (0+1)-dimensional scalar field. Following <a href="./../⛳️ NON CLASSIFIED/Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>, this scalar field is determined by the <a href="./principle of least action.md.html">principle of least action</a>, that is, we have </p>
+$$
+\mbox{Action}=\int_a^b Ldt
+$$
+<p>Remember that the simplest situation for a particle is a constant velocity motion (no potential energy is present), and the Lagrangian is</p>
+$$
+L=\frac{1}{2}(\dot{\phi}(t))^2
+$$
+<p>and the <a href="./Euler-Lagrange.md.html">Euler-Lagrange</a> equation for this Lagrangian is</p>
+$$
+\frac{d^2\phi}{dt^2}(t)=0
+$$
+<p></p>
+<p>The analogous for a field is the wave propagation! This is because the Lagrangian that naturally extends that of a 0-dimensional field (particle) to that of a spatial field in relativistic context include terms that lead to a wave equation.</p>
+<p><b>(see Susskind_2017 page 122 to understand this)</b></p>
+<p></p>
+<p>That is, in Euler Lagrange equations, compare</p>
+$$
+\frac{d^{2} \phi}{d t^{2}}+\frac{\partial V(\phi)}{\partial \phi}=0
+$$
+<p>with</p>
+$$
+\frac{\partial^{2} \phi}{\partial t^{2}}-\frac{\partial^{2} \phi}{\partial x^{2}}-\frac{\partial^{2} \phi}{\partial y^{2}}-\frac{\partial^{2} \phi}{\partial z^{2}}+\frac{\partial V}{\partial \phi}=0
+$$
+<p>(Klein-Gordon equation)</p>
+<p></p>
+<p>The Lagrangian would be something like</p>
+$$
+\mathcal{L}=-\frac{1}{2} \partial_{\mu} \phi \partial^{\mu} \phi-U(\phi)
+$$
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

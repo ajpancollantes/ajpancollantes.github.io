@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Principal_connection">Principal connection</h1>
+<p>It is a particular case of <a href="./connection on a fiber bundle.md.html">connection on a fiber bundle</a>. </p>
+<p></p>
+<h2 style="margin-left:0px;" id="Definition">Definition</h2>
+<p>A connection on a <a href="./principal bundle.md.html">principal</a> $G$-bundle $P\stackrel{\pi}{\rightarrow}M$, with $dim(M)=n$, is a $n$-dimensional distribution (named horizontal distribution)</p>
+<p>$$H:u\mapsto H_u P\subseteq T_u P$$</p>
+<p>on $P$ such that the following conditions hold for every $u\in P$:</p>
+<p><ul style="margin-left:0px;"><li>$T_u P=V_u P \oplus H_u P$, where $V_u P=Ker((d\pi)_u)$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$H_{\rho_g(u)} P=(d\rho_g)_u(H_u P)$, for every $g\in G$, and being $\rho_g$ the right action of $g$ in $P$</li></ul></p>
+<p>Here $VP$ is the <a href="./vertical bundle.md.html">vertical bundle</a>.</p>
+<p></p>
+<p>The simplest example of a connection is the trivial connection on the trivial bundle $P=M\times G$, that is, $$H_{(m,g)} P=T_m M \subseteq T_{(m,g)} P.$$ </p>
+<h2 style="margin-left:0px;" id="Connection_1-form">Connection 1-form</h2>
+<p>It can be shown ([Vakar 2011]), without much difficulty, that a connection can be alternatively defined as a 1-form $\omega \in \Omega^1(P) \otimes \mathfrak{g}$, being $\mathfrak{g}$ the Lie algebra of $G$, that satisfies:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$\omega(\tilde{A})=A$, for every $A\in \mathfrak{g}$ and being $\tilde{A}$ the fundamental vector field of $A.$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>For every $g\in G$ the following diagram commutes:</li></ul></p>
+<p><img src="./../../imagenes/Pasted image 20220107182609.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>being $G \stackrel{\mathrm{Ad}}{\longrightarrow} G L(\mathfrak{g})$ the adjoint representation of $G$. This can be written</p>
+$$
+\rho_g^*(\omega)=Ad_{g^{-1}} \omega
+$$
+<p>which is the same expression that we find for the Maurer-Cartan form (see <a href="./Maurer-Cartan form.md.html#MC_form_and_left_and_right_actions">Maurer-Cartan form#MC form and left and right actions</a>). The connection is then an extension of the <a href="./Maurer-Cartan form.md.html#Maurer-Cartan_form_on_a_principal_bundle">Maurer-Cartan form of the bundle</a> to the whole $T_uP$ but the values are still in $\mathfrak{g}$. A <a href="./Cartan geometry.md.html">Cartan connection</a> is similar, but the values are taken in a bigger Lie algebra.</p>
+<p></p>
+<p>Observe that given the horizontal distribution $H$ we can construct the associated 1-form $\omega$ by projecting every vector $X \in T_u P$ to $V_u P$ and identifying the latter with $\mathfrak{g}$ by using the <a href="./Maurer-Cartan form.md.html#Maurer-Cartan_form_on_a_principal_bundle">Maurer-Cartan form</a> and any trivialization (see [Belgun 2020] for more details). Conversely, given a connection by the 1-form $\omega$, we recover the horizontal distribution by means of</p>
+$$
+H_{u} P:=\left\{X \in T_{u} P \mid \omega(u)(X)=0\right\}
+$$
+<h3 style="margin-left:0px;" id="Idea">Idea</h3>
+<p>See the idea in the particular case of <a href="./linear connection.md.html#General_Idea">affine connection</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Another_characterization">Another characterization</h2>
+<p>But connections can be characterized in one more way. Given an atlas $\{(U_{\alpha},\psi_{\alpha})\}_{\Lambda}$ for the $G$-bundle $P\stackrel{\pi}{\rightarrow}M$ and the connection defined by $\omega$, we can use the collection of distinguished local $G$-frames (local sections) $p_{\alpha}:U_{\alpha} \rightarrow P$ (see <a href="./principal bundle.md.html#Alternative_approach">principal bundle#Alternative approach</a>) to define the family of local 1-forms</p>
+$$
+\omega_{\alpha}=p_{\alpha}^*(\omega) \in \Omega^1(U_{\alpha}) \otimes \mathfrak{g}
+$$
+<p>satisfying</p>
+$$
+\omega_{\beta}(m)=Ad\left(g_{\alpha\beta}(m)^{-1}\right) \omega_{\alpha}(x)+\Theta_{\alpha\beta}(m), \tag{!}
+$$
+$$
+ \forall m \in U_{\alpha \beta} \text { and } \forall \alpha, \beta \in \Lambda
+$$
+<p></p>
+<p>where $\Theta_{\alpha\beta}$ denote $g_{\alpha\beta}^*(\Theta)$, being $\Theta$ the Maurer-Cartan form. Every $\omega_{\alpha}$ is called a Yang-Mills field (see [Schuller 2013] page 185).</p>
+<p></p>
+<p>Reciprocally, any collection $\{(U_{\alpha},\psi_{\alpha},\omega_{\alpha})\}$, being $\{(U_{\alpha},\psi_{\alpha})\}$ an atlas for the bundle $P\stackrel{\pi}{\rightarrow}M$, defines a connection on it if $\{\omega_{\alpha}\}$ satisfies condition (!) (see [Marathe 1992] for a proof).</p>
+<p></p>
+<p><b>The idea behind Yang-Mills fields</b> is what follows. The local section $p_{\alpha}$ is a <a href="./moving frame.md.html">moving frame</a>, that is, a choice of a $G$-frame for every point $m\in U$. The 1-form $p_{\alpha}^*(\omega)$ evaluated on a vector $v\in T_m M$ tells us how the frame varies when we move in the direction $v$ (assuming the notion of derivative provided by the connection $\omega$). But this "variation" is measured in terms of elements of $\mathfrak{g}$.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Exterior_covariant_derivative">Exterior covariant derivative</h1>
+<p></p>
+<p>An important feature is <a href="./../exterior covariant derivative.md.html">exterior covariant derivative</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

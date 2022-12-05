@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Group_action">Group action  </h1>
+<p>Let $X$ be a set and $G$ a group. A right (left) action of $G$ on $X$ is a map</p>
+$$
+X \times G \longrightarrow X
+$$
+<p>denoted b $(x,g)\mapsto x \cdot g$, and such that $x \cdot 1=x$ y $(x \cdot g)\cdot g'=x\cdot (gg')$ for every $x \in X$ and $g,g' \in G$.</p>
+<p></p>
+<p>One may equivalently define a group action of $G$ on $X$ as a group homomorphism from $G$ into the symmetric group $Sym(X)$ of all bijections from $X$ to itself.</p>
+<p></p>
+<p>There is also an interpretation in terms of category theory (see <a href="./../CATEGORY THEORY/group as a category.md.html">group as a category</a>).</p>
+<p></p>
+<p>Related notions: <a href="./../subaction.md.html">subaction</a> and <a href="./../quotient action.md.html">quotient action</a>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Types">Types</h1>
+<p><ul style="margin-left:0px;"><li>A <a href="./../free action.md.html">free action</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>A <a href="./../transitive action.md.html">transitive action</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>A <a href="./../faithful action.md.html">faithful action</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>A <a href="./../regular action.md.html">regular action</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>A <a href="./../proper action.md.html">proper action</a>.</li></ul></p>
+<p></p>
+<h1 style="margin-left:0px;" id="More_definitions">More definitions</h1>
+<p></p>
+<p>En las condiciones de la definición anterior llamamos <b>$G$-órbita</b> de $x\in X$ al conjunto de puntos $x\cdot g$ para $g\in G$.</p>
+<p>Para un subconjunto $S \subseteq X$ y un elemento $g\in G$, el conjunto <b>$g$-trasladado</b> $Sg$ es el conjunto de puntos de $X$ de la forma $x=s\cdot g$, para algún $s\in S$</p>
+<p></p>
+<p>El conjunto cociente $X/G$ es el <b>conjunto de $G$-órbitas</b>, y la aplicación $\pi: X \mapsto X/G$ que envía $x$ a su $G$-órbita es la aplicación cociente.</p>
+<p></p>
+<p>If the action is transitive then we only have one orbit, and for any $x \in X$ we have</p>
+$$
+X\approx G/Stab_G(x)
+$$
+<p>where $G/Stab_G(x)=\{g\cdot Stab_G(x): g\in G\}$, the set of cosets.  In this case we say that $X$ is a <a href="./../ALGEBRA/homogeneous space.md.html">homogeneous space</a>.</p>
+<p></p>
+<p>Sea $X$ un espacio topológico y $G$ un grupo discreto. Una acción derecha de $G$ sobre $X$ es \textit{continua} si para cada $g\in G$ la aplicación $X \mapsto X$ inducida por $g$ es continua (y, por tanto, un homeomorfismo). </p>
+<p></p>
+<p>Se dice que la acción es propiamente discontinua cuando es continua y cada $x\in X$ admite un entorno $U_x$ tal que el $G$-trasladado $U_x\cdot g$ corta a $U_x$ sólo para un número finito de elementos de $G$.</p>
+<p></p>
+<p>La acciones libres y propiamente discontinuas son importantes porque en espacios $X$ Hausdorff cada $x \in X$ tiene al menos un entorno $U_x$ disjunto de cada $U_x \cdot g$ para cualquier $g \neq 1$ ({\color{red} hay que demostrarlo}).</p>
+<p></p>
+<p>Sea $X$ un espacio topológico de Hausdorff equipado con una acción libre y propiamente discontinua por un grupo $G$. Existe una única topología sobre $X/G$ tal que la aplicación cociente $\pi \mapsto X/G$ es continua y además un homeomorfismo local. Además, esta aplicación es abierta.</p>
+<p></p>
+<p>En dicha topología un conjunto $S \subseteq X/G$ es abierto si y sólo si su preimagen en $X$ es abierto. Y si el subconjunto $U\subseteq X$ es un conjunto abierto que es disjunto de $U\cdot g$ para $g\neq1$ entonces la aplicación $\pi|_U:U\mapsto \pi(U)$ es un homeomorfismo. </p>
+<p></p>
+<p>El espacio $X/G$ con esta topología es localmente Hausdorff en general. Podremos afirmar que es Hausdorff en el siguiente caso:</p>
+<p></p>
+<p><b>Lemma</b></p>
+<p>En las condiciones de la proposición anterior, el espacio $X/G$ es Hausdorff si y sólo si la imagen de la aplicación</p>
+$$
+X \times G \longrightarrow X \times X
+$$
+<p></p>
+<p>es cerrada en $X \times X$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>Una acción de un grupo diremos que es diferenciable cuando los homeomorfismos asociados sean además difeomorfismos</p>
+<p></p>
+<p></p>
+<p></p>
+<p><b>Theorem</b> (Quotient manifold theorem)</p>
+<p>Suppose a Lie group  $G$ acts smoothly, freely, and properly on a smooth manifold $M$. Then the orbit space $M/G$ is a topological manifold  of dimension $dim(M)-dim(G)$, and has a unique smooth structure  with the property that the quotient map $\pi:M\to M/G$ is a smooth submersion.</p>
+<p>$\blacksquare$</p>
+<p>See <a href="./../../Bibliography/@lee2013smooth.md.html">@lee2013smooth</a> theorem 7.10 at page 153.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Lie_group_action">Lie group action</h1>
+<p>In case $G$ is a Lie group action on a manifold $M$ we have an injection</p>
+$$
+\tau: G \longmapsto Diff(M)
+$$
+<p>Indeed, $Diff(M)$ is in some sense like a (infinite dimensional) Lie group, whose Lie algebra is $\mathfrak{X}(M)$. This is due to the <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">flow theorem for vector fields</a>.</p>
+<p></p>
+<p>Given a vector in the Lie algebra $\mathfrak{g}$ we can consider the <a href="./fundamental vector field.md.html">fundamental vector field</a> on $M$. This corresponds to the differential of $\tau$ at the identity $e\in G$:</p>
+$$
+\begin{aligned}
+d \tau_e : \mathfrak{g} & \longmapsto  \mathfrak{X}(M)\\
+V &\longmapsto (X_V:p\mapsto \frac{d}{dt}(p\cdot e^{tV} )|_{t=0}) 
+\end{aligned}
+$$
+<p>This is the induced <a href="./../Lie algebra action.md.html">Lie algebra action</a>.</p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

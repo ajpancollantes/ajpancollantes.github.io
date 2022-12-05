@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Local_chart_connection">Local chart connection</h1>
+<p>Suppose $(U, \varphi)$ is a local chart of $M$. Given a vector field $\xi$ we can express it in the local chart as $\xi=\sum_i f_i \partial{u_i}$. Given other vector, say $\eta$, we can define in $U$ the expression</p>
+$$
+\nabla_{\eta}\xi=\sum_i \eta(f_i) \partial{ u_i}
+$$
+<p>Implicitly, what we are doing is assume a geometry in which the $\partial u_i$ are constant. It could be shown that $\nabla$ define a <a href="./GEOMETRY/linear connection.md.html#Definition_as_operator">covariant derivative operator</a> restricted to $U$, that applies to any tensor field, not only vectors. It is called the <b>local chart connection</b> or <b>coordinate connection</b> for $(U,\varphi)$.</p>
+<p>Moreover, this operator is unique: it is the only that satisfies</p>
+$$
+\nabla(\partial u_i)=0
+$$
+<p>When there is no place to confusion, we will denote it by $\partial$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>How is this related to <a href="./Christoffel symbols.md.html">Christoffel symbols</a>? Think of any connection $\nabla$. In a local chart, we have the trivial connection $\partial$, and the expression $\nabla - \partial$ defines a set of tensor fields $C^a_{nm}$ like in equation \ref{dosconexiones}. The Christoffel symbols $\Gamma_{ij}^k$, defined traditionally as the components of $\nabla_{\partial_{x_i}} \partial x_j$ respect to the basis element $\partial x_k$, multiplied by -1 coincide with the components of $C_{mn}^a$ expressed in the basis $\{(dx_i)_m (dx_j)_n (\partial x_k)^a\}_{ijk}$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Relationship_parallel_transport,_covariant_derivatives_and_metrics">Relationship parallel transport, covariant derivatives and metrics</h1>
+<p>What follows is a discussion in "low level". For "high level" discussion go to <a href="./connections summary.md.html">connections summary</a>.</p>
+<p>1. In an abstract setting, a $n$-dimensional manifold $M$, given a <a href="./../♾️ CONCEPTS/parallel transport.md.html#Definition_of_parallel_transport">parallel transport</a> $\tau$, we can construct a <a href="./../♾️ CONCEPTS/covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$. See the sketch of the construction at <a href="./../♾️ CONCEPTS/parallel transport.md.html#Covariant_derivative">parallel transport#Covariant derivative</a>, that can be generalized to any manifold, not only surfaces.</p>
+<p>2. Conversely, given a <a href="./../♾️ CONCEPTS/GEOMETRY/linear connection.md.html#Definition_as_operator">covariant derivative operator</a> $\nabla$ we can construct a <a href="./../♾️ CONCEPTS/parallel transport.md.html#Definition_of_parallel_transport">parallel transport</a> $\tau$. See <a href="./../♾️ CONCEPTS/parallel transport.md.html#Construction_from_a_covariant_derivative_operator">this construction</a>.</p>
+<p>3. A <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> $g$ on $M$ gives rises to several covariant derivatives (or parallel transports). There is only one which is <a href="./../♾️ CONCEPTS/torsion of a connection.md.html">torsion</a> free, the <a href="./../♾️ CONCEPTS/GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a> $\nabla_g$, with parallel transport $\tau_g$.</p>
+<p>4.  In $\mathbb{R}^N$ the standard metric $g_{std}$ gives rise to the standard covariant derivative $\nabla_{std}$ which corresponds to a <a href="./../♾️ CONCEPTS/parallel transport.md.html">parallel transport</a> $\tau_{std}$ that is the usual <a href="./../♾️ CONCEPTS/absolute parallelism.md.html">absolute parallelism</a> of $\mathbb{R}^3$.</p>
+<p>5. If the manifold $M$ is a <a href="./../♾️ CONCEPTS/GEOMETRY/surface.md.html">surface</a> immersed in $\mathbb{R}^3$ (and I guess this is valid for any manifold immersed in $\mathbb{R}^N$) we can construct a metric induced by the "ambient metric", $g_{ind}$. This inherited metric gives rise, according to point 3 above, to $\nabla_{ind}$ and $\tau_{ind}$.</p>
+<p>6. In particular, $\tau_{ind}$ can be constructed from $g_{ind}$ by means of geodesics and holonomy. See <a href="./../♾️ CONCEPTS/parallel transport.md.html#Intrinsic_construction">parallel transport#Intrinsic construction</a> for surfaces. For 3-manifolds <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> provides three constructions in page 282.</p>
+<p>7. But $\tau_{ind}$ can be constructed directly by means of translation and projection in $\mathbb{R}^N$, that is, by using $\tau_{std}$ and $g_{std}$. This correspond to <a href="./../♾️ CONCEPTS/parallel transport.md.html#Extrinsic_construction">parallel transport#Extrinsic construction</a>.</p>
+<p>8. Respect to $\nabla_{ind}$, it can be constructed from $\tau_{ind}$, according to point 1 above, but also from $\nabla_{std}$ and $g_{std}$ (see <a href="./../♾️ CONCEPTS/GEOMETRY/linear connection.md.html#How_to_get_one">linear connection#How to get one</a>).</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

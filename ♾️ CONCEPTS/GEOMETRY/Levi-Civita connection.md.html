@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Levi-Civita_connection">Levi-Civita connection</h1>
+<p>(Before this read <a href="./../../☕REFLECTIONS/relationship parallel transport, covariant derivatives and metrics.md.html">relationship parallel transport, covariant derivatives and metrics</a>)</p>
+<p>Given a <a href="./Riemannian metric.md.html">Riemannian metric</a> $g$ on a manifold $M$, the Levi-Civita connection is a <a href="./vector bundle connection.md.html">vector bundle connection</a> $\nabla$ on the tangent bundle (<a href="./linear connection.md.html">linear connection</a>) which is compatible with $g$, in the sense that:</p>
+<p>1. it preserves the metric, i.e., $\nabla g=0$. This condition means that the inner product of two vectors remains constant when they are parallel transported. On the other hand, remember that a vector bundle connection induces (and indeed is uniquely determined by) a <a href="./principal connection on a principal bundle.md.html">principal connection</a> on the frame bundle (see <a href="./associated connection.md.html#Conversely">this</a>). This condition means that the vector bundle connection induces a principal connection also on the <a href="./../orthonormal frame bundle.md.html">orthonormal frame bundle</a>.</p>
+<p>2. it is <a href="./../torsion of a connection.md.html">torsion-free in the sense of covariant derivatives</a>. I think that this condition can be interpreted in the sense that the <a href="./Cartan geometry.md.html">Cartan geometry</a> that appears from "pasting together" $\nabla$ and the solder form $\theta$ is a <a href="./../torsion of a Cartan geometry.md.html">torsion-free Cartan geometry</a>.</p>
+<p></p>
+<p><b>Theorem</b>. Every <a href="./(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian manifold</a> $(M,g)$ has a unique Levi-Civita connection.</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b> <a href="https://en.wikipedia.org/wiki/Levi-Civita_connection" target="_blank">Wikipedia</a></p>
+<p>$\blacksquare$</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Christoffel_symbols">Christoffel symbols</h2>
+<p>In a local chart $\{x_1,\ldots,x_n\}$ we have a local chart frame, and we can express the Levi-Civita connection as a 1-form (see <a href="./vector bundle connection.md.html#Connection_form">vector bundle connection#Connection form</a>). This gives rise to the <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="About_curvature">About curvature</h2>
+<p>Since it is a particular <a href="./vector bundle connection.md.html">vector bundle connection</a> and therefore a particular <a href="./connection on a fiber bundle.md.html">connection on a fiber bundle</a>, it has a <a href="./curvature of a connection.md.html">curvature of a connection</a> which is a 2-form of a particular kind. On the other hand, the <a href="./Riemannian metric.md.html">Riemannian metric</a> gives rise to the <a href="./../Riemann curvature tensor.md.html">Riemann curvature tensor</a>. Both ideas are related (I have to investigate it more, but something is said <a href="./curvature of a connection.md.html#Vector_bundles">here</a>).</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Old_stuff_malament">Old stuff (malament)</h1>
+<p>(Here we are going to use <a href="./../../⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html">Penrose abstract index notation</a>)</p>
+<p><a href="./linear connection.md.html">Derivative operators</a> (in the sense of particular <a href="./vector bundle connection.md.html">vector bundle connection</a> on $TM$) and <a href="./Riemannian metric.md.html">Riemannian metric</a>s give two different ways to check the constancy of a field along a curve. Given $g_{ab}$ and $\nabla$, in principle not related, and a field $\lambda^a$ we could establish that it is constant, as we know, with the expression:</p>
+$$
+\xi ^ { n } \nabla _ { n } \lambda ^ { a } = 0
+$$
+<p>where $\xi^n$ is the tangent field to a given curve $\gamma$.</p>
+<p></p>
+<p>On the other hand, would be convenient to say that $\lambda^a$ is constant if $g_{ab} \lambda ^ { a } \lambda ^ { b }$ is constant along $\gamma$, i. e., </p>
+$$
+\xi ^ { n } \nabla _ { n } \left( g _ { a b } \lambda ^ { a } \lambda ^ { b } \right) = 0
+$$
+<p>We would say that a connection $\nabla_n$ is <b>compatible</b> with a metric $g_{ab}$ if for any $\gamma$ and $\lambda^a$ the first condition of constancy imply the second one. This can be say more simply thanks to the following proposition:</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>The derivative operator $\nabla$ and the metric $g_{ab}$ are compatible if and only if</p>
+$$
+\nabla_a g_{bc}=0.
+$$
+<p>$\blacksquare$</p>
+<p></p>
+<p></p>
+<p>At the same time, this is equivalent to saying that </p>
+$$
+\nabla_n g^{bc}=0
+$$
+<p>Given a manifold $M$ it can be shown that there exists a lot of derivative operators. But given a manifold with a metric, it can be shown that there is only one of them that is compatible with the metric and torsion free: the <b>Levi-Civita connection</b>. </p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

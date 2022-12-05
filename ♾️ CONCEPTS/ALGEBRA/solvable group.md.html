@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Solvable_group">Solvable group</h1>
+<p></p>
+<p>A group is solvable if we find a finite sequence of normal subgroups $(A_0, \ldots, A_r)$ such that </p>
+$$
+I=A_{0} \triangleleft A_{1} \triangleleft \ldots \triangleleft A_{r}=G
+$$
+<p>($\triangleleft$ means "is <a href="./normal subgroup.md.html">normal subgroup</a> of") and such that</p>
+$$
+A_{k+1}/A_{k}
+$$
+<p>is abelian.</p>
+<p></p>
+<p>The $A_{k+1}/A_{k}$  are called normal factors.</p>
+<p>The sequence $(A_0, \ldots, A_r)$ is called normal series. If each term of the series is <a href="./normal subgroup.md.html">normal</a> not in the whole group but only in the preceding term, then the series is called subnormal series.</p>
+<p></p>
+<p>It turns out that it is enough the existence of a subnormal series with Abelian normal factors (see <a href="https://encyclopediaofmath.org/wiki/Solvable_group)" target="_blank">here</a></p>
+<p></p>
+<p>Taking into account the <a href="./../../✏️ THEOREMS/normal subgroup vs ideal of Lie algebra.md.html">normal subgroup vs ideal of Lie algebra</a> relationship, it looks intuitive understand that a solvable Lie group correspond to a <a href="./solvable Lie algebra.md.html">solvable Lie algebra</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

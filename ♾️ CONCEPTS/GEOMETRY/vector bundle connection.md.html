@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Vector_bundle_connection">Vector bundle connection</h1>
+<p>Let $E \rightarrow M$ a smooth vector bundle on a manifold $M$. Let $\Gamma(E)$ be the space of sections. A connection on $E$ is an $\mathbb{R}$-linear map</p>
+<p></p>
+$$
+\nabla : \Gamma(E) \rightarrow \Gamma\left(E \otimes T^{*} M\right)
+$$
+<p>satisfyng Leibniz rule</p>
+$$
+\nabla(f \sigma )=\sigma \otimes d f+f \cdot \nabla \sigma
+$$
+<p>This map is also called derivative operator. In <a href="https://en.wikipedia.org/wiki/Connection_form" target="_blank">Wikipedia</a> it is called exterior connection.</p>
+<p></p>
+<p>This way, if $X$ is a vector field one can define a notion of derivative of a section</p>
+$$
+\nabla_{X} : \Gamma(E) \rightarrow \Gamma(E)
+$$
+<p>by means of $\nabla_{X} \sigma=(\nabla \sigma)(X)$.</p>
+<p></p>
+<p>If we think of sections like a generalization of functions (I personally call them twisted functions) the connection is a device that let us derive this functions.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="As_a_particular_case_of_connection_on_a_fiber_bundle">As a particular case of connection on a fiber bundle</h2>
+<p>This concept is nothing but a particular case of a <a href="./connection on a fiber bundle.md.html">connection on a fiber bundle</a> when the <a href="./bundle.md.html">bundle</a> is a vector bundle. Let's see that every derivative operator give rise to horizontal subspaces in $TE$.</p>
+<p></p>
+<p><img src="./../../imagenes/Pasted image 20211112091622.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>For every $e\in E$, with $\pi(e)=x\in M$, we have a "natural" linear space $T_e E_x$ that is called the _vertical space_. The union in $e\in E$ gives us a subbundle $V\subseteq TE$ called the _vertical bundle_. </p>
+<p>At a first glance, there is no natural choice for an horizontal bundle, but $\nabla$ <b>determines one</b>. We will define </p>
+$$
+H_e:=ds_x (T_x M)
+$$
+<p>where $s$ is a section such that $s(x)=e$ and $\nabla_X s=0$ for every $X\in T_x M$.</p>
+<p>Therefore the <a href="./vector bundle connection.md.html">vector bundle connection</a> determine a <a href="./connection on a fiber bundle.md.html">Ehresmann connection</a>.</p>
+<p></p>
+<p>Conversely, given a <a href="./connection on a fiber bundle.md.html">connection in the sense of Ehresmann</a> $HE$ we can define a vector bundle connection like this:</p>
+<p><img src="./../../imagenes/Pasted image 20211112155016.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>The isomorphism $\phi$ only exists because we are in a vector <a href="./bundle.md.html">bundle</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Connection_form">Connection form</h2>
+<p>(<b>Christoffel 1-form, for me</b>)</p>
+<p>It is a way to express locally the vector bundle connection.</p>
+<p>Suppose we choose a particular local <a href="./frame on a manifold.md.html">frame</a> $e=\{e_i\}$ (that is, we restrict to an open subset $U\subseteq M$ and choose sections that span all the others). If we apply the connection to every $e_i$ we obtain</p>
+$$
+\nabla(e_i)=\sum_j e_i \otimes \omega_i^j
+$$
+<p>The square matrix $\omega=(\omega_i^j)$ of 1-forms is called the <b>connection form</b>. If our vector bundle is the tangent bundle, the frame is a local chart frame, and the connection is a <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a>, the connection form is not <b>other thing that the usual</b> <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>! So I think this matrix of 1-forms should be called the <b>Christoffel 1-forms</b>.</p>
+<p>Given a particular local section of $E$, say </p>
+$$
+\sigma= \sum_i \sigma_i e_i
+$$
+<p>we have</p>
+$$
+\nabla(\sigma)=\nabla(\sum_i \sigma_i e_i)=\sum_i e_i\otimes d\sigma_i+\sum_{ij}\sigma_i e_j\otimes \omega_i^j
+$$
+<p>and renaming $i$ and $j$ in the second sum</p>
+$$
+\nabla(\sigma)=\sum_i e_i\otimes\left( d \sigma_i+\sum_j \sigma_j \omega_j^i\right)
+$$
+<p>So if we call $\widetilde{\sigma}$ and $\widetilde{\nabla(\sigma)}$ to the column vector of components of $\sigma$ and $\nabla(\sigma)$ respectively we have</p>
+$$
+\widetilde{\nabla(\sigma)}=(d+\omega)\widetilde{\sigma}
+$$
+<p>where $d$ is the differential and $\omega$ is a matrix of 1-forms.</p>
+<p>Observe that an arbitrary matrix of 1-forms is a priori enough to define locally a connection.</p>
+<p>If we choose a different frame $e'=\{e'_i\}$ in $U$, being</p>
+$$
+e'=e g
+$$
+<p>with $g$ a matrix of smooth functions, it can be show that the new connection form will be</p>
+$$
+\omega'=g^{-1} dg+g^{-1} \omega g
+$$
+<p>This let us define a global connection form as a collection of matrices of 1-forms defined in an open covering of $M$ satisfying certain compatibility condition in the overlaps.</p>
+<p></p>
+<p><b>Keep an eye</b>: this is not the same that the <a href="./connection on a fiber bundle.md.html#Connection_1-form">connection 1-form</a> of a connection on a fiber bundle, which does not depends on any frame, although they both are related. I am not sure but I think is "almost" the <a href="./principal connection on a principal bundle.md.html#Another_characterization">Yang-Mills field</a> obtained by means of a particular frame of the connection in the frame bundle "related" to the original vector bundle connection. That is, suppose that our vector bundle connection on $E$ is coming from a principal connection on the frame bundle $FE$ (it is always true, see <a href="./associated connection.md.html#Conversely">associated connection#Conversely</a>), given by a 1-form on $FE$, $\tilde{\omega}$. Then, if we select the frame $e=\{e_i\}$ as above, we are providing a section $p_{\alpha}$ of $FE$, and the Yang-Mills field is $p_{\alpha}^*(\tilde{\omega})$. **What is the relation of $\omega$ obtained from $e$ as above and $p_{\alpha}^*(\tilde{\omega})$?** See xournal 182, they are not exactly the same...</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Curvature">Curvature</h2>
+<p>Since it is a particular case of <a href="./connection on a fiber bundle.md.html">connection on a fiber bundle</a> we can think of its <a href="./curvature of a connection.md.html#Vector_bundles">curvature</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Worked_example_1">Worked example 1</h2>
+<p></p>
+<p>Suppose the manifold $M=\mathbb R^2$ with the <a href="./linear connection.md.html">linear connection</a> $\nabla$ (which is a <a href="./vector bundle connection.md.html">vector bundle connection</a>) given by</p>
+$$
+\nabla_{\partial_{x_i}}\partial_{x_j}=a_{ij}\partial_{x_1}+b_{ij}\partial_{x_2}
+$$
+<p>This means that when we move from a point $p=(x_1,x_2)$ to, for example, a nearby point $p'=(x_1+\delta x_1,x_2)$ the vector $\partial_{x_2}$ at $p$ is "not the same" has $\partial_{x_2}$ at $p'$, but it is like if it has suffered an increase of $a_{12}\partial_{x_1}+b_{12}\partial_{x_2}$. So we should have chosen in $p'$ the vector $\partial_{x_2}-a_{12}\partial_{x_1}-b_{12}\partial_{x_2}$. Equivalently, the horizontal vectors in $TM$ will be (following <a href="./vector bundle connection.md.html#As_a_particular_case_of_connection_on_a_fiber_bundle">this construction</a>):</p>
+<p>(xournal 197)</p>
+<p><img src="./../../imagenes/Pasted image 20221030091200.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><img src="./../../imagenes/Pasted image 20221030091232.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>and the connection 1-form</p>
+<p><img src="./../../imagenes/Pasted image 20221030100200.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><img src="./../../imagenes/Pasted image 20221030101727.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Its meaning is that given a tangent vector at $p=(x_1,x_2)$, say $(x_1,x_2,v_1,v_2)$, if you want to parallel transport it to a nearby point $p'=(x_1+\delta x_1,x_2+\delta x_2)$ you have to choose in $p'$ a vector $(x_1+\delta x_1,x_2+\delta x_2,v_1+\delta v_1,v_2+ \delta v_2)$ such that the little quantities $\delta x_1,\delta x_2,\delta v_1,\delta v_2$ satisfy $\omega=0$ when used in the places of $dx_1,dx_2,dv_1,dv_2$ . That is, the 1-form <b>tells us how much have we "fail to be constant"</b> when we pass from the vector $(x_1,x_2,v_1,v_2)$ to the vector $(x_1+\delta x_1,x_2+\delta x_2,v_1+\delta v_1,v_2+ \delta v_2)$.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Worked_example_2">Worked example 2</h2>
+<p>Let's take $M=\mathbb{R}$ and $E=M \times \mathbb{R}=\mathbb{R}\times \mathbb{R}$. Smooth sections of this bundle $\pi: E\mapsto M$ can be identified with smooth functions</p>
+$$
+f:\mathbb{R}\longmapsto \mathbb{R}
+$$
+<p>if we take the frame given by the constant section $e(x)=(x,1)$. That is, a section would be</p>
+$$
+\sigma(x)=f(x) e(x)
+$$
+<p>where $f(x)$ is any smooth function.</p>
+<p>Suppose we have a generic connection defined on $E$, $\nabla$. We have</p>
+$$
+\nabla(\sigma)=e\otimes df+e\otimes f(x) \omega(x)
+$$
+<p>being $\omega$ a 1-form (the Christoffel 1-forms, in my terminology). With this set up, <b>the usual derivative</b> correspond to a connection whose connection form is $\omega=0$. In effect, for the vector field $\partial x$ on $M$ we have</p>
+$$
+\nabla(\sigma)(\partial x)=df(\partial x) e+0=f'(x) e
+$$
+<p>But now, let's take a different $\omega$ to obtain <b>a new notion of derivative</b>. For example, we can choose $\omega(x)=2dx$. In this case, when we _derive_ the section $\sigma$ we obtain</p>
+$$
+\nabla(\sigma)(\partial x)=df(\partial x) e+f(x)2dx(\partial x)e=(f'(x)+2f(x))e
+$$
+<p>So this new notion of derivative associates</p>
+$$
+f(x)\longmapsto f'(x)+2f(x)
+$$
+<p>What functions would correspond to "constant functions"? Well, those whose derivative were 0, that is</p>
+$$
+f'(x)+2f(x)=0
+$$
+<p>Solving this ODE we obtain the family</p>
+$$
+f(x)=Ke^{-2x}
+$$that corresponds to constant functions.
+<p>Let's stop. What's going on here? When we learn to derive usual functions </p>
+$$
+f:\mathbb{R}\longrightarrow \mathbb{R}
+$$
+<p>we assume that the arriving $\mathbb{R}$ is always the same. But in a more general sense, we can think that every $f(x)$ lives in a different space $E_x=\mathbb{R}$, or the same space but measured with different units. For example, imagine that we live in a 1 dimensional world, and want to study the movement of a particle which is initially at 1 meter from us. To do this, we check the distance every 1 second and annotate it in a table. We say that the particle is not moving if its distance is always 1.</p>
+<p></p>
+<p>But now, imagine that the stick we use to measure the distance is increasing its size (maybe because of rising temperatures because of climate change, who knows). For example, suppose that the size of the stick is $e^{2t}$, where $t$ is time. Then a distance $d$ measured at time 0 would correspond to a distance $d e^{-2t}$ measured at time $t$ (think about it). Therefore, we would consider that the particle is at rest (constant position function) when its curve is of the form</p>
+$$
+f(t)=de^{-2t}
+$$
+<p><img src="./../../imagenes/Pasted image 20211112092242.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>These lines are interpreted as joining points in different $\mathbb{R}$s that can be identified as the same. They act like parallel transporters. Their tangent lines define the horizontal subbundle of $TE$</p>
+$$
+H_{(x,y)}E=\langle \partial_x-2y\partial_y\rangle
+$$
+<p>.</p>
+<p></p>
+<p>Now, let's compute the <a href="./connection on a fiber bundle.md.html#Connection_1-form">connection 1-form</a>. A tangent vector $a\partial_x+b\partial_y$ is projected, with this choice of horizontal subbundle, to</p>
+$$
+(b+2ay)\partial_y
+$$
+<p>So the 1-form is $(2ydx+dy)\otimes \partial_y$ .</p>
+<p></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

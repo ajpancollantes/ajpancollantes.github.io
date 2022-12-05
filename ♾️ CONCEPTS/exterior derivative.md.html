@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Exterior_derivative">Exterior derivative</h1>
+<p>See <a href="https://en.wikipedia.org/wiki/Exterior_derivative" target="_blank">wikipedia</a></p>
+<p></p>
+<p>It is an antiderivation of degree 1 on the <a href="./exterior algebra.md.html">exterior algebra</a>.</p>
+<p>1. For a 0-form $df$ is the differential of $f$</p>
+<p>2. $d(df)=0$ for 0-forms (for the other differential forms can be deduced)</p>
+<p>3. $d(\alpha \wedge \beta)=d \alpha \wedge \beta+(-1)^{p}(\alpha \wedge d \beta)$ where $\alpha$ is a $p$-form.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Interpretation">Interpretation</h2>
+<p>Debería ser llamada <b>el medidor de acumulación negativa</b> o <b>medidor de producción</b>.</p>
+<p>En caso de funciones (0-formas). La función podría estar indicando inyección de cierto material en un punto del espacio. La diferencial $df$ nos dice cuánto se está "produciendo" en un elemento de línea $X=P_1P_2$:</p>
+$$
+df(X)=f(P_2)-f(P_1)
+$$
+<p>cuando $P_1$ y $P_2$ están suficientemente cerca, claro.</p>
+<p></p>
+<p>En caso de 1-formas $\omega$, que asocian valores a elementos de línea, la diferencial exterior nos dice cuánto de algo se está produciendo en un bivector (una "bidirección", un elemento de área). Si nos restringimos a ese elemento de área $u\wedge v$ (mediante una especie de pullback) la 1-forma se puede ver como una especie de flujo, y $dw(u,v)$ mide cuánto de ese flujo se está produciendo en $u\wedge v$. This is the idea of the <a href="./../✏️ THEOREMS/DG/infinitesimal Stokes' theorem.md.html">infinitesimal Stokes' theorem</a>. <b>In a sense, the value of $d\omega$ in $u\wedge v$  is like measuring how the 1-form varies "along the bivector" $u\wedge v$.</b></p>
+<p></p>
+<p>En el caso de 2-formas, por ejemplo en $\mathbb{R}^3$, estas se ven como "paquetitos de fibras 1-dimensionales" en un entorno de cada punto (en $\mathbb{R}^n$ son paquetitos de fibras $(n-2)$-dimensionales). El valor que asocian a cada bivector es la "densidad de cortes" de esas fibras con el bivector. Si aplicamos su diferencial a un elemento de volumen (3-vector) tenemos algo totalmente análogo a lo dicho más arriba: haciendo pullback a ese "espacio tridimensional infinitamente pequeño" la 2-forma se sigue viendo como un flujo unidimensional, y su diferencial nos dice cuánto se está <b>produciendo</b> dentro (a lo que sale le resto lo que ha entrado). Si en vez de en $\mathbb{R}^3$ estuviésemos en un $\mathbb{R}^n$, el pullback de la 2-forma al 3-vector se ve como una flujo 1-dimensional, aunque en $\mathbb{R}^n$ no lo sea.</p>
+<p></p>
+<p>From here it shouldn't be difficult understand why</p>
+$$
+d^2=0.
+$$
+<p>For 0-forms it is easy: if $\omega=df$, the 2-form $d\omega$ is computed evaluating $\omega$ in sides of the parallelogram $u\wedge v$, which in turn is evaluated in the "vertices". But the latter appear twice in the final computation, but with different sign. </p>
+<p>For a 1-form is the same, but a bit more difficult to visualize. In this case $d(d\omega)$ is evaluated in a parallelepiped, and the computation rests, finally, at evaluation on the edges, which appear twice with opposite sign.</p>
+<p></p>
+<p></p>
+<p>The interpretation of $d\omega$ as production (negative accumulation) of a flow in a $k$-vector makes <a href="./Stokes' theorem.md.html">Stokes' theorem</a> trivial. By the way, this interpretation is in some sense given in also in <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 409.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

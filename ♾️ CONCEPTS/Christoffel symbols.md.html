@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Christoffel_symbols">Christoffel symbols</h1>
+<p>Let $M$ be a manifold. To specify locally a <a href="./covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$ it suffices to fix a local chart $\{x_i\}$ and provide the functions $\Gamma_{ij}^k$ such that</p>
+$$
+\nabla_{\partial_{x_i}}\partial_{x_j}=\Gamma_{ij}^k \partial_{x_k}
+$$
+<p>which are called the Christoffel symbols when the covariant derivative is coming from the <a href="./GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a> of a <a href="./GEOMETRY/Riemannian metric.md.html">Riemannian metric</a>! They correspond to the <a href="./GEOMETRY/vector bundle connection.md.html#Connection_form">vector bundle connection#Connection form</a>.</p>
+<p></p>
+<p>The formula to compute the Christoffel symbols from the <a href="./GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> can be deduced from the defining conditions 1. and 2. of the <a href="./GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a> (see, for examle, <a href="https://en.wikipedia.org/wiki/Levi-Civita_connection)" target="_blank">wikipedia</a> giving rise to</p>
+$$
+\Gamma_{ij}^k = \frac{1}{2} g^{kl}(\partial_i g_{jl} + \partial_j g_{il} - \partial_l g_{ij})
+$$
+<p></p>
+<h3 style="margin-left:0px;" id="Generalization?">Generalization?</h3>
+<p>I think that for other <a href="./GEOMETRY/frame on a manifold.md.html">local frame</a> $\{e_i\}$ of $TM$, the functions $\Gamma_{ij}^k$ such that</p>
+$$
+\nabla_{e_{i}}e_j=\Gamma_{ij}^k e_k,
+$$
+<p>are also called Christoffel symbols.</p>
+<p></p>
+<p>This idea works also for a <a href="./GEOMETRY/vector bundle connection.md.html">vector bundle connection</a> on a vector bundle $E$, not only the particular case of $TM$. This case is explained <a href="./GEOMETRY/vector bundle connection.md.html#Connection_form">here</a>: they define the connection form, not to be confused with the <a href="./GEOMETRY/connection on a fiber bundle.md.html#Connection_1-form">connection 1-form of a connection on a general bundle</a>, although there is a relation explained <a href="./GEOMETRY/vector bundle connection.md.html#Connection_form">here</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Reductive_Cartan_geometry">Reductive Cartan geometry</h1>
+<p>A <a href="./GEOMETRY/Cartan geometry.md.html">Cartan geometry</a> $P$ of type $(G,H)$ on $M$ is called <b>reductive</b> if the Lie algebra $\mathfrak{g}$ seen as a $Ad(H)$-<a href="./module.md.html">module</a> (see <a href="./GEOMETRY/adjoint representation.md.html#AdG-module_structure">this</a>) can be decomposed </p>
+$$
+\mathfrak{g}=\mathfrak{h}\oplus\mathfrak{p},
+$$
+<p>with $\mathfrak g$ and $\mathfrak h$ being the corresponding <a href="./GEOMETRY/Lie algebra.md.html">Lie algebra</a>s.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Interpretation">Interpretation</h2>
+<p>Let's denote $M=P/H$. In a reductive Cartan geometry we can identify $T_{\pi(p)}M$ with a subspace of $\mathfrak g$ complementary to $\mathfrak h$ and invariant under the adjoint action of $H$. So we have a kind of "horizontal" direction. Let's see. </p>
+<p></p>
+<p>You can fix a choice of $\mathfrak p$ and you get a projection $f:\mathfrak g \to \mathfrak h$. This way, the Cartan connection (or the MC form, if we are in a Klein geometry) can be split </p>
+$$
+A=(f+id-f)A=A_{\mathfrak h}+A_{\mathfrak p}
+$$
+<p>The 1-form $\omega=A_{\mathfrak h}$ is the 1-form of a <a href="./GEOMETRY/principal connection on a principal bundle.md.html">principal connection on a principal bundle</a>, and $\ker(A_{\mathfrak h})$ describe the horizontal subspaces. The map $d\pi_p:\ker(A_{\mathfrak h})\to T_{\pi(p)}M$ is a isomorphism, since it is surjective, and dimensions agree. Observe that if $V\in V_p P$ then $A_p(V)=\omega_p(V)$.</p>
+<p></p>
+<p><b>Personal belief</b></p>
+<p>Conversely, given a Cartan geometry and a principal connection on its <a href="./GEOMETRY/principal bundle.md.html">principal bundle</a> such that $A_p(V)=\omega_p(V)$ we can define a <a href="./projection.md.html">projection</a> $f:\mathfrak g \to \mathfrak h$ given by</p>
+$$
+f:\mathfrak g \stackrel{A_e{-1}}{\longrightarrow} T_e P \stackrel{\omega_e}{\longrightarrow} \mathfrak h
+$$
+<p>and then $\mathfrak g=\mbox{im}(f)\oplus \ker f=\mathfrak h \oplus \mathfrak p$, since the <a href="./short exact sequence.md.html">short exact sequence</a></p>
+$$
+0 \longrightarrow \mathfrak h \stackrel{i}{\longrightarrow} \mathfrak g \stackrel{}{\longrightarrow} \mathfrak g/\mathfrak h \longrightarrow 0
+$$
+<p>split. I think it can be proved that $\mathfrak p$ is a $Ad(H)$-module and that $f$ is well-defined, i.e., independent of $p\in P$. See <a href="https://mathoverflow.net/questions/433019/characterization-of-reductive-cartan-geometries" target="_blank">my own question in MO</a>.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>In any case, if we have a reductive Cartan geometry, we have a isomorphism between $T_{\pi(p)}M$ and $\mathfrak p$:</p>
+$$
+T_{\pi(p)}(P/H) \stackrel{d\pi_p^{-1}}{\longrightarrow}\ker(A_{\mathfrak h})\stackrel{A_{\mathfrak p}}{\longrightarrow} \mathfrak p
+$$
+<p>This means that reductive Cartan geometries are geometries in which a little displacement on the base manifold from $x:=\pi(p)\in M$ to a nearby point $x'\in M$ corresponds to a canonical element $v\in \mathfrak p \subset \mathfrak g$. A kind of "canonical translation" or transvection (see "Symmetric Space Cartan Connections and Gravity in Three and Four Dimensions" by Derek Wise page 3). That is, we obtain a <a href="./one-parameter subgroup.md.html">one-parameter subgroup</a> of the group of  $G$ of privileged transformations of the geometry, associated to this little displacement. This is in total analogy with what happens in the case of affine space and usual translations. ^6297a6</p>
+<p></p>
+<p>Conversely, given a Klein geometry in which there is an isomorphism from $T_{\pi(p)}M$ to a subspace $\mathfrak p$ of $\mathfrak g$ then the <a href="./short exact sequence.md.html">short exact sequence</a></p>
+$$
+0 \longrightarrow \mathfrak h \stackrel{i}{\longrightarrow} \mathfrak g \stackrel{d\pi_e}{\longrightarrow} T_{\pi(e)} M \longrightarrow 0
+$$
+<p>splits, and $\mathfrak g=\mathfrak h \oplus \mathfrak p$. Of course, several properties have to be checked...</p>
+<p></p>
+<p>Continue with Jacob Erickson...</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Question_for_MO_of_myself">Question for MO of myself</h3>
+<p>Asking about the characterization of reductive Klein geometries. See <a href="https://mathoverflow.net/questions/433019/characterization-of-reductive-cartan-geometries" target="_blank">here</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

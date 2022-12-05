@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Parallel_transport">Parallel transport</h1>
+<p>Before all, see <a href="./../☕REFLECTIONS/relationship parallel transport, covariant derivatives and metrics.md.html">relationship parallel transport, covariant derivatives and metrics</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Intuitive_approach">Intuitive approach</h2>
+<p>The following intuitions are about the transport corresponding to an existent metric in a <a href="./GEOMETRY/surface.md.html">surface</a> (inherited or not from that of $\mathbb{R}^3$), that is, the Levi-Civita parallel transport. </p>
+<p></p>
+<h3 style="margin-left:0px;" id="Extrinsic_construction">Extrinsic construction</h3>
+<p>Suppose the metric has a surface inherited from that of $\mathbb{R}^3$. To parallel transport a vector $w$ along a curve $K$ in a <a href="./GEOMETRY/surface.md.html">surface</a> $S$ we break $K$ into small steps of length $\epsilon$. In every step we translate $w$ from one point $p$ to the next one $q$, according to our knowledge of the parallelism of $\mathbb{R}^3$. Since the translated vector is no longer tangent to $S$, we project it to $T_qS$ by means of</p>
+$$
+w_q:=w-(w\cdot n_q)n_q
+$$
+<p>where $n_q$ is the unit normal at $q$. This is only an approximation, of course.</p>
+<p></p>
+<p><img src="./../imagenes/Pasted image 20220619194110.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>The given vector doesn't have to be initially tangent to the curve $K$. If this is the case, the parallel transported vector doesn't have to remain tangent to the curve $K$. This happens when the curve is a <a href="./GEOMETRY/geodesic curve.md.html">geodesic curve</a>.</p>
+<p></p>
+<p></p>
+<p>Another way to construct the parallel transport (<a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 237):</p>
+<p><img src="./../imagenes/Pasted image 20220615171108.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Intrinsic_construction">Intrinsic construction</h3>
+<p>(<a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 283)</p>
+<p>It takes into account parallel transport along a <a href="./GEOMETRY/geodesic curve.md.html">geodesic</a> $G$ (if the curve is not a geodesic, we break it down into geodesic segments). To achieve parallel transport along $G$, it is only necessary to keep the angle with the tangent vector of $G$ constant (and the length).</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Constancy_of_angles">Constancy of angles</h3>
+<p>From this last intuition can be concluded that if two vectors are parallel transported along a curve on a surface then the angle between them remains constant.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Covariant_derivative">Covariant derivative</h3>
+<p>Still from the intuitive point of view, a defined notion of parallel transport on a <a href="./GEOMETRY/surface.md.html">surface</a> leads to an idea of <a href="./covariant derivative operator.md.html">covariant derivative operator</a> on this surface. Suppose that we know how to parallel transport vectors along curves, and fixed a curve $K$ with tangent vector $v$ at $p=K(0)$, denote by $\xi_{\parallel}(q\to p)$ the parallel transport of $\xi \in T_q S$ to $T_pS$, then, for a vector field $w$ on the surface, we defined</p>
+$$
+(\nabla_v w)_p=\lim_{\epsilon \to 0} \dfrac{w(q_{\epsilon})_{\parallel}(q_{\epsilon}\to p)-w(p)}{\epsilon}
+$$
+<p>where $q_{\epsilon}=K(\epsilon)$.</p>
+<p></p>
+<p>Conversely, this covariant derivative, if given a priori, let us recover the parallel transport. See <a href="./parallel transport.md.html#Construction_from_a_covariant_derivative_operator">this construction</a>.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Formal_approach">Formal approach</h2>
+<h3 style="margin-left:0px;" id="Construction_from_a_covariant_derivative_operator">Construction from a covariant derivative operator</h3>
+<p>Suppose a manifold $M$ with a <a href="./covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$ defined on it. A vector field $X$ on $M$ is <b>constant along a curve</b> $c$ in $M$ if</p>
+$$
+\nabla_{c'(t)} X=0
+$$
+<p>This is well defined since covariant derivative only depends on the value at a point in the first vector field (see <a href="./GEOMETRY/linear connection.md.html#Definition_as_operator">linear connection#Definition as operator</a>).</p>
+<p></p>
+<p>If the vector field $X(t)$ i<b>s only defined along the curve</b> $c$, it is shown in <a href="./../Bibliography/@malament2012topics.md.html">@malament2012topics</a> page 55 that there exist an operator $D_c$ such that if $X$ were the restriction to $c$ of a vector field $\tilde{X}$ defined on an open set then $(D_c X)(t)=(\nabla_{c'(t)}\tilde{X} )(c(t))$.</p>
+<p></p>
+<p><b>Idea of the proof</b></p>
+<p>Suposse a vector field $V(t)$ defined over a curve $\alpha(t)$. Suposse, too, that in a local chart we have</p>
+$$
+V(t)=V_1(t) \partial x_1+V_2(t) \partial x_2
+$$
+<p>and </p>
+$$
+\alpha'(t)=A_1(t) \partial x_1+A_2(t) \partial x_2
+$$
+<p>We cannot calculate $\nabla_{\alpha_{c'(t)}} V(t)$ because we need $V$ to be defined in an open set. But if there exists $D_{\alpha}$ satisfying what it must satisfy, it will make:</p>
+$$
+D_{\alpha}(V(t))=D_{\alpha}(V_1(t) \partial x_1+V_2(t) \partial x_2)=
+$$
+$$
+=D_{\alpha}(V_1(t))\partial x_1+V_1(t)\cdot D_{\alpha}(\partial x_1)+
+$$
+$$
++D_{\alpha}(V_2(t))\partial x_2+V_2(t)\cdot D_{\alpha}(\partial x_2)
+$$
+<p>and this way, it should be</p>
+$$
+D_{\alpha}(V(t))=\frac{d V_1(t)}{dt}\partial x_1+V_1(t)\cdot \nabla_{\alpha'(t)}(\partial x_1)+
+$$
+$$
++\frac{d V_2(t)}{dt}\partial x_2+V_2(t)\cdot \nabla_{\alpha'(t)}(\partial x_2)
+$$
+<p>And this expression can be used to define $D$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>With this in mind we can say when a vector field defined along a curve $c$ is <b>constant along</b> the curve: $D_c X=0$ for every $c(t)$.</p>
+<p></p>
+<p>In <a href="./../Bibliography/@malament2012topics.md.html">@malament2012topics</a> page 57  it is also shown that</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>Dada una variedad $(M,\nabla)$ y una curva $c$ en ella, y un vector $v$ en un punto $p=c(0)$ <b>existe un único</b> campo de vectores $X(t)$ sobre $c$ que es constante a lo largo de ella y tal que $X(p)=v$. This vector field is called the <b>parallel transport</b> of $v$ along $c$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Definition_of_parallel_transport">Definition of parallel transport</h3>
+<p>I suppose that parallel transport can be defined in abstract, and then proof that give rise to a <a href="./covariant derivative operator.md.html">covariant derivative operator</a> (the converse of the previous section). See section "covariant derivative" in <a href="./parallel transport.md.html#Intuitive_approach">parallel transport#Intuitive approach</a> above.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Properties">Properties</h3>
+<p><ul style="margin-left:0px;"><li>If the space has curvature then parallel transport depends on the path chosen to transport. This is called <a href="./holonomy.md.html">holonomy</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>For the "gap" of a parallelogram made of parallel transported vectors see <a href="./torsion of a connection.md.html">torsion of a connection</a>.</li></ul></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

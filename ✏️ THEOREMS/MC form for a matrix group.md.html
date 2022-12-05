@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Maurer-Cartan_form_on_a_matrix_Lie_group">Maurer-Cartan form on a matrix Lie group</h1>
+<p>In case $G$ is a matrix Lie group, i.e., $G\subset GL(n)$ then the (left-invariant) <a href="./../♾️ CONCEPTS/GEOMETRY/Maurer-Cartan form.md.html">Maurer-Cartan form</a> can be computed with the following formula</p>
+$$
+\theta=g^{-1} dg
+$$
+<p>This is the expression appearing everywhere, but I think the correct expression for $\theta$ should be, for $p\in G$ and $V\in T_pG$</p>
+$$
+\theta_p (V)=dg_e^{-1}(g(p)^{-1} dg_p(V))
+$$
+<p><img src="./../imagenes/Pasted image 20220926184710.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p></p>
+<p></p>
+<p><b>But what is $dg$?</b> Following <a href="./../Bibliography/@ivey2016cartan.md.html">@ivey2016cartan</a> definition 1.6.1, $g:G\to M_{n\times n}$ is a parametrization (<a href="./../♾️ CONCEPTS/GEOMETRY/embedded manifold.md.html">embedding</a>) of the group as a submanifold of $M_{n\times n}$ but the name $g$ is a bit misleading. For example, consider for $S\subset \mathbb{R}^2$ the embedding</p>
+$$
+\iota: S \to \mathbb{R}^3
+$$
+<p>given by $\iota(a,b)=(a^2+b,-b,a+b)$. The differential $d\iota$ is a map</p>
+$$
+d\iota: TS \to T \mathbb{R}^3
+$$
+<p>and we know that for a vector $(v_1,v_2)\in T_p S$ the image is computed as</p>
+$$
+d\iota_p(v)=\begin{pmatrix}
+2a& 1   \\
+0&-1\\
+1&1\\
+\end{pmatrix}\cdot
+\begin{pmatrix}
+v_1\\
+v_2
+\end{pmatrix}=
+\begin{pmatrix}
+2av_1+v_2\\
+-v_2\\
+v_1+v_2
+\end{pmatrix}.
+$$
+<p>If we use the natural identification $T_{\iota(p)} \mathbb{R}^3\approx \mathbb{R}^3$ we can think of $d\iota$ as the $\mathbb{R}^3$-valued differential 1-form</p>
+$$
+d\iota=(2ada+db,-db,da+db)
+$$
+<p>In the case of $g:G\to M_{n\times n}$, think in $G$ as the parameter space and $M_{n\times n}$ a fancy way of writing $\mathbb{R}^{n^2}$. So $dg$ is a $M_{n\times n}$-valued differential form in $G$. This way, the expression $\theta=g^{-1}dg$ is also a $M_{n\times n}$-valued differential form in $G$. </p>
+<p></p>
+<p></p>
+<p><b>Examples</b></p>
+<p>I have worked examples in xournal 188 (afin group) and xournal 189 (euclidean group). </p>
+<p></p>
+<h2 style="margin-left:0px;" id="Interpretation">Interpretation</h2>
+<p>In xournal 189 there is a reflection on how do we understand the Maurer-Cartan form when the group is interpreted as a set of frames. If $G$ is the set of frames or $G$-descriptions of a homogeneous space $X$ (see <a href="./../♾️ CONCEPTS/ALGEBRA/homogeneous space.md.html#Intuitive_approach">this</a>), then for a frame $f\in G$, a vector $V\in T_f G$ can be thought as an arrow connecting the frame $f$ with a "nearby" frame $\bar{f}$, i.e., something like $V\approx \bar{f}-f \approx \delta f$. That is, $V$ is a infinitesimal change of the frame $p$. In this context, $\theta_f(V)$ is nothing but how this infinitesimal change can be described from the own frame $f$. </p>
+<p></p>
+<p>The same in other words (following ideas of <a href="./../♾️ CONCEPTS/ALGEBRA/homogeneous space.md.html#Intuitive_approach">the end of this</a>). Given a frame $g\in G$, we can consider a nearby frame $\bar{g}\approx g+dg$. To express this "frame" in the frame $g$ we take</p>
+$$
+g^{-1}(g+dg)=I+g^{-1}dg.
+$$
+<p>So the Maurer-Cartan form $g^{-1}dg$ is the "infinitesimal displacement" of the frame, but described from the point of view of the chosen frame.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

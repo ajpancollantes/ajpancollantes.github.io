@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Formulas_for_Lie_derivative,_exterior_derivative,_brackets_and_interior_product">Formulas for Lie derivative, exterior derivative, brackets and interior product</h1>
+<p>For the definitions see: </p>
+<p><a href="./../../♾️ CONCEPTS/GEOMETRY/Lie derivative of forms.md.html">Lie derivative of forms</a>, </p>
+<p><a href="./../../♾️ CONCEPTS/GEOMETRY/Lie derivative for tensors in general.md.html">Lie derivative for tensors in general</a>, </p>
+<p><a href="./../../♾️ CONCEPTS/GEOMETRY/interior product.md.html">interior product</a>, </p>
+<p><a href="./../../♾️ CONCEPTS/GEOMETRY/Lie bracket.md.html">Lie bracket</a>, </p>
+<p><a href="./../../♾️ CONCEPTS/exterior derivative.md.html">exterior derivative</a>,...</p>
+<p></p>
+<p>In what follows: $X,Y$ vector fields, $\omega,\theta$ differential forms, not necessarily of the same degree.</p>
+<p>1. $d \mathcal{L}_{X} \omega=\mathcal{L}_{X}(d \omega)$</p>
+<p>2. $\mathcal{L}_{f X} \omega=f \mathcal{L}_{X} \omega+d f \wedge i_{X} \omega$ (only 1-forms?)</p>
+<p>3. $\mathcal{L}_{X}(\omega\wedge \theta)=\mathcal{L}_{X}(\omega)\wedge \theta+\omega\wedge\mathcal{L}_{X}(\theta)$</p>
+<p>4. $i_{[X, Y]}=\left[\mathcal{L}_{X}, i_{Y}\right]$ (warning: informal notation). It is the same as equation (1.62) in <a href="./../../Bibliography/@olver86.md.html">@olver86</a>: $\mathbf{v}(\mathbf{w} \lrcorner \omega)=[\mathbf{v}, \mathbf{w}] \lrcorner \omega+\mathbf{w} \lrcorner \mathbf{v}(\omega)$. It is related to the following cases:</p>
+<p>	1. For a 1-form: $\mathcal{L}_X(i_Y \omega)=i_Y \mathcal{L}_X(\omega)+i_{[X,Y]}\omega$  , and with other notation</p>
+<p>	2. $\mathcal{L}_X(\langle \omega; Y\rangle)=\langle \mathcal{L}_X\omega;Y \rangle+\langle \omega;\mathcal{L}_X Y \rangle$ or, in general for a $k$-form,</p>
+<p>	3. $\mathcal{L}_X(\langle \omega; Y_1,\ldots,Y_k\rangle)=\langle \mathcal{L}_X \omega;Y_1,\ldots,Y_k \rangle+\langle \omega; \mathcal{L}_X Y_1,\ldots,Y_k\rangle+\ldots$. See <a href="./../../Bibliography/@olver86.md.html">@olver86</a> page 74 exercise 1.35.</p>
+<p>5. <a href="./infinitesimal Stokes' theorem.md.html">infinitesimal Stokes' theorem</a></p>
+<p>6. <a href="./Cartan formula.md.html">Cartan formula</a></p>
+<p>7. $\mathcal{L}_{X} \circ \mathcal{L}_{Y}-\mathcal{L}_{Y} \circ \mathcal{L}_{X}=\mathcal{L}_{[X, Y]}$, valid for $k$-forms. For vector fields is nothing but Jacobi identity. </p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

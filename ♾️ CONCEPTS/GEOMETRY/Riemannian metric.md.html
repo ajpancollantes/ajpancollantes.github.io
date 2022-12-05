@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Riemannian_metric_or_pseudo-Riemannian">Riemannian metric (or pseudo-Riemannian)</h1>
+<p><b>Definition</b> </p>
+<p>(<a href="./../../Bibliography/@sharpe2000differential.md.html">@sharpe2000differential</a> page 238)</p>
+<p>A Riemannian metric on a smooth manifold $M$ is a smooth function $q_M:TM\to \mathbb{R}$ whose restrictions $q_x:T_xM \to \mathbb R$ are all non-degenerate <a href="./../quadratic form.md.html">quadratic form</a>s. </p>
+<p>Remember there is a equivalence between quadratic forms and bilinear forms.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Another definition</b>:</p>
+<p>Equivalently, following notation in \cite{malament}, we can say that a (pseudo-Riemannian) metric is a smooth field $g_{ab}$ on $M$ that is symmetric and invertible, i.e., there exists other smooth field $g^{ab}$ on $M$ such that $g_{ab}g^{bc}=\delta_a^c$.</p>
+<p></p>
+<p>It is usually called pseudo-Riemannian or pseudo-metric if is not definite positive.</p>
+<p></p>
+<p>In the note <a href="./../ALGEBRA/dual vector space.md.html">dual vector space</a> can be seen how to construct the inverse. It requires the non-degenerate condition of the metric. In fact is equivalent.</p>
+<p></p>
+<p>The inverse field is also symmetric:</p>
+<p></p>
+$$
+g ^ { c b } = g ^ { n b } \delta _ { n } ^ { c } = g ^ { n b } \left( g _ { n m } g ^ { m c } \right) = \left( g _ { m n } g ^ { n b } \right) g ^ { m c } = \delta _ { m } ^ { b } g ^ { m c } = g ^ { b c }
+$$
+<p></p>
+<p>We can watch it in diagrammatic notation:</p>
+<p><img src="./../../imagenes/symmetric.jpg" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>It has associated a particular <a href="./vector bundle connection.md.html">vector bundle connection</a> in $TM$, (i.e., a <a href="./linear connection.md.html">linear connection</a>) the <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a>. See <a href="./../../☕REFLECTIONS/relationship parallel transport, covariant derivatives and metrics.md.html">relationship parallel transport, covariant derivatives and metrics</a>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Every_manifold_can_be_equipped_with_a_Riemannian_metric.">Every manifold can be equipped with a Riemannian metric. </h1>
+<p>(This is related to the <a href="./extension and reduction of a principal bundle.md.html">extension and reduction of a principal bundle</a>)</p>
+<p></p>
+<p>We can endow $M$ with a Riemannian metric as follows: Let $\{(U_\alpha,\varphi_\alpha )\}$ be an open cover of $M$ which trivializes $TM$. On each $U_\alpha$, choose a frame for $TM|_{U_\alpha}$ and *declare* it to be orthonormal (a basis on a vector space determines a metric, see <a href="./../ALGEBRA/dual vector space.md.html#No_natural_isomorphism">dual vector space#No natural isomorphism</a>). Let $g_\alpha$ denote this inner product on $TM|_{U_\alpha}$. Now use a <a href="./partition of unity.md.html">partition of unity</a> $\rho_{\alpha}$ to splice them together, i.e. define</p>
+$$
+g(u, v)=\sum_{\alpha} \rho_{\alpha} g_{\alpha}\left(D \varphi_{\alpha}(u), D \varphi_{\alpha}(v)\right)
+$$
+<p></p>
+<p>This is clearly symmetric; $g(u, u) \geq 0$; and $g(u, u) = 0$ iff $u = 0$. Furthermore, it is smooth, and so defines a Riemannian metric on $M$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

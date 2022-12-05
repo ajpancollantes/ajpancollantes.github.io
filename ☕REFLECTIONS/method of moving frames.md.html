@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="The_method_of_moving_frames">The method of moving frames</h1>
+<p>See xournal 193 for the case of curves in $\mathbb{E}^2$.</p>
+<p></p>
+<p>Given a Lie group $G$ and a <a href="./../♾️ CONCEPTS/ALGEBRA/homogeneous space.md.html">homogeneous space</a> $X\equiv G/H$, the goal is to study submanifolds $M$ of $X$. In particular we want to know if two given submanifolds $M$ and $\tilde{M}$ are "congruent", in the sense that there is a "movement" $g\in G$ such that $g(M)=\tilde{M}$. </p>
+<p>I know I have a $\mathfrak{g}$-valued differential form on $G$ which is left invariant, the <a href="./../♾️ CONCEPTS/GEOMETRY/Maurer-Cartan form.md.html">Maurer-Cartan form</a> $\theta$. The left-invariance of $\theta$ allows us to show (see <a href="./../Bibliography/@griffiths1974cartan.md.html">@griffiths1974cartan</a> lemma (1.3)) that given two maps $f,\tilde{f}$ from, let's say, $\mathbb{R}^n$ to $G$ then $\tilde{f}(x)=g\cdot f(x)$ if and only if $\tilde{f}^*(\theta)=f^*(\theta)$. This way $f^*(\theta)$ provide a set of invariants to characterize submanifolds in $G$.</p>
+<p></p>
+<p>(The Maurer-Cartan form in $p\in G$ is nothing but keeping a register of how the current frame $p$ varies along every possible direction in $G$. This variation is expressed as seen from $p$ itself. See <a href="./../✏️ THEOREMS/MC form for a matrix group.md.html#Interpretation">this</a>.</p>
+<p>The pullback of the Maurer-Cartan form to the manifold $M$ is nothing but keeping a register of how the current frame $p$ (which belongs to the image of $M$) varies in every direction of $M$. These are, precisely, the connection form in <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> I think...)</p>
+<p></p>
+<p>Suppose our submanifolds $M$ and $\tilde{M}$ are parametrized respectively by maps $\alpha:\mathbb{R}^n \to X$ and $\tilde{\alpha}:\mathbb{R}^n \to X$. If we are in a particular case, for example $G=E(2)$, $X=\mathbb{E}^2$ and $M,\tilde{M}$ curves, we have a "canonical" way to lift $\alpha$ and $\tilde{\alpha}$ to $f_{\alpha}, f_{\tilde{\alpha}}:\mathbb{R} \to G$ (the unitary tangent vector and its orthogonal, together with the curve point itself). This way, if $f_{\alpha}^*(\theta)={f}_{\tilde{\alpha}}^*(\theta)$ we conclude that the "curves of frames" $f_{\alpha}$ and $f_{\tilde{\alpha}}$ are congruent, and therefore $\alpha$ and $\tilde{\alpha}$ are congruent. The key fact here is, I think, that the assignment </p>
+$$
+\alpha \mapsto f_{\alpha}
+$$
+<p>is $G$-invariant, in the sense that $\tilde{\alpha}=g\alpha$ if and only if $f_{\tilde{\alpha}}=g f_{\alpha}$. Otherwise we could have congruent curves in $E(2)$ which couldn't be detected by the invariants.</p>
+<p></p>
+<p><b>Question 1</b></p>
+<p>But in the general case: can we always find such a "canonical lift"? Is there a method to find it? Or is the moving frames method restricted to a bunch of particular cases?</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>The answer is no, there is no an standard way to assign a lift which is equivariant. </p>
+<p>Indeed, this lack has given rise to lots of works on this topic. For example, together with the works cited by Robert Bryant, in <a href="./../Bibliography/@griffiths1974cartan.md.html">@griffiths1974cartan</a> it is said that for some cases, "by going to a sufficiently high order jet or contact element of a submanifold $M$ of a homogeneous space, there will naturally appear a good frame over $M$ in a similar manner to the appearance of the Frenet frames of a curve in Euclidean space".</p>
+<p></p>
+<p>In a more recent work <a href="./../Bibliography/@fels1999moving.md.html">@fels1999moving</a> by Fels and Olver, it is said that "the group theoretical basis for the method has hindered the theoretical foundations from covering all the situations to which the practical algorithm could be applied". I understand that what they are doing in this work is to give a different approach to the method, in such a way that they solve this problem of the "standard assignment". They even say that "our formulation of the framework goes beyond what Griffiths envisioned, and successfully realizes Cartan’s original vision".</p>
+<p></p>
+<p><b>Question 2</b></p>
+<p>Can you provide at least a brief list of examples of these assignments? For example:</p>
+<p><ul style="margin-left:0px;"><li>Curves in $\mathbb{R}^3$ with Euclidean movements: the Frenet frame.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Surfaces in $\mathbb{R}^3$ with Euclidean movements: a frame made with the point, the normal vector and two ortogonal vectors aligned with the principal directions of the surface (or is not this necessary?).</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Curves $\alpha$ in equi-affine space $\mathbb{A}^3\equiv \mathbb{R}^3 \rtimes SL(3)/SL(3)$: an unimodular frame built from $\alpha'(t)$, $\alpha''(t)$ and $\alpha'''(t)$. I find it a particularly illuminating example. Is very well explained in Clelland's book, _From Frenet to Cartan_, page 172.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Curves in $T^2=\mathbb{R}^2 \rtimes\{id\}/\{id\}$: a plane where the only allowed transformations are the translations. A "standard assignment of frames" would consist simply of the point of the curve itself. The obtained invariants are the components of the tangent vector of the curve (a curve in $\mathbb{R}^3$ can be carried into another if they both share the same tangent vectors. How do we compare this tangent vectors? For example, by carrying them to the tangent space at the identity, i.e., applying the MC form!). This example illustrates very well why the problem is solved when we can lift the manifold $M$ to $G$ in a standard way.</li></ul></p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>If I focus in particular cases I find another kind of doubts. In some cases it is possible to take maps from $G$ to the space $X$ itself (for example, from frames of $\mathbb{E}^3$ to $\mathbb{E}^3$ like in <a href="./../Bibliography/@griffiths1974cartan.md.html">@griffiths1974cartan</a>) which completely determine the frames, and this, I think, gives rise to the classical differential geometry facts...</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Olver's_way">Olver's way</h1>
+<p>...</p>
+<p></p>
+<p>Idea clave: la <a href="./../♾️ CONCEPTS/GEOMETRY/cross section.md.html">cross section</a>. Permite visualizar muy bien el espacio de órbitas, y parametrizarlo de una forma relativamente sencilla</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

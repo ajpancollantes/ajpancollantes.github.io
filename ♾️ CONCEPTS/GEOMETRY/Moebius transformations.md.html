@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Moebius_transformations">Moebius transformations</h1>
+<p>(Also called fractional linear or bilinear transformations)</p>
+<p></p>
+<p>They are maps defined on a open subset of $\mathbb{C}$ of the form</p>
+$$
+f(z)=\frac{a z+b}{c z+d}
+$$
+<p>where a, b, c, d are any complex numbers satisfying ad − bc ≠ 0. If ad = bc, the rational function defined above is a constant since</p>
+$$
+f(z)=\frac{a z+b}{c z+d}=\frac{a(c z+d)}{c(c z+d)}-\frac{a d-b c}{c(c z+d)}=\frac{a}{c}
+$$
+<p>and is thus not considered a Möbius transformation. </p>
+<p></p>
+<p>These maps can be extended to the <a href="./../Riemann sphere.md.html">Riemann sphere</a> $\bar{\mathbb{C}}$. If $c\neq 0$</p>
+$$
+f\left(\frac{-d}{c}\right)=\infty \text { and } f(\infty)=\frac{a}{c}
+$$
+<p>and if $c=0$</p>
+$$
+f(\infty)=\infty.
+$$
+<p>Thus a Möbius transformation is always a bijective holomorphic function from the Riemann sphere to the Riemann sphere, and they constitute a group. As stated <a href="https://en.wikipedia.org/wiki/Conformal_map#Conformal_maps_in_two_dimensions" target="_blank">here</a>, they corresponds exactly to the <a href="./../conformal map.md.html">conformal map</a>s on the <a href="./../Riemann sphere.md.html">Riemann sphere</a>.</p>
+<p></p>
+<hr>
+<h1 style="margin-left:0px;" id="Projective_complex_line_approach">Projective complex line approach</h1>
+<p>The group of Moebius transformations $\mathcal{M}$ is, in fact, the same as the <a href="./../projective linear group.md.html">projective linear group</a> $\mathbb{P}GL(2,\mathbb{C})=GL(2,\mathbb{C})/\{\lambda I\}$ acting over $\mathbb{C}\mathbb{P}^1$. This identification comes this way: the Moebius transformation </p>
+<p></p>
+$$
+
+z\mapsto\frac{a z+b}{c z+d}
+
+$$
+<p></p>
+<p>with $ad-bc\neq 0$ corresponds to</p>
+<p></p>
+$$
+
+\left[\left(\begin{array}{ll}
+
+a & b \\
+
+c & d
+
+\end{array}\right)\right] \in GL(2,\mathbb{C})/\{\lambda I\}
+
+$$
+<p></p>
+<p>with nonzero determinant.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>In other words, the complex vector space $\mathbb{C}^2$ gives rise to the complex projective line (aka the Riemann sphere). The linear transformations of $\mathbb{C}^2$ give rise to Moebius transformations. </p>
+<p></p>
+<p>But several linear transformations give rise to the same Moebius transformation, so we take equivalence classes. Even if we restrict to the singular matrices with unit determinant, we have a 2-1 relation. That is, we have a 2-1 surjection from $SL(2,\mathbb{C})$ to the group of Moebius, $\mathcal{M}$. That is,</p>
+<p></p>
+$$
+
+\mathcal{M}\equiv GL(2,\mathbb{C})/\{\lambda I\} \equiv SL(2,\mathbb{C})/\{\pm I\}
+
+$$
+<p></p>
+<p>so we can express the Moebius transformation (abusing of notation) by</p>
+<p></p>
+$$
+
+\pm \left(\begin{array}{ll}
+
+a & b \\
+
+c & d
+
+\end{array}\right)
+
+$$
+<p></p>
+<p>with $ad-bc=1$.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Relation_to_hyperbolic_geometry">Relation to hyperbolic geometry</h1>
+<p>The subgroup of $\mathcal{M}$ consisting of Moebius transformations with real coefficients, i.e. the special linear real group </p>
+<p>$$SL(2,\mathbb{R})=\{A\in M_2(\mathbb{R}): det(A)=1\}$$</p>
+<p>acts on the upper half complex plane (<a href="./Poincare half plane.md.html">Poincare half plane</a>) $\mathbb{H}=\{z=x+yi: y>0\}$ in the following way:</p>
+$$\left(\begin{array}{ll}
+a & b \\
+c & d
+\end{array}\right) \cdot z=\frac{a z+b}{c z+d}.$$
+<p></p>
+<hr>
+<p>But very surprisingly: the isometries of the hyperbolic 3-space (see <a href="./hyperbolic geometry.md.html">hyperbolic geometry</a>) $\mathbb{H}^3$ is <b>the full group of Moebius transformations</b>!! ([Needham 2021] page 81)</p>
+<p></p>
+<p>And moreover. According to [Needham 2021] page 72: all three geometries of constant curvature (not only hyperbolic) have symmetry groups that are subgroups of the group of <a href="./Moebius transformations.md.html">Moebius transformations</a> of the <a href="./../Riemann sphere.md.html">Riemann sphere</a>. I haven't "seen" yet, but it is clear from what it is said <a href="./hyperbolic geometry.md.html#Dimension_3">here</a> about all the three geometries living inside hyperbolic 3-space.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Relation_to_Special_Relativity">Relation to Special Relativity</h1>
+<p>[Needham 2021] page 77 :</p>
+<p>Every Möbius transformation of C yields a unique Lorentz transformation of spacetime. Conversely, it can be shown (Penrose and Rindler, 1984, Ch. 1) that to every Lorentz transformation there corresponds a unique (up to sign) Moebius transformation.</p>
+<p>Maybe this has to do with the discussion at <a href="./../Minkowski space.md.html#Relation_of_Minkowski_plane_and_hyperbolic_plane">Minkowski space#Relation of Minkowski plane and hyperbolic plane</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

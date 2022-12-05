@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Distribution">Distribution</h1>
+<p>(See [Lychagin_2007] page 3)</p>
+<p>A distribution $D$ of <b>rank</b> $r$ on a $n$-dimensional manifold $M$ is a <a href="./subbundle.md.html">subbundle</a> of the tangent bundle $TM$. Locally, for $p\in M$ there exist  $r$ pointwise linearly independent vector fields $X_1, \ldots, X_r$ such that $D_p=\mbox{span}(\{X_{1,p},\cdots,X_{r,p}\})$.</p>
+<p></p>
+<p>(We call it <b>rank</b> instead of <b>dimension</b> since as a manifold already have a *dimension*, $n+r$)</p>
+<p></p>
+<p>Sometimes the <a href="./distribution.md.html">distribution</a> is identified with the $\mathcal{C}^{\infty}(M)$-<a href="./../module.md.html">module</a> of vector fields $X$ de $M$ such that $X_p\in D_p$ for every $p\in M$, $\Gamma(M,D)$. This is justified by the <a href="./../../✏️ THEOREMS/DG/vector bundle-module of section identification.md.html">vector bundle-module of section identification</a>.</p>
+<p></p>
+<p>Distributions can be <a href="./involutive distribution.md.html">involutive</a> or not.</p>
+<p></p>
+<p>They can have <a href="./symmetry of a distribution.md.html">symmetry of a distribution</a> or <a href="./../../❓MY RESEARCH/♾️ ❗CONCEPTS/cinf-symmetry of distribution.md.html">cinf-symmetry of distribution</a> (the latter only the <a href="./involutive distribution.md.html">involutive distribution</a>).</p>
+<p></p>
+<p></p>
+<p>Distributions have associated a <a href="./structure 1-form of a distribution.md.html">structure 1-form of a distribution</a>, which takes value in a kind of "vertical bundle".</p>
+<p></p>
+<p>Distributions have a notion of <a href="./curvature of a distribution.md.html">curvature of a distribution</a>.</p>
+<p></p>
+<p>There is a <a href="./../../✏️ THEOREMS/DG/dual description of the distribution.md.html">dual description of the distribution</a> by means of a <a href="./Pfaffian system.md.html">Pfaffian system</a>.</p>
+<p></p>
+<p>A distribution of constant rank $r$ on $M$ can also be seen like a smooth section of the <a href="./../Grassmannian bundle.md.html">Grassmannian bundle</a> $G(r,TM)$ over $M$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

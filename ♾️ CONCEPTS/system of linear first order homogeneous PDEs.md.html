@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="System_of_linear_first_order_homogeneous_PDEs">System of linear first order homogeneous PDEs</h1>
+<p>It is a <a href="./DEs/system of DEs.md.html">system of DEs</a> of the form</p>
+$$
+\sum_{i=1}^{m} \sum_{j=1}^{n} a_{i j k}\left(x_{1}, x_{2}, \ldots, x_{n}\right) \frac{\partial V_{i}}{\partial x_{j}}=0, \quad k=1,2, \ldots, r
+$$
+<p>where $x_j$ are the independent variables, $V_i$ the dependent ones and $a_{ijk}$ smooth functions. Suppose  the $r$ equations are linearly independent. We say the system is overdetermined if $r>m$, determined if $r=m$ and underdetermined if $r<m$.</p>
+<p></p>
+<p>The simpler case when $m=1$ is important. When also $r=1$ we are in the situation of <a href="./DEs/characteristics of first-order partial differential equation.md.html">characteristics of first-order partial differential equation</a>, that is, a <a href="./homogeneous linear PDE.md.html">homogeneous linear PDE</a>.</p>
+<p>We are going to show that when $m=1$ we can always reduce to the case $r=1$ (Jonasson_2007 page 20).</p>
+<p></p>
+<p>If $m=1$ we can consider $r$ vector fields $X_k$ such that the system is giving by</p>
+$$
+\begin{aligned}
+X_{1}(V) &:=a_{11} \frac{\partial V}{\partial x_{1}}+a_{12} \frac{\partial V}{\partial x_{2}}+\cdots+a_{1 n} \frac{\partial V}{\partial x_{n}}=0 \\
+X_{2}(V):=& a_{21} \frac{\partial V}{\partial x_{1}}+a_{22} \frac{\partial V}{\partial x_{2}}+\cdots+a_{2 n} \frac{\partial V}{\partial x_{n}}=0 \\
+& \vdots \\
+X_{r}(V):=& a_{r 1} \frac{\partial V}{\partial x_{1}}+a_{r 2} \frac{\partial V}{\partial x_{2}}+\cdots+a_{r n} \frac{\partial V}{\partial x_{n}}=0
+\end{aligned}
+$$
+<p></p>
+<p>blablabla... to be continued.... Jonasson_2007 page 20.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Dependence_on_parameters">Dependence on parameters</h2>
+<p>I think that from here it can be shown that if the coefficients of the system depends smoothly on parameters, the solution must depends smoothly on these parameters. Because we can convert the system to a <a href="./DEs/system of ODEs.md.html">system of ODEs</a>, and there we have continuos and differentiable dependency on parameters.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

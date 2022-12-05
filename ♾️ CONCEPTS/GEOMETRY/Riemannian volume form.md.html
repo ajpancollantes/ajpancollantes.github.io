@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Riemannian_volume_form">Riemannian volume form</h1>
+<p>Any oriented <a href="./(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian manifold</a> $(X,g)$ has a natural volume form $\Omega_g$. </p>
+<p>Is the differential $n$-form whose integral over pieces of $(X,g)$ computes the volume as measured by the metric $g$. Explicitly, is defined as follows. For $p\in X$ let $e_1,\ldots,e_n$ be a positive orthonormal basis of $T_p X$. Then</p>
+$$
+(\Omega_g)_p=e^1\wedge\cdots \wedge e^n
+$$
+<p>where $\{e^i\}\subset T_p^*M$ is the dual basis, i.e., $e^i(e_j)=\delta^i_j$. It is easy to check that is well defined</p>
+<p></p>
+<p>In local coordinates $(x_1,\ldots,x_n)$ it can be expressed as</p>
+$$
+\Omega_g=\sqrt{\left|g\right|} dx_1\wedge \cdots\wedge dx_n
+$$
+<p>where $\left|g\right|$ is the absolute value of the determinant of the matrix $\{g_{ij}\}$ of the <a href="./(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian metric</a> in these local coordinates: $g_{ij}=g(\partial_{x_i},\partial_{x_j})$. This follows from the following idea. Given an orthonormal basis $\{e_i\}$ consider the matrix $A$ whose columns are the coordinates of $\partial_{x_i}$ in this basis. Then it is the matrix to go from the dual basis $\{dx_i\}$ to $\{e^i\}$. Therefore</p>
+$$
+(\Omega_g)_p=e^1\wedge\cdots \wedge e^n=det(A)dx_1\wedge \cdots\wedge dx_n
+$$
+<p>But, finally, observe that $det(A)=\sqrt{det(A^tA)}=\sqrt{det(\{g_{ij}\})}$ .</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Induced_volume_in_submanifolds">Induced volume in submanifolds</h2>
+<p>Suppose $S\subset X$ is a submanifold of codimension 1. We have an induced Riemannian metric $g_S$ on $S$. Therefore we have a volume form on $S$ given by</p>
+$$
+\Omega_{g_S}=N\,\lrcorner\,\Omega_g
+$$
+<p>where $N$ is a unit normal vector field to $S$, and we are considering the orientation in $S$ induced by $N$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

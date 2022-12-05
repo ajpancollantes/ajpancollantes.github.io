@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Euler-Poincare_characteristic">Euler-Poincare characteristic</h1>
+<p><b>Definition</b></p>
+<p><ul style="margin-left:0px;"><li>For a polyhedron:</li></ul></p>
+<p>For a given polyhedron $P$, it is the quantity</p>
+$$
+\mathcal{X}(P)=V-E+F
+$$
+<p>where $V, E,F$ stand, respectively, for the number of vertices, edges and faces of $P$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>For a compact surface:</li></ul></p>
+<p>Given a compact surface $S$ and a polyhedron $P$ topologically equivalent to $S$, we defined</p>
+$$
+\mathcal{X}(S):=\mathcal{X}(P)
+$$
+<p>$\blacksquare$</p>
+<p></p>
+<hr>
+<p></p>
+<p></p>
+<p><b>Proposition (Euler Fórmula)</b></p>
+<p>For a surface $S$, Euler characteristic satisfies $\mathcal{X}(S)=2-2g$, being $g$ the <a href="./genus.md.html">genus</a> of the surface. </p>
+<p></p>
+<p><b>Proof</b></p>
+<p>Step 1. If a polyhedron is topologically equivalent to a sphere the $\mathcal{X}(P)=2.$ Therefore $\mathcal{X}(\mathbb{S}^2)=2-2\cdot 0=2$ and $\mathcal{X}(S)=2$ for any $S$ of <a href="./genus.md.html">genus</a> equals to 0.</p>
+<p>See Needham_2021 page 186 for Cauchy's proof. </p>
+<p></p>
+<p>Step 2. If we attach a handle to a compact surface $S$, we reduces $\mathcal{X}(S)$ by 2. See Needham_2021 page 192.</p>
+<p></p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>Key idea: triangulation does not affect Euler characteristic.</p>
+<p></p>
+<p></p>
+<p>It is also related to the <a href="./../✏️ THEOREMS/Poincare-Hopf Theorem.md.html">Poincare-Hopf Theorem</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

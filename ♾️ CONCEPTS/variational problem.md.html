@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Variational_problem">Variational problem</h1>
+<p>(See Olver_1986 page 243)</p>
+<p>Let $\Omega \subset \mathbb{R}^p$ be an open, connected subset with smooth boundary $\partial \Omega$. A variational problem consists of finding the extrema of a functional</p>
+$$
+J[u]=\int_{\Omega}L(x,u^{(n)})dx
+$$
+<p>in some class of functions $u:\mathbb{R}^p\to \mathbb{R}^q$, where $L$ is the <b>Lagrangian</b> of the variational problem $J$ and is a smooth function of $x$, $u(x)$ and their derivatives. </p>
+<p></p>
+<p>In this context we have <a href="./variational symmetry.md.html">variational symmetry</a>s, which have some relation to the <a href="./DEs/generalized symmetry of an ODE.md.html">generalized symmetries</a> of the associated <a href="./Euler-Lagrange.md.html">Euler-Lagrange</a> equations.</p>
+<p></p>
+<p></p>
+<p>I think this can be formalized in terms of the <a href="./GEOMETRY/jet bundle.md.html">jet bundle</a> $J^n(\mathbb{R}^p,\mathbb{R}^q)$ by means of the <a href="./variational bicomplex.md.html">variational bicomplex</a>, ... </p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

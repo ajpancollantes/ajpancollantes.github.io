@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Solvable_Lie_algebra">Solvable Lie algebra</h1>
+<p>Let $\mathfrak{g}$ be a Lie algebra (finite or infinite dimensional). By using the <a href="./../GEOMETRY/commutator subalgebra.md.html">commutator subalgebra</a> we can construct the _derived series_ of $\mathfrak{g}$</p>
+$$
+\mathfrak{g} \geq[\mathfrak{g}, \mathfrak{g}] \geq[[\mathfrak{g}, \mathfrak{g}],[\mathfrak{g}, \mathfrak{g}]] \geq[[[\mathfrak{g}, \mathfrak{g}],[\mathfrak{g}, \mathfrak{g}]],[[\mathfrak{g}, \mathfrak{g}],[\mathfrak{g}, \mathfrak{g}]]] \geq \ldots
+$$
+<p>If this series arrives to 0 in a finite number of steps it is said that $\mathfrak{g}$ is solvable.</p>
+<p></p>
+<p><b>Theorem</b></p>
+<p>A Lie algebra $\mathfrak{g}$ is solvable if and only if there exists a sequence of subalgebras</p>
+$$
+\{0\}=a^{0} \subset a^{1} \subset \ldots \subset a^{k}=\mathfrak{g}
+$$
+<p>such that $a^{i}$  is an ideal of $a^{i+1}$ and the quotient $a^{i+1}/a^i$ is abelian.$\blacksquare$</p>
+<p>See Ruiz_2014, page 7.</p>
+<p></p>
+<p><b>Theorem</b></p>
+<p>Let $\mathfrak{g}$ be a solvable Lie algebra. There exists a sequence of ideals of $\mathfrak{g}$</p>
+$$
+\{0\} \subset L^{1} \subset \ldots \subset a^{n}=\mathfrak{g}
+$$
+<p>such that $\mbox{dim}(L^i)=i$ for $i=1,\ldots,n$.$\blacksquare$</p>
+<p>See Ruiz_2014, page 8.</p>
+<p></p>
+<p>It can be <a href="https://www.sciencedirect.com/science/article/abs/pii/S0079816908616700" target="_blank">shown</a>  that a connected Lie group is <a href="./solvable group.md.html">solvable</a> if and only if its Lie algebra is <a href="./solvable Lie algebra.md.html">solvable</a>.</p>
+<p></p>
+<p></p>
+<p>On the other hand, if $\mathfrak{g}$ is a finite dimensional Lie algebra, there exists a unique maximal solvable ideal called the <a href="./../radical of a Lie algebra.md.html">radical of a Lie algebra</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><p>$\newcommand{\deriv}[2] {\frac{\partial #1}{\partial #2}}$</p>
+<h1 style="margin-left:0px;" id="Derivation_of_Euler-Lagrange_equations">Derivation of Euler-Lagrange equations</h1>
+<h2 style="margin-left:0px;" id="One_degree_of_fredom">One degree of fredom</h2>
+<p>For any curve $\alpha: I\mapsto C$, where $C$ is the configuration space of <a href="./../⛳️ NON CLASSIFIED/Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>, we can create </p>
+$$
+\tilde{\alpha}=(\alpha,\alpha'): I\longmapsto TC
+$$
+<p>(is nothing but the <a href="./GEOMETRY/prolongation of a section.md.html">prolongation of a section</a> of the trivial bundle $\mathbb{R}\times C \to \mathbb{R}$).</p>
+<p></p>
+<p>Then, the action for that curve is the integral of the composition </p>
+$$
+L \circ \tilde{\alpha}: I \longmapsto \mathbb{R}
+$$
+<p>where $L:TC\mapsto \mathbb{R}$ is a Lagrangian. That is</p>
+$$
+S_{\alpha}=\int_{t{0}}^{t_1} L \circ \tilde{\alpha} dt
+$$
+<p>with fixed $\tilde{\alpha}(t_i)$ for every $\alpha$.</p>
+<p>(in the context of the <a href="./variational bicomplex.md.html">variational bicomplex</a>, the Lagrangian is a differential form $\lambda=Ldt$ of type $(1,0)$ and the action is $\int_T \tilde{\alpha}^*(\lambda)$, see Anderson_1992 page 9).</p>
+<p></p>
+<p>The trick to find $\alpha$ such that $S_{\alpha}$ is "critical" is what follows. Consider that the whole $\tilde{\alpha}$ lie inside a local chart (if not, I think that it could be done in a partition of unity, the same that we would have for the integration process). In local coordinates, let $\tilde{\alpha}(t)=(q(t),q'(t))$, with $q(t)\in \mathbb{R}^n$.</p>
+<p></p>
+<p>We can choose any vector field over $\{q(t)\}_{t\in I}$, for example $V(t)$, and a little real number $\epsilon$ to construct a new curve $\beta_{\epsilon}$ that in local coordinates looks like</p>
+$$
+(q(t)+\epsilon V(t))
+$$
+<p></p>
+<p>This curve gives us a $\tilde{\beta_{\epsilon}}$ (the prolongation of $\beta_{\epsilon}$), which in local coordinates is written</p>
+$$
+(q(t)+\epsilon V(t), q'(t)+\epsilon V'(t))
+$$
+<p>(By the way, we are deriving using the <a href="./local chart connection.md.html">local chart connection</a>).</p>
+<p></p>
+<p></p>
+<p>If we consider the smooth function</p>
+$$
+\epsilon \to S_{\beta_{\epsilon}}=\int_{t_0}^{t_1} L(q(t)+\epsilon V(t), q'(t)+\epsilon V'(t)) dt,
+$$
+<p>its derivative respect to $\epsilon$ should be null for $\epsilon=0$ in order to $\alpha$ be a extrema of this functional. So, let's go. Consider that the specified local char induces in $TC$ coordinates $(q,v)$, then:</p>
+$$
+\int_{t_0}^{t_1} \deriv{L}{q} V+\deriv{L}{v} V' dt=0
+$$
+<p></p>
+<p>Integrating the second term by parts:</p>
+$$
+\int_{t_0}^{t_1} \deriv{L}{q} V dt + \left[ \deriv{L}{v} V \right]_{t_0}^{t_1}-\int_{t_0}^{t_1}\frac{d}{dt}(\deriv{L}{v}) V dt=0
+$$
+<p></p>
+<p>And since the end points are fixed</p>
+$$
+\int_{t_0}^{t_1} \deriv{L}{q} V -\frac{d}{dt}(\deriv{L}{v}) V dt=0
+$$
+<p></p>
+<p>And since this is valid for every $V$ we get, finally:</p>
+$$
+\deriv{L}{q}(\alpha(t),\alpha'(t)) =\frac{d}{dt}\left(\deriv{L}{v}(\alpha(t),\alpha'(t))\right)
+$$
+<p>or more compactly</p>
+$$
+\frac{\partial L}{\partial q}-\frac{\mathrm{d}}{\mathrm{d} t} \frac{\partial L}{\partial v}=0
+$$
+<p></p>
+<p></p>
+<p>It is a straightforward calculation to check that Euler-Lagrange equations "behave in a good way" for change of variables.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Discrete_approach">Discrete approach</h2>
+<p>xournal_154</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Infinite_degree_of_freedom:_fields">Infinite degree of freedom: fields</h2>
+<p>With the notation of the <a href="./GEOMETRY/jet bundle.md.html">jet bundle</a> $J^1(E)$:</p>
+<p></p>
+$$
+\frac{\partial L}{\partial u^{\alpha}}-\frac{\mathrm{d}}{\mathrm{d} x^{i}} \frac{\partial L}{\partial u_{i}^{\alpha}}=0
+$$
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

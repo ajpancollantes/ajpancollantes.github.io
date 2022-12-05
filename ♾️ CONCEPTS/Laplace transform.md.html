@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Laplace_transform">Laplace transform</h1>
+<p>Given a complex-valued function $f(t)$ with $t\in \mathbb{R}$, the Laplace transform is a function $F:\mathbb{C}\to \mathbb{C}$ such that every $F(s)$ represents the weight of the function $e^{st}$ in the descomposition</p>
+$$
+f(t)=\frac{1}{2\pi i}\left( \cdots+F(c+0.1i)e^{(c+0.1i)t}+F(c+0.2i)e^{(c+0.2i)t}+\right.
+$$
+$$
+\left.+F(s)e^{st}+\cdots\right)=
+$$
+$$
+=\frac{1}{2 \pi i} \lim _{T \rightarrow \infty} \int_{c-i T}^{c+i T} e^{s t} F(s) d s
+$$
+<p>for any $c\in \mathbb{R}$</p>
+<p>In <a href="https://www.youtube.com/watch?v=6MXMDrs6ZmA" target="_blank">this video</a> it is pictured like this:</p>
+<p><img src="./../imagenes/Pasted image 20220119170021.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>A particular case would be the <a href="./Fourier transform.md.html">Fourier transform</a>, whose picture corresponds to the case $c=0$</p>
+<p><img src="./../imagenes/Pasted image 20220119170159.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>Both transformation has to do with the fact that some spaces of functions are <a href="./FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a>, so we have basis. The original function can be thought as expressed in the <a href="./Dirac delta.md.html">Dirac delta</a> basis, and the <a href="./Fourier transform.md.html">Fourier transform</a> and <a href="./Laplace transform.md.html">Laplace transform</a> is nothing but the expression of the same function in a different basis.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

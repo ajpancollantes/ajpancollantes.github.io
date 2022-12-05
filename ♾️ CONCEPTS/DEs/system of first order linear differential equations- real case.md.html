@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="System_of_first_order_linear_ODEs_real_case">System of first order linear ODEs (real case)</h1>
+<p>It is a particular case of <a href="./system of first order linear differential equations- complex case.md.html">the linear complex case</a> and, more in general, of the <a href="./system of first order differential equations.md.html">system of first order differential equations</a>.</p>
+<p><ul style="margin-left:0px;"><li>If $A$ is a real matrix, given a solution $\varphi(t)$, the conjugate function is just the solution of the system whose initial value is the conjugate of that of $\varphi(t)$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>By uniqueness of solutions, if we take any real initial condition, $v\in \mathbb{R}^n$ then</p>
+<p></p>
+$$
+e^{At}\cdot v
+$$
+<p></p>
+<p>must be real, and so $e^{At}$ is a real matrix. </p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>What form does the elements of this matrix have? In the <a href="./system of first order linear differential equations- complex case.md.html#3_The_rest_of_the_cases">note of the complex case</a> we stated that</p>
+$$
+e^{At}=M e^{Jt} M^{-1}
+$$
+<p></p>
+<p>Solutions are then made by mixing quasi-polynomials by mean of complex number, so the results are linear combinations of real and imaginary parts of these quasi-polinomials:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<h3 style="margin-left:0px;" id="Proposition">Proposition</h3>
+<p>Let $\dot{z}=Az$ a system of first order linear equations, with $A:\mathbb{R}^n \mapsto \mathbb{R}^n$ a linear operator. Then, if $A$ has  real eigenvalues $\lambda_i$ with algebraic multiplicities $n_i$ and complex eigenvalues $\alpha_j\pm i \omega_j$ with multiplicities $\mu_j$ then every component of a solution $\varphi(t)$ has the form:</p>
+<p></p>
+$$ 
+
+\varphi_{m}(t)=
+
+\sum_{i} e^{\lambda_{i} t} p_{m, i}+
+
+\sum_{j} e^{\alpha_{j} t}\left[q_{m, j}(t) \cos \omega_{j} t+r_{m, j}(t) \sin \omega_{j} t\right]
+
+ $$
+<p></p>
+<p>where $p_{m,i}(t)$, $q_{m,j}(t)$ and $r_{m,j}(t)$ are real polynomials with degree limited by the multiplicities.</p>
+<p>$\blacksquare$</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p></p>
+<p>In particular, consider the case where \textbf{all eigenvalues are single}. We would have: </p>
+<p></p>
+$$  
+\varphi_{m}(t)=
+
+\sum_{i} c_{m, i} e^{\lambda_{i} t} +
+
+\sum_{j} a_{m, j} e^{\alpha_{j} t} \cos \omega_{j} t+b_{m, j}
+
+e^{\alpha_{j} t}\sin \omega_{j} t
+$$ 
+<p>(1)</p>
+<p>with $a, b, c$ families of real constants. But there are too many.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>How many of degrees of freedom do we have? Let's see.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>The map $\varphi:I\subset \mathbb{R}\mapsto \mathbb{C}^n$ is a complex solution of the equation if and only if the real and the imaginary part of $z$ are both real solutions. This is because of linearity and because $\overline{z}(t)$ is also a solution of the associated complex equation (the only one with initial value the complex conjugate of $z(0)$).</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Suppose $A$ has $n$ distinct eigenvalues, $r$ real eigenvalues and $c$ complex eigenvalues, such that $n=r+2c$. The general solution is</p>
+<p></p>
+<p>$$\varphi(t)=\sum_{k=1}^{n} c_{k} e^{\lambda_{k} t} \xi_{k}$$</p>
+<p></p>
+<p>where we have chosen real eigenvectors for the real eigenvalues, and complex conjugate eigenvectors for the complex eigenvalue pairs. We observe that for $\varphi(0)$ being real</p>
+<p></p>
+<p>$$\sum_{k=1}^{n} c_{k} \boldsymbol{\xi}_{k}=\sum_{k=1}^{n} \overline{c}_{k} \overline{\boldsymbol{\xi}}_{k}$$</p>
+<p></p>
+<p>and therefore coefficients of complex conjugates eigenvectors must be complex conjugates. So, for real eigenvalues (with real eigenvector) $c_k$ is real, and we denote it by $a_k$. And for the complex conjugates eigenvalues $\lambda_k$ and $\lambda_j$, with of course complex conjugates eigenvectors, coefficients $c_k$ and $c_j$ must be conjugates. So we can write the solution as</p>
+<p></p>
+$$
+
+\varphi(t)=\sum_{k=1}^{r} a_{k} e^{\lambda_{k} t} \xi_{k}+\sum_{k=r+1}^{r+c} c_{k} e^{\lambda_{k} t} \xi_{k}+\sum_{k=r+1}^{r+c} \overline{c_{k}} e^{\overline{\lambda_{k}} t} \overline{\xi_{k}}
+
+$$
+<p></p>
+<p>and so</p>
+<p></p>
+$$
+
+ \varphi(t)=\sum_{k=1}^{r} a_{k} e^{\lambda_{k} t} \xi_{k}+ \sum_{k=r+1}^{r+c} 2 \operatorname{Re} [c_{k} e^{\lambda_{k} t} \xi_{k}]
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>In conclusion, in equation (1) above, $c_{m,i}$, $a_{m,j}$, $b_{m,j}$ are "connected" in such a way that they only suppose $n$ degrees of freedom: they are linear functions of real and imaginary parts of $c_k$ and we have that the first $r$ $c_k$s are real and the last $2c$ are paired by conjugation .</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>Sometimes it is preferred other expression of the general solution. For $k=r+1..r+c$ the terms above can be rewritten:</p>
+<p></p>
+$$
+
+ 2Re[c_{k} e^{\lambda_{k} t} \xi_{k}]=
+
+ Re(\xi_k)e^{\alpha_k t} \cdot \left(2Re(c_k)cos(\omega_k t)-2Im(c_k)Sin(\omega_k t)\right)+ 
+
+$$
+<p></p>
+$$
+
++Im(\xi_k)e^{\alpha_k t} \cdot \left(-2Im(c_k)cos(\omega_k t)-2Re(c_k)Sin(\omega_k t)\right)+ 
+
+$$
+<p></p>
+<p>that can be clean be means of a change of names and trigonometric properties into:</p>
+<p></p>
+<p>\label{soluciondefinitiva}</p>
+$$
+e^{\alpha_k t}A_k cos(\omega_k t+\phi_k) \cdot v_k^1+ e^{\alpha_k t}A_k sin(\omega_k t+\phi_k) \cdot v_k^2 
+$$
+<p></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>where $v_k^1=Re(\xi_k) $, $v_k^2=Im(\xi_k) $, $A_k=|2c_k|$ and $\phi_k=arg(2 c_k))$</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

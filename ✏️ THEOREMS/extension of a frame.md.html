@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Completion_or_extension_of_a_frame">Completion or extension of a frame</h1>
+<p>See <a href="./../Bibliography/@lee2013smooth.md.html">@lee2013smooth</a> proposition 8.11 (exercise)</p>
+<p><b>Proposition</b></p>
+<p>Let $M$ be a smooth $n$-manifold with or without boundary and let $(X_1,\dots,X_k)$ be a linearly independent $k$-tuple of smooth vector fields on an open subset $U$ of $M$, with $1\le k< n$. Then for each $p\in U$ there exist smooth vector fields $X_{k+1},\dots,X_n$ in a neighborhood $V$ of $p$ such that $(X_1,\dots,X_n)$ is a smooth local frame for $M$ on $U \cap V$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>I add that if the manifold $M$ is <a href="./../♾️ CONCEPTS/contractible space.md.html">contractible space</a> then the completion can be performed in the whole $M$. Since in this case the tangent bundle is trivial, </p>
+$$
+g: TM \to M\times \mathbb{R}^n
+$$
+<p>we can apply a linear transformation pointwisely </p>
+$$
+h: M\times \mathbb{R}^n \to M\times \mathbb{R}^n
+$$
+<p>such that $h\circ g$ sends $X_i$ to $(0,0,1,0,\ldots,0)$. The desired vector fields are given by the preimage (pre-pushforward, better said) of the rest of the canonical vector fields.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

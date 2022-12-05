@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Serre-Swan_theorem">Serre-Swan theorem</h1>
+<p>Idea: Projective modules over commutative rings are like <a href="./../../♾️ CONCEPTS/GEOMETRY/bundle.md.html">bundle</a>s on <a href="./compact spaces.md.html">compact spaces</a>.</p>
+<p></p>
+<p>Suppose _M_ is a smooth manifold (not necessarily compact), and _E_ is a [smooth vector bundle](https://en.wikipedia.org/wiki/Smooth_vector_bundle "Smooth vector bundle") over _M_. Then _Γ(E)_, the space of <a href="https://en.wikipedia.org/wiki/Section_(fiber_bundle" target="_blank">smooth sections</a> "Section (fiber bundle)") of _E_, is a <a href="./../../♾️ CONCEPTS/module.md.html">module</a> over $\mathcal{C}^{\infty}(M)$ (the commutative algebra of smooth real-valued functions on _M_). Swan's theorem states that this module is [finitely generated](https://en.wikipedia.org/wiki/Finitely-generated_module "Finitely-generated module") and [projective](https://en.wikipedia.org/wiki/Projective_module "Projective module") over $\mathcal{C}^{\infty}(M)$. In other words, every vector bundle is a direct summand of some trivial bundle:  $M\times \mathbb{R}^k$ for some $k$. The theorem can be proved by constructing a bundle epimorphism from a trivial bundle $M\times \mathbb{R}^k\rightarrow E$. This can be done by, for instance, exhibiting sections $s_1,...,sk$ with the property that for each point  $p$, $\{s_i(p)\}$ span the fiber over $p$.</p>
+<p></p>
+<p>When $M$ is [connected](https://en.wikipedia.org/wiki/Connected_space "Connected space"), the converse is also true: every [finitely generated projective module](https://en.wikipedia.org/wiki/Finitely_generated_projective_module "Finitely generated projective module") over $\mathcal{C}^{\infty}(M)$ arises in this way from some smooth vector bundle on $M$. By the way, remember that a vector bundle is the same as a <a href="./../../♾️ CONCEPTS/ALGEBRAIC GEOMETRY/locally free sheaf.md.html">locally free sheaf</a>, so this justifies the idea that projective modules are <a href="./../../♾️ CONCEPTS/ALGEBRAIC GEOMETRY/locally free O-module.md.html">locally free O-module</a>s, which is tipically misundestood as "projective modules are stalkwise free modules (see <a href="./../../♾️ CONCEPTS/ALGEBRA/locally free module.md.html">locally free module</a>)".</p>
+<p></p>
+<p>Extracted from <a href="https://en.wikipedia.org/wiki/Serre%E2%80%93Swan_theorem." target="_blank">https://en.wikipedia.org/wiki/Serre%E2%80%93Swan_theorem.</a></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

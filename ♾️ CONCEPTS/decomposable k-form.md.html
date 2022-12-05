@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Decomposable_k-form">Decomposable k-form</h1>
+<p>A differential $k$-form $\omega$ in the exterior algebra $\Lambda V^*$ for certain vector space $V$ is said to be decomposable if there exist $k$ 1-forms $\alpha_i$ such that</p>
+$$
+\omega=\alpha_1\wedge \ldots \wedge \alpha_k.
+$$
+<p>Forms of degree $0$, $1$, $dim V-1$ and $dim V$ <b>are always decomposable</b>.</p>
+<p></p>
+<p>Example of non decomposable: in $\mathbb{R}^4$, the 2-form $e^1\wedge e^2+e^3\wedge e^4$.</p>
+<p></p>
+<p>Important property: </p>
+<p></p>
+<p><b>Lemma</b></p>
+<p>Suppose $V$ is a $n$-dimensional vector space and $\eta$ is a $k$-form in the <a href="./exterior algebra.md.html">exterior algebra</a> $\Lambda V^*$. Consider the linear map</p>
+$$
+\hat{\eta}:V\to \Lambda^{k-1}V^*
+$$
+<p>defined by $\hat{\eta}(v)=i_v\eta$ (<a href="./GEOMETRY/interior product.md.html">interior product</a>). The $\eta$ is a <a href="./decomposable k-form.md.html">decomposable k-form</a> if and only if $\mbox{Ker}(\hat{\eta})$ has codimension $k$ in $V$. $\blacksquare$</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>Found <a href="https://math.stackexchange.com/a/2835225/601797" target="_blank">here</a>.</p>
+<p>If $\eta$ is decomposable, $\eta=e^1\wedge \ldots \wedge e^k$, with $e^j$ linearly independent. We can complete them to a basis for $V^*$, $\langle e^1,\ldots,e^n\rangle$, with dual basis $\langle e_1,\ldots,e_n\rangle$. For an arbitrary $v=\sum v^i e_i \in V$ we have</p>
+$$
+\hat{\eta}(v)=\sum_{i=1}^{k}(-1)^{k} v^{i} e^{1} \wedge \cdots \wedge \widehat{e^{i}} \wedge \cdots \wedge e^{k}
+$$
+<p>where the hat indicates omission. This is zero if and only if $v_1=v_2=\ldots=v_k=0$, so $\mbox{Ker}(\hat{\eta})$ has codimension $k$.</p>
+<p></p>
+<p>Conversely, if $\mbox{Ker}(\hat{\eta})$ has dimension $n-k$, we can look for a basis $(e_1,\ldots,e_{n})$of $V$ such that  $\mbox{Ker}(\hat{\eta})=\mbox{span}(\{e_{k+1},\ldots,e_n\})$. Suppose</p>
+$$
+\eta=\sum_{J} \eta_{J} e^{j_{1}} \wedge \cdots \wedge e^{j k} \tag{1}
+$$
+<p>for increasing multiindices $J=(j_1,\ldots,j_k)$. If $J$ is such that $j_k>k$ then $e_{j_k}\in Ker(\hat{\eta})$ and so</p>
+$$
+\eta_{J}=\eta\left(e_{j_{1}}, \ldots, e_{j_{k}}\right)=(-1)^{k-1} \hat{\eta}\left(e_{j_{k}}\right)\left(e_{j_{1}}, \ldots, e_{j_{k-1}}\right)=0
+$$
+<p>so the only term that survive in $(1)$ is the associated to $J=(1,\ldots,k)$, and therefore</p>
+$$
+\eta=c e^{1} \wedge \cdots \wedge e^{k}.
+$$
+<p>$\blacksquare$</p>
+<p></p>
+<p></p>
+<p><b>More info about decomposable k-forms:</b> <a href="https://mathworld.wolfram.com/Decomposable.html" target="_blank">here</a>.</p>
+<p></p>
+<p></p>
+<p>I am not sure but:</p>
+<p><ul style="margin-left:0px;"><li>a $k$-form decomposable define a distribution involutive if $d\omega=\eta\wedge \omega$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$Y$ is a symmetry if $L_Y \omega=\beta \omega$ bla bla bla...</li></ul></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

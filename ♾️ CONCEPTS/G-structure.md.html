@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="G-structure">G-structure</h1>
+<p>[Kobayashi 1972]</p>
+<p><b>Definition</b></p>
+<p>For a manifold $M$ the <a href="./GEOMETRY/frame bundle.md.html">frame bundle</a> $FM$ is a $GL(n)$-<a href="./GEOMETRY/principal bundle.md.html">principal bundle</a>. Given a subgroup $G$ of $GL(n)$ we call a $G$-structure on $M$ to a $G$-principal bundle $P$ which is a subbundle of $FM$.$\blacksquare$</p>
+<p></p>
+<p>This is a particular case of <a href="./GEOMETRY/extension and reduction of a principal bundle.md.html#Definition_from_Mathoverflow">reduction of group structure</a> with respect to the inclusion $G\to GL(n)$.</p>
+<p></p>
+<p>When $M$ and $G$ are given, and $G$ is a closed subgroup of $GL(n)$ the existence problem  becomes the problem of finding a cross section  in a certain bundle. Since $GL(n)$ acts on $FM$ on the right, $G$ also acts on $FM$. If $G$ is closed the quotient $FM/G$ is also a bundle, in particular is the <a href="./GEOMETRY/associated bundle.md.html">associated bundle</a> to $FM$ with fibre $GL(n)/G$. It is classical (see [Kobayashi 1972] page 9) that the G-structures on $M$ are in a natural one-to-one correspondence with cross sections</p>
+$$
+\sigma: M\to FM/G.
+$$
+<p>See the <a href="./G-structure.md.html#Example">example below</a>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Relation_to_tensors">Relation to tensors</h1>
+<p>If we have a tensor field defined in a manifold $M$ it let us to define a subgroup $G$ of $GL(n)$ (the subgroup that leaves invariant the copy of the tensor in $\mathbb{R}^n$) and a $G$-structure on $M$.</p>
+<p></p>
+<p>I suppose the converse is true: a $G$-structure let us define one or several tensor fields in $M$. The group $G$ is possibly (I'm not sure) characterized by some tensors in $\mathbb{R}^n$, $T_i$, of type $(r_i,s_i)$, which are their _invariants_. We can cover $M$ with trivializing neighbourhoods of $E$, $\{U_{\alpha}\}$, and select the <a href="./GEOMETRY/principal bundle.md.html#Components_of_a_section">G-frames</a> corresponding to $(x,e)\in U_{\alpha}\times G$. Finally, we can define the tensor fields whose expression in this frames is given by $T_i$.</p>
+<p></p>
+<p>This is better understood in the <a href="./G-structure.md.html#Example">example below</a>.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Example">Example</h1>
+<p>The <a href="./orthonormal frame bundle.md.html">orthonormal frame bundle</a>.</p>
+<p>If $G=O(n)$, a $G$-structure on $M$ will be a principal bundle $E$ such that for $p\in M$ the fibre $E_p$ is made of <a href="./GEOMETRY/frame on a manifold.md.html">frames</a> such that one can be obtained from other by means of an orthogonal transformation. The choice of the G-structure implies we are pointing out in every $p$ a special kind of basis: the orthonormal ones.</p>
+<p></p>
+<p>On the other hand,  $FM/G$ consists of families of <a href="./GEOMETRY/frame on a manifold.md.html">frames</a> that can be transformed into others in the family by means of an orthogonal transformation (orbits of the action). So it is intuitively clear that a cross section $\sigma: M\to FM/G$ (a choice of a family in every $p$) provides us with the same data that $E$ (see <a href="./orthonormal frame bundle.md.html">orthonormal frame bundle</a>). </p>
+<p></p>
+<p>At the same time, this is the same as providing the metric tensor. Once we know which frames are considered orthonormal, we can cover the manifold $M$ with trivializing open sets for $E$, $\{U_{\alpha}\}$. Then define the metric $g$ like the one whose local expression in every $U_{\alpha}$ is $g|_{U_{\alpha}}\equiv \delta_i^j$.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Relation_to_Cartan_geometries">Relation to Cartan geometries</h1>
+All these ideas are related to <a href="./GEOMETRY/Cartan geometry.md.html">Cartan geometry</a>. It seems (I'm not sure enough yet) like if a G-structure $P$ on $M$ together with a connection (a <a href="./GEOMETRY/principal connection on a principal bundle.md.html">principal connection</a> on $P,$ that is, a $\mathfrak{g}$-valued 1-form with properties) is the same as providing to $M$ a Cartan geometry modelled on $$
+G\to \mathbb{R}^n \rtimes G
+$$
+<p>This is not valid for a general <a href="./extension and restriction of principal bundles.md.html">reduction of a principal bundle</a> because we don't have solder form??</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Linear_connections">Linear connections </h1>
+<p>Also called affine connections, covariant derivative, <a href="./../covariant derivative operator.md.html">covariant derivative operator</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="General_framework">General framework</h2>
+<p>An affine connection on a manifold $M$ is a <a href="./vector bundle connection.md.html">vector bundle connection</a> on the tangent bundle  of M. Equivalently, it is a <a href="./principal connection on a principal bundle.md.html">principal connection</a> on the <a href="./frame bundle.md.html">frame bundle</a> (which is a <a href="./principal bundle.md.html">principal bundle</a>) of $M$. This equivalence is due to <a href="./associated connection.md.html#Conversely">this</a>.</p>
+<p></p>
+<p>Let's call $P$ to the frame bundle and $\omega$ to the <a href="./principal connection on a principal bundle.md.html#Connection_1-form">connection 1-form</a> of this connection. What is a vector $v\in T_pP$? The point $p\in P$ represents a point $x$ in the manifold together with a choice of a basis for $T_x M$, and $v$ represents the beginning of a curve $\alpha$ leaving $x$ and a choice of a basis for every $T_{\alpha(t)}M$. <b>The value of $\omega_p(v)$ tells us how the basis is changing (if it is the case) when we move along</b> $\alpha$. This is "not natural" to $M$, and must be introduced by hand. This "change" is infinitesimal, since it correspond to an infinitesimal step along $\alpha$, so it is measured by an element of $\mathfrak{gl}(n)$. See <a href="./Cartan geometry.md.html#Generalization_of_affine_connections">Cartan geometry#Generalization of affine connections</a> for more info about "the big picture".</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Motivational_introduction">Motivational introduction</h2>
+<p>Consider first the situation in $\mathbb{R}^n$. Let $X,Y \colon \mathbb{R}^n \rightarrow \mathbb{R}^n$ be vector fields. To define the directional derivative of the vector field $X$ in the direction of the vector field $Y$ at a point $p \in \mathbb{R}^n$, we can mimic usual definition of directional derivative:</p>
+<p></p>
+<p>$$ (\nabla_Y X)(p) := \lim_{t \to 0} \frac{X(p + tY(p)) - X(p)}{t}. $$</p>
+<p>The result $(\nabla_Y X)$ is a vector field on $\mathbb{R}^n$. You can check that the operation $\nabla$ defined as above satisfies the following two properties:</p>
+<p>1. $\nabla_{fY}(X) = f\nabla_Y X$. </p>
+<p>2. $\nabla_Y(fX) = (Yf)X + f\nabla_YX$. </p>
+<p>Here, $X,Y \colon \mathbb{R}^n \rightarrow \mathbb{R}^n$ are vector fields and $f \colon \mathbb{R}^n \rightarrow \mathbb{R}$ is a scalar function. The function $Yf$ (at a point $p$) is the directional derivative of $f$ at $p$ in the direction $Y(p)$.</p>
+<p>Now let us try and mimic the above construction on a general manifold. Given vector fields $X,Y \in \mathfrak{X}(M)$, we try to use the same formula and define</p>
+$$ 
+(\nabla_Y X)(p) := \lim_{t \to 0} \frac{X(p + tY(p)) - X(p)}{t}. 
+$$
+<p>However, we see that there are two problems. First, the expression $X(p + tY(p))$ is not defined because we don't have a way of adding a point $p \in M$ to a tangent vector $tY(p) \in T_pM$. This is not so bad because we can actually replace the expression $p + tY(p)$ with any curve "which goes in the direction $Y(p)$" such as the flow $\varphi_t^Y(p)$. The more serious problem is that <b>we need to subtract the tangent vector $X(p) \in T_pM$ from the tangent vector $X(\varphi_t^Y(p)) \in T_{\varphi_t^Y(p)}$ and those are two tangent vectors that belong to different vector spaces</b>. </p>
+<p></p>
+<p>In general, without any extra data, we have no way of identifying tangent spaces at different points of $M$.</p>
+<p></p>
+<p>To summarise, we see that we can differentiate vector fields along vector fields without any problem on $\mathbb{R}^n$ but we encounter problems when we try and do it on a general manifold. But $\mathbb{R}^n$ is also a manifold so what makes it special? We need extra data.</p>
+<p></p>
+<p>The definition of an affine connection is meant to supply the manifold $M$ "externally" with an operation $\nabla \colon \mathfrak{X}(M) \times \mathfrak{X}(M) \rightarrow \mathfrak{X}(M)$ which satisfies properties $(1)-(2)$ and so allows us to differentiate vector fields along vector fields. That is, instead of defining the directional derivative of a vector field along a vector field, we require that somebody handles us a mechanism $\nabla$ which satisfies the properties that the familiar derivative satisfied on $\mathbb{R}^n$ and then we will think of it as a directional derivative.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="How_to_get_one?">How to get one?</h3>
+<p>This extra data could be provided:</p>
+<p><ul style="margin-left:0px;"><li>externally</li></ul></p>
+<p><ul style="margin-left:0px;"><li>by a <a href="./../parallel transport.md.html#Covariant_derivative">parallel transport</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Or it can be inherited from the ambient (for example if the manifold is immersed in $\mathbb{R}^N$). Covariant derivative operator on surfaces can be seen like inherited from the absolute parallelism of $\mathbb{R}^3$ and the metric of $\mathbb{R}^3$:</li></ul></p>
+$$
+\mathrm{D}_{\mathbf{v}} \mathbf{w}=\mathcal{P}\left[\nabla_{\mathbf{v}} \mathbf{w}\right]=\nabla_{\mathbf{v}} \mathbf{w}-\left(\mathbf{n} \cdot \nabla_{\mathbf{v}} \mathbf{w}\right) \mathbf{n}
+$$
+<p>where $\mathcal{P}$ is the projection into the surface along its normal $\mathbf{n}$.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Definition_as_operator">Definition as operator</h2>
+<p>(See <a href="./../../☕REFLECTIONS/relationship parallel transport, covariant derivatives and metrics.md.html">relationship parallel transport, covariant derivatives and metrics</a>).</p>
+<p></p>
+<p>We call covariant derivative operator or affine connection or linear connection  to an operator $\nabla \colon \mathfrak{X}(M) \times \mathfrak{T}(M) \rightarrow \mathfrak{T}(M)$, where $\mathfrak{T}(M)$ is the set of all tensor fields in $M$, satisfying:</p>
+<p>1. Commute with addition.</p>
+<p>2. Leibniz rule.</p>
+<p>3. Tensorial with respect to the first $\mathfrak{X}(M)$.</p>
+<p>4. Commute with index contraction.</p>
+<p>5. Applied to scalar fields, coincides with directional derivative respect to the vector.</p>
+<p>6. For scalar fields we have commutation: $\nabla _ { a } \nabla _ { b } \alpha = \nabla _ { b } \nabla _ { a } \alpha$.</p>
+<p></p>
+<p>Obviously this raises quite a lot of questions:</p>
+<p>1. Does such mechanism always exists? (Yes). </p>
+<p>2. It it unique? (No). </p>
+<p>3. Is there a natural choice of such differentiation mechanism? (Yes, under certain circumstances). </p>
+<p>4. Can we use this mechanism to recover the ability to identify tangent vectors at different points that was necessary to define the regular directional derivative in $\mathbb{R}^n$? (Yes, at least along curves. This leads to the notion of <a href="./../parallel transport.md.html">parallel transport</a>). </p>
+<p></p>
+<p>In this context, we call covariant derivative to the result </p>
+$$
+(\nabla_X Y)(p)
+$$
+<p>This result depends on the values of the vector field $X$ in a neighbourhood of $p$, but only <b>on the specific vector</b> $Y(p)$, since it is linear in this argument (property 3 above). The <a href="./Lie derivative of vector fields.md.html">Lie derivative of vector fields</a>, on the contrary, depends on the values of $X$ in a neighbourhood.</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>The value of $\nabla_XY$ depends only on the values of $X$ and $Y$ in a neighborhood $U$ of $p$, so you can write in a local frame $X=X^iE_i$ such that $X^i(p)=0$, then as you said :</p>
+<p>$$\nabla_XZ=X^i\nabla_{E_i}Z$$</p>
+<p>So evaluating in $p$ :</p>
+$$
+\nabla_XZ|_p=X^i(p)\nabla_{E_i}Z|_p
+$$
+<p>which only depends of the value of $X$ at $p$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>If we perform this construction not on $TM$ but in any vector bundle $E\to M$ we obtain the notion of <a href="./vector bundle connection.md.html">vector bundle connection</a>, which is a particular case of a <a href="./connection on a fiber bundle.md.html">connection on a fiber bundle</a>.</p>
+<p></p>
+<p>According to the following example, to specify a covariant derivative operator we only need to fix a coordinate chart $\{x_i\}$ of $TM$ and provide the functions $\Gamma_{ij}^k$</p>
+$$
+\nabla_{\partial_{x_i}}\partial_{x_j}=\Gamma_{ij}^k \partial_{x_k}
+$$
+<p>which are called the <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Worked_example">Worked example </h1>
+<p>Otro enfoque para entender el problema es el siguiente:</p>
+<p></p>
+<p>En $\mathbb{R}^2$ con coordenadas cartesianas $(x,y)$ tenemos una base $\{\frac{\partial}{\partial x}, \frac{\partial}{\partial y}\}$ para los distintos espacios tangentes. Además, el vector tangente $\frac{\partial}{\partial x}$ en el punto $P=(1,2)$ y el vector $\frac{\partial}{\partial x}$ en el punto $Q=(0,1)$ son "el mismo", en el sentido de que puedo trasladarlo de $P$ a $Q$. Esto es así porque <b>ESTAMOS ASUMIENDO</b> la noción de paralelismo tradicional en $\mathbb{R}^2$.</p>
+<p></p>
+<p>Ahora bien, consideremos otras coordenadas, por ejemplo $(t,a)$ dadas por la transformación:</p>
+$$ 
+\phi: (x,y) \to (t,a)=(x, y-x^2)
+$$
+<p>El vector $\frac{\partial}{\partial t}$ en el punto $P=(1,1)$ (ojo, este $P$ es el mismo que el del párrafo anterior pero expresado en coordenadas $(t,a)$) y el vector $\frac{\partial}{\partial t}$ en el punto $Q=(0,1)$ ahora <b>NO son el mismo, desde el punto de vista del paralelismo tradicional</b> en $\mathbb{R}^2$. Veámoslo:</p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}$ en $P$ se puede expresar en coordenadas cartesianas como</li></ul></p>
+$$
+d \phi^{-1} (\frac{\partial}{\partial t})=\left(
+\begin{array}{cc}
+1 & 0\\
+2t & 1 \\
+\end{array}
+\right) \cdot \left. \left(
+\begin{array}{c}
+1 \\
+0  \\
+\end{array}
+\right) \right|_P  =\left. (1 \quad 2t)\right| _P=\frac{\partial}{\partial x}+4 \frac{\partial}{\partial y}
+$$
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}$ en $Q$ se puede expresar en coordenadas cartesianas como</li></ul></p>
+$$
+d\phi^{-1} (\frac{\partial}{\partial t})=\left(
+\begin{array}{cc}
+1 & 0\\
+2t & 1 \\
+\end{array}
+\right) \cdot \left. \left(
+\begin{array}{c}
+1 \\
+0  \\
+\end{array}
+\right) \right|_Q  =\left. (1 \quad 2t)\right| _Q =\frac{\partial}{\partial x}
+$$
+<p>Luego $\frac{\partial}{\partial t}$ NO es constante, aunque sus componentes lo sean. </p>
+<p>Esto supone que si queremos derivar un campo de vectores en este nuevo sistema de coordenadas <b>NO PODREMOS LIMITARNOS a derivar cada componente</b>. Pues por ejemplo, la derivada de $\frac{\partial}{\partial t}$ sería 0, y acabamos de ver que no es constante.</p>
+<p>La forma de arreglar esto es añadir a la derivada tradicional por componentes unos términos de corrección que reflejen la propia deformación de los ejes.</p>
+<p>Veámoslo en el caso concreto de las coordenadas $(t,a)$ (ojo, para las coordenadas $(x,y)$ bastaría con derivar cada componente, porque estamos asumiendo que los vectores de las bases sí son constantes):</p>
+<p></p>
+<p>Consideremos el campo de vectores $X=F_X \frac{\partial}{\partial t}+G_X \frac{\partial}{\partial a}$ y el campo $Y=F_Y \frac{\partial}{\partial t}+G_Y \frac{\partial}{\partial a}$. Una forma coherente de diferenciar $Y$ respecto de $X$ sería una operación $\nabla$ que debería cumplir:</p>
+$$
+\nabla_X Y= F_X \frac{\partial}{\partial t}(Y)+G_X \frac{\partial}{\partial a}(Y)=
+$$
+$$
+=
+F_X \frac{\partial}{\partial t}(F_Y \frac{\partial}{\partial t}+G_Y \frac{\partial}{\partial a})+G_X \frac{\partial}{\partial a}(F_Y \frac{\partial}{\partial t}+G_Y \frac{\partial}{\partial a})
+$$
+<p>Como la regla de Leibniz debería cumplirse también para vectores, la expresión anterior quedaría:</p>
+$$
+F_X \frac{\partial}{\partial t}(F_Y) \frac{\partial}{\partial t}+F_X F_Y \frac{\partial}{\partial t}(\frac{\partial}{\partial t})
++
+$$
+$$
++F_X \frac{\partial}{\partial t}(G_Y) \frac{\partial}{\partial a}+F_X G_Y \frac{\partial}{\partial t}(\frac{\partial}{\partial a})
++
+$$
+<p></p>
+$$
++G_X \frac{\partial}{\partial a}(F_Y) \frac{\partial}{\partial t}+G_X F_Y \frac{\partial}{\partial a}(\frac{\partial}{\partial t})
++
+$$
+$$
++G_X \frac{\partial}{\partial a}(G_Y) \frac{\partial}{\partial a}+G_X G_Y \frac{\partial}{\partial a}(\frac{\partial}{\partial a})
+=
+$$
+$$
+=X(F_Y) \frac{\partial}{\partial t}+X(G_Y) \frac{\partial}{\partial a}+ \textrm{términos de corrección}
+$$
+<p></p>
+<p>Estos "términos de corrección" estarán perfectamente determinados cuando calculemos $\frac{\partial}{\partial t}(\frac{\partial}{\partial t})$, $\frac{\partial}{\partial t}(\frac{\partial}{\partial a})$, $\frac{\partial}{\partial a}(\frac{\partial}{\partial t})$ y $\frac{\partial}{\partial a}(\frac{\partial}{\partial a})$</p>
+<p>Traduzcámoslo todo a coordenadas cartesianas, donde SÍ sabemos derivar porque existe paralelismo.</p>
+$$
+d \phi^{-1} (\frac{\partial}{\partial t})=\left(
+\begin{array}{cc}
+1 & 0\\
+2t & 1 \\
+\end{array}
+\right) \cdot  \left(
+\begin{array}{c}
+1 \\
+0  \\
+\end{array}
+\right)=\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y}
+$$
+$$
+d \phi^{-1} (\frac{\partial}{\partial a})=\left(
+\begin{array}{cc}
+1 & 0\\
+2t & 1 \\
+\end{array}
+\right) \cdot  \left(
+\begin{array}{c}
+0 \\
+1  \\
+\end{array}
+\right)=\frac{\partial}{\partial y}
+$$
+<p>Así pues:</p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}(\frac{\partial}{\partial t})=(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y})(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y})=2\frac{\partial}{\partial y}=2\frac{\partial}{\partial a}$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}(\frac{\partial}{\partial a})=(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y})( \frac{\partial}{\partial y})=0$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial a}(\frac{\partial}{\partial t})=\frac{\partial}{\partial y}(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y} )=0$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial a}(\frac{\partial}{\partial a})=\frac{\partial}{\partial y}(\frac{\partial}{\partial y} )=0$</li></ul></p>
+<p></p>
+<p>Así pues, la "derivación" quedaría así:</p>
+$$
+\nabla_X Y=X(F_Y) \frac{\partial}{\partial t}+X(G_Y) \frac{\partial}{\partial a}+ 2 F_X F_Y\frac{\partial}{\partial a} 
+$$
+<p>A las componentes de $\frac{\partial}{\partial t}(\frac{\partial}{\partial t})$, $\frac{\partial}{\partial t}(\frac{\partial}{\partial a})$, $\frac{\partial}{\partial a}(\frac{\partial}{\partial t})$ y $\frac{\partial}{\partial a}(\frac{\partial}{\partial a})$ en la base $\left< \frac{\partial}{\partial t}, \frac{\partial}{\partial t} \right>$ se les llama <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>, y dependen de la noción de paralelismo y de las coordenadas elegidas. Se simbolizan por $\Gamma_{ij}^k$ y, en nuestro caso, $\Gamma_{11}^2=2$ y todos los demás son 0.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<h1 style="margin-left:0px;" id="Abstract_index_notation">Abstract index notation</h1>
+<p>Se le puede dar a todo un enfoque con <a href="./../../⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html">Penrose abstract index notation</a>. Así, denotaríamos:</p>
+$$
+\xi^c \nabla_c \Psi^a=\nabla_{\xi} \Psi
+$$
+<p>En notación de Penrose queda:</p>
+<p><img src="./../../imagenes/derivadacovariante.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Y por ejemplo la regla de Leibniz (y más cosas):</p>
+<p><img src="./../../imagenes/notacionpenrose3 1.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Una conexión va a determinar, en último término, una forma de identificar vectores tangentes en un punto $p\in M$ con los de otro punto $q\in M$, aunque dependerá de la curva que los una (<a href="./../parallel transport.md.html">parallel transport</a>).</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

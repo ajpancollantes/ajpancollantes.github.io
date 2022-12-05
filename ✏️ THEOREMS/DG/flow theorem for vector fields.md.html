@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Fundamental_theorem_on_vector_fields._Flow_of_a_vector_field">Fundamental theorem on vector fields. Flow of a vector field</h1>
+<p></p>
+<p>There is a better approach in <a href="./../../Bibliography/@lee2013smooth.md.html">@lee2013smooth</a> page 314.</p>
+<p>(Ojo, notación en la entrada no consistente, arreglar)</p>
+<p>Esto está en [Warner 1983] prop 1.48:</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>Sea $X$ un campo de vectores en una variedad $M$. Para cada $p \in M$ existen $a(p),b(p) \in \mathbb{R} \cup \{\pm \infty\}$ y una curva diferenciable</p>
+$$
+\gamma_p: (a(p), b(p)) \longrightarrow M
+$$
+<p>tal que:</p>
+<p>1. $0 \in (a(p), b(p))$ y $\gamma_p(0)=p$</p>
+<p>2. $\gamma_p$ es una <b>curva integral</b> de $X$ (es decir, $d(\gamma_p)_s(\frac{d}{dt})=X(\gamma_p(s))$)</p>
+<p>3. <b>Uniqueness</b>: Si $\mu:(c,d) \longrightarrow M$ es otra curva  satisfaciendo las condiciones anteriores entonces $(c,d) \subseteq (a(p), b(p))$ y $\gamma_p|_{(c,d)}=\mu$.</p>
+<p>4. Para cada $t \in \mathbb{R}$ definimos una transformación $X_t$ con dominio $D_t=\{q \in M: t \in (a(q),b(q))\}$ mediante la expresión $X_t(q)=\gamma_q(t)$, de manera que para cada $p\in M$ existe un entorno abierto $V$ y un $\epsilon >0$ tal que la aplicación</p>
+$$
+(t,q)\longrightarrow X_t(q)
+$$
+<p>está definida en $(\epsilon, \epsilon)\times V$. It is called <b>flow</b> of $X$ and it is usually denoted by $\phi_X(t,q).$</p>
+<p>5. $D_t$ es abierto para cada $t$.</p>
+<p>6. $\bigcup_{t>0} D_t =M$.</p>
+<p>7. $X_t: D_t\longrightarrow D_{-t}$ es un difeomorfismo con inversa $X_{-t}$.</p>
+<p>8. Sean $s,t \in \mathbb{R}$. El dominio de $X_s \circ X_t$ está contenido en $D_{t+s}$ (pero en general no es igual). Lo es si $s$ y $t$ tienen el mismo signo. Más aún, en el dominio de $X_s \circ X_t$, se verifica que $X_s \circ X_t=X_{t+s}$. Therefore we have a <a href="./../../♾️ CONCEPTS/local group of transformations.md.html">local group of transformations</a>.</p>
+<p></p>
+<hr>
+<p></p>
+<p>Related: <a href="./flow of the sum of two vector fields.md.html">flow of the sum of two vector fields</a></p>
+<p></p>
+<hr>
+<h1 style="margin-left:0px;" id="Important_facts">Important facts</h1>
+<p><b>Proposition</b></p>
+<p>Let $X$ be a vector field, and $k$ a constant. Let's denote $\phi_X$ and $\phi_{kX}$the flow of $X$ and $kX$ respectively. It is satisfied that:</p>
+$$
+\phi_{kX}(t,q)=\phi_{X}(kt,q).
+$$
+<p><b>Proof</b></p>
+<p>We only have to check that $\hat{\phi}(t,q)=\phi_{X}(kt,q)$ satisfies 1. and 2. for the vector field $kX$, and then we will have the result. In fact:</p>
+<p>1. $\hat{\phi}(0,q)=\phi_{X}(0,q)=q$.</p>
+<p>2. $\hat{\phi}(t,q)$ are integral curves of $kX$:</p>
+$$
+\frac{d}{dt}\hat{\phi}(t,q)=\frac{d}{dt}\phi_{X}(kt,q)=k X_{\phi_{X}(kt,q)} 
+$$
+<p>$\blacksquare$</p>
+<h2 style="margin-left:0px;" id="Jacobian_of_the_flow_of_a_vector_field">Jacobian of the flow of a vector field</h2>
+<p><b>Proposition</b></p>
+<p>Let $X$ be a vector field and $\phi_t(p)$ its flow. For every $t$ the map $\phi_t(-)$ is a diffeomorphism, so we can consider its Jacobian </p>
+$$
+J(t,x):=det(D_x \phi_t(x)).
+$$
+<p>It is satisfied that</p>
+$$
+\frac{d}{dt}|_{t=0} J(t,x)=\mbox{div}X (x)
+$$
+<p>where $\mbox{div}$ is the <a href="./../../♾️ CONCEPTS/divergence.md.html">divergence</a>.</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>See <a href="https://math.stackexchange.com/a/312623/601797" target="_blank">this answer</a> in Mathstackexchange. $\blacksquare$</p>
+<p></p>
+<p>Even more, </p>
+$$
+J(t,x)=e^{\int_0^t \mbox{div}X(\phi_s(x))ds}.
+$$
+<p>See xournal_155 page 5 for relation with <a href="./../../♾️ CONCEPTS/Jacobi last multiplier.md.html">Jacobi last multiplier</a>s.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

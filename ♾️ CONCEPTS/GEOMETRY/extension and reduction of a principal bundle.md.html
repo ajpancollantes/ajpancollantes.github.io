@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Definition_from_Mathoverflow">Definition from Mathoverflow</h1>
+<p>See <a href="https://mathoverflow.net/questions/309140/what-does-reduction-of-structure-group-of-principal-bundle-say" target="_blank">here</a>.</p>
+<p>Let $f:P(M,G)\rightarrow P'(M',G')$ be a morphism of <a href="./principal bundle.md.html">principal bundle</a>s such that $f:P\rightarrow P'$ is an imbedding and $f:G\rightarrow G'$ is a monomorphism. If $M=M'$ and the induced map $f:M\rightarrow M'$ is identity map, we call $P(M,G)$ to be <b>reduced bundle</b> for $P'(M,G').$ </p>
+<p></p>
+<p>Given a principal bundle $P’(M’,G’)$ and a Lie subgroup $G$ of $G’,$ we say <b>the structure group $G’$ is reduced to $G$</b> if there is a reduced bundle $P(M,G).$</p>
+<p></p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Extension_and_restriction_of_a">Extension and restriction of a </h1>
+<p></p>
+<p><b>Definition</b></p>
+<p>([Schuller 2013] page 178. There are some gaps in the definition and in the theorem, I think. On the other hand, I think this can be also calle group reduction or group structure reduction.)</p>
+<p></p>
+<p>Let $H$ be a closed subgroup of $G$. Let $(P,\pi, M)$ a principal $G$-bundle and $(Q,\pi',M)$ a principal $H$-bundle.  If there exists a <a href="./principal bundle map.md.html">principal bundle map</a> $u$ from $P$ to $Q$, i.e. a smooth <a href="./bundle map.md.html">bundle map</a> which is equivariant with respect to the inclusion $H \subseteq G$ then $Q$ is called an $H$-restriction of $P$ and $P$ is called a $G$-extension of $Q$.</p>
+<p><img src="./../../imagenes/Pasted image 20220101105109.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p><b>Theorem</b></p>
+<p>[Schuller 2013] page 178.</p>
+<p>Let $H$ be a closed Lie subgroup of $G$. </p>
+<p>	i) Any principal $H$-bundle can be extended to a principal $G$-bundle.</p>
+<p>	ii) A principal $G$-bundle $(P,\pi, M)$ can be restricted to a principal $H$-bundle if and only if the bundle $(P/H,\pi',M)$ has a section.</p>
+<p><b>Proof</b></p>
+<p>I don't know.</p>
+<p></p>
+<p><b>Idea of ii)</b>. Think of the <a href="./extension and reduction of a principal bundle.md.html#Example">example</a>.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Example">Example</h1>
+<p>The <a href="./../orthonormal frame bundle.md.html">orthonormal frame bundle</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

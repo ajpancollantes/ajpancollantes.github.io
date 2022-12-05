@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Jacobi_equation">Jacobi equation</h1>
+<p>(<a href="./GEOMETRY/geodesic curve.md.html">geodesic curve</a> and <a href="./GEOMETRY/Gaussian curvature.md.html">Gaussian curvature</a>)</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Case_$n=2$">Case $n=2$</h1>
+<p>In a <a href="./GEOMETRY/surface.md.html">surface</a></p>
+$$
+\ddot{\xi}=-\mathcal{K}\xi
+$$
+<p>being $\xi(t)$ the "separation" of two geodesics (<a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 269; and proof in 274)</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>It uses <a href="./geodesic polar coordinates.md.html">geodesic polar coordinates</a>. Also uses <a href="./../✏️ THEOREMS/Gauss lemma.md.html">Gauss lemma</a>.</p>
+<p>By the way, it let us to show <a href="./../✏️ THEOREMS/Minding's theorem.md.html">Minding's theorem</a>.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Case_$n>2$">Case $n>2$</h1>
+<p><img src="./../imagenes/Pasted image 20220707193229.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>According to <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> there are two versions:</p>
+<p><ul style="margin-left:0px;"><li>Sectional Jacobi equation</li></ul></p>
+$$
+\mathcal{P}\left[\boldsymbol{\nabla}_{\mathbf{v}} \boldsymbol{\nabla}_{\mathbf{v}} \boldsymbol{\xi}\right]=-\mathcal{P}[\mathcal{R}(\boldsymbol{\xi}, \mathbf{v}) \mathbf{v}]=-\mathcal{K}(\Pi) \boldsymbol{\xi}
+$$
+<p>where $\Pi$ is a plane containing the tangent vector $v$ to the geodesic, $\mathcal{P}$ is the projection over this plane and $\mathcal{K}(\Pi)$ is the <a href="./sectional curvature.md.html">sectional curvature</a>.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>General Jacobi equation or Equation of Geodesic Deviation</li></ul></p>
+$$
+\nabla_{\mathbf{v}} \nabla_{\mathbf{v}} \boldsymbol{\xi}=-\mathcal{R}(\boldsymbol{\xi}, \mathbf{v}) \mathbf{v}
+$$
+<p>When $\mathcal{R}(\boldsymbol{\xi}, \mathbf{v}) \mathbf{v}$ is not contained in $\Pi$ it happens the rotation of picture b) above.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Lie_derivative_of_forms">Lie derivative of forms	  </h1>
+<p></p>
+<p>Let $X$ be a vector field and $\phi$ its flow. Let $\alpha$ be a $p$-form, we define:</p>
+$$
+\mathcal { L } _ { X } ( \alpha )=\frac{d}{d t}\left[\phi_{t}^{*} \alpha^{}\right]_{t=0}=\lim _{t \rightarrow 0} \frac{\phi_{t}^{*} \alpha_{\phi_{t} x}-\alpha_{x}}{t}
+$$
+<p></p>
+<p>in the sense that</p>
+$$
+\left[\frac{d}{d t} \phi_{t}^{*} \alpha^{}\right]\left(\mathbf{Y}_{1}, \ldots, \mathbf{Y}_{p}\right)=
+$$
+$$
+=\frac{d}{d t}\left[\phi_{t}^{*} \alpha^{}\left(\mathbf{Y}_{1}, \dots, \mathbf{Y}_{p}\right)\right]=\frac{d}{d t}|_{t=0}\left\{\alpha^{}\left[\phi_{t *} \mathbf{Y}_{1}, \ldots, \phi_{t *} \mathbf{Y}_{p}\right]\right\}
+$$
+<p>More explicitly:</p>
+<p><img src="./../../imagenes/Pasted image 20220427075145.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>If we define vector fields $Y_i$ extending the previous vectors in a invariant way respect to the flow $\phi$, that is, $Y_i(\phi_t x)=\phi_{t*}Y_i$ then</p>
+$$
+\mathcal{L}_{\mathbf{X}} \alpha^{}\left(\mathbf{Y}_{1}, \ldots, \mathbf{Y}_{p}\right)=\frac{d}{d t}\left[\alpha_{\phi_{t} x}^{}\left(\mathbf{Y}_{1}, \ldots, \mathbf{Y}_{p}\right)\right]_{t=0}
+$$
+<p>That is, the Lie derivative of a $p$-form measure the rate of change along the flow of $X$ of the $p$-form applied to invariant vector fields along $X$. </p>
+<p>It can be generalized to <a href="./Lie derivative for tensors in general.md.html">Lie derivative for tensors in general</a>.</p>
+<p></p>
+<p>Useful formulas: <a href="./../../✏️ THEOREMS/DG/formulas for Lie derivative, exterior derivatives, bracket, interior product.md.html">formulas for Lie derivative, exterior derivatives, bracket, interior product</a>.</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>A differential $k$-form $\omega$ on $M$ is invariant under the flow of a vector field $X$, i.e., </p>
+$$
+\left.\omega\right|_{\exp (\varepsilon X) x}=\exp (-\varepsilon X)^{*}\left(\left.\omega\right|_{x}\right)
+$$
+<p>if and only if $\mathcal{L}_X(\omega)=0$</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>See <a href="./../../Bibliography/@olver86.md.html">@olver86</a> proposition 1.65.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p></p>
+<p>Especial case: the Lie derivative of a <a href="./volume form.md.html">volume form</a> leads to the idea of <a href="./../divergence.md.html">divergence</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

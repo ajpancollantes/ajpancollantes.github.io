@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Normal_subgroup">Normal subgroup </h1>
+<p>In general, left and right cosets do not coincide for an arbitrary subgroup $H$. When they do, we say it is  a normal subgroup:</p>
+<p>Un subgrupo $H$ de un grupo $G$ se dice  normal if $ghg^{-1} \in H$ para todo $g \in G$ and $h \in H$. Dicho de otra forma, $gHg^{-1}=H$.</p>
+<p></p>
+<p>Son aquellos que permiten hacer cociente y seguir obteniendo una estructura de grupo (this new group would act on the orbit space, not in the same space of course). **That is to say, they are made of transformations whose orbits get transformed to orbits of itself when any  $g \in G$ is applied.</p>
+<p></p>
+<p>Suppose that $G$ acts on a manifold $M$. We can think of the space of orbits of $H$ acting on $M$. Being $H$ normal, an element $g\in G$ transform whole orbits of $H$ in whole orbits of $H$.</p>
+<p><b>I.E., WE CAN DEFINE AN ACTION OF THE QUOTIENT GROUP ON THE ORBITS SPACE!!!</b> (I think it could be called <a href="./../quotient action.md.html">quotient action</a>)</p>
+<p><img src="./../../imagenes/Pasted image 20211022085936.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>At an infinitesimal level, the Lie algebra $\mathfrak{h}$  is an ideal of $\mathfrak{g}$. See the proof <a href="./../../✏️ THEOREMS/normal subgroup vs ideal of Lie algebra.md.html">here</a></p>
+<p></p>
+<hr>
+<p></p>
+<p>Por otro lado, su sentido visual es el siguiente.</p>
+<p>Consideremos el grupo de simetrías de un cuadrado. Tiene ocho elementos: </p>
+$$
+\{1, r, r^2,r^3,s,-s,sr, sr^3\}
+$$
+<p>donde se tienen las relaciones $s^2=1$, $rs=sr^3$, $r^2 s=s r^2$ (se visualiza mejor pensando que el cuadrado está en los números complejos con vértices: $-1, 1, i, -i$, y que $r$ es multiplicar por $i$ y $s$ es la conjugación).</p>
+<p>Es sencillo comprobar que el sugbrupo $H=\{1,s\}$ no es normal, puesto que el grupo $rHr^{-1}=\{1,rsr^{-1}\}=\{1,r^2 s\}$ no coincide con $H$. Ambos grupos, aún no siendo iguales, tienen el mismo aspecto, en el sentido de que son el mismo pero trasladados.</p>
+<p><img src="./../../imagenes/Pasted image 20211022090800.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Pues bien, un subgrupo normal es más "simétrico", en el sentido de que cualquier traslación de ida y vuelta lo deja como estaba. The subgroup $\{1, r, r^2, r^3\}$ is normal.</p>
+<p>We can say that \textbf{a normal subgroup is an invariant set under the adjoint action of the group on itself}.</p>
+<p></p>
+<hr>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Normal_subgroup_as_a_kernel">Normal subgroup as a kernel</h1>
+<p>If we have a group homomorphism $\phi: G\rightarrow G'$ the kernel $Ker(\phi)$ is a normal subgroup (easy to proof). But conversely, if $H \triangleleft G$ we can see $H$ as the kernel of the map</p>
+$$
+\pi: G \rightarrow G/H
+$$
+<p>This can be visualized in terms of the action of $G$ over a set $M$. If $G$ has a normal subgroup $H$, then we can define a group $G^{orb}$ acting on the space $M^{orb}$ of orbits of $H$ (see above). Every $g\in G$ can be seen as an element of $G^{orb}$ and the kernel of this association is, obviously $H$. So, for me, the essence of normal subgroups is that they let us to comprise the space $M$ to an orbit space and an the group $G$ to an orbit group acting on the orbit space.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

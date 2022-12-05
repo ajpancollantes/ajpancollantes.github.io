@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Example:_basis_of_left_invariants_vector_fields_and_MC_form">Example: basis of left invariants vector fields and MC form</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="The_case_of_$E2$">The case of $E(2)$</h2>
+<p>xournal 192</p>
+<p></p>
+<p>Consider the euclidean group $E(2)=\mathbb{R}^2 \rtimes SO(2)$. It can be realized as a matrix group with a local chart given by</p>
+$$
+\varphi:(a,b,\theta)\mapsto
+\begin{pmatrix}
+cos(\theta)&-sin(\theta) &a \\
+sin(\theta)& cos(\theta) & b\\
+0 & 0& 1\\
+\end{pmatrix},
+$$
+<p>for $a,b,\theta \in \mathbb{R}\times \mathbb{R}\times(-\pi,\pi)=:U$.</p>
+<p></p>
+<p>I am looking for a basis of the left invariant vector fields. In the parameter space $U$ I take a basis of $T_eU$, $\{\partial_a,\partial_b,\partial_{\theta}\}$ and apply $d(L_g)_e$ to all of them, being $g=(a_0,b_0,\theta_0)$ and</p>
+$$
+L_g: (a,b,\theta) \mapsto (cos(\theta_0) a-sin(\theta_0)b,sin(\theta_0) a+cos(\theta_0)b,\theta+\theta_0)
+$$
+<p>the left translation by $g$.</p>
+<p></p>
+<p>This way I obtain the basis of left invariants vector fields</p>
+$$
+e_1=d(L_g)_e(\partial_a|_e)=cos(\theta)\partial_a+sin(\theta)\partial_b
+$$
+$$
+e_2=d(L_g)_e(\partial_b|_e)=-sin(\theta)\partial_a+cos(\theta)\partial_b
+$$
+$$
+e_3=\partial_{\theta}
+$$
+<p>But now I want to see this basis in $GL(3)$. Because although this example is fairly easy to work with it in parameter space, with a group with a more complicated "product" can be difficult to deal. In $GL(3)$, left translation $L_g$ takes the shape of left multiplication by the matrix $\varphi(g)$</p>
+$$
+\begin{array}{ccc}
+U &\stackrel{L_g}{\longrightarrow} &U\\
+\varphi\downarrow & &\varphi\downarrow\\
+GL(3)&\stackrel{\varphi(g)\cdot-}{\longrightarrow} &GL(3)\\
+A&\longmapsto &\varphi(g)\cdot A
+\end{array}
+$$
+<p></p>
+<p>A basis for $\mathfrak{g}=T_e E(2)\subset T_e GL(3)$ is $B=\{d\varphi_e(\partial_a),d\varphi_e(\partial_b),d\varphi_e(\partial_\theta)\}$, that is,</p>
+$$
+B=\left\{
+\begin{pmatrix}
+0&0&1\\
+0&0&0\\
+0&0&0
+\end{pmatrix},
+\begin{pmatrix}
+0&0&0&\\
+0&0&1\\
+0&0&0&\\
+\end{pmatrix},
+\begin{pmatrix}
+0&-1&0&\\
+1&0&0\\
+0&0&0&\\
+\end{pmatrix}
+\right\}
+$$
+<p>Multiplying by the left with </p>
+$$
+\varphi(g)=\begin{pmatrix}
+cos(\theta)&-sin(\theta) &a \\
+sin(\theta)& cos(\theta) & b\\
+0 & 0& 1\\
+\end{pmatrix}
+$$
+<p>we obtain the left invariant vector fields in $TE(2)\subset TGL(3)$</p>
+<p></p>
+$$
+\left\{
+\begin{pmatrix}
+0&0&cos(\theta)\\
+0&0&sin(\theta)\\
+0&0&0
+\end{pmatrix},
+\begin{pmatrix}
+0&0&-sin(\theta)&\\
+0&0&cos(\theta)\\
+0&0&0&\\
+\end{pmatrix},
+\begin{pmatrix}
+-sin(\theta)&-cos(\theta)&0&\\
+cos(\theta)&-sin(\theta)&0\\
+0&0&0&\\
+\end{pmatrix}
+\right\}
+$$
+<p>It can be checked that they are precisely $\{\varphi_*(e_i)\}$.</p>
+<p></p>
+<p>By the way, given any left invariant vector field, its coordinates in the basis above are the <a href="./../♾️ CONCEPTS/GEOMETRY/Maurer-Cartan form.md.html">Maurer-Cartan form</a>s. Consider a vector field $V=v_1\partial_a+v_2\partial_b+v_3 \partial_{\theta}\in T_gU$. It yields a vector field $d\varphi (V)\in GL(3)$:</p>
+$$
+d\varphi(V)=\begin{pmatrix}
+0&0&v_1\\
+0&0&0\\
+0&0&0
+\end{pmatrix}+
+\begin{pmatrix}
+0&0&0&\\
+0&0&v_2\\
+0&0&0&\\
+\end{pmatrix}+
+\begin{pmatrix}
+-sin(\theta)v_3&-cos(\theta)v_3&0&\\
+cos(\theta)v_3&-sin(\theta)v_3&0\\
+0&0&0&\\
+\end{pmatrix}
+$$
+<p></p>
+<p>We can take $da,db,d\theta$ instead of $v_1,v_2,v_3$ and then</p>
+$$
+d\varphi=\begin{pmatrix}
+-sin(\theta)d\theta&-cos(\theta)d\theta&da&\\
+cos(\theta)d\theta&-sin(\theta)d\theta&db\\
+0&0&0&\\
+\end{pmatrix}
+$$
+<p></p>
+<p>The $\mathfrak{g}$-valued <a href="./../♾️ CONCEPTS/GEOMETRY/Maurer-Cartan form.md.html">Maurer-Cartan form</a> is, according to the formula <a href="./../✏️ THEOREMS/MC form for a matrix group.md.html">MC form for a matrix group</a></p>
+$$
+[\varphi(-)]^{-1} d\varphi=\begin{pmatrix}
+0&-d\theta&cos(\theta)da+sin(\theta)db\\
+d\theta&0&-sin(\theta)da+cos(\theta)db\\
+0&0&0&\\
+\end{pmatrix}
+$$
+<p>but, what are the real valued Maurer-Cartan forms? Since we are working with basis $B$ above, we have</p>
+$$
+\mu_1=cos(\theta)da+sin(\theta)db
+$$
+$$
+\mu_2=-sin(\theta)da+cos(\theta)db
+$$
+$$
+\mu_3=d\theta
+$$
+<p></p>
+<p><b>Question</b></p>
+<p>Coming from <a href="" target="_blank">this question</a>.</p>
+<p>I find the approach of Chern, <a href="./../Bibliography/@griffiths1974cartan.md.html">@griffiths1974cartan</a> and Clelland very misleading. They consider maps from $G=E(n)$ to $\mathbb{R}^n$, $x, e_1,\ldots, e_n$, and express their differentials in terms of the frame in which we are. But for me that doesn't seem natural because is something very particular of this example: the frame can be described in terms of the objects it describe. I consider more natural the general approach: the group $E(n)$ can be seen like a matrix group of a special type, that one with elements of the form </p>
+$$
+\begin{pmatrix}
+A & v\\
+0 & 1\\
+\end{pmatrix}
+$$
+<p>with $A\in O(n)$ and $v\in \mathbb{R}^n$. And now you only have to apply the formula for <a href="./../✏️ THEOREMS/MC form for a matrix group.md.html">MC form for a matrix group</a> $\theta=g^{-1}dg$, obtaining the same 1-forms.</p>
+<p></p>
+<p>> Is this true for every Lie group of this type? That is, whenever we have a group $G\approx \mathbb{R}^n \rtimes H$ it can be seen as a subgroup of $GL(n+1)$ as above (see this QA in MSE) and we can interpret the columns as vectors in the homogeneous space $G/H\approx \mathbb{R}^n$. Then, does the Maurer-Cartan form tell us the variation of these vectors expressed in the current frame?</p>
+<p></p>
+<p>Back to the case of $E(2)$, for simplicity. The MC form is</p>
+$$
+\theta=g^{-1}dg=\begin{pmatrix}
+0&-d\theta&cos(\theta)da+sin(\theta)db\\
+d\theta&0&-sin(\theta)da+cos(\theta)db\\
+0&0&0&\\
+\end{pmatrix}
+$$
+<p>If we consider the basis of $\mathfrak{e}(2)$ given by</p>
+$$
+B=\left\{
+\begin{pmatrix}
+0&0&1\\
+0&0&0\\
+0&0&0
+\end{pmatrix},
+\begin{pmatrix}
+0&0&0&\\
+0&0&1\\
+0&0&0&\\
+\end{pmatrix},
+\begin{pmatrix}
+0&-1&0&\\
+1&0&0\\
+0&0&0&\\
+\end{pmatrix}
+\right\}\equiv
+$$
+$$
+\equiv\{\partial_a|_e,\partial_b|_e,\partial_{\theta}|_e\}
+$$
+<p>we have </p>
+$$
+\theta=\mu_1 \otimes\partial_a|_e+\mu_2 \otimes\partial_b|_e +\mu_3\otimes \partial{\theta}|_e
+$$
+<p>with</p>
+$$
+\mu_1=cos(\theta)da+sin(\theta)db
+$$
+$$
+\mu_2=-sin(\theta)da+cos(\theta)db
+$$
+$$
+\mu_3=d\theta
+$$
+<p>In this case the Maurer-Cartan form has "two parts": $\mu_1, \mu_2$ on the one hand, and $\mu_3$ on the other hand. I think that $(\mu_1, \mu_2)$ corresponds to the canonical <a href="./../♾️ CONCEPTS/GEOMETRY/solder form.md.html">solder form</a> and $\mu_3$ is the <a href="./../♾️ CONCEPTS/GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a>.</p>
+<p></p>
+<p>> Why is this the Levi-Civita connection? What relationship does it have (if any) with the group reduction of $GL(2)$ to $O(2)$ by means of the standard metric? See <a href="./Euclidean plane.md.html">Euclidean plane</a>.</p>
+<p></p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="The_case_of_$SO3$">The case of $SO(3)$</h2>
+<p>This case is much more complicated to do "in parameters", so we are going to work directly in $GL(3)$. We can consider the group $SO(3)$ has a subgroup of $GL(3)$ given by <a href="./../♾️ CONCEPTS/SO(3).md.html">SO(3)</a> </p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Visualization_of_Lie_groups">Visualization of Lie groups</h1>
+<p><b>Proposition</b></p>
+<p>Given a group action $G\times M \mapsto M$ free and transitive, fixed $m\in M$ we have a bijection</p>
+$$
+G \stackrel{\cong}{\longmapsto} M
+$$
+<p>with $g\mapsto gm$</p>
+<p>$\blacksquare$</p>
+<p>See principal homogeneous spaces in <a href="./../♾️ CONCEPTS/ALGEBRA/homogeneous space.md.html">homogeneous space</a> .</p>
+<p>This result can be proven easily and let us use the manifold $M$ to visualize $G$.</p>
+<p></p>
+<p>If the action is not free (but still transitive), we cannot visualize $G$ (for example, $SO(3)$ acting over $S^2$). Anyway, observe first that the stabilizer of every $x\in M$ are all conjugate of each other. And second, if we fix $x\in M$, we can establish a surjection $\pi_x: G\mapsto M$, $\pi_x(g)=gx$, that gives rise to a bijection</p>
+$$
+\bar{\pi}_{x}: G / G_{x} \rightarrow X
+$$
+<p>From here we have a natural bijection</p>
+$$
+G \longrightarrow \bigsqcup_{m\in M} \{m\} \times \pi_x^{-1}(m)
+$$
+<p>that could be translated to a bijection </p>
+$$
+G \longrightarrow\tilde{M}=\bigsqcup_{m\in M} \{m\} \times G_m
+$$
+<p>if we had a \textit{preferred choice} of a $t_m \in G$ such that $t_m x=m$ for every $m\in M$ (need to be proven but I think is easy). Take $g\mapsto (gx,gt_{gx}^{-1})$...</p>
+<p>In this circumstances, we can even define an action of $G$ at $\tilde{M}$:</p>
+$$
+(g, (m,h))\longmapsto (gm,ghg^{-1})
+$$
+<p>But it is not necessarily transitive or free.</p>
+<p></p>
+<p>But on the other hand, since the action of $G$ on itself is free and transitive, we can copy this action to $\tilde{M}$ with the previous bijection and obtain a new action on $\tilde{M}$</p>
+$$
+(g, (m,h))\longmapsto (gm,ght_m t_{gm}^{-1})
+$$
+<p>For example, we can see $SO(3)$ as the sphere bundle of $S^2$. Remember</p>
+$$
+S M:=\left\{(x, v): x \in M, v \in T_{x} M,|v|=1\right\}=
+$$
+$$
+=\bigsqcup_{x\in M} \{x\}\times S^1
+$$
+<p>This is this way because if we fix a point $P$ in $S^2$ and define $\pi_P:SO(3)\mapsto S^2$ taking the action on $P$, we have the bijection of $SO(3)$ with $\bigsqcup \{x\}\times \pi_P ^{-1}(x)$ and, even more, we have preferred transformations from one point to another: the great circle paths \textbf{with angle lesser or equal to $\pi$}. So (following result above) we have</p>
+$$
+SO(3)\stackrel{\equiv}{\longmapsto} \bigsqcup_{x\in S^2} \{x\}\times SO(2)
+$$
+<p>given explicitly by</p>
+$$
+g\longmapsto (gP, g t_{gP}^{-1})
+$$
+<p>where $t_Q$ is the great circle path from $P$ to $Q$.</p>
+<p>This bijection is, indeed, a diffeomorphism, as can be proven with the map</p>
+$$
+\Phi: S\left(\mathbb{S}^{2}\right) \rightarrow S O(3)
+$$
+$$
+\Phi(x, v):=[x, v, x \times v]
+$$
+<p>that sends the pair of vectors in $\mathbb{R}^3$ $(x,v)$ to the orthogonal matrix $[x, v, x \times v]$.</p>
+<p></p>
+<p>But let's return to our original map and take $P=(1,0,0)$ and think of several examples to \textit{see} the elements of $SO(3)$.</p>
+<p><ul style="margin-left:0px;"><li>The identity $id\in SO(3)$ corresponds to $P$ itself with the identity in $SO(2)$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Rotation of axis $x$ and angle $\theta$, $R_{x}^{\theta}\in SO(3)$,  corresponds to $(P,R^{\theta})$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Rotation of axis $z$ and angle $\theta$, $R_{z}^{\theta}\in SO(3)$,  corresponds to $(R_{z}^{\theta} P, id)$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Rotation of axis $y$ and angle $\theta$, $R_{y}^{\theta}\in SO(3)$,  corresponds to $(R_{y}^{\theta} P, id)$.</li></ul></p>
+<p><img src="./../imagenes/rotations1.jpg" style="width:30vw; border-radius: 3px;" ></p>
+<p>In general, rotation $R_e^{\theta}$ through an axis no orthogonal to $P$ yields $(Q,R^{\alpha})$ where $Q=R_e^{\theta}P$ and $R^{\alpha}=R_e^{\theta}t_Q^{-1}\in SO(2)$, with $\alpha$ an angle that measures how much $P$ deviates from the great circle corresponding to the axis $e$. </p>
+<p><img src="./../imagenes/rotations2.jpg" style="width:24vw; border-radius: 3px;" ></p>
+<p><ul style="margin-left:0px;"><li><b>Hypothesis</b>: a point $(Q,R^{\alpha}) \in \bigsqcup_{x\in S^2} \{x\}\times SO(2)$ comes from the composition of the rotation $t_Q\in SO(3)$ with a rotation of angle $\alpha$ an axis $Q$ itself...</li></ul></p>
+<p></p>
+<p><b>To sum up, we would have something like this</b>: fixed $P\in S^2$, rotations around great circles passing through $P$ and angle $\theta$ are encoded in the arrival point of $P$, $Q$. If the rotation is not along a great circle, is encoded in the same final point $Q$ but with an \textit{internal rotation} of angle $\gamma$ (i.e., an element of the $SO(2)$ of $Q$) related to the angular displacement $\alpha$ of the axis of the rotation respect to the ideal great circle rotation taking $P$ to $Q$ with angle lesser than $\pi$. By mean of examples I guess that  $\gamma=2\alpha$:</p>
+<p><img src="./../imagenes/rotations3.jpg" style="width:24vw; border-radius: 3px;" ></p>
+<p>Possible rotations other than the great circle of axis $e_{PQ}$ taking $P$ to $Q$ arise when we choose a different axis $e$ along the \textit{perpendicular bisector} of $PQ$. The extremal case is when $e=-e_{PQ}$ ($\alpha=\pi$), and then they begin to be repeated (although in a complementary way).</p>
+<p>Keep an eye: this is not diffeomporhic to the 3-sphere $S^3$. $S^3$ is diffeomorphic to the <a href="./../♾️ CONCEPTS/covering group.md.html">covering group</a> $\tilde{SO(3)}=SU(2)$, the double cover of $SO(3)$. See <a href="./../♾️ CONCEPTS/unitary matrix.md.html#Unitary_matrix">unitary matrix#Unitary matrix#What is SU 2 topologically</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

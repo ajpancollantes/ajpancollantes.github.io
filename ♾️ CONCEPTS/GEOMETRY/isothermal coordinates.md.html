@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Isothermal_coordinates_or_conformal_coordinates">Isothermal coordinates (or conformal coordinates)</h1>
+<p></p>
+<p>On a <a href="./(pseudo)-Riemannian manifold.md.html">(pseudo)-Riemannian manifold</a>, a coordinate system is called "isothermal" if the <a href="./Riemannian metric.md.html">Riemannian metric</a> in those coordinates is <a href="./../conformal map.md.html">conformal</a> to the Euclidean metric:</p>
+<p></p>
+$$
+g_{ij} = e^{\rho} Id=\Lambda^2 Id \tag{1}
+$$
+<p>The coefficient $\Lambda^2$ is called conformal factor. It is a measure of how distorted is the surface in every point with respect tot a plane. </p>
+<p></p>
+<p><b>Example</b>: see <a href="./../stereographic projection.md.html#First_approach">stereographic projection#First approach</a>. </p>
+<p></p>
+<p>It is well known that when the dimension $n=2$, there always exist isothermal coordinates, and this is probably where they were first introduced.</p>
+<p>They solve $\Delta_g u=0$. So locally it is a stationary solution of the heat equation. In physics, for a steady state distribution of temperatures, each level set is called an isotherm. </p>
+<p>See this <a href="https://mathoverflow.net/questions/32169/why-are-they-called-isothermal-coordinates" target="_blank">Q&A</a></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Gaussian_curvature">Gaussian curvature</h2>
+<p>In isothermal coordinates, <a href="./Gaussian curvature.md.html">Gaussian curvature</a> takes the simpler form (wikipedia):</p>
+$$
+K=-\frac{1}{2} e^{-\rho}\left(\frac{\partial^{2} \rho}{\partial u^{2}}+\frac{\partial^{2} \rho}{\partial v^{2}}\right)=-\frac{\Delta \mbox{log}(\Lambda)}{\Lambda^2}
+$$
+<p>where $\Lambda^2=e^{\rho}$ and $\Delta$ is the Laplacian.  Here $\Lambda$ is the expansion factor of a vector in the surface with respect to itself expressed in the chart. That is, if we move a quantity $\delta$ in the chart $(u,v)$, in the surface we will have moved a quantity $\Lambda\delta$ (<a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 41).</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Matrix_exponential">Matrix exponential</h1>
+<p>Given a matrix $K$, we define a new matrix $\exp(K)$ as</p>
+$$
+\exp(K)=\mathrm{id}+K + \frac{K^{2}}{2 !}+\cdots 
+$$
+<p>It can be shown that it is well defined, i.e., this series is convergent. The proof involves the definition of a convenient norm in the matrix space, etcetera. </p>
+<p></p>
+<p>Matrix exponential has a bunch of good properties:</p>
+<p><ul style="margin-left:0px;"><li>$\exp \left(0_{n}\right)=I_{n}$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\exp (A+B)=\exp (A) \exp (B)$ provided $A B=B A$. In fact</li></ul></p>
+$$
+e^{\hat{A}+\hat{B}}=e^{\hat{A}} e^{\hat{B}} e^{-\hat{[A,B]} / 2}
+$$
+<p>is the Baker-Campbell-Hausdorff theorem.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$\exp (A)^{-1}=\exp (-A)$ for every $A \in \mathcal{M}(n, \mathbb{R})$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$\exp \left(A^{T}\right)=(\exp (A))^{T}$ for every $A \in \mathcal{M}(n, \mathbb{R})$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$\exp \left(P A P^{-1}\right)=P \exp (A) P^{-1}$ for every $A \in \mathcal{M}(n, \mathbb{R})$ and $P\in GL(n,\mathbb{R})$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$\exp \left(A^{\dagger}\right)=(\exp (A))^{\dagger}$ for every $A \in \mathcal{M}(n, \mathbb{R})$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>If $A$ is a diagonal matrix with elements $\lambda_i$, $exp(A)$ is also diagonal, with elements $e^{\lambda_i}$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>If</li></ul></p>
+$$
+A=\left( \begin{array}{ccccc}{0} & {1} & {0} & {\dots} & {0} \\ {0} & {0} & {1} & {\dots} & {0} \\ {\vdots} & {\vdots} & {\vdots} & {\ddots} & {\vdots} \\ {0} & {0} & {0} & {\dots} & {1} \\ {0} & {0} & {0} & {\ldots} & {0}\end{array}\right)
+$$
+<p>then</p>
+$$ 
+e^{A t}=\left( \begin{array}{ccccc}{1} & {t} & {t^{2} / 2} & {\dots} & {t^{n-1} /(n-1) !} \\ 
+      & {1} & {t} & {\cdots} & {\vdots} \\ 
+
+      & { } & {1} & {\cdots} & {t^{2} / 2} \\ 
+      &{ } & { } & {\ddots} & {t} \\ 
+&{ } & { } & {\ddots} & {1}\end{array}\right)
+$$
+<p><b>Proof</b></p>
+<p>First, check that $A$ can be seen as the matrix of the derivative operator on polynomial-of-degree-less-than-n vector space, if we take the basis $\{1,\frac{x}{1!}, \frac{x^2}{2!}, \frac{x^3}{3!}\}$. And the other matrix above is the matrix of the linear operator $H_t:p(x)\mapsto p(x+t)$ acting on the same vector space with the same basis.</p>
+<p>Now, classical Taylor's theorem states that</p>
+$$
+e^{At}(p(x))=(\mathrm{id}+tA + t^2\frac{A^{2}}{2 !}+\cdots )(p(x))=p(x)+tp'(x)+t^2\frac{p''(x)}{2!}+\cdots=p(x+t)=H_t(p(x))
+$$
+<p>That is to say</p>
+$$
+exp(At)=H_t
+$$
+<p>$\blacksquare$ </p>
+<p>Given any $K \in \mathcal{M}(n, \mathbb{R})$, let $\gamma(t)=\exp (t K)$ for $t \in \mathbb{R}$. Observe that $\gamma$ is differentiable, and $\gamma'(t)$ can be obtained differenciating term by term in the infinite sum (it results of convergence theorems). In fact, $\gamma'(t)=K\gamma(t)$.</p>
+<p>Moreover, we can check that $\gamma: \mathbb{R} \mapsto GL(n,\mathbb{R})$ is a one-parameter subgroup with $\gamma^{\prime}(0)=K$</p>
+<p>The surprise is that the converse is also true:</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>If</p>
+$$ 
+\gamma : \mathbb{R} \rightarrow G L(n, \mathbb{R})
+$$
+<p>is a one-parameter subgroup then</p>
+$$ 
+\gamma(t)=\exp (t A)
+$$
+<p>where $A=\gamma'(0)$</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>It is based on the existence and uniqueness theorem of ODEs. Let $y=\gamma(t) x$, where $x$ is a constant vector in $\mathbb{R}^n$. Then, with the definition of the derivative we check that $y$ is a solution of </p>
+$$
+y^{\prime}=A y
+$$
+<p>with $A=\gamma'(0)$. But $e^{At}$ is another one...</p>
+<p>$\blacksquare$</p>
+<p>Observe that $\gamma(\mathbb{R})$ could be contained in any subgroup $G$ of $GL(n,\mathbb{R})$. In this case, $A \in \mathfrak{g}$. On the contrary, if we take any $A \in \mathfrak{g}$, then $\exp (t A)\in G$ (proof?).</p>
+<p></p>
+<p>Thus, if we have a matrix $M_{\tau}$ depending on the parameter $\tau$ in such a way that $\{M_{\tau}\}$ constitutes a one-parameter group then </p>
+$$
+M_{\tau}=\mathrm{id}+K \tau+K^{2} \frac{\tau^{2}}{2 !}+\cdots =\exp(\tau K);  \tau \in \mathbb{R}
+$$
+<p>for some matrix $K$ not depending on $\tau$.</p>
+<p></p>
+<p>Another important result, although more general that matrices groups, is:</p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>Given $F:G_1\longmapsto G_2$ a differentiable group homomorphism, then</p>
+$$
+F(\exp(A))=\exp(dF(A))
+$$
+<p>$\blacksquare$</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

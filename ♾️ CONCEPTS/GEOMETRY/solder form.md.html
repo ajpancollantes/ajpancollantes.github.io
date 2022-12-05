@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Solder_form">Solder form</h1>
+<p>See <a href="https://en.wikipedia.org/wiki/Solder_form" target="_blank">wikipedia</a>.</p>
+<p><b>Definition</b></p>
+<p>Let $M$ be a smooth manifold, and $G$ a <a href="./../Lie group.md.html">Lie group</a>. Let $E\to M$ be a fiber bundle with structure group $G$ (see <a href="./G-bundle.md.html">G-bundle</a>s). Suppose that $G$ acts transitively on the standard fibre $F$, and that $dim F=dim M$.  (By the way, the standard fibre would be a <a href="./../ALGEBRA/homogeneous space.md.html">homogeneous space</a>). </p>
+<p>A soldering of $E$ to $M$ consist of:</p>
+<p><ul style="margin-left:0px;"><li>A distinguished section $\sigma: M\to E$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>A linear isomorphism of vector bundles</li></ul></p>
+$$
+\theta: TM\to \sigma^*(VE),
+$$
+<p>from the tangent bundle of $M$ to the pullback of the <a href="./vertical bundle.md.html">vertical bundle</a> of $E$. This is called the solder form.</p>
+<p>$\blacksquare$</p>
+<p>The intuition behind this notion is $E$ represents putting a copy of a homogeneous space on every point of $M$, and the soldering tell us a point of contact for every $x$ with the homogeneous space and an identification of the tangent spaces.</p>
+<p><img src="./../../imagenes/Pasted image 20220919192833.png" style="width:43vw; border-radius: 3px;" ></p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Principal_bundles">Principal bundles</h2>
+<p>See <a href="https://en.wikipedia.org/wiki/Solder_form" target="_blank">wikipedia</a>, down to "principal bundles" section.</p>
+<p></p>
+<p>Suppose that $M$ has dimension $n$ and $H$ is a group which acts on $\mathbb{R}^n$ (i.e., we have a <a href="./group representation.md.html">group representation</a> of $H$). A solder form on a $H$-<a href="./principal bundle.md.html">principal bundle</a> $P$ over $M$ is an $\mathbb{R}^n$-valued 1-form $\theta: TP \to \mathbb{R}^n$ which is horizontal (in the sense that $\theta(V)=0$ for $V$ a <a href="./vertical bundle.md.html">vertical vector</a>) and equivariant</p>
+$$
+R_h^*\theta=h^{-1}\theta
+$$
+<p>for $h\in H$; so that it induces a bundle homomorphism from TM to the <a href="./associated bundle.md.html">associated bundle</a> $P \times_{H} \mathbb{R}^{n}$. This is furthermore required to be a bundle isomorphism. </p>
+<p></p>
+<p>The reason for the name is that a solder form solders (or attaches) the abstract principal bundle to the manifold M by identifying an associated bundle with the tangent bundle.</p>
+<p></p>
+<p>The main example is the <a href="./frame bundle.md.html#Tautological_1-form">canonical solder form</a> of the <a href="./frame bundle.md.html">frame bundle</a>, which sends a tangent vector $X\in T_pP$ to the coordinates of $d\pi_p(X)\in T_{\pi(p)}M$ with respect to the frame $p$.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

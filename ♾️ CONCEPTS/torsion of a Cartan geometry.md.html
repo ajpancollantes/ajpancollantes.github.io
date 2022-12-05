@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Torsion_of_a_Cartan_geometry">Torsion of a Cartan geometry</h1>
+<p>See <a href="./../Bibliography/@sharpe2000differential.md.html">@sharpe2000differential</a> page 184.</p>
+<p><b>Definition</b></p>
+<p>Consider a <a href="./GEOMETRY/Cartan geometry.md.html#Definition_and_remarks">Cartan geometry</a> $(P,A)$ modeled on $(G,H)$, and let $\Omega$ be its <a href="./curvature of a Cartan geometry.md.html">curvature</a>. If </p>
+$$
+\rho: \mathfrak{g} \to \mathfrak{g}/\mathfrak{h}
+$$
+<p>is the canonical projection then $\rho(\Omega)$ is called the <b>torsion</b>.</p>
+<p>$\blacksquare$</p>
+<p>It is a measure of the deviation of the curvature from belonging to $\mathfrak{h}$. The idea, I think, is that if we travel through a closed loop, if the geometry is not flat we don't recover our original "position+orientation", but a modified "position+orientation" due to the curvature. If after our travel we only have modified our "orientation" then we are in a <b>torsion-free</b> Cartan geometry. The change of the "position" (a translation) is the <b>torsion</b>.</p>
+<p></p>
+<p></p>
+<h4 style="margin-left:0px;" id="Idea_to_explore">Idea to explore</h4>
+<p>In <a href="https://mathoverflow.net/q/122182/129995" target="_blank">this question on MO</a> it is said that the torsion $\rho(\Omega)$ can be computed as</p>
+$$
+de+\omega \wedge e
+$$
+<p>where $A=\omega+e$, being $\omega$ the projection on $\mathfrak{h}$ (a kind of "rotations") and $e$ the projection on $\mathfrak{g}/\mathfrak{h}$ (a kind of "translations"). Moreover, it is said that $\Omega=d\omega+\omega\wedge \omega$... This is what is called in <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 440 the Cartan's second structural equation.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

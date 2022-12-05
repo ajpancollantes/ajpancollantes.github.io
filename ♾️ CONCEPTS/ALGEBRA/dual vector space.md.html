@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Dual_vector_space">Dual vector space  </h1>
+<p></p>
+<p>Dado un espacio vectorial $V$, definimos $V^*$ como el espacio de aplicaciones lineales de $V$ en $\mathbb{R}$ (formas lineales).</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Dual_basis">Dual basis</h1>
+<p>Dada una base en $V$, $\{e^i\}$, llamamos base dual a $\{e_i\}$ donde los $e_i$ son formas verificando:</p>
+<p></p>
+$$
+
+e_i(e^j)=\delta_i ^j \textrm{ (delta de Kroneker)}
+
+$$
+<p></p>
+<h1 style="margin-left:0px;" id="No_natural_isomorphism">No natural isomorphism</h1>
+<p>At a first glance, there is no natural isomorphism between $V$ and $V^*$. But if we have in $V$ an <a href="./../FUNCTIONAL ANALYSIS/inner product space.md.html">inner product</a> $g$, <b>we automatically do have a natural isomorphism</b> from $V$ into $V^*$:</p>
+$$
+T(v)=g(\cdot, v)
+$$
+<p>And reciprocally: given an isomorphism we  <b>recover a bilinear form (not necessarily a metric)</b>, which is non degenerated. Given $\phi: V\rightarrow V^*$ we can define</p>
+$$
+b:V\times V \rightarrow \mathbb{R}
+$$
+<p>by means of $b(v_1,v_2)=\phi(v_1)(v_2).$ </p>
+<p></p>
+<p>But you can argue that we have a natural isomorphism: the one which sends $e^i$ to $e_i$. But it is needed to fix a basis. In this case, the bilinear for associated is the one with matrix $\left(\begin{array}{cc c}1 & 0& \cdots \\ 0 & 1 & \cdots \\ \cdots &\cdots & \cdots\end{array}\right)$  in the basis $\{e^i\}$.</p>
+<p>So in a vector space is equivalent:</p>
+<p>1. Fixing a basis</p>
+<p>2. Fixing a metric</p>
+<p>3. Fixing an isomorphism with its dual, with conditions.</p>
+<p></p>
+<p>Además, el producto escalar original induce otro en $V^*$. Se puede ver "a mano" o pensando que, igual que hay una correspondencia entre productos escalares en $V$ e isomorfismos de $V$ en $V^*$, la hay entre productos escalares de $V^*$ e isomorfismos de $V^*$ y $V^{* *}$. Pero es que $V^{* *}=V$, luego la secuencia es: el producto $g$ induce el isomorfismo $T$ y como $T^{-1}$ también es isomorfismo induce un producto escalar $g^*$ en $V^*$. </p>
+<p></p>
+<p>Moreover, the inner products $g$ and $g^*$ are inverse, in the sense that for a vector $v$</p>
+$$
+g^*(g(v,_), -)=v
+$$
+<p></p>
+<p>In <a href="./../../⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html">Penrose abstract index notation</a> we would have:</p>
+<p></p>
+$$
+g_{ab}g^{bc}=\delta_a^c
+$$
+<p></p>
+<h1 style="margin-left:0px;" id="Covariant_components_of_a_vector">Covariant components of a vector</h1>
+<p>Let $v=\sum_i v^i e^i$. It is clear that it has a correspondent $v^*\in V^*$ such that $v^*=\sum_i g(v,e^i) e_i$. We write $v_i=g(v,e^i)$ and call it <b>the covariant components</b> of $v$, while $v^i$ are the <b>contravariant ones</b>. Since $g$ has an inverse, we can recover the contravariant components from the covariant ones: $v^i=g^*(v^*,e_i)$. Using the matrix form of $g=(g_{ij})$ and $g^*=(g^{ij})$ respect to the chosen basis we would write</p>
+$$
+\sum_i v^i e^i=\sum_i \sum_j g^{ij}v_j e^i=\sum_i \sum_j g^{ij} g(v,e^j)e^i
+$$
+<p>and so</p>
+$$
+v^i=\sum_j g^{ij} g(v,e^j)
+$$
+<p>Compare with the usual orthogonal case $v^i=g(v,e^i)$.</p>
+<p></p>
+<p>Here you can compare the $v^i$s with the $v_i$s:</p>
+<p><img src="./../../imagenes/coordenadadual.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p></p>
+<p>This ideas, I think, can be generalized to <a href="./homogeneous space.md.html#Intuitive_approach">general frames</a> in homogeneous spaces. See <a href="./../../☕REFLECTIONS/general covariance and contravariance.md.html">general covariance and contravariance</a>.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

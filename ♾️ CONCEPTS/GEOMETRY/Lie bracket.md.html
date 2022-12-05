@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Lie_bracket">Lie bracket</h1>
+<h2 style="margin-left:0px;" id="Definition">Definition</h2>
+<p>Si $X$ e $Y$ son dos campos de vectores en una variedad $M$ definimos un nuevo campo de vectores $[X,Y]$ mediante la expresión</p>
+$$
+[X,Y](p)(f)=X(p)(Y(f))-Y(p)(X(f)))
+$$
+<p>Hay que demostrar que es un campo.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Visualization">Visualization</h2>
+<p>Lie bracket of two vector fields, $[u,v]$, measures how is the gap when we try to draw a rectangle along flow lines of $u$ and $v$. Let' see:</p>
+<p>Let's go to a local chart $U$ with coordinates $x_i$. If $u=u^i \partial x_i$ and $v=v^i \partial x_i$ we have that</p>
+$$
+[u,v]=\left( u^j \frac{\partial v^i}{\partial x_j}- v^j \frac{\partial u^i}{\partial x_j} \right) \partial x_i
+$$
+<p>On the other hand, consider a point $P$, in the local chart. Let's call $\varphi$ to the flow of $v$ and $\phi$ to the flow of $u$. If we move a little amount $\epsilon$ from $P$ following $v$ we arrive to a point $R$ that can be approximated by:</p>
+$$
+\varphi_P(\epsilon)=R=P+\epsilon v_p+O(\epsilon^2)
+$$
+<p>Let's call $R'=P+\epsilon v_p$. Now we can move along the flow of $u$. If we moved from $R$ we would arrive to, say, $S$ (the perfect final position), but if we begin in $R'$ we will arrive to $S'$. But since we are approximating, we actually arrive to a certain $S''$ in the following way:</p>
+$$
+\phi_{R'}(\epsilon)=S'=R'+\epsilon u_{R'}+O(\epsilon^2)
+$$
+<p>where we take $S''=R'+\epsilon u_{R'}$</p>
+<p><img src="./../../imagenes/Pasted image 20220703105036.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>But observe that</p>
+$$
+S''=P+\epsilon v_P+\epsilon\left(u_P+\epsilon\frac{\partial u^i_P}{\partial x_j} v^j_P+O(\epsilon^2) \right)=
+$$
+$$
+=P+\epsilon v_P+\epsilon u_P+\epsilon^2 \frac{\partial u^i_P}{\partial x_j} v^j_P+O(\epsilon^3)
+$$
+<p>If we begin our "whole approximated journey" from $P$ but beginning with the flow of $u$ instead, we would arrive to a certain $T''$, such that:</p>
+$$
+T''=P+\epsilon u_P+\epsilon v_P+\epsilon^2 \frac{\partial v^i_P}{\partial x_j} u^j_P+O(\epsilon^3)
+$$
+<p>So the vector $T''-S''$ (remember we are in a local chart) is</p>
+$$
+T''-S''=\epsilon^2[u,v]_P+O(\epsilon^3)
+$$
+<p></p>
+<p>So $[u,v]$ measures the failure to close a parallelogram, in some sense.</p>
+<p></p>
+<p>Here is a picture from TRTR, by Penrose.</p>
+<p><img src="./../../imagenes/Pasted image 20220703105136.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Esto está formalizado en el teorema 7.12 del \cite{boothby}, que dice lo siguiente:</p>
+<p></p>
+<p><b>Theorem</b></p>
+<p>Sean $X$ e $Y$ dos campos de vectores diferenciables en una variedad $M$. Entonces $[X,Y]=0$ en todo $M$ si y sólo si para cada $p \in M$ existe un $\delta_p >0$ tal que $X_s \circ Y_t(p)=Y_t\circ X_s(p)$ para $s,t <\delta_p$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>TFG Adrián Ruíz, teorema 4.2.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<hr>
+<p></p>
+<h1 style="margin-left:0px;" id="Idea">Idea </h1>
+<p>(I think is the same as above, review and delete if needed)</p>
+<p></p>
+<p>To see the idea of Lie bracket, we are going to consider a  local chart around a point $P$, and to use the Taylor expansion theorem in two ways: for a curve in $\mathbb{R}^n$ and for a map $\mathbb{R}^n\rightarrow\mathbb{R}^n$:</p>
+<p><img src="./../../imagenes/liebracketgap1.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><img src="./../../imagenes/liebracketgap2.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><img src="./../../imagenes/liebracketgap3.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>On the other hand, see TFG Adrián Ruíz for another approach of the Lie bracket as generating a <b>zero velocity curve</b> (lema 4.2. y lema 4.3.) </p>
+<p></p>
+<hr>
+<p></p>
+<h1 style="margin-left:0px;" id="Useful_formula">Useful formula</h1>
+<p>Also we have the following formula for the Lie bracket (Wikipedia, Lie bracket of vector fields):</p>
+$$
+[X, Y]_{p}=\left.\frac{1}{2} \frac{\mathrm{d}^{2}}{\mathrm{d} t^{2}}\right|_{t=0}\left(\Phi_{-t}^{Y} \circ \Phi_{-t}^{X} \circ \Phi_{t}^{Y} \circ \Phi_{t}^{X}\right)(p)=
+$$
+$$
+=\left.\frac{\mathrm{d}}{\mathrm{d} t}\right|_{t=0}\left(\Phi_{-\sqrt{t}}^{Y} \circ \Phi_{-\sqrt{t}}^{X} \circ \Phi_{\sqrt{t}}^{Y} \circ \Phi_{\sqrt{t}}^{X}\right)(p)
+$$
+<p>where we are denoting the flows of the vector fields by $\Phi_t^X$.</p>
+<p><b>Proof</b></p>
+<p>TFG Adrián Ruíz, teorema 4.3.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<hr>
+<p></p>
+<h1 style="margin-left:0px;" id="Coordinates_expression_for_the_Lie_bracket">Coordinates expression for the Lie bracket</h1>
+<p>If $u=u^i \partial x_i$ and $v=v^i \partial x_i$ we have that</p>
+$$
+[u,v]=\left( u^j \partial _{x_j}{v^i}- v^j \partial_{x_j}{u^i} \right) \partial x_i
+$$
+<p></p>
+<hr>
+<p></p>
+<h2 style="margin-left:0px;" id="Other_remarks">Other remarks</h2>
+<p><ul style="margin-left:0px;"><li>It can be shown that is the same as <a href="./Lie derivative of vector fields.md.html">Lie derivative of vector fields</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>It is bilinear, and also satisfies</li></ul></p>
+<p><ul style="margin-left:20px;"><li>Alternativity: $[x, x]=0$</li></ul></p>
+<p><ul style="margin-left:20px;"><li>Jacobi identity: $[x,[y, z]]=[[x, y], z]+[y,[x, z]$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>If we abstract the properties of the Lie bracket we arrive to the notion of <a href="./Lie algebra.md.html">Lie algebra</a>s.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Given any <a href="./../covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$:</li></ul></p>
+$$
+[X,Y]=X^m\nabla_m Y^a-Y^m\nabla_m X^a
+$$
+<p>The proof is in <a href="./../../Bibliography/@malament2012topics.md.html">@malament2012topics</a>, I guess... In <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 288 appears a motivational picture, but the formalization is not good, from my point of view:</p>
+<p><img src="./../../imagenes/Pasted image 20220703103724.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><ul style="margin-left:0px;"><li>Lie bracket has to do with <a href="./../../✏️ THEOREMS/Clairaut's theorem.md.html">Clairaut's theorem</a>: $[\partial_{x_i},\partial_{x_j}]=0$.</li></ul></p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

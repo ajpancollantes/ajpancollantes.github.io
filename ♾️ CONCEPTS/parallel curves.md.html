@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Parallel_curves">Parallel curves</h1>
+<p>See <a href="https://planetmath.org/parallelcurve" target="_blank">planetmath</a>.</p>
+<p></p>
+<p>Given two curves, one is a parallel curve (also known as an offset curve) of the other if the points on the first curve are equidistant to the corresponding points in the direction of the second curve’s normal. Alternatively, a parallel of a curve can be defined as the envelope of congruent circles whose centres lie on the curve.</p>
+<p></p>
+<p>For a parametric curve in the plane defined by  $F(u):=(x(u),y(u))$,  its parallel curve  $G(u):=(X(u),Y(u))$  with offset $t$ is defined by</p>
+$$
+\begin{array}{l}
+X(u)=x(u)+\frac{t y^{\prime}(u)}{\sqrt{x^{\prime}(u)^{2}+y^{\prime}(u)^{2}}} \\
+Y(u)=y(u)-\frac{t x^{\prime}(u)}{\sqrt{x^{\prime}(u)^{2}+y^{\prime}(u)^{2}}}
+\end{array}
+$$
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Lie_derivative_for_tensors">Lie derivative for tensors</h1>
+<p>This generalize the <a href="./Lie derivative of forms.md.html">Lie derivative of forms</a> and the <a href="./Lie derivative of vector fields.md.html">Lie derivative of vector fields</a></p>
+<p></p>
+<p>This includes the previous section. For any smooth vector field $\lambda^a$, any smooth </p>
+<p></p>
+<p>tensor field $\alpha_{b_{1} \ldots b_{s}}^{a_{1} \ldots a_{r}}$ and any torsion free affine connection $\nabla$:</p>
+<p></p>
+$$
+
+\begin{aligned} \mathcal{L}_{\lambda} \alpha_{b_{1} \ldots b_{s}}^{a_{1} \ldots a_{r}}=& \lambda^{n} \nabla_{n} \alpha_{b_{1} \ldots b_{s}}^{a_{1} \ldots a_{r}}+\alpha_{n b_{2} \ldots b_{s}}^{a_{1} \ldots a_{r}} \nabla_{b_{1}} \lambda^{n} \\ &+\ldots+\alpha_{b_{1} \ldots b_{s-1} n}^{a_{1} \ldots a_{r}} \nabla_{b_{s}} \lambda^{n} \\ &-\alpha_{b_{1} \ldots b_{s}}^{n a_{2} \ldots a_{r}} \nabla_{n} \lambda^{a_{1}}-\ldots-\alpha_{b_{1} \ldots b_{s}}^{a_{1} \ldots a_{r-1} n} \nabla_{n} \lambda^{a_{r}} \end{aligned}
+
+$$
+<p></p>
+<p>(see \cite{malament} page 53).</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>In particular:</p>
+<p></p>
+<p>\begin{itemize}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>\item $\mathcal{L}_{\lambda} \alpha^{a}=\lambda^n \nabla_n \alpha^{a}-\alpha^n \nabla_n \lambda^a$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>\item $\mathcal{L}_{\lambda} \alpha_{b}=\lambda^n \nabla_n \alpha_{b}+\alpha_n \nabla_b \lambda^n$</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>\item $\mathcal{L}_{\lambda} g_{ab}=\lambda^n \nabla_n g_{ab}+g_{nb} \nabla_a \lambda^n+g_{an} \nabla_b \lambda^n$</li></ul></p>
+<p></p>
+<p>\end{itemize}</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

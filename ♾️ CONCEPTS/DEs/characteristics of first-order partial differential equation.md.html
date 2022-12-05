@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Characteristic_equation_of_a_PDE">Characteristic equation of a PDE</h1>
+<p>Probably is a particular case of <a href="./../method of characteristics.md.html">method of characteristics</a>...</p>
+<p></p>
+<p><img src="./../../imagenes/Documento 331_2.jpg" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>The following discussion is made for first order homogeneous linear <a href="./../PDE.md.html">PDE</a>s, but according to <a href="https://en.wikipedia.org/wiki/Method_of_characteristics" target="_blank">this entry of wikipedia</a> it can be generalized to any first order PDE (see section Fully nonlinear case).</p>
+<p></p>
+<p>Given a first order homogeneous linear PDE</p>
+<p></p>
+$$
+a_{1} \partial W / \partial x_{1}+\cdots+a_{n} \partial W / \partial x_{n}=0 \tag{1}
+$$
+<p></p>
+<p>where $a_k=a_k(x_1,\ldots,x_n)$, we look for solutions</p>
+<p></p>
+$$
+W: \mathbb{R}^n \rightarrow \mathbb{R}.
+$$
+<p></p>
+<p>We can consider a solution like "surfaces" $S$ given implicitly by $W=cte$. Their tangent planes are given by the kernel of $dW$</p>
+<p></p>
+<p>If we define the vector field $A=a_1\partial x_1+a_2\partial x_2+\ldots+a_n \partial x_n$, a function $W$ is solution of (1) if $A(W)=0$, i.e., the integral curves of $A$ are contained in the surfaces $W=cte$.</p>
+<p></p>
+<p>The ODE </p>
+<p></p>
+$$
+
+\dot{x}=A(x) \tag{2}
+
+$$
+<p></p>
+<p>is called the characteristic system or characteristic equation, and their integral curves are called the characteristics of the original PDE.  Solutions of the <a href="./../PDE.md.html">PDE</a> are <a href="./first integral.md.html">first integral</a>s of the characteristic equation.</p>
+<p></p>
+<p>The ODE (2) is, for me, like a parametric expression of a line $r$ in linear algebra. On the contrary, equation (1) is similar to an implicit expression of all the planes containing the line $r$. The 1-form $dW$ is like an implicit equation</p>
+<p></p>
+<p><b>Method of characteristic</b></p>
+<p>I think that method of characteristics is usually called to what follows.</p>
+<p>The line $r$ above can be described by saying that it is made of vectors such that they are proportional to $(a_1,\ldots,a_n)$, that is,</p>
+$$
+\frac{dx_1}{a_1}=\frac{dx_2}{a_2}=\cdots
+$$
+<p>We can think of this expression as the symmetric form of a line in space ("expresión continua de la recta en el espacio" in Spanish).</p>
+<p></p>
+<p>From here, in the case of linear algebra, we recover several planes whose intersection gives the line $r$:</p>
+$$
+a_2 x_1-a_1 x_2=0
+$$
+$$
+a_3 x_2-a_2 x_3=0
+$$
+$$
+...
+$$
+<p>In the differential context, we could recover an independent set of first integral if we were able to solve</p>
+$$
+a_2 \mbox{d}x_1-a_1 \mbox{d}x_2=0
+$$
+$$
+a_3 \mbox{d}x_2-a_2 \mbox{d}x_3=0
+$$
+$$
+...
+$$
+<p>The solutions are independent first integrals of the ODE or functions that generate functionally the solutions of the PDE.</p>
+<p></p>
+<p>In the general case, i.e. $a_i$ depending on too many variables, the system cannot be solved, although is useful for numerical approximation of initial or boundary value problems.</p>
+<p></p>
+<p><b>Particular case</b></p>
+<p>If in the PDE we look for solutions in the form of explicit functions </p>
+$$
+W=x_n-f(x_1,\ldots,x_{n-1})
+$$
+<p>we get </p>
+$$
+a_{1} \partial W / \partial x_{1}+\cdots+a_{n-1} \partial W / \partial x_{n-1}=a_n 
+$$
+<p>which is the case for non-homogeneous linear PDEs.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

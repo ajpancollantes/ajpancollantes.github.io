@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Runge-Kutta_method">Runge-Kutta method</h1>
+<p></p>
+<p>It is a family of numerical methods to solve ODEs. The more famous is the RK4 (4th order).</p>
+<p></p>
+$$
+\begin{array}{l}
+y_{n+1}=y_n+h \frac{1}{6}\left(k_1+2 k_2+2 k_3+k_4\right) \\
+t_{n+1}=t_n+h
+\end{array}
+$$
+<p>where</p>
+$$
+\begin{array}{l}
+k_1=f\left(t_n, y_n\right) \\
+k_2=f\left(t_n+\frac{h}{2}, y_n+h \frac{k_1}{2}\right), \\
+k_3=f\left(t_n+\frac{h}{2}, y_n+h \frac{k_2}{2}\right), \\
+k_4=f\left(t_n+h, y_n+h k_3\right) .
+\end{array}
+$$
+<p>Here $y_{n+1}$ is the RK4 approximation of $y(t_{n+1})$, and the next value ($y_{n+1}$) is determined by the present value ($y_{n}$) plus the weighted <b>average</b> of four increments, where each increment is the product of the size of the interval, $h$, and an estimated slope specified by function f on the right-hand side of the differential equation. </p>
+<p></p>
+<h2 style="margin-left:0px;" id="Interpretation">Interpretation</h2>
+<p>Short answer: you can think of $v:=\frac{1}{6}\left(k_1+2 k_2+2 k_3+k_4\right)$ as a weighted average slope, so </p>
+$$
+y_{n+1}=y_n+h v_n
+$$
+<p>is nothing but a kind of Euler method but with an improved slope. Instead of taking the slope at $(x_n,y_n)$ you take several measures ($k_i$) in the interval $(x_n,x_{n+1})$. Why these weights exactly? This requires a long answer.</p>
+<p></p>
+<p>Long answer: see <a href="https://math.stackexchange.com/a/1756863/601797" target="_blank">this great answer</a>. To summarize, the exact value of $y_{n+1}$ is $y_n+\int_{x_n}^{x_{n+1}}f(x,y)dx$ so you should approximate this integral numerically (because you don't know $y(x)$). When you use Simpson's rule you obtain the formula you have presented.</p>
+<p>Author: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
