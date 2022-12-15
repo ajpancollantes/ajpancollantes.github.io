@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-LBT9E8N3HS');</script><script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
 <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
@@ -24,9 +24,7 @@
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Hamiltonian_mechanics">Hamiltonian mechanics</h1>
-<p>Los estados de un sistema vienen determinados por variables generalizadas y sus derivadas. Es decir, trabajamos en el fibrado tangente del espacio de la configuración, o el <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> de orden 1. Eso forma parte de la formulación: <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>.</p>
-<p></p>
-<p>La <a href="./../♾️ CONCEPTS/Legendre transform.md.html">Legendre transform</a> nos permite pasar todo al <b>fibrado cotangente</b>. Los estados del sistema van a venir determinados por las variables y los momentos generalizados. Puede parecer muy incómodo, pero tiene ventajas en la interpretación geométrica.</p>
+<p>Los estados de un sistema de <a href="./Classical Mechanics.md.html">Classical Mechanics</a> vienen determinados por variables generalizadas y sus derivadas. Es decir, trabajamos en el fibrado tangente del espacio de la configuración, o el <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> de orden 1. Eso forma parte de la formulación: <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>. La <a href="./../♾️ CONCEPTS/Legendre transform.md.html">Legendre transform</a> nos permite pasar todo al <b>fibrado cotangente</b>. Los estados del sistema van a venir determinados por las variables y los momentos generalizados. Puede parecer muy incómodo, pero tiene ventajas en la interpretación geométrica. The systems (<a href="./../dynamical system.md.html">dynamical system</a>s) with this origin are called <b>Hamiltonian systems</b>. Some of the are called <a href="./../integrable systems.md.html">integrable systems</a>.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Symplectic_form">Symplectic form</h2>
 <p>In any cotangent bundle $T^*Q$ we have a canonical 1-form known as tautological 1-form, Poincaré 1-form, Liouville 1-form, symplectic potential or canonical 1-form. Let's see how is defined. We are looking for an element $\lambda \in \Omega^1(T^*Q)$, so consider an element (in any local chart, it doesn't have to be the special one provide by the lagrangian) $(q,p)\in T^*Q.$ We want a definition for a map</p>
@@ -187,7 +185,7 @@ $$
 g \longmapsto F^{\phi_s}(g)=g \circ \phi_s 
 $$
 <p></p>
-<p>I interpret observables as little machines that you can place where you want (in a broad sense of the meaning of "where", because this includes time and any other variable properties like temperature or energy, but we are treating them as "space") and then you can read a number in their screen. What this is telling to us is that given any of those machines, say \(f\), we can construct a \textit{modifier of machines} that depends on one parameter and that yields a group. Observe that the definition of the modifier use the symplectic form, or the Poisson bracket, which is a bit annoying for me. I think that this would be removed if we go to the \(C^*-\)algebra formulation...</p>
+<p>I interpret observables as little machines that you can place where you want (in a broad sense of the meaning of "where", because this includes time and any other variable properties like temperature or energy, but we are treating them as "space") and then you can read a number in their screen. What this is telling to us is that given any of those machines, say $f$, we can construct a "modifier of machines" that depends on one parameter and that yields a group. Observe that the definition of the modifier use the symplectic form, or the Poisson bracket, which is a bit annoying for me. I think that this would be removed if we go to the $C^*$-algebra formulation...</p>
 <p></p>
 <p><ul style="margin-left:0px;"><li></li></ul></p>
 <p>On the other hand, we have that </p>

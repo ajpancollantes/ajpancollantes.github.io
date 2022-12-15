@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-LBT9E8N3HS');</script><script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
 <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
@@ -43,6 +43,24 @@ $$
 curl(V)=\partial_u Q- \partial_v P
 $$
 <p>which is the traditional definition.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="In_the_space">In the space</h2>
+<p>Nemotecnic rule</p>
+$$
+\nabla \times \mathbf{F}=\left|\begin{array}{ccc}
+\hat{\boldsymbol{\imath}} & \hat{\jmath} & \hat{\boldsymbol{k}} \\
+\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+F_x & F_y & F_z
+\end{array}\right|
+$$
+<p>which expands as</p>
+$$
+\nabla \times \mathbf{F}=\left(\frac{\partial F_z}{\partial y}-\frac{\partial F_y}{\partial z}\right) \hat{\imath}+\left(\frac{\partial F_x}{\partial z}-\frac{\partial F_z}{\partial x}\right) \hat{\jmath}+\left(\frac{\partial F_y}{\partial x}-\frac{\partial F_x}{\partial y}\right) \hat{\boldsymbol{k}}=\left[\begin{array}{l}
+\frac{\partial F_z}{\partial y}-\frac{\partial F_y}{\partial z} \\
+\frac{\partial F_x}{\partial z}-\frac{\partial F_z}{\partial x} \\
+\frac{\partial F_y}{\partial x}-\frac{\partial F_x}{\partial y}
+\end{array}\right]
+$$
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
