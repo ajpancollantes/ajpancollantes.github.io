@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Material_derivative">Material derivative</h1>
+<p>From  <a href="https://eng.libretexts.org/Bookshelves/Civil_Engineering/Book%3A_All_Things_Flow_-_Fluid_Mechanics_for_the_Natural_Sciences_(Smyth)/05%3A_Fluid_Kinematics/5.01%3A_Lagrangian_and_Eulerian_descriptions" target="_blank">here</a>.</p>
+<p>Consider a function of time and space $\phi\left(t,\vec{x}\right)$. For specificity, this could be some ocean property such as temperature or salinity. Now suppose that we evaluate $\phi\left(t,\vec{x} \right)$ along some arbitrary trajectory $\vec{x}(t)$. That could be the course of an oceanographic vessel from which $\phi$ is measured. Let the velocity of the measurement point (i.e., the ship) be $\vec{v}=d\vec{x}/dt$. At what rate will our measured value of $\phi$ change in time? The answer is given by the chain rule:</p>
+$$
+\frac{d \phi}{d t}=\frac{\partial \phi}{\partial t}+\frac{\partial \phi}{\partial x_{j}} \frac{d x_{j}}{d t}=\frac{\partial \phi}{\partial t}+v_{j} \frac{\partial \phi}{\partial x_{j}}.
+$$
+<p>Now consider the special case in which $\vec{x}(t)$ is the trajectory of a <a href="./../⛳️ NON CLASSIFIED/Fluid mechanics.md.html">fluid parcel</a>, and the observer is following the same trajectory (e.g., a boat allowed to drift with the current). The velocity $\vec{v}$ is now the velocity of the flow at the parcel’s location at any given time: $\vec{u}(t)$. In this special case, the rate of change we measure will be</p>
+$$
+\frac{d \phi}{d t}=\frac{\partial \phi}{\partial t}+u_{j} \frac{\partial \phi}{\partial x_{j}}.
+$$
+<p>The expression on the right-hand side is called the <b>material derivative</b>, i.e., the time derivative following a material parcel. It is a total time derivative, but is distinguished by the use of an uppercase “D”, e.g., $D\phi/Dt$. It can be written equivalently in index form or in vector form:</p>
+$$
+\frac{D}{D t} \equiv \frac{\partial}{\partial t}+u_{j} \frac{\partial}{\partial x_{j}} \equiv \frac{\partial}{\partial t}+\vec{u} \cdot \vec{\nabla}
+$$
+<p>The material derivative has a dual character: it expresses Lagrangian information (the rate of change following a fluid parcel), but does so in an Eulerian way, i.e., in terms of partial derivatives with respect to space and time.</p>
+<p></p>
+<p>It is instructive to isolate in the expression above the partial time derivative. Suppose, for example, that the field in question is air temperature. Then</p>
+$$
+\underbrace{\frac{\partial T}{\partial t}}_{\text{thermometer reading }}=\overbrace{\frac{D T}{D t}}^{\text {heating/cooling }}-\underbrace{\vec{u} \cdot \vec{\nabla} T}_{\text{advection }}.
+$$
+<p></p>
+<p>This tells us that the temperature at a given location can change for two reasons corresponding to the two terms on the right-hand side. The first term, $DT/Dt$, is nonzero only if the air parcels are actually being heated or cooled (heated by the sun, perhaps). The second term is due to the wind: if the wind is blowing from a warm place, the local temperature will rise. This process, whereby local changes result from transport by the flow, is called advection.</p>
+<p></p>
+<p>If there is no external factors it should be $\frac{D T}{D t}=(\frac{\partial}{\partial t}+\vec{u} \cdot \vec{\nabla}) T=0$, because if we follow a particle (fluid parcel) the temperature is always the same.</p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

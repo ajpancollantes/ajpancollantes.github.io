@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Relationship_of_cinf-symmetry_of_distribution_with_lambda-preservation_of_distributions">Relationship of cinf-symmetry of distribution with lambda-preservation of distributions</h1>
+<p></p>
+<p>Los vectores prolongados preservan la <a href="./../../♾️ CONCEPTS/GEOMETRY/Cartan distribution.md.html">Cartan distribution</a> y los λ-prolongados la λ-preservan ([Gaeta 2004]). Yo a esto lo llamaría "la deforman poquito...", pero bueno. </p>
+<p></p>
+<p>Por otra parte, las <a href="./../../♾️ CONCEPTS/GEOMETRY/symmetry of a distribution.md.html">symmetry of a distribution</a> en general lo que hacen al fin y al cabo es "preservar" dicha distribución: for every $\omega \in \mathcal{Z}^*$</p>
+$$
+L_X(\omega)\in \mathcal{Z}^*.
+$$
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p>With this in mind I wonder two questions:</p>
+<p></p>
+<h2 style="margin-left:0px;" id="1._$\lambda$-prolongation_implies_cinf-symmetry_of_distribution?">1. $\lambda$-prolongation implies cinf-symmetry of distribution?</h2>
+<p>Al igual que los vectores prolongados (estándar) son una simetría de la distribución de Cartan, ¿serán los λ-prolongados una Cinf-simetría de la distribución de Cartan? <b>He comprobado que sí</b>. El recíproco aún no he conseguido probarlo, de hecho no creo que sea cierto si no se piden condiciones.  </p>
+<p></p>
+<h3 style="margin-left:0px;" id="Proof">Proof</h3>
+<p>([Xournal 106])</p>
+<p>Let $Y$ be a $\lambda$-prolongued vector field, and $\mathcal{E}$ the <a href="./../../♾️ CONCEPTS/GEOMETRY/Cartan distribution.md.html">Cartan distribution</a> of the <a href="./../../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> $J^k(\mathbb{R},\mathbb{R}).$ Observe that</p>
+$$
+\mathcal{E}=\operatorname{span}(\{\bar{D},\partial u_k\})
+$$
+<p>where $\bar{D}=\partial x+u_1\partial u+\cdots+u_k \partial u_{k-1}$ is the truncated total differential. Then, by [Gaeta 2004] corollary of lemma 2, </p>
+$$
+[Y,\bar{D}] \in \operatorname{span}(\{Y,\bar{D},\partial u_k\})
+$$
+<p>and, on the other hand, </p>
+<p>$$[Y,\partial u_k]=\gamma\cdot \partial u_k$$</p>
+<p>since $Y$ responds to the $\lambda$-prolongation formula.</p>
+<p><ul style="margin-left:0px;"><li>____</li></ul></p>
+<p></p>
+<h2 style="margin-left:0px;" id="2._¿Can_we_define_the_$\lambda$-preservation_of_any_distribution?">2. ¿Can we define the $\lambda$-preservation of any distribution? </h2>
+<p>Si las simetrías (de distribución) preservan las distribuciones, ¿qué harán las nuevas Cinf-simetrías de distribuciones? Bueno, pues he llegado a una <b>fórmula muy parecida a la de λ-preservar (en el sentido de Gaeta)</b> pero aplicado a cualquier distribución. Era más complicada porque ahora había varios lambdas, que dependen de los vectores que elijamos para generar la distribución. La cosa es que se podría usar para definir lo que sería λ-preservar una distribución cualquiera (no solo la de Cartan). Pero seguí pensando y he conseguido dejarla "intrínseca" (quiero decir, independiente de los vectores elegidos) usando <b>la función simetrizadora de la Cinf-simetría!</b> </p>
+<p></p>
+<p>It turns out that if $Y$ is a <a href="./../♾️ ❗CONCEPTS/cinf-symmetry of distribution.md.html">cinf-symmetry of distribution</a>  $\mathcal{Z}$ and $f$ is the symmetrizing function, for every $\theta \in \mathcal{Z}^*$</p>
+$$
+\mathcal{L}_Y (\theta)-\frac{df}{f} \wedge i_Y(\theta)\in \mathcal{Z}^* \tag{1}
+$$ 
+<p>([xournal 106]) That is, we can give the following definition</p>
+<h3 style="margin-left:0px;" id="Definition">Definition</h3>
+<p>Given a vector field $Y\in TJ^k(\mathbb{R},\mathbb{R})$ and $f\in \mathcal{C}^{\infty}(J^k(\mathbb{R},\mathbb{R}))$ we say that $Y$ $f$-preserves a distribution if condition (1) it is held.</p>
+<p>___</p>
+<p>Incidentally, this ideas coincide with those ones of [Morando 2007], deformation of Lie derivative. We can define this new operator, based in (1) </p>
+$$
+\mathcal{L}_Y^f (-):=\mathcal{L}_Y(-)-\frac{df}{f}\wedge i_Y(-)
+$$
+<p>that essentially is the same as Definition 5 in [Morando 2007].</p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

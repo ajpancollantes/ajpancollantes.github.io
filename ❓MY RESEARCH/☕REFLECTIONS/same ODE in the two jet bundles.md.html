@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="The_same_ODE_in_two_jet_spaces">The same ODE in two jet spaces</h1>
+<p>Una <a href="./../../♾️ CONCEPTS/DEs/ODE.md.html">ODE</a> de orden $m$ se puede visualizar tanto en el <a href="./../../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> $J^{m-1}(\mathbb{R},\mathbb{R})$ como en el $J^{m}(\mathbb{R},\mathbb{R})$. El dibujo sería:</p>
+<p><img src="./../../imagenes/Pasted image 20211001084016.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>siendo</p>
+$$
+i: (x,u,u_1,u_2) \longmapsto (x,u,u_1,u_2,F(x,u,u_1,u_2))
+$$
+<p>El campo $A$ pasa a $i_* (A)$ definido solo en la imagen pero además tendríamos definido <b>en todo $J^{m}(\mathbb{R},\mathbb{R})$</b> el campo </p>
+$$
+\widetilde{A}=\partial x+u_1 \partial u+u_2 \partial u_1+u_3\partial u_2+D_x(F)\partial u_3
+$$
+<p>tal que </p>
+$$
+\widetilde{A}|_{\{u_3=F\}}=i_*(A)
+$$
+<p></p>
+<p>Suppose we have a Lie point symmetry $X$ of the ODE. We have the prolongations</p>
+$$
+X^{(m-1)}=\xi \partial x+\eta^0 \partial u+\sum^{m-1}\eta^k \partial u_k
+$$
+<p>prolonged up to $(m-1)$th order, and</p>
+$$
+X^{(m)}=\xi \partial x+\eta^0 \partial u+\sum^{m} \eta^k \partial u_k=
+$$
+$$
+=\xi \partial x+\eta^0 \partial u+\sum^{m-1} \eta^k \partial u_k+(D_x \eta^{m-1}-u_m D_x \xi)\partial u_m
+$$
+<p>up to $m$th order.</p>
+<p></p>
+<p></p>
+<p>And we can wonder, <b>what is</b> $i_*(X^{(m-1)})$?</p>
+$$
+i_*(X^{(m-1)})=\xi\partial x+\eta^0 \partial u+\eta^1\partial u_1+\eta^2 \partial u_2+ X^{(m-1)}(F)\partial u_3
+$$
+<p></p>
+<p><b>If we restrict to $\{u_3=F\}$</b>, do we have that</p>
+$$
+X^{(m-1)}(F)=(D_x \eta^{m-1}-u_3 D_x \xi)
+$$
+<p><b>???</b></p>
+<p></p>
+<p>It must be true that</p>
+$$
+X^{(m)}(u_3-F)=0
+$$
+<p>(in order to be a symmetry) so</p>
+$$
+(D_x \eta^{m-1}-u_3 D_x \xi)-X^{(m-1)}(F)=0
+$$
+<p><b>and the answer is YES</b>.</p>
+<p></p>
+<p>And therefore $X^{(m)}$ is a vector field in $J^m$ that extend $i_*(X^{(m-1)})$.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

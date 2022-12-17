@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Symmetrizing_factor_in_the_case_of_corank_1">Symmetrizing factor in the case of corank 1</h1>
+<p>(xournal 195)</p>
+<p><b>Lemma</b></p>
+<p>Given a closed 1-form $\omega$ on an open set $U\subset \mathbb R^n$, a vector field $V$ is a symmetry of the <a href="./../../♾️ CONCEPTS/GEOMETRY/Pfaffian system.md.html">Pfaffian system</a> $\mathcal S (\{\omega\})$ if and only if $V\,\lrcorner\,\omega$ is a first integral of  $\mathcal S (\{\omega\})$.</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b></p>
+<p>The function $V\,\lrcorner\,\omega$ is a first integral if and only if $d(V\,\lrcorner\,\omega)\wedge \omega=0$. Taking into account <a href="./../../✏️ THEOREMS/DG/Cartan formula.md.html">Cartan formula</a> this is equivalent to</p>
+$$
+(\mathcal L _V \omega-V\lrcorner \,d\omega)\wedge \omega=0
+$$
+$$
+\mathcal L _V \omega\wedge \omega=0.
+$$
+<p>And this is true if and only if $\mathcal L _V \omega=\beta \omega$ for some function $\beta$, i.e., $V$ is a symmetry of the Pfaffian system</p>
+<p>$\blacksquare$</p>
+<p><img src="./../../imagenes/Pasted image 20221028073831.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>From here we can conclude several interesting facts:</p>
+<p></p>
+<p><b>Proposition 1</b></p>
+<p>Given a <a href="./../../♾️ CONCEPTS/GEOMETRY/Pfaffian equation.md.html">Frobenius integrable</a> 1-form $\omega$ and a vector field $X\notin \mathcal S(\{\omega\})^{\perp}$ then a function $f$ satisfies $fX$ is a symmetry of $\mathcal S(\{\omega\})$ (is a <a href="./../♾️ ❗CONCEPTS/symmetrizing factor.md.html">symmetrizing factor</a>) if and only if $\mu=\dfrac{1}{f X\lrcorner\, \omega}$ is an <a href="./../../♾️ CONCEPTS/DEs/integrating factor.md.html">integrating factor</a> of $\omega$.</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b></p>
+<p>We know that there exist an <a href="./../../♾️ CONCEPTS/DEs/integrating factor.md.html">integrating factor</a> $\tilde{\mu}$, that is, a function such that $\tilde{\mu}\omega$ is closed. Taking into account that $\mathcal S (\{\tilde{\mu}\omega\})$=$\mathcal S (\{\omega\})$, and according to the Lemma above, $fX$ is a symmetry of $\mathcal S (\{\omega\})$ if and only if $fX\lrcorner\,\tilde{\mu}\omega$ is a first integral. Now observe that</p>
+$$
+fX\lrcorner\,\tilde{\mu}\omega=\dfrac{\tilde{\mu}}{\frac{1}{fX\lrcorner\,\omega}}
+$$
+<p>and this is a first integral if and only if $\dfrac{1}{fX\lrcorner\,\omega}$ is an integrating factor.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Proposition 2</b></p>
+<p>Given a symmetry $V$, then $1/V\lrcorner\,\omega$ is an integrating factor.</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b></p>
+<p>Take $f=1$ in Proposition 1.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Proposition 3</b></p>
+<p>Given a Frobenius integrable 1-form, a smooth function $\mu$ is an integrating factor if there exists a symmetry $V$ such that $\mu=1/V\lrcorner\,\omega$.</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b></p>
+<p>Take any $X$ such that $X\lrcorner\,\omega\neq 0$. Since $\mu$ is an integrating factor, by Proposition 1 $f=\dfrac{1}{\mu X\lrcorner\, \omega}$ is a symmetrizing factor for $X$, so $V=fX$ is a symmetry. It is easy to check that </p>
+$$
+\mu=\dfrac{1}{V\lrcorner\,\omega}.
+$$
+<p>$\blacksquare$</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

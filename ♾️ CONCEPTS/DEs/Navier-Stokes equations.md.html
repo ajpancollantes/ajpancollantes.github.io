@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Navier-Stokes_equations">Navier-Stokes equations</h1>
+<p>It is a <a href="./../PDE.md.html">PDE</a> that indeed reflects Newton second law $m\cdot a=F$. It shows how a fluid varies with time:</p>
+$$
+\rho \left(\frac{\partial u}{\partial t} +u\cdot \nabla u\right)=-\nabla P+\mu \nabla^2 u+\rho F
+$$
+<p><ul style="margin-left:0px;"><li>$\rho$ is density of the fluid</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$u$ is the velocity</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$P$ is the pressure</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\mu$ is viscosity</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$F$ is an external force</li></ul></p>
+<p></p>
+<p>It is also required	 $\nabla \cdot u=0$ (divergence), which meas that mass is conserved.</p>
+<p></p>
+<p>Often, it is used the operator </p>
+$$
+\frac{D \square}{Dt}:=\frac{\partial \square}{\partial t}+u\cdot \nabla \square
+$$
+<p>named <a href="./../material derivative.md.html">material derivative</a> in the context of <a href="./Continuum Mechanics.md.html">Continuum Mechanics</a>.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Expanded, Navier-Stokes shows up as</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+\begin{aligned}
+\frac{\partial u}{\partial t}+u \frac{\partial u}{\partial x}+v \frac{\partial u}{\partial y}+w \frac{\partial u}{\partial z} &=-\frac{\partial p}{\partial x}+\mu\left(\frac{\partial^{2} u}{\partial x^{2}}+\frac{\partial^{2} u}{\partial y^{2}}+\frac{\partial^{2} u}{\partial z^{2}}\right) \\
+\frac{\partial v}{\partial t}+u \frac{\partial v}{\partial x}+v \frac{\partial v}{\partial y}+w \frac{\partial v}{\partial z} &=-\frac{\partial p}{\partial y}+\mu\left(\frac{\partial^{2} v}{\partial x^{2}}+\frac{\partial^{2} v}{\partial y^{2}}+\frac{\partial^{2} v}{\partial z^{2}}\right) \\
+\frac{\partial w}{\partial t}+u \frac{\partial w}{\partial x}+v \frac{\partial w}{\partial y}+w \frac{\partial w}{\partial z} &=-\frac{\partial p}{\partial z}+\mu\left(\frac{\partial^{2} w}{\partial x^{2}}+\frac{\partial^{2} w}{\partial y^{2}}+\frac{\partial^{2} w}{\partial z^{2}}\right) \\
+\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}+\frac{\partial w}{\partial z} &=0
+\end{aligned} 
+$$
+<p>if there is no external force.</p>
+<p></p>
+<p>The case $\mu=0$ (no viscosity) is called Euler equation.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

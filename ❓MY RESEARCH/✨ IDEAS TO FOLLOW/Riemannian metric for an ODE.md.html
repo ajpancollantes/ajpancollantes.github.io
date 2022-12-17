@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Metrics_and_ODEs">Metrics and ODEs</h1>
+<h1 style="margin-left:0px;" id="Idea_original">Idea original </h1>
+<p><b>(Está obsoleta, revisar para ver cómo encaja con lo nuevo y luego borrar)</b></p>
+<p>Cuando hacemos el cambio de variable </p>
+$$
+(t, c1,c2,c3)\mapsto (x,u,u1,u2)
+$$
+<p>estamos transmitiendo la métrica usual de $\mathbb{R}^4$ a una nueva métrica. Y la forma de volumen asociada a una nueva forma de volumen. Creo que con esa forma de volumen "heredada" sí se cumple que las 1-formas al estilo <a href="./../../✏️ THEOREMS/Basarab 1991, proposition 2.md.html">Basarab 1991, proposition 2</a> son directamente cerradas, sin necesidad de dividir.</p>
+<p></p>
+<p>¿Podrían tener utilidad estas ideas? </p>
+<p></p>
+<p>Tendría algo que ver aquí el <a href="./../../♾️ CONCEPTS/GEOMETRY/Ricci curvature tensor.md.html">Ricci curvature tensor</a>? (las soluciones de la <a href="./../../♾️ CONCEPTS/DEs/ODE.md.html">ODE</a> son <a href="./../../♾️ CONCEPTS/GEOMETRY/geodesic curve.md.html">geodesic curve</a>s con la <a href="./../../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">métrica</a> inducida...) </p>
+<p></p>
+<p>Más de lo mismo: en el caso de orden 1, por ejemplo, tendríamos un $\mathbb{R}^2$ junto con una métrica. Eso significaría que nuestro campo $A$ no está "en realidad", en $\mathbb{R}^2$, sino en otra superficie, con otra <a href="./../../♾️ CONCEPTS/GEOMETRY/Gaussian curvature.md.html">Gaussian curvature</a>. Es interesante ver qué tipo de superficies salen (se pueden clasificar?). Las métricas no son cualquiera, pues todas tienen al vector $A=\partial x+\phi \partial u$ "como de longitud 1". </p>
+<p>Se pueden caracterizar estas métricas? Las métricas son una sección de un fibrado, estas métricas son un tipo especial?...</p>
+<p></p>
+<p>Más ideas. El conocimiento de las integrales primeras de la ecuación es equivalente al conocimiento de la métrica, pues con ellas podría rectificar el campo y obtener el cambio de variable como el de arriba.</p>
+<p>¿Los vectores normales de las hipersuperficies integrales primera son los que rellenarían la base ortonormal que comienza con A? En realidad no, lo serían los normales a ellas pero con la "nueva" métrica... Necesitaría vectores que sean <a href="./../../♾️ CONCEPTS/GEOMETRY/symmetry of a distribution.md.html">symmetry of a distribution</a> de esas integrales primera...  y que además formen el ángulo adecuado.</p>
+<p></p>
+<p>On the other hand, there are lots of metrics with these requirements. I don't need $\|A\|=1$, but any constant. And I can reorganize the constants $c_i$ in such a way that give the same general solution. So we will obtain another metric. What have they got in common? Do they constitute an equivalence class in the metric space?</p>
+<p></p>
+<hr>
+<p></p>
+<p>Hacer experimento con la ecuación de un péndulo doble, cuyo espacio de configuración es un toro, o el péndulo simple,... para ver si hay alguna relación entre la métrica asociada (la conocemos, pues sabemos la solución general) y la métrica del espacio "en el que viven"</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Ideas_para_paper">Ideas para paper</h3>
+<p>Ver xournal_123 page 6, and maple_022.</p>
+<p></p>
+<hr>
+<p></p>
+<h2 style="margin-left:0px;" id="Nuevo_enfoque">Nuevo enfoque</h2>
+<p>See Maple_035 and xournal_139.</p>
+<p></p>
+<p>If we want to find the integral curves of a vector field, for example the vector field $A$ associated to an <a href="./../../♾️ CONCEPTS/DEs/ODE.md.html">ODE</a>, we can describe this "lines field" by local linear equations for every point of the plane, i.e., a 1-form. This 1-form, <a href="./../☕REFLECTIONS/visualization of 1-forms.md.html">interpreted</a> has a set of parallel lines in every point, probably has to be corrected by a factor, in order to have this parallel lines separated by the "same distance". This way we could find the <a href="./../../♾️ CONCEPTS/DEs/first integral.md.html">first integral</a>, i.e., a function whose level curves are tangents to the given lines field.</p>
+<p></p>
+<p>A way to perform this "correction" is by measuring the separation using the area (the standard volume form) and dividing by the length of the vector (computed with the standard <a href="./../../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a>). But this only will work for special cases in which the desired integral curves are <a href="./../../♾️ CONCEPTS/parallel curves.md.html">parallel curves</a> with respect to the standard metric.</p>
+<p></p>
+<p>But <b>what if this is just the case for every ODE, with the only trick that we have to consider a different metric</b>? The <a href="./../../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> associated to the equation could be <a href="./../../♾️ CONCEPTS/conformal map.md.html">conformal</a> to the standard one</p>
+$$
+\Lambda^2 Id
+$$
+<p>with </p>
+$$
+\Lambda^2=\mu^2(1+\phi^2)
+$$
+<p>where the ODE is given by $u_1=\phi$ and $\mu$ should be an integrating factor.</p>
+<p></p>
+<p>I think that for general vector fields $A=F\partial_x+G \partial_u$ in $\mathbb{R}^2$ the formula is</p>
+$$
+\Lambda^2=\mu^2(F^2+G^2)
+$$
+<p>where $\mu$ is an integrating factor for $\omega=-Gdx+Fdu=\Omega(A,-)$ where $\Omega$ is the standard volume form.</p>
+<p></p>
+<p>Observe that in the new metric $g=\Lambda^2 Id$, the <a href="./../../♾️ CONCEPTS/GEOMETRY/Riemannian volume form.md.html">Riemannian volume form</a> is $\tilde{\Omega}=\Lambda^2 \Omega$, therefore to "measure the local separation from $A$" we use</p>
+$$
+\omega=\dfrac{\tilde{\Omega}(A,-)}{\left\Vert A\right\Vert_{new}}=\dfrac{\mu^2(F^2+G^2) \Omega(A,-)}{\Lambda \left\Vert A\right\Vert_{std}}=\dfrac{\mu^2(F^2+G^2) \Omega(A,-)}{\mu (F^2+G^2)}
+$$
+$$
+=\mu \Omega(A,-),
+$$
+<p>which of course is closed.</p>
+<p></p>
+<p></p>
+<p>I think that the quotient $\Delta^2 /\left\Vert A\right\Vert_{new}$ is an <a href="./../../♾️ CONCEPTS/Jacobi last multiplier.md.html">Jacobi last multiplier</a>! See maple_035.</p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Relationship_with_symmetries">Relationship with symmetries</h3>
+<p>Suppose that $V$ is a <a href="./../../♾️ CONCEPTS/GEOMETRY/symmetry of a distribution.md.html">symmetry of a distribution</a> of $\mathcal{S}(\{A\})$. It is known that $\dfrac{1}{\Omega(A,V)}$ is an integrating factor of the 1-form $\Omega(A,-)$ (see <a href="./../../✏️ THEOREMS/Basarab 1991, proposition 2.md.html">Basarab 1991, proposition 2</a> and the slides of "04 Charla ODEs geometric viewpoint").</p>
+<p></p>
+<p>How does it fit in this context?</p>
+<p><img src="./../../imagenes/Pasted image 20220317103245.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>The volume spanned by $A$ y $V$ with the new metric is proportional to the length of $A$ with the new metric.</p>
+<p></p>
+<p>What about the length of $V$ with the new metric? I don't expect it to be constant, unless it is orthogonal to $A$...</p>
+<p></p>
+<p>On the other hand, the unit normal to $A$ should be a symmetry. </p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Open_questions">Open questions</h3>
+<p><ul style="margin-left:0px;"><li>What is the meaning of the curvature of this metric? Let us to classify equations?</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Is there a determining equation for the metric? (see Maple_035 eq 19) Yes</li></ul></p>
+$$
+(2 f \phi -1- \phi^{2})f_x- (\phi^{3}+ \phi)f_u-2 f\phi_u=0
+$$
+<p>being $f=\Lambda^2$. </p>
+<p>Is it easier to solve that the equation for integrating factors?</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>What is the role of symmetries in this surface? I think that the commuting symmetries correspond to vector of constant length...</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Is there an isometric <a href="./../../♾️ CONCEPTS/GEOMETRY/embedded manifold.md.html">embedding</a> of this manifold in $\mathbb{R}^3$ such that the curves are given by intersection of parallel planes with the <a href="./../../♾️ CONCEPTS/GEOMETRY/surface.md.html">surface</a>? I think that at least they must be <a href="./../../♾️ CONCEPTS/parallel curves.md.html">parallel curves</a>  inside this surface. The definition and importance is in <a href="https://www.sciencedirect.com/science/article/pii/S0307904X13006549#b0010" target="_blank">this paper</a>  called "Computing parallel curves on parametric surfaces" by Galvez, Iglesias, Puig-Rey. Could what they call characteristic curves be the geodesics of the surface in this case?</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Given the curvature, we have a surface. Can we study what equations would yield this surface?</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Does the <a href="./../../♾️ CONCEPTS/GEOMETRY/geodesic curve.md.html">geodesic curve</a>s of this metric have a meaning?</li></ul></p>
+<p><ul style="margin-left:0px;"><li>For general vector fields $A=F\partial_x+G \partial_u$ in $\mathbb{R}^2$ we have</li></ul></p>
+$$
+f_x  F^{3}+ f_x F  G^{2}+2\,
+ F_x f  G^{
+2}-2 G_x F  f G + f_u F^{2} G+f_u  G^{3}-2F_u F f 
+G  +2 G_u  F^{2
+}f =0
+$$
+<p>The relationship with an integrating factor of the associated 1-form $\omega=-G dx+Fdu$.</p>
+<p></p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Nuevo_chispazo:_orden_$m$">Nuevo chispazo: orden $m$</h2>
+<p>(muy poco claro)</p>
+<p>Dada una ODE $A$, el conocimiento de una cinf-structure en diagonal form nos da una o varias métricas (tengo que pensar aún cómo se construye), con cierta curvatura. Con esta métrica el flujo de la ODE son geodésicas (hipótesis no confirmada).</p>
+<p></p>
+<p>Además, hopefully las integrales primeras están dando <a href="./../../♾️ CONCEPTS/totally-geodesic manifold.md.html">totally-geodesic manifold</a>s, pues estarían hechas de geodeśicas.</p>
+<p></p>
+<p>Estamos describiendo el espacio con una especie de <a href="./../../♾️ CONCEPTS/geodesic polar coordinates.md.html">geodesic polar coordinates</a> generalizadas a dimensión $n$?</p>
+<p></p>
+<p>La métrica puede ser deformada hasta una métrica plana (usando los symmetrising factors), y tenemos un frame, que contiene a $A$, que es ortogonal y los vectores que lo forman commutan. Así pues, tenemos carta local tal que los vectores coordenados son esa base: hemos resuelto la ecuación.</p>
+<p></p>
+<p></p>
+<p>En cierto sentido, sería como si demostrásemos que la cinf-structure da <b>direcciones</b> (familia de <a href="./../../♾️ CONCEPTS/conformal map.md.html">conformal metrics</a>) y queremos buscar, de entre todas, aquella que sea plana, buscando las <b>longitudes</b> adecuadas (symmetrising factors).</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
