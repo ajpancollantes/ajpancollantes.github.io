@@ -33,20 +33,27 @@ gtag('config', 'G-LBT9E8N3HS');
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Generalized_symmetries">Generalized symmetries</h1>
 <p>Para mí, deberían llamarse simplemente simetrías. Son la <a href="./../GEOMETRY/symmetry of a distribution.md.html">symmetry of a distribution</a> correspondiente a la distribución asociada a la <a href="./ODE.md.html">ODE</a>.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>Todas satisfacen</li></ul></p>
+<p>Suppose an $n$th-order <a href="./ODE.md.html">ODE</a></p>
+$$
+u_m=\phi(x,u,\ldots,u_{m-1})
+$$
+<p>Generalized symmetries can be defined as vector fields</p>
 $$
 Y=\xi(x, u^{(m-1)}) \partial x+\eta (x, u^{(m-1)}) \partial u + \sum_{i=1}^{m-1} \eta^{i}(x, u^{(m-1)}) \partial u_i
 $$
-<p>siendo</p>
+<p>with</p>
 $$
-\eta^{i}(x, u^{(m-1)})=A(\eta^{i-1})-A (\xi) \cdot u_i.
+\eta^{i}(x, u^{(m-1)})=D_x(\eta^{i-1})-D_x (\xi) \cdot u_i.
 $$
-<p>y $A$ el campo de la <a href="./ODE.md.html">ODE</a>. Esto se demuestra en Stephani page 111.</p>
+<p>and $D_x$ the  <a href="./../GEOMETRY/Cartan distribution.md.html#Vector_fields_description">total derivative operator</a>, and such that when prolonged one more step $Y^{(m)}$</p>
+$$
+Y^{(m)}(u_m-\phi)=0
+$$
+<p>In <a href="./../../Bibliography/@Stephani.md.html">@Stephani</a> page 111 it is shown that they correspond to <a href="./../GEOMETRY/symmetry of a distribution.md.html">symmetry of a distribution</a> of $\mathcal{S}(\{A\})$, with $A$ the associated vector field to the ODE.</p>
 <p></p>
-<p>Como caso particular están las clásicas <a href="./Lie point symmetry.md.html">Lie point symmetry</a>.</p>
+<p>A particular case are the <a href="./Lie point symmetry.md.html">Lie point symmetry</a>. A more general type are <a href="./../nonlocal symmetry.md.html">nonlocal symmetry</a>s.</p>
 <p></p>
-<p>In Lychagin_2007 appears the approach of <a href="./generating function.md.html">generating function</a>s.</p>
+<p>In <a href="./../../Bibliography/@lychagin2007contact.md.html">@lychagin2007contact</a> appears the approach of <a href="./generating function.md.html">generating function</a>s.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

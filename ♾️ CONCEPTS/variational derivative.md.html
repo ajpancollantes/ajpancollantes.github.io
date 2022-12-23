@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Variational_derivative">Variational derivative</h1>
+<p>See <a href="./../Bibliography/@olver86.md.html">@olver86</a> page 244.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Introduction">Introduction</h2>
+<p>For functionals, the variational derivative plays the role of the gradient of functions of several variables. </p>
+<p>Given a smooth function $f$, the gradient is a 1-form $df$ such that for a vector $V$</p>
+$$
+df_x(V)=\lim_{\epsilon \to 0} \frac{f(x+\epsilon V)-f(x)}{\epsilon}=\frac{d}{d\epsilon}f(x+\epsilon V)|_{\epsilon=0}
+$$
+<p>that is, tells us how much the function varies along the direction specified by $V$.</p>
+<p></p>
+<p>If we think of $x$ not like a finite dimensional vector $(x_1,\ldots,x_p)$ but like a function $x:\{1,\ldots,p\}\to \mathbb{R}$ we can generalize this to the case $x:\mathbb{R}\to \mathbb{R}$, $t\mapsto x(t)$, and now $f$ won't be a function but a functional.</p>
+<p></p>
+<p>The question is: for a functional $f$, is there any mathematical object $\delta f_x$ such that for a function $V(t)$ gives us the new function</p>
+$$
+\delta f_x(V)=\lim_{\epsilon\to 0}\frac{f(x+\epsilon V)-f(x)}{\epsilon}
+$$
+<p>?</p>
+<p>Observe that in the usual case of $x$ being a vector and $f$ being a function we can interpret $df$ as the gradient vector $\nabla f$ (assuming the standard <a href="./FUNCTIONAL ANALYSIS/inner product space.md.html">inner product</a>, see <a href="./ALGEBRA/dual vector space.md.html#No_natural_isomorphism">here</a> for more information) which satisfies</p>
+$$
+df_x(V)=\langle (\nabla f)_x, V \rangle=\frac{d}{d\epsilon}f(x+\epsilon V)|_{\epsilon=0}.
+$$
+<p>We can replace $\langle-,-\rangle$  with the usual inner product $\int$ for the <a href="./FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> $L^2$, so we can alternatively require to our new object $\delta f_x$, being $f$ a functional again, to satisfy</p>
+$$
+\int \delta f_x \cdot V dt=\frac{d}{d\epsilon}f(x+\epsilon V)|_{\epsilon=0}
+$$
+<p>There are lots of technical details we are missing here, but this is the idea.</p>
+<p></p>
+<p><b>Definition</b> (<a href="./../Bibliography/@olver86.md.html">@olver86</a> page 245)</p>
+<p>Let $J[u]$ be a <a href="./variational problem.md.html">variational problem</a> (for functions $u:\mathbb{R}^p \to \mathbb{R}^q$). The variational derivative of $J$ is the unique $q$-tuple</p>
+$$
+\delta J[u]=(\delta_1 J[u],\ldots,\delta_q J[u])
+$$
+<p>such that given functions $f,\eta:\Omega \subset \mathbb{R}^p \to \mathbb{R}^q$, $\eta$ with compact support, satisfies:</p>
+$$
+\frac{d}{d\epsilon}J[f+\epsilon \eta]|_{\epsilon=0}=\int_{\Omega}\delta J[f(x)]\cdot \eta(x)dx.
+$$
+<p>$\blacksquare$</p>
+<p>To my knowledge, maybe it doesn't exist...</p>
+<p></p>
+<p>Important property</p>
+<p><b>Proposition</b></p>
+<p>If $f(x)$ is an extrema of $J[u]$ then $\delta J[f(x)] \equiv 0$, the null function on $\Omega$.</p>
+<p>$\blacksquare$</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

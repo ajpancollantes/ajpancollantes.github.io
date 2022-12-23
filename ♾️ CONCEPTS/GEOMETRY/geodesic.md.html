@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Geodesic">Geodesic</h1>
+<h2 style="margin-left:0px;" id="Motivation_informal_definitions">Motivation (informal definitions)</h2>
+<p>First, given a <a href="./surface.md.html">surface</a> and two points $A,B$ on it, we can conceive a geodesic like the (in some sense locally) <b>shortest curve</b> joining $A$ and $B$.</p>
+<p>But there is other underlying idea behind geodesics. They are the <b>straightest lines</b> inside the <a href="./surface.md.html">surface</a>. That is, they are the curves with less <a href="./curvature of a curve.md.html">curvature</a>: the curve necessarily have the <a href="./normal and geodesic curvature of a curve.md.html">normal curvature</a> provided by the surface so we only can control the <a href="./normal and geodesic curvature of a curve.md.html">geodesic curvature</a>. These curves appears to be straight lines to the inhabitants of the surface, in the sense that their <a href="./normal and geodesic curvature of a curve.md.html">geodesic curvature</a> is 0.</p>
+<p></p>
+<p>These two motivations <b>are related</b>. Following <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 118, if the curve is the shortest posible joining any two points on it, the <a href="./curvature of a curve.md.html">normal vector</a>, which in some sense can be "feeling" like the "restorative force" of the curve, must point perpendicularly to the surface, since if not the curve wouldn't be the shortest posible. Therefore, all the curvature of the curve is in the normal curvature component (see <a href="./normal and geodesic curvature of a curve.md.html">normal and geodesic curvature of a curve</a>) and therefore the geodesic curvature is zero.</p>
+<p></p>
+<p>Possibly related: <a href="./../../☕REFLECTIONS/curvature like a driving force.md.html">curvature like a driving force</a>.</p>
+<p></p>
+<p>Another motivational idea: if the geodesic is traced on the surface of a fruit and then is peeled from the surface and laid flat on the table it becomes a straight line (<a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> pages 13-14).</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Definitions">Definitions</h2>
+<p><b>Definition 1</b></p>
+<p>Given a <a href="./pseudo-Riemannian manifold.md.html">pseudo-Riemannian manifold</a>, a geodesic it is a curve such that the geodesic curvature is cero.</p>
+<p></p>
+<p><b>Definition 2</b></p>
+<p>Another approach. Consider that we have a manifold $M$ and a <a href="./../covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$. A curve $\gamma$ is a geodesic if, in the context <a href="./../parallel transport.md.html#Construction_from_a_covariant_derivative_operator">given here</a>, the vector field $v=\gamma'(t)$ defined along $\gamma$ is constant along $\gamma$, that is,</p>
+$$
+D_v v=0.
+$$
+<p></p>
+<p>These definitions are equivalent. There is a weaker definition, in which the speed of the geodesic is not constant, only the direction is. In that case, they are defined by</p>
+$$
+D_v v=\alpha v,
+$$
+<p>for certain function $\alpha$ defined on the image of the curve, $\gamma([0,1])$.</p>
+<p></p>
+<p></p>
+<p><b>Proposition</b></p>
+<p>Dada una variedad $M$ con una derivada covariante $\nabla$. Sea $p\in M$ y $\xi\in T_p M$. Existe una única geodésica $\gamma:I\rightarrow M$ tal que $\gamma (0)=p$ , $\gamma'(0)=\xi$ y que es maximal en el siguiente sentido: si hay otra curva cumpliendo lo mismo, su dominio está contenido en $I$ y en la intersección coinciden.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>Existence and uniqueness of parallel transport (see <a href="./../parallel transport.md.html#Construction_from_a_covariant_derivative_operator">here</a>).</p>
+<p>$\blacksquare$</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Other_properties">Other properties</h2>
+<p><ul style="margin-left:0px;"><li>As said in the "Motivation" section above, geodesics minimise the <a href="./../length of a curve.md.html">length of a curve</a> and the <a href="./../energy of a curve.md.html">energy of a curve</a>. In <a href="./../../Bibliography/@malham2016introduction.md.html">@malham2016introduction</a> page 81 it is shown, by using <a href="./../../✏️ THEOREMS/Cauchy-Schwarz inequality.md.html">Cauchy-Schwarz inequality</a>, that minimising the energy of a curve is the same as minimising the length plus the additional requirement that the speed $\|c'(t) \|$ stays constant.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>At any point of a geodesic in a <a href="./surface.md.html">surface</a>, the normal of the curve is parallel to the normal of the surface.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>In a surface of revolution, the meridians are geodesics.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The geodesics have a "behavior" influenced by the <a href="./Gaussian curvature.md.html">Gaussian curvature</a>. This is reflected in the <a href="./../Jacobi equation.md.html">Jacobi equation</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Their generalization to other dimensions different from 1 is related to <a href="./../totally-geodesic manifold.md.html">totally-geodesic manifold</a>s.</li></ul></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
