@@ -46,7 +46,7 @@ $$
 <p></p>
 <p>The question is: for a functional $f$, is there any mathematical object $\delta f_x$ such that for a function $V(t)$ gives us the new function</p>
 $$
-\delta f_x(V)=\lim_{\epsilon\to 0}\frac{f(x+\epsilon V)-f(x)}{\epsilon}
+\delta f_x(V)=\lim_{\epsilon\to 0}\frac{f(x+\epsilon V)-f(x)}{\epsilon}=\frac{d}{d\epsilon}f(x+\epsilon V)|_{\epsilon=0}
 $$
 <p>?</p>
 <p>Observe that in the usual case of $x$ being a vector and $f$ being a function we can interpret $df$ as the gradient vector $\nabla f$ (assuming the standard <a href="./FUNCTIONAL ANALYSIS/inner product space.md.html">inner product</a>, see <a href="./ALGEBRA/dual vector space.md.html#No_natural_isomorphism">here</a> for more information) which satisfies</p>
@@ -59,6 +59,7 @@ $$
 $$
 <p>There are lots of technical details we are missing here, but this is the idea.</p>
 <p></p>
+<h2 style="margin-left:0px;" id="Definition">Definition</h2>
 <p><b>Definition</b> (<a href="./../Bibliography/@olver86.md.html">@olver86</a> page 245)</p>
 <p>Let $J[u]$ be a <a href="./variational problem.md.html">variational problem</a> (for functions $u:\mathbb{R}^p \to \mathbb{R}^q$). The variational derivative of $J$ is the unique $q$-tuple</p>
 $$
@@ -69,12 +70,48 @@ $$
 \frac{d}{d\epsilon}J[f+\epsilon \eta]|_{\epsilon=0}=\int_{\Omega}\delta J[f(x)]\cdot \eta(x)dx.
 $$
 <p>$\blacksquare$</p>
-<p>To my knowledge, maybe it doesn't exist...</p>
 <p></p>
-<p>Important property</p>
-<p><b>Proposition</b></p>
+<h2 style="margin-left:0px;" id="Some_facts">Some facts</h2>
+<p></p>
+<p><b>Remarks</b></p>
+<p>a) To my knowledge, it doesn't have to exist...</p>
+<p></p>
+<p>b) The expression $\delta J[f(x)]$ can be thought as another function of $x$ or, alternatively, as something eating functions $\eta$ and turning back numbers, i.e., something analogous to the 1-form $df$ in the usual case of functions of $\mathbb{R}^n$. Something like the duality between the gradient $\nabla f_x$ and $df_x$ (vectors correspond to functions).</p>
+<p></p>
+<p>c) Since the functional $J$ is coming from a variational problem we can compute an explicit formula for its variational derivative. Let's focus in the case of functions $u:\mathbb{R}\to \mathbb{R}$:</p>
+$$
+\int_{\Omega}\delta J[f(x)]\cdot \eta(x)dx=\frac{d}{d\epsilon}J[f+\epsilon \eta]|_{\epsilon=0}=
+$$
+$$
+=\frac{d}{d\epsilon}|_{\epsilon=0} \int_{\Omega}L(x,pr^n(f+\epsilon \eta))dx=
+$$
+$$
+=\int_{\Omega}\dfrac{\partial L}{\partial u}\cdot \eta+\dfrac{\partial L}{\partial u_1}\cdot \eta^{\prime}+\cdots+\dfrac{\partial L}{\partial u_n}\cdot \eta^{n)}dx
+$$
+<p>being $\eta^{j)}$ the $j$th derivative of $\eta$. </p>
+<p>We can apply integration by parts, leaving apart the first term, and obtain</p>
+$$
+=\int_{\Omega}\dfrac{\partial L}{\partial u}\cdot \eta dx+\int_{\Omega}-D_x\dfrac{\partial L}{\partial u_1}\cdot \eta dx+\cdots+\int_{\Omega}-D_x \dfrac{\partial L}{\partial u_{n}}\cdot \eta^{n-1)}dx
+$$
+<p>and after $n$ steps:</p>
+$$
+=\int_{\Omega}\dfrac{\partial L}{\partial u}\cdot \eta dx+\int_{\Omega}-D_x\dfrac{\partial L}{\partial u_1}\cdot \eta dx+\cdots+\int_{\Omega}\left(-D_x\right)^n \dfrac{\partial L}{\partial u_{n}}\cdot \eta dx=
+$$
+$$
+=\int_{\Omega} \sum_{j=0}^n \left(-D_x\right)^j \dfrac{\partial L}{\partial u_{j}}\cdot \eta dx
+$$
+<p>So it should be </p>
+$$
+\delta J[f(x)]=\sum_{j=0}^n \left(-D_x\right)^j \dfrac{\partial L}{\partial u_{j}}
+$$
+<p>This last expression is called the <a href="./Euler operator.md.html">Euler operator</a>.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Proposition</b> (<a href="./../Bibliography/@olver86.md.html">@olver86</a> page 246)</p>
 <p>If $f(x)$ is an extrema of $J[u]$ then $\delta J[f(x)] \equiv 0$, the null function on $\Omega$.</p>
 <p>$\blacksquare$</p>
+<p></p>
+<p>The <a href="./Euler-Lagrange.md.html">Euler-Lagrange</a> equations then appear from this proposition together with Remark c) above.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
