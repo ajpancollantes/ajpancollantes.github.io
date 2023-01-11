@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="System_of_first_order_ODEs">System of first order ODEs</h1>
+<p>Particular case of <a href="./system of ODEs.md.html">system of ODEs</a>. They are also called <a href="./../dynamical system.md.html">dynamical system</a>s.</p>
+<p>Consider the equation</p>
+$$
+\dot{\boldsymbol{x}}=F(\boldsymbol{x}), \quad \boldsymbol{x} \in \mathbb{R}^{n}
+$$
+<p>with $F: \mathbb{R}^n\mapsto \mathbb{R}^n$. </p>
+<p>A solution for this equation with initial condition $\varphi\left(t_{0}\right)=x_{0}$ is any </p>
+$$
+\varphi : I \rightarrow \mathbb{R}^{n}
+$$
+<p>such that</p>
+$$
+\left.\frac{d \varphi}{d t}\right|_{t=\tau}=F( \varphi(\tau))
+$$
+<p>for every $\tau\in I$, and $\varphi\left(t_{0}\right)=x_{0}$.</p>
+<p></p>
+<p>This problem has always a solution, which is smooth and unique (if we consider the maximality of the domain): this is the <b>existence and uniqueness theorem for ODEs</b>. The statement and proof can be read at [Arnold 1991] page 93 (chapter 2, S7, 2) or [Lee 2013] page 314. The hypothesis can be weaker (the function $F$ only needs to be a <a href="./../Lipschitz continuous function.md.html">Lipschitz continuous function</a>), and I think this is what states the <a href="https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem#Other_existence_theorems" target="_blank">Picard-Lindelöf theorem</a>.</p>
+<p></p>
+<p>Every system can be identified with a vector field in $\mathbb{R}^n$: if $F=(F_1,F_2,\ldots)$ then correspond to the <a href="./../GEOMETRY/vector field.md.html">vector field</a></p>
+$$
+X=\sum_i F_i \partial x_i
+$$
+<p>So, in addition, the <b>existence and uniqueness theorem</b> establishes the 1-1 relation between vector fields and local one-parameter groups:</p>
+<p><img src="./../../imagenes/Pasted image 20211021170431.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>The system, since it has an associated vector field, it is also associated to a <a href="./characteristics of first-order partial differential equation.md.html">linear homogeneous PDE</a> of which is its characteristic equation. See discussion at the end of that link about method of characteristics.</p>
+<p></p>
+<p>Particularly important is the linear case, which can be split in <a href="./system of first order linear ODEs- real case.md.html">system of first order linear ODEs- real case</a> and <a href="./system of first order linear ODEs- complex case.md.html">system of first order linear ODEs- complex case</a>.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Examples">Examples</h2>
+<p>Important examples appears at <a href="./../../⛳️ NON CLASSIFIED/Hamiltonian mechanics.md.html">Hamiltonian mechanics</a>.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

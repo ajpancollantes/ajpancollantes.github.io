@@ -68,18 +68,12 @@ $$
 $$
 \lambda_{\alpha}=\pi^*(\alpha)
 $$
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p></p>
 <p>Now, we can take the exterior derivative, $\omega:=d\lambda$. This is called the Poincaré 2-form, or symplectic 2-form. It is canonical for every cotangent bundle and verifies:</p>
 <p><ul style="margin-left:0px;"><li>- It is closed.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>- It is nondegenerate. That is, for every vector $X\in T(T^*Q)$, the 1-form $i_X \omega=\omega(X,-)$ is not null</li></ul></p>
 <p></p>
+<p>Any manifold equipped with a 2-form satisfying both conditions is called a <b>symplectic manifold</b></p>
 <p></p>
-<p>Any manifold equipped with a 2-form satisfying both conditions is called a <b>symplectic manifold</b>.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
 <h2 style="margin-left:0px;" id="Hamiltonian_vector_fields">Hamiltonian vector fields	</h2>
 <p></p>
 <p><b>This symplectic form has a main use</b>: to convert the differential of the hamiltonian, $dH$, into a vector field called the <b>symplectic gradient</b>: the only vector field $X_H$ such that $\omega(X_H,-)=dH$. If we have also a <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> $g$, it turns out that this symplectic gradient and the usual gradient are orthogonal: remember that given a function $H$ the gradient is the only vector field $\nabla H$ such that $dH=g(\nabla H,-)$. Therefore</p>
@@ -135,18 +129,18 @@ $$
 <p></p>
 <p><ul style="margin-left:0px;"><li>- $\left\{q_{i}, p_{j}\right\}=\delta_{i j}$</li></ul></p>
 <p></p>
-<p><ul style="margin-left:0px;"><li>- Observe that if we leave a slot $\{-,H\}$ we have an operator that acts over functions. In fact, is the vector field $X$! So the Poisson bracket let us to find the symplectic gradient \textbf{directly}, without the use of $d$ and $\omega$. More explicitly</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- Observe that if we leave a slot $\{-,H\}$ we have an operator that acts over functions. In fact, is the vector field $X$! So the Poisson bracket let us to find the symplectic gradient <b>directly</b>, without the use of $d$ and $\omega$. More explicitly</li></ul></p>
 $$
  X_f=\{-,f\}
  $$
 <p></p>
-<p><ul style="margin-left:0px;"><li>From $d\omega=0$ it can be deduced the  Jacobi identity:</li></ul></p>
+<p><ul style="margin-left:0px;"><li>From $d\omega=0$ it can be deduced the Jacobi identity:</li></ul></p>
 <ul style="margin-left:0px;"><li>$$</li></ul>
  \{f,\{g, h\}\}=\{\{f, h\}, g\}+\{h,\{f, g\}\}
 $$
 <p><ul style="margin-left:0px;"><li>for any three functions $f, g, h$.</li></ul></p>
 <p></p>
-<p><ul style="margin-left:0px;"><li>Leaving an slot instead of $f$ we get</li></ul></p>
+<p>Leaving an slot instead of $f$ we get</p>
 $$
  \{-,\{g,h\}\}=\left[ \{-,g\}, \{-,h\}\right]
 $$
@@ -164,9 +158,8 @@ $$
 <p><ul style="margin-left:0px;"><li>- $\{f,g\}$ can be interpreted as the area of the paralelogram made of $X_f$ and $X_g$</li></ul></p>
 $$
  \{f,g\}=X_g(f)=df(X_g)=\nabla f \cdot X_g
-$$ 
-<p></p>
-<p><ul style="margin-left:0px;"><li>Any function $f \in \mathcal{C}^{\infty}(T^*Q)$ is called an \textbf{observable}. They constitute a commutative algebra that is, in fact, a \textbf{Poisson algebra} due to the existence of the Poisson bracket $\{-,-\}$. If you fix any $f\in \mathcal{C}^{\infty}(T^*Q)$ then you get a one-parameter local tranformation group for $\mathcal{C}^{\infty}(T^*Q)$ in the following way.</li></ul></p>
+$$
+<p><ul style="margin-left:0px;"><li>Any function $f \in \mathcal{C}^{\infty}(T^*Q)$ is called an <b>observable</b>. They constitute a commutative algebra that is, in fact, a <b>Poisson algebra</b> due to the existence of the Poisson bracket $\{-,-\}$. If you fix any $f\in \mathcal{C}^{\infty}(T^*Q)$ then you get a one-parameter <a href="./../♾️ CONCEPTS/local group of transformations.md.html">local group of transformations</a> for $\mathcal{C}^{\infty}(T^*Q)$ in the following way.</li></ul></p>
 <p>First, you have the vector field $X_f$ given by</p>
 $$
 X_f=\{-,f\}
@@ -183,7 +176,6 @@ $$
 <p></p>
 <p>1. $\phi_s \circ \phi_t=\phi_{s+t}$</p>
 <p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
 <p>Now, we can define a family of transformations</p>
 $$
 F^{\phi_s}: \mathcal{C}^{\infty}(T^*Q) \longmapsto \mathcal{C}^{\infty}(T^*Q)
@@ -195,7 +187,6 @@ $$
 <p></p>
 <p>I interpret observables as little machines that you can place where you want (in a broad sense of the meaning of "where", because this includes time and any other variable properties like temperature or energy, but we are treating them as "space") and then you can read a number in their screen. What this is telling to us is that given any of those machines, say $f$, we can construct a "modifier of machines" that depends on one parameter and that yields a group. Observe that the definition of the modifier use the symplectic form, or the Poisson bracket, which is a bit annoying for me. I think that this would be removed if we go to the $C^*$-algebra formulation...</p>
 <p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
 <p>On the other hand, we have that </p>
 $$
 \frac{d}{ds} F^{\phi_s}(g)=\frac{d}{ds}(g\circ \phi_s)=dg_{\phi_{s}(-)} \cdot X_f=X_f(g\circ \phi_s)=\{F^{\phi_s}(g),f\}

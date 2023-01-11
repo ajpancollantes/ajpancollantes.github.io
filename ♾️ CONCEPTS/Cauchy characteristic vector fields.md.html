@@ -32,16 +32,18 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Cauchy_characteristic_vector_fields">Cauchy characteristic vector fields</h1>
-<p><b>Definition</b></p>
-<p>Given an <a href="./exterior differential system.md.html">exterior differential system</a> $\mathcal{I}$ a Cauchy characteristic vector field is a vector field $X$ such that $X\,\lrcorner\, \omega\in \mathcal{I}$ for every $\omega\in \mathcal{I}$.</p>
-<p>$\blacksquare$</p>
+<p><b>Definition</b>. Given an <a href="./exterior differential system.md.html">exterior differential system</a> $\mathcal{I}$ a Cauchy characteristic vector field is a vector field $X$ such that $X\,\lrcorner\, \omega\in \mathcal{I}$ for every $\omega\in \mathcal{I}$.$\blacksquare$</p>
 <p></p>
-<p><b>Proposition</b></p>
-<p>Cauchy characteristic vector fields constitute a Lie subalgebra of $\mathfrak{X}(M)$ .</p>
+<p><b>Proposition</b>. Cauchy characteristic vector fields constitute a Lie subalgebra of $\mathfrak{X}(M)$ .</p>
 <p>$\blacksquare$</p>
-<p><b>Proof</b></p>
-<p>It can be shown using formula 4 in <a href="./../✏️ THEOREMS/DG/formulas for Lie derivative, exterior derivatives, bracket, interior product.md.html">formulas for Lie derivative, exterior derivatives, bracket, interior product</a>.</p>
+<p><b>Proof</b>. It can be shown using formula 4 in <a href="./../✏️ THEOREMS/DG/formulas for Lie derivative, exterior derivatives, bracket, interior product.md.html">formulas for Lie derivative, exterior derivatives, bracket, interior product</a>.</p>
 <p>$\blacksquare$</p>
+<p><b>Remarks</b></p>
+<p><ul style="margin-left:0px;"><li>If $X$ is a Cauchy characteristic vector field of an EDS, then it is also a <a href="./symmetry of an EDS.md.html">symmetry of the EDS</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>To check that a vector field is a Cauchy characteristic vector fields we only have to check $X\,\lrcorner\, \omega\in \mathcal{I}$ for a set of forms $\omega$ that generate $\mathcal{I}$ algebraically.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The flow lines of a Cauchy characteristic vector field are called the Cauchy characteristics of the EDS. It has to do with <a href="./method of characteristics.md.html">method of characteristics</a>...</li></ul></p>
+<p></p>
+<p></p>
 <p></p>
 <p></p>
 <hr>
@@ -56,7 +58,7 @@ C(\mathcal{I})_x=A(\mathcal{I})_x^{\perp}\subset T^*M
 $$
 <p>This is called the <b>retracting space</b> at $x$.</p>
 <p></p>
-<p>The differential system defined by $C(\mathcal{I})$ or, what is the same, the distribution $A(\mathcal{I})$ is <a href="./GEOMETRY/completely integrable distribution.md.html">completely integrable</a> (see <a href="./../Bibliography/@bryant2013exterior.md.html">@bryant2013exterior</a> Proposition 2.1. page 31, although is a conclusion of Proposition above).</p>
+<p>The differential system defined by $C(\mathcal{I})$ or, what is the same, the distribution $A(\mathcal{I})$ is <a href="./GEOMETRY/completely integrable distribution.md.html">completely integrable</a> (see <a href="./../Bibliography/@bryant2013exterior.md.html">@bryant2013exterior</a> Proposition 2.1. page 31, although it can be concluded from Proposition above).</p>
 <p></p>
 <p>I think that $A(\mathcal{I})$ is a generalization to <a href="./exterior differential system.md.html">exterior differential system</a> of the associated distribution to a completely integrable <a href="./GEOMETRY/Pfaffian system.md.html">Pfaffian system</a>.</p>
 <p>Observe that given $\omega \in \mathcal{I}$, for every $\xi\in A(\mathcal{I})$ we have $\xi \,\lrcorner \, \omega \in \mathcal{I}$, so $\xi \,\lrcorner \, \omega=0$ since the contraction is a 0-form, and they are usually not considered in <a href="./exterior differential system.md.html">exterior differential system</a>s (if they are present, we can restrict to the manifold defined by its zeros). Therefore $\omega \in C(\mathcal{I})$ and </p>

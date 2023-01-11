@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Dirac_delta">Dirac delta</h1>
+<p>Is not a function, but a <a href="./distribution (functional analysis).md.html">distribution (functional analysis)</a>. In the context of <a href="./distribution (functional analysis).md.html">distribution (functional analysis)</a> it is defined as:</p>
+$$
+<\delta,\varphi>=\varphi(0)
+$$
+<p>Informally, Dirac delta function is usually written as</p>
+$$
+\delta(x)=\left\{\begin{array}{ll}{+\infty,} & {x=0} \\ {0,} & {x \neq 0}\end{array}\right.
+$$
+<p>More on the Dirac delta: it picks out the value of $\varphi$ at 0 ignoring the others, so in some sense it is a continuous version of the Kronecker delta! That is, in the same sense that</p>
+$$
+\delta_{ij}=\left\{\begin{array}{ll}{1,} & {i=j} \\ {0,} & {i \neq j}\end{array}\right.
+$$
+<p>we have that</p>
+$$
+\delta_y(x):=\delta(x-y)=\left\{\begin{array}{ll}{+\infty,} & {x=y} \\ {0,} & {x \neq y}\end{array}\right.
+$$
+<p>Even more on this, consider for simplicity $D(\mathbb{R})$ (see <a href="./distribution (functional analysis).md.html">distribution (functional analysis)</a>). For every $y\in \mathbb{R}$ we can consider</p>
+$$
+T_y:D(\mathbb{R}) \mapsto \mathbb{R}
+$$
+<p>such that $T_y(\varphi)=\varphi(q)$. It can be checked that informally:</p>
+$$
+T_y=\delta_y(x)
+$$
+<p>and</p>
+$$
+T_y(\varphi)=\varphi(y)=<\delta_y,\varphi>=\int_{\mathbb{R}}\varphi(x) \delta_y(x)dx.
+$$
+<p>In this way, $\delta_y$ plays the role of $e_j$ when $\{e_i\}$ is an orthogonal basis in a vector space $V$, since for a vector $v\in V$ its $j$th coordinate is</p>
+$$
+coord_j(v)=v_j=<e_j,v>=\sum_i v_i\cdot \delta_{ij}.
+$$
+<p>In the same sense that $\delta_{ij}$, with $i$ running from 1 to $n$, are the coordinates of $e_j$ in the basis $\{e_i\}$, the expression $\delta_y(x)$ represents the "coordinates" of $\delta_y$ in the basis $\{\delta_x\}$. The notation is not appropriate, and indeed this last sentence should be:</p>
+<p>>the expression $\delta_y(x)$ represents the "coordinates" of $|y\rangle$ in the basis $\{\delta_x\}$</p>
+<p></p>
+<p>in concordance with the <a href="./../☕REFLECTIONS/bra-ket notation.md.html">bra-ket notation</a>.</p>
+<p></p>
+<p>The <a href="./Fourier transform.md.html">Fourier transform</a> of the Dirac delta is</p>
+$$
+\delta_a(t)=\frac{1}{2 \pi} \int_{-\infty}^{\infty} e^{i w(t-a)} d w=
+$$
+$$
+=\frac{1}{2 \pi} \int_{-\infty}^{\infty} e^{-iaw}e^{i wt} d w
+$$
+<p>See <a href="https://en.wikipedia.org/wiki/Dirac_delta_function#Fourier_transform" target="_blank">Wikipedia</a> for a proof.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

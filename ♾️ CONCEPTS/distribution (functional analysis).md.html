@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Distribution_functional_analysis">Distribution (functional analysis)</h1>
+<p>Main idea: usual functions can be reinterpreted like acting over an special set of functions: the test functions (functions with compact support). So we can think of functions like something similar to covectors. But there are more operators than the usual functions: they are the distributions.</p>
+<p></p>
+<p>Let us define $D(\mathbb{R}^n)$ as the set of $\mathbb{C}^{\infty}$-functions with compact support. We call a distribution to every continuous linear transformation:</p>
+$$
+T:D(\mathbb{R}^n)\mapsto \mathbb{R} 
+$$
+<p>Usually, the action will be denoted, for $\varphi \in D(\mathbb{R}^n)$:</p>
+$$
+<T,\varphi>:=T(\varphi)
+$$
+<p>Any locally integrable function $f:\mathbb{R}\mapsto \mathbb{R}$ define a distribution $T_f$ in the following way</p>
+$$
+<T_f,\varphi>=\int _ { \mathbb { R }^n } f ( x ) \varphi ( x ) d x
+$$
+<p>An important example of distribution, not really coming from a function,  is the <a href="./Dirac delta.md.html">Dirac delta</a> function $\delta$ (not really a function!) </p>
+<p></p>
+<p>We also can define the <b>derivative of a distribution</b>. It would be convenient that for usual functions $(T_f)'=T_{f'}$, that is</p>
+$$
+<(T_f)',\varphi>=\int _ { \mathbf { R }^n } f' ( x ) \varphi ( x ) d x=
+[ f ( x ) \varphi ( x ) ] _ { - \infty } ^ { \infty } - \int _ { \mathbf { R }^n } f \varphi ^ { \prime } d x = - \left\langle f , \varphi ^ { \prime } \right\rangle
+$$
+<p>where we have integrated by parts. </p>
+<p>So in general we define $T'$ as</p>
+$$
+\langle T',\varphi \rangle=-\langle T,\varphi' \rangle
+$$
+<p>From this point of view it can be check that the <a href="./Dirac delta.md.html">Dirac delta</a> is the derivative of the Heaviside function</p>
+$$
+H (x) = \left\{ \begin{array} { l l } { 0 , } & { x < 0 } \\ { \frac { 1 } { 2 } , } & { x = 0 } \\ { 1 , } & { x > 0 } \end{array} \right.
+$$
+<p>Attention: value at 0 could be controversial.</p>
+<p></p>
+<p>At the same way that <a href="./Dirac delta.md.html">Dirac delta</a> means evaluation at 0 of a test function, we can interpret that  general distributions are "generalized points", or "matter distribution", or "bodies"; and the action over a function is "evaluate the function over that body". If the distribution have compact support I think we can choose any function, not only test functions.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Bra-ket_notation">Bra-ket notation</h1>
+<p>Explanation: in progress. Notation used in <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>...</p>
+<p></p>
+<p>Justification:</p>
+<p>Given a complex <a href="./../♾️ CONCEPTS/FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> $H$ we can define the complex conjugate of $H$, $\overline{H}$, which is all the same than $H$ except that the scalar multiplication by $z\in \mathbb{C}$ is changed by the conjugate $\overline{z}$. Obviously, there is a conjugate linear isomorphism between $H$ and $\overline{H}$ </p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>On the other hand, we can define the continuous dual $H^*$ of $H$ like the vector space of all continuous and linear maps from $H$ to $\mathbb{C}$. </p>
+<p></p>
+<p>The inner product gives rise to a morphism from $H$ to his dual $H^*$ that is conjugate-linear:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+\begin{array}{rcc}
+
+\Phi: H & \longmapsto & H^*\\
+
+v & \longmapsto & \langle v,\cdot \rangle
+
+\end{array}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>The {\bf Riesz representation theorem} tell us that $\Phi$ is an isomorphism (this is only evident in the finite dimensional case). Moreover, it is an isometry respect to the norm.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>In conclusion, $H^* \cong\overline{H}$, since the composition of two conjugate-linear maps is a genuine linear map. This conclusion is what justifies the {\it bra-ket} notation: For an element $v\in H$ we will write $|v \rangle$ and for $\Phi(v)\in H^*$ we will write $\langle v|$. This way, for $v,w\in H$, you know that $\Phi(v)(w)=<v,w>$, but in the new notation is, directly</p>
+<p></p>
+$$
+
+\langle v|w \rangle=\langle v,w \rangle
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Observe that to $z\cdot|  v \rangle$ we associate $\langle v |\cdot\overline{z}$. The scalar is at the right because is an habit of physicist. </p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\vspace{1cm}</p>
+<p></p>
+<p>A linear map between two complex Hilbert spaces $f: H_1\mapsto H_2$ gives rise to other linear map</p>
+<p></p>
+$$
+
+\overline{f}: \overline{H_1} \longmapsto \overline{H_2}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Let us identify $\overline{H_i}$ with $H_i^*$ and call $\Phi_i$ to the conjugate linear isomorphism from $H_i$ to $H_i^*$ (for example, $\Phi_1(v)=<v,\cdot >$). We will take $\overline{f}=\Phi_2\circ f \circ \Phi_1^{-1}$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>We are going to study this in the bra-ket notation. Suppose $|v\rangle \in H_1$ such that $f(|v\rangle)=|w \rangle$, what is $\overline{f}(\langle v |)$? Obvisouly, is $\langle w |$. But let $M$ be the matrix of $f$ respect to the basis $\{|e_i\rangle\} \subset H_1$, $\{|g_j\rangle\} \subset H_2$. What is the marix of $\overline{f}$ respect to $\{\langle e_i|\} \subset H_1^*$, $\{\langle g_j|\} \subset H_2$?</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>If we take, say for example, $\langle e_1|$ and follow the compositions that produce $\overline{f}$ we obtain</p>
+<p></p>
+$$
+
+\overline{f}(\langle e_1|)=\langle \sum_j m_{j1}g_j|= \sum_j \langle g_j|\cdot \overline{m}_{j1}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But wait a moment. Physicists have a habit of representig $|v\rangle$ like a column vector, and $\langle v|$ like a row vector; and, in the latter case, apply the matrix of linear maps multiplying by the right. Putting all together we obtain that the matrix of $\overline{f}$ is</p>
+<p></p>
+$$
+
+M^{\dagger}:=\overline{M}^T
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li>which is calle the {\bf Hermitian conjugate} of $M$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>And we can write that to $M|v\rangle$ we associate</p>
+<p></p>
+$$
+
+\langle v | M^{\dagger}
+
+$$
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
