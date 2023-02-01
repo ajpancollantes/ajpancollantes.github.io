@@ -31,326 +31,76 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="General_variance_and_contravariance_draft">General variance and contravariance (draft)</h1>
-<p>Suppose that a group $G$ acts on a space $X$. A transformation $p\in G$ can be thought of as "moving" the objects in $X$ or as a change of "point of view". </p>
-<p><img src="./../imagenes/Pasted image 20220928081325.png" style="width:80vw; border-radius: 3px;" ></p>
+<font size="3vw"><h1 style="margin-left:0px;" id="General_variance_and_contravariance">General variance and contravariance</h1>
+<p>Suppose that a group $G$ <a href="./../♾️ CONCEPTS/transitive action.md.html">acts transitively</a> on a space $X$. A transformation $p\in G$ can be thought of as "moving" the objects in $X$ or as a change of "point of view" in the following way. </p>
 <p></p>
-<p><img src="./../imagenes/Pasted image 20220928081352.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Suppose we have a comfortable, mathematically speaking, space with a distinguished point, $(S,s_0)$; and a bijection $\phi:S\to X$ (in the line of reasoning of <a href="./../♾️ CONCEPTS/ALGEBRA/homogeneous space.md.html#Intuitive_approach">homogeneous space#Intuitive approach</a>). That is, for every $x\in X$ we have a kind of "coordinates" $s$ for $x$, given by $s=\phi^{-1}(x)\in S$. Think, for example, of a vector space $V$ and the isomorphism $\phi:V\to \mathbb R^2$ (fixing a basis in $V$). We can think of this as our <b>initial point of view</b>, and we can imagina as if we were located at $x_0=\phi(s_0)\in X$ with some devices to take measurements that let us to create $\phi$ .</p>
+<p><img src="./../imagenes/Pasted image 20230131093423.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
+<p>An element of the group $g\in G$ is a transformation, a movement, of $X$ into itself. </p>
+<p><img src="./../imagenes/Pasted image 20230131094126.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
-<h1 style="margin-left:0px;" id="Old_notes_revisar_anotaciones_latex_antiguas_y_unificar">Old notes (revisar anotaciones latex antiguas y unificar)</h1>
+<p>Observe that $g$ induces a new bijection, a new point of view, $\varphi:S\to X$ given by $\varphi=g^{-1}\circ \phi$. On the other hand, observe that any transformation of $S$, $t$, also leads to a new description: $\phi\circ t$. You can think of $t$ as moving myself and my measurement system to a new location, a new observer.</p>
 <p></p>
-<h2 style="margin-left:0px;" id="On_manifolds">On manifolds</h2>
-<p>\section{Sobre covarianza y contravarianza}</p>
-<p></p>
-<p>Todo esto se explica mejor en la sección \ref{covarianza}, en un contexto de álgebra lineal. </p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Si tenemos dos cartas para una misma región de una variedad $M$, denotadas $x$ e $y$, relacionadas mediante una transformación </p>
-<p></p>
-<p>$$\phi: x \lra y$$</p>
-<p></p>
-<p>la matriz</p>
-<p></p>
+<p><b>The key point is</b>: the transformation $g$ has an associated transformation $\tilde{g}:S\to S$ given by $\tilde{g}=\phi^{-1}\circ g\circ \phi$, i.e. induced by the bijection $\phi$. <b>It is impossible to distinguish</b> if the new description $\varphi$ is caused by the transformation $g$ on $X$ or by the transformation $\tilde{g}^{-1}$ on $S$:</p>
 $$
-
-d \phi=\frac{\partial y^b}{\partial x^a}
-
+\varphi=g^{-1}\circ \phi=(\phi \tilde{g}^{-1}\phi^{-1})\circ\phi=\phi\circ \tilde{g}^{-1}
 $$
+<p>That is to say, it is the same thing to move "the world" while I remain fixed than to move myself in the opposite direction while I leave the world fixed.</p>
 <p></p>
-<p>es la que convierte las coordenadas de los vectores del espacio tangente en la base proporcionada por $x$ a las coordenadas de la base proporcionada por $y$. </p>
-<p></p>
-<p>Pero $d \phi$ y $d \phi^{-1}$ no son solamente cambios de coordenadas, también se pueden interpretar como una transformación de vectores (esto ocurre desde el nivel del álgebra lineal, las matrices pueden ser cambios de bases o trasformación del espacio, {\it si dejamos la segunda base fija}). Pero entonces, la matriz que transforma la base aportada por la carta $x$ en la base aportada por la base $y$ no es $d\phi$, sino </p>
-<p></p>
-<p>$$d \phi^{-1}=\frac{\partial x^a}{\partial y^b}$$</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Además, si para transformar las coordenadas de los vectores de la carta $x$ en las coordenadas en $y$ hemos usado matrices columna y la matriz multiplicaba al vector por la izquierda, para convertir los vectores de la base de la carta $x$ en los de la base de la carta $y$ usamos matrices fila (aunque por dentro sean vectores) y multiplicación a la derecha. Que se puede pasar a la forma cómoda (columnas y multiplicación por izquierda) haciendo la transpuesta.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Luego la matriz para transformar uno en otro es:</p>
-<p></p>
-<p>$$d \left(\phi^{-1} \right)^t=\left(\frac{\partial x^a}{\partial y^b} \right)^t$$</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Es decir, los vectores {\bf en sí} se transforman en una dirección, pero las coordenadas se transforman en {\bf la contraria}. De ahí el nombre de {\bf contravarianza}.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Es algo análogo a lo que ocurre cuando cambiamos la hora. Si adelantamos la hora nuestra coordenada temporal está a +1 pero realmente estamos desplazándonos hacia atrás (-1) porque a la misma hora que ayer ahora es más temprano (hay más luz)</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>\begin{center}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\includegraphics[width=9cm]{imagenes/reloj.jpg}\\</li></ul></p>
-<p></p>
-<p>\end{center}</p>
-<p></p>
-<p>Summing up:</p>
-<p></p>
-<p>\begin{table}[htbp]</p>
-<p></p>
-<p>\begin{center}</p>
-<p></p>
-<p>\begin{tabular}{|c|c|c|}</p>
-<p></p>
-<p>\hline</p>
-<p></p>
-<p>{\bf Transformation} & {\bf Kind} & {\bf Expression}\\</p>
-<p></p>
-<p>\hline \hline</p>
-<p></p>
-<p>Coordinates change & Contravariant? &  $\phi:x\mapsto y$, $y=\phi(x)$\\ \hline</p>
-<p></p>
-<p>Vector conversion & Covariant? & $\{\frac{\partial }{\partial y}\}=\{\frac{\partial }{\partial x}\} \frac{\partial x}{\partial y}$ (chain rule)\\ \hline</p>
-<p></p>
-<p>Vector components & Contravariant &$V_y=\frac{\partial y}{\partial x} V_x$\\  \hline</p>
-<p></p>
-<p>Covector conversion & Contravariant &$\{dy\}=\frac{\partial y}{\partial x} \{dx\}$ (chain rule)\\  \hline</p>
-<p></p>
-<p>Covector components & Covariant & $\eta_y=\eta_x \cdot \frac{\partial x}{\partial y}$\\  \hline</p>
-<p></p>
-<p>\end{tabular}</p>
-<p></p>
-<p>\caption{Covariance y contravariance.}</p>
-<p></p>
-<p>\label{tabla:sencilla}</p>
-<p></p>
-<p>\end{center}</p>
-<p></p>
-<p>\end{table}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>\textbf{More over:}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Let's restrict to 2D case. When we have a vector, say </p>
-<p></p>
+<h2 style="margin-left:0px;" id="Example_in_Linear_Algebra">Example in Linear Algebra</h2>
+<p>In the context of <a href="./../⛳️ NON CLASSIFIED/Linear Algebra.md.html">Linear Algebra</a> and <a href="./../♾️ CONCEPTS/basis and change of basis.md.html">basis and change of basis</a>, consider the vector space $\mathbb{R}^2$ with the standard basis $\mathcal{C}$. Consider also the alternative basis $\mathcal B$ given by $v_1=(-1,2),v_2=(3,4)$. If we have a vector $w$ with coordinates in this new basis $(1,7)_{\mathcal B}$ we can compute its coordinates in $\mathcal C$ by multiplication with the matrix $A=\begin{pmatrix}-1 & 3\\ 2 & 4 \\ \end{pmatrix}$, as it is well known. But we can interpret this in the context above:</p>
+<p><ul style="margin-left:0px;"><li>$X$, the landscape, is $\mathbb R^2$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$S$, me and my devices, is also $\mathbb R^2$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\phi$ is the identity.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The matrix $A$ is a transformation of $S$ into $S$, and it corresponds to $\tilde{g}^{-1}$, since it change the observer (me with the canonical basis $\mathcal C$) to a new observer (me with the basis $\mathcal B$).</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The vector $w$ has coordinates $(1,7)$ in the new description, and this is reflected by $\varphi^{-1}(w)=(1,7)$. The initial description of $w$ should be $\phi^{-1}(w)$. But $w=\varphi(1,7)$ so</li></ul></p>
 $$
-
-2\partial x+\partial y
-
+\phi^{-1}(w)=\phi^{-1}(\varphi(1,7))=\phi^{-1}\circ\phi\circ\tilde{g}^{-1}(1,7)=
 $$
-<p></p>
-<p>and a covector </p>
-<p></p>
 $$
-
-dx+3dy
-
+=\begin{pmatrix}-1 & 3\\ 2 & 4 \\ \end{pmatrix}\cdot \begin{pmatrix}1\\7\\ \end{pmatrix}
 $$
+<p>Compared with my pictures above: if I shift my measurement system by -2, and I tell you that the tree is now at position 7, you can recover the position of the tree at the initial description by applying the same shift, 7-2=5.</p>
 <p></p>
-<p>we can represent them like an arrow, the first one, and a gradient (at least locally), the second one (ojo, este dibujo no corresponde al ejemplo):</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\begin{center}</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\includegraphics[width=5cm]{imagenes/vectorcovector.png}\\</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\end{center}</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>The application of one into the other is the number of lines of the gradient that cross the vector. This is because to count the crossing lines we can count first in the horizontal direction and then add those from the vertical direction.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>The gradient produced by, for example, $dx+3dy$ corresponds to a line trough the point $(0,1/3)$ and $(1,0)$, its parallel line through the $(0,0)$ and others at the same distance. Why the 3 produces 1/3? It has to do with real examples: 1) imagine vectors are stock in a shop and covectors are prices, a cost, a barrier, to every product in the shop. 2) a covector is a frequency, a vector is like a wavelength, and their product is analogous to a velocity (no estoy seguro de esto, es copiado de \begin{verbatim}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li><a href="http://www.physicsinsights.org/pbp_one_forms.html" target="_blank">http://www.physicsinsights.org/pbp_one_forms.html</a></li></ul></p>
-<p></p>
-<p>\end{verbatim} y creo que se le puede sacar más partido a la analogía, viendo lo que pasa en la exponencial soluciión de la ecuación de onda multidimensional).</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Observe that the set of parallel lines is perpendicular to the vector (arrow) $(1,3)=\partial x+ 3 \partial y$. The similitud with the original $dx+3dy$ is not coincidence: it is the covariant version of the other. It is exactly the same because in this case we are assuming the trivial metric </p>
-<p></p>
+<h2 style="margin-left:0px;" id="Behavior_of_functions">Behavior of functions</h2>
+<p>Suppose a function $f:X\to \mathbb R$ (in the pictures above think of the "height" of every object). The description given by $\phi$ let us create a "more comfortable" function $F_1:S\to \mathbb R$ given by $F_1=f\circ \phi$, encoding the same data</p>
 $$
-
-\left( 
-
-\begin{array}{cc}
-
-    1 & 0 \\
-
-    0 & 1
-
+\begin{array}{ccc}
+X &\stackrel{f}{\longrightarrow} & \mathbb R\\
+\phi\uparrow & &\\
+S&&\\
 \end{array}
-
-\right)
-
 $$
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>What if we were with the metric </p>
-<p></p>
+<p>Consider a transformation $g$ of $X$ (think of a shift of +2, por example, in the picture above). The visual effect corresponds to translate the picture two units right with respect to the scale space $S$. What is the new comfortable description of $f$ with the new description of $X$? Well, the new description of $X$ is $\varphi=g^{-1}\circ \phi$, so the new comfortable function is </p>
 $$
-
-\left( 
-
-\begin{array}{cc}
-
-    4 & 0 \\
-
-    0 & 1
-
-\end{array}
-
-\right)
-
-$$ ?
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>The covector $dx+3dy$ would be coming from the vector $1/4 \partial x+3\partial y$, that is still orthogonal to the parallel line but with the new concept of orthogonality.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>\bigbreak</p>
-<p></p>
-<p>Now consider a change of basis, a clockwise rotation of angle $\theta$, $R_{\theta}$, for example. It is a passive change, in the sense that we transform our basis but the main characters, the arrow and the gradient, are the same. </p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>The new basis is obtained by applying the matrix $R_{\theta}$ through the right side or with the transpose of $R_{\theta}$ in the usual side (i.e., is covariant). But how i expressed now the vector $2 \partial x+\partial y$? You can check that you have to multiply $R_{-\theta}$ to the components! This is why vectors are called \textit{contravariant} vectors.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>And what about the gradient? Now, you can check that the line appears rotated and correspond to a different covector. The new components can be obtained by multiplying by $R_{\theta}$ in the right side, just like the vector conversion! So they are called \textit{covariant} vectors.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>\bigbreak</p>
-<p></p>
-<p>\textbf{And even more about contra and covariance:}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>In a shop, imagine we have a product, apples, whose amount we measure in kg. The price is measured in eur/kg. When somebody comes to the shop and buys 4 kg of apples with a price of 2'5 eur/kg, he does the simple computation:</p>
-<p></p>
-<p>$$4 \cdot 2'5=10 $$</p>
-<p></p>
-<p>to obtain an scalar. It could be done with several items and several prices, but we always obtain a scalar.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>But, what if we change the units in which we measure the apples. For example, imagine that apples are sold in packets of 2'3 kg. Observe:</p>
-<p></p>
-<p>\begin{itemize}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\item The unit itself has been multiplied by 2'3 (kg to packet).</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\item The quantity of apples bought is no longer 4, but less than 4. It is divided by 2'3, for which we say is contravariant.</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\item The price is no longer 2'5, but it change to a greater price. It is multiplied by 2'3. So it is called covariant.</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\item The fact is that we obtain the same scalar: the total money.</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\item Everything works well if we replace apple with a list of products and a list of prices: vectors and covectors.</li></ul></p>
-<p></p>
-<p>\end{itemize}</p>
-<p></p>
-<h2 style="margin-left:0px;" id="Linear_algebra">Linear algebra</h2>
-<p>\section{Varianza y contravarianza}\label{covarianza}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Sea $V$ un espacio vectorial, que tomaremos de dimensión 3 por simplificar las cosas. Si tenemos una base $f=(X_1, X_2, X_3)$ y otra $f'=(Y_1, Y_2, Y_3)$ podemos considerar una aplicación lineal que transforma una en otra. Sea $A$ la matriz de esa aplicación respecto de la base $f$, es decir, las columnas de $A$ son las coordenadas de cada $Y_i$ en la base $f$.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Abusando del lenguaje se puede escribir que:</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
+F_2=f\circ \varphi=f\circ g^{-1} \circ \phi=F_1\circ \phi^{-1}\circ g^{-1} \circ \phi
 $$
-
-f'= f \cdot A
-
+<p>and</p>
 $$
-<p></p>
-<p>donde hay que observar que $f$ y $f'$ son matrices filas hechas de vectores (no tendría sentido).</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Esto mismo se podría escribir como <code class="inlineCoed"></code>columnas'' (para mí más usual) sin más que hacer la transpuesta:</p>
-<p></p>
-<p>\begin{equation}\label{transformacion}   </p>
-<p></p>
-<p>(f')^t= A^t \cdot f^t  </p>
-<p></p>
-<p>\end{equation}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Ahora bien, la matriz $A$ también sirve para cambiar las coordenadas de un vector cualquiera $v \in V$. Denotemos por $v[f]$ y $v[f']$ respectivamente a las matrices columnas con las coordenadas de $v$ en $f$ y en $f'$. De toda la vida sabemos que la matriz para pasar de una base a otra se fabrica poniendo en columnas las coordenadas de la base original respecto de la nueva base, y luego multiplicando matrices columna. Así pues, nuestra matriz $A$ serviría para pasar de la base $f'$ a la base $f$. Por lo tanto:</p>
-<p></p>
+F_2=F_1\circ \tilde{g}^{-1}
 $$
-
-v[f]=A \cdot v[f']
-
+<p>So the new description of $f$ is obtained by a shift of -2 in the space $S$. This correspond to the elemental fact in high school mathematics that to shift the graph of a function $f(x)$ an amount of $a$ units you write $f(x-a)$.</p>
+<p></p>
+<p>On the other hand, there is also another approach. Observe that</p>
 $$
-<p></p>
-<p>y de manera inversa:</p>
-<p></p>
+F_2=f\circ \varphi=f\circ g^{-1} \circ \phi$$
 $$
-
-v[f']=A^{-1} \cdot v[f]
-
+=(f\circ g^{-1}) \circ \phi,
 $$
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Comparando esta expresión con \ref{transformacion} podemos decir que las coordenadas de los vectores se transforman de manera {\bf contravariante} a como lo hacen los propios vectores de la base. Ojo, ¡la contravarianza implica la transpuesta de la inversa!</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Ahora vamos a analizar las coordenadas de los covectores, o sea, de los elementos del espacio dual $V^*$. Sea $w \in V^*$, con coordenadas $w[f^*]$ y $w[f'^*]$ en las respectivas bases duales de $f$ y $f'$ expresadas en columnas. </p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Recordemos que las coordenadas de $w$ en una base dual no es más que aplicar $w$ a la base original. Luego:</p>
-<p></p>
+<p>so $F_2$ is also the "comfortable description" in the first "point of view" of another function, not $f$ but a transformed one: $f\circ g^{-1}$. What is this new function?</p>
+<p>Consider the set $C=\{f(x)=0\}$, the zero set of $f$. The transformation $g$ moves the set $C$ to the set $g C$. Since $y\in gC$ if and only if there exists $y'\in C$ such that $y=g(y')$, with $f(y')=0$. Then, $f(g^{-1}(y))=0$, and therefore</p>
 $$
-
-w[f'^*]^t=(w(Y_1),  w(Y_2),  w(Y_3))= (w(f \cdot A_1),  w(f \cdot A_2),  w(f \cdot A_3))
-
+gC=\{x\in X: (f\circ g^{-1})=0\}
 $$
+<p>i.e. the transformed function $f\circ g^{-1}$ is just the function such that its zero set is the transformed of the zero set of $f$.</p>
+<p><img src="./../imagenes/Pasted image 20230201085403.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
-<p>siendo $A_i$ las columnas de $A$. Así pues</p>
+<p>Particular cases:</p>
+<p><ul style="margin-left:0px;"><li><a href="./covariance and contravariance in linear algebra.md.html">covariance and contravariance in linear algebra</a></li></ul></p>
+<p><ul style="margin-left:0px;"><li><a href="./covariance and contravariance on manifolds.md.html">covariance and contravariance on manifolds</a></li></ul></p>
 <p></p>
-$$
-
-w[f'^*]^t=(w((X_1, X_2, X_3) \cdot A_1),  w((X_1, X_2, X_3) \cdot A_2),  w((X_1, X_2, X_3) \cdot A_3))=w[f^*]^t \cdot A
-
-$$
 <p></p>
-<p>de donde</p>
-<p></p>
-$$
-
-w[f'^*]=A^t \cdot w[f^*]
-
-$$
-<p></p>
-<p>lo que, por comparación con la expresión \ref{transformacion}, justifica que se diga que los covectores cambian sus coordenadas de manera {\bf covariante}.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

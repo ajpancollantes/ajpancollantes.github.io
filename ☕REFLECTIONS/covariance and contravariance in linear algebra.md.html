@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Covariance_and_contravariance_in_linear_algebra">Covariance and contravariance in linear algebra</h1>
+<p>Sea $V$ un espacio vectorial, que tomaremos de dimensión 3 por simplificar las cosas. Si tenemos una base $f=(X_1, X_2, X_3)$ y otra $f'=(Y_1, Y_2, Y_3)$ podemos considerar una aplicación lineal que transforma una en otra. Sea $A$ la matriz de esa aplicación respecto de la base $f$, es decir, las columnas de $A$ son las coordenadas de cada $Y_i$ en la base $f$.</p>
+<p>Abusando del lenguaje se puede escribir que:</p>
+$$
+f'= f \cdot A
+$$
+<p>donde hay que observar que $f$ y $f'$ son matrices filas hechas de vectores (no tendría sentido).</p>
+<p>Esto mismo se podría escribir como  columnas (para mí más usual) sin más que hacer la transpuesta:</p>
+$$
+(f')^t= A^t \cdot f^t  
+$$
+<p>Ahora bien, la matriz $A$ también sirve para cambiar las coordenadas de un vector cualquiera $v \in V$. Denotemos por $v[f]$ y $v[f']$ respectivamente a las matrices columnas con las coordenadas de $v$ en $f$ y en $f'$. De toda la vida sabemos que la matriz para pasar de una base a otra se fabrica poniendo en columnas las coordenadas de la base original respecto de la nueva base, y luego multiplicando matrices columna. Así pues, nuestra matriz $A$ serviría para pasar de la base $f'$ a la base $f$. Por lo tanto:</p>
+$$
+v[f]=A \cdot v[f']
+$$
+<p>y de manera inversa:</p>
+$$
+v[f']=A^{-1} \cdot v[f]
+$$
+<p>Comparando esta expresión con \ref{transformacion} podemos decir que las coordenadas de los vectores se transforman de manera {\bf contravariante} a como lo hacen los propios vectores de la base. Ojo, ¡la contravarianza implica la transpuesta de la inversa!</p>
+<p>Ahora vamos a analizar las coordenadas de los covectores, o sea, de los elementos del espacio dual $V^*$. Sea $w \in V^*$, con coordenadas $w[f^*]$ y $w[f'^*]$ en las respectivas bases duales de $f$ y $f'$ expresadas en columnas. </p>
+<p>Recordemos que las coordenadas de $w$ en una base dual no es más que aplicar $w$ a la base original. Luego:</p>
+$$
+w[f'^*]^t=(w(Y_1),  w(Y_2),  w(Y_3))= (w(f \cdot A_1),  w(f \cdot A_2),  w(f \cdot A_3))
+$$
+<p>siendo $A_i$ las columnas de $A$. Así pues</p>
+$$
+w[f'^*]^t=(w((X_1, X_2, X_3) \cdot A_1),  w((X_1, X_2, X_3) \cdot A_2),  w((X_1, X_2, X_3) \cdot A_3))=w[f^*]^t \cdot A
+$$
+<p>de donde</p>
+$$
+w[f'^*]=A^t \cdot w[f^*]
+$$
+<p>lo que, por comparación con la expresión \ref{transformacion}, justifica que se diga que los covectores cambian sus coordenadas de manera {\bf covariante}.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

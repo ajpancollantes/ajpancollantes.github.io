@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Covariance_and_contravariance_on_manifolds">Covariance and contravariance on manifolds</h1>
+<p>Todo esto se explica mejor en <a href="./covariance and contravariance in linear algebra.md.html">covariance and contravariance in linear algebra</a>.</p>
+<p>Si tenemos dos cartas para una misma región de una variedad $M$, denotadas $x$ e $y$, relacionadas mediante una transformación </p>
+$$
+\phi: x \to y
+$$
+<p>la matriz</p>
+$$
+d \phi=\frac{\partial y^b}{\partial x^a}
+$$
+<p>es la que convierte las coordenadas de los vectores del espacio tangente en la base proporcionada por $x$ a las coordenadas de la base proporcionada por $y$. </p>
+<p>Pero $d \phi$ y $d \phi^{-1}$ no son solamente cambios de coordenadas, también se pueden interpretar como una transformación de vectores (esto ocurre desde el nivel del álgebra lineal, las matrices pueden ser cambios de bases o trasformación del espacio, {\it si dejamos la segunda base fija}). Pero entonces, la matriz que transforma la base aportada por la carta $x$ en la base aportada por la base $y$ no es $d\phi$, sino </p>
+$$
+d \phi^{-1}=\frac{\partial x^a}{\partial y^b}
+$$
+<p>Además, si para transformar las coordenadas de los vectores de la carta $x$ en las coordenadas en $y$ hemos usado matrices columna y la matriz multiplicaba al vector por la izquierda, para convertir los vectores de la base de la carta $x$ en los de la base de la carta $y$ usamos matrices fila (aunque por dentro sean vectores) y multiplicación a la derecha. Que se puede pasar a la forma cómoda (columnas y multiplicación por izquierda) haciendo la transpuesta.</p>
+<p>Luego la matriz para transformar uno en otro es:</p>
+$$
+d \left(\phi^{-1} \right)^t=\left(\frac{\partial x^a}{\partial y^b} \right)^t
+$$
+<p>Es decir, los vectores <b>en sí</b> se transforman en una dirección, pero las coordenadas se transforman en <b>la contraria</b>. De ahí el nombre de <b>contravarianza</b>.</p>
+<p>Es algo análogo a lo que ocurre cuando cambiamos la hora. Si adelantamos la hora nuestra coordenada temporal está a +1 pero realmente estamos desplazándonos hacia atrás (-1) porque a la misma hora que ayer ahora es más temprano (hay más luz)</p>
+<p></p>
+<p>Summing up:</p>
+<p><img src="./../imagenes/Pasted image 20230201090857.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><b>More over:</b></p>
+<p>Let's restrict to 2D case. When we have a vector, say </p>
+$$
+2\partial x+\partial y
+$$
+<p>and a covector </p>
+$$
+dx+3dy
+$$
+<p>we can represent them like an arrow, the first one, and a gradient (at least locally), the second one </p>
+<p>The application of one into the other is the number of lines of the gradient that cross the vector. This is because to count the crossing lines we can count first in the horizontal direction and then add those from the vertical direction. See <a href="./../❓MY RESEARCH/☕REFLECTIONS/visualization of k-forms.md.html">visualization of k-forms</a>.</p>
+<p>The gradient produced by, for example, $dx+3dy$ corresponds to a line trough the point $(0,1/3)$ and $(1,0)$, its parallel line through the $(0,0)$ and others at the same distance. Why the 3 produces 1/3? It has to do with real examples: </p>
+<p>1) imagine vectors are stock in a shop and covectors are prices, a cost, a barrier, to every product in the shop. </p>
+<p>2) a covector is a frequency, a vector is like a wavelength, and their product is analogous to a velocity (no estoy seguro de esto, es copiado de <a href="http://www.physicsinsights.org/pbp_one_forms.html" target="_blank">aquí</a> y creo que se le puede sacar más partido a la analogía, viendo lo que pasa en la exponencial soluciión de la ecuación de onda multidimensional).</p>
+<p></p>
+<p>Observe that the set of parallel lines is perpendicular to the vector (arrow) $(1,3)=\partial x+ 3 \partial y$. The similitud with the original $dx+3dy$ is not coincidence: it is the covariant version of the other. It is exactly the same because in this case we are assuming the trivial metric </p>
+$$
+\left( 
+\begin{array}{cc}
+    1 & 0 \\
+    0 & 1
+\end{array}
+\right)
+$$
+<p>What if we were with the metric </p>
+$$
+\left( 
+\begin{array}{cc}
+    4 & 0 \\
+
+    0 & 1
+
+\end{array}
+\right)
+$$ ?
+<p>The covector $dx+3dy$ would be coming from the vector $1/4 \partial x+3\partial y$, that is still orthogonal to the parallel line but with the new concept of orthogonality.</p>
+<p></p>
+<p>Now consider a change of basis, a clockwise rotation of angle $\theta$, $R_{\theta}$, for example. It is a passive change, in the sense that we transform our basis but the main characters, the arrow and the gradient, are the same. </p>
+<p>The new basis is obtained by applying the matrix $R_{\theta}$ through the right side or with the transpose of $R_{\theta}$ in the usual side (i.e., is covariant). But how i expressed now the vector $2 \partial x+\partial y$? You can check that you have to multiply $R_{-\theta}$ to the components! This is why vectors are called contravariant vectors.</p>
+<p>And what about the gradient? Now, you can check that the line appears rotated and correspond to a different covector. The new components can be obtained by multiplying by $R_{\theta}$ in the right side, just like the vector conversion! So they are called covariant vectors.</p>
+<p></p>
+<p><b>And even more about contra and covariance</b></p>
+<p>In a shop, imagine we have a product, apples, whose amount we measure in kg. The price is measured in eur/kg. When somebody comes to the shop and buys 4 kg of apples with a price of 2'5 eur/kg, he does the simple computation:</p>
+$$
+4 \cdot 2'5=10
+$$
+<p>to obtain an scalar. It could be done with several items and several prices, but we always obtain a scalar.</p>
+<p>But, what if we change the units in which we measure the apples. For example, imagine that apples are sold in packets of 2'3 kg. Observe:</p>
+<p><ul style="margin-left:0px;"><li>The unit itself has been multiplied by 2'3 (kg to packet).</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The quantity of apples bought is no longer 4, but less than 4. It is divided by 2'3, for which we say is contravariant.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The price is no longer 2'5, but it change to a greater price. It is multiplied by 2'3. So it is called covariant.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The fact is that we obtain the same scalar: the total money.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Everything works well if we replace apple with a list of products and a list of prices: vectors and covectors.</li></ul></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
