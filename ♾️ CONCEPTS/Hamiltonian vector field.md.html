@@ -31,12 +31,21 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Self_adjoint_operator">Self adjoint operator</h1>
-<p>A coordinate free expression (and an infinite dimensional generalization) of <a href="./self adjoint matrix.md.html">self adjoint matrix</a>s.</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Hamiltonian_vector_field">Hamiltonian vector field</h1>
+<p>Given a smooth function $f$ defined on a <a href="./symplectic manifold.md.html">symplectic manifold</a> $(M,\omega)$ we can define a vector field $X_f$, corresponding to the 1-form $df$ by means of the duality provided by the <a href="./symplectic form.md.html">symplectic form</a>. It is also called the symplectic gradient of $f$. It is defined as the vector field which satisfies</p>
+$$
+\omega(X_f,-)=df(-)
+$$
+<p>How it is applied to another function $g$? It is satisfied that </p>
+$$
+X_f(g)=dg(X_f)=\omega(X_g,X_f)=-\omega(X_f,X_g)
+$$
+<p>An this is precisely the definition of the <a href="./Poisson bracket.md.html">Poisson bracket</a>.</p>
 <p></p>
-<p>I think that in finite dimensional case, their matrix with respect to an orthonormal basis is a <a href="./self adjoint matrix.md.html">self adjoint matrix</a>.</p>
+<p>A Hamiltonian vector field is a particular case of a <a href="./symplectic vector field.md.html">symplectic vector field</a>.</p>
 <p></p>
-<p>I also think there is a version of <a href="./../✏️ THEOREMS/spectral theory.md.html">spectral theorem</a> for these operators.</p>
+<p>A Hamiltonian vector field gives rise to a 1-parameter <a href="./local group of transformations.md.html">local group of transformations</a>, and this parameter has usually a physical interpretation. For example, for $f=H$, the energy of a system, the parameter is $t$, the time. If $f=p$, the momentum, the the parameter is $x$, the position.</p>
+<p></p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

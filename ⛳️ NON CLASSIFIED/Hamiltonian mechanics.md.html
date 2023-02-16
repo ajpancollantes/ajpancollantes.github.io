@@ -32,7 +32,7 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Hamiltonian_mechanics">Hamiltonian mechanics</h1>
-<p>Los estados de un sistema de <a href="./Classical Mechanics.md.html">Classical Mechanics</a> vienen determinados por variables generalizadas y sus derivadas. Es decir, trabajamos en el fibrado tangente del espacio de la configuración, o el <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> de orden 1. Eso forma parte de la formulación: <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>. La <a href="./../♾️ CONCEPTS/Legendre transform.md.html">Legendre transform</a> nos permite pasar todo al <b>fibrado cotangente</b>. Los estados del sistema van a venir determinados por las variables y los momentos generalizados. Puede parecer muy incómodo, pero tiene ventajas en la interpretación geométrica. The systems (<a href="./../♾️ CONCEPTS/dynamical system.md.html">dynamical system</a>s) with this origin are called <b>Hamiltonian systems</b>. Some of the are called <a href="./../♾️ CONCEPTS/integrable systems.md.html">integrable systems</a>.</p>
+<p>Los estados de un sistema de <a href="./Classical Mechanics.md.html">Classical Mechanics</a> vienen determinados por variables generalizadas y sus derivadas. Es decir, trabajamos en el fibrado tangente del espacio de la configuración, o el <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> de orden 1. Eso forma parte de la formulación: <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>. La <a href="./../♾️ CONCEPTS/Legendre transform.md.html">Legendre transform</a> nos permite pasar todo al <b>fibrado cotangente</b> (<b>phase space</b>). Los estados del sistema van a venir determinados por las variables y los momentos generalizados. Puede parecer muy incómodo, pero tiene ventajas en la interpretación geométrica. The systems (<a href="./../♾️ CONCEPTS/dynamical system.md.html">dynamical system</a>s) with this origin are called <a href="./../♾️ CONCEPTS/classical Hamiltonian system.md.html">classical Hamiltonian system</a>s. Some of the are called <a href="./../♾️ CONCEPTS/integrable systems.md.html">integrable systems</a>.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Symplectic_form">Symplectic form</h2>
 <p>In any cotangent bundle $T^*Q$ we have a canonical 1-form known as tautological 1-form, Poincaré 1-form, Liouville 1-form, symplectic potential or canonical 1-form. Let's see how is defined. We are looking for an element $\lambda \in \Omega^1(T^*Q)$, so consider an element (in any local chart, it doesn't have to be the special one provide by the lagrangian) $(q,p)\in T^*Q.$ We want a definition for a map</p>
@@ -46,10 +46,7 @@ $$
 $$
 \lambda_{(q,p)}(q,p,v,\eta)=p(v)
 $$
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
 <p>But we can define it without coordinates.</p>
-<p></p>
 <p>Consider</p>
 $$
 \pi: T^*Q\longmapsto Q
@@ -58,8 +55,6 @@ $$
 $$
 d\pi: T(T^*Q)\longmapsto TQ
 $$
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
 <p>So we can define </p>
 $$
 \lambda: T^*Q \longmapsto T^*(T^*Q)
@@ -70,92 +65,79 @@ $$
 $$
 <p>Now, we can take the exterior derivative, $\omega:=d\lambda$. This is called the Poincaré 2-form, or symplectic 2-form. It is canonical for every cotangent bundle and verifies:</p>
 <p><ul style="margin-left:0px;"><li>- It is closed.</li></ul></p>
-<p><ul style="margin-left:0px;"><li>- It is nondegenerate. That is, for every vector $X\in T(T^*Q)$, the 1-form $i_X \omega=\omega(X,-)$ is not null</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- It is nondegenerate. That is, for every vector $X\in T(T^*Q)$, the 1-form $i_X \omega=\omega(X,-)$ is not null.</li></ul></p>
 <p></p>
-<p>Any manifold equipped with a 2-form satisfying both conditions is called a <b>symplectic manifold</b></p>
+<p>Any manifold equipped with a 2-form satisfying both conditions is called a <a href="./../♾️ CONCEPTS/symplectic manifold.md.html">symplectic manifold</a>.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Hamiltonian_vector_fields">Hamiltonian vector fields	</h2>
-<p></p>
+<p>See <a href="./../♾️ CONCEPTS/Hamiltonian vector field.md.html">Hamiltonian vector field</a>s.</p>
 <p><b>This symplectic form has a main use</b>: to convert the differential of the hamiltonian, $dH$, into a vector field called the <b>symplectic gradient</b>: the only vector field $X_H$ such that $\omega(X_H,-)=dH$. If we have also a <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> $g$, it turns out that this symplectic gradient and the usual gradient are orthogonal: remember that given a function $H$ the gradient is the only vector field $\nabla H$ such that $dH=g(\nabla H,-)$. Therefore</p>
 $$
 g(\nabla H, X_H)=dH(X_H)=\omega(X_H,X_H)=0
 $$
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
 <p>It's important to observe that:</p>
-<p><ul style="margin-left:0px;"><li>1. $i_{X_H} \omega=dH$</li></ul></p>
+<p>1. $i_{X_H} \omega=dH$</p>
+<p>2. $\mathcal{L}_{X_H} \omega=0$. It is proven by Cartan's formula.</p>
+<p>3. $\mathcal{L}_{X_H}\omega^n=0$. This $2n$- form is a volume form. So the flow over the Hamiltonian vector field conserve the volume. This fact is known as <b>Liouville theorem</b>.</p>
 <p></p>
-<p><ul style="margin-left:0px;"><li>2. $\mathcal{L}_{X_H} \omega=0$. It is proven by Cartan's formula.</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>3. $\mathcal{L}_{X_H}\omega^n=0$. This $2n$- form is a volume form. So the flow over the Hamiltonian vector field conserve the volume. This fact is known as <b>Liouville theorem</b>.</li></ul></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p><ul style="margin-left:0px;"><li>More things about:</li></ul></p>
-<p><ul style="margin-left:0px;"><li>- $T^*Q$ is a space that represents the <b>states</b> of the system. The function $H: T^*Q \mapsto \mathbb{R}$ determines the <b>dynamic</b> of the system. $H$ produces a vector field, $X$, the symplectic gradient, that yields the dynamic itself. Its flow, $\phi$, is again the dynamic.</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>- $X$ is tangent to hypersurfaces $H=cte$:</li></ul></p>
+<p>More things about:</p>
+<p><ul style="margin-left:0px;"><li>$T^*Q$ is a space that represents the <b>states</b> of the system. The function $H: T^*Q \mapsto \mathbb{R}$ determines the <b>dynamic</b> of the system. $H$ produces a vector field, $X$, the symplectic gradient, that yields the dynamic itself. Its flow, $\phi$, is again the dynamic.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$X$ is tangent to hypersurfaces $H=cte$:</li></ul></p>
 $$
  X(H)=dH(X)=i_X(\omega)(X)=0
-$$ 
+$$
 <p>(maybe with a minus sign?)</p>
 <p></p>
-<p><ul style="margin-left:0px;"><li>So $H$ is constant along the $\phi$ curves:</li></ul></p>
+<p>So $H$ is constant along the $\phi$ curves:</p>
 $$
  X(H)=\frac{d}{dt}H\circ \phi
 $$
-<p></p>
-<p><ul style="margin-left:0px;"><li>- The one-parameter group $\phi$ is the evolution of the system. This privileged parameter $t$ will be called <b>time</b>.</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>- Imagine other function $F:T^*Q\mapsto \mathbb{R}$. Possibly you want to know how it changes with _time_. Fix a initial point $P$:</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The one-parameter group $\phi$ is the evolution of the system. This privileged parameter $t$ will be called <b>time</b>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Imagine other function $F:T^*Q\mapsto \mathbb{R}$. Possibly you want to know how it changes with _time_. Fix a initial point $P$:</li></ul></p>
 $$
  D=\frac{d}{dt}(F\circ \phi)=X(F)=dF(X)
 $$
-<p></p>
-<p><ul style="margin-left:0px;"><li>But observe that if we take $Y$ such that $i_Y \omega=-dF$ then</li></ul></p>
+<p>But observe that if we take $Y$ such that $i_Y \omega=-dF$ then</p>
 $$
  dF(X)=-i_Y \omega (X)=-\omega(Y,X)=
 $$
 $$
 =\omega(X,Y)=i_X\omega(Y)=-dH(Y)=-Y(H)
 $$
-<p><ul style="margin-left:0px;"><li>So the interesting quantity $D$ can be computed in two ways</li></ul></p>
+<p>So the interesting quantity $D$ can be computed in two ways</p>
 $$
  X(F)=-Y(H)
 $$
 <p></p>
-<p><ul style="margin-left:0px;"><li>This motivate a new definition. Remove, temporarily, the special paper to $H$. For the functions $F, H$ we define the Poisson brackets as the new function:</li></ul></p>
+<p>This motivate a new definition. Remove, temporarily, the special paper to $H$. For the functions $F, H$ we define the <a href="./../♾️ CONCEPTS/Poisson bracket.md.html">Poisson bracket</a>s as the new function:</p>
 $$
  \{F,H\}=X(F)=-Y(H)=\omega(X,Y) 
 $$
-<p></p>
-<p><ul style="margin-left:0px;"><li>- $\left\{q_{i}, p_{j}\right\}=\delta_{i j}$</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>- Observe that if we leave a slot $\{-,H\}$ we have an operator that acts over functions. In fact, is the vector field $X$! So the Poisson bracket let us to find the symplectic gradient <b>directly</b>, without the use of $d$ and $\omega$. More explicitly</li></ul></p>
+<p>It is satisfied:</p>
+<p><ul style="margin-left:0px;"><li>$\left\{q_{i}, p_{j}\right\}=\delta_{i j}$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Observe that if we leave a slot $\{-,H\}$ we have an operator that acts over functions. In fact, is the vector field $X$! So the Poisson bracket let us to find the symplectic gradient <b>directly</b>, without the use of $d$ and $\omega$. More explicitly</li></ul></p>
 $$
- X_f=\{-,f\}
- $$
-<p></p>
+X_f=\{-,f\}
+$$
 <p><ul style="margin-left:0px;"><li>From $d\omega=0$ it can be deduced the Jacobi identity:</li></ul></p>
-<ul style="margin-left:0px;"><li>$$</li></ul>
+$$
  \{f,\{g, h\}\}=\{\{f, h\}, g\}+\{h,\{f, g\}\}
 $$
-<p><ul style="margin-left:0px;"><li>for any three functions $f, g, h$.</li></ul></p>
-<p></p>
+<p>for any three functions $f, g, h$.</p>
 <p>Leaving an slot instead of $f$ we get</p>
 $$
  \{-,\{g,h\}\}=\left[ \{-,g\}, \{-,h\}\right]
 $$
-<p><ul style="margin-left:0px;"><li>expression that can be rewritten as</li></ul></p>
+<p>expression that can be rewritten as</p>
 $$
  X_{\{g,h\}}=[X_g,X_h]=X_{\omega(X_g,X_h)}
 $$
-<p></p>
-<p><ul style="margin-left:0px;"><li>- Taking the Poisson bracket of any function with a moment $p_i$ gives us how the function varies along the associated coordinate $q_i$:</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Taking the Poisson bracket of any function with a moment $p_i$ gives us how the function varies along the associated coordinate $q_i$:</li></ul></p>
 $$
  \{F,p_i\}=X_{p_i}(F)
 $$
-<p><ul style="margin-left:0px;"><li>but $X_{p_i}$ is just $\partial q_i$</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>- $\{f,g\}$ can be interpreted as the area of the paralelogram made of $X_f$ and $X_g$</li></ul></p>
+<p>but $X_{p_i}$ is just $\partial q_i$</p>
+<p><ul style="margin-left:0px;"><li>$\{f,g\}$ can be interpreted as the area of the paralelogram made of $X_f$ and $X_g$</li></ul></p>
 $$
  \{f,g\}=X_g(f)=df(X_g)=\nabla f \cdot X_g
 $$

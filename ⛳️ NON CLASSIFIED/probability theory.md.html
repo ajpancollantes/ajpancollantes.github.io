@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Probability_theory">Probability theory</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="Classical_probability">Classical probability</h2>
+<p>In a <b>classical probabilistic space</b> you have events and a probability measure: </p>
+$$
+(\Omega, \Sigma, P).
+$$
+<p>But you want numerical data, so you study <b>random variables</b>: functions</p>
+$$
+f: \Omega \mapsto \mathbb C
+$$
+<p>such that </p>
+$$
+f^{-1}(A)\in \Sigma
+$$
+<p>for every open set $A=\{z\in \mathbb C: a<Re[z]<b\}$ and</p>
+$$
+sup_{\Omega} \{f(\omega)\}< \infty.
+$$
+<p>They constitute the algebra $L^{\infty}(\Omega, \Sigma,P)$, and the expected value for any random variable $g$, defined by</p>
+$$
+E_P[g]=\int_{\Omega}g(\omega)\cdot P(\omega)
+$$
+<p>plays the role of a linear functional</p>
+$$
+E_P: L^{\infty}(\Omega, \Sigma,P) \mapsto \mathbb C
+$$
+<p>In fact, it is not only an algebra, but a commutative <a href="./../♾️ CONCEPTS/von Neumann algebra.md.html">von Neumann algebra</a>, and $E_P$ is what it is called a <b>faithful, normal state</b> (see Quantum Probability Theory, from Hans Maasen, for details).</p>
+<p>There is a theorem called the <a href="./../✏️ THEOREMS/Gelfand-Naimark theorem.md.html">Gelfand-Naimark theorem</a> which applied to a von Neumann algebra with a normal, faithful state let us recover the original probabilistic space. That is to say: all the data is inside the von Neumann algebra and the linear functional. </p>
+<p></p>
+<p><b>Sketch of the construction</b>: if we begin with an algebra $\mathcal{A}$ (it could be $L^{\infty}(\Omega, \Sigma, P)$ or not) we recover a $\sigma$-algebra $\Sigma$ by selecting all the $p\in \mathcal{A}$ such that $p^2=p=p^*$. Think if $p \in L^{\infty}$ is like that, $p(\omega)=0$ or $p(\omega)=1$, and $p$ works like and indicator function of a set $A_p \in \Sigma$. The inclusion $\subseteq$ relation in $\Sigma$ is recovered by means of the relation: $p\subseteq q$ iff $p\cdot q=p$. And so we can recover the elementary events and the sample space $\Omega$.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Step_to_quantum_probability">Step to quantum probability</h2>
+<p><b>And now, here comes the key idea</b>: making a mental effort you can see any $f\in L^{\infty}$ like an operator on a Hilbert space. What Hilbert space? Well, is $L^2(\Omega,\Sigma,P)$, and as weird as it can look,  you can think that is nothing else than $\mathbb C^n$ when $\Omega$ has cardinal $n$. So, in a finite $\Omega$ you can associate to $f$ the linear map</p>
+$$
+M_f:\mathbb C^n \longmapsto \mathbb C^n
+$$
+<p>simply defined like the diagonal matrix whose entries are the values of $f$.</p>
+<p>This way we distinguish a subset $\mathcal{F}$ of $End(\mathbb C^n)$ which is a subalgebra. And it turns out that if you take any other subalgebra being a <a href="./../♾️ CONCEPTS/von Neumann algebra.md.html">von Neumann algebra</a> and with a faithful, normal state, and if this algebra <b>is non-commutative</b>, what you recover with the <a href="./../✏️ THEOREMS/Gelfand-Naimark theorem.md.html">Gelfand-Naimark theorem</a> is a <b>quantum version of probability</b>. These non-commutative matrices are the observables (the random variables, if you want) of this theory.</p>
+$$
+\begin{array}{ccc}
+\text{Basic events } \Omega & \leftrightarrow& \text{Gelfand spectrum}\\
+\text{Events }\Sigma & \leftrightarrow& \text{Projections?}\\
+\text{Probability distribution }P & \leftrightarrow& \text{faithfull normal state}\\
+\text{Random variables }L^{\infty}& \leftrightarrow&\text{von Neumann algebra}\\
+\end{array}
+$$
+<p></p>
+<p>Let's try with an example. Consider $\Omega=\{a,b,c\}$ (abstract results of an experiment), $\Sigma=2^{\Omega}$ and $P$ such that $P(a)=P(b)=1/4$ and $P(c)=1/2$. We can look at a random variable $f\in L^{\infty}(\Omega, \Sigma, P)$:</p>
+$$
+f:\Omega \mapsto \mathbb C
+$$
+<p>such that $f(a)=2$, $f(b)=3$ and $f(c)=1$. The meaning is something like <b>putting a numerical tag</b> over every $x\in \Omega$.</p>
+<p>But we can think in a <b>more active visualization</b> of all this stuff. Imagine that $a,b,c$ are <b>physical features of football players</b>. </p>
+<p>I can express a player with three numbers $\alpha_1, \alpha_2, \alpha_3$, and element of $\mathbb C^3$. Players, in general, are "superposition" of features: none of them is "only velocity". And also they are not normalized states: there can be a player who is bad at everything. The elements of the Hilbert space are like particular players and the elements of the corresponding projective space (pure states) are ideal classes of players (goalkeeper, striker, left back,...). It is as if we relativize the player with respect to himself (as when I used to say I was a climber cyclist, even if I was a worse climber than a professional sprinter).</p>
+<p></p>
+<p>What is the role of our function $f$? It would be like a treatment to change these features (a training system or a drug): you can amplify any of the features with different coefficients.</p>
+<p><ul style="margin-left:0px;"><li>The function $f$ applied to a player by means of $M_f$ returns a new player with improved (or worsened) features.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>A state $\omega$ (a class of players) acts as a functional on the algebra $\mathcal{F}$ and $\omega(f)$ is the average improvement of the treatment $f$ over the player of type $f$.</li></ul></p>
+<p></p>
+<p>If several treatments changes features in a _isolated way_, like the previous one, you can apply them to the player in the order you want.That is, they commute. But we can admit other treatments which act in a more complicated way, i. e., no diagonal matrices than may not commute. Our $f$ is a map $f:\mathbb C^n \longmapsto \mathbb C^n$ sending a player configuration to the new one after the treatment. It would correspond to a matrix</p>
+$$
+ M_f=   \left( \begin{array} { c c c} 
+    2 &0 & 0 \\
+    0 & 3 & 0 \\
+    0& 0 & 1
+    \end{array} \right)
+$$
+<p>That is, we are identifying $f$ with an element $M_f \in End(\mathbb C^n)$. That is, we have a map</p>
+$$
+\mathcal{M}:L^{\infty} \longmapsto End(\mathbb C^n)
+$$
+<p>such that $\mathcal{M}(f)=M_f$. </p>
+<p>But, in fact, $a,b,c$ can also be identified with elements of $End(\mathbb C^n)$:</p>
+$$
+ M_a=   \left( \begin{array} { c c c} 
+    1 &0 & 0 \\
+    0 & 0 & 0 \\
+    0& 0 & 0
+    \end{array} \right)
+$$
+$$
+ M_b=   \left( \begin{array} { c c c} 
+    0 &0 & 0 \\
+    0 & 1 & 0 \\
+    0& 0 & 0
+    \end{array} \right)
+$$
+$$
+M_c=   \left( \begin{array} { c c c} 
+    0 &0 & 0 \\
+    0 & 0 & 0 \\
+    0& 0 & 1
+    \end{array} \right)
+$$
+<p>And the evaluation process </p>
+$$
+f(a)=2
+$$
+<p>corresponds to</p>
+$$
+Tr(M_f\cdot M_a)=2
+$$
+<p>This operation has a name, is the Frobenious inner product, related to the trace:</p>
+$$
+\langle\mathbf{A}, \mathbf{B}\rangle_{\mathrm{F}}=\sum_{i, j} \overline{A_{i j}} B_{i j}=\operatorname{tr}(\overline{\mathbf{A}^{T}} \mathbf{B})
+$$
+<p>Even $P$ is an element of $End(\mathbb C^n)$, </p>
+$$
+M_P= \frac{1}{4}M_a+\frac{1}{4}M_b+\frac{1}{2}M_c= \left( \begin{array} { c c c} 
+    1/4 &0 & 0 \\
+    0 & 1/4 & 0 \\
+    0& 0 & 1/2
+    \end{array} \right)
+$$
+<p>being $Tr(M_f M_P)$ the expected value of $f$. In fact, you can see _evaluation of $f$ in $a$_ like the expected value of $f$ over a degenerate probability measure concentrated at $a$:</p>
+$$
+Tr(M_f\cdot M_a)
+$$
+<p>Moreover, the probability of an event, for example $\{a\}$, is the expected value of a <b>degenerate</b> random variable concentrated at $a$</p>
+$$
+Tr(M_a\cdot M_P)
+$$
+<p>Matrices such that $B^2=B$. They are typically the ones associated with elements of $\Omega$ or $\Sigma$, when we consider $B\in \mathcal{M}(L^{\infty})$. But if we expand our _algebra of interest_ from $\mathcal{M}(L^{\infty})$ to something bigger we obtain objects that do not belong to the original sample space or $\sigma$-algebra, but behave like if they do.</p>
+<p>For example, consider the matrix</p>
+$$
+B=\left( \begin{array} { c c c} 
+    1/2 & 1/2 & 0 \\
+    1/2 & 1/2 & 0 \\
+    0& 0 & 0
+    \end{array} \right)
+$$
+<p>We can try to evaluate our $f$ in $B$, be mean of</p>
+$$
+Tr(Mf\cdot B)
+$$
+<p>and we obtain 2'5. Something between $f(a)$ and $f(3)$. It looks like if we are filling the holes of the sample space $\Omega$. </p>
+<p></p>
+<p>Another key idea to develop: as subspaces and even as linear maps, events and states are the same. I compute the probability of an event given a state by projecting the state vector over the event subspace: the squared length is the probability and the resulting vector is the new state, or by means of the trace if I consider them operators. They should be treated on the same footing.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
