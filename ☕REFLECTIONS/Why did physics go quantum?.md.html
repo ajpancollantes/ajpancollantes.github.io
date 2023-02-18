@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Why_did_physics_go_quantum?">Why did physics go quantum?</h1>
+<p>We start by assuming a classical setup: </p>
+<p><ul style="margin-left:0px;"><li>we have pure and mixed states (which are <a href="./../⛳️ NON CLASSIFIED/probability theory.md.html">probability distributions</a> of pure states).</li></ul></p>
+<p><ul style="margin-left:0px;"><li>the observables are real-valued functions, which can be seen like part of a <a href="./../♾️ CONCEPTS/c-star algebra.md.html">c-star algebra</a> $\mathcal{A}$.</li></ul></p>
+<p>We can <b>reverse our point of view</b> and think of all this like if states were functionals on $\mathcal{A}$, specifically they are normalized, <a href="./../♾️ CONCEPTS/positive functional.md.html">positive</a>, linear functionals. That is, a mixed state $\omega$ is a probability distribution and an observable $f$ is a <a href="./../⛳️ NON CLASSIFIED/probability theory.md.html">random variable</a>, so we consider the pairing $\omega(f)=E_{\omega}(f)$ (the expected value). The pure states are those functionals which are also multiplicative (degenerated distributions, with all the probability concentrated on a single point). We decide to stick to this point of view, since it is equivalent to the original one (this is proven by the <a href="./../✏️ THEOREMS/Gelfand-Naimark theorem.md.html">Gelfand-Naimark theorem</a> and <a href="./Riesz-Markov representation theorem.md.html">Riesz-Markov representation theorem</a>), and because at the end of the day observables are what we manage in real life. If you can't _measure_ the difference between two systems, you have no right to treat them as different. By the way, in mathematics there are lots of examples where a space is recovered from its algebra of functions, or at least from its <a href="./../♾️ CONCEPTS/ALGEBRAIC GEOMETRY/sheaf.md.html">sheaves</a>. This is the spirit of <a href="./Algebraic Geometry.md.html">Algebraic Geometry</a>.</p>
+<p></p>
+<p>Now, some experimental facts, like for example the discrete <a href="./../♾️ CONCEPTS/emission spectrum.md.html">emission spectrum</a>s, the <a href="./Stern-Gerlach experiment.md.html">Stern-Gerlach experiment</a>, and so on, led people like Heisenberg to conclude that there were observables $A,B$ such that the <a href="./../♾️ CONCEPTS/mean square deviation.md.html">mean square deviation</a>s $\Delta_{\omega}(A),\Delta_{\omega}(B)$ cannot be simultaneously reduced. For example, it was checked that for the position $q$ and momentum $p$ of electrons in any state $\omega$ it is satisfied the relation</p>
+$$
+\Delta_{\omega} (q)\Delta_{\omega} (p)\geq h/4\pi \equiv\hbar/2, \tag{1}
+$$
+<p>named Heisenberg uncertainty relation (think that when we watch an electron we modify its momentum). But this doesn't fit the description above, since in theory we could refine the apparatus and obtain a pure state $\omega$ such that $\Delta_{\omega} (q)=\Delta_{\omega} (p)=0$.</p>
+<p></p>
+<p>On the other hand, without having anything to do with this, observe the following algebraic development. Let $A=A^*$ and $B=B^*$ be two self-adjoint elements of an arbitrary <a href="./../♾️ CONCEPTS/c-star algebra.md.html">c-star algebra</a> such that, without lost of generality, satisfy $\omega(A)=\omega(B)=0$, being $\omega$ a pure state (normalized, positive, linear functional). For $\lambda \in \mathbb R$ we have $(A-i \lambda B)(A+i \lambda B)$ is a <a href="./../♾️ CONCEPTS/c-star algebra.md.html">positive observable</a> and <a href="./../♾️ CONCEPTS/positive functional.md.html">positivity</a> of $\omega$ implies</p>
+$$
+\omega\left(A^2\right)+|\lambda|^2 \omega\left(B^2\right)+i \lambda \omega([A, B]) \geq 0,
+$$
+<p>where we define, right now, $[A,B]:=AB-BA$. But if we think of this expression as a polynomial in $\lambda$ with real coefficients then we have:</p>
+$$
+4 \omega\left(A^2\right) \omega\left(B^2\right) \geq|\omega(i[A, B])|^2,
+$$
+<p>and then</p>
+$$
+\Delta_\omega(A) \Delta_\omega(B) \geq \frac{1}{2}|\omega([A, B])|. \tag{2}
+$$
+<p></p>
+<p>So <b>a possible explanation for the Heisenberg relation (1) could be that the observables do not belong to a commutative</b> <a href="./../♾️ CONCEPTS/c-star algebra.md.html">c-star algebra</a> but to <b>a non commutative one!!!!</b> We can introduce the <a href="./../♾️ CONCEPTS/canonical commutation relations.md.html">canonical commutation relations</a> in the algebra to explain that empirical fact.</p>
+<p></p>
+<p><b>What is happening here?</b></p>
+<p>As mathematicians (or as human beings), we elaborate theories assuming some things (and deducing others). At the beginning (classical physics), we chose modelling "experimental data outputs", or observables, as a commutative algebra: the functions defined on the phase space. This was the assumption. Since observables are tightly related to measurement apparatuses we thought that the operations of the algebra $\mathcal A$ should be given by the corresponding real number operations with the measured values.</p>
+<p></p>
+<p>But new experimental facts revealed that reality would be better modelled if we drop the "commutative product" hypothesis. We have that the observables "xposition" and "yposition" can be simultaneously measured, in real life, with precision enough, so we can let them behave "classically" from the operational point of view. But since "xposition" and "xmomentum" cannot be simultaneously measured with precision (as pointed out by Heisenberg (1)) then we should define multiplication in $\mathcal A$ in such a way that they do not commute, and then relation (2) would explain (1). </p>
+<p>In other words, the product of observables cannot be the pointwise product of the obtained values, but some other operation which <b>only when restricted to the particular case of compatible observables</b> is the pointwise product. Does this product have an interpretation in terms of the output of the measurement apparatuses? I am not aware of any.</p>
+<p></p>
+<p>The sum remains being commutative because we don't have the necessity of remove this hypothesis, and we can still stick to the idea of observables living inside a big <a href="./../♾️ CONCEPTS/c-star algebra.md.html">c-star algebra</a>. In case of compatible observables like "xposition" and "yposition", the sum should be what you naturally would think: a new observable whose meaning is self evident. All the observables compatible with, for example, "xposition" constitutes a subalgebra (let's denote it by $\mathcal{A}_{xposition}$) where we can perform sums and products and still remain inside. </p>
+<p>Now consider "xposition" a "xmomentum", for example. The sum is well defined even as a new observable, since the sum of <a href="./../♾️ CONCEPTS/c-star algebra.md.html">self adjoint elements</a> is self adjoint. But, what is its meaning?</p>
+<p></p>
+<p>To my understanding, the sum and product of observables belonging to "different subalgebras" is not naturally defined. <b>It depends on the "big algebra"</b> $(\mathcal A,+,\cdot)$ <b>we choose</b>. But keep an eye, this choice has to reconcile what we know from experiments:</p>
+<p><ul style="margin-left:0px;"><li>The sum and product on $\mathcal A$ are such that when restricted to any subalgebra $\mathcal A_B=C_{\mathcal A} (\{B\})$, where $C$ denotes the <a href="./../♾️ CONCEPTS/centralizer.md.html">centralizer</a>, the sum and product of observables belonging to $\mathcal A_B$ corresponds to the sum and product of the outputs when they are interpreted as apparatuses.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Some relations like $q\cdot p-p\cdot q=i\hbar$ have to be satisfied, in order to algebraically justify Heisenberg uncertainty relations.</li></ul></p>
+<p></p>
+<p>So the answer to "Why is addition of observables in quantum mechanics commutative?" is:</p>
+<p><b>Because so far there has been no need to eliminate that hypothesis</b>. But we cannot even be sure that we have more than several commutative algebras $\mathcal A_B$ tied together with some commutation relations. That is, not only can we not be sure that the sum of two arbitrary elements is commutative, but we cannot even be sure that such a sum exists. But as I understand it, at the moment there is no empirical contradiction in assuming it.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

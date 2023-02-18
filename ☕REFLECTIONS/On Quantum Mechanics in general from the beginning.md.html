@@ -36,7 +36,7 @@ gtag('config', 'G-LBT9E8N3HS');
 <p></p>
 <p>All this can be modelled, at least to my knowledge, in two ways:</p>
 <p></p>
-<h3 style="margin-left:0px;" id="Mathematical_model_1">Mathematical model 1</h3>
+<h3 style="margin-left:0px;" id="Mathematical_model_1_MM1">Mathematical model 1 (MM1)</h3>
 <p><ul style="margin-left:0px;"><li>We have a set $\Omega=\{a,b,c,d,\ldots\}$. Its elements are called the pure states of the system. We call this set the <b>phase space</b>.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>The observables are nothing but functions $f: \Omega \to \mathbb{R}$. The measurement process consists, simply, of evaluating the function. It is assumed that the measurement is "clean" in the sense that does not modify the state in which the system is.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>If we have "observables enough" we can have a bijection of $\Omega$ with a "numerical set".</li></ul></p>
@@ -50,7 +50,7 @@ $$
 <p><ul style="margin-left:0px;"><li>Dynamics. Once we have the bijection with the numerical set, we usually formulate the dynamical law like a continuous or discrete <a href="./../♾️ CONCEPTS/dynamical system.md.html">dynamical system</a>. I have to develop this yet.</li></ul></p>
 <p></p>
 <p></p>
-<h3 style="margin-left:0px;" id="Mathematical_model_2">Mathematical model 2</h3>
+<h3 style="margin-left:0px;" id="Mathematical_model_2_MM2">Mathematical model 2 (MM2)</h3>
 <p><ul style="margin-left:0px;"><li>The system consist of a <a href="./../♾️ CONCEPTS/FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> $(\mathcal{H},\langle -,- \rangle)$ whose elements of length 1 (or its rays, I am not sure) are the states of the system.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>The observables are <a href="./../♾️ CONCEPTS/Hermitian matrix.md.html">Hermitian operators</a> $\hat Q: \mathcal H \to \mathcal H$. The measurement process, provided we are in state $|\psi \rangle \in \mathcal H$, consists of</li></ul></p>
 <p><ul style="margin-left:20px;"><li>obtaining the basis of eigenvectors $\{|q_i\rangle\}_i$ (with eigenvalues $q_i$) of the operator $\hat Q$.</li></ul></p>
@@ -64,32 +64,32 @@ $$
 <p></p>
 <h3 style="margin-left:0px;" id="Summary">Summary </h3>
 <p>So to summarize, we can say that:</p>
-<p>1. A system (classical system or quantum system) is given by a <a href="./../♾️ CONCEPTS/c-star algebra.md.html">c-star algebra</a> $\mathcal{A}$. A subset of $\mathcal{A}$ (the $*$-invariants elements) are the observables.</p>
+<p>1. A system (classical system or quantum system) is given by a <a href="./../♾️ CONCEPTS/c-star algebra.md.html">c-star algebra</a> $\mathcal{A}$. A subset of $\mathcal{A}$ (the $*$-invariants elements) are the observables.  </p>
 <p>2. Systems can be set on pure states or mixed states. The latter ones are interpreted as a kind of "combination" of the former ones, or better said, probability distributions of them. They are all <a href="./../♾️ CONCEPTS/positive functional.md.html">positive</a> normalized linear functionals on $\mathcal{A}$. The pure states are required to be also multiplicative (also called <a href="./../♾️ CONCEPTS/Gelfand spectrum.md.html">characters</a>).</p>
-<p>3. In the case of a classical system the algebra is commutative. The multiplicative functionals constitute the Gelfand spectrum of $\mathcal{A}$, which is a compact topological space. The rest of the normalized functionals correspond to probability distributions defined on the Gelfand spectrum of $\mathcal{A}$. For pure states, the probability distribution is typically described by a delta function concentrated at a single point in the phase space. This corresponds to the fact that the system is in a definite state, with the position and momentum of each particle in the system being well-defined.</p>
-<p>4. In the case of quantum systems, the algebra is not commutative. The multiplicative functionals (pure states) constitute the Gelfand spectrum of $\mathcal{A}$, which in many important cases, is a complex projective space with an underlying Hilbert space. They can be also interpreted as one-dimensional projections in the algebra, while the general normalized functionals (mixed states) are represented by density matrices, which are positive semi-definite operators with trace equal to 1.  I have to think this yet.</p>
+<p>3. In the case of a classical system the algebra is commutative. The multiplicative functionals constitute the <a href="./../♾️ CONCEPTS/Gelfand spectrum.md.html">Gelfand spectrum</a> of $\mathcal{A}$, which is a compact topological space representing the pure states. The rest of the normalized functionals correspond to probability distributions defined on the Gelfand spectrum of $\mathcal{A}$. For pure states, the probability distribution is typically described by a delta function concentrated at a single point in the phase space. This corresponds to the fact that the system is in a definite state, with the position and momentum of each particle in the system being well-defined.</p>
+<p>4. In the case of quantum systems, the algebra is not commutative. The multiplicative functionals (pure states) constitute again the Gelfand spectrum of $\mathcal{A}$, which in many important cases, is a complex projective space with an underlying Hilbert space. They can be also interpreted as one-dimensional projections in the algebra, while the general normalized functionals (mixed states) are represented by density matrices, which are positive semi-definite operators with trace equal to 1.  I have to think this yet.</p>
 <p></p>
 <p></p>
 <h3 style="margin-left:0px;" id="Quantum_physics_as_a_generalization_of_classical_physics">Quantum physics as a generalization of classical physics</h3>
-<p></p>
-<p>We can embed MM1 into MM2 in the following way: (I have to write this better)</p>
+<p>We can embed MM1 into MM2 in the following way: </p>
 <p><ul style="margin-left:0px;"><li>$\Omega$ goes to $\mathbb P \mathbb C^n$, si cardinal de $\Omega$ es $n$</li></ul></p>
 <p><ul style="margin-left:0px;"><li>$f:\Omega \to \mathbb C$ goes to the linear map</li></ul></p>
 $$
 M_f:\mathbb C^n \longmapsto \mathbb C^n
 $$
 <p>defined like the diagonal matrix whose entries are the values of $f$.</p>
-<p><ul style="margin-left:0px;"><li>and so on...</li></ul></p>
+<p><ul style="margin-left:0px;"><li>and so on... (I have to write this better)</li></ul></p>
+<p><ul style="margin-left:0px;"><li>...</li></ul></p>
 <p></p>
-<p>But, why do we care about embed MM1 into MM2? See <a href="./Why did Physics go quantum?.md.html">Why did Physics go quantum?</a> </p>
+<p>But, why do we care about this embedding of MM1 into MM2? Why don't we settle for MM1? See this note: <a href="./Why did physics go quantum?.md.html">Why did physics go quantum?</a> </p>
 <p></p>
-<p><b>To review and may incorporate</b>: as it is said in <a href="https://mathoverflow.net/questions/6200/what-is-quantization/6216#6216" target="_blank">this MO answer</a> the point of QM is to see the algebra of functions as "immersed" in a bigger not necessarily commutative algebra. </p>
+<p><b>To review and maybe incorporate</b>: as it is said in <a href="https://mathoverflow.net/questions/6200/what-is-quantization/6216#6216" target="_blank">this MO answer</a> the point of QM is to see the algebra of functions as "immersed" in a bigger not necessarily commutative algebra. </p>
 <p></p>
 <p></p>
 <hr>
 <p></p>
 <p></p>
-<h1 style="margin-left:0px;" id="Old_stuff,_to_incorporate_above_one_day...">Old stuff, to incorporate above one day...</h1>
+<h1 style="margin-left:0px;" id="Old_latex_notes,_to_incorporate_above_one_day...">Old latex notes, to incorporate above one day...</h1>
 <p></p>
 <h2 style="margin-left:0px;" id="With_classical_probability">With classical probability</h2>
 <p>We are going to analyse, from the beginning, the <a href="./Stern-Gerlach experiment.md.html">Stern-Gerlach experiment</a> from a mathematical viewpoint, and try to see why is natural the <a href="./formulation of QM.md.html">formulation of QM</a>. Imagine that electrons have an <b>internal configuration</b> that can be observed with a Stern-Gerlach device ($SG$) when they are shot with an electron gun. We align the machine with the $z$ axis (we call this configuration $SG_z$) and it gives us two outputs when electrons arrive: for example, <b>red</b> and <b>green</b>. Our first idea would be to think that there are two kinds of electrons or <b>two states of the electron</b>. </p>

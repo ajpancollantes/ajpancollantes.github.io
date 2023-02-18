@@ -31,25 +31,12 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Dynamical_system">Dynamical system</h1>
-<p>A set $\Omega$ whose elements are called states, and an object, called dynamical law, that tells us how to go from one state to the next one. </p>
-<p>In the case of a <b>discrete dynamical system</b>, the dynamical law is a map</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Mean_square_deviation">Mean square deviation</h1>
+<p>For a probability distribution $P$ and a random variable $f$ (see <a href="./../⛳️ NON CLASSIFIED/probability theory.md.html">probability theory</a>), the mean square deviation is defined as</p>
 $$
-F:\mathbb{N}\times \Omega\to \Omega
+\Delta_P(f):=\sqrt{E_P((E_P(f)-f)^2)}
 $$
-<p>In this case, $\mathbb{N}$ is something like "discrete time". The function $F$ is something like a "semigroup action", similar to a <a href="./GEOMETRY/group action.md.html">group action</a> but with $\mathbb N$.</p>
-<p></p>
-<p>The <b>continuos dynamical systems</b>, on the other hand, correspond to <a href="./DEs/system of first order ODEs.md.html">system of first order ODEs</a>, whose solution is a 1-parameter <a href="./local group of transformations.md.html">local group of transformations</a>, roughly speaking</p>
-$$
-F:\mathbb{R}\times \Omega\to \Omega
-$$
-<p>They can be identified with <a href="./GEOMETRY/vector field.md.html">vector field</a>s of the form </p>
-$$
-A=\partial_t+\sum \phi_j \partial{x_j}
-$$
-<p>The more important cases, for me, are the <a href="./classical Hamiltonian system.md.html">classical Hamiltonian system</a>s.</p>
-<p></p>
-<p>They can be <a href="./integrable systems.md.html">integrable systems</a>.</p>
+<p>being $E_P$ the <a href="./../⛳️ NON CLASSIFIED/probability theory.md.html">expected value</a>.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
