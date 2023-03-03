@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Heisenberg_approach_to_quantum_mechanics">Heisenberg approach to quantum mechanics</h1>
+<p>When a classical charged particle is orbiting around a nucleus, if the radioactive damping is neglected, it will emit radiation in a pattern that repeats itself every orbital period. The frequencies that make up the outgoing wave are then integer multiples of the orbital frequency, and this is a reflection of the fact that component $x$ of position, $X(t)$, is periodic, so that its Fourier representation has frequencies $2\pi k/T=k\omega$ only:</p>
+$$
+x(t)=\sum_{k=-\infty}^{\infty} X_k e^{2 \pi i k t / T} =\sum_{k=-\infty}^{\infty} X_k e^{i k \omega t}  \tag{1}
+$$
+<p>Since $x(t)$ is real, we know from <a href="./../♾️ CONCEPTS/Fourier transform.md.html">Fourier transform</a> that the coefficients satisfy $X_k^*=X_{-k}$, and in some sense <b>they characterize-codify the position</b>. Every frequency $k\omega$ should give rise to a spectral line in the <a href="./../♾️ CONCEPTS/emission spectrum.md.html">emission spectrum</a>, with an intensity (or power, I am not sure):</p>
+$$
+-\left(\frac{\mathrm{d} E}{\mathrm{~d} t}\right)_k=\frac{e^2}{3 \pi \epsilon_0 c^3}[k\omega]^4\left|X_k\right|^2 .
+$$
+<p></p>
+<p>But according to observations, the frequencies in the <a href="./../♾️ CONCEPTS/emission spectrum.md.html">emission spectrum</a> didn't adhere to multiples of a fundamental frequency $\omega$, so the empirical data didn't match equation $(1)$.</p>
+<p>At that time there had been much study of the frequencies of spectral lines, and there were some numerical rules. It was known that the frequencies emitted by an electron adhere to the differences of some quantities, that were identified with energy levels. So the frequency emitted by an electron changing from level $n$ to level $n-\alpha$ was</p>
+$$
+\omega(n,n-\alpha)=\frac{1}{\hbar}(E(n)-E(n-\alpha)) \tag{2}
+$$
+<p>The Bohr school, and Heisenberg in particular, required that only those quantities that were in principle measurable by spectroscopy should appear in the theory. These quantities include, then, the energy levels (or better said, their differences) and their intensities (thought as probabilities of a jump or amount of them) but they do not include the exact location of a particle in its Bohr orbit. It is very hard to imagine an experiment that could determine whether an electron in the ground state of a hydrogen atom is to the right or to the left of the nucleus. It was a deep conviction that such questions did not have an answer. </p>
+<p></p>
+<p>Then, Heisenberg introduced the quantities $X(n,n-\alpha)$ analogues of $X_k$ in the same way that $\omega(n,n-\alpha)$ is analogue of $k\omega$, and they can be measured since they should satisfy:</p>
+$$
+P(n, n-\alpha)=\frac{e^2}{3 \pi \epsilon_0 \hbar c^3}[\omega(n, n-\alpha)]^3|X(n, n-\alpha)|^2,
+$$
+<p>being $P$ the probability of the jump or, better said, the "intensity" of the spectral line.</p>
+<p></p>
+<p>So, in the same way that the quantities $\{X_k e^{i k \omega t}\}$ codify the position with respect to time of a classical particle Heisenberg established that the collection of quantities $\{X(n,n-\alpha) e^{i\omega(n,n-\alpha)t}\}$ (a kind of infinity matrix) must stand for the position of a quantum particle. But while in the classical case the $\{X_k e^{i k \omega t}\}$ can be "summarized" in a function $x(t)$, this is no longer true for $\{X(n,n-\alpha) e^{i\omega(n,n-\alpha)t}\}$ since they are not the Fourier series of anything. </p>
+<p></p>
+<p>Anyway, observe that a Fourier series can be written in matrix form</p>
+$$
+\begin{array}{ccccccc}
+\ddots & \vdots & \vdots & \vdots & \vdots & \vdots & \unicode{x22f0} \\
+\cdots & \mathrm{X}_0 & \mathrm{X}_1 \mathrm{e}^{\mathrm{i} \omega \mathrm{t}} & \mathrm{X}_2 \mathrm{e}^{2 \mathrm{i} \omega \mathrm{t}} & \mathrm{X}_3 \mathrm{e}^{3 \mathrm{i} \omega \mathrm{t}} & \mathrm{X}_4 \mathrm{e}^{4 \mathrm{i} \omega \mathrm{t}} & \cdots \\
+\cdots & \mathrm{X}_{-1} \mathrm{e}^{-i \omega t} & \mathrm{X}_0 & \mathrm{X}_1 \mathrm{e}^{i \omega t} & \mathrm{X}_2 \mathrm{e}^{2 \mathrm{i} \omega \mathrm{t}} & \mathrm{X}_3 \mathrm{e}^{3 \mathrm{i} \omega \mathrm{t}} & \cdots \\
+\cdots & \mathrm{X}_{-2} \mathrm{e}^{-2 \mathrm{i} \omega \mathrm{t}} & \mathrm{X}_{-1} \mathrm{e}^{-\mathrm{i} \omega \mathrm{t}} & \mathrm{X}_0 & \mathrm{X}_1 \mathrm{e}^{\mathrm{i} \omega \mathrm{t}} & \mathrm{X}_2 \mathrm{e}^{2 \mathrm{i} \omega \mathrm{t}} & \cdots \\
+\cdots & \mathrm{X}_{-3} \mathrm{e}^{-3 \mathrm{i} \omega \mathrm{t}} & \mathrm{X}_{-2} \mathrm{e}^{-2 \mathrm{i} \omega \mathrm{t}} & \mathrm{X}_{-1} \mathrm{e}^{-\mathrm{i} \omega \mathrm{t}} & \mathrm{X}_0 & \mathrm{X}_1 \mathrm{e}^{\mathrm{i} \omega \mathrm{t}} & \cdots \\
+\cdots & \mathrm{X}_{-4} \mathrm{e}^{-4 i \omega t} & \mathrm{X}_{-3} \mathrm{e}^{-3 i \omega t} & \mathrm{X}_{-2} \mathrm{e}^{-2 \mathrm{i} \omega \mathrm{t}} & \mathrm{X}_{-1} \mathrm{e}^{-\mathrm{i} \omega \mathrm{t}} & \mathrm{X}_0 & \cdots \\
+\unicode{x22f0} & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+\end{array}
+$$
+<p>and in the rest of the cases is a more general matrix (although in this case it is truncated at 0):</p>
+$$
+\begin{array}{ccccccc}
+& \mathrm{X}(0,0) & \mathrm{X}(0,1) \mathrm{e}^{\mathrm{i} \omega(0,1) \mathrm{t}} & \mathrm{X}(0,2) \mathrm{e}^{ \mathrm{i} \omega(0,2) \mathrm{t}} & \mathrm{X}(0,3) \mathrm{e}^{ \mathrm{i} \omega(0,3) \mathrm{t}} & \mathrm{X}(0,4) \mathrm{e}^{ \mathrm{i} \omega(0,4) \mathrm{t}} & \cdots \\
+& \mathrm{X}(1,0) \mathrm{e}^{i \omega(1,0) t} & \mathrm{X}(1,1) & \mathrm{X}(1,2) \mathrm{e}^{i \omega(1,2) t} & \mathrm{X}(1,3) \mathrm{e}^{ \mathrm{i} \omega(1,3) \mathrm{t}} & \mathrm{X}(1,4) \mathrm{e}^{ \mathrm{i} \omega(1,4) \mathrm{t}} & \cdots \\
+& \mathrm{X}(2,0) \mathrm{e}^{ \mathrm{i} \omega \mathrm{t}} & \mathrm{X}(2,1) \mathrm{e}^{\mathrm{i} \omega(2,1) \mathrm{t}} & \mathrm{X}(2,2) & \mathrm{X}(2,3) \mathrm{e}^{\mathrm{i} \omega(2,3) \mathrm{t}} & \mathrm{X}(2,4) \mathrm{e}^{\mathrm{i} \omega(2,4) \mathrm{t}} & \cdots \\
+
+& \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+\end{array}
+$$
+<p></p>
+<p>We will denote $X(t)$ to this "matrix", being their entries $X_{nm}(t)=X(n,m)e^{i\omega(n,m) t}$, and it is satisfied that $X_{nm}^*=X_{mn}$. Observe also that if we have two time dependen real quantities $A(t)$ and $B(t)$ their sum and product are represented as infinite matrices as $[A_{nm}(t)]+[B_{nm}(t)]$ and $[A_{nm}(t)]\cdot [B_{nm}(t)]$, respectively.</p>
+<p></p>
+<p>How do we introduce a <a href="./../♾️ CONCEPTS/dynamical system.md.html">dynamical law</a> to this new objects $\{X(n,n-\alpha) e^{i\omega(n,n-\alpha)t}\}$?</p>
+<p></p>
+<p>A "curious" thing: since $\omega(n,m)=\frac{1}{\hbar}(E_n-E_m)$ and since </p>
+$$
+\mathbf{H}=\left[\begin{array}{cccc}
+\mathrm{E}_0 & 0 & 0 & \cdots \\
+0 & \mathrm{E}_1 & 0 & \cdots \\
+0 & 0 & \mathrm{E}_2 & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{array}\right]
+$$
+<p>because by assumption $E$ or $H$ is constant with respect to time, we can check</p>
+$$
+\frac{d}{dt} X(t)=\frac{i}{\hbar}(HX-XH)=\frac{i}{\hbar}[H,X]
+$$
+<p>This fact bring to my mind two ideas:</p>
+<p>1. Jacobi identity means that Lie bracket creates derivations. <a href="./../♾️ CONCEPTS/GEOMETRY/Lie algebra.md.html">Lie algebra</a> </p>
+<p>2. $e^{iHt}$ or something like that is time evolution in <a href="./../♾️ CONCEPTS/DEs/Schrodinger equation.md.html">Schrodinger equation</a> </p>
+<p></p>
+<p></p>
+<p>Think about: $\omega$ are differences of energies (over $\hbar$), and momentum is difference of positions (times $m$)</p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
