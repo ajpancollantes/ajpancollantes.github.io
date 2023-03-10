@@ -32,12 +32,13 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Poisson_bracket">Poisson bracket</h1>
+<p><b>Definition</b></p>
 <p>Given a <a href="./symplectic manifold.md.html">symplectic manifold</a> $(M,\omega)$, the Poisson bracket on $C^\infty(M)$, the space of smooth functions on $M$, is a binary operation $\{\cdot, \cdot\} : C^\infty(M) \times C^\infty(M) \to C^\infty(M)$ defined as follows: for any two functions $f, g \in C^\infty(M)$, the Poisson bracket is given by</p>
 $$
 \{f, g\}(p) = \omega(X_f, X_g)(p),
 $$
 <p>where $X_f$ and $X_g$ are the <a href="./Hamiltonian vector field.md.html">Hamiltonian vector field</a>s associated to $f$ and $g$ respectively, and $p$ is a point in $M$. </p>
-<p></p>
+<p>$\blacksquare$</p>
 <p>In the canonical coordinates of a <a href="./classical Hamiltonian system.md.html">classical Hamiltonian system</a> is written as</p>
 $$
 \{f, g\}=\sum_{i=1}^N\left(\frac{\partial f}{\partial q_i} \frac{\partial g}{\partial p_i}-\frac{\partial f}{\partial p_i} \frac{\partial g}{\partial q_i}\right)
@@ -54,12 +55,11 @@ $$
 <p></p>
 <p></p>
 <p>The Poisson bracket satisfies the following properties:</p>
+<p><ul style="margin-left:0px;"><li>Bilinearity</li></ul></p>
 <p><ul style="margin-left:0px;"><li>Antisymmetry: $\{f, g\} = -\{g, f\}$.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>Leibniz rule: $\{f, g h\} = \{f, g\}h + g\{f, h\}$.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>Jacobi identity: $\{f, \{g, h\}\} + \{g, \{h, f\}\} + \{h, \{f, g\}\} = 0$.</li></ul></p>
-<p></p>
-<p></p>
-<p>These properties make the Poisson bracket a Lie bracket, that is, it makes $(C^\infty(M), \{\cdot, \cdot\})$ into a Lie algebra. Also is a <a href="./Poisson algebra.md.html">Poisson algebra</a>.</p>
+<p>These properties make the Poisson bracket a Lie bracket, that is, it makes $(C^\infty(M), \{\cdot, \cdot\})$ into a Lie algebra. Also is a <a href="./Poisson algebra.md.html">Poisson algebra</a>. If we abstract these properties we can define a <a href="./Poisson manifold.md.html">Poisson manifold</a>.</p>
 <p></p>
 <p>For every $f$ we have that $\{-,f\}$ is a differential operator, so it is a vector field. Indeed, it is $\{-,f\}\equiv X_f$ since for any smooth function $g$</p>
 $$

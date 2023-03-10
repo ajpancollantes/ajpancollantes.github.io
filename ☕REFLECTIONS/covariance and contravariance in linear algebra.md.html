@@ -32,39 +32,40 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Covariance_and_contravariance_in_linear_algebra">Covariance and contravariance in linear algebra</h1>
-<p>Sea $V$ un espacio vectorial, que tomaremos de dimensión 3 por simplificar las cosas. Si tenemos una base $f=(X_1, X_2, X_3)$ y otra $f'=(Y_1, Y_2, Y_3)$ podemos considerar una aplicación lineal que transforma una en otra. Sea $A$ la matriz de esa aplicación respecto de la base $f$, es decir, las columnas de $A$ son las coordenadas de cada $Y_i$ en la base $f$.</p>
-<p>Abusando del lenguaje se puede escribir que:</p>
+<p></p>
+<p>Let $V$ be a vector space, which we will take to have dimension 3 to simplify things. If we have a base $f=(X_1, X_2, X_3)$ and another base $f'=(Y_1, Y_2, Y_3)$ we can consider a linear map that transforms one into the other. Let $A$ be the matrix of that application with respect to base $f$, that is, the columns of $A$ are the coordinates of each $Y_i$ in base $f$.</p>
+<p>Abusing the language it can be written that:</p>
 $$
-f'= f \cdot A
+f'= f \cdot A \tag{1}
 $$
-<p>donde hay que observar que $f$ y $f'$ son matrices filas hechas de vectores (no tendría sentido).</p>
-<p>Esto mismo se podría escribir como  columnas (para mí más usual) sin más que hacer la transpuesta:</p>
+<p>where note that $f$ and $f'$ are row matrices made of vectors (it wouldn't make sense).</p>
+<p>This could be written as columns (for me more usual) without more than doing the transpose:</p>
 $$
-(f')^t= A^t \cdot f^t  
+(f')^t= A^t \cdot f^t
 $$
-<p>Ahora bien, la matriz $A$ también sirve para cambiar las coordenadas de un vector cualquiera $v \in V$. Denotemos por $v[f]$ y $v[f']$ respectivamente a las matrices columnas con las coordenadas de $v$ en $f$ y en $f'$. De toda la vida sabemos que la matriz para pasar de una base a otra se fabrica poniendo en columnas las coordenadas de la base original respecto de la nueva base, y luego multiplicando matrices columna. Así pues, nuestra matriz $A$ serviría para pasar de la base $f'$ a la base $f$. Por lo tanto:</p>
+<p>Now, the matrix $A$ is also used to change the coordinates of any vector $v \in V$. Let us denote by $v[f]$ and $v[f']$ respectively the column matrices with the coordinates of $v$ in $f$ and in $f'$. We have always known that the matrix to go from one base to another is made by putting the coordinates of the original base in columns with respect to the new base, and then multiplying column matrices. Thus, our matrix $A$ would serve to pass from base $f'$ to base $f$. Therefore:</p>
 $$
-v[f]=A \cdot v[f']
+v[f]=A\cdot v[f']
 $$
-<p>y de manera inversa:</p>
+<p>and conversely:</p>
 $$
 v[f']=A^{-1} \cdot v[f]
 $$
-<p>Comparando esta expresión con \ref{transformacion} podemos decir que las coordenadas de los vectores se transforman de manera {\bf contravariante} a como lo hacen los propios vectores de la base. Ojo, ¡la contravarianza implica la transpuesta de la inversa!</p>
-<p>Ahora vamos a analizar las coordenadas de los covectores, o sea, de los elementos del espacio dual $V^*$. Sea $w \in V^*$, con coordenadas $w[f^*]$ y $w[f'^*]$ en las respectivas bases duales de $f$ y $f'$ expresadas en columnas. </p>
-<p>Recordemos que las coordenadas de $w$ en una base dual no es más que aplicar $w$ a la base original. Luego:</p>
+<p>Comparing this expression with $(1)$ we can say that the coordinates of the vectors are transformed in a <b>contravariant</b> way to how the basis vectors themselves do. Be careful, the contravariance implies the transpose of the inverse!</p>
+<p>Now we are going to analyze the coordinates of the covectors, that is, of the elements of the dual space $V^*$. Let $w \in V^*$, with coordinates $w[f^*]$ and $w[f'^*]$ in the respective dual bases of $f$ and $f'$ expressed in columns.</p>
+<p>Let's remember that the coordinates of $w$ in a dual base is nothing more than applying $w$ to the original base. Then:</p>
 $$
-w[f'^*]^t=(w(Y_1),  w(Y_2),  w(Y_3))= (w(f \cdot A_1),  w(f \cdot A_2),  w(f \cdot A_3))
+w[f'^*]^t=(w(Y_1), w(Y_2), w(Y_3))= (w(f \cdot A_1), w(f \cdot A_2), w(f \cdot A_3 ))
 $$
-<p>siendo $A_i$ las columnas de $A$. Así pues</p>
+<p>where $A_i$ is the columns of $A$. So that</p>
 $$
-w[f'^*]^t=(w((X_1, X_2, X_3) \cdot A_1),  w((X_1, X_2, X_3) \cdot A_2),  w((X_1, X_2, X_3) \cdot A_3))=w[f^*]^t \cdot A
+w[f'^*]^t=(w((X_1, X_2, X_3) \cdot A_1), w((X_1, X_2, X_3) \cdot A_2), w((X_1, X_2, X_3) \cdot A_3))=w[f^*]^t \cdot A
 $$
-<p>de donde</p>
+<p>where from</p>
 $$
 w[f'^*]=A^t \cdot w[f^*]
 $$
-<p>lo que, por comparación con la expresión \ref{transformacion}, justifica que se diga que los covectores cambian sus coordenadas de manera {\bf covariante}.</p>
+<p>which, by comparison with the expression $(1)$, justifies saying that the covectors change their coordinates in a <b>covariant</b> manner.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

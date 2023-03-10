@@ -40,28 +40,28 @@ gtag('config', 'G-LBT9E8N3HS');
 <p>3. $d(\alpha \wedge \beta)=d \alpha \wedge \beta+(-1)^{p}(\alpha \wedge d \beta)$ where $\alpha$ is a $p$-form.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Interpretation">Interpretation</h2>
-<p>See also: <a href="./../❓MY RESEARCH/☕REFLECTIONS/visualization of k-forms.md.html">visualization of k-forms</a>.</p>
-<p></p>
-<p>Debería ser llamada <b>el medidor de acumulación negativa</b> o <b>medidor de producción</b>.</p>
-<p>En caso de funciones (0-formas). La función podría estar indicando inyección de cierto material en un punto del espacio. La diferencial $df$ nos dice cuánto se está "produciendo" en un elemento de línea $X=P_1P_2$:</p>
+See also: <a href="./../❓MY RESEARCH/☕REFLECTIONS/visualization of k-forms.md.html">visualization of k-forms</a>.
+
+Debería ser llamada <b>el medidor de acumulación negativa</b> o <b>medidor de producción</b>.
+En caso de funciones (0-formas). La función podría estar indicando inyección de cierto material en un punto del espacio. La diferencial $df$ nos dice cuánto se está "produciendo" en un elemento de línea $X=P_1P_2$:
 $$
-df(X)=f(P_2)-f(P_1)
+<p>df(X)=f(P_2)-f(P_1)</p>
 $$
-<p>cuando $P_1$ y $P_2$ están suficientemente cerca, claro.</p>
-<p></p>
-<p>En caso de 1-formas $\omega$, que asocian valores a elementos de línea, la diferencial exterior nos dice cuánto de algo se está produciendo en un bivector (una "bidirección", un elemento de área). Si nos restringimos a ese elemento de área $u\wedge v$ (mediante una especie de pullback) la 1-forma se puede ver como una especie de flujo, y $dw(u,v)$ mide cuánto de ese flujo se está produciendo en $u\wedge v$. This is the idea of the <a href="./../✏️ THEOREMS/DG/infinitesimal Stokes' theorem.md.html">infinitesimal Stokes' theorem</a>. <b>In a sense, the value of $d\omega$ in $u\wedge v$  is like measuring how the 1-form varies "along the bivector" $u\wedge v$.</b></p>
-<p></p>
-<p>En el caso de 2-formas, por ejemplo en $\mathbb{R}^3$, estas se ven como "paquetitos de fibras 1-dimensionales" en un entorno de cada punto (en $\mathbb{R}^n$ son paquetitos de fibras $(n-2)$-dimensionales). El valor que asocian a cada bivector es la "densidad de cortes" de esas fibras con el bivector. Si aplicamos su diferencial a un elemento de volumen (3-vector) tenemos algo totalmente análogo a lo dicho más arriba: haciendo pullback a ese "espacio tridimensional infinitamente pequeño" la 2-forma se sigue viendo como un flujo unidimensional, y su diferencial nos dice cuánto se está <b>produciendo</b> dentro (a lo que sale le resto lo que ha entrado). Si en vez de en $\mathbb{R}^3$ estuviésemos en un $\mathbb{R}^n$, el pullback de la 2-forma al 3-vector se ve como una flujo 1-dimensional, aunque en $\mathbb{R}^n$ no lo sea.</p>
-<p></p>
-<p>From here it shouldn't be difficult understand why</p>
+cuando $P_1$ y $P_2$ están suficientemente cerca, claro.
+
+En caso de 1-formas $\omega$, que asocian valores a elementos de línea, la diferencial exterior nos dice cuánto de algo se está produciendo en un bivector (una "bidirección", un elemento de área). Si nos restringimos a ese elemento de área $u\wedge v$ (mediante una especie de pullback) la 1-forma se puede ver como una especie de flujo, y $dw(u,v)$ mide cuánto de ese flujo se está produciendo en $u\wedge v$. This is the idea of the <a href="./../✏️ THEOREMS/DG/infinitesimal Stokes' theorem.md.html">infinitesimal Stokes' theorem</a>. <b>In a sense, the value of $d\omega$ in $u\wedge v$  is like measuring how the 1-form varies "along the bivector" $u\wedge v$.</b>
+
+En el caso de 2-formas, por ejemplo en $\mathbb{R}^3$, estas se ven como "paquetitos de fibras 1-dimensionales" en un entorno de cada punto (en $\mathbb{R}^n$ son paquetitos de fibras $(n-2)$-dimensionales). El valor que asocian a cada bivector es la "densidad de cortes" de esas fibras con el bivector. Si aplicamos su diferencial a un elemento de volumen (3-vector) tenemos algo totalmente análogo a lo dicho más arriba: haciendo pullback a ese "espacio tridimensional infinitamente pequeño" la 2-forma se sigue viendo como un flujo unidimensional, y su diferencial nos dice cuánto se está <b>produciendo</b> dentro (a lo que sale le resto lo que ha entrado). Si en vez de en $\mathbb{R}^3$ estuviésemos en un $\mathbb{R}^n$, el pullback de la 2-forma al 3-vector se ve como una flujo 1-dimensional, aunque en $\mathbb{R}^n$ no lo sea.
+
+From here it shouldn't be difficult understand why
 $$
-d^2=0.
+<p>d^2=0.</p>
 $$
-<p>For 0-forms it is easy: if $\omega=df$, the 2-form $d\omega$ is computed evaluating $\omega$ in sides of the parallelogram $u\wedge v$, which in turn is evaluated in the "vertices". But the latter appear twice in the final computation, but with different sign. </p>
-<p>For a 1-form is the same, but a bit more difficult to visualize. In this case $d(d\omega)$ is evaluated in a parallelepiped, and the computation rests, finally, at evaluation on the edges, which appear twice with opposite sign.</p>
-<p></p>
-<p></p>
-<p>The interpretation of $d\omega$ as production (negative accumulation) of a flow in a $k$-vector makes <a href="./Stokes' theorem.md.html">Stokes' theorem</a> trivial. By the way, this interpretation is in some sense given in <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 409.</p>
+For 0-forms it is easy: if $\omega=df$, the 2-form $d\omega$ is computed evaluating $\omega$ in sides of the parallelogram $u\wedge v$, which in turn is evaluated in the "vertices". But the latter appear twice in the final computation, but with different sign. 
+For a 1-form is the same, but a bit more difficult to visualize. In this case $d(d\omega)$ is evaluated in a parallelepiped, and the computation rests, finally, at evaluation on the edges, which appear twice with opposite sign.
+
+
+The interpretation of $d\omega$ as production (negative accumulation) of a flow in a $k$-vector makes <a href="./Stokes' theorem.md.html">Stokes' theorem</a> trivial. By the way, this interpretation is in some sense given in <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 409.
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

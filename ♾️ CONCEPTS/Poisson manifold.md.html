@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Poisson_manifold">Poisson manifold</h1>
+<p>It is a manifold $M$ together with an operation $\{-,-\}$ in $C^{\infty}(M)$ satisfying the properties:</p>
+<p><ul style="margin-left:0px;"><li>Bilinearity</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Antisymmetry: $\{f, g\} = -\{g, f\}$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Leibniz rule: $\{f, g h\} = \{f, g\}h + g\{f, h\}$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Jacobi identity: $\{f, \{g, h\}\} + \{g, \{h, f\}\} + \{h, \{f, g\}\} = 0$.</li></ul></p>
+<p></p>
+<p>The operation is called <a href="./Poisson bracket.md.html">Poisson bracket</a>. Every <a href="./symplectic manifold.md.html">symplectic manifold</a> is a <a href="./Poisson manifold.md.html">Poisson manifold</a> but the converse is not true (<a href="./../Bibliography/@olver86.md.html">@olver86</a> page 391). The algebra of functions on a Poisson manifold constitutes a <a href="./Poisson algebra.md.html">Poisson algebra</a>.</p>
+<p></p>
+<p><b>Example</b></p>
+<p>An arbitrary $\mathbb R^N\equiv (x_i,q_i,z_j)$, with $i=1,\ldots,m$ and $j=1,\ldots,l$ ($N=2m+l$), can be seen as a Poisson manifold, we can define a Poisson bracket on the space of smooth functions on $\mathbb R^N$ as follows:</p>
+<p></p>
+<p>For any two smooth functions $f,g:\mathbb R^N\rightarrow \mathbb R$, we define their Poisson bracket ${f,g}$ as:</p>
+$$
+\{f,g\} = \sum_{i=1}^m \left(\frac{\partial f}{\partial x_i} \frac{\partial g}{\partial p_i} - \frac{\partial f}{\partial p_i} \frac{\partial g}{\partial x_i}\right)
+$$
+<p>The functions which only dedends on $z_j$ have null Poisson bracket with every other function. They are called distinguished functions, and can be thought as "observables" which do not provide "evolution parameter", since its associated <a href="./Hamiltonian vector field.md.html">Hamiltonian vector field</a> is null.</p>
+<p>Moreover, they remain constant along the evolution parameter of any Hamiltonian vector fields. They are a kind of "generalized constants".</p>
+<p>$\blacksquare$</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
