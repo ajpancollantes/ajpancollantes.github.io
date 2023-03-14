@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Boolean_algebra">Boolean algebra</h1>
+<p>Main example: the subsets of a set form a Boolean algebra. To see why, let's define a set $S$ and its power set $\mathcal{P}(S)$, which is the set of all subsets of $S$. We can then define two operations on $\mathcal{P}(S)$, union ($\cup$) and intersection ($\cap$), as well as a complement operation ($'$) that takes the complement of a set with respect to $S$.</p>
+<p>Formally, we can define the Boolean algebra $\mathcal{B}(S)$ as the tuple $(\mathcal{P}(S), \cup, \cap, ', \emptyset, S)$. We can then verify that these operations satisfy the axioms of a Boolean algebra:</p>
+<p>1.  Commutativity of $\cup$ and $\cap$: </p>
+<p>$$A\cup B = B\cup A$$</p>
+<p>$$A\cap B = B\cap A$$</p>
+<p>2.  Associativity of $\cup$ and $\cap$: </p>
+<p>$$A\cup (B\cup C) = (A\cup B)\cup C$$</p>
+<p>$$A\cap (B\cap C) = (A\cap B)\cap C$$</p>
+<p>3. Distributivity of $\cup$ over $\cap$ and $\cap$ over $\cup$: </p>
+<p>$$A\cup (B\cap C) = (A\cup B)\cap (A\cup C)$$</p>
+<p>$$A\cap (B\cup C) = (A\cap B)\cup (A\cap C)$$</p>
+<p>4.  Identity elements: </p>
+<p>$$A\cup \emptyset = A$$ $$A\cap S = A$$</p>
+<p>6.  Complement: </p>
+<p>$$A\cup A' = S$$ $$A\cap A' = \emptyset$$</p>
+<p>7. Double complement: </p>
+<p>$$(A')' = A$$</p>
+<p></p>
+<p>This Boolean algebra formalize the usual <a href="./../⛳️ NON CLASSIFIED/Logic.md.html">Logic</a>, with intersection and union in the place of "and" and "or",  and the subsets being "propositions". </p>
+<p>In the context of sets, the "implies" operator corresponds to set inclusion. That is, if $A$ and $B$ are sets, then $A \rightarrow B$ means that if an element is in $A$, then it must also be in $B$. Symbolically, $A \rightarrow B$ is equivalent to $x \in A \rightarrow x \in B$. Alternatively, we can also define $A \rightarrow B$ as the set of all elements that are either not in $A$ or that are in both $A$ and $B$. Symbolically, $A \rightarrow B = (A^c \cup (A \cap B))=A^c \cup B$, where $A^c$ is the complement of $A$ (that is, the set of all elements not in $A$). </p>
+<p></p>
+<p></p>
+<p>But even more, what in Logic is considered a "verifiable proposition" can be understood as open sets, endowing in this way to the set $S$ with a topology. See <a href="https://math.stackexchange.com/a/4656827/601797" target="_blank">this answer</a> or <a href="https://math.stackexchange.com/a/31946/601797" target="_blank">this other</a> and <a href="https://xorshammer.com/2011/07/09/a-logical-interpretation-of-some-bits-of-topology/" target="_blank">this blog entry</a>. Maybe ideas in the blog post are related to new logic for <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>.</p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

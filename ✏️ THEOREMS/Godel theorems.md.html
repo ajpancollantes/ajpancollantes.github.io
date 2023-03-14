@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Godel_theorems">Godel theorems</h1>
+<h2 style="margin-left:0px;" id="Introduction">Introduction</h2>
+<p>Gödel's incompleteness theorems establish certain limitations on what is possible to prove through mathematical reasoning. To speak precisely about what <b>can be proven</b> or not, a mathematical model called formal theory is studied. A <b>formal theory</b> consists of a series of symbols and a set of rules for manipulating and combining them. Through these rules, certain collections of symbols can be distinguished as <b>formulas</b>, and certain sequences of formulas as <b>proofs</b>. The theorems of a certain theory are then all the formulas that can be proven from a certain initial collection of formulas that are assumed as axioms.</p>
+<p></p>
+<p>A theory can be:</p>
+<p><ul style="margin-left:0px;"><li>A <b>consistent</b> theory contains no contradictions, that is, it is not possible to prove both a formula and its negation at the same time. A theory that is not consistent is useless: due to the principle of explosion, from a contradiction all its formulas can be proven, and it is not suitable for modeling mathematical reasoning.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>A <b>complete</b> theory answers <b>any question</b>, in the sense that for each of its formulas, either it is provable, or there is a proof of its negation (it is refutable). A complete theory is optimal, and corresponds to the intuition about logical truth: just as every sentence must be true or false, in a complete theory every formula is provable or refutable.</li></ul></p>
+<p></p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Incompleteness_theorem">Incompleteness theorem</h2>
+<p>The first theorem of <b>incompleteness</b> establishes that, under certain hypotheses, a formal theory cannot have both properties at the same time. The first of these is that it is an arithmetic theory, that is, that its symbols serve to describe natural numbers and their operations and relations; and that it is able to prove some basic properties about them. The second hypothesis is that it is a recursive theory, which means that the rules for manipulating its symbols and formulas in proofs must be able to be executed using an algorithm: a precise series of unambiguous steps that can be carried out in a finite time, and even implemented by a computer program.</p>
+<p></p>
+<p>The statement of the first theorem reads:</p>
+<p><b>Theorem</b></p>
+<p>Any consistent recursive arithmetic theory is incomplete.$\blacksquare$</p>
+<p></p>
+<p>The proof of this theorem involves constructing a certain formula, the <b>Gödel sentence</b> $G$, that cannot be proven or refuted in $T$: neither $G$ nor $\neg G$ (the negation of $G$) are theorems of $T$. It is then said that $G$ and $\neg G$ are undecidable or independent in $T$.</p>
+<p></p>
+<p>To arrive at this, Gödel developed a method for encoding symbols and formulas using numbers, called Gödel numbering. Using this numbering, it is possible to translate the properties of a formal theory $T$, such as <b>these symbols constitute a formula</b> or <b>these formulas are not a proof in T</b>, to arithmetic properties of those numbers. In particular, the Gödel sentence $G$ is an arithmetic formula whose meaning is <b>there is no proof of $G$ in theory $T$</b>, or in other words, <b>I am not provable in theory $T$</b>.</p>
+<p></p>
+<p><b>Consequences:</b></p>
+<p>The Gödel sentence $G$ is not provable but is true, since it precisely asserts its own unprovability. This means that no arithmetic theory under the conditions of the theorem is able to prove all true statements of arithmetic.</p>
+<p>Furthermore, even though $\neg G$ is false (for asserting the opposite of $G$) it is not refutable (since $G$ is unprovable). This sentence can be taken as an axiom if desired and <b>this does not produce a contradiction</b>. The resulting theory contains many true statements about natural numbers and some false ones, starting with $\neg G$. The objects described by such a theory form a non-standard model of arithmetic.</p>
+<p>Taking $G$ (or its negation) as an axiom produces a new theory $T'$ in which $G$ (or its negation) is automatically provable. However, this does not invalidate the theorem, since $G$ asserts its relative unprovability to theory $T$. The new theory $T'$ is also incomplete: a new independent sentence $G'$ can be found, which asserts <b>I am not provable in $T'$</b>.</p>
+<p></p>
+<p>In short, in a consistent and complete formal theory, one of the hypotheses must fail: either it is not recursive and there is no algorithm to distinguish axioms from the rest of the formulas; or they are not arithmetic, and they do not include the necessary basic properties of natural numbers. For example, in the proof of the semantic completeness theorem, consistent and complete theories that are not recursive are used. On the other hand, Presburger arithmetic is a collection of axioms about natural numbers that omits several of their properties, to the point that a theory based on them can be consistent and complete.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Completeness_theorem">Completeness theorem</h2>
+<p><b>Theorem</b></p>
+<p>A sentence is provable from a set of axioms iff every structure (model) that satisfies the axioms also satisfies the sentence.$\blacksquare$</p>
+<p></p>
+<p>Remember that a "model" of an axiomatic system means a particular interpretation of the primitive notions that makes that makes the axioms true in that interpretation.</p>
+<p><b>True</b> and <b>False</b> in this context refer to <b>models</b>.  <b>True</b> should really be <b>true in the model $M$</b>; that is, there is a particular interpretation of the axioms which makes the statement true. When we talk about arithmetic statements being true, we mean <b>true in the standard model</b> (the standard model being a particular interpretation of the primitive notions of arithmetic). There are non-standard models for arithmetic, which include other chains similar to $1, 2, 3, \ldots$</p>
+<p></p>
+<p><b>Provable</b> means that there is a formal derivation of the statement from the axioms. If a statement is provable, then it is true in all models; conversely, Godel's Completeness Theorem shows that if a (first order) statement is true in all models, then it is provable. </p>
+<p></p>
+<p>In particular, a statement is <b>formally undecidable</b> in an axiomatic system if there are some models in which it is true, and some models in which it is false. When you have a <b>prefered model</b> (as we do with arithmetic), we often talk simply about true instead of <b>true in a particular model</b>. </p>
+<p></p>
+<p>In this whole reasoning we are assuming <b>first order logic</b>. We can know about the trueness of a sentence not only by proving it in a bigger axiomatic system but also by using second-order logic, or infinite quantification, or, in the case of Godel sentece,via a meta-analysis from outside the system. In general, this meta-analysis can be carried out within the weak formal system known as "primitive recursive arithmetic'').</p>
+<p></p>
+<p>However within the confines of first-order logic, and the given theory there are sentences which <b>we can prove are unprovable</b> from this given theory, but can be true in some model. Furthermore, in every model there is some statement which is true (in that specific model) but has no proof.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
