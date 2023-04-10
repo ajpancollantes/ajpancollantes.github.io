@@ -36,32 +36,34 @@ gtag('config', 'G-LBT9E8N3HS');
 <p></p>
 <p><b>Proposition</b>. Cauchy characteristic vector fields constitute a Lie subalgebra of $\mathfrak{X}(M)$ .</p>
 <p>$\blacksquare$</p>
-<b>Proof</b>. It can be shown using formula 4 in <a href="./../✏️ THEOREMS/DG/formulas for Lie derivative, exterior derivatives, bracket, interior product.md.html">formulas for Lie derivative, exterior derivatives, bracket, interior product</a>.
-$\blacksquare$
-<b>Remarks</b>
-- If $X$ is a Cauchy characteristic vector field of an EDS, then it is also a <a href="./symmetry of an EDS.md.html">symmetry of the EDS</a>. Therefore, in the case of a <a href="./GEOMETRY/Pfaffian system.md.html">Pfaffian system</a>, a Cauchy characteristic vector field is a <a href="./GEOMETRY/symmetry of a distribution.md.html#Characteristic_symmetries">trivial symmetry</a> of the associated distribution.
-- To check that a vector field is a Cauchy characteristic vector fields we only have to check $X\,\lrcorner\, \omega\in \mathcal{I}$ for a set of forms $\omega$ that generate $\mathcal{I}$ algebraically.
-- The flow lines of a Cauchy characteristic vector field are called the Cauchy <b>characteristics curves</b> of the EDS. It has to do with <a href="./method of characteristics.md.html">method of characteristics</a>...
-
-
+<p><b>Proof</b>. It can be shown using formula 4 in <a href="./../✏️ THEOREMS/DG/formulas for Lie derivative, exterior derivatives, bracket, interior product.md.html">formulas for Lie derivative, exterior derivatives, bracket, interior product</a>.</p>
+<p>$\blacksquare$</p>
+<p><b>Remarks</b></p>
+<p><ul style="margin-left:0px;"><li>If $X$ is a Cauchy characteristic vector field of an EDS, then it is also a <a href="./symmetry of an EDS.md.html">symmetry of the EDS</a>. Therefore, in the case of a <a href="./GEOMETRY/Pfaffian system.md.html">Pfaffian system</a>, a Cauchy characteristic vector field is a <a href="./GEOMETRY/symmetry of a distribution.md.html#Characteristic_symmetries">trivial symmetry</a> of the associated distribution.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>To check that a vector field is a Cauchy characteristic vector fields we only have to check $X\,\lrcorner\, \omega\in \mathcal{I}$ for a set of forms $\omega$ that generate $\mathcal{I}$ algebraically.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The flow lines of a Cauchy characteristic vector field are called the Cauchy <b>characteristics curves</b> of the EDS. It has to do with <a href="./method of characteristics.md.html">method of characteristics</a>...</li></ul></p>
+<p></p>
+<p></p>
 <hr>
-
-In <a href="./../Bibliography/@bryant2013exterior.md.html">@bryant2013exterior</a> page 30 it is defined at a point $x\in M$
+<p></p>
+<p>In <a href="./../Bibliography/@bryant2013exterior.md.html">@bryant2013exterior</a> and page 30 and Barco thesis page 33 it is defined at a point $x\in M$ the <b>Cauchy characteristic space</b> of an ideal $\mathcal{I}$:</p>
 $$
-<p>A(\mathcal{I})_x=\{\xi_x \in T_xM: \xi_x\,\lrcorner\,\mathcal{I}_x\subset \mathcal{I}_x\}</p>
+A(\mathcal{I})_x=\{\xi_x \in T_xM: \xi_x\,\lrcorner\,\mathcal{I}_x\subset \mathcal{I}_x\}
 $$
-and 
+<p>and </p>
 $$
-<p>C(\mathcal{I})_x=A(\mathcal{I})_x^{\perp}\subset T^*M</p>
+C(\mathcal{I})_x=A(\mathcal{I})_x^{\perp}\subset T^*M=
 $$
-This is called the <b>retracting space</b> at $x$.
-
+$$
+=\{\omega \in \Lambda^1(M)_{x}: X \lrcorner \omega=0 \text{ for all } X\in A(\mathcal{I}) \}
+$$
+<p>This is called the <b>retracting space</b> at $x$, or the <b>Cartan system</b> of $\mathcal{I}$ (Barco, M. A. thesis, page 34). </p>
 <p>The differential system defined by $C(\mathcal{I})$ or, what is the same, the distribution $A(\mathcal{I})$ is <a href="./GEOMETRY/completely integrable distribution.md.html">completely integrable</a> (see <a href="./../Bibliography/@bryant2013exterior.md.html">@bryant2013exterior</a> Proposition 2.1. page 31, although it can be concluded from Proposition above).</p>
 <p></p>
-<p>I think that $A(\mathcal{I})$ is a generalization to <a href="./exterior differential system.md.html">exterior differential system</a> of the associated distribution to a completely integrable <a href="./GEOMETRY/Pfaffian system.md.html">Pfaffian system</a>.</p>
-<p>Observe that given $\omega \in \mathcal{I}$, for every $\xi\in A(\mathcal{I})$ we have $\xi \,\lrcorner \, \omega \in \mathcal{I}$, so $\xi \,\lrcorner \, \omega=0$ since the contraction is a 0-form, and they are usually not considered in <a href="./exterior differential system.md.html">exterior differential system</a>s (if they are present, we can restrict to the manifold defined by its zeros). Therefore $\omega \in C(\mathcal{I})$ and </p>
+<p><b>I think</b> that $A(\mathcal{I})$ is a generalization to <a href="./exterior differential system.md.html">exterior differential system</a> of the associated distribution to a completely integrable <a href="./GEOMETRY/Pfaffian system.md.html">Pfaffian system</a>.   </p>
+<p>Observe that given a 1-form $\omega \in \mathcal{I}$, for every $\xi\in A(\mathcal{I})$ we have $\xi \,\lrcorner \, \omega \in \mathcal{I}$, so $\xi \,\lrcorner \, \omega=0$ since the contraction is a 0-form, and they are usually not considered in <a href="./exterior differential system.md.html">exterior differential system</a>s (if they are present, we can restrict to the manifold defined by its zeros). Therefore $\omega \in C(\mathcal{I})$ and </p>
 $$
-\mathcal{I}\subset C(\mathcal{I})
+\mathcal{I} \cap \Omega^1 \subset C(\mathcal{I})
 $$
 <p>A <b>Cauchy characteristic</b> is an integral manifold of the retracting space. They are a special kind of integral manifold of the original EDS.</p>
 <p>________________________________________</p>

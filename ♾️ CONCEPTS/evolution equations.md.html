@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Evolution_equations">Evolution equations</h1>
+<p>See <a href="https://www.math.ucdavis.edu/~hunter/notes/nonlinev.pdf" target="_blank">the introduction here</a>.</p>
+<p>The evolution of a <a href="./dynamical system.md.html">dynamical system</a> depending on a continuous time variable $t$ is described by an equation of the form:</p>
+<p>$$\dot{u}=f(u)$$</p>
+<p>Here, the dot denotes a time derivative, $u(t) \in X$ is the state of the system at time $t$, and $f$ is a given vector field on $X$. The space $X$ is the state space of the system; a point in $X$ specifies the instantaneous state of the system. We will assume that $X$ is a <a href="./FUNCTIONAL ANALYSIS/Banach space.md.html">Banach space</a>. When $X$ is finite dimensional, the evolution equation is a <a href="./DEs/system of ODEs.md.html">system of ODEs</a>. </p>
+<p>On the other hand, <a href="./PDE.md.html">PDE</a>s can be regarded as evolution equations on an infinite dimensional state space (see example in <a href="./../⛳️ NON CLASSIFIED/Classical Field Theory.md.html">Classical Field Theory</a>). The solution $u(x,t)$ belongs to a function space in $x$ at each instant of time $t$. In the finite dimensional case $f$ has a finite number of entries $u^1, u^2, \cdots,u^{n}$ but, how do we deal with the case of infinite entries for a function $f$? Think that the index $i$ in $u^i$ is substituted by $x$ in $u(x)$. The problem in general would be intractable, but we restring to special cases of relations between the "components" $u(x)$: the derivatives of $u$ respect to $x$. That is, $u_x$ would play the role of $u^{i+1}-u^i$. So an evolution equation is, in this context,</p>
+$$
+\frac{\partial u}{\partial t}=P(x,u^{(n)}),
+$$
+<p>where $x\in \mathbb{R}$, $u\in \mathbb{R}$ and $u^{(n)}=(u,u_x,u_{xx},\ldots)$. This can be further generalized (<a href="./../Bibliography/@olver86.md.html">@olver86</a> page 303). The <a href="./differential function.md.html">differential function</a> $P$ can be seen as a kind of vector field on the space of functions...</p>
+<p></p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

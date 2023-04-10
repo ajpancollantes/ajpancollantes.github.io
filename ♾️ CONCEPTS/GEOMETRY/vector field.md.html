@@ -31,7 +31,33 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Steps_on_the_abstract_definition_of_tangent_vector:">Steps on the abstract definition of tangent vector:</h1>
+<font size="3vw"><h1 style="margin-left:0px;" id="Some_basic_definitions">Some basic definitions</h1>
+<p><b>Definition 1</b>. A tangent vector $V$ at $p\in S$ is an equivalence class of curves $\gamma:[a,b]\to S$ such that $\gamma(a)=p$, where two curves $\gamma_1$ and $\gamma_2$ are equivalent if their derivatives at $t=a$ are equal, i.e., $\gamma_1'(a)=\gamma_2'(a)$. Also, it can be defined as an operator from $C^{\infty}(S)$ to $\mathbb R$</p>
+$$
+V(f)=(f\circ \gamma)'(0)
+$$
+<p></p>
+<p><b>Definition 2</b>. The tangent vector space $T_p S$ is the set of all tangent vectors at $p$. It is a vector space, with the addition and scalar multiplication of tangent vectors <b>defined pointwise</b>, and zero vector given by the equivalence class of the constant curve at $p$. </p>
+<p></p>
+<p><b>Definition 3</b>. The differential of a map $F:S\to \mathbb R^m$ at a point $p\in S$ is a linear map $dF_p:T_p S\to \mathbb R^m$ defined as follows: for any tangent vector $V\in T_p S$, we define $dF_p(V)$ as a vector whose action on a function $g$ in $C^{\infty}(\mathbb R^m$ is</p>
+$$
+dF_p(V)(g)=V(g\circ F)
+$$
+<p>(observe that $g\circ F \in C^{\infty}(S)$).</p>
+<p></p>
+<p>With all this three ingredients, you have that $dF_p$ is linear since</p>
+$$
+dF_p(V+W)(g)=(V+W)(g\circ F)=V(g\circ F)+W(g\circ F)=
+$$
+$$
+=dF_p(V)(g)+dF_p(W)(g)
+$$
+<p>and</p>
+$$
+dF_p(\lambda V)(g)=\lambda V(g\circ F)=\lambda dF_p(V)(g)
+$$
+<p></p>
+<h1 style="margin-left:0px;" id="Steps_on_the_abstract_definition_of_tangent_vector:">Steps on the abstract definition of tangent vector:</h1>
 <p><ul style="margin-left:0px;"><li>It can be shown that in $\mathbb{R}^n$ traditional vectors are the same as derivations of (the germ of) functions.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>We define vectors at $p$ in a manifold $M$ as derivations of the germ of functions at $p$, inspired in the previous item.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>The collection of all of then constitute the tangent space at $p$: $T_p M$.</li></ul></p>

@@ -32,7 +32,27 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Idea">Idea</h1>
-<p>Paste from LaTex notes</p>
+<p>The Legendre transform of a function $f(x)$ is a way to encode the same information but in another (maybe more convenient) way. Something similar to the Fourier transform: we encode the information of the function in the coefficients $C_{\omega}$ of the "armonics" $e^{i\omega t}$.</p>
+<p></p>
+<p>In the case of Legendre transform, we express the information of the function associating a value to every slope $p$ of the original function. By the way, this is only valid for a function whose slope has a 1-1 relation with the independent variable $x$, that is, $f'(x)$ must be injective. Usually we take $f$ convex, so no problem here.</p>
+<p></p>
+<p>The point is that in certain situations the slope $f'(x)=:p$ is more important than $x$ itself. </p>
+<p></p>
+<p>*Idea:* en una etapa ciclista de montaña queremos información de la altitud (porque nos ahogamos) en función de la distancia recorrida, y de ahí podemos sacar la pendiente (porque es duro). Así podemos decir que el kilómetro 8 tendrá una pendiente del 6 por ciento y a una altitud de 1250 m. Pero para según qué fin, podría ser más interesante expresar como variable independiente la pendiente (por ejemplo, distintas pendientes condicionan el desarrollo que hay que llevar instalado, pero las distancias no influyen...). Podríamos expresar la altitud en función de la pendiente, simplemente despejando en la derivada y sustituyendo en la función original. Pero así habríamos perdido la información de la distancia! La solución es la transformada de Legendre.</p>
+<p></p>
+<p>In Lagrangian mechanics $\frac{dL}{dq_t}=p$ is the generalized momentum (that appears once and again), so is natural that we want to express $L$ as a function of $p$. </p>
+<p></p>
+<p>We could simply solve</p>
+<p>$$\frac{dL}{dq_t}=p$$</p>
+<p>for $q_t$ and find an expression for a new</p>
+<p>$$\tilde{L}(q,p)=L(q,q_t(p))$$</p>
+<p>but then we had lost information. From only $\tilde{L}$ we cannot recover the connection between $q_t$ and $p$. Think that $L$ has two good things: 1) it measure the cost for a generalized particle to pass for a point of the jet space (the sum of all these costs is what we call *the action* of the complete curve) and 2) it let us to connect $q_t$ and $p$. Instead, $\tilde{L}$ gives the *costs* but not the other thing.</p>
+<p></p>
+<p>The Legendre transform is a modification to $\tilde{L}$, say $H$, in such a way that we CAN recover everything. It is computed in such a way that $\frac{dH}{dp}=q_t$. But you can say: WTF, but $L$ measured something, what about $H$? The incredible thing is that $H$ is even more intuitive, is the <b>energy</b>; and, moreover, the least action principle is translated in this new language as the hamilton equations, that are far more intuitive.</p>
+<p></p>
+<p>One more reflection about Legendre transform. When we have a manifold, and a metric (or pseudometric) defined on the tangent bundle we can find a canonical isomorphism between every tangent space and its dual. This let us to lower the indexes for our convenience.</p>
+<p></p>
+<p>Legendre transform appears to me like doing something similar but for any function, not only a bilinear form, defined on the jet bundle (for example a complicated lagrangian).</p>
 <p></p>
 <p></p>
 <h1 style="margin-left:0px;" id="Moreover">Moreover</h1>

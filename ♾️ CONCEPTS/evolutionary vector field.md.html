@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Evolutionary_vector_field">Evolutionary vector field</h1>
+<p>A evolutionary vector field $V$ is a vector field on the <a href="./GEOMETRY/jet bundle.md.html#Infinity_jet_bundle">infinite jet bundle</a> of a bundle $E\to M$, such that  is vertical with respect to the projection $\pi: J^{\infty}(E)\to M$ and it preserves the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>.</p>
+<p></p>
+<p>Since they preserve the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a> they satisfy the <a href="./DEs/prolongation formula for vector fields.md.html">prolongation formula</a>, so they can be written as</p>
+$$
+V=\phi_{\alpha} \partial_{u^{\alpha}}+\sum_{i,\sigma}(D_\sigma\phi_{\alpha})\frac{\partial}{\partial u^{\alpha}_\sigma}.
+$$
+<p>Here $D_\sigma$ is the composition of total derivatives corresponding to the multi-index $\sigma$, and $\{\phi_{\alpha}\}$ is a smooth map usually called <a href="./DEs/generating function.md.html">generating function</a>.</p>
+<p></p>
+<p>Consider a section $s:M\to E$ of the original bundle. It can be <a href="./GEOMETRY/prolongation of a section.md.html">prolonged</a> to a section $\tilde{s}:M\to J^{\infty}(E)$. The obtained section represents the original section together with "all its derivatives", and it is tangent to the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>. Since $V$ preserves this distribution, the flow of $V$, let's call it $\tilde{\theta}_t$, sends $\tilde{s}$ to another section $\tilde{r}_t$ also tangent to <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>, so we can consider that it comes from a section $r_t:M\to E$.</p>
+<p></p>
+<p>How can we interpret this?</p>
+<p>For simplicity, suppose $E=\mathbb R \times \mathbb R$ is a trivial bundle, and sections $s:M\to E$ are identified with smooth functions $f:\mathbb R \to \mathbb R$.  In this case an evolutionary vector field as the form</p>
+$$
+V=\phi {\partial u}+D_x(\phi) {\partial u_{1}}+\cdots
+$$
+<p>with $\phi(x,u,u_1,\ldots,u_m)$ a smooth function for certain integer $m$. </p>
+<p>In this context the section $\tilde{s}$ is identified with $(x,f(x),f'(x),f''(x),\ldots)$. Observe that the flow $\tilde{\theta}_t$ is, by definition,</p>
+$$
+\tilde{r}_t=\tilde{\theta}_t \circ \tilde{s}\equiv(x,g_t(x),g_t'(x),g_t''(x),\ldots)
+$$
+<p>satisfying</p>
+$$
+\frac{d}{dt}|_{t=0} x=0,
+$$
+$$
+\frac{d}{dt}|_{t=0} g_t(x)=\phi(x,f(x),f'(x),\ldots,f^{m)(x)}), \tag{*}
+$$
+$$
+\frac{d}{dt}|_{t=0} g'_t(x)=D_x\phi(x,f(x),f'(x),\ldots,f^{m)(x)}),
+$$
+<p>But all this equations are satisfied if $(*)$ is satisfied, as it can be checked.</p>
+<p>In conclusion, an evolutionary vector field is identified a functions $\phi$. If you think of $f$ as a point in an infinite-dimensional space, $\phi$ is like a tangent direction to flow this point. The flow is obtained by solving the <a href="./evolution equations.md.html">evolution equation</a> </p>
+$$
+\frac{d}{dt}h(x,t)=\phi(x,h,\frac{\partial h}{\partial x},\ldots,\frac{\partial^m h}{\partial^m x}),
+$$
+$$
+h(x,0)=f(x).
+$$
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

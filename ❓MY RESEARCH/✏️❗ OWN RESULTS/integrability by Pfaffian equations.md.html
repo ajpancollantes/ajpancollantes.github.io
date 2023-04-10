@@ -31,127 +31,18 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><p>Theorem</p>
-<hr>
-<p></p>
+<font size="3vw"><p><b>Theorem</b></p>
 <p>Given an involutive distribution $\mathcal{Z}=\mathcal{S}(\{Z_1,\ldots,Z_r\})$ and a <a href="./../♾️ ❗CONCEPTS/cinf-structure.md.html">cinf-structure</a> $\langle \omega_1,\ldots, \omega_{n-r}\rangle$ for $\mathcal{Z}$ we can find the integral manifolds of $\mathcal{Z}$ by solving $n-r$ completely integrable <a href="./../../♾️ CONCEPTS/GEOMETRY/Pfaffian equation.md.html">Pfaffian equation</a>s.</p>
 <p></p>
-<p>Remarks</p>
-<hr>
+<p><b>Remarks</b></p>
 <p><ul style="margin-left:0px;"><li>La dificultad sigue estando en encontrar los <a href="./../../♾️ CONCEPTS/DEs/integrating factor.md.html">integrating factor</a>s. Al menos sabemos que hay una relación inversa entre los <a href="./../../♾️ CONCEPTS/DEs/integrating factor.md.html">integrating factor</a>s y las <a href="./../♾️ ❗CONCEPTS/symmetrising factor.md.html">symmetrising factor</a>s.</li></ul></p>
 <p></p>
 <p><ul style="margin-left:0px;"><li>Tengo la <a href="./../✏️❓ CONJECTURES/conjecture_qsolv structure refinada.md.html">hipótesis</a> de que se podría refinar cualquier <a href="./../♾️ ❗CONCEPTS/cinf-structure.md.html">cinf-structure</a> para obtener otra en la cual se pueda usar el <a href="./método atrás-adelante.md.html">método atrás-adelante</a>.</li></ul></p>
 <p></p>
 <p><ul style="margin-left:0px;"><li>En orden 2 <a href="./equivalence of cinf-sym and qsolv str in second order.md.html">coincide con la reducción mediante</a> $\lambda$-simetrías de Conchi.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Description of the <a href="./algorithm for cinf-structures.md.html">algorithm for cinf-structures</a>.</li></ul></p>
 <p></p>
-<p>Proof</p>
-<hr>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Let's consider $p\in M$, we will look for the integral manifold passing through $p$. We can take a local coordinate chart $\left(U, \varphi\equiv(x_1,\ldots,x_n)\right)$ around $p$ and work in $\varphi(U)\subseteq \mathbb{R}^n$. In what follows, we will use the same symbols $p$, $\omega_j$ ($j=1,\ldots,n-r$), $Z_i $ ($ i=1,\ldots,r$) </p>
-<p></p>
-<p>and $\mathcal{Z}$ for the corresponding objects defined in $ \varphi(U)$, for notational simplicity. </p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>We are going to proceed by induction on the dimension $ n $ of the manifold $M$ but starting at $r+1$. First, if $\operatorname{dim}(M)=r+1$ and we have a quasi-solvable structure $\langle \omega_1 \rangle$, the ideal $\mathcal{I}(\{\omega_{1}\})$ is a differential ideal, so $d\omega_1 \wedge \omega_1=0$ and the Pfaffian equation</p>
-<p></p>
-$$
-
-\omega_1\equiv 0
-
-$$
-<p></p>
-<p>is completely integrable. Let</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>$F$ be a solution, the submanifold $N=\{x\in \varphi(U): F(x)=c\}$, where $c=F(p)$, is an integral submanifold of $\mathcal{Z}$ through $p$ that can be pulled back to $U$.</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Now, suppose the result is true for manifolds of dimension $n-1$ and let's check for dimension $n$. The ideal $\mathcal{I}(\{\omega_{n-r}\})$ is, again, a differential ideal, so we have the completely integrable Pfaffian equation</p>
-<p></p>
-$$
-
-\omega_{n-r}\equiv 0.
-
-$$
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Let $F$ be a  solution of it, assuming without lost of generality that $\frac{\partial F}{\partial x_n} \neq 0$, we can isolate $x_n $ in $F(x_1,\ldots,x_n)=c$</p>
-<p></p>
-$$
-
-x_n=\phi(x_1,\ldots,x_{n-1},c),
-
-$$
-<p></p>
-<p>where $c=F(p) $ and consider the map</p>
-<p></p>
-$$
-
-\begin{array}{rccc}
-
-\iota: & \tilde{N} &\longrightarrow & \varphi(U)\\
-
-&(x_1,x_2, \ldots,x_{n-1})  & \longmapsto  & (x_1,x_2, \ldots,x_{n-1}, \phi(x_1,\ldots,x_{n-1},c))
-
-\end{array}
-
-$$
-<p></p>
-<p>for a suitable domain $\tilde{N} \subseteq \mathbb{R}^{n-1}$. This map is a diffeomorphism from $\tilde{N}$ to $N:=\{q\in \varphi(U):F(q)=c\}$, and since the vector fields $Z_i$ are tangent to $N$ everywhere, it is well defined the pushforward</p>
-<p></p>
-$$
-
-\widetilde{Z}_i:=(\iota^{-1})_*(Z_i)
-
-$$
-<p></p>
-<p>for the restriction of $Z_i$ to $N$. We define, also</p>
-<p></p>
-$$
-
-\widetilde{\omega}_j:=\iota^*(\omega_j) \text{ for } j=1,\ldots,n-1.
-
-$$
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Observe that $\widetilde{\omega}_{n-r}=0$ and that $\langle\widetilde{\omega}_1,\ldots,\widetilde{\omega}_{n-r-1}  \rangle$ constitutes a quasi-solvable structure for $\widetilde{\mathcal{Z}}:=\mathcal{S}(\widetilde{Z}_1,\ldots,\widetilde{Z}_r)$.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>If we call</p>
-<p></p>
-$$
-
-\widetilde{p}:=\iota^{-1}(p),
-
-$$
-<p></p>
-<p>we can find, by induction hypothesis, an integral submanifold $\widetilde{S}$ for $\widetilde{\mathcal{Z}}$ passing through $\tilde{p}$, by solving $n-1-r$ completely integrable Pfaffian equations. Suppose we have managed to arrive at a  parametrization $\sigma$ of $\widetilde{S}$, then $\iota \circ \sigma$ is a parametrization of the manifold $S:=\iota(\widetilde{S})$, which we claim is an integral submanifold of $\mathcal{Z}$ passing through $p$.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>First, it is obvious that $S$ passes through $p$. And, on the other hand, given $q=\iota(\widetilde{q})\in S$ and $V\in T_{q}S$ it is clear that $(\iota^{-1})_*(V)=\sum_{i=1}^r h_i \cdot \widetilde{{Z}}_{i\widetilde{q}}$ for some $h_i \in \mathbb{R}$, since $\widetilde{S}$ is an integral submanifold of $\widetilde{\mathcal{Z}}$. Therefore</p>
-<p></p>
-$$
-
-V=\iota_*((\iota^{-1})_*(V))=
-
-\iota_*(\sum_{i=1}^r h_i \cdot {\widetilde{Z}}_{i\widetilde{q}})= \iota_*(\sum_{i=1}^r h_i \cdot (\iota^{-1})_*({Z_i}_{q}))=\sum_{i=1}^r h_i \cdot {Z_i}_{q},
-
-$$
-<p></p>
-<p>so $V\in \mathcal{Z}_{q}$.</p>
-<p>#resultadospropios</p>
+<p><b>Proof</b> See <a href="./../../Bibliography/@pancinf-structures.md.html">@pancinf-structures</a>$\blacksquare$</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

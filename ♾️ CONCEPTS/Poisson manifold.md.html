@@ -38,18 +38,25 @@ gtag('config', 'G-LBT9E8N3HS');
 <p><ul style="margin-left:0px;"><li>Leibniz rule: $\{f, g h\} = \{f, g\}h + g\{f, h\}$.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>Jacobi identity: $\{f, \{g, h\}\} + \{g, \{h, f\}\} + \{h, \{f, g\}\} = 0$.</li></ul></p>
 <p></p>
-<p>The operation is called <a href="./Poisson bracket.md.html">Poisson bracket</a>. Every <a href="./symplectic manifold.md.html">symplectic manifold</a> is a <a href="./Poisson manifold.md.html">Poisson manifold</a> but the converse is not true (<a href="./../Bibliography/@olver86.md.html">@olver86</a> page 391). The algebra of functions on a Poisson manifold constitutes a <a href="./Poisson algebra.md.html">Poisson algebra</a>.</p>
+<p>The operation is called <a href="./Poisson bracket.md.html#Poisson_bracket">Poisson bracket</a>. Every <a href="./symplectic manifold.md.html">symplectic manifold</a> is a <a href="./Poisson manifold.md.html">Poisson manifold</a> but the converse is not true (<a href="./../Bibliography/@olver86.md.html">@olver86</a> page 391). The algebra of functions on a Poisson manifold constitutes a <a href="./Poisson algebra.md.html">Poisson algebra</a>.</p>
 <p></p>
 <p><b>Example</b></p>
-<p>An arbitrary $\mathbb R^N\equiv (x_i,q_i,z_j)$, with $i=1,\ldots,m$ and $j=1,\ldots,l$ ($N=2m+l$), can be seen as a Poisson manifold, we can define a Poisson bracket on the space of smooth functions on $\mathbb R^N$ as follows:</p>
+<p>An arbitrary $\mathbb R^N\equiv (p_i,q_i,z_j)$, with $i=1,\ldots,m$ and $j=1,\ldots,l$ ($N=2m+l$), can be seen as a Poisson manifold, we can define a Poisson bracket on the space of smooth functions on $\mathbb R^N$ as follows:</p>
 <p></p>
 <p>For any two smooth functions $f,g:\mathbb R^N\rightarrow \mathbb R$, we define their Poisson bracket ${f,g}$ as:</p>
 $$
-\{f,g\} = \sum_{i=1}^m \left(\frac{\partial f}{\partial x_i} \frac{\partial g}{\partial p_i} - \frac{\partial f}{\partial p_i} \frac{\partial g}{\partial x_i}\right)
+\{f,g\} = \sum_{i=1}^m \left(\frac{\partial f}{\partial q_i} \frac{\partial g}{\partial p_i} - \frac{\partial f}{\partial p_i} \frac{\partial g}{\partial q_i}\right)
 $$
-<p>The functions which only dedends on $z_j$ have null Poisson bracket with every other function. They are called distinguished functions, and can be thought as "observables" which do not provide "evolution parameter", since its associated <a href="./Hamiltonian vector field.md.html">Hamiltonian vector field</a> is null.</p>
+<p>The Poisson bracket of functions which only depends on $z_j$  with any other function is zero. These are called distinguished functions or Casimir functions, and can be thought as "observables" which do not provide "evolution parameter", since its associated <a href="./Hamiltonian vector field.md.html">Hamiltonian vector field</a> is null.</p>
 <p>Moreover, they remain constant along the evolution parameter of any Hamiltonian vector fields. They are a kind of "generalized constants". This reminds me the <a href="./centralizer.md.html">centralizer</a> of an algebra, in case that the bracket is given by the commutator of a product...</p>
 <p>$\blacksquare$</p>
+<p></p>
+<p>For every $f$ we have that $\{-,f\}$ is a differential operator, so it is a vector field. We call it the Hamiltonian vector field associated with $f$. It coincides with the notion of <a href="./Hamiltonian vector field.md.html">Hamiltonian vector field</a> for <a href="./symplectic manifold.md.html">symplectic manifold</a>s. Also, see <a href="./Poisson bracket.md.html#Relation_with_Lie_bracket">Poisson bracket#Relation with Lie bracket</a>. </p>
+<p></p>
+<p></p>
+<p>The Poisson bracket can be seen in <a href="./Poisson bracket.md.html#In_local_coordinates">local coordinates</a> as a <a href="./skew-symmetric matrix.md.html">skew-symmetric matrix</a>. If we require that the rank of this matrix is everywhere the same as the dimension of the manifold, we recover the notion of <a href="./symplectic manifold.md.html">symplectic manifold</a>.</p>
+<p></p>
+<p>The "morphisms" between Poisson manifolds are called <a href="./Poisson map.md.html">Poisson map</a>s.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

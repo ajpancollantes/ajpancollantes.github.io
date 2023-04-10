@@ -38,23 +38,23 @@ gtag('config', 'G-LBT9E8N3HS');
 <p></p>
 <h2 style="margin-left:0px;" id="Classical_approach">Classical approach</h2>
 <p>Is another formulation of <a href="./Classical Mechanics.md.html">Classical Mechanics</a>. </p>
-<p>This approach is very different to <a href="./axiomatic Newtonian mechanics.md.html">that of Newton</a>, aunque da lugar a una teoría equivalente, y soluciona los mismos problemas. En primer lugar, los problemas se reescriben en términos de coordenadas generalizadas, no necesariamente espaciales (pueden ser distancias, ángulos, etcétera) y no necesariamente cartesianas (polares, cilíndricas o cualquier otra que convenga a la resolución del problema).</p>
+<p>This approach is very different from <a href="./axiomatic Newtonian mechanics.md.html">that of Newton</a>ian mechanics, although it gives rise to an equivalent theory and solves the same problems. Firstly, the problems are rewritten in terms of generalized coordinates, not necessarily spatial (they can be distances, angles, etc.) and not necessarily Cartesian (polar, cylindrical or any other coordinate system that is convenient for solving the problem).</p>
 <p></p>
-<p>Tales coordenadas dan lugar a una variedad abstracta denotada normalmente $M$ o $\mathcal{C}$ (<b>configuration space</b>) particular para cada problema, en la que cada punto representa un estado del sistema estudiado (una combinación de posiciones de partículas, posiciones y ángulos de sólidos rígidos, velocidades...). Una curva $\alpha: I\subseteq \mathbb{R} \to M$ representa una evolución posible del sistema, y <b>el problema genérico de la mecánica es encontrar cuál es esa curva</b> para un punto $(p_0,v_0)\in TM$ del espacio tangente, siendo $\alpha(0)=p_0$ y $\alpha'(0)=v_0$. </p>
+<p>Such coordinates give rise to an abstract manifold denoted normally by $M$ or $\mathcal{C}$ (configuration space) specific to each problem, in which each point represents a state of the system under study (a combination of particle positions, positions and angles of rigid solids, velocities, etc.). A curve $\alpha: I\subseteq \mathbb{R} \to M$ represents a possible evolution of the system, and <b>the generic problem of mechanics is to find which curve represents the actual evolution</b> for a point $(p_0,v_0)\in TM$ of the tangent space, with $\alpha(0)=p_0$ and $\alpha'(0)=v_0$.</p>
 <p></p>
-<p>Pues bien, el principio de Lagrange y Hamilton, or <a href="./../♾️ CONCEPTS/principle of least action.md.html">principle of least action</a>, es que tal curva será aquella que minimice la cantidad de "Lagrangiano global". Es decir, <b>para el sistema en cuestión</b> se define una función </p>
+<p>The principle of Lagrange and Hamilton, or the <a href="./../♾️ CONCEPTS/principle of least action.md.html">principle of least action</a>, states that such a curve will be the one that minimizes the amount of "total Lagrangian". That is, <b>for the system in question</b>, a function </p>
 $$
 L: TM \to \mathbb{R}
 $$
-<p>que mide, para cada $(p,v) \in TM$, el "peaje a pagar" por pasar por un punto $p$ con velocidad $v$. </p>
+<p>is defined that measures, for each $(p,v) \in TM$, the "toll to pay" for passing through a point $p$ with velocity $v$.</p>
 <p></p>
-<p>Una curva-evolución $\alpha$ cualquiera tiene una "acumulación de lagrangiano" dada por </p>
+<p>Any curve-evolution $\alpha$ has an "accumulation of Lagrangian" given by </p>
 $$
 J(\alpha)=\int_I L(\alpha(t), \alpha'(t)) dt
 $$
-<p>Pues bien, por principio <b>asumimos</b> que <b>la curva solución es aquélla con menor o mayor</b> $J(\alpha)$ (this is the <a href="./../♾️ CONCEPTS/principle of least action.md.html">principle of least action</a>). Y también asumimos la forma de la función $L$. Estas asunciones surgen, como todo en física, de la <b>observación de la Naturaleza</b>.</p>
+<p>We assume that the solution curve is the one with the lowest or highest $J(\alpha)$ (this is the principle of least action). We also assume the form of the function $L$. These assumptions arise, like everything in physics, from the <b>observation of nature</b>.</p>
 <p></p>
-<p><b>Personal idea</b>: Visualizo el Lagrangiano como un peaje que hay que pagar por coger un determinado camino a una determinada velocidad. Hay que intentar minimizar el pago (ojo, o maximizar). From this point of view, the Lagrangian is like a kind of <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> and we are computing a <a href="./../♾️ CONCEPTS/GEOMETRY/geodesic.md.html">geodesic</a>. This is not, of course, the case except in some cases. I think this has to do with <a href="./../♾️ CONCEPTS/Finsler manifold.md.html">Finsler manifold</a>s...</p>
+<p><b>Personal idea</b>: I visualize the Lagrangian as a toll that must be paid for taking a certain path at a certain speed. We must try to minimize the payment (or sometimes maximize it). From this point of view, the Lagrangian is like a kind of <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a>, and we are computing a <a href="./../♾️ CONCEPTS/GEOMETRY/geodesic.md.html">geodesic</a>. This is not, of course, the case except in some cases. I think this has to do with <a href="./../♾️ CONCEPTS/Finsler manifold.md.html">Finsler manifold</a>s...</p>
 <p></p>
 <p>Therefore, every system of Lagrangian Mechanics is a particular case of a <a href="./../♾️ CONCEPTS/variational problem.md.html">variational problem</a>.</p>
 <p></p>
@@ -75,7 +75,7 @@ m\ddot{x}=F
 $$
 <h1 style="margin-left:0px;" id="Jet_space_approach">Jet space approach</h1>
 <p>From the point of view of the <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a>s, we have what follows. </p>
-<p>We have the configuration manifold $M$ and the infinite jet bundle $J^{\infty} (\mathbb{R},M)$. We have the <a href="./../♾️ CONCEPTS/GEOMETRY/Cartan distribution.md.html#Vector_fields_description">total derivative operator</a> $D_t$.</p>
+<p>We have the configuration manifold $M$ and the infinite jet bundle $J^{\infty} (\mathbb{R},M)$. We have also the <a href="./../♾️ CONCEPTS/GEOMETRY/Cartan distribution.md.html#Vector_fields_description">total derivative operator</a> $D_t$.</p>
 <p></p>
 <p>Physics is introduced by the Lagrangian, which is an <a href="./../♾️ CONCEPTS/GEOMETRY/horizontal cotangent bundle.md.html">horizontal 1-form</a> on the first order <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> $J^1(\mathbb{R},\mathbb{R})$ (maybe related, <a href="./../♾️ CONCEPTS/variational bicomplex.md.html">variational bicomplex</a>):</p>
 $$
@@ -84,11 +84,11 @@ $$
 <p><img src="./../imagenes/Pasted image 20221219075943.png" style="width:80vw; border-radius: 3px;" ></p>
 <p>Given a general curve $\alpha:I \to J^1$ we can compute $\int_{\alpha} \lambda$. </p>
 <p></p>
-<p>The important sections $\phi$ of $\mathbb{R}\times M\to \mathbb{R}$ (i.e., curves of $M$) are those which extremizes the functional</p>
+<p>The important sections $\phi$ of $\pi:\mathbb{R}\times M\to \mathbb{R}$ (i.e., curves of $M$) are those which extremizes the functional</p>
 $$
 S[\phi]=\int_T (j^1\phi)^*(\lambda)
 $$
-<p>being $T$ a closed interval of $\mathbb{R}$ and $j^1\phi$ the prolongation to the first order jet space (<a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">holonomic section</a>).</p>
+<p>being $T$ a closed interval of $\mathbb{R}$ and $j^1\phi$ the prolongation to the first order jet space (<a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">holonomic section</a>). Therefore we have a <a href="./../♾️ CONCEPTS/variational problem.md.html">variational problem</a>.</p>
 <p></p>
 <p>The condition of $\phi$ extremizing this functional is equivalent to satisfying <a href="./../♾️ CONCEPTS/Euler-Lagrange.md.html">Euler-Lagrange</a> equation, a second order <a href="./../♾️ CONCEPTS/DEs/ODE.md.html">ODE</a>.</p>
 <p></p>
@@ -110,7 +110,7 @@ $$
 <p><img src="./../imagenes/Pasted image 20220424110227.png" style="width:80vw; border-radius: 3px;" ></p>
 <p>(pizarra_016)</p>
 <p></p>
-<p>I have a visualization of the relation of minimizing the action with satisfying <a href="./../♾️ CONCEPTS/Euler-Lagrange.md.html">Euler-Lagrange</a> in xournal_154, although it is done from a "discrete point of view".</p>
+<p>I have a visualization of the <b>relation of minimizing the action with satisfying</b> <a href="./../♾️ CONCEPTS/Euler-Lagrange.md.html">Euler-Lagrange</a> in [xournal_154](<code class="inlineCoed">file:///C:/Users/antoniojpan/Dropbox/Obsidian/Vaults/ClippingContents/statswords.csv</code>), although it is done from a "discrete point of view".</p>
 <p></p>
 <p>On the other hand, I guess that a group symmetry for the Lagrangian $L: J^1 (\mathbb{R},M)\mapsto \mathbb{R}$ implies that this group leaves invariant the submanifold $S_{\Delta}$, but I have to proof it. I have to learn more on <a href="./../♾️ CONCEPTS/variational symmetry.md.html">variational symmetry</a>s.</p>
 <p></p>

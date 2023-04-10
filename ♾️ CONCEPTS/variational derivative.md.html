@@ -116,56 +116,29 @@ $$
 <p></p>
 <p></p>
 <h1 style="margin-left:0px;" id="Old_stuff_integrate_with_above">Old stuff (integrate with above)</h1>
-<p>\section{Functional derivative. Gradient flow}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Given a functional $F:\mathcal{H}\mapsto \RR$, being $\mathcal{H}$ \textit{a Hilbert space of functions}, the associated gradient flow is given by the equation</p>
-<p></p>
-<p>\begin{equation}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\frac{\partial \rho}{\partial t} = - \frac{\partial F}{\partial \rho}. \tag{1}</li></ul></p>
-<p></p>
-<p>\end{equation}</p>
+<h1 style="margin-left:0px;" id="Functional_derivative._Gradient_flow">Functional derivative. Gradient flow</h1>
+<p>Given a functional $F:\mathcal{H}\mapsto \mathbb R$, being $\mathcal{H}$ a Hilbert space of functions, the associated gradient flow is given by the equation</p>
+$$
+\frac{\partial \rho}{\partial t} = - \frac{\partial F}{\partial \rho}.  \tag{1}
+$$
 <p></p>
 <p>for $\rho(t) \in \mathcal{H}$.</p>
 <p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>In other words, $\rho$ decreases along the gradient of $F$. The terminology stems from the 'finite dimensional' case, where a function $f(x,y,z)$ produces a vector field $V = \nabla f$, which is called its 'gradient vector field'. Then, as with any vector field, one can study the <b>flow</b> induced by that vector field, i.e. the flow of the dynamical system given by $\dot{x} = V(x)$. </p>
 <p></p>
-<p>In other words, $\rho$ decreases along the gradient of $F$. The terminology stems from the 'finite dimensional' case, where a function $f(x,y,z)$ produces a vector field $V = \nabla f$, which is called its 'gradient vector field'. Then, as with any vector field, one can study the \textbf{flow} induced by that vector field, i.e. the flow of the dynamical system given by $\dot{x} = V(x)$. </p>
+<p>In $(1)$, the notation $\frac{\partial F}{\partial \rho}$ denotes the so-called <b>functional derivative</b> of $F$ to $\rho$, which generalises the <b>'gradient' notion for functions</b>. There exist multiple versions of the functional derivative, mainly because its definition depends on the function space on which $F$ acts. Anyway, the idea is to perturb $\rho$ a bit, i.e. to substitute $\rho \to \rho + \epsilon \phi$ with $0 < \epsilon \ll 1$, and work out the resulting expression.</p>
 <p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>In $(1)$, the notation $\frac{\partial F}{\partial \rho}$ denotes the so-called \textbf{functional derivative} of $F$ to $\rho$, which generalises the \textbf{'gradient' notion for functions}. There exist multiple versions of the functional derivative, mainly because its definition depends on the function space on which $F$ acts. Anyway, the idea is to perturb $\rho$ a bit, i.e. to substitute $\rho \to \rho + \epsilon \phi$ with $0 < \epsilon \ll 1$, and work out the resulting expression. </p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>\bigbreak</p>
-<p></p>
-<p>\underline{Example}: Let $\mathcal{H}=L^2(\RR^n)$, and $F$ such that for $u\in L^2(\RR^n)$:</p>
+<h2 style="margin-left:0px;" id="Example">Example</h2>
+<p>Let $\mathcal{H}=L^2(\mathbb R^n)$, and $F$ such that for $u\in L^2(\mathbb R^n)$:</p>
 <p></p>
 $$
-
 F(u)=\frac{1}{2} \int|\nabla u(x)|^{2} d x
-
 $$
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
 <p></p>
 <p>That is, $F$ is the Dirichlet energy. Then the Heat Equation</p>
 <p></p>
 $$
-
 \partial_{t} u=\nabla^{2} u
-
 $$
 <p></p>
 <p>is the associated gradient flow problem.</p>

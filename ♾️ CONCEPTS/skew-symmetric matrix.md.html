@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Skew-symmetric_matrix">Skew-symmetric matrix</h1>
+$$
+A^T=-A.
+$$
+<p></p>
+<p><b>Remarks</b> (See <a href="https://encyclopediaofmath.org/wiki/Skew-symmetric_matrix)" target="_blank">here</a>:</p>
+<p><ul style="margin-left:0px;"><li>They constitute the Lie algebra of the orthogonal group (see <a href="./orthogonal matrix.md.html">orthogonal matrix</a> and <a href="./SO(3).md.html">SO(3)</a>).</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>The rank of a skew-symmetric matrix is even.</li></ul></p>
+<p><b>Proof</b>. </p>
+<p>Suppose that $A$ is a skew-symmetric matrix of rank $r$ and dimension $n \times n$. Now $r$ could very well be zero, and since zero is an even number, then $A$ has an even rank. So assume instead that $r > 0$. Consequently, we can pick out exactly $r$ rows, say those with the indices $i_1, i_2, ..., i_r$, which span the entire row space. Given that for a skew-symmetric matrix each column is equal to $-1$ times the transpose of the corresponding row, therefore every column of the matrix can be expressed as a linear combination of the columns with indices $i_1, ..., i_r$ in the exact same way that the corresponding row is expressed as a linear combination of the rows with these same indices. We know that if we remove a row/column of a matrix that is in the span of the remaining rows/columns, the rank does not change. Thus, we can remove all the $n - r$ rows and $n - r$ columns remaining and not change the rank. Due to symmetry, every time we remove a row, we remove its corresponding column. This way, we have preserved the structure of the matrix. The resultant submatrix $A'$ has dimensions $r \times r$ and full rank $r$. </p>
+<p></p>
+<p>Suppose for the sake of contradiction that $r$ is odd. We know that $A'^T = -A'$. Then the determinant of this submatrix is </p>
+<p>$$\det(A') = \det(A'^T) = \det(-A') = (-1)^{r} \cdot \det(-A') = -\det(A')$$</p>
+<p></p>
+<p>and therefore $\det(A') = 0$. This contradicts our assumption that $r \neq 0$. Hence, $r$ is an even natural number.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>The non-zero roots of the characteristic polynomial of a real skew-symmetric matrix are purely imaginary numbers.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>A real skew-symmetric matrix is similar to a matrix</li></ul></p>
+$$
+\text{diag}[A_1,A_2,\ldots,A_t,0,0,\ldots]
+$$
+<p>where</p>
+$$
+A_i = \alpha_i \left( \begin{array}{cc} 0 & 1 \\ -1 & 0 \end{array} \right)
+$$
+<p>with $\alpha_i$ real numbers, $i = 1,\ldots,t$. </p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

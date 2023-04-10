@@ -31,22 +31,14 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Symmetry_of_an_exterior_differential_system">Symmetry of an exterior differential system</h1>
-<p>Given a <a href="./exterior differential system.md.html">exterior differential system</a> $\mathcal{I}$ on a manifold $M$, a vector field $X\in \mathfrak{X}(M)$ is called a symmetry of $\mathcal{I}$ if</p>
-$$
-\mathcal{L}_X \omega \in \mathcal{I}
-$$
-<p>for every $\omega\in \mathcal{I}$.</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Operator">Operator</h1>
+<p>In a <a href="./FUNCTIONAL ANALYSIS/normed space.md.html">normed space</a>, an operator is a linear mapping between two normed spaces. More specifically, let $(X, \|\cdot\|_X)$ and $(Y, \|\cdot\|_Y)$ be two normed spaces, an operator $T$ from $X$ to $Y$ is a linear transformation that maps each vector $x$ in $X$ to a vector $T(x)$ in $Y$.</p>
 <p></p>
-<p><b>Remarks</b></p>
-<p>(see <a href="./../Bibliography/@ivey2016cartan.md.html">@ivey2016cartan</a> exercises 6.1.2)</p>
-<p><ul style="margin-left:0px;"><li>Symmetries of an <a href="./exterior differential system.md.html">EDS</a> form a <a href="./GEOMETRY/Lie algebra.md.html">Lie algebra</a>.</li></ul></p>
-<p><ul style="margin-left:0px;"><li>To show that $X$ is a symmetry we only need to check the condition above in a set of form which generate $\mathcal{I}$ differentially (see <a href="./../✏️ THEOREMS/DG/formulas for Lie derivative, exterior derivatives, bracket, interior product.md.html">formulas for Lie derivative, exterior derivatives, bracket, interior product</a>).</li></ul></p>
+<p>An important property of operators in normed spaces is that they preserve the norm of vectors. Specifically, if $T$ is an operator from $X$ to $Y$, then for any vector $x$ in $X$, we have $\|T(x)\|_Y \leq \|T\|\,\|x\|_X$, where $\|T\|$ is the operator norm (<a href="./induced matrix norm.md.html">induced matrix norm</a>) of $T$. The operator norm of $T$ is defined as the supremum of the ratios $\|T(x)\|_Y/\|x\|_X$ over all non-zero vectors $x$ in $X$.</p>
 <p></p>
-<p>A particular case of symmetries is given by the <a href="./Cauchy characteristic vector fields.md.html">Cauchy characteristic vector fields</a>.</p>
+<p>Operators play an important role in functional analysis, where they are used to study linear transformations between normed spaces, such as <a href="./GEOMETRY/differential operator.md.html">differential operator</a>s and integral operators.</p>
 <p></p>
-<p><b>Theorem</b> (Th 2.3.3 Barco thesis). Given an ideal $\mathcal{I}$ and suppose that the <a href="./Cauchy characteristic vector fields.md.html">Cauchy characteristic space</a> $A(\mathcal{I})$ is not the 0 modulus. If a vector field $X$ is a symmetry of $\mathcal{I}$ then it is also a symmetry of the distribution $A(\mathcal{I})$.$\blacksquare$</p>
-<p></p>
+<p>When the operator norm is lesser than 1 it can be applied the <a href="./../✏️ THEOREMS/Banach fixed point theorem.md.html">Banach fixed point theorem</a>, and then 0 is the only fixed point.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
