@@ -31,17 +31,25 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Laplace_equation">Laplace equation</h1>
-<p>It belongs to the <a href="./../⛳️ NON CLASSIFIED/famous equations.md.html">famous equations</a>. </p>
-<p>In the 3D case is</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Conservation_law">Conservation law</h1>
+<p><b>Definition</b>. <a href="./../Bibliography/@olver86.md.html">@olver86</a> section 4.3.</p>
+<p>Consider a <a href="./DEs/system of DEs.md.html">system of DEs</a> $\Delta_{\nu}(x,u^{(n)})=0$. A conservation law is an expression </p>
 $$
-\frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}+\frac{\partial^2 f}{\partial z^2}=0.
+\mbox{Div} P=0
+$$ 
+<p>which vanishes for all solutions $u=f(x)$ of the system. Here $P=(P_1(x,u^{(n)}),\ldots,P_p(x,u^{(n)}))$ is a $p$-tuple of smooth functions and $\mbox{Div}$ is the <a href="./total divergence.md.html">total divergence</a>.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>In the particular case of a <a href="./DEs/system of ODEs.md.html">system of ODEs</a>, where we have only 1 independent variable and $u$ represents functions</p>
 $$
-<p>The operator</p>
+u:x\mapsto (u^1,\ldots,u^q)
+$$a conservation law is of the form $D_x P=0$ for every solution of the system, that is, $P(x,u^{(n)})$ must be constant along solutions. Son in this case a conservation law is nothing but a <a href="./DEs/first integral.md.html#3.a._First_integral_of_a_first_order_ODE_system">first integral of the system</a>. 
+<p></p>
+<p>In case our system of DE arise in a dynamical context, one of the independent variables is the time $t$ and the other $x_1,\ldots,x_p$ are spatial variables. The conservation law is given by</p>
 $$
-\frac{\partial^2 }{\partial x^2}+\frac{\partial^2 }{\partial y^2}+\frac{\partial^2 }{\partial z^2}
+D_t T+\mbox{Div}_{space} X=0
 $$
-<p>is called the <a href="./Laplacian operator.md.html">Laplacian operator</a>. </p>
+<p>The function $T$ is called the conserved density and $X=(X_1,\ldots,X_p)$ are called the associated flux. This is totally related to <a href="./current density and charge density.md.html">current density and charge density</a> . Relate with Example 4.22 in <a href="./../Bibliography/@olver86.md.html">@olver86</a>.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

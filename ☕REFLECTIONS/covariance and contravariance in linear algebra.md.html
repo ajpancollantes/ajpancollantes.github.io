@@ -33,39 +33,41 @@ gtag('config', 'G-LBT9E8N3HS');
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Covariance_and_contravariance_in_linear_algebra">Covariance and contravariance in linear algebra</h1>
 <p></p>
-<p>Let $V$ be a vector space, which we will take to have dimension 3 to simplify things. If we have a base $f=(X_1, X_2, X_3)$ and another base $f'=(Y_1, Y_2, Y_3)$ we can consider a linear map that transforms one into the other. Let $A$ be the matrix of that application with respect to base $f$, that is, the columns of $A$ are the coordinates of each $Y_i$ in base $f$.</p>
-<p>Abusing the language it can be written that:</p>
+<p>Let $V$ be a vector space, which we will take to have dimension 2 to simplify things. Suppose we have a basis $b1=(u_1,u_2)$ and another one $b_2=(v_1,v_2)$, interpreted as in the <a href="./../♾️ CONCEPTS/basis and change of basis.md.html">basis and change of basis</a> note. We can consider that we have two points of view to describe $V$; and on the other hand we can consider that we have a linear map $T$ which transforms one into the other. That is, $b_2=T\circ b_1$.</p>
+<p><img src="./../imagenes/Pasted image 20230412101304.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>We can call $\tilde{T}_1$ to the matrix of the map $T$ with respect to base $b_1$, that is, the columns are the coordinates of each $v_i$ in base $b_1$</p>
 $$
-f'= f \cdot A \tag{1}
+\tilde{T}_1=\begin{pmatrix} 
+3&2\\ 
+-1 &3
+\end{pmatrix}
 $$
-<p>where note that $f$ and $f'$ are row matrices made of vectors (it wouldn't make sense).</p>
-<p>This could be written as columns (for me more usual) without more than doing the transpose:</p>
+<p></p>
+<p>According to <a href="./../♾️ CONCEPTS/basis and change of basis.md.html">basis and change of basis</a>, we have that $\tilde{T}_1=b_1^{-1} \circ T \circ b_1$, and it represents how the transformation is "felt" from the point of view 1. The vector $w=(1,1)$ is transformed into $z=Tw=(5,2)$ in the basis $b_1$, by matrix multiplication with $\begin{pmatrix} 3&2\\ -1 &3\end{pmatrix}$.</p>
+<p></p>
+<p>On the other hand, since we have two basis, we can wonder about how can we translate from the point of view 1 to the point of view 2. That is, we wonder about the transformation $\mathbb R^2 \to \mathbb R^2$ such that for every $z\in V$</p>
 $$
-(f')^t= A^t \cdot f^t
+A:b_1^{-1}(z)\to b_2^{-1}(z)
 $$
-<p>Now, the matrix $A$ is also used to change the coordinates of any vector $v \in V$. Let us denote by $v[f]$ and $v[f']$ respectively the column matrices with the coordinates of $v$ in $f$ and in $f'$. We have always known that the matrix to go from one base to another is made by putting the coordinates of the original base in columns with respect to the new base, and then multiplying column matrices. Thus, our matrix $A$ would serve to pass from base $f'$ to base $f$. Therefore:</p>
+<p>But $A$ is precisely $\tilde{T}_1^{-1}$, since </p>
 $$
-v[f]=A\cdot v[f']
+\tilde{T}_1^{-1} b_1^{-1}(z)=(b_1^{-1} \circ T \circ b_1)^{-1}b_1^{-1}(z)=
 $$
-<p>and conversely:</p>
 $$
-v[f']=A^{-1} \cdot v[f]
+=b_1^{-1}\circ T^{-1} (z)=b_2^{-1}(z)
 $$
-<p>Comparing this expression with $(1)$ we can say that the coordinates of the vectors are transformed in a <b>contravariant</b> way to how the basis vectors themselves do. Be careful, the contravariance implies the transpose of the inverse!</p>
-<p>Now we are going to analyze the coordinates of the covectors, that is, of the elements of the dual space $V^*$. Let $w \in V^*$, with coordinates $w[f^*]$ and $w[f'^*]$ in the respective dual bases of $f$ and $f'$ expressed in columns.</p>
-<p>Let's remember that the coordinates of $w$ in a dual base is nothing more than applying $w$ to the original base. Then:</p>
-$$
-w[f'^*]^t=(w(Y_1), w(Y_2), w(Y_3))= (w(f \cdot A_1), w(f \cdot A_2), w(f \cdot A_3 ))
-$$
-<p>where $A_i$ is the columns of $A$. So that</p>
-$$
-w[f'^*]^t=(w((X_1, X_2, X_3) \cdot A_1), w((X_1, X_2, X_3) \cdot A_2), w((X_1, X_2, X_3) \cdot A_3))=w[f^*]^t \cdot A
-$$
-<p>where from</p>
-$$
-w[f'^*]=A^t \cdot w[f^*]
-$$
-<p>which, by comparison with the expression $(1)$, justifies saying that the covectors change their coordinates in a <b>covariant</b> manner.</p>
+<p>for every $z\in V$.</p>
+<p></p>
+<p>In conclusion, the matrix of $T$ from the point of view of $b_1$ is such that its inverse represents the change of point of view from $b_1$ to $b_2$. This means that "changing my point of view of the world" is the opposite of "changing the world." In this sense, it is said that the coordinates of vectors are <b>contravariant</b>.</p>
+<p></p>
+<p></p>
+<p>Now we are going to analyze the coordinates of the covectors, that is, of the elements of the dual space $V^*$</p>
+<p>...</p>
+<p>... to be completed...</p>
+<p>...</p>
+<p>and so we obtain the same matrix $\tilde{T}_1$, which justifies saying that the covectors change their coordinates in a <b>covariant</b> manner.</p>
+<p></p>
+<p>This can be generalized to any kind of transformations on any space, see <a href="./general covariance and contravariance.md.html">general covariance and contravariance</a>.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

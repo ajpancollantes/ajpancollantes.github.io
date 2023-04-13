@@ -32,69 +32,82 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="General_variance_and_contravariance">General variance and contravariance</h1>
-<p>Suppose that a group $G$ <a href="./../♾️ CONCEPTS/transitive action.md.html">acts transitively</a> on a space $X$. A transformation $p\in G$ can be thought of as "moving" the objects in $X$ or as a change of "point of view" in the following way. </p>
+<p>Suppose that a group $G$ <a href="./../♾️ CONCEPTS/transitive action.md.html">acts transitively</a> on a space $X$. A transformation $T\in G$ can be thought of indistinctly as either "moving" the objects in $X$ or as a change of "point of view" in the following way:</p>
 <p></p>
-<p>Suppose we have a comfortable, mathematically speaking, space with a distinguished point, $(S,s_0)$; and a bijection $\phi:S\to X$ (in the line of reasoning of <a href="./../♾️ CONCEPTS/ALGEBRA/homogeneous space.md.html#Intuitive_approach">homogeneous space#Intuitive approach</a>). That is, for every $x\in X$ we have a kind of "coordinates" $s$ for $x$, given by $s=\phi^{-1}(x)\in S$. Think, for example, of a vector space $V$ and the isomorphism $\phi:V\to \mathbb R^2$ (fixing a basis in $V$). We can think of this as our <b>initial point of view</b>, and we can imagina as if we were located at $x_0=\phi(s_0)\in X$ with some devices to take measurements that let us to create $\phi$ .</p>
-<p><img src="./../imagenes/Pasted image 20230131093423.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Suppose we have a comfortable, mathematically speaking, space with a distinguished point, $(S,s_0)$. We are going to think of $(\mathbb Z,0)$, for easy. Suppose also a bijection $b_1:S\to X$ (in the line of reasoning of the notes <a href="./../♾️ CONCEPTS/ALGEBRA/homogeneous space.md.html#Intuitive_approach">homogeneous space#Intuitive approach</a> and <a href="./../♾️ CONCEPTS/basis and change of basis.md.html">basis and change of basis</a>). It is better to think in terms of $b_1^{-1}$. That is, for every $x\in X$ we have a kind of "coordinates" $s$ for $x$, given by $s=b_1^{-1}(x)\in S$. Think, for example, of a vector space $V$ and the isomorphism $b_1:\mathbb R^2 \to V$ (fixing a basis in $V$). We can think of this as our <b>initial point of view</b>, and we can imagine as if we were located at $x_0=b_1(0)\in X$ with some devices to take measurements that let us to create $b_1$ .</p>
+<p><img src="./../imagenes/Pasted image 20230412110500.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
-<p>An element of the group $g\in G$ is a transformation, a movement, of $X$ into itself. </p>
-<p><img src="./../imagenes/Pasted image 20230131094126.png" style="width:80vw; border-radius: 3px;" ></p>
-<p></p>
-<p>Observe that $g$ induces a new bijection, a new point of view, $\varphi:S\to X$ given by $\varphi=g^{-1}\circ \phi$. On the other hand, observe that any transformation of $S$, $t$, also leads to a new description: $\phi\circ t$. You can think of $t$ as moving myself and my measurement system to a new location, a new observer.</p>
-<p></p>
-<p><b>The key point is</b>: the transformation $g$ has an associated transformation $\tilde{g}:S\to S$ given by $\tilde{g}=\phi^{-1}\circ g\circ \phi$, i.e. induced by the bijection $\phi$. <b>It is impossible to distinguish</b> if the new description $\varphi$ is caused by the transformation $g$ on $X$ or by the transformation $\tilde{g}^{-1}$ on $S$:</p>
+<p>An element of the group $T\in G$ is a transformation, a movement, of $X$ into itself. </p>
+<p><img src="./../imagenes/Pasted image 20230413091637.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>The world description given by $b_1$ let us define a map in $\mathbb Z$ given by $\tilde{T}_1=b_1^{-1}\circ T \circ b_1\equiv +6$</p>
 $$
-\varphi=g^{-1}\circ \phi=(\phi \tilde{g}^{-1}\phi^{-1})\circ\phi=\phi\circ \tilde{g}^{-1}
-$$
-<p>That is to say, it is the same thing to move "the world" while I remain fixed than to move myself in the opposite direction while I leave the world fixed.</p>
-<p></p>
-<h2 style="margin-left:0px;" id="Example_in_Linear_Algebra">Example in Linear Algebra</h2>
-<p>In the context of <a href="./../⛳️ NON CLASSIFIED/Linear Algebra.md.html">Linear Algebra</a> and <a href="./../♾️ CONCEPTS/basis and change of basis.md.html">basis and change of basis</a>, consider the vector space $\mathbb{R}^2$ with the standard basis $\mathcal{C}$. Consider also the alternative basis $\mathcal B$ given by $v_1=(-1,2),v_2=(3,4)$. If we have a vector $w$ with coordinates in this new basis $(1,7)_{\mathcal B}$ we can compute its coordinates in $\mathcal C$ by multiplication with the matrix $A=\begin{pmatrix}-1 & 3\\ 2 & 4 \\ \end{pmatrix}$, as it is well known. But we can interpret this in the context above:</p>
-<p><ul style="margin-left:0px;"><li>$X$, the landscape, is $\mathbb R^2$.</li></ul></p>
-<p><ul style="margin-left:0px;"><li>$S$, me and my devices, is also $\mathbb R^2$.</li></ul></p>
-<p><ul style="margin-left:0px;"><li>$\phi$ is the identity.</li></ul></p>
-<p><ul style="margin-left:0px;"><li>The matrix $A$ is a transformation of $S$ into $S$, and it corresponds to $\tilde{g}^{-1}$, since it change the observer (me with the canonical basis $\mathcal C$) to a new observer (me with the basis $\mathcal B$).</li></ul></p>
-<p><ul style="margin-left:0px;"><li>The vector $w$ has coordinates $(1,7)$ in the new description, and this is reflected by $\varphi^{-1}(w)=(1,7)$. The initial description of $w$ should be $\phi^{-1}(w)$. But $w=\varphi(1,7)$ so</li></ul></p>
-$$
-\phi^{-1}(w)=\phi^{-1}(\varphi(1,7))=\phi^{-1}\circ\phi\circ\tilde{g}^{-1}(1,7)=
-$$
-$$
-=\begin{pmatrix}-1 & 3\\ 2 & 4 \\ \end{pmatrix}\cdot \begin{pmatrix}1\\7\\ \end{pmatrix}
-$$
-<p>Compared with my pictures above: if I shift my measurement system by -2, and I tell you that the tree is now at position 7, you can recover the position of the tree at the initial description by applying the same shift, 7-2=5.</p>
-<p></p>
-<h2 style="margin-left:0px;" id="Behavior_of_functions">Behavior of functions</h2>
-<p>Suppose a function $f:X\to \mathbb R$ (in the pictures above think of the "height" of every object). The description given by $\phi$ let us create a "more comfortable" function $F_1:S\to \mathbb R$ given by $F_1=f\circ \phi$, encoding the same data</p>
-$$
-\begin{array}{ccc}
-X &\stackrel{f}{\longrightarrow} & \mathbb R\\
-\phi\uparrow & &\\
-S&&\\
+\begin{array}{cccc}
+\tilde{T}_1:& \mathbb Z &\to &\mathbb Z\\
+&0&\mapsto&6\\
+&3&\mapsto&9\\
+&&...&
 \end{array}
 $$
-<p>Consider a transformation $g$ of $X$ (think of a shift of +2, por example, in the picture above). The visual effect corresponds to translate the picture two units right with respect to the scale space $S$. What is the new comfortable description of $f$ with the new description of $X$? Well, the new description of $X$ is $\varphi=g^{-1}\circ \phi$, so the new comfortable function is </p>
+<p></p>
+<p>Now, think that we ourselves have been shifted, so we can consider that we have a new point of view $b_2$ of the world before the transformation. That is, <b>the point of view 2 is how the red drawings is seen from the purple person</b>. This new point of view satisfies $b_2=T\circ b_1$, or $b_2^{-1}=b_1^{-1}\circ T^{-1}$, if you want:</p>
+<p><img src="./../imagenes/Pasted image 20230412112101.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Also, $b_2=b_1\circ \tilde{T}_1$.</p>
+<p></p>
+<p>The translation of point of view is a map $f$ such that</p>
 $$
-F_2=f\circ \varphi=f\circ g^{-1} \circ \phi=F_1\circ \phi^{-1}\circ g^{-1} \circ \phi
+b_2^{-1}(\text{something})=f\circ b_1^{-1}(\text{something})
+$$
+<p>Therefore $f=\tilde{T}_1^{-1}$ since</p>
+$$
+f=b_2^{-1}\circ b_1=
+$$
+$$
+=b_1^{-1}\circ T^{-1}\circ b_1=\tilde{T}_1^{-1}\equiv -6
+$$
+<p></p>
+<p>So it turns out that to translate from point of view 2 to point of view 1 you have to substract 6 units, while the change itself has been produced by adding 6 units to the observer.It is impossible to distinguish whether the new description $b_2^{-1}$ is caused by the world moving or by myself moving in the opposite direction.</p>
+<p>Since the change of the "components" is opposite to the "transformation", it is said the the components are contravariant.</p>
+<p></p>
+<p>Very important example: <a href="./covariance and contravariance in linear algebra.md.html">covariance and contravariance in linear algebra</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Behavior_of_functions">Behavior of functions</h2>
+<p>Suppose a function $h:X\to \mathbb R$ (in the pictures above think of the "height" of every object). The description given by $b_1$ let us create a "more comfortable" function $F_1:\mathbb Z\to \mathbb R$ given by $F_1=h\circ b_1$, encoding the same data as in the diagram </p>
+$$
+\begin{array}{ccc}
+X &\stackrel{h}{\longrightarrow} & \mathbb R\\
+b_1\Big\uparrow & &\\
+\mathbb Z&&\\
+\end{array}
+$$
+<p>Consider a transformation $T$ of $X$ (think of a shift of +6, por example, in the picture above). What is the new comfortable description $F_2$ of $h$ with the new description $b_2$ of $X$? Since $b_2$ is the red drawings as seen by the purple person, it correspond to shift the graph by 6 units to the left:</p>
+<p><img src="./../imagenes/Pasted image 20230413090807.png" style="width:49vw; border-radius: 3px;" ></p>
+<p>Analytically, the new description of $X$ is $b_2=T\circ b_1$, </p>
+$$
+\begin{array}{ccc}
+\mathbb R&&\mathbb R\\
+h\Big\uparrow & &h\Big\uparrow \\
+X &\stackrel{T}{\longrightarrow} & X\\
+b_1\Big\uparrow & &\\
+\mathbb Z&&\\
+\end{array}
+$$
+<p>so the new comfortable function is </p>
+$$
+F_2=h\circ b_2=h\circ T \circ b_1=h\circ b_1 \circ b_1^{-1}\circ T \circ b_1=
 $$
 <p>and</p>
 $$
-F_2=F_1\circ \tilde{g}^{-1}
+=F_1\circ \tilde{T}_1
 $$
-<p>So the new description of $f$ is obtained by a shift of -2 in the space $S$. This correspond to the elemental fact in high school mathematics that to shift the graph of a function $f(x)$ an amount of $a$ units you write $f(x-a)$.</p>
+<p>So if, for example, $F_1(x)=x^2+1$ then $F_2(x)=(x+6)^2+1$. Observe then that this correspond to the elemental fact in high school mathematics that to shift the graph of a function f(x) by $a$ units you have to substitute $f$ by $f(x−a)$.</p>
 <p></p>
-<p>On the other hand, there is also another approach. Observe that</p>
+<p>On the other hand, we may be interested in the implicit description of subsets of $X$. How does the zero set of functions transform under $T$?</p>
+<p>Consider $C=\{h(x)=0\}$, the zero set of $h$. The transformation $T$ moves the set $C$ to the set $T (C)$. Since $y\in T(C)$ if and only if there exists $y'\in C$ such that $y=T(y')$, with $h(y')=0$. Then, $h(T^{-1}(y))=0$, and therefore</p>
 $$
-F_2=f\circ \varphi=f\circ g^{-1} \circ \phi$$
+T(C)=\{x\in X: (h\circ T^{-1})(x)=0\}
 $$
-=(f\circ g^{-1}) \circ \phi,
-$$
-<p>so $F_2$ is also the "comfortable description" in the first "point of view" of another function, not $f$ but a transformed one: $f\circ g^{-1}$. What is this new function?</p>
-<p>Consider the set $C=\{f(x)=0\}$, the zero set of $f$. The transformation $g$ moves the set $C$ to the set $g C$. Since $y\in gC$ if and only if there exists $y'\in C$ such that $y=g(y')$, with $f(y')=0$. Then, $f(g^{-1}(y))=0$, and therefore</p>
-$$
-gC=\{x\in X: (f\circ g^{-1})=0\}
-$$
-<p>i.e. the transformed function $f\circ g^{-1}$ is just the function such that its zero set is the transformed of the zero set of $f$.</p>
-<p><img src="./../imagenes/Pasted image 20230201085403.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>i.e. the transformed function $h\circ T^{-1}$ is just the function such that its zero set is the transformed of the zero set of $h$. If we had started with $T^{-1}$ instead of $T$ we have arrived at the conclusion that $h\circ T$ is the function whose zeroes are the translated by $T^{-1}$, and then the function $F_2=h \circ b_2=(h\circ T) \circ b_1$ have an interpretation different than above: is the description, in the first point of view, of the implicit function of the translation of $C$ by $T^{-1}$.</p>
+<p><img src="./../imagenes/Pasted image 20230413161739.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
 <p>Particular cases:</p>
 <p><ul style="margin-left:0px;"><li><a href="./covariance and contravariance in linear algebra.md.html">covariance and contravariance in linear algebra</a></li></ul></p>
