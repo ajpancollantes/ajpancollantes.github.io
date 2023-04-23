@@ -36,18 +36,18 @@ gtag('config', 'G-LBT9E8N3HS');
 <p></p>
 <p>Since they preserve the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a> they satisfy the <a href="./DEs/prolongation formula for vector fields.md.html">prolongation formula</a>, so they can be written as</p>
 $$
-V=\phi_{\alpha} \partial_{u^{\alpha}}+\sum_{i,\sigma}(D_\sigma\phi_{\alpha})\frac{\partial}{\partial u^{\alpha}_\sigma}.
+V= Q_{\alpha} \partial_{u^{\alpha}}+\sum_{i,\sigma}(D_\sigma Q_{\alpha})\frac{\partial}{\partial u^{\alpha}_\sigma}.
 $$
-<p>Here $D_\sigma$ is the composition of total derivatives corresponding to the multi-index $\sigma$, and $\{\phi_{\alpha}\}$ is a smooth map usually called <a href="./DEs/generating function.md.html">generating function</a>.</p>
+<p>Here $D_\sigma$ is the composition of total derivatives corresponding to the multi-index $\sigma$, and $\{ Q_{\alpha}\}$ is a smooth map usually called <a href="./DEs/generating function.md.html">generating function</a>.</p>
 <p></p>
 <p>Consider a section $s:M\to E$ of the original bundle. It can be <a href="./GEOMETRY/prolongation of a section.md.html">prolonged</a> to a section $\tilde{s}:M\to J^{\infty}(E)$. The obtained section represents the original section together with "all its derivatives", and it is tangent to the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>. Since $V$ preserves this distribution, the flow of $V$, let's call it $\tilde{\theta}_t$, sends $\tilde{s}$ to another section $\tilde{r}_t$ also tangent to <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>, so we can consider that it comes from a section $r_t:M\to E$.</p>
 <p></p>
-<p>How can we interpret this?</p>
+<p><b>How can we interpret this?</b></p>
 <p>For simplicity, suppose $E=\mathbb R \times \mathbb R$ is a trivial bundle, and sections $s:M\to E$ are identified with smooth functions $f:\mathbb R \to \mathbb R$.  In this case an evolutionary vector field as the form</p>
 $$
-V=\phi {\partial u}+D_x(\phi) {\partial u_{1}}+\cdots
+V= Q {\partial u}+D_x( Q) {\partial u_{1}}+\cdots
 $$
-<p>with $\phi(x,u,u_1,\ldots,u_m)$ a smooth function for certain integer $m$. </p>
+<p>with $Q(x,u,u_1,\ldots,u_m)$ a smooth function on $J^m$ for certain integer $m$ (a <a href="./differential function.md.html">differential function</a>). </p>
 <p>In this context the section $\tilde{s}$ is identified with $(x,f(x),f'(x),f''(x),\ldots)$. Observe that the flow $\tilde{\theta}_t$ is, by definition,</p>
 $$
 \tilde{r}_t=\tilde{\theta}_t \circ \tilde{s}\equiv(x,g_t(x),g_t'(x),g_t''(x),\ldots)
@@ -57,18 +57,23 @@ $$
 \frac{d}{dt}|_{t=0} x=0,
 $$
 $$
-\frac{d}{dt}|_{t=0} g_t(x)=\phi(x,f(x),f'(x),\ldots,f^{m)(x)}), \tag{*}
+\frac{d}{dt}|_{t=0} g_t(x)= Q(x,f(x),f'(x),\ldots,f^{m)(x)}), \tag{*}
 $$
 $$
-\frac{d}{dt}|_{t=0} g'_t(x)=D_x\phi(x,f(x),f'(x),\ldots,f^{m)(x)}),
-$$
-<p>But all this equations are satisfied if $(*)$ is satisfied, as it can be checked.</p>
-<p>In conclusion, an evolutionary vector field is identified a functions $\phi$. If you think of $f$ as a point in an infinite-dimensional space, $\phi$ is like a tangent direction to flow this point. The flow is obtained by solving the <a href="./evolution equations.md.html">evolution equation</a> </p>
-$$
-\frac{d}{dt}h(x,t)=\phi(x,h,\frac{\partial h}{\partial x},\ldots,\frac{\partial^m h}{\partial^m x}),
+\frac{d}{dt}|_{t=0} g'_t(x)=D_x Q(x,f(x),f'(x),\ldots,f^{m)(x)}),
 $$
 $$
-h(x,0)=f(x).
+...
+$$
+<p>But all this equations are satisfied if and only if $(*)$ is satisfied, as it can be checked.</p>
+<p>In conclusion, an evolutionary vector field is identified a functions $Q$. If you think of $f$ as a point in an infinite-dimensional space, $Q$ is like a tangent direction to flow this point. The flow is obtained by solving the <a href="./evolution equations.md.html">evolution equation</a> </p>
+$$
+\left\{
+\begin{array}{l}
+\dfrac{\partial}{\partial t}h(x,t)= Q(x,h,\frac{\partial h}{\partial x},\ldots,\frac{\partial^m h}{\partial^m x}),\\
+h(x,0)=f(x)
+\end{array}
+\right .
 $$
 <p>________________________________________</p>
 <p>________________________________________</p>

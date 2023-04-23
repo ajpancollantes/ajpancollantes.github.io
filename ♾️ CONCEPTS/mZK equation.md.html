@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="mZK_equation">mZK equation</h1>
+<p>Maple 085. </p>
+<p><a href="https://www.researchgate.net/publication/369532256_New_soliton_solutions_of_the_mZK_equation_and_the_Gerdjikov-Ivanov_equation_by_employing_the_double_G'G_1G_-expansion_method" target="_blank">Paper de referencia</a></p>
+<p></p>
+<p>Encuentro cinf-structure siguiendo la determining equation, y la uso para encontrar una familia uniparamétrica ($C_3=C_2=0$) de travelling waves. Usar la que he llamado "modif" en el fichero maple. Incluyen al caso 1 y 2 del paper de arriba. Dependen de todos los parámetros de la ecuación, de la $c$ y de $C_1$, luego respecto de la PDE constituyen una familia biparamétrica</p>
+<p></p>
+<p>Con Lie, forzando a Maple a hacer la integral y a simplificar, se llega a lo mismo</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Las_soluciones_del_paper">Las soluciones del paper</h3>
+<p><b>Caso 1</b></p>
+<p>Si en mi familia tomamos $c=- \lambda (M+N)$ y </p>
+<p><img src="./../imagenes/Pasted image 20230423184915.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>entonces sale el caso 1 del paper.</p>
+<p></p>
+<p><b>Caso 2</b></p>
+<p>Si en mi familia tomamos $c=-\frac{A^2}{6B}$ y </p>
+<p><img src="./../imagenes/Pasted image 20230423185159.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>sale el caso 2 de ellos. Observese que son valores complejos para $C_1$ en ambos casos...</p>
+<p></p>
+<p></p>
+<p><b>Caso 3</b></p>
+<p>Fijando $c=-\frac{3 A^2}{16 B}$ de antemano, podemos llegar a una familia de soluciones que solamente es válida para este valor de $c$. Es independiente de la otra familia, pues es $C_3=-\frac{9 A^4}{1024 B^3 (M+N)}$. Sería $F=$</p>
+<p><img src="./../imagenes/Pasted image 20230423185648.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Tomando $C_1=0$ sale el caso 3 de ellos</p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Otra_familia_no_invertible">Otra familia no invertible</h3>
+<p>Encuentro otra familia uniparamétrica, despejando $v_1$ en vez de $v_2$ en la $I_3$, pero no sé invertirla (es decir, encuentro $r(v)$). A esto creo que no se llega con Lie</p>
+<p><img src="./../imagenes/Pasted image 20230423190656.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Expresión_general_de_las_travelling_wave">Expresión general de las travelling wave</h3>
+<p>La solución general (su inversa) se puede expresar con las raíces de un polinomio de grado 4. A esto se llegaría también usando Lie...</p>
+<p><img src="./../imagenes/Pasted image 20230423190954.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>El polinomio es el que aparece dentro de la raíz cuadrada en el denominador</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -32,50 +32,38 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Exponential_map">Exponential map</h1>
-<h2 style="margin-left:0px;" id="Motivation_old_version,_delete?">Motivation (old version, delete?)</h2>
-<p>Let $G$ be a group acting over a manifold $X$. Let $V \in T_e G$ and $n\in \mathbb{N}$. Then, since $e+\frac{1}{n} V \notin G$, for $p \in X$ we can not define:</p>
-$$
-q=p \cdot (e+\frac{1}{n} V)
-$$
-<p>But if we take $n$ big enough we can take a blind eye. Let's apply such transformation several times, say $\lambda\cdot n$ times, to get a new transformation.</p>
-$$
-q=p \cdot (e+\frac{1}{n} V)\cdot (e+\frac{1}{n} V)\cdot (e+\frac{1}{n} V)\cdot \ldots=p\cdot (e+\frac{1}{n} V)^{\lambda\cdot n}
-$$
-<p><img src="./../../imagenes/exponoentialmap.jpg" style="width:30vw; border-radius: 3px;" ></p>
 <p></p>
-<p>As we has said, this is not actually defined. But if we take limit in the expression above:</p>
-$$
-q=\lim _{n\rightarrow + \infty} [ p\cdot (e+\frac{1}{n} V)^{\lambda\cdot n}]
-$$
-<p>it could be something real.</p>
-<p></p>
-<p>Because of the form of this expression, we can identify:</p>
-$$
-q=p\cdot e^{\lambda\cdot V}
-$$
-<h2 style="margin-left:0px;" id="Motivation_new_version">Motivation (new version)</h2>
-<p>See [Xournal_134].</p>
+<h2 style="margin-left:0px;" id="Motivation">Motivation</h2>
+<p>See xournal_134.</p>
 <p>Given a manifold $M$ we can think of a "procedure" that takes a point $p\in M$, a real number $t\in \mathbb{R}$ and a vector field $X$ on $M$ and returns a new point of $M$, working at this way: </p>
-<p>1. we start at $p$ and move a little along $X_p$. That is, we compute $q_1=p+X_p/10$. </p>
-<p>2. we move a little from $q_1$ along the direction of $X_{q_1}$, that is, we compute $q_2=q_1+X_{q_2}/10$.</p>
+<p>1. we start at $p$ and move a little along $X_p$. That is, we compute $q_1=p+tX_p/10$. This is obviously not defined, but we take a blind eye. Also, we denote it by $q_1=p(Id+tX/10)$. This notation is justified because $X$ is, loosely speaking, an element of the Lie algebra of $\text{Dif}(M)$ so we can think of $Id+tX/10$ as an element of $\text{Dif}(M)$ near to $Id$.</p>
+<p>2. we move a little from $q_1$ along the direction of $X_{q_1}$, that is, we compute $q_2=q_1+tX_{q_1}/10=q_1(Id+tX/10)$.</p>
 <p>3. We finish after 10 steps.</p>
 <p></p>
-<p>Of course, we have better precision if we do this in more steps. In the limit (steps $\to \infty$) we would obtain the true output that we will denote by</p>
+<p>Observe that, abusing of notation,</p>
 $$
-q=pe^{tX}
+q\approx q_{10}=q_9(Id+tX/10)=q_8(Id+tX/10)^2=
 $$
-<p>and is nothing but the <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">flow</a> of $X$. See also <a href="./../Lie algebra action.md.html">Lie algebra action</a>.</p>
+$$
+=p(Id+tX/10)^{10}
+$$
+<p>Of course, we have had better precision if we do this in more steps. In the limit (steps $\to \infty$) we would obtain the true output that we will denote by</p>
+$$
+q=p \lim_{n\to \infty}(Id+tX/n)^{n} \equiv pe^{tX}
+$$
+<p>and is nothing but the <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">flow</a> of $X$. See also <a href="./../Lie algebra action.md.html">Lie algebra action</a>. And <a href="./../Lie series.md.html">Lie series</a>.</p>
 <p><img src="./../../imagenes/Pasted image 20220212092330.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
-<p>This is a very general construction. What has to do with the usual exponential and, moreover, with the number $e$?</p>
-<p>Suppose the manifold $M=\mathbb{R}$ and the vector field given in the canonical coordinates by $X_x=x$.</p>
+<p>This is a very general construction, which <b>allows you to find curves with a prescribed velocity</b>. </p>
+<p></p>
+<p>What has to do with the usual exponential and, moreover, with the number $e$? Suppose the manifold $M=\mathbb{R}$ and the vector field $X$ given in the canonical coordinates by $X_x=x$.</p>
 <p><img src="./../../imagenes/Pasted image 20220212092648.png" style="width:80vw; border-radius: 3px;" ></p>
 <p>Then the number $e$ appears when we move from 1 a time 1 by means of that particular vector field. </p>
-<p></p>
+<p>That is, if you consider a curve $\alpha: \mathbb{R} \to \mathbb{R}$ such that $\alpha(0)=1$ and its velocity at $x$ is precisely $x$, then at time $t=1$ you will have arrived to position $e$.</p>
 <p></p>
 <p></p>
 <h2 style="margin-left:0px;" id="Formal_definition">Formal definition</h2>
-<p>But, <b>what is $e^{\lambda\cdot V}$ in reality?</b> (watch out, not to mistake this $e$ with the identity $e\in G$).  </p>
+<p>Consider a <a href="./../Lie group.md.html">Lie group</a> $G$, and an element $v$ in the <a href="./Lie algebra.md.html">Lie algebra</a> $\mathfrak{g}$. <b>What is $e^{\lambda\cdot v}$ in reality?</b> </p>
 <p>Let us observe that, when we consider $G$ acting on itself, every vector $v\in \mathfrak{g}=T_e G$ gives rise to a left invariant vector field $V$ associated to $v$:</p>
 $$
 V_g=d(L_g)_e(v)
@@ -147,8 +135,7 @@ $$
 <p>If ${G}$ is a compact connected Lie group, then the exponential map is surjective. </p>
 <p></p>
 <p><b>Proof</b></p>
-<p>The proof is not trivial. Ver aquí:</p>
-<p></p>
+<p>The proof is not trivial. See here:</p>
 <p><a href="https://terrytao.wordpress.com/2011/06/25/two-small-facts-about-lie-groups/" target="_blank">https://terrytao.wordpress.com/2011/06/25/two-small-facts-about-lie-groups/</a></p>
 <p>________________________________________</p>
 <p>________________________________________</p>

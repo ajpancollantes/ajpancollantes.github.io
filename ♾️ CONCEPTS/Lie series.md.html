@@ -31,16 +31,41 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Parallel_curves">Parallel curves</h1>
-<p>See <a href="https://planetmath.org/parallelcurve" target="_blank">planetmath</a>.</p>
-<p>Given two curves, one is a parallel curve (also known as an offset curve) of the other if the points on the first curve are equidistant to the corresponding points in the direction of the second curve’s normal. Alternatively, a parallel of a curve can be defined as the envelope of congruent circles whose centres lie on the curve.</p>
-<p></p>
-<p>For a parametric curve in the plane defined by  $F(u):=(x(u),y(u))$,  its parallel curve  $G(u):=(X(u),Y(u))$  with offset $t$ is defined by</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Lie_series">Lie series</h1>
+<p>It is a generalization of Taylor series. See <a href="./../Bibliography/@olver86.md.html">@olver86</a> page 30.</p>
+<p>In the context of the note <a href="./GEOMETRY/exponential map.md.html#Motivation">exponential map#Motivation</a>, we have that a vector field $X$ on a manifold $M$ gives rise to a flow in the sense that for a point $p\in M$ and a fixed "time" $t$ we obtain a point $q$ given by</p>
 $$
-\begin{array}{l}
-X(u)=x(u)+\frac{t y^{\prime}(u)}{\sqrt{x^{\prime}(u)^{2}+y^{\prime}(u)^{2}}} \\
-Y(u)=y(u)-\frac{t x^{\prime}(u)}{\sqrt{x^{\prime}(u)^{2}+y^{\prime}(u)^{2}}}
-\end{array}
+q=pe^{tX}=p\lim_{n\to \infty}(Id+tX/n)^{n}.
+$$
+<p>The velocities of this curves are precisely $X$.</p>
+<p>Now, given a smooth function $F$ defined on $M$, we observe that if $X=\sum \xi_i\partial_{x_i}$</p>
+$$
+\dfrac{d}{dt}F(pe^{tX})=\sum_{i=1}^n \partial_{x_i}F(pe^{tX})\cdot \xi_i(pe^{tX})
+$$
+<p>and for $t=0$</p>
+$$
+\left.\dfrac{d}{dt}\right|_{t=0} F(pe^{tX})=\sum_{i=1}^n \partial_{x_i}F(p)\cdot \xi_i(p)=X(F)(p).
+$$
+<p>This can be written in another way, according to Taylor</p>
+$$
+F(pe^{tX})\approx F(p)+tX(F)(p)
+$$ and, moreover,
+$$
+F(pe^{tX})\approx F(p)+tX(F)(p)+\frac{t^2}{2}X^2(F)(p)+\frac{t^3}{3!}X^3(F)(p)+\cdots
+$$
+<p>where $X^k(F)=X(X(\cdots(F)))$.</p>
+<p></p>
+<p>This expression is called Lie series.</p>
+<p></p>
+<p>If we take $F=(x_1,\ldots,x_n)$ the coordinate functions, then </p>
+$$
+pe^{tX}=p+t\xi(p)+\frac{t^2}{2}X(\xi)(p)+\frac{t^3}{3!}X(X(\xi))(p)+\cdots \tag{*}
+$$
+<p>where $\xi=(\xi_1,\ldots,\xi_n)$ and $X(\xi)=(X(\xi_1),\ldots,X(\xi_n))$ and so on.</p>
+<p></p>
+<p>In this sense, expression $(*)$ is a formal power series solution to the <a href="./DEs/system of first order ODEs.md.html">system of first order ODEs</a></p>
+$$
+\dot{x}=X(x).
 $$
 <p>________________________________________</p>
 <p>________________________________________</p>
