@@ -32,26 +32,50 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="mZK_equation">mZK equation</h1>
+<p></p>
+<h3 style="margin-left:0px;" id="Background">Background</h3>
+<p></p>
+<p>Copiado de <a href="https://www.researchgate.net/publication/369532256_New_soliton_solutions_of_the_mZK_equation_and_the_Gerdjikov-Ivanov_equation_by_employing_the_double_G'G_1G_-expansion_method" target="_blank">1</a>:</p>
+<p></p>
+<p>The Zakharov-Kuznetsov (ZK) equation is a mathematical model used to study the behavior of weakly nonlinear ion-acoustic waves in the presence of a uniform magnetic field. The equation describes the interaction between hot isothermal electrons and cold ions and can also be applied in the analysis of the generalized stationary Gardner equation.</p>
+<p></p>
+<p>Copiado de <a href="https://www.sciencedirect.com/science/article/pii/S2468013321001340" target="_blank">Este</a>:</p>
+<p>Kuznetsov together with Zakharov [10] presented the equation</p>
+$$
+u_t+u u_x+\nabla^2 u_x=0 \tag{2}
+$$
+<p>which recounts the progression of the infirmly nonlinear ion with acoustic waves within a plasma comprising hot plutonic electrons alongside cold ions in the attendance of an unvarying magnetic field pushed in the direction of -axis. Eq. (2) also emerged in sundry other fields in science counting, optical fibre, geochemistry, as well as physics in solid states [11], [12], [13], [14]. This type of equation is found out to govern diverse as well as varieties of physical phenomena, in the purely dispersive limit, thus including the Rossby waves in a rotating atmosphere [15], long waves subsisting on a thin liquid film [16], as well as the isolated vortex of drift waves in a plasma that is three-dimensional [17]. Shivamoggi in Shivamoggi [18] dispensed a detailed discourse which brought to play the analytical features of (2). Besides, Nawaz et al. [19] instituted pertinent solutions to the ZK equations which possess full nonlinear dispersion property via the homotopy analysis approach.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Papers_que_he_encontrado">Papers que he encontrado</h3>
 <p>Maple 085. </p>
 <p><a href="https://www.researchgate.net/publication/369532256_New_soliton_solutions_of_the_mZK_equation_and_the_Gerdjikov-Ivanov_equation_by_employing_the_double_G'G_1G_-expansion_method" target="_blank">Paper de referencia</a></p>
+<p></p>
+<p>Otra paper que habla de la misma es <a href="https://www.sciencedirect.com/science/article/pii/S0960077920301119" target="_blank">este</a>. Pero no es exactamente la misma eq.</p>
+<p></p>
+<p>En este <a href="https://www.hindawi.com/journals/jmath/2022/5224289/" target="_blank">otro paper</a> sale una parecida, pero no igual.</p>
+<p></p>
+<p>En <a href="https://arxiv.org/pdf/2011.01028.pdf" target="_blank">este otro</a> parece que nos acercamos un poco más, porque sale término de segundo grado.</p>
+<p></p>
+<p>Aquí <a href="https://www.hindawi.com/journals/amp/2023/3965804/" target="_blank">ya por fin</a> sale la misma, pero con coeficientes variables. Buena revista. <a href="https://www.sciencedirect.com/science/article/pii/S2468013321001340" target="_blank">Este</a> también y con coeficientes constantes!! También con coeficientes constantes en <a href="https://link.springer.com/content/pdf/10.1186/s13660-017-1587-5.pdf" target="_blank">este</a>.</p>
+<p></p>
 <p></p>
 <p>Encuentro cinf-structure siguiendo la determining equation, y la uso para encontrar dos familias uniparamétricas ($C_3=C_2=0$) de travelling waves. </p>
 <p></p>
 <p></p>
 <p>Por una parte, usando la $I_1$ que he llamado "I1modifsimple" en el fichero maple. Incluyen al caso 1. Dependen de todos los parámetros de la ecuación, de la $c$ y de $C_1$, luego respecto de la PDE constituyen una familia biparamétrica:</p>
 <p><img src="./../imagenes/Pasted image 20230424091521.png" style="width:80vw; border-radius: 3px;" ></p>
-<p></p>
+<p>En la nueva nomenclatura es sol4 (con C1/sqrt(c)). Es la misma que sol 1 con otra C1.</p>
 <p>Con Lie, forzando a Maple a hacer la integral y a simplificar, se llega a lo mismo</p>
 <p></p>
 <p>Por otra parte, usando la $I_1$ que he llamado "I1simple" obtengo "solsimple", que tras eliminar el número imaginario obtengo "soluc":</p>
 <p><img src="./../imagenes/Pasted image 20230424165830.png" style="width:80vw; border-radius: 3px;" ></p>
-<p></p>
+<p>En la nueva nomenclatura es sol2 o sol2correg (con C1/sqrt(c)).</p>
 <p>Puede que solmodifsimple y soluc sean la misma familia, pero tomando valores complejos para $C_1$.</p>
 <p></p>
 <h3 style="margin-left:0px;" id="Las_soluciones_del_paper">Las soluciones del paper</h3>
 <p><b>Caso 1</b></p>
 <p>Si en mi familia solmodifsimple tomamos $c=- \lambda (M+N)$ y </p>
-<p><img src="./../imagenes/Pasted image 20230424091638.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><img src="./../imagenes/Pasted image 20230424091638.png" style="width:43vw; border-radius: 3px;" ></p>
 <p>entonces sale el caso 1 del paper. </p>
 <p></p>
 <p></p>
@@ -59,7 +83,7 @@ gtag('config', 'G-LBT9E8N3HS');
 <p><b>Caso 2</b></p>
 <p>Asumimos, como ellos $B(M+N)<0$. </p>
 <p>Si en mi familia solsimple tomamos $c=-\frac{A^2}{6B}$ y </p>
-<p><img src="./../imagenes/Pasted image 20230424170243.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><img src="./../imagenes/Pasted image 20230424170243.png" style="width:24vw; border-radius: 3px;" ></p>
 <p>sale el caso 2 de ellos.</p>
 <p></p>
 <p></p>

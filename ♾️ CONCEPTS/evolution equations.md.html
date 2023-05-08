@@ -38,7 +38,8 @@ gtag('config', 'G-LBT9E8N3HS');
 <p>Here, the dot denotes a time derivative, $u(t) \in X$ is the state of the system at time $t$, and $f$ is a given vector field on $X$. The space $X$ is the state space of the system; a point in $X$ specifies the instantaneous state of the system. We will assume that $X$ is a <a href="./FUNCTIONAL ANALYSIS/Banach space.md.html">Banach space</a>. When $X$ is finite dimensional, the evolution equation is a <a href="./DEs/system of ODEs.md.html">system of ODEs</a>. </p>
 <p></p>
 <h2 style="margin-left:0px;" id="Infinite_dimensional_case">Infinite dimensional case</h2>
-<p>On the other hand, <a href="./PDE.md.html">PDE</a>s can be regarded as evolution equations on an infinite dimensional state space $X$ (see example in <a href="./../⛳️ NON CLASSIFIED/Classical Field Theory.md.html">Classical Field Theory</a>). The solution $u(x,t)$ belongs to a function space in $x$ at each instant of time $t$. In the finite dimensional case $f$ has a finite number of entries $u^1, u^2, \cdots,u^{n}$ but, how do we deal with the case of infinite entries for a function $f$? Think that the index $i$ in $u^i$ is substituted by $x$ in $u(x)$. The problem in general would be intractable: how do we write infinite relations between $u(1,t),u(2,t),u(3,t),u(8.23,t),\ldots$? But we restring to special cases of relations between the "components" $u(x)$, or better said, special patterns: the derivatives of $u$ respect to $x$. For example, $u_t=u_x$ would play the role of an infinite collection of expressions analogous to $\frac{d}{dt}u^i=u^{i+1}-u^i$... See xournal_210.</p>
+<p>On the other hand, <a href="./PDE.md.html">PDE</a>s can be regarded as evolution equations on an infinite dimensional state space $X$ (see example in <a href="./../⛳️ NON CLASSIFIED/Classical Field Theory.md.html">Classical Field Theory</a>). The solution $u(x,t)$ belongs to a function space in $x$ at each instant of time $t$. In the finite dimensional case $f$ has a finite number of entries $u^1, u^2, \cdots,u^{n}$ but, how do we deal with the case of infinite entries for a function $f$? Think that the index $i$ in $u^i$ is substituted by $x$ in $u(x)$. The problem in general would be intractable: <b>how do we write infinite relations</b> between $u(1,t),u(2,t),u(3,t),u(8.23,t),\ldots$? </p>
+<p>But we can restring to special cases of relations between the "components" $u(x)$, or better said, <b>special patterns</b>: the derivatives of $u$ respect to $x$. For example, $u_t=u_x$ would play the role of an infinite collection of expressions analogous to $\frac{d}{dt}u^i=u^{i+1}-u^i$... See xournal_210.</p>
 <p></p>
 <p>So an evolution equation, in this context, is an expression</p>
 $$
@@ -66,6 +67,9 @@ $$
 \mbox{pr} V_Q(\Delta)=0.
 $$
 <p>The differential function $\Delta$ can be though as a kind of first integral for the evolution equation. Indeed, if $\Delta$ is of order, let's say, 2, then we can think of it like $\infty-2$ first integrals... </p>
+<p><img src="./../imagenes/Pasted image 20230430083705.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>xournal_210</p>
+<p></p>
 <p><b>And I wonder, can any evolution equation be characterized by 2 second-order ODEs?</b> It would be like an implicit expression of the PDE...</p>
 <p></p>
 <p>________________________________________</p>
