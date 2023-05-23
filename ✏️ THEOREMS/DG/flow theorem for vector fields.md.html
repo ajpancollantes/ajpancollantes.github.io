@@ -34,34 +34,35 @@ gtag('config', 'G-LBT9E8N3HS');
 <font size="3vw"><h1 style="margin-left:0px;" id="Fundamental_theorem_on_vector_fields._Flow_of_a_vector_field">Fundamental theorem on vector fields. Flow of a vector field</h1>
 <p></p>
 <p>There is a better approach in <a href="./../../Bibliography/@lee2013smooth.md.html">@lee2013smooth</a> page 314.</p>
-<p>(Ojo, notación en la entrada no consistente, arreglar)</p>
+<p>(I have to fix the notation)</p>
 <p>Esto está en [Warner 1983] prop 1.48:</p>
 <p></p>
 <p><b>Proposition</b></p>
-<p>Sea $X$ un campo de vectores en una variedad $M$. Para cada $p \in M$ existen $a(p),b(p) \in \mathbb{R} \cup \{\pm \infty\}$ y una curva diferenciable</p>
+<p>Let $X$ be a vector field on a manifold $M$. For each $p \in M$, there exist $a(p),b(p) \in \mathbb{R} \cup \{\pm \infty\}$ and a differentiable curve </p>
 $$
 \gamma_p: (a(p), b(p)) \longrightarrow M
 $$
-<p>tal que:</p>
-<p>1. $0 \in (a(p), b(p))$ y $\gamma_p(0)=p$</p>
-<p>2. $\gamma_p$ es una <b>curva integral</b> de $X$ (es decir, $d(\gamma_p)_s(\frac{d}{dt})=X(\gamma_p(s))$)</p>
-<p>3. <b>Uniqueness</b>: Si $\mu:(c,d) \longrightarrow M$ es otra curva  satisfaciendo las condiciones anteriores entonces $(c,d) \subseteq (a(p), b(p))$ y $\gamma_p|_{(c,d)}=\mu$.</p>
-<p>4. Para cada $t \in \mathbb{R}$ definimos una transformación $X_t$ con dominio $D_t=\{q \in M: t \in (a(q),b(q))\}$ mediante la expresión $X_t(q)=\gamma_q(t)$, de manera que para cada $p\in M$ existe un entorno abierto $V$ y un $\epsilon >0$ tal que la aplicación</p>
+<p>such that:</p>
+<p>1. $0 \in (a(p), b(p))$ and $\gamma_p(0)=p$</p>
+<p>2. $\gamma_p$ is an <b>integral curve</b> of $X$ (i.e. $d(\gamma_p)_s(\frac{d}{dt})=X(\gamma_p(s))$)</p>
+<p>3. <b>Uniqueness</b>: If $\mu:(c,d) \longrightarrow M$ is another curve satisfying the above conditions, then $(c,d) \subseteq (a(p), b(p))$ and $\gamma_p|_{(c,d)}=\mu$.</p>
+<p>4. For each $t\in \mathbb{R}$, we define a transformation $X_t$ with domain $D_t=\{q \in M: t \in (a(q),b(q))\}$ by the expression $X_t(q)=\gamma_q(t)$, so that for each $p\in M$, there exists an open neighborhood $V$ and an $\epsilon >0$ such that the map </p>
 $$
 (t,q)\longrightarrow X_t(q)
 $$
-<p>está definida en $(\epsilon, \epsilon)\times V$. It is called <b>flow</b> of $X$ and it is usually denoted by $\phi_X(t,q).$</p>
-<p>5. $D_t$ es abierto para cada $t$.</p>
+<p>is defined on $(\epsilon, \epsilon)\times V$. This transformation is called the <b>flow</b> of $X$ and is usually denoted by $\phi_X(t,q).$</p>
+<p>5. $D_t$ is open for each $t$.</p>
 <p>6. $\bigcup_{t>0} D_t =M$.</p>
-<p>7. $X_t: D_t\longrightarrow D_{-t}$ es un difeomorfismo con inversa $X_{-t}$.</p>
-<p>8. Sean $s,t \in \mathbb{R}$. El dominio de $X_s \circ X_t$ está contenido en $D_{t+s}$ (pero en general no es igual). Lo es si $s$ y $t$ tienen el mismo signo. Más aún, en el dominio de $X_s \circ X_t$, se verifica que $X_s \circ X_t=X_{t+s}$. Therefore we have a <a href="./../../♾️ CONCEPTS/local group of transformations.md.html">local group of transformations</a>.</p>
+<p>7. $X_t: D_t\longrightarrow D_{-t}$ is a diffeomorphism with inverse $X_{-t}$.</p>
+<p>8. Let $s,t \in \mathbb{R}$. The domain of $X_s \circ X_t$ is contained in $D_{t+s}$ (but in general, it is not equal to $D_{t+s}$). It is equal to $D_{t+s}$ if $s$ and $t$ have the same sign. Moreover, in the domain of $X_s \circ X_t$, we have $X_s \circ X_t=X_{t+s}$. Therefore, we have a <a href="./../../♾️ CONCEPTS/local group of transformations.md.html">local group of transformations</a>.</p>
 <p></p>
-<hr>
 <p></p>
-<p>Related: <a href="./flow of the sum of two vector fields.md.html">flow of the sum of two vector fields</a></p>
-<p></p>
-<hr>
 <h1 style="margin-left:0px;" id="Important_facts">Important facts</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="Flow_of_the_sum">Flow of the sum</h2>
+<p>See <a href="./flow of the sum of two vector fields.md.html">flow of the sum of two vector fields</a></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Re-scaling_of_the_flow">Re-scaling of the flow</h2>
 <p><b>Proposition</b></p>
 <p>Let $X$ be a vector field, and $k$ a constant. Let's denote $\phi_X$ and $\phi_{kX}$the flow of $X$ and $kX$ respectively. It is satisfied that:</p>
 $$
@@ -75,6 +76,7 @@ $$
 \frac{d}{dt}\hat{\phi}(t,q)=\frac{d}{dt}\phi_{X}(kt,q)=k X_{\phi_{X}(kt,q)} 
 $$
 <p>$\blacksquare$</p>
+<p></p>
 <h2 style="margin-left:0px;" id="Jacobian_of_the_flow_of_a_vector_field">Jacobian of the flow of a vector field</h2>
 <p><b>Proposition</b></p>
 <p>Let $X$ be a vector field and $\phi_t(p)$ its flow. For every $t$ the map $\phi_t(-)$ is a diffeomorphism, so we can consider its Jacobian </p>
@@ -87,17 +89,29 @@ $$
 $$
 <p>where $\mbox{div}$ is the <a href="./../../♾️ CONCEPTS/divergence.md.html">divergence</a>.</p>
 <p></p>
-<p>I think that also</p>
+<p>Moreover</p>
 $$
-\frac{d}{dt} J(t,x)=J(t,x) \mbox{div}X (x).
+\frac{d}{dt} J(t,x)=J(t,x) \mbox{div}X (\phi_t(x)).
 $$
 <p><b>Proof</b></p>
-<p>See <a href="https://math.stackexchange.com/a/312623/601797" target="_blank">this answer</a> in Mathstackexchange. $\blacksquare$</p>
-<p></p>
-<p>Even more, </p>
+<p>(See <a href="https://math.stackexchange.com/a/312623/601797" target="_blank">this answer</a> in Mathstackexchange)</p>
+<p>It is satisfied that</p>
 $$
-J(t,x)=e^{\int_0^t \mbox{div}X(\phi_s(x))ds}.
+\frac{d}{dt} \phi_t(x)=X(\phi_t(x))
 $$
+<p>and then, taking derivatives with respect to the coordinates $x_1,\ldots,x_n$ we obtain</p>
+$$
+\frac{d}{dt} d(\phi_t)_x=dX_{\phi_t(x)} d(\phi_t)_x.
+$$
+<p>We now apply <a href="./../Liouville's formula.md.html">Liouville's formula</a> to this linear system, obtaining</p>
+$$
+J(t,x)=J(t_0,x)e^{\int_{t_0}^t \mbox{tr}dX_{\phi_s(x)}ds}
+$$
+<p>and deriving with respect to $t$:</p>
+$$
+\frac{d}{dt} J(t,x)=J(t,x) \mbox{div}X (\phi_t(x)).
+$$
+<p>$\blacksquare$</p>
 <p>See xournal_155 page 5 for relation with <a href="./../../♾️ CONCEPTS/Jacobi last multiplier.md.html">Jacobi last multiplier</a>s.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
