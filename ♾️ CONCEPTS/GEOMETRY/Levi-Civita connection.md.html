@@ -50,13 +50,16 @@ gtag('config', 'G-LBT9E8N3HS');
 <p><b>Proof</b></p>
 <p>Let's show it in dimension 2.</p>
 <p>Suppose you have an orthonormal basis ${X_1, X_2}$ of tangent vectors (<a href="./frame on a manifold.md.html">frame on a manifold</a>), and a dual coframe ${\omega^1, \omega^2}$, such that $\omega^i(X_j) = \delta^i_j$. The structure coefficients of the frame/coframe are defined by the commutation relations of the base vectors: $[X_i, X_j] = -T_{ij}^k X_k$. Also we have that $d\omega^k=T_{ij}^k \omega_i \wedge \omega_j$.</p>
-<p>On the other hand, the connection 1-forms of the Levi-Civita connection, $\omega_{ij}$, are defined by the relation: $\nabla_{X_i} X_j = \omega_{ij}(X_k) X_k$, where $\nabla$ is the covariant derivative associated with the Levi-Civita connection.</p>
+<p>On the other hand, the connection 1-forms of the Levi-Civita connection, $\omega_{ij}$, are defined by the relation: $\nabla_{X_i} X_j = \omega_{j}^k(X_i) X_k=\omega_{ji}^k X_k$, where $\nabla$ is the covariant derivative associated with the Levi-Civita connection.</p>
 <p>The Levi-Civita connection is compatible with the metric, which means that the covariant derivative of the metric is zero. In terms of the connection 1-forms, this translates into the condition: $\omega_{ij} + \omega_{ji} = 0$.</p>
 <p>Now, since the connection is <a href="./../torsion of a connection.md.html">torsion</a>-free $\nabla_{X_i} X_j-\nabla_{X_j} X_i =[X_i,X_j]=  -T_{ij}^k X_k$, which leads to</p>
 $$
-2\omega_{ij}(X_k)=-T_{ij}^k
+\omega_{ji}^k-\omega_{ij}^k=-T_{ij}^k
 $$
-<p>so $\omega_{ij} = -\frac{1}{2} T_{ij}^k \omega^k$ .</p>
+$$
+-2\omega_{ij}^k=-T_{ij}^k
+$$
+<p>so $\omega_{ij}^k = \frac{1}{2} T_{ij}^k \omega^k$ .</p>
 <p>$\blacksquare$</p>
 <p></p>
 <h2 style="margin-left:0px;" id="About_curvature">About curvature</h2>
