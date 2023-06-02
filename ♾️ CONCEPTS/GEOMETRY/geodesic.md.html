@@ -45,22 +45,25 @@ gtag('config', 'G-LBT9E8N3HS');
 <h2 style="margin-left:0px;" id="Definitions">Definitions</h2>
 <p><b>Definition 1</b></p>
 <p>Given a <a href="./pseudo-Riemannian manifold.md.html">pseudo-Riemannian manifold</a>, a geodesic it is a curve such that the geodesic curvature is cero.</p>
+<p>$\blacksquare$</p>
 <p></p>
 <p><b>Definition 2</b></p>
-<p>Another approach. Consider that we have a manifold $M$ and a <a href="./../covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$. A curve $\gamma$ is a geodesic if, in the context <a href="./../parallel transport.md.html#Construction_from_a_covariant_derivative_operator">given here</a>, the vector field $v=\gamma'(t)$ defined along $\gamma$ is constant along $\gamma$, that is,</p>
+<p>Another approach. Consider that we have a manifold $M$ and a <a href="./../covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$. A curve $\gamma$ is a geodesic if the vector field $v=\gamma'(t)$ defined along $\gamma$ is constant along $\gamma$, that is,</p>
 $$
-D_v v=0.
+D_v v=0,
 $$
+<p>where $D$ is the <a href="./../covariant derivative along a curve.md.html">covariant derivative along a curve</a>.</p>
+<p>$\blacksquare$</p>
 <p></p>
 <p>These definitions are equivalent. There is a weaker definition, in which the speed of the geodesic is not constant, only the direction is. In that case, they are defined by</p>
 $$
 D_v v=\alpha v,
 $$
-<p>for certain function $\alpha$ defined on the image of the curve, $\gamma([0,1])$.</p>
+<p>for certain function $\alpha$ defined on the image of the curve, $\gamma([0,1])$. They are called <a href="https://math.stackexchange.com/q/2167444/601797" target="_blank">pregeodesics</a>.</p>
 <p></p>
 <p></p>
 <p><b>Proposition</b></p>
-<p>Dada una variedad $M$ con una derivada covariante $\nabla$. Sea $p\in M$ y $\xi\in T_p M$. Existe una única geodésica $\gamma:I\rightarrow M$ tal que $\gamma (0)=p$ , $\gamma'(0)=\xi$ y que es maximal en el siguiente sentido: si hay otra curva cumpliendo lo mismo, su dominio está contenido en $I$ y en la intersección coinciden.</p>
+<p>Given a manifold $M$ with a covariant derivative $\nabla$, let $p\in M$ and $\xi\in T_p M$. There exists a unique geodesic $\gamma:I\rightarrow M$ such that $\gamma(0)=p$, $\gamma'(0)=\xi$, and it is maximal in the following sense: if there is another curve satisfying the same conditions, its domain is contained in $I$, and they coincide on the intersection.</p>
 <p>$\blacksquare$</p>
 <p></p>
 <p><b>Proof</b></p>

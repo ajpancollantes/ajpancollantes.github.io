@@ -32,9 +32,31 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Jacobi_equation">Jacobi equation</h1>
-<p>(it relates <a href="./GEOMETRY/geodesic.md.html">geodesic</a>s and <a href="./GEOMETRY/Gaussian curvature.md.html">Gaussian curvature</a>)</p>
+<p>Also known as geodesic deviation equation, it relates <a href="./GEOMETRY/geodesic.md.html">geodesic</a>s and <a href="./GEOMETRY/Gaussian curvature.md.html">Gaussian curvature</a>.</p>
+<p>This equation describes how the separation between geodesics (as measured by a <a href="./Jacobi field.md.html">Jacobi field</a>) evolves as we move along the geodesics.</p>
+<p>The equation is</p>
+$$
+\frac{D^2}{dt^2} J + R(J, U)U = 0,
+$$
+<p>with the notation given <a href="./Jacobi field.md.html">here</a>.</p>
 <p></p>
-<h1 style="margin-left:0px;" id="Case_$n=2$">Case $n=2$</h1>
+<h2 style="margin-left:0px;" id="In_surfaces">In surfaces</h2>
+<p>In a 2-dimensional Riemannian manifold, the Riemann curvature tensor simplifies significantly. In particular, it can be expressed entirely in terms of the <a href="./GEOMETRY/Gaussian curvature.md.html">Gaussian curvature</a> $K$. The <a href="./Riemann curvature tensor.md.html#2-dimensional_case">Riemann curvature tensor in 2 dimensions</a> is given by:</p>
+$$
+R(X, Y)Z = K(g(Y, Z)X - g(X, Z)Y),
+$$
+<p>where $X, Y, Z$ are vector fields on the manifold, $g$ is the metric tensor, and $K$ is the Gaussian curvature.</p>
+<p>So substituting it above we obtain</p>
+$$
+\frac{D^2}{dt^2} J + K(g(U, J)U - g(U, U)J) = 0.
+$$
+<p>Since $U$ is the tangent vector to a geodesic, it is normalized, so $g(U, U) = 1$. Therefore, the equation simplifies to:</p>
+$$
+\frac{D^2}{dt^2} J + K(g(U, J)U - J) = 0.
+$$
+<p></p>
+<h2 style="margin-left:0px;" id="Intuitive_approach_of_Needham">Intuitive approach of Needham</h2>
+<h3 style="margin-left:0px;" id="Case_$n=2$">Case $n=2$</h3>
 <p>In a <a href="./GEOMETRY/surface.md.html">surface</a></p>
 $$
 \ddot{\xi}=-\mathcal{K}\xi
@@ -45,9 +67,9 @@ $$
 <p>It uses <a href="./geodesic polar coordinates.md.html">geodesic polar coordinates</a>. Also uses <a href="./../✏️ THEOREMS/Gauss lemma.md.html">Gauss lemma</a>.</p>
 <p>By the way, it let us to show <a href="./../✏️ THEOREMS/Minding's theorem.md.html">Minding's theorem</a>.</p>
 <p>$\blacksquare$</p>
+<p>Formal statement is based on the notion of <a href="./Jacobi field.md.html">Jacobi field</a>.</p>
 <p></p>
-<p></p>
-<h1 style="margin-left:0px;" id="Case_$n>2$">Case $n>2$</h1>
+<h3 style="margin-left:0px;" id="Case_$n>2$">Case $n>2$</h3>
 <p><img src="./../imagenes/Pasted image 20220707193229.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
 <p>According to <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> there are two versions:</p>
