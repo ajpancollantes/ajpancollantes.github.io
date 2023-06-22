@@ -61,7 +61,7 @@ D_v v=\alpha v,
 $$
 <p>for certain function $\alpha$ defined on the image of the curve, $\gamma([0,1])$. They are called <a href="https://math.stackexchange.com/q/2167444/601797" target="_blank">pregeodesics</a>.</p>
 <p></p>
-<p></p>
+<h2 style="margin-left:0px;" id="Existence_and_computation">Existence and computation</h2>
 <p><b>Proposition</b></p>
 <p>Given a manifold $M$ with a covariant derivative $\nabla$, let $p\in M$ and $\xi\in T_p M$. There exists a unique geodesic $\gamma:I\rightarrow M$ such that $\gamma(0)=p$, $\gamma'(0)=\xi$, and it is maximal in the following sense: if there is another curve satisfying the same conditions, its domain is contained in $I$, and they coincide on the intersection.</p>
 <p>$\blacksquare$</p>
@@ -70,13 +70,37 @@ $$
 <p>Existence and uniqueness of parallel transport (see <a href="./../parallel transport.md.html#Construction_from_a_covariant_derivative_operator">here</a>).</p>
 <p>$\blacksquare$</p>
 <p></p>
+<p>To compute a geodesic curve we use the <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>. The geodesic equations are second order equations given by:</p>
+$$
+\frac{d^2 x^i}{dt^2} + \Gamma^i_{jk} \frac{dx^j}{dt}\frac{dx^k}{dt} = 0
+$$
+<p><b>In two dimensions:</b></p>
+<p>Sure, in a 2-dimensional Riemannian manifold, where $i, j, k \in \{1, 2\}$, the geodesic equations will be given as follows:</p>
+$$
+\frac{d^2 x^1}{dt^2} + \Gamma^1_{11} \frac{dx^1}{dt}\frac{dx^1}{dt} + \Gamma^1_{12} \frac{dx^1}{dt}\frac{dx^2}{dt} + \Gamma^1_{21} \frac{dx^2}{dt}\frac{dx^1}{dt} + \Gamma^1_{22} \frac{dx^2}{dt}\frac{dx^2}{dt} = 0
+$$
+$$
+\frac{d^2 x^2}{dt^2} + \Gamma^2_{11} \frac{dx^1}{dt}\frac{dx^1}{dt} + \Gamma^2_{12} \frac{dx^1}{dt}\frac{dx^2}{dt} + \Gamma^2_{21} \frac{dx^2}{dt}\frac{dx^1}{dt} + \Gamma^2_{22} \frac{dx^2}{dt}\frac{dx^2}{dt} = 0
+$$
+<p></p>
+<p>This simplifies further by noting that the Christoffel symbols are symmetric in the lower indices, i.e. $\Gamma^i_{jk} = \Gamma^i_{kj}$, so we have:</p>
+$$
+\frac{d^2 x^1}{dt^2} + \Gamma^1_{11} \left(\frac{dx^1}{dt}\right)^2 + 2 \Gamma^1_{12} \frac{dx^1}{dt}\frac{dx^2}{dt} + \Gamma^1_{22} \left(\frac{dx^2}{dt}\right)^2 = 0
+$$
+$$
+\frac{d^2 x^2}{dt^2} + \Gamma^2_{11} \left(\frac{dx^1}{dt}\right)^2 + 2 \Gamma^2_{12} \frac{dx^1}{dt}\frac{dx^2}{dt} + \Gamma^2_{22} \left(\frac{dx^2}{dt}\right)^2 = 0
+$$
+<p>Here $x^1$ and $x^2$ are the coordinates of the 2-dimensional Riemannian manifold.</p>
+<p></p>
 <h2 style="margin-left:0px;" id="Other_properties">Other properties</h2>
 <p><ul style="margin-left:0px;"><li>As said in the "Motivation" section above, geodesics minimise the <a href="./../length of a curve.md.html">length of a curve</a> and the <a href="./../energy of a curve.md.html">energy of a curve</a>. In <a href="./../../Bibliography/@malham2016introduction.md.html">@malham2016introduction</a> page 81 it is shown, by using <a href="./../../✏️ THEOREMS/Cauchy-Schwarz inequality.md.html">Cauchy-Schwarz inequality</a>, that minimising the energy of a curve is the same as minimising the length plus the additional requirement that the speed $\|c'(t) \|$ stays constant.</li></ul></p>
-<p></p>
+<p><ul style="margin-left:0px;"><li>A vector field whose <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">integral curves</a> are geodesics is called a <b>geodesic vector field</b>.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>At any point of a geodesic in a <a href="./surface.md.html">surface</a>, the normal of the curve is parallel to the normal of the surface.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>In a surface of revolution, the meridians are geodesics.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>The geodesics have a "behavior" influenced by the <a href="./Gaussian curvature.md.html">Gaussian curvature</a>. This is reflected in the <a href="./../Jacobi equation.md.html">Jacobi equation</a>.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>Their generalization to other dimensions different from 1 is related to <a href="./../totally-geodesic manifold.md.html">totally-geodesic manifold</a>s.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>If two linear connections on an open subset $U$ of $\mathbb{R}^2$ give rise locally to the same families of geodesics up to reparametrization (pregeodesics), they are indeed the same connection. Intuitively, the reason is that a linear connection on a manifold is equivalent to a unique notion of parallel transport along curves in the manifold, and this notion of parallel transport is what determines the geodesics for the connection. The parallel transport can be made by pieces of geodesics, see <a href="./../parallel transport.md.html#Intrinsic_construction">the intrinsic construction</a>. If two connections have the same geodesics, then they must have the same parallel transport, and thus they must be the same connection. For a computational proof, see <a href="./../contorsion.md.html">contorsion</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>On the contrary, two different Riemannian metrics can give rise to the same geodesics locally in a region, but they are not necessarily the same metric. In other words, two different Riemannian metrics can have the same geodesic flow, but they can differ in other ways. Let's take a look at a simple example to illustrate this point. Consider the flat Euclidean metric in $\mathbb{R}^2$ and a metric that has been scaled by a positive factor. These two metrics will produce the same geodesics, which are straight lines in this case. However, these two metrics are not the same because one is a scaled version of the other. The reason why this is possible is that two metrics can have the same Levi-Civita connection and hence the same geodesics, but differ in other properties like volumes, angles, etc. In more formal terms, this question involves projective equivalence of Riemannian metrics, a topic studied in differential geometry. Two metrics are projectively equivalent if they have the same unparametrized geodesics. There are nontrivial examples of projectively equivalent but distinct Riemannian metrics, even in dimension 2.</li></ul></p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

@@ -31,17 +31,32 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Contorsion">Contorsion</h1>
-<p>Every <a href="./covariant derivative operator.md.html">covariant derivative operator</a> that one can define in a manifold is related in some sense to the others. See \cite{malament} page 51:</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Cartan-Janet_theorem">Cartan-Janet theorem</h1>
+<p><b>Theorem</b></p>
+<p>Let $(M,g)$ be a real-analytic Riemannian manifold of dimension $n$, and let $N=\frac{1}{2}n(n+1)$. Every point of $M$ has a neighbourhood which has a real-analytic isometric <a href="./../♾️ CONCEPTS/GEOMETRY/embedded manifold.md.html">embedding</a> into $\mathbb R^N$.</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b></p>
+<p>See <a href="http://math.stanford.edu/~jmadnick/CartanJanet.pdf" target="_blank">this</a>. It uses <a href="./../♾️ CONCEPTS/exterior differential system.md.html">exterior differential system</a>s.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Keep an eye</b>: the smooth case is still open even in dimension 2.</p>
+<p></p>
+<p>Specifically, for the case $n=2$ it means that locally any Riemannian surface can be isometrically embedded in $\mathbb R^3$.</p>
+<p></p>
+<p>To find the isometric embedding $\varphi: M\to \mathbb R^N$ we have to solve a system of fully non-linear first-order <a href="./../♾️ CONCEPTS/PDE.md.html">PDE</a>s for $u$. Namely, if the coordinates of $M$ are $(x^i)$ and the metric is $g=g_{ij}dx^i\otimes dx^j$ then $u$ is an isometric embedding if and only if</p>
 $$
-\left( \nabla _ { m } ^ { \prime } - \nabla _ { m } \right) \alpha _ { b _ { 1 } \ldots b _ { s } } ^ { a _ { 1 } \dots a _ { r } } = \alpha _ { n b _ { 2 } \dots b _ { s } } ^ { a _ { 1 } \dots a _ { r } } C _ { m b _ { 1 } } ^ { n } + \ldots    
+g_{ij}=\dfrac{\partial \varphi}{\partial x^i}\cdot \dfrac{\partial \varphi}{\partial x^j}
 $$
-<p>In particular, for a vector field we would have:</p>
+<p>For example, in the case $n=2$ we have, for $U\equiv (x,u)$ an open subset of $\mathbb R^2$ and a metric $g$:</p>
 $$
-\left( \nabla _ { m } ^ { \prime } - \nabla _ { m } \right) \xi^{a} =-\xi^n C _ { m n } ^ { a }
+g_{11}=\varphi_{1,x}^2+\varphi_{2,x}^2+\varphi_{3,x}^2
 $$
-<p>This let us show (see \cite{malament} page 57) that if <b>two derivative operators define the same set of <a href="./GEOMETRY/geodesic.md.html">geodesic</a>s then they are equals</b>.</p>
-<p>Moreover, the expression $\nabla _ { m } ^ { \prime } - \nabla _ { m }$ defines a tensor called difference tensor or <b>contorsion</b>.</p>
+$$
+g_{12}=\varphi_{1,x}\varphi_{1,u}+\varphi_{2,x}\varphi_{2,u}+\varphi_{3,x}\varphi_{3,u}
+$$
+$$
+g_{22}=\varphi_{1,u}^2+\varphi_{2,u}^2+\varphi_{3,u}^2
+$$
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

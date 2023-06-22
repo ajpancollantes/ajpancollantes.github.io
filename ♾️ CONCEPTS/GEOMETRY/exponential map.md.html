@@ -32,9 +32,8 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Exponential_map">Exponential map</h1>
-<p></p>
-<h2 style="margin-left:0px;" id="Motivation">Motivation</h2>
-<p>See xournal_134.</p>
+<h2 style="margin-left:0px;" id="Motivation_and_general_construction">Motivation and general construction</h2>
+<p>(xournal_134)</p>
 <p>Given a manifold $M$ we can think of a "procedure" that takes a point $p\in M$, a real number $t\in \mathbb{R}$ and a vector field $X$ on $M$ and returns a new point of $M$, working at this way: </p>
 <p>1. we start at $p$ and move a little along $X_p$. That is, we compute $q_1=p+tX_p/10$. This is obviously not defined, but we take a blind eye. Also, we denote it by $q_1=p(Id+tX/10)$. This notation is justified because $X$ is, loosely speaking, an element of the Lie algebra of $\text{Dif}(M)$ so we can think of $Id+tX/10$ as an element of $\text{Dif}(M)$ near to $Id$.</p>
 <p>2. we move a little from $q_1$ along the direction of $X_{q_1}$, that is, we compute $q_2=q_1+tX_{q_1}/10=q_1(Id+tX/10)$.</p>
@@ -51,25 +50,39 @@ $$
 $$
 q=p \lim_{n\to \infty}(Id+tX/n)^{n} \equiv pe^{tX}
 $$
-<p>and is nothing but the <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">flow</a> of $X$. See also <a href="./../Lie algebra action.md.html">Lie algebra action</a>. And <a href="./../Lie series.md.html">Lie series</a>.</p>
+<p>and is nothing but the <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html">flow</a> of $X$. (See also <a href="./../Lie algebra action.md.html">Lie algebra action</a>. And <a href="./../Lie series.md.html">Lie series</a>.)</p>
 <p><img src="./../../imagenes/Pasted image 20220212092330.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
 <p>This is a very general construction, which <b>allows you to find curves with a prescribed velocity</b>. </p>
 <p></p>
-<p>What has to do with the usual exponential and, moreover, with the number $e$? Suppose the manifold $M=\mathbb{R}$ and the vector field $X$ given in the canonical coordinates by $X_x=x$.</p>
+<h3 style="margin-left:0px;" id="Particular_case:_usual_exponential_function">Particular case: usual exponential function</h3>
+<p>What has to do with the usual exponential function and, moreover, with the number $e$? Suppose the manifold $M=\mathbb{R}$ and the vector field $X$ given in canonical coordinates by $X_x=x$.</p>
 <p><img src="./../../imagenes/Pasted image 20220212092648.png" style="width:80vw; border-radius: 3px;" ></p>
 <p>Then the number $e$ appears when we move from 1 a time 1 by means of that particular vector field. </p>
 <p>That is, if you consider a curve $\alpha: \mathbb{R} \to \mathbb{R}$ such that $\alpha(0)=1$ and its velocity at $x$ is precisely $x$, then at time $t=1$ you will have arrived to position $e$.</p>
 <p></p>
+<h3 style="margin-left:0px;" id="Particular_case:_matrix_exponential">Particular case: matrix exponential</h3>
+<p>This general construction can also be particularized to the case of <a href="./../matrix exponential.md.html">matrix exponential</a>. Suppose that the manifold is $M=GL(2,\mathbb{R})$ (it s valid for an arbitrary $GL(n)$, of course). So given any vector field $X\in \mathfrak{X}(GL(2,\mathbb{R}))$ we can define $e^{tX}$ as above. </p>
+<p>But since in this case $M$ is a <a href="./../Lie group.md.html">Lie group</a> we can suppose that the chosen vector field $X$ is a <a href="./../../left invariant vector field.md.html">left invariant vector field</a>. Then it takes the form </p>
+$$
+X_A=B\cdot A,
+$$
+<p>being $A\in GL(2)$ (an invertible matrix) and $B\in T_{Id} GL(2)$ (an arbitrary matrix). When we compute $e^B$ what we are doing is to consider the corresponding left invariant vector field $X$ and move along its flow a time $t=1$ from the point $Id$.</p>
 <p></p>
-<h2 style="margin-left:0px;" id="Formal_definition">Formal definition</h2>
-<p>Consider a <a href="./../Lie group.md.html">Lie group</a> $G$, and an element $v$ in the <a href="./Lie algebra.md.html">Lie algebra</a> $\mathfrak{g}$. <b>What is $e^{\lambda\cdot v}$ in reality?</b> </p>
-<p>Let us observe that, when we consider $G$ acting on itself, every vector $v\in \mathfrak{g}=T_e G$ gives rise to a left invariant vector field $V$ associated to $v$:</p>
+<h3 style="margin-left:0px;" id="Particular_case:_any_Lie_group">Particular case: any Lie group</h3>
+<p>Consider a <a href="./../Lie group.md.html">Lie group</a> $G$, and an element $v$ in the <a href="./Lie algebra.md.html">Lie algebra</a> $\mathfrak{g}$. Observe that, when we consider $G$ acting on itself, every vector $v\in T_{Id} G$ gives rise to a <a href="./../../left invariant vector field.md.html">left invariant vector field</a> $V\in \mathfrak{g}$ associated to $v$:</p>
 $$
-V_g=d(L_g)_e(v)
+V_g=d(L_g)_{Id}(v).
 $$
-<p>(it is nothing but the <a href="./fundamental vector field.md.html">fundamental vector field</a>).</p>
-<p>Then, if we consider the flow $\phi_V$ of this vector field on $G$, we have a <a href="./../one-parameter subgroup.md.html">one-parameter subgroup</a> of $\mbox{Diff}(G)$ (ey, we are assuming that it is a complete vector field. It is proven <a href="https://math.stackexchange.com/a/3549632/601797)" target="_blank">here</a>. Since $G\subseteq \mbox{Diff}(G)$ we can wonder: is it, in fact, a one-parameter subgroup of $G$? Or in other words, does every diffeomorphism $\phi_V(t,-)$ correspond to left translation by an certain element $g_t \in G$?</p>
+<p>Then, if we consider the flow $\phi_V$ of this vector field on $G$, we have a <a href="./../one-parameter subgroup.md.html">one-parameter subgroup</a> of $\mbox{Diff}(G)$ (we are assuming that it is a complete vector field, which is something proven <a href="https://math.stackexchange.com/a/3549632/601797)" target="_blank">here</a>. </p>
+<p>With this set up, the exponential map is defined by</p>
+$$
+exp(v)=\phi_V(1,Id)
+$$
+<p>and is usually also denoted by $e^v$. </p>
+<p></p>
+<p></p>
+<p>Since $G\subseteq \mbox{Diff}(G)$ we can wonder: is it, in fact, a one-parameter subgroup of $G$? Or in other words, does every diffeomorphism $\phi_V(t,-)$ correspond to left translation by an certain element $g_t \in G$?</p>
 <p>The answer is yes. We can take $g_t=\phi_V(t,e)\in G$, and define $\tilde{\phi}(t,m)=m\cdot g_t$. But we can show that </p>
 $$
 \phi_V=\tilde{\phi}
@@ -85,12 +98,19 @@ $$
 $$
 =V_{mg_t}=V_{\tilde{\phi}(t,m)}
 $$
+<h3 style="margin-left:0px;" id="Particular_case:_Riemannian_manifolds">Particular case: Riemannian manifolds</h3>
+<p>If we have a <a href="./../Riemannian manifold.md.html">Riemannian manifold</a> $(N,g)$ we have the <a href="./../exponential map for Riemannian manifolds.md.html">exponential map for Riemannian manifolds</a>: </p>
+$$
+exp_p: T_pN \to N
+$$
+$$
+V\mapsto exp_p(V)
+$$
+<p>How does it fit in this framework? If we consider the manifold $M=TN$ and the vector field $X\in \mathfrak{X}(TN)$ called the <a href="./../../geodesic flow.md.html">geodesic spray</a> then we have, abusing of notation, $P=(p,V) \in TN$ and it turns out that</p>
+$$
+P\cdot e^X=exp_p(V).
+$$
 <p></p>
-<p>With this set up, the exponential map is defined by</p>
-$$
-exp(v)=g_1=\phi_V(1,e)
-$$
-<p>and is usually also denoted by $e^v$. </p>
 <p></p>
 <h1 style="margin-left:0px;" id="Inverse_relation_with_"differentiation"">Inverse relation with "differentiation"</h1>
 <p>It is important to note that $\phi_V(t,e)=e^{tv}$. But this is obvious from <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html#Important_property">flow theorem for vector fields#Important property</a>. Indeed</p>

@@ -62,108 +62,87 @@ $$
 <p></p>
 <p></p>
 <p></p>
-<h2 style="margin-left:0px;" id="What_I_wrote_in_Latex_in_the_paper_with_Paola">What I wrote in Latex in the paper with Paola</h2>
-<p>Copy and paste in Overleaf to read this</p>
+<h2 style="margin-left:0px;" id="What_I_wrote_in_Latex_in_the_paper-with-Paola">What I wrote in Latex in the paper-with-Paola</h2>
 <p></p>
+<h2 style="margin-left:0px;" id="Classical_procedure_as_a_reduction_"a_la_$\mathcal{J}^X$"">Classical procedure as a reduction "a la $\mathcal{J}^X$"</h2>
 <p></p>
-<p>\section{Alternative version: Geometric approach to ODE reduction}</p>
-<p></p>
-<p></p>
-<p>\subsection{Classical procedure as a reduction "a la $\mathcal{J}^X$"}</p>
-<p>The reduction process for ODEs once a Lie point symmetry or a generalized symmetry is known is a classical procedure that can be found in many references (\cite{olver86,Stephani} ...). More recently, a similar reduction procedure was introduced in \cite{muriel01ima1,MR2001541} by using \cinf-symmetries instead of Lie point symmetries. This common reduction procedure goes, in essence, as follows. Suppose we have an ODE like \eqref{eq_ode}, and let $X$ be a \cinf-symmetry in the sense of Definition \ref{def_lambdasym} (this include the case of Lie point symmetries and contact symmetries (?)). We can construct a complete set of invariants of $X$ once we know two of them, say $y$ and $w$ (see Remark \ref{rem_IBD}). Since $\Delta=u_m-\phi$ satisfies $X(\Delta)=0$ whenever $\Delta=0$, the function $\Delta$ can be written in terms of this complete set of invariants, and we have</p>
+<p>The reduction process for ODEs once a Lie point symmetry or a generalized symmetry is known is a classical procedure that can be found in many references \cite{olver86,Stephani} ... More recently, a similar reduction procedure was introduced \cite{muriel01ima1,MR2001541} by using $\mathcal{C}^{\infty}$-symmetries instead of Lie point symmetries. This common reduction procedure goes, in essence, as follows. Suppose we have an ODE like</p>
 $$
-\Delta(x,u,\ldots,u_m)=u_m-\phi=\tilde{\Delta}(y,w,\ldots, w_{m-1})=\rho (w_{m-1}-\tilde{\phi}).
+\Delta=u_m-\phi(x, u,u_1,\ldots,u_{m-1})=0, \tag{1}
 $$
-<p></p>
+<p>and let $X$ be a $\mathcal{C}^{\infty}$-symmetry in the sense of Definition 1 (this include the case of Lie point symmetries and contact symmetries (?) ). We can construct a complete set of invariants of $X$ once we know two of them, say $y$ and $w$ (see Remark 1). Since $\Delta=u_m-\phi$ satisfies $X(\Delta)=0$ whenever $\Delta=0$, the function $\Delta$ can be written in terms of this complete set of invariants, and we have</p>
+$$
+\Delta(x,u,\ldots,u_m)=u_m-\phi=\tilde{\Delta}(y,w,\ldots, w_{m-1})=\rho (w_{m-1}-\tilde{\phi}) \tag{2}.
+$$
 <p>We call to the expression</p>
-<p><ul style="margin-left:0px;"><li>\begin{equation}\label{eq_reducedODE1}</li></ul></p>
-<p><ul style="margin-left:0px;"><li>w_{m-1}=\tilde{\phi}(y,w_1,\ldots,w_{m-2})</li></ul></p>
-<p><ul style="margin-left:0px;"><li>\end{equation}</li></ul></p>
-<p>the reduced equation of the ODE \eqref{eq_ode} by means of $X$.</p>
+$$
+w_{m-1}=\tilde{\phi}(y,w_1,\ldots,w_{m-2})
+$$
+<p>the reduced equation of the ODE (1) by means of $X$.</p>
 <p></p>
-<p>This "analytical" process can be understood in terms of exterior differential systems (\cite{bryant2013exterior}) in the following way. The ODE \eqref{eq_ode} can be encoded with the EDS $(J^m, \mathcal{J})$  where</p>
+<p>This "analytical" process can be understood in terms of <a href="./../../♾️ CONCEPTS/exterior differential system.md.html">exterior differential system</a>s  in the following way. The ODE (1) can be encoded with the EDS $(J^m, \mathcal{J})$  where</p>
 $$
 \mathcal{J}=\{\theta_0,\ldots,\theta_{m-1},\Delta\}_{diff}=\{\theta_0,\ldots,\theta_{m-1},\Delta,d\theta_0,\ldots,d\theta_{m-1},d\Delta\}_{alg}.
 $$
-<p>It is a mere computation to check that there is a 1-1 relationship between solutions of \eqref{eq_ode} and integral manifolds of $\mathcal{J}$.</p>
+<p>It is a mere computation to check that there is a 1-1 relationship between solutions of equation (1) and integral manifolds of $\mathcal{J}$.</p>
 <p></p>
-<p>Observe that $\mathcal{J}="\mathcal{C}\cup \{\Delta,d\Delta\}_{alg}"$ (maybe $\mathcal{J}=\mathcal{C}+ \{\Delta,d\Delta\}_{alg}$?), being $\mathcal{C}$ the contact ideal of $J^m$.</p>
-<p></p>
-<p></p>
+<p>Observe that $\mathcal{J}=\mathcal{C}\cup \{\Delta,d\Delta\}_{alg}$ (maybe $\mathcal{J}=\mathcal{C}+ \{\Delta,d\Delta\}_{alg}$?), being $\mathcal{C}$ the contact ideal of $J^m$.</p>
 <p></p>
 <p>Given a vector field $X$ we can define the following set</p>
 $$
-\mathcal{J}^X=\{\omega\in \mathcal{J}: X\contract \omega\in \mathcal{J}\}.
+\mathcal{J}^X=\{\omega\in \mathcal{J}: X\,\lrcorner\, \omega\in \mathcal{J}\}.
 $$
 <p></p>
-<p>{\color{blue}</p>
-<p>\begin{remark}</p>
-<p>[For us, to be erased later] The vector field $X$ is trivially a Cauchy characteristic vector field of $\mathcal{J}^X$, in case $\mathcal{J}^X$ were an EDS. So $\mathcal{J}^X$ is, in a sense, the result of "appending a new vector field" to the "distribution" represented by $\mathcal{J}$. Of course, if $X$ were already a Cauchy characteristic vector field of $\mathcal{J}$ then $\mathcal{J}^X=\mathcal{J}$: we are doing nothing.</p>
+<p>*Remark*: The vector field $X$ is trivially a <a href="./../../♾️ CONCEPTS/Cauchy characteristic vector fields.md.html">Cauchy characteristic vector fields</a> of $\mathcal{J}^X$ (in case $\mathcal{J}^X$ were an EDS). So $\mathcal{J}^X$ is, in a sense, the result of "appending a new vector field" to the "distribution" represented by $\mathcal{J}$. Of course, if $X$ were already a Cauchy characteristic vector field of $\mathcal{J}$ then $\mathcal{J}^X=\mathcal{J}$, and we are doing nothing.</p>
 <p></p>
-<p>On the other hand, observe that in $\mathcal{J}$ there are 1-forms like $\alpha=3\Delta dx+u \Delta du$ such that $X\contract \alpha\neq 0$ but $X\contract \alpha\in \mathcal{J}$. These 1-forms are included in our $\mathcal{J}^X$ but are not considered by Fels (they require $X\contract \alpha= 0$). If the EDS doesn't have 0-forms I guess that both ideas are the same. But our apporach is better for two reasons:</p>
-<p>\begin{enumerate}</p>
-<p><ul style="margin-left:0px;"><li>\item It is more general, more elegant</li></ul></p>
-<p><ul style="margin-left:0px;"><li>\item It coincides with the definition of Cauchy characteristic vector field, so it fits better with Bryant...</li></ul></p>
-<p>\end{enumerate}</p>
-<p>\end{remark}</p>
-<p>}</p>
+<p>On the other hand, observe that in $\mathcal{J}$ there are 1-forms like $\alpha=3\Delta dx+u \Delta du$ such that $X\,\lrcorner\, \alpha\neq 0$ but $X\,\lrcorner\, \alpha\in \mathcal{J}$. These 1-forms are included in our $\mathcal{J}^X$ but are not considered by Fels (they require $X\,\lrcorner\, \alpha= 0$). If the EDS doesn't have 0-forms I guess that both ideas are the same. But our approach is better for two reasons:</p>
+<p>1. It is more general, more elegant</p>
+<p>2. It coincides with the definition of Cauchy characteristic vector field, so it fits better with Bryant...</p>
 <p></p>
-<p>\begin{lemma}\label{lem_condition_cinfsym}</p>
-<p>If $X$ is a \cinf-symmetry in the sense of Definition \ref{def_lambdasym} then there exists a smooth function $f$ such that for every $\omega\in \mathcal{C}$ </p>
+<p><b>Lemma</b>: If $X$ is a $\mathcal{C}^{\infty}$-symmetry of equation (1) then there exists a smooth function $f$ such that for every $\omega\in \mathcal{C}$ </p>
 $$
-X\contract d\omega +d(X\contract \omega)+\dfrac{df}{f}X\contract \omega \in \mathcal{C}
+X\,\lrcorner\, d\omega +d(X\,\lrcorner\, \omega)+\dfrac{df}{f}X\,\lrcorner\, \omega \in \mathcal{C}
 $$
-<p>\end{lemma}</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b>: Since $X$ is a $\mathcal{C}^{\infty}$-symmetry, there exist $f$ such that $fX$ is a contact symmetry (it is deduced from \cite[Lemma 5.1]{muriel01ima1})). Then, for every $\omega\in \mathcal{C}$ we have $\mathcal{L}_{fX} \omega \in \mathcal{C}$. Now observe that</p>
 <p></p>
-<p>\begin{proof}</p>
-<p>Since $X$ is a \cinf-symmetry, there exist $f$ such that $fX$ is a contact symmetry (it is deduced from \cite[Lemma 5.1]{muriel01ima1}). Then, for every $\omega\in \mathcal{C}$ we have $\mathcal{L}_{fX} \omega \in \mathcal{C}$. Now observe that</p>
 $$
-\mathcal{L}_{fX} \omega=f\mathcal{L}_{X} \omega+df X\contract \omega
+\mathcal{L}_{fX} \omega=f\mathcal{L}_{X} \omega+df X\,\lrcorner\, \omega
 $$
 <p>so </p>
 $$
-\mathcal{L}_{X} \omega+\dfrac{df}{f} X\contract \omega\in \mathcal{C}
+\mathcal{L}_{X} \omega+\dfrac{df}{f} X\,\lrcorner\, \omega\in \mathcal{C}
 $$
 <p>and hence</p>
 $$
-X\contract d\omega +d(X\contract \omega)+\dfrac{df}{f}X\contract \omega \in \mathcal{C}.
+X\,\lrcorner\, d\omega +d(X\,\lrcorner\, \omega)+\dfrac{df}{f}X\,\lrcorner\, \omega \in \mathcal{C}.
 $$
-<p>\end{proof}</p>
+<p><b>Proposition</b>: If the vector field $X$ is a $\mathcal{C}^{\infty}$-symmetry of equation (1) then $\mathcal{J}^X$ is an EDS.$\blacksquare$</p>
 <p></p>
-<p>\begin{proposition}</p>
-<p>If the vector field $X$ is a \cinf-symmetry of equation \eqref{eq_ode} then $\mathcal{J}^X$ is an EDS.</p>
-<p>\end{proposition}</p>
-<p>\begin{proof}</p>
-<p>The set $\mathcal{J}^X$ is an ideal, because given $\omega \in \mathcal{J}$ such that $X\contract \omega \in \mathcal{J}$ then given $\alpha \in \Omega^*(J^m)$ we have $\alpha \wedge \omega\in \mathcal{J}$ and</p>
+<p><b>Proof</b>: The set $\mathcal{J}^X$ is an ideal, because given $\omega \in \mathcal{J}$ such that $X\,\lrcorner\, \omega \in \mathcal{J}$ then given $\alpha \in \Omega^*(J^m)$ we have $\alpha \wedge \omega\in \mathcal{J}$ and</p>
 $$
-X\contract \alpha \wedge \omega=X\contract \alpha \wedge \omega+(-1)^p \alpha \wedge (X\contract \omega) \in \mathcal{J},
+X\,\lrcorner\, \alpha \wedge \omega=X\,\lrcorner\, \alpha \wedge \omega+(-1)^p \alpha \wedge (X\,\lrcorner\, \omega) \in \mathcal{J},
 $$
 <p>so $\alpha \wedge \omega \in \mathcal{J}^X$.</p>
 <p></p>
-<p>Now, we are going to see that if $X$ is a \cinf-symmetry, this ideal is differentially closed. Consider $\omega\in \mathcal{J}^X$, i.e., $\omega\in \mathcal{J}$ and $X\contract \omega\in \mathcal{J}$. We already know that $d\omega\in \mathcal{J}$, and we need to show that $X\contract d\omega \in \mathcal{J}$.</p>
+<p>Now, we are going to see that if $X$ is a $\mathcal{C}^{\infty}$-symmetry, this ideal is differentially closed. Consider $\omega\in \mathcal{J}^X$, i.e., $\omega\in \mathcal{J}$ and $X\,\lrcorner\, \omega\in \mathcal{J}$. We already know that $d\omega\in \mathcal{J}$, and we need to show that $X\,\lrcorner\, d\omega \in \mathcal{J}$.</p>
 <p></p>
-<p>If $\omega\in \mathcal{C}$ then because of Lemma \ref{lem_condition_cinfsym} there exists a smooth function $f$ such that</p>
+<p>If $\omega\in \mathcal{C}$ then because of the Lemma there exists a smooth function $f$ such that</p>
 $$
-X\contract d\omega +d(X\contract \omega)+\dfrac{df}{f}X\contract \omega \in \mathcal{C}\subset \mathcal{J}.
+X\,\lrcorner\, d\omega +d(X\,\lrcorner\, \omega)+\dfrac{df}{f}X\,\lrcorner\, \omega \in \mathcal{C}\subset \mathcal{J}.
 $$
-<p>We have that $X\contract \omega$ and $d(X\contract \omega)$ belong to $\mathcal{J}$, so $X\contract d\omega \in \mathcal{J}$.</p>
+<p>We have that $X\,\lrcorner\, \omega$ and $d(X\,\lrcorner\, \omega)$ belong to $\mathcal{J}$, so $X\,\lrcorner\, d\omega \in \mathcal{J}$.</p>
 <p></p>
-<p>If $\omega=d\Delta$, $d\omega=0$ so trivially $X\contract d\omega \in \mathcal{J}$.</p>
+<p>If $\omega=d\Delta$, $d\omega=0$ so trivially $X\,\lrcorner\, d\omega \in \mathcal{J}$.</p>
 <p></p>
-<p>Finally, if $\omega=\Delta$ then $X\contract d\omega =X\contract d\Delta=X(\Delta)$, which is 0 if $\Delta=0$. And therefore there exists a nonvanishing function $\rho$ (possibly we should shrink the domain of $\Delta$?) such that</p>
+<p>Finally, if $\omega=\Delta$ then $X\,\lrcorner\, d\omega =X\,\lrcorner\, d\Delta=X(\Delta)$, which is 0 if $\Delta=0$. And therefore there exists a nonvanishing function $\rho$ (possibly we should shrink the domain of $\Delta$?) such that</p>
 $$
-X\contract d\omega=\rho \Delta \in \mathcal{J}.
+X\,\lrcorner\, d\omega=\rho \Delta \in \mathcal{J}.
 $$
-<p>\end{proof}</p>
 <p></p>
+<p><b>Remark</b>: This proposition could lead us to define a <b>reducing vector field</b> for an EDS $\mathcal{I}$ as a vector field $X$ such that $\mathcal{I}^X$ is again an EDS and $\mathcal{I}^X \neq \mathcal{I}$ (if not it will be a Cauchy characteristic vector field).</p>
 <p></p>
-<p>{\color{blue}</p>
-<p>\begin{remark}</p>
-<p>[For us, to be erased later] This proposition could lead us to define a \textbf{reducing vector field} for an EDS $\mathcal{I}$ as a vector field $X$ such that $\mathcal{I}^X$ is again an EDS and $\mathcal{I}^X \neq \mathcal{I}$ (if not it will be a Cauchy characteristic vector field).</p>
-<p>\end{remark}</p>
-<p>}</p>
-<p></p>
-<p>It is known that \cinf-symmetries have the invariant-by-derivation property (Remark \ref{rem_IBD}), so we can construct a surjective submersion $\pi$.</p>
+<p>It is known that $\mathcal{C}^{\infty}$-symmetries have the invariant-by-derivation property (see <a href="./../../✏️ THEOREMS/IBD property for vectors.md.html">IBD property for vectors</a>), so we can construct a surjective submersion $\pi$.</p>
 <p></p>
 <p>Let's call $\tilde{\mathcal{J}}$ to the EDS of the reduced equation by the classical procedure. It would be interesting to prove that </p>
 $$
@@ -176,13 +155,9 @@ $$
 <p></p>
 <p>They are, indeed, equivalent (see exercise 8.35 and theorem 8.2 in Benjamin McKay Introduction to Exterior Differential Systems).</p>
 <p></p>
+<h2 style="margin-left:0px;" id="Geometrical_reduction_like_Sherring_"a_la_$\mathcal{J}^X$"">Geometrical reduction (like Sherring) "a la $\mathcal{J}^X$"</h2>
+<p>This is, in essence, what Fels does in  \cite{fels2007integrating}..</p>
 <p></p>
-<p></p>
-<p>\subsection{Geometrical reduction (like Sherring) "a la $\mathcal{J}^X$"}</p>
-<p>This is, in essence, what Fels does in \cite{fels2007integrating}.</p>
-<p></p>
-<p></p>
-<p>\subsection{"Commutative diagram" to see that they are the same}</p>
 <p></p>
 <p></p>
 <p>________________________________________</p>

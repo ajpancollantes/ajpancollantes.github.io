@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Bell's_experiment">Bell's experiment</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="Why_Bell_inequalities_exclude_hidden_variables?">Why Bell inequalities exclude hidden variables?</h2>
+<p>Before all: it only excludes \textbf{local} hidden variables.</p>
+<p>Einstein, Podolsky, Rosen and Bohm thought a gendaken that consisted of two particles, positron and electron, carrying opposite spins and emerging from the same neutral $\pi$ meson. They claimed that if QM is true (the spin is under superposition until we measure it), then the measurement of, say, the electron would imply an instantaneous action over the positron, which could be far away from the electron. And this is in contradiction with relativity. So there must be hidden variables in the system that determine the spin of the electron and positron before they emerge from the pi meson.</p>
+<p>But Bell modified the experiment in the following sense. He thought about measuring both spins (electron and positron) at different angles, turning slightly the detectors. Assigned a value to the detector result: +1 and -1, and kept track of the product of the results of both detectors to compute their average: $P$.</p>
+<p>Subquestion: why the product? Because this way is easy to follow the correlation. The product being -1 is what it should be if we had perfectly aligned detectors. I we turn a detector a little we would sometimes get a +1]</p>
+<p>Now, think in a classical context: the electron and positron are balls with opposite spin (=angular momentum), but with random orientation, and our detectors only give us the sign of the projection of the spin over the orientation vector of the detectors (call them $a$ and $b$).</p>
+<p><img src="./../imagenes/Pasted image 20230613082355.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>By simple probabilities calculations (total probability theorem) we obtain that $P=\frac{2|\eta|-\pi}{\pi}$. </p>
+<p></p>
+<p></p>
+<p>But according to QM the balls would be in an entangled state $\frac{1}{\sqrt{2}} \ket{a_+}\ket{a_-}-\frac{1}{\sqrt{2}} \ket{a_-}\ket{a_+}$ (in the base given by eigenstates of detector $a$). </p>
+<p>If we measure the electron and obtain +1 the state collapse to $\ket{a_+}\ket{a_-}$ so the positron is in state $\ket{a_-}$. If we express it in the other basis</p>
+$$
+\ket{a_-}=\alpha\ket{b_+}+\beta\ket{b_-}=sin(\frac{\eta}{2})\ket{b_+}+cos(\frac{\eta}{2})\ket{b_-}
+$$
+<p>I conclude that because $\alpha^2+\beta^2=1$ and because $\beta^2-\alpha^2=cos(\eta)$ since the average measurement of $\ket{a_-}$ in detector $b$ should lead to a classical result $cos(\eta)$. </p>
+<p></p>
+<p>Analogously </p>
+$$
+\ket{a_+}=cos(\frac{\eta}{2})\ket{b_+}+sin(\frac{\eta}{2})\ket{b_-}
+$$
+<p>So, using total probability theorem</p>
+<p><img src="./../imagenes/Pasted image 20230613082500.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+$$
+
+P=1\cdot sin^2(\eta/2)+ (-1)\cdot cos^2(\eta/2)=-cos(\eta)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So CM and QM disagrees. Experiments, of course, give the reason to QM. Observe that the \textbf{hidden variable $\eta$} is not enough to explain reality.</p>
+<p></p>
+<p>But what about any other alternative theory to CM with more hidden variables or with other probability distribution of the variable (above we have supposed that the random angle $\eta$ is uniformly distributed)?</p>
+<p></p>
+<p>Let's see. Supposse that the pairs electron-positron comes with a set o hidden variables $\lambda$ with a probability distribution $\rho(\lambda)$. Call $A(a,\lambda)=\pm 1$ the result given by detector $a$ for the electron with variables $\lambda$. And the same for $B(b,\lambda)$ and the positron in $b$ detector. Of course $B(b,\lambda)=-A(b,\lambda)$. Then</p>
+$$
+P(\mathbf{a}, \mathbf{b})=-\int \rho(\lambda) A(\mathbf{a}, \lambda) A(\mathbf{b}, \lambda) d \lambda
+$$
+<p>I we now consider another detector.. (This is in chapter Afterwords, in Griffiths)...</p>
+<p></p>
+<p></p>
+<p>Related: <a href="./On Many Worlds, entanglement and hidden variables.md.html">On Many Worlds, entanglement and hidden variables</a>.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

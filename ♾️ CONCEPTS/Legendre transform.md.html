@@ -31,14 +31,16 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Idea">Idea</h1>
+<font size="3vw"><h1 style="margin-left:0px;" id="Legendre_transform">Legendre transform</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="Idea">Idea</h2>
 <p>The Legendre transform of a function $f(x)$ is a way to encode the same information but in another (maybe more convenient) way. Something similar to the Fourier transform: we encode the information of the function in the coefficients $C_{\omega}$ of the "armonics" $e^{i\omega t}$.</p>
 <p></p>
 <p>In the case of Legendre transform, we express the information of the function associating a value to every slope $p$ of the original function. By the way, this is only valid for a function whose slope has a 1-1 relation with the independent variable $x$, that is, $f'(x)$ must be injective. Usually we take $f$ convex, so no problem here.</p>
 <p></p>
 <p>The point is that in certain situations the slope $f'(x)=:p$ is more important than $x$ itself. </p>
 <p></p>
-<p>*Idea:* en una etapa ciclista de montaña queremos información de la altitud (porque nos ahogamos) en función de la distancia recorrida, y de ahí podemos sacar la pendiente (porque es duro). Así podemos decir que el kilómetro 8 tendrá una pendiente del 6 por ciento y a una altitud de 1250 m. Pero para según qué fin, podría ser más interesante expresar como variable independiente la pendiente (por ejemplo, distintas pendientes condicionan el desarrollo que hay que llevar instalado, pero las distancias no influyen...). Podríamos expresar la altitud en función de la pendiente, simplemente despejando en la derivada y sustituyendo en la función original. Pero así habríamos perdido la información de la distancia! La solución es la transformada de Legendre.</p>
+<p>*Idea:* In a mountain cycling stage, we want information on altitude (because we struggle when we lack oxygen) as a function of the distance covered, and from there we can determine the slope (because it's tough, and we want to know which gears to use). So, we can say that at kilometer 8, the slope will be 6 percent at an altitude of 1250 m. However, for certain purposes, it might be more interesting to express the slope as the independent variable (for example, different slopes dictate the gear setup, but distances don't have the same effect...). We could express altitude as a function of slope, simply by clearing in the derivative and substituting in the original function. But in doing so, we would lose the information on distance! The solution is the Legendre transform.</p>
 <p></p>
 <p>In Lagrangian mechanics $\frac{dL}{dq_t}=p$ is the generalized momentum (that appears once and again), so is natural that we want to express $L$ as a function of $p$. </p>
 <p></p>

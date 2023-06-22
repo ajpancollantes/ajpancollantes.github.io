@@ -62,7 +62,7 @@ $$
 H_e:=ds_x (T_x M)
 $$
 <p>where $s$ is a section such that $s(x)=e$ and $\nabla_X s=0$ for every $X\in T_x M$.</p>
-<p>Therefore the <a href="./vector bundle connection.md.html">vector bundle connection</a> determine a <a href="./connection on a fiber bundle.md.html">Ehresmann connection</a>.</p>
+<p>Therefore the <a href="./vector bundle connection.md.html">vector bundle connection</a> determine a <a href="./connection on a fiber bundle.md.html">Ehresmann connection</a>, which can be also described by a connection 1-form <a href="./connection on a fiber bundle.md.html#Connection_1-form">in this sense</a> (not the Christoffel 1-form). See the worked <a href="./vector bundle connection.md.html#Worked_example_1">worked example here</a>.</p>
 <p></p>
 <p>Conversely, given a <a href="./connection on a fiber bundle.md.html">connection in the sense of Ehresmann</a> $HE$ we can define a vector bundle connection like this:</p>
 <p><img src="./../../imagenes/Pasted image 20211112155016.png" style="width:80vw; border-radius: 3px;" ></p>
@@ -70,10 +70,10 @@ $$
 <p></p>
 <h2 style="margin-left:0px;" id="Connection_form">Connection form</h2>
 <p>(<b>Christoffel 1-form, for me</b>)</p>
-<p>It is a way to express locally the vector bundle connection.</p>
+<p>It is a way to express the vector bundle connection with respect to a choice of a frame.</p>
 <p>Suppose we choose a particular local <a href="./frame on a manifold.md.html">frame</a> $e=\{e_i\}$ (that is, we restrict to an open subset $U\subseteq M$ and choose sections that span all the others). If we apply the connection to every $e_i$ we obtain</p>
 $$
-\nabla(e_i)=\sum_j e_i \otimes \omega_i^j
+\nabla(e_i)=\sum_j e_j \otimes \omega_i^j
 $$
 <p>The square matrix $\omega=(\omega_i^j)$ of 1-forms is called the <b>connection form</b>. If our vector bundle is the tangent bundle, the frame is a local chart frame, and the connection is a <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a>, the connection form is not <b>other thing that the usual</b> <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>! So I think this matrix of 1-forms should be called the <b>Christoffel 1-forms</b>.</p>
 <p>Given a particular local section of $E$, say </p>
@@ -116,7 +116,7 @@ $$
 $$
 \nabla_{\partial_{x_i}}\partial_{x_j}=a_{ij}\partial_{x_1}+b_{ij}\partial_{x_2}
 $$
-<p>This means that when we move from a point $p=(x_1,x_2)$ to, for example, a nearby point $p'=(x_1+\delta x_1,x_2)$ the vector $\partial_{x_2}$ at $p$ is "not the same" has $\partial_{x_2}$ at $p'$, but it is like if it has suffered an increase of $a_{12}\partial_{x_1}+b_{12}\partial_{x_2}$. So we should have chosen in $p'$ the vector $\partial_{x_2}-a_{12}\partial_{x_1}-b_{12}\partial_{x_2}$. Equivalently, the horizontal vectors in $TM$ will be (following <a href="./vector bundle connection.md.html#As_a_particular_case_of_connection_on_a_fiber_bundle">this construction</a>):</p>
+<p>This means that when we move from a point $p=(x_1,x_2)$ to, for example, a nearby point $p'=(x_1+\delta x_1,x_2)$ the vector $\partial_{x_2}$ at $p$ is "not the same as" $\partial_{x_2}$ at $p'$, but it is like if it has suffered an increase of $a_{12}\partial_{x_1}+b_{12}\partial_{x_2}$. So we should have chosen in $p'$ the vector $\partial_{x_2}-a_{12}\partial_{x_1}-b_{12}\partial_{x_2}$. Equivalently, the horizontal vectors in $T(TM)$ will be (following <a href="./vector bundle connection.md.html#As_a_particular_case_of_connection_on_a_fiber_bundle">this construction</a>):</p>
 <p>(xournal 197)</p>
 <p><img src="./../../imagenes/Pasted image 20221030091200.png" style="width:80vw; border-radius: 3px;" ></p>
 <p><img src="./../../imagenes/Pasted image 20221030091232.png" style="width:80vw; border-radius: 3px;" ></p>

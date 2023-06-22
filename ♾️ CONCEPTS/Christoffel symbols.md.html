@@ -36,12 +36,34 @@ gtag('config', 'G-LBT9E8N3HS');
 $$
 \nabla_{\partial_{x_i}}\partial_{x_j}=\Gamma_{ij}^k \partial_{x_k}
 $$
-<p>which are called the Christoffel symbols when the covariant derivative is coming from the <a href="./GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a> of a <a href="./GEOMETRY/Riemannian metric.md.html">Riemannian metric</a>! They correspond to the <a href="./GEOMETRY/vector bundle connection.md.html#Connection_form">vector bundle connection#Connection form</a>.</p>
+<p>which are called the Christoffel symbols (of second kind) when the covariant derivative is coming from the <a href="./GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a> of a <a href="./GEOMETRY/Riemannian metric.md.html">Riemannian metric</a>! They correspond to the <a href="./GEOMETRY/vector bundle connection.md.html#Connection_form">vector bundle connection#Connection form</a>.</p>
 <p></p>
 <p>The formula to compute the Christoffel symbols from the <a href="./GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> can be deduced from the defining conditions 1. and 2. of the <a href="./GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a> (see, for examle, <a href="https://en.wikipedia.org/wiki/Levi-Civita_connection)" target="_blank">wikipedia</a> giving rise to</p>
 $$
 \Gamma_{ij}^k = \frac{1}{2} g^{kl}(\partial_i g_{jl} + \partial_j g_{il} - \partial_l g_{ij})
 $$
+<p>In  2 dimensions:</p>
+<p>For $k=1$:</p>
+<p></p>
+<p>1) $\Gamma_{11}^1 =\sum_{l=1}^2 \frac{1}{2} g^{1l}(\partial_1 g_{1l} + \partial_1 g_{1l} - \partial_l g_{11}) = \frac{1}{2} g^{11}\partial_1 g_{11} + \frac{1}{2} g^{12}(2 \partial_1 g_{21}  - \partial_2 g_{11})$</p>
+<p></p>
+<p>2) $\Gamma_{12}^1 =\sum_{l=1}^2 \frac{1}{2} g^{1l}(\partial_1 g_{2l} + \partial_2 g_{1l} - \partial_l g_{12}) = \frac{1}{2} g^{11}\partial_2 g_{11} + \frac{1}{2} g^{12}\partial_1 g_{22}$</p>
+<p></p>
+<p>3) $\Gamma_{21}^1 =\sum_{l=1}^2 \frac{1}{2} g^{1l}(\partial_2 g_{1l} + \partial_1 g_{2l} - \partial_l g_{21}) = \frac{1}{2} g^{11}\partial_2 g_{11} + \frac{1}{2} g^{12} \partial_1 g_{22}$</p>
+<p></p>
+<p>4) $\Gamma_{22}^1 =\sum_{l=1}^2 \frac{1}{2} g^{1l}(\partial_2 g_{2l} + \partial_2 g_{2l} - \partial_l g_{22}) = \frac{1}{2} g^{11}(2\partial_2 g_{21} - \partial_1 g_{22}) + \frac{1}{2} g^{12} \partial_2 g_{22}$</p>
+<p></p>
+<p>For $k=2$:</p>
+<p></p>
+<p>1) $\Gamma_{11}^2 = \frac{1}{2} g^{21}\partial_1 g_{11} + \frac{1}{2} g^{22}(2 \partial_1 g_{21}  - \partial_2 g_{11})$</p>
+<p></p>
+<p>2) $\Gamma_{12}^2 = \frac{1}{2} g^{21}\partial_2 g_{11} + \frac{1}{2} g^{22}\partial_1 g_{22}$</p>
+<p></p>
+<p>3) $\Gamma_{21}^2 =\frac{1}{2} g^{21}\partial_2 g_{11} + \frac{1}{2} g^{22} \partial_1 g_{22}$</p>
+<p></p>
+<p>4) $\Gamma_{22}^2 = \frac{1}{2} g^{21}(2\partial_2 g_{21} - \partial_1 g_{22}) + \frac{1}{2} g^{22} \partial_2 g_{22}$</p>
+<p></p>
+<p>Since the metric tensor $g_{ij}$ is symmetric (i.e., $g_{ij} = g_{ji}$), it follows that the Christoffel symbols are symmetric in their lower indices, i.e., $\Gamma_{ij}^k = \Gamma_{ji}^k$.</p>
 <p></p>
 <h3 style="margin-left:0px;" id="Generalization?">Generalization?</h3>
 <p>I think that for other <a href="./GEOMETRY/frame on a manifold.md.html">local frame</a> $\{e_i\}$ of $TM$, the functions $\Gamma_{ij}^k$ such that</p>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Fornberg-Whitham_equation_with_cinf-structures">Fornberg-Whitham equation with cinf-structures</h1>
+<p></p>
+<p>Maple 068 Fornberg Whitham</p>
+<p></p>
+<p>Es una alternativa para modelar las shallow water waves.</p>
+<p>La ecuación de Fornberg-Whitham es una ecuación alternativa a la KdV para describir ondas en aguas poco profundas. Se puede utilizar para modelar el comportamiento de una ola en el proceso de rompimiento, es decir, cuando la amplitud de la onda se hace grande y la forma de la onda cambia drásticamente.</p>
+<p></p>
+<p>Artículo original donde aparece: </p>
+<p><a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rsta.1978.0064" target="_blank">https://royalsocietypublishing.org/doi/pdf/10.1098/rsta.1978.0064	</a></p>
+<p></p>
+<p>Según las condiciones iniciales, puede llevar a un wave breaking:</p>
+<p><a href="https://www.sciencedirect.com/science/article/pii/S0022039617304394#br0090" target="_blank">https://www.sciencedirect.com/science/article/pii/S0022039617304394#br0090</a></p>
+<p></p>
+<p></p>
+<p>La ecuacion es</p>
+$$
+	u_t-u_{x x t}+\beta u_x=u u_{x x x}-\alpha u^n u_x+3 u_x u_{x x}
+$$
+<p></p>
+$$
+	-k^2 h h_{z z z}+k \omega h_{z z z}-3 k^2 h_z h_{z z}+\alpha  h^n h_z-\omega h_z+\beta  h_z=0
+$$
+<p></p>
+<p>Conclusions:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>We get a \cinf-structure for the generalized Fornberg-Whitham equation \eqref{eq_GFW}.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>We can use it to find the general solution of the travelling wave solutions, but with shape of the inverse of an integral.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Particular cases of interest:</li></ul></p>
+<p>	\begin{enumerate}</p>
+<p>		\item $n=1$, explicit expression $z(h)$, complicated but can be simplified with change of variables for the constants.</p>
+<p>		\item $n=2$, explicit expression $z(h)$, with $C_3=C_2=0$, but too complicated with so many constants</p>
+<p>		\item $n=2,k=1, \omega=1, \alpha=1, \beta= 1$, a modo de ejemplo del caso anterior.</p>
+<p>		\item $n=3,k=1, \omega=1, \alpha=1, \beta= 1$ and $C_3=C_2=0$. We obtain an explicit expression $h(z)$</p>
+<p>		\item Podemos resolver para $n=0$, expresión explĺicita $z(h)$, pero muy complicada. Con valores $C_2=C_3=0$ ($C_1$ libre) sí sale algo presentable. Ojo, todos los demás parámetros están libres.</p>
+<p>		\item Para valor $n=-1,-2,-3$, sale expresión con inversa de una integral. Estos casos son excluidos en el artículo \cite{CAMACHO2017149}</p>
+<p>	\end{enumerate}</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

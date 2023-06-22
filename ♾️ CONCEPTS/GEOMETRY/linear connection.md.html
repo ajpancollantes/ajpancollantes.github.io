@@ -91,7 +91,7 @@ $$
 $$
 (\nabla_X Y)(p)
 $$
-<p>This result depends on the values of the vector field $X$ in a neighbourhood of $p$, but only <b>on the specific vector</b> $Y(p)$, since it is linear in this argument (property 3 above). The <a href="./Lie derivative of vector fields.md.html">Lie derivative of vector fields</a>, on the contrary, depends on the values of $X$ in a neighbourhood.</p>
+<p>This result depends on the values of the vector field $X$ in a neighbourhood of $p$, but only <b>on the specific vector</b> $Y(p)$, since it is linear in this argument (property 3 above). The <a href="./Lie derivative of vector fields.md.html">Lie derivative of vector fields</a>, on the contrary, depends on the values of $X$ in a neighbourhood. See the <a href="./../../☕REFLECTIONS/relation of Lie derivative, covariant derivative and torsion.md.html">relation of Lie derivative, covariant derivative and torsion</a>.</p>
 <p></p>
 <p><b>Proof</b></p>
 <p>The value of $\nabla_XY$ depends only on the values of $X$ and $Y$ in a neighborhood $U$ of $p$, so you can write in a local frame $X=X^iE_i$ such that $X^i(p)=0$, then as you said :</p>
@@ -112,18 +112,19 @@ $$
 <p>which are called the <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>.</p>
 <p></p>
 <h1 style="margin-left:0px;" id="Worked_example">Worked example </h1>
-<p>Otro enfoque para entender el problema es el siguiente:</p>
+<p>Another approach to understanding the problem is as follows:</p>
 <p></p>
-<p>En $\mathbb{R}^2$ con coordenadas cartesianas $(x,y)$ tenemos una base $\{\frac{\partial}{\partial x}, \frac{\partial}{\partial y}\}$ para los distintos espacios tangentes. Además, el vector tangente $\frac{\partial}{\partial x}$ en el punto $P=(1,2)$ y el vector $\frac{\partial}{\partial x}$ en el punto $Q=(0,1)$ son "el mismo", en el sentido de que puedo trasladarlo de $P$ a $Q$. Esto es así porque <b>ESTAMOS ASUMIENDO</b> la noción de paralelismo tradicional en $\mathbb{R}^2$.</p>
+<p>In $\mathbb{R}^2$ with Cartesian coordinates $(x, y)$, we have a basis $\{\frac{\partial}{\partial x}, \frac{\partial}{\partial y}\}$ for the different tangent spaces. Moreover, the tangent vector $\frac{\partial}{\partial x}$ at point $P=(1,2)$ and the vector $\frac{\partial}{\partial x}$ at point $Q=(0,1)$ are "the same," in the sense that I can translate it from $P$ to $Q$. This is because we are assuming the notion of traditional parallelism in $\mathbb{R}^2$.</p>
 <p></p>
-<p>Ahora bien, consideremos otras coordenadas, por ejemplo $(t,a)$ dadas por la transformación:</p>
-$$ 
-\phi: (x,y) \to (t,a)=(x, y-x^2)
+<p>Now, let's consider other coordinates, for example, $(t, a)$ given by the transformation:</p>
 $$
-<p>El vector $\frac{\partial}{\partial t}$ en el punto $P=(1,1)$ (ojo, este $P$ es el mismo que el del párrafo anterior pero expresado en coordenadas $(t,a)$) y el vector $\frac{\partial}{\partial t}$ en el punto $Q=(0,1)$ ahora <b>NO son el mismo, desde el punto de vista del paralelismo tradicional</b> en $\mathbb{R}^2$. Veámoslo:</p>
-<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}$ en $P$ se puede expresar en coordenadas cartesianas como</li></ul></p>
+\phi: (x, y) \to (t, a) = (x, y - x^2)
 $$
-d \phi^{-1} (\frac{\partial}{\partial t})=\left(
+<p>The vector $\frac{\partial}{\partial t}$ at point $P=(1,1)$ (note that this $P$ is the same as in the previous paragraph but expressed in coordinates $(t, a)$), and the vector $\frac{\partial}{\partial t}$ at point $Q=(0,1)$ are now <b>not the same, from the perspective of traditional parallelism</b> in $\mathbb{R}^2$. Let's see this:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}$ at $P$ can be expressed in Cartesian coordinates as</li></ul></p>
+$$
+d\phi^{-1}(\frac{\partial}{\partial t})=\left(
 \begin{array}{cc}
 1 & 0\\
 2t & 1 \\
@@ -135,9 +136,9 @@ d \phi^{-1} (\frac{\partial}{\partial t})=\left(
 \end{array}
 \right) \right|_P  =\left. (1 \quad 2t)\right| _P=\frac{\partial}{\partial x}+4 \frac{\partial}{\partial y}
 $$
-<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}$ en $Q$ se puede expresar en coordenadas cartesianas como</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}$ at $Q$ can be expressed in Cartesian coordinates as</li></ul></p>
 $$
-d\phi^{-1} (\frac{\partial}{\partial t})=\left(
+d\phi^{-1}(\frac{\partial}{\partial t})=\left(
 \begin{array}{cc}
 1 & 0\\
 2t & 1 \\
@@ -149,45 +150,36 @@ d\phi^{-1} (\frac{\partial}{\partial t})=\left(
 \end{array}
 \right) \right|_Q  =\left. (1 \quad 2t)\right| _Q =\frac{\partial}{\partial x}
 $$
-<p>Luego $\frac{\partial}{\partial t}$ NO es constante, aunque sus componentes lo sean. </p>
-<p>Esto supone que si queremos derivar un campo de vectores en este nuevo sistema de coordenadas <b>NO PODREMOS LIMITARNOS a derivar cada componente</b>. Pues por ejemplo, la derivada de $\frac{\partial}{\partial t}$ sería 0, y acabamos de ver que no es constante.</p>
-<p>La forma de arreglar esto es añadir a la derivada tradicional por componentes unos términos de corrección que reflejen la propia deformación de los ejes.</p>
-<p>Veámoslo en el caso concreto de las coordenadas $(t,a)$ (ojo, para las coordenadas $(x,y)$ bastaría con derivar cada componente, porque estamos asumiendo que los vectores de las bases sí son constantes):</p>
-<p></p>
-<p>Consideremos el campo de vectores $X=F_X \frac{\partial}{\partial t}+G_X \frac{\partial}{\partial a}$ y el campo $Y=F_Y \frac{\partial}{\partial t}+G_Y \frac{\partial}{\partial a}$. Una forma coherente de diferenciar $Y$ respecto de $X$ sería una operación $\nabla$ que debería cumplir:</p>
+<p>Therefore, $\frac{\partial}{\partial t}$ is not constant, even though its components are. This implies that if we want to differentiate a vector field in this new coordinate system, we <b>cannot simply differentiate each component</b>. For example, the derivative of $\frac{\partial}{\partial t}$ would be 0, but we have just seen that it is not constant.</p>
+<p>The way to fix this is to add correction terms to the traditional component-wise derivative that reflect the deformation of the axes themselves. Let's see this in the specific case of coordinates $(t, a)$ (note that for coordinates $(x, y)$, it would be sufficient to differentiate each component because we assume that the basis vectors are constant):</p>
+<p>Consider the vector field $X = F_X \frac{\partial}{\partial t} + G_X \frac{\partial}{\partial a}$ and the field $Y = F_Y \frac{\partial}{\partial t} + G_Y \frac{\partial}{\partial a}$. A consistent way to differentiate $Y$ with respect to $X$ would be an operation $\nabla$ that should satisfy:</p>
 $$
-\nabla_X Y= F_X \frac{\partial}{\partial t}(Y)+G_X \frac{\partial}{\partial a}(Y)=
+\nabla_X Y = F_X \frac{\partial}{\partial t}(Y) + G_X \frac{\partial}{\partial a}(Y) =
 $$
 $$
-=
-F_X \frac{\partial}{\partial t}(F_Y \frac{\partial}{\partial t}+G_Y \frac{\partial}{\partial a})+G_X \frac{\partial}{\partial a}(F_Y \frac{\partial}{\partial t}+G_Y \frac{\partial}{\partial a})
+= F_X \frac{\partial}{\partial t}(F_Y \frac{\partial}{\partial t} + G_Y \frac{\partial}{\partial a}) + G_X \frac{\partial}{\partial a}(F_Y \frac{\partial}{\partial t} + G_Y \frac{\partial}{\partial a})
 $$
-<p>Como la regla de Leibniz debería cumplirse también para vectores, la expresión anterior quedaría:</p>
+<p>Since the Leibniz rule should also hold for vectors, the above expression becomes:</p>
 $$
-F_X \frac{\partial}{\partial t}(F_Y) \frac{\partial}{\partial t}+F_X F_Y \frac{\partial}{\partial t}(\frac{\partial}{\partial t})
-+
+F_X \frac{\partial}{\partial t}(F_Y) \frac{\partial}{\partial t} + F_X F_Y \frac{\partial}{\partial t}(\frac{\partial}{\partial t}) +
 $$
 $$
-+F_X \frac{\partial}{\partial t}(G_Y) \frac{\partial}{\partial a}+F_X G_Y \frac{\partial}{\partial t}(\frac{\partial}{\partial a})
-+
-$$
-<p></p>
-$$
-+G_X \frac{\partial}{\partial a}(F_Y) \frac{\partial}{\partial t}+G_X F_Y \frac{\partial}{\partial a}(\frac{\partial}{\partial t})
-+
++ F_X \frac{\partial}{\partial t}(G_Y) \frac{\partial}{\partial a} + F_X G_Y \frac{\partial}{\partial t}(\frac{\partial}{\partial a}) +
 $$
 $$
-+G_X \frac{\partial}{\partial a}(G_Y) \frac{\partial}{\partial a}+G_X G_Y \frac{\partial}{\partial a}(\frac{\partial}{\partial a})
-=
++ G_X \frac{\partial}{\partial a}(F_Y) \frac{\partial}{\partial t} + G_X F_Y \frac{\partial}{\partial a}(\frac{\partial}{\partial t}) +
 $$
 $$
-=X(F_Y) \frac{\partial}{\partial t}+X(G_Y) \frac{\partial}{\partial a}+ \textrm{términos de corrección}
++ G_X \frac{\partial}{\partial a}(G_Y) \frac{\partial}{\partial a} + G_X G_Y \frac{\partial}{\partial a}(\frac{\partial}{\partial a}) =
+$$
+$$
+= X(F_Y) \frac{\partial}{\partial t} + X(G_Y) \frac{\partial}{\partial a} + \textrm{correction terms}
 $$
 <p></p>
-<p>Estos "términos de corrección" estarán perfectamente determinados cuando calculemos $\frac{\partial}{\partial t}(\frac{\partial}{\partial t})$, $\frac{\partial}{\partial t}(\frac{\partial}{\partial a})$, $\frac{\partial}{\partial a}(\frac{\partial}{\partial t})$ y $\frac{\partial}{\partial a}(\frac{\partial}{\partial a})$</p>
-<p>Traduzcámoslo todo a coordenadas cartesianas, donde SÍ sabemos derivar porque existe paralelismo.</p>
+<p>These "correction terms" will be fully determined when we calculate $\frac{\partial}{\partial t}(\frac{\partial}{\partial t})$, $\frac{\partial}{\partial t}(\frac{\partial}{\partial a})$, $\frac{\partial}{\partial a}(\frac{\partial}{\partial t})$, and $\frac{\partial}{\partial a}(\frac{\partial}{\partial a})$. Let's translate everything into Cartesian coordinates, where we can differentiate because parallelism exists.</p>
+<p></p>
 $$
-d \phi^{-1} (\frac{\partial}{\partial t})=\left(
+d\phi^{-1}(\frac{\partial}{\partial t})=\left(
 \begin{array}{cc}
 1 & 0\\
 2t & 1 \\
@@ -199,8 +191,9 @@ d \phi^{-1} (\frac{\partial}{\partial t})=\left(
 \end{array}
 \right)=\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y}
 $$
+<p></p>
 $$
-d \phi^{-1} (\frac{\partial}{\partial a})=\left(
+d\phi^{-1}(\frac{\partial}{\partial a})=\left(
 \begin{array}{cc}
 1 & 0\\
 2t & 1 \\
@@ -212,29 +205,30 @@ d \phi^{-1} (\frac{\partial}{\partial a})=\left(
 \end{array}
 \right)=\frac{\partial}{\partial y}
 $$
-<p>Así pues:</p>
+<p></p>
+<p>Therefore:</p>
 <p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}(\frac{\partial}{\partial t})=(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y})(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y})=2\frac{\partial}{\partial y}=2\frac{\partial}{\partial a}$</li></ul></p>
-<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}(\frac{\partial}{\partial a})=(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y})( \frac{\partial}{\partial y})=0$</li></ul></p>
-<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial a}(\frac{\partial}{\partial t})=\frac{\partial}{\partial y}(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y} )=0$</li></ul></p>
-<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial a}(\frac{\partial}{\partial a})=\frac{\partial}{\partial y}(\frac{\partial}{\partial y} )=0$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}(\frac{\partial}{\partial a})=(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y})(\frac{\partial}{\partial y})=0$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial a}(\frac{\partial}{\partial t})=\frac{\partial}{\partial y}(\frac{\partial}{\partial x}+2x \frac{\partial}{\partial y})=0$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial a}(\frac{\partial}{\partial a})=\frac{\partial}{\partial y}(\frac{\partial}{\partial y})=0$</li></ul></p>
 <p></p>
-<p>Así pues, la "derivación" quedaría así:</p>
+<p>Thus, the "differentiation" becomes:</p>
 $$
-\nabla_X Y=X(F_Y) \frac{\partial}{\partial t}+X(G_Y) \frac{\partial}{\partial a}+ 2 F_X F_Y\frac{\partial}{\partial a} 
+\nabla_X Y = X(F_Y) \frac{\partial}{\partial t} + X(G_Y) \frac{\partial}{\partial a} + 2 F_X F_Y\frac{\partial}{\partial a}
 $$
-<p>A las componentes de $\frac{\partial}{\partial t}(\frac{\partial}{\partial t})$, $\frac{\partial}{\partial t}(\frac{\partial}{\partial a})$, $\frac{\partial}{\partial a}(\frac{\partial}{\partial t})$ y $\frac{\partial}{\partial a}(\frac{\partial}{\partial a})$ en la base $\left< \frac{\partial}{\partial t}, \frac{\partial}{\partial t} \right>$ se les llama <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>, y dependen de la noción de paralelismo y de las coordenadas elegidas. Se simbolizan por $\Gamma_{ij}^k$ y, en nuestro caso, $\Gamma_{11}^2=2$ y todos los demás son 0.</p>
 <p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<h1 style="margin-left:0px;" id="Abstract_index_notation">Abstract index notation</h1>
-<p>Se le puede dar a todo un enfoque con <a href="./../../⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html">Penrose abstract index notation</a>. Así, denotaríamos:</p>
+<p>The components of $\frac{\partial}{\partial t}(\frac{\partial}{\partial t})$, $\frac{\partial}{\partial t}(\frac{\partial}{\partial a})$, $\frac{\partial}{\partial a}(\frac{\partial}{\partial t})$, and $\frac{\partial}{\partial a}(\frac{\partial}{\partial a})$ in the basis $\left< \frac{\partial}{\partial t}, \frac{\partial}{\partial t} \right>$ are called <a href="./../Christoffel symbols.md.html">Christoffel symbols</a> and depend on the notion of parallelism and the chosen coordinates. They are symbolized by $\Gamma_{ij}^k$, and in our case, $\Gamma_{11}^2=2$, and all others are 0.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Abstract_Index_Notation">Abstract Index Notation</h1>
+<p>This whole approach can be given using <a href="./../../⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html">Penrose abstract index notation</a>. In this notation, we would denote:</p>
 $$
-\xi^c \nabla_c \Psi^a=\nabla_{\xi} \Psi
+\xi^c \nabla_c \Psi^a = \nabla_{\xi} \Psi
 $$
-<p>En notación de Penrose queda:</p>
+<p>In Penrose notation, it becomes:</p>
 <p><img src="./../../imagenes/derivadacovariante.png" style="width:80vw; border-radius: 3px;" ></p>
-<p>Y por ejemplo la regla de Leibniz (y más cosas):</p>
+<p>And, for example, the Leibniz rule (and more):</p>
 <p><img src="./../../imagenes/notacionpenrose3 1.png" style="width:80vw; border-radius: 3px;" ></p>
-<p>Una conexión va a determinar, en último término, una forma de identificar vectores tangentes en un punto $p\in M$ con los de otro punto $q\in M$, aunque dependerá de la curva que los una (<a href="./../parallel transport.md.html">parallel transport</a>).</p>
+<p>Ultimately, a connection will determine a way to identify tangent vectors at one point $p\in M$ with those at another point $q\in M$, although it will depend on the curve connecting them (<a href="./../parallel transport.md.html">parallel transport</a>).</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

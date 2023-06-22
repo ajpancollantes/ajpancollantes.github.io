@@ -31,18 +31,58 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Embedded_manifold">Embedded manifold</h1>
-<p>It is an <a href="./immersed manifold.md.html">immersed manifold</a> but now we require the map $f$ to be globally injective and a homeomorphism between $M$ and $f(M)$ (with the relative topology). It is also said that $f$ <b>is an embedding</b>.</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="The_same_ODE_in_two_jet_spaces">The same ODE in two jet spaces</h1>
+<p>An $m$-th order <a href="./../../♾️ CONCEPTS/DEs/ODE.md.html">ODE</a> can be visualized both in the <a href="./../../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> $J^{m-1}(\mathbb{R},\mathbb{R})$ and in $J^{m}(\mathbb{R},\mathbb{R})$. The diagram would be:</p>
+<p><img src="./../../imagenes/Pasted image 20211001084016.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>where</p>
+$$
+i: (x,u,u_1,u_2) \mapsto (x,u,u_1,u_2,F(x,u,u_1,u_2))
+$$
+<p>The field $A$ is mapped to $i_* (A)$ defined only in the image, but we would also have defined <b>in the entire $J^{m}(\mathbb{R},\mathbb{R})$</b> the field</p>
+$$
+\widetilde{A}=\partial x+u_1 \partial u+u_2 \partial u_1+u_3\partial u_2+D_x(F)\partial u_3
+$$
+<p>such that</p>
+$$
+\widetilde{A}|_{\{u_3=F\}}=i_*(A)
+$$
 <p></p>
-<p>The image of $f$ is called <b>regular submanifold</b>.</p>
+<p>Suppose we have a Lie point symmetry $X$ of the ODE. We have the prolongations</p>
+$$
+X^{(m-1)}=\xi \partial x+\eta^0 \partial u+\sum^{m-1}\eta^k \partial u_k
+$$
+<p>prolonged up to $(m-1)$th order, and</p>
+$$
+X^{(m)}=\xi \partial x+\eta^0 \partial u+\sum^{m} \eta^k \partial u_k=
+$$
+$$
+=\xi \partial x+\eta^0 \partial u+\sum^{m-1} \eta^k \partial u_k+(D_x \eta^{m-1}-u_m D_x \xi)\partial u_m
+$$
+<p>up to $m$th order.</p>
 <p></p>
-<p>If $M$ is compact then we only have to require to be an injective immersion.</p>
 <p></p>
-<p>Very surprisingly, there are two important results relative to embeddings: the <a href="https://en.wikipedia.org/wiki/Whitney_embedding_theorem" target="_blank">Whitney embedding theorem</a> and the <a href="https://en.wikipedia.org/wiki/Nash_embedding_theorem" target="_blank">Nash embedding theorem</a>. The latter refer specifically to <b>isometric embeddings</b> in $\mathbb R^N$, i.e., the original manifold $M$ is equipped with a <a href="./Riemannian metric.md.html">Riemannian metric</a> $g$ and we require that it concides with the pullback of the standard metric of $\mathbb R^N$.</p>
+<p>And we can wonder, <b>what is</b> $i_*(X^{(m-1)})$?</p>
+$$
+i_*(X^{(m-1)})=\xi\partial x+\eta^0 \partial u+\eta^1\partial u_1+\eta^2 \partial u_2+ X^{(m-1)}(F)\partial u_3
+$$
 <p></p>
-<p>Another less know result is the <a href="./../../✏️ THEOREMS/Cartan-Janet theorem.md.html">Cartan-Janet theorem</a>.</p>
+<p><b>If we restrict to $\{u_3=F\}$</b>, do we have that</p>
+$$
+X^{(m-1)}(F)=(D_x \eta^{m-1}-u_3 D_x \xi)
+$$
+<p><b>???</b></p>
 <p></p>
-<p>A typical way to construct regular submanifolds is by mean of the <a href="./../../✏️ THEOREMS/preimage theorem.md.html">preimage theorem</a>.</p>
+<p>It must be true that</p>
+$$
+X^{(m)}(u_3-F)=0
+$$
+<p>(in order to be a symmetry) so</p>
+$$
+(D_x \eta^{m-1}-u_3 D_x \xi)-X^{(m-1)}(F)=0
+$$
+<p><b>and the answer is YES</b>.</p>
+<p></p>
+<p>And therefore $X^{(m)}$ is a vector field in $J^m$ that extend $i_*(X^{(m-1)})$.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

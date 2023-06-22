@@ -31,17 +31,18 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Contorsion">Contorsion</h1>
-<p>Every <a href="./covariant derivative operator.md.html">covariant derivative operator</a> that one can define in a manifold is related in some sense to the others. See \cite{malament} page 51:</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Relation_symplectic_form_and_Riemannian_metric">Relation symplectic form and Riemannian metric</h1>
+<p>Consider a <a href="./../♾️ CONCEPTS/symplectic manifold.md.html">symplectic manifold</a>. If we have also any <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> $g$, it turns out that the symplectic gradient and the usual gradient are orthogonal: remember that given a function $H$ the gradient is the only vector field $\nabla H$ such that $dH=g(\nabla H,-)$. Therefore</p>
 $$
-\left( \nabla _ { m } ^ { \prime } - \nabla _ { m } \right) \alpha _ { b _ { 1 } \ldots b _ { s } } ^ { a _ { 1 } \dots a _ { r } } = \alpha _ { n b _ { 2 } \dots b _ { s } } ^ { a _ { 1 } \dots a _ { r } } C _ { m b _ { 1 } } ^ { n } + \ldots    
+g(\nabla H, X_H)=dH(X_H)=\omega(X_H,X_H)=0
 $$
-<p>In particular, for a vector field we would have:</p>
+<p>Also, the <a href="./../♾️ CONCEPTS/Poisson bracket.md.html">Poisson bracket</a> can be computed as</p>
 $$
-\left( \nabla _ { m } ^ { \prime } - \nabla _ { m } \right) \xi^{a} =-\xi^n C _ { m n } ^ { a }
+\{A,B\}=\omega(X_A,X_B)=dA(X_B)=g(\nabla A,X_B)=\nabla A \cdot X_B
 $$
-<p>This let us show (see \cite{malament} page 57) that if <b>two derivative operators define the same set of <a href="./GEOMETRY/geodesic.md.html">geodesic</a>s then they are equals</b>.</p>
-<p>Moreover, the expression $\nabla _ { m } ^ { \prime } - \nabla _ { m }$ defines a tensor called difference tensor or <b>contorsion</b>.</p>
+<p>So the Poisson bracket can be seen as the dot product of both gradients, for any Riemannian metric!!</p>
+<p></p>
+<p>This also should also has to do with the note <a href="./Hermitian form, inner product and symplectic form relationship.md.html">Hermitian form, inner product and symplectic form relationship</a>.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

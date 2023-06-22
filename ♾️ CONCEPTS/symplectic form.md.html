@@ -35,7 +35,42 @@ gtag('config', 'G-LBT9E8N3HS');
 <p>See <a href="./../⛳️ NON CLASSIFIED/Hamiltonian mechanics.md.html#Symplectic_form">Hamiltonian mechanics#Symplectic form</a>. </p>
 <p>It is a closed non-degenerate differential 2-form. It defines a <a href="./symplectic manifold.md.html">symplectic manifold</a>. </p>
 <p></p>
-In finite dimensional manifolds we can use, I think, the <a href="./../✏️ THEOREMS/Pfaff-Darboux theorem.md.html">Pfaff-Darboux theorem</a> to obtain coordinates which provide a particularly simple expression for the symplectic form. According to <a href="./../Bibliography/@olver86.md.html">@olver86</a> page 390 it is not true in the infinite dimensional case.
+<p>In finite dimensional manifolds we can use, I think, the <a href="./../✏️ THEOREMS/Pfaff-Darboux theorem.md.html">Pfaff-Darboux theorem</a> to obtain coordinates which provide a particularly simple expression for the symplectic form. According to <a href="./../Bibliography/@olver86.md.html">@olver86</a> page 390 it is not true in the infinite dimensional case.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Discussion">Discussion</h2>
+<p>In any cotangent bundle $T^*Q$ we have a canonical 1-form known as tautological 1-form, Poincaré 1-form, Liouville 1-form, symplectic potential or canonical 1-form. Let's see how is defined. We are looking for an element $\lambda \in \Omega^1(T^*Q)$, so consider an element (in any local chart, it doesn't have to be the special one provide by the lagrangian) $(q,p)\in T^*Q.$ We want a definition for a map</p>
+$$\lambda_{(q,p)}: T_{(q,p)}(T^*Q)\longmapsto \mathbb{R}
+$$
+<p>Since in local chart we see elements in the form </p>
+$$
+(q,p,v,\eta)\in T_{(q,p)}(T^*Q)
+$$
+<p>it seems natural to forget $\eta$ and take</p>
+$$
+\lambda_{(q,p)}(q,p,v,\eta)=p(v)
+$$
+<p>But we can define it without coordinates.</p>
+<p>Consider</p>
+$$
+\pi: T^*Q\longmapsto Q
+$$
+<p>and</p>
+$$
+d\pi: T(T^*Q)\longmapsto TQ
+$$
+<p>So we can define </p>
+$$
+\lambda: T^*Q \longmapsto T^*(T^*Q)
+$$
+<p>by</p>
+$$
+\lambda_{\alpha}=\pi^*(\alpha)
+$$
+<p>Now, we can take the exterior derivative, $\omega:=d\lambda$. This is called the Poincaré 2-form, or symplectic 2-form. It is canonical for every cotangent bundle and verifies:</p>
+<p><ul style="margin-left:0px;"><li>- It is closed.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- It is nondegenerate. That is, for every vector $X\in T(T^*Q)$, the 1-form $i_X \omega=\omega(X,-)$ is not null.</li></ul></p>
+<p></p>
+<p>Any manifold equipped with a 2-form satisfying both conditions is called a <a href="./symplectic manifold.md.html">symplectic manifold</a>.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

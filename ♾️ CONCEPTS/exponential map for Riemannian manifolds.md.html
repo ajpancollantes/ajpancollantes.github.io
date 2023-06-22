@@ -32,10 +32,14 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Exponential_map_Riemannian_manifolds">Exponential map (Riemannian manifolds)</h1>
-<p>Definition...</p>
+<p>The exponential map is a way of moving from the tangent space at a point on a manifold to the manifold itself. Given a <a href="./Riemannian manifold.md.html">Riemannian manifold</a> $(M,g)$, a point $p \in M$, and a tangent vector $V \in T_pM$, the exponential map at $p$, denoted $exp_p$, is defined as follows: for every $V\in T_pM$, there is a unique <a href="./GEOMETRY/geodesic.md.html#Existence_and_computation">geodesic</a> $\gamma_V: \mathbb{R} \to M$ with $\gamma_V(0) = p$ and $\gamma_V'(0) = V$. The exponential map $exp_p: T_pM \to M$ is then defined by $exp_p(V) = \gamma_V(1)$. To get $exp_p(tV)$, you follow the geodesic for a "time" $t$ instead of 1, so $exp_p(tV) = \gamma_{tV}(1)$.</p>
 <p></p>
+<p>In other words, the exponential map $exp_p(tV)$ for $t\in\mathbb{R}$ is the point reached by traveling along the geodesic in $M$ starting at $p$ in the direction of $V$ for "time" $t$.</p>
 <p></p>
 <p>It let us define <a href="./Riemann normal coordinates.md.html">Riemann normal coordinates</a>.</p>
+<p></p>
+<p></p>
+<p>The exponential map for every $p$ and for every $V$ is controlled by the <a href="./../geodesic flow.md.html">geodesic flow</a>.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

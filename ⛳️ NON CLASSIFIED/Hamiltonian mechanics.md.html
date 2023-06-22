@@ -32,46 +32,109 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Hamiltonian_mechanics">Hamiltonian mechanics</h1>
-<p>Los estados de un sistema de <a href="./Classical Mechanics.md.html">Classical Mechanics</a> vienen determinados por variables generalizadas y sus derivadas. Es decir, trabajamos en el fibrado tangente del espacio de la configuración, o el <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> de orden 1. Eso forma parte de la formulación: <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>. La <a href="./../♾️ CONCEPTS/Legendre transform.md.html">Legendre transform</a> nos permite pasar todo al <b>fibrado cotangente</b> (<b>phase space</b>). Los estados del sistema van a venir determinados por las variables y los momentos generalizados. Puede parecer muy incómodo, pero tiene ventajas en la interpretación geométrica. The systems (<a href="./../♾️ CONCEPTS/dynamical system.md.html">dynamical system</a>s) with this origin are called <a href="./../♾️ CONCEPTS/classical Hamiltonian system.md.html">classical Hamiltonian system</a>s. Some of the are called <a href="./../♾️ CONCEPTS/integrable systems.md.html">integrable systems</a>.</p>
 <p></p>
+<p>The states of a system of <a href="./Classical Mechanics.md.html">Classical Mechanics</a> are determined by generalized variables and their derivatives. In other words, we work in the tangent bundle of the <b>configuration space</b>, or the <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> of order 1. That is part of the formulation of <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>. The <a href="./../♾️ CONCEPTS/Legendre transform.md.html">Legendre transform</a> allows us to move everything to the <b>cotangent bundle</b> (<b>phase space</b>). The states of the system are determined by the original variables and generalized momenta. It may seem cumbersome, but it has advantages in geometric interpretation. The systems (<a href="./../♾️ CONCEPTS/dynamical system.md.html">dynamical system</a>s) with this origin are called <a href="./../♾️ CONCEPTS/classical Hamiltonian system.md.html">classical Hamiltonian system</a>s. Some of them are called <a href="./../♾️ CONCEPTS/integrable systems.md.html">integrable systems</a>. Important example: <a href="./harmonic oscillator.md.html">harmonic oscillator</a>.</p>
+<p></p>
+<p>The Hamiltonian mechanics formalism can be summarized as follows (modified from review of CM and QM by <a href="https://terrytao.wordpress.com/2009/11/26/from-bose-einstein-condensates-to-the-nonlinear-schrodinger-equation/)" target="_blank">Terence Tao</a>:</p>
+<p></p>
+<p>1. The physical system has a phase space $\Omega$ of states $\vec{x}$ (often parameterized by position variables $q$ and momentum variables $p$), which mathematically corresponds to a symplectic manifold with a <a href="./../♾️ CONCEPTS/symplectic form.md.html">symplectic form</a> $\omega$ (e.g., $\omega = dp \wedge dq$ for position and momentum coordinates).</p>
+<p>2. The complete state of the system at any time $t$ is represented by a point $\vec{x}(t)$ in the phase space $\Omega$.</p>
+<p>3. Every physical observable $A$ (e.g., energy, momentum, position) is associated with a function $A$ that maps the phase space $\Omega$ to the range of the observable (e.g., for real observables, $A$ maps $\Omega$ to $\mathbb{R}$). Measuring the observable $A$ at time $t$ yields the measurement $A(\vec{x}(t))$.</p>
+<p>4. The Hamiltonian $H: \Omega \rightarrow \mathbb{R}$ is a special observable that governs the evolution of the state $\vec{x}(t)$ over time through <a href="./../♾️ CONCEPTS/Hamiltonian equations.md.html">Hamiltonian equations</a> of motion. In terms of position and momentum coordinates $\vec{x}(t) = (q_i(t), p_i(t))_{i=1}^n$, these equations are given by:</p>
+$$
+\frac{\partial p_i}{\partial t} = -\frac{\partial H}{\partial q_i}, \quad \frac{\partial q_i}{\partial t} = \frac{\partial H}{\partial p_i}.
+$$
+<p>More abstractly, using the symplectic form $\omega$, the equations of motion can be written as:</p>
+$$
+\frac{\partial \vec{x}(t)}{\partial t} = -\nabla_\omega H(\vec{x}(t)), \quad (2)
+$$
+<p>where $\nabla_\omega H$ is the <a href="./../♾️ CONCEPTS/Hamiltonian vector field.md.html">symplectic gradient</a> of $H$.</p>
+<p></p>
+<p>Hamilton's equations of motion can also be expressed in a dual form using observables $A$ as <b>Poisson's equations of motion</b>:</p>
+$$
+\frac{\partial A(\vec{x}(t))}{\partial t} = -\{H, A\}(\vec{x}(t)),
+$$
+<p>where $\{H,A\} = \nabla_\omega H \cdot \nabla A$ is the induced <a href="./../♾️ CONCEPTS/Poisson bracket.md.html">Poisson bracket</a> (here we consider an arbitrary Riemannian metric defined on $\Omega$ in order to define $\nabla A$ and the dot product.  See <a href="./../☕REFLECTIONS/relation symplectic form and Riemannian metric.md.html">relation symplectic form and Riemannian metric</a>). In a more abstract form, Poisson's equation can be written as:</p>
+$$
+\frac{\partial A}{\partial t} = -\{H,A\}, \quad (3)
+$$
+<p>where $\{H,A\}$ represents the Poisson bracket.</p>
+<p></p>
+<p>In the formalism above, we assume the system is in a pure state at each time $t$, occupying a single point $\vec{x}(t)$ in phase space. However, mixed states can also be considered, where the state of the system at time $t$ is described by a <a href="./probability theory.md.html">probability distribution</a> $\rho(t,\vec{x})\, d\vec{x}$ on the phase space. Measuring an observable $A$ at time $t$ becomes a <a href="./../♾️ CONCEPTS/random variable.md.html">random variable</a>, and its expectation $\langle A \rangle$ is given by:</p>
+$$
+\langle A \rangle(t) = \int_\Omega A(\vec{x}) \rho(t,\vec{x})\, d\vec{x}, \quad (4)
+$$
+<p>The equation of motion for a mixed state $\rho$ is given by the advection equation:</p>
+$$
+\frac{\partial \rho}{\partial t} = \text{div}(\rho \nabla_\omega H)$$
+<p>using the same vector field $-\nabla_\omega H$ as in equation (2). This equation can also be derived from equations (3), (4), and a duality argument.</p>
+<p></p>
+<p>Pure states can be seen as a special case of mixed states, where the probability distribution $\rho(t,\vec{x})\, d\vec{x}$ is a <a href="./../♾️ CONCEPTS/Dirac delta.md.html">Dirac delta</a> $\delta_{\vec{x}(t)}(\vec{x})$. Mixed states can be thought of as continuous averages of pure states, or equivalently, the space of mixed states is the convex hull of the space of pure states. </p>
+<p></p>
+<p>Consider a system of 2 particles with a joint phase space $\Omega = \Omega_1 \times \Omega_2$, where $\Omega_1$ and $\Omega_2$ are the individual one-particle phase spaces. A pure joint state is represented by a point $x = (\vec{x}_1, \vec{x}_2)$ in $\Omega$, where $\vec{x}_1$ and $\vec{x}_2$ represent the states of the first and second particles, respectively. If the joint Hamiltonian $H: \Omega \rightarrow \mathbb{R}$ splits as:</p>
+$$
+H(\vec{x}_1, \vec{x}_2) = H_1(\vec{x}_1) + H_2(\vec{x}_2),
+$$
+<p>then the equations of motion for the first and second particles are completely decoupled, with no interactions between them. However, in practice, the joint Hamiltonian contains coupling terms between $\vec{x}_1$ and $\vec{x}_2$ that prevent total decoupling. For instance, the joint Hamiltonian may be:</p>
+$$
+H(\vec{x}_1, \vec{x}_2) = \frac{|p_1|^2}{2m_1} + \frac{|p_2|^2}{2m_2} + V(q_1 - q_2),
+$$
+<p>where $\vec{x}_1 = (q_1, p_1)$ and $\vec{x}_2 = (q_2, p_2)$ are position and momentum coordinates, $m_1$ and $m_2$ are mass constants, and $V(q_1 - q_2)$ represents the interaction potential depending on the spatial separation $q_1 - q_2$ between the particles.</p>
+<p></p>
+<p>Similarly, a mixed joint state is a joint probability distribution $\rho(\vec{x}_1, \vec{x}_2)\, d\vec{x}_1\, d\vec{x}_2$ on the product state space. To obtain the (mixed) state of an individual particle, we consider marginal distributions such as:</p>
+$$
+\rho_1(\vec{x}_1) = \int_{\Omega_2} \rho(\vec{x}_1, \vec{x}_2)\, d\vec{x}_2
+$$
+<p>for the first particle or</p>
+$$
+\rho_2(\vec{x}_2) = \int_{\Omega_1} \rho(\vec{x}_1, \vec{x}_2)\, d\vec{x}_1
+$$
+<p>for the second particle. For $N$-particle systems, if the joint distribution of $N$ distinct particles is given by $\rho(\vec{x}_1, \ldots, \vec{x}_N)\, d\vec{x}_1 \ldots d\vec{x}_N$, then the distribution of the first particle is:</p>
+$$
+\rho_1(\vec{x}_1) = \int_{\Omega_2 \times \ldots \times \Omega_N} \rho(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N)\, d\vec{x}_2 \ldots d\vec{x}_N,
+$$
+<p>and the distribution of the first two particles is:</p>
+$$
+\rho_{12}(\vec{x}_1, \vec{x}_2) = \int_{\Omega_3 \times \ldots \times \Omega_N} \rho(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N)\, d\vec{x}_3 \ldots d\vec{x}_N,
+$$
+<p>and so on.</p>
+<p></p>
+<p>A typical Hamiltonian for such systems can take the form:</p>
+$$
+H(\vec{x}_1, \ldots, \vec{x}_N) = \sum_{j=1}^N \frac{|p_j|^2}{2m_j} + \sum_{1 \leq j < k \leq N} V_{jk}(q_j - q_k),
+$$
+<p>which combines single-particle Hamiltonians $H_j$ and interaction perturbations. When momenta $p_j$ and masses $m_j$ are normalized to be of size $O(1)$ and the potential $V_{jk}$ has an average value (i.e., $L^1$ norm) of $O(1)$, the first sum has size $O(N)$ and the second sum has size $O(N^2)$. In order to balance the two components and obtain more interesting limiting dynamics as $N \rightarrow \infty$, we introduce a normalization factor of $\frac{1}{N}$ on the right-hand side, resulting in the Hamiltonian:</p>
+<p></p>
+<p>$$H(\vec{x}_1, \ldots, \vec{x}_N) = \sum_{j=1}^N \frac{|p_j|^2}{2m_j} + \frac{1}{N} \sum_{1 \leq j < k \leq N} V_{jk}(q_j - q_k).$$</p>
+<p></p>
+<p>Now consider a system of $N$ indistinguishable particles, where all the state spaces $\Omega_1 = \ldots = \Omega_N$ are identical, and observables (including the Hamiltonian) are symmetric functions of the product space $\Omega = \Omega_1^N$ (i.e., invariant under the action of the symmetric group $S_N$). In this case, we can average over the symmetric group (without affecting physical observables) and assume that all mixed states $\rho$ are also symmetric. However, this comes at the cost of mostly giving up pure states $(\vec{x}_1, \ldots, \vec{x}_N)$, as they are symmetric only in exceptional cases where $\vec{x}_1 = \ldots = \vec{x}_N$.</p>
+<p></p>
+<p>A typical example of a symmetric Hamiltonian is:</p>
+<p></p>
+<p>$$H(\vec{x}_1, \ldots, \vec{x}_N) = \sum_{j=1}^N \frac{|p_j|^2}{2m} + \frac{1}{N} \sum_{1 \leq j < k \leq N} V(q_j - q_k),$$</p>
+<p></p>
+<p>where $V$ is an even function (implying all particles have the same individual Hamiltonian and interact with other particles using the same potential). In many physical systems, it is natural to consider short-range interaction potentials, where the interaction between $q_j$ and $q_k$ is localized to the region $q_j - q_k = O(r)$ for some small $r$. This is modeled by Hamiltonians of the form:</p>
+<p></p>
+$$H
+
+(\vec{x}_1, \ldots, \vec{x}_N) = \sum_{j=1}^N H(\vec{x}_j) + \frac{1}{N} \sum_{1 \leq j < k \leq N} \frac{1}{r^d} V\left(\frac{\vec{x}_j - \vec{x}_k}{r}\right),$$
+<p></p>
+<p>where $d$ is the ambient dimension of each particle (typically 3 in physical models). The factor of $\frac{1}{r^d}$ normalizes the interaction potential's $L^1$ norm to be $O(1)$. An interesting limit arises when $r$ approaches zero as $N$ goes to infinity with $r = N^{-\beta}$, where $\beta$ is some power law. For example, one can consider $N$ particles of "radius" $r$ bouncing around in a box, which is a basic model for classical gases.</p>
+<p></p>
+<p>A symmetric mixed state example is a factored state:</p>
+<p></p>
+<p>$$\rho(\vec{x}_1, \ldots, \vec{x}_N) = \rho_1(\vec{x}_1) \ldots \rho_1(\vec{x}_N),$$</p>
+<p></p>
+<p>where $\rho_1$ is a single-particle probability density function. In the absence of interaction terms in the Hamiltonian, the factored state property is preserved by Hamilton's equations of motion, with $\rho_1$ evolving according to the one-particle equation. However, with interactions, the factored nature may be lost over time.</p>
+<p></p>
+<p></p>
+<h1 style="margin-left:0px;" id="Old_stuff">Old stuff</h1>
 <h2 style="margin-left:0px;" id="Symplectic_form">Symplectic form</h2>
-<p>In any cotangent bundle $T^*Q$ we have a canonical 1-form known as tautological 1-form, Poincaré 1-form, Liouville 1-form, symplectic potential or canonical 1-form. Let's see how is defined. We are looking for an element $\lambda \in \Omega^1(T^*Q)$, so consider an element (in any local chart, it doesn't have to be the special one provide by the lagrangian) $(q,p)\in T^*Q.$ We want a definition for a map</p>
-$$\lambda_{(q,p)}: T_{(q,p)}(T^*Q)\longmapsto \mathbb{R}
-$$
-<p>Since in local chart we see elements in the form </p>
-$$
-(q,p,v,\eta)\in T_{(q,p)}(T^*Q)
-$$
-<p>it seems natural to forget $\eta$ and take</p>
-$$
-\lambda_{(q,p)}(q,p,v,\eta)=p(v)
-$$
-<p>But we can define it without coordinates.</p>
-<p>Consider</p>
-$$
-\pi: T^*Q\longmapsto Q
-$$
-<p>and</p>
-$$
-d\pi: T(T^*Q)\longmapsto TQ
-$$
-<p>So we can define </p>
-$$
-\lambda: T^*Q \longmapsto T^*(T^*Q)
-$$
-<p>by</p>
-$$
-\lambda_{\alpha}=\pi^*(\alpha)
-$$
-<p>Now, we can take the exterior derivative, $\omega:=d\lambda$. This is called the Poincaré 2-form, or symplectic 2-form. It is canonical for every cotangent bundle and verifies:</p>
-<p><ul style="margin-left:0px;"><li>- It is closed.</li></ul></p>
-<p><ul style="margin-left:0px;"><li>- It is nondegenerate. That is, for every vector $X\in T(T^*Q)$, the 1-form $i_X \omega=\omega(X,-)$ is not null.</li></ul></p>
-<p></p>
-<p>Any manifold equipped with a 2-form satisfying both conditions is called a <a href="./../♾️ CONCEPTS/symplectic manifold.md.html">symplectic manifold</a>.</p>
+<p>See <a href="./../♾️ CONCEPTS/symplectic form.md.html">symplectic form</a>.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Hamiltonian_vector_fields">Hamiltonian vector fields	</h2>
 <p>See <a href="./../♾️ CONCEPTS/Hamiltonian vector field.md.html">Hamiltonian vector field</a>s.</p>
-<p><b>This symplectic form has a main use</b>: to convert the differential of the hamiltonian, $dH$, into a vector field called the <b>symplectic gradient</b>: the only vector field $X_H$ such that $\omega(X_H,-)=dH$. If we have also a <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> $g$, it turns out that this symplectic gradient and the usual gradient are orthogonal: remember that given a function $H$ the gradient is the only vector field $\nabla H$ such that $dH=g(\nabla H,-)$. Therefore</p>
+<p><b>This <a href="./../♾️ CONCEPTS/symplectic form.md.html">symplectic form</a> has a main use</b>: to convert the differential of the hamiltonian, $dH$, into a vector field called the <b>symplectic gradient</b>: the only vector field $X_H$ such that $\omega(X_H,-)=dH$. If we have also a <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> $g$, it turns out that this symplectic gradient and the usual gradient are orthogonal: remember that given a function $H$ the gradient is the only vector field $\nabla H$ such that $dH=g(\nabla H,-)$. Therefore</p>
 $$
 g(\nabla H, X_H)=dH(X_H)=\omega(X_H,X_H)=0
 $$
