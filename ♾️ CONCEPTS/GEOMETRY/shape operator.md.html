@@ -43,23 +43,25 @@ dN_p(X)=df_p(\mathcal{S}(X))
 $$
 <p>The idea is that we are studying the different <a href="./curvature of a curve.md.html">curvatures</a> of the surface, but in the abstract manifold, not in $\mathbb{R}^3$. That is, we are substituting the <a href="./immersed manifold.md.html">immersion</a> by a $(1,1)$-tensor. We can use the <a href="./Riemannian metric.md.html">Riemannian metric</a> (called in this case the <a href="./first fundamental form.md.html">first fundamental form</a>) of the surface to <a href="./../../⛳️ NON CLASSIFIED/raising and lowering indices.md.html">lower the index</a> and construct the <a href="./second fundamental form.md.html">second fundamental form</a>. We are connecting this way <a href="./Gaussian curvature.md.html">Gaussian curvature</a> and <a href="./../extrinsic curvature.md.html">extrinsic curvature</a>.</p>
 <p></p>
-<p></p>
 <p>In what follows, we are going to identify $S\equiv f(S)$, and will work inside $\mathbb{R}^3.$ Observe that for a unit tangent vector $V$ at $p$:</p>
 $$
 \mathcal{S}(V)=dN_p(V)
 $$
 <p>and therefore the shape operator is measuring the variation of the normal vector $N$ to the surface $S$ when we move along a <a href="./normal curvature of an immersed surface.md.html">normal section</a> with tangent vector $V$ at $p$.</p>
 <p>On the other hand, this normal section has a curvature, $\kappa(V)$, and it turns out that</p>
+<p></p>
 <p><b>Lemma</b></p>
 <p>The <a href="./curvature of a curve.md.html">curvature</a> $\kappa(V)$ of a normal section along $V$ is given by </p>
 $$
 \kappa(V)=-\langle V, \mathcal{S}(V)\rangle
 $$
+<p></p>
 <p><b>Proof</b></p>
-<p>Think of $V$ as the velocity of a particle travelling at unit speed along the normal section $\alpha$, with $\alpha(0)=p, \alpha'(0)=V$, so  </p>
+<p>Think of $V$ as the velocity of a particle travelling at unit speed along the normal section $\alpha$, with $\alpha(0)=p, \alpha'(0)=V$, so </p>
 $$
 \dfrac{d}{dt}|_{t=0}\alpha'(t)=\kappa(V) N_p
-$$(observe that at $p$, the normal to the curve $n$ coincides with the normal to the surface $N$). 
+$$
+<p>(observe that at $p$, the normal to the curve $n$ coincides with the normal to the surface $N$). </p>
 <p>But now observe that</p>
 $$
 0=\dfrac{d}{dt}|_{t=0}\langle \alpha'(t),N_{\alpha(t)} \rangle=\langle \kappa(V)N_p,N_p\rangle +\langle V,\dfrac{d}{dt}|_{t=0}N_{\alpha(t)}\rangle=
@@ -69,11 +71,31 @@ $$
 $$
 <p>$\blacksquare$</p>
 <p></p>
-<p>The shape operator is <a href="./../../✏️ THEOREMS/symmetric matrix.md.html">symmetric</a> (I have to think this yet) and therefore it has eigenvectors and eigenvalues. The <a href="./eigenvector.md.html">eigenvector</a>s of $\mathcal{S}$ define the <a href="./../principal direction.md.html">principal direction</a>s, and their <a href="./eigenvalues.md.html">eigenvalues</a> define the <a href="./principal curvatures.md.html">principal curvatures</a>. Since the <a href="./../extrinsic curvature.md.html">extrinsic curvature</a> is the local area magnification of the <a href="./Gauss map.md.html">Gauss map</a>, it corresponds to the determinant of the shape operator when expressed in a basis of tangent vectors. In case we take the basis of eigenvectors we recuperate the famous formula</p>
+<p>The shape operator is <a href="./../../✏️ THEOREMS/symmetric matrix.md.html">symmetric</a> (I have to think this yet) and therefore it has eigenvectors and eigenvalues. The <a href="./eigenvector.md.html">eigenvector</a>s of $\mathcal{S}$ define the <a href="./../principal direction.md.html">principal direction</a>s, and their <a href="./eigenvalues.md.html">eigenvalues</a> define the <a href="./principal curvatures.md.html">principal curvatures</a>. Since the <a href="./../extrinsic curvature.md.html">extrinsic curvature</a> is the <b>local area magnification</b> of the <a href="./Gauss map.md.html">Gauss map</a>, it corresponds to <b>the determinant of the shape operator</b> when expressed in a basis of tangent vectors. In case we take the basis of eigenvectors we recuperate the famous formula</p>
 $$
 K=\kappa_1 \kappa_2,
 $$
 <p></p>
+<h2 style="margin-left:0px;" id="Shape_operator_and_the_standard_connection_of_R3">Shape operator and the standard connection of R3</h2>
+<p>Observe that given $V\in T_pS$ represented by a curve $\alpha$ ($\alpha(0)=p$, $\alpha'(0)=V$) the shape operator $\mathcal{S}(V)$ is represented by the curve</p>
+$$
+\beta(t)=N_{\alpha(t)}-N_p+p,
+$$
+<p>in the sense that $\beta(0)=p$ and $\beta'(0)=dN_p(V)$, and interpreting $N$ as a map from $\mathbb{R}^3$ to $\mathbb{R}^3$.</p>
+<p>If we now consider the standard Riemannian metric of $\mathbb{R}^3\equiv (x,y,z)$ and the corresponding Levi-Civita connection $\nabla$, we know that in the coordinate frame $\{\partial_x,\partial_y,\partial_z\}$ the <a href="./vector bundle connection.md.html#Connection_form_matrix">connection form</a> is the matrix $\Theta=0$. And we can wonder about $\nabla_V N$, provided we extend $N$ to a vector field on an open neighbourhood of $p$. Suppose $N=n_x \partial_x+n_y\partial_y+n_z\partial_z$, then </p>
+$$
+\nabla_V N=V(n_x)\partial_x+V(n_y)\partial_y+V(n_z)\partial_z
+$$
+<p>On the other hand, by computations we obtain </p>
+$$
+dN_p(V)=\beta'(0)=V(n_x)\partial_x+V(n_y)\partial_y+V(n_z)\partial_z=(\nabla_VN)_p.
+$$
+<p></p>
+<p><b>Giving a particular orthonormal frame</b> $\{e_1,e_2,N\}$, we can express $\nabla$ as another matrix $\tilde{\Theta}$, not necessarily null. The components $\Theta^i_j$ are 1-forms, and indeed the shape operator is given by the map:</p>
+$$
+S:V\mapsto \nabla_V N=V\lrcorner\tilde{\Theta}^1_3 e_1+V\lrcorner\tilde{\Theta}^2_3 e_2
+$$
+<p>The determinant of $S$ is the <a href="./Gaussian curvature.md.html">Gaussian curvature</a>, so $K=\tilde{\Theta}^1_3 \wedge \tilde{\Theta}^2_3(e_1,e_2)$.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

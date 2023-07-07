@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Connection_form_for_LV_in_R3">Connection form for LV in R3</h1>
+<p>What follows could be done more "abstractly", like in the note <a href="./Euclidean plane.md.html">Euclidean plane</a>, I think.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="With_the_standard_coordinate_frame">With the standard coordinate frame</h2>
+<p>Consider the Levi-Civita connection in $\mathbb{R}^3$, $\nabla$. If we use the standard coordinates $(x, y, z)$ we have the orthonormal frame $\{\partial_1,\partial_2,\partial_3\}$ and we know that</p>
+$$
+\nabla_{\partial_i} \partial_j=0
+$$
+<p>so in this case the <a href="./../♾️ CONCEPTS/GEOMETRY/vector bundle connection.md.html#Connection_form_matrix">connection form</a> (Christoffel symbols, indeed) is $\Theta=0$.</p>
+<p></p>
+<p>This can be deduced also with the <a href="./../✏️ THEOREMS/Cartan's first structural equation.md.html">Cartan's first structural equation</a>. We have the coframe $\{dx,dy,dz\}$ and since they are all closed</p>
+$$
+0=d(dx)=dx\wedge \Theta^1_1+dy\wedge \Theta^1_2+dz\wedge \Theta^1_3
+$$
+$$
+0=d(dy)=dx\wedge \Theta^2_1+dy\wedge \Theta^2_2+dz\wedge \Theta^2_3
+$$
+$$
+0=d(dz)=dx\wedge \Theta^3_1+dy\wedge \Theta^3_2+dz\wedge \Theta^3_3
+$$
+<p>Moreover, since the connection is metric and the frame is orthonormal we have that $\Theta_i^j=-\Theta_j^i$ (see <a href="./../♾️ CONCEPTS/GEOMETRY/Levi-Civita connection.md.html#In_a_orthonormal_frame_the_matrix_of_connection_1-form">here</a>) and, since is torsion free, $\partial_i\lrcorner\Theta_{j}^k-\partial_j\lrcorner\Theta_{i}^k=-T_{ij}^k=0$ (see <a href="./../♾️ CONCEPTS/GEOMETRY/Levi-Civita connection.md.html#In_a_orthonormal_frame_the_matrix_of_connection_1-form">here</a>). Then</p>
+$$
+0=dy\wedge \Theta^1_2+dz\wedge \Theta^1_3
+$$
+$$
+0=-dx\wedge \Theta^1_2+dz\wedge \Theta^2_3
+$$
+$$
+0=-dx\wedge \Theta^1_3-dy\wedge \Theta^2_3
+$$
+<p>Observe, first, </p>
+$$
+\partial_1 \lrcorner \Theta^1_2=\partial_2 \lrcorner \Theta^1_1=0
+$$
+<p>Now, contracting $\partial_2$ in the second equation</p>
+$$
+0=dx\wedge\partial_2\lrcorner  \Theta^1_2-dz\wedge \partial_2\lrcorner \Theta^2_3
+$$
+<p>and from here $\partial_2\lrcorner  \Theta^1_2=0$.</p>
+<p>So $\Theta^1_2$ is a multiple of $dz$. For the same reasons, $\Theta^1_3$ is a multiple of $dy$ and $\Theta^2_3$ is a multiple of $dx$. </p>
+<p></p>
+<p>Therefore</p>
+$$
+0=dy\wedge K_{12}dz+dz\wedge K_{13}dy
+$$
+$$
+0=-dx\wedge K_{12}dz+dz\wedge K_{23}dx
+$$
+$$
+0=-dx\wedge K_{12}dy-dy\wedge K_{23}dx
+$$
+<p>and $K_{13}=K_{12}=-K_{23}=-K_{12}$ and therefore all of them are 0.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="With_a_general_orthonormal_frame">With a general orthonormal frame</h2>
+<p>Consider now an orthonormal frame $\{e_1,e_2,e_3\}$ with dual coframe $\{\omega_1,\omega_2,\omega_3\}$. The connection form is, as usual, a matrix of 1-form $\Theta$ such that</p>
+$$
+\begin{array}{l}
+\nabla e_1=\quad\qquad-\Theta^1_2 e_2-\Theta^1_3 e_3\\
+\nabla e_2=\Theta_2^1 e_1+\qquad-\Theta_3^2e_3\\
+\nabla e_3=\Theta_3^1 e_1+\Theta_3^2e_2\\
+\end{array}
+$$
+<p>where we have used that since the connection is metric and the frame is orthonormal we have that $\Theta_i^j=-\Theta_j^i$ (see <a href="./../♾️ CONCEPTS/GEOMETRY/Levi-Civita connection.md.html#In_a_orthonormal_frame_the_matrix_of_connection_1-form">here</a>).</p>
+<p></p>
+<p>We have two pieces of data: the connection and the frame. And we can get $\Theta$ from them. </p>
+<p></p>
+<p></p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

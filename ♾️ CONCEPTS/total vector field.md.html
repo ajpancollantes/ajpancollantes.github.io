@@ -48,7 +48,26 @@ $$
 $$
 <p>where $D_{x_i}$ are the <a href="./GEOMETRY/Cartan distribution.md.html#Vector_fields_description">total derivative operators</a>. Observe that this definition gives us an intrinsic definition of this total derivative operators.</p>
 <p></p>
-<p>I think that in the infinite jet bundle $J^{\infty}(E)$ the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a> has the same dimension as the base space $M$ so...</p>
+<p><b>Idea</b>: A vector in a manifold $M$ is a kind of little displacement. In the jet space $J^{\infty}(E)$ we have little displacement, too. For example, you can go from $(x,u,u_1)\in J^{\infty}(E)$ to:</p>
+$$
+(x,u,u_1,\ldots) \mapsto (x+0.1,u+0.3,u_1-0.04,\ldots).
+$$
+<p>But if you think of $(x,u,u_1,\ldots)$ as the class of functions defined on $M$ (sections of $E$, indeed) such that $f(x)=u$, $f'(x)=u_1$ and so on, then the little displacement $x\mapsto x+0.1$ <b>induce a natural displacement</b> in $(x,u,u_1)$ since:</p>
+$$
+u\mapsto u+0.1 u_1
+$$
+$$
+u_1\mapsto u_1+0.1 u_2
+$$
+<p>because of the definition of derivative: </p>
+<p>$f(x+0.1)\approx f(x)+0.1 f'(x)$, </p>
+<p>$f'(x+0.1)=f'(x)+0.1 f''(x)$</p>
+<p>...</p>
+<p>So the induced natural displacement is</p>
+$$
+(x,u,u_1,\ldots) \mapsto (x+0.1,u+0.1 u_1,u_1+0.1 u_2,\ldots).
+$$
+<p>This induced displacement would be a total vector field.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

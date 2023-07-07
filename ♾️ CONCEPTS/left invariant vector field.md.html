@@ -31,29 +31,19 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Conservation_law">Conservation law</h1>
-<p><b>Definition</b>. <a href="./../Bibliography/@olver86.md.html">@olver86</a> section 4.3.</p>
-<p>Consider a <a href="./DEs/system of DEs.md.html">system of DEs</a> $\Delta_{\nu}(x,u^{(n)})=0$. A conservation law is an expression </p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Left_invariant_vector_field">Left invariant vector field</h1>
+<p>Consider a <a href="./Lie group.md.html">Lie group</a> $G$ acting on itself. Every vector $v\in T_e G$ gives rise to a vector field $V$ associated to $v$:</p>
 $$
-\mbox{Div} P=0
+V_g=d(L_g)_e(v)
 $$
-<p>which vanishes for all solutions $u=f(x)$ of the system. Here $P=(P_1(x,u^{(n)}),\ldots,P_p(x,u^{(n)}))$ is a $p$-tuple of smooth functions and $\mbox{Div}$ is the <a href="./total divergence.md.html">total divergence</a>.</p>
-<p>$\blacksquare$</p>
-<p>In the particular case of a <a href="./DEs/system of ODEs.md.html">system of ODEs</a>, where we have only 1 independent variable and $u$ represents functions</p>
+<p>which satisfies </p>
 $$
-u:x\mapsto (u^1,\ldots,u^q)
+d(L_g)_h(V_h)=V_{gh}. \tag{1}
 $$
-<p>a conservation law is of the form $D_x P=0$ for every solution of the system, that is, $P(x,u^{(n)})$ must be constant along solutions. Son in this case a conservation law is nothing but a <a href="./DEs/first integral.md.html#3.a._First_integral_of_a_first_order_ODE_system">first integral of the system</a>. </p>
-<p></p>
-<p>In case our system of DE arise in a dynamical context, one of the independent variables is the time $t$ and the other $x_1,\ldots,x_p$ are spatial variables. The conservation law is given by</p>
+<p>All the vector fields satisfying (1) this are called left invariant vector fields, and the set of all of them is the <a href="./GEOMETRY/Lie algebra.md.html">Lie algebra</a> $\mathfrak{g}$ of $G$. Observe that there is a one-to-one relation</p>
 $$
-D_t T+\mbox{Div}_{space} X=0
+T_eG \to \mathfrak{g}
 $$
-<p>The function $T$ is called the conserved density and $X=(X_1,\ldots,X_p)$ are called the associated flux. This is completely related to the note <a href="./current density and charge density.md.html">current density and charge density</a> . Indeed, an example of conservation law is the <a href="./continuity equation.md.html">continuity equation</a>.</p>
-<p></p>
-<p></p>
-<h2 style="margin-left:0px;" id="And,_in_the_case_of">And, in the case of </h2>
-<p></p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

@@ -68,31 +68,54 @@ $$
 <p><img src="./../../imagenes/Pasted image 20211112155016.png" style="width:80vw; border-radius: 3px;" ></p>
 <p>The isomorphism $\phi$ only exists because we are in a vector <a href="./bundle.md.html">bundle</a>.</p>
 <p></p>
-<h2 style="margin-left:0px;" id="Connection_form">Connection form</h2>
+<h2 style="margin-left:0px;" id="Connection_form_matrix">Connection form matrix</h2>
 <p>(<b>Christoffel 1-form, for me</b>)</p>
 <p>It is a way to express the vector bundle connection with respect to a choice of a frame.</p>
 <p>Suppose we choose a particular local <a href="./frame on a manifold.md.html">frame</a> $e=\{e_i\}$ (that is, we restrict to an open subset $U\subseteq M$ and choose sections that span all the others). If we apply the connection to every $e_i$ we obtain</p>
 $$
-\nabla(e_i)=\sum_j e_j \otimes \omega_i^j
+\nabla(e_i)=\sum_j e_j \otimes \Theta_i^j
 $$
-<p>The square matrix $\omega=(\omega_i^j)$ of 1-forms is called the <b>connection form</b>. If our vector bundle is the tangent bundle, the frame is a local chart frame, and the connection is a <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a>, the connection form is not <b>other thing that the usual</b> <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>! So I think this matrix of 1-forms should be called the <b>Christoffel 1-forms</b>.</p>
+<p>The square matrix $\Theta=(\Theta_i^j)$ of 1-forms is called the <b>connection form</b>. If our vector bundle is the tangent bundle, the frame is a local chart frame, and the connection is a <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a>, the connection form is not <b>other thing that the usual</b> <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>! So I think this matrix of 1-forms should be called the <b>Christoffel 1-forms</b>.</p>
 <p>Given a particular local section of $E$, say </p>
 $$
 \sigma= \sum_i \sigma_i e_i
 $$
 <p>we have</p>
 $$
-\nabla(\sigma)=\nabla(\sum_i \sigma_i e_i)=\sum_i e_i\otimes d\sigma_i+\sum_{ij}\sigma_i e_j\otimes \omega_i^j
+\nabla(\sigma)=\nabla(\sum_i \sigma_i e_i)=\sum_i e_i\otimes d\sigma_i+\sum_{ij}\sigma_i e_j\otimes \Theta_i^j
 $$
 <p>and renaming $i$ and $j$ in the second sum</p>
 $$
-\nabla(\sigma)=\sum_i e_i\otimes\left( d \sigma_i+\sum_j \sigma_j \omega_j^i\right)
+\nabla(\sigma)=\sum_i e_i\otimes\left( d \sigma_i+\sum_j \sigma_j \Theta_j^i\right)
 $$
 <p>So if we call $\widetilde{\sigma}$ and $\widetilde{\nabla(\sigma)}$ to the column vector of components of $\sigma$ and $\nabla(\sigma)$ respectively we have</p>
 $$
-\widetilde{\nabla(\sigma)}=(d+\omega)\widetilde{\sigma}
+\widetilde{\nabla(\sigma)}=(d+\Theta)\widetilde{\sigma}
 $$
-<p>where $d$ is the differential and $\omega$ is a matrix of 1-forms.</p>
+<p>where $d$ is the differential and $\Theta$ is a matrix of 1-forms.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Example:_connection_on_a_2-dimensional_manifold">Example: connection on a 2-dimensional manifold</h3>
+<p>Suppose a 2-dimensional manifold $\mathcal{S}$ with a connection $\nabla$ in the tangent bundle $TM$ described in a frame $e_1,e_2$ by the matrix $\Theta$. Given two vector fields </p>
+$$
+X_i=a_i e_1+b_ie_2=\begin{pmatrix}
+a_i\\
+b_i
+\end{pmatrix},
+$$
+<p>with $a_i,b_i$, $i=1,2,$ smooth functions defined on $\mathcal{S}$, we have, abusing of notation, that</p>
+$$
+\nabla_{X_1} X_2=
+\begin{pmatrix}
+X_1(a_2)\\
+X_1(b_2)
+\end{pmatrix} +X_1\lrcorner \Theta \cdot \begin{pmatrix}
+a_2\\
+b_2\\
+\end{pmatrix}
+$$
+<p>where $X_1\lrcorner \Theta$ is a matrix whose entries are the contraction of $X_1$ with every entry of $\Theta$.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Change_of_frame">Change of frame</h3>
 <p>Observe that an arbitrary matrix of 1-forms is a priori enough to define locally a connection.</p>
 <p>If we choose a different frame $e'=\{e'_i\}$ in $U$, being</p>
 $$
@@ -100,10 +123,11 @@ e'=e g
 $$
 <p>with $g$ a matrix of smooth functions, it can be show that the new connection form will be</p>
 $$
-\omega'=g^{-1} dg+g^{-1} \omega g
+\Theta'=g^{-1} dg+g^{-1} \Theta g
 $$
 <p>This let us define a global connection form as a collection of matrices of 1-forms defined in an open covering of $M$ satisfying certain compatibility condition in the overlaps.</p>
 <p></p>
+<h3 style="margin-left:0px;" id="Relation_to_the_general_connection_1-form">Relation to the general connection 1-form</h3>
 <p><b>Keep an eye</b>: this is not the same that the <a href="./connection on a fiber bundle.md.html#Connection_1-form">connection 1-form</a> of a connection on a fiber bundle, which does not depends on any frame, although they both are related. I am not sure but I think is "almost" the <a href="./principal connection on a principal bundle.md.html#Another_characterization">Yang-Mills field</a> obtained by means of a particular frame of the connection in the frame bundle "related" to the original vector bundle connection. That is, suppose that our vector bundle connection on $E$ is coming from a principal connection on the frame bundle $FE$ (it is always true, see <a href="./associated connection.md.html#Conversely">associated connection#Conversely</a>), given by a 1-form on $FE$, $\tilde{\omega}$. Then, if we select the frame $e=\{e_i\}$ as above, we are providing a section $p_{\alpha}$ of $FE$, and the Yang-Mills field is $p_{\alpha}^*(\tilde{\omega})$. **What is the relation of $\omega$ obtained from $e$ as above and $p_{\alpha}^*(\tilde{\omega})$?** See xournal 182, they are not exactly the same...</p>
 <p></p>
 <p></p>
@@ -111,7 +135,7 @@ $$
 <p>Since it is a particular case of <a href="./connection on a fiber bundle.md.html">connection on a fiber bundle</a> we can think of its <a href="./curvature of a connection.md.html#Vector_bundles">curvature</a>.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Worked_example_1">Worked example 1</h2>
-<p></p>
+<p>(what follows can be done easily (I think) with the coframe and the structure coefficients, taking into account the <a href="./../../✏️ THEOREMS/Cartan's first structural equation.md.html">Cartan's first structural equation</a>)</p>
 <p>Suppose the manifold $M=\mathbb R^2$ with the <a href="./linear connection.md.html">linear connection</a> $\nabla$ (which, by the way, is a <a href="./vector bundle connection.md.html">vector bundle connection</a>) given by</p>
 $$
 \nabla_{\partial_{x_i}}\partial_{x_j}=a_{ij}\partial_{x_1}+b_{ij}\partial_{x_2}

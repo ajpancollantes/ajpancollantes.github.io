@@ -32,14 +32,14 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Evolution_equations">Evolution equations</h1>
-<p>See <a href="https://www.math.ucdavis.edu/~hunter/notes/nonlinev.pdf" target="_blank">the introduction here</a>.</p>
+<p>(See <a href="https://www.math.ucdavis.edu/~hunter/notes/nonlinev.pdf)" target="_blank">the introduction here</a></p>
 <p>The evolution of a <a href="./dynamical system.md.html">dynamical system</a> depending on a continuous time variable $t$ is described by an equation of the form:</p>
 <p>$$\dot{u}=f(u).$$</p>
 <p>Here, the dot denotes a time derivative, $u(t) \in X$ is the state of the system at time $t$, and $f$ is a given vector field on $X$. The space $X$ is the state space of the system; a point in $X$ specifies the instantaneous state of the system. We will assume that $X$ is a <a href="./FUNCTIONAL ANALYSIS/Banach space.md.html">Banach space</a>. When $X$ is finite dimensional, the evolution equation is a <a href="./DEs/system of ODEs.md.html">system of ODEs</a>. </p>
 <p></p>
 <h2 style="margin-left:0px;" id="Infinite_dimensional_case">Infinite dimensional case</h2>
-<p>On the other hand, <a href="./PDE.md.html">PDE</a>s can be regarded as evolution equations on an infinite dimensional state space $X$ (see example in <a href="./../⛳️ NON CLASSIFIED/Classical Field Theory.md.html">Classical Field Theory</a>). The solution $u(x,t)$ belongs to a function space in $x$ at each instant of time $t$. In the finite dimensional case $f$ has a finite number of entries $u^1, u^2, \cdots,u^{n}$ but, how do we deal with the case of infinite entries for a function $f$? Think that the index $i$ in $u^i$ is substituted by $x$ in $u(x)$. The problem in general would be intractable: <b>how do we write infinite relations</b> between $u(1,t),u(2,t),u(3,t),u(8.23,t),\ldots$? </p>
-<p>But we can restring to special cases of relations between the "components" $u(x)$, or better said, <b>special patterns</b>: the derivatives of $u$ respect to $x$. For example, $u_t=u_x$ would play the role of an infinite collection of expressions analogous to $\frac{d}{dt}u^i=u^{i+1}-u^i$... See xournal_210.</p>
+<p>On the other hand, some <a href="./PDE.md.html">PDE</a>s can be regarded as evolution equations on an infinite dimensional state space $X$ (see example in <a href="./../⛳️ NON CLASSIFIED/Classical Field Theory.md.html">Classical Field Theory</a>). The solution $u(x,t)$ belongs to a function space in $x$ at each instant of time $t$. In the finite dimensional case you can consider that the finite number of entries $u^1(t), u^2(t), \cdots,u^{n}(t)$ is like a function of two variables, a continuous variable $t\in \mathbb{R}$ and a discrete one $i=1,\ldots,n$. Now, think that the index $i$ in $u^i$ is substituted by $x$ in $u(x)$: we have an uncountable set of entries, and the derivatives of each one needs to be related to the entries themself. The problem in general would be intractable: <b>how do we write infinite relations</b> between $u(1,t),u(2,t),u(3,t),u(8.23,t),\ldots$? </p>
+<p>But we can restrict to special cases of "relations" between the "components" $u(x)$, or better said, <b>special patterns</b>: the derivatives of $u$ respect to $x$. For example, $u_t=u_x$ would play the role of an infinite collection of expressions analogous to $\frac{d}{dt}u^i=u^{i+1}-u^i$... See xournal_210.</p>
 <p></p>
 <p>So an evolution equation, in this context, is an expression</p>
 $$
@@ -72,6 +72,7 @@ $$
 <p></p>
 <p><b>And I wonder, can any evolution equation be characterized by 2 second-order ODEs?</b> It would be like an implicit expression of the PDE...</p>
 <p></p>
+<p>And another question: in the context above, is $\Delta$ a <a href="./conservation law.md.html">conservation law</a>?</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

@@ -38,11 +38,11 @@ gtag('config', 'G-LBT9E8N3HS');
 <p>For functionals, the variational derivative plays the role of the gradient of functions of several variables. </p>
 <p>Given a smooth function $f$, the gradient is a 1-form $df$ such that for a vector $V$</p>
 $$
-df_x(V)=\lim_{\epsilon \to 0} \frac{f(x+\epsilon V)-f(x)}{\epsilon}=\frac{d}{d\epsilon}f(x+\epsilon V)|_{\epsilon=0}
+df_x(V)=\lim_{\epsilon \to 0} \frac{f(x+\epsilon V)-f(x)}{\epsilon}=\frac{d}{d\epsilon}f(x+\epsilon V)|_{\epsilon=0},
 $$
-<p>that is, tells us how much the function varies along the direction specified by $V$.</p>
+<p>that is, it tells us how much the function varies along the direction specified by $V$.</p>
 <p></p>
-<p>If we think of $x$ not like a finite dimensional vector $(x_1,\ldots,x_p)$ but like a function $x:\{1,\ldots,p\}\to \mathbb{R}$ we can generalize this to the case $x:\mathbb{R}\to \mathbb{R}$, $t\mapsto x(t)$, and now $f$ won't be a function but a functional.</p>
+<p>If we think of $x$ not like a finite dimensional vector $(x_1,\ldots,x_p)$ but like a function $x:\{1,\ldots,p\}\to \mathbb{R}$ we can generalize this to the case $x:\mathbb{R}\to \mathbb{R}$, $t\mapsto x(t)$, being now $f$ not a function but a functional.</p>
 <p></p>
 <p>The question is: for a functional $f$, is there any mathematical object $\delta f_x$ such that for a function $V(t)$ gives us the new function</p>
 $$
@@ -53,7 +53,7 @@ $$
 $$
 df_x(V)=\langle (\nabla f)_x, V \rangle=\frac{d}{d\epsilon}f(x+\epsilon V)|_{\epsilon=0}.
 $$
-<p>We can replace $\langle-,-\rangle$  with the usual inner product $\int$ for the <a href="./FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> $L^2$, so we can alternatively require to our new object $\delta f_x$, being $f$ a functional again, to satisfy</p>
+<p>We can replace $\langle-,-\rangle$  with the usual inner product $\int dt$ for the <a href="./FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> $L^2$, so we can alternatively require to our new object $\delta f_x$, being $f$ a functional again, to satisfy</p>
 $$
 \int \delta f_x \cdot V dt=\frac{d}{d\epsilon}f(x+\epsilon V)|_{\epsilon=0}
 $$
@@ -67,16 +67,22 @@ $$
 $$
 <p>such that given functions $f,\eta:\Omega \subset \mathbb{R}^p \to \mathbb{R}^q$, $\eta$ with compact support, satisfies:</p>
 $$
-\frac{d}{d\epsilon}J[f+\epsilon \eta]|_{\epsilon=0}=\int_{\Omega}\delta J[f(x)]\cdot \eta(x)dx.
+\frac{d}{d\epsilon}J[f+\epsilon \eta]|_{\epsilon=0}=\int_{\Omega}\delta J[f(x)]\cdot \eta(x)dx. \tag{1}
 $$
 <p>$\blacksquare$</p>
+<p></p>
+<p></p>
 <p></p>
 <h2 style="margin-left:0px;" id="Some_facts">Some facts</h2>
 <p></p>
 <p><b>Remarks</b></p>
 <p>a) To my knowledge, it doesn't have to exist...</p>
 <p></p>
-<p>b) The expression $\delta J[f(x)]$ can be thought as another function of $x$ or, alternatively, as something eating functions $\eta$ and turning back numbers, i.e., something analogous to the 1-form $df$ in the usual case of functions of $\mathbb{R}^n$. Something like the duality between the gradient $\nabla f_x$ and $df_x$ (vectors correspond to functions).</p>
+<p>b) I think that the quantity (1) should also be denoted by</p>
+$$
+\delta J_f(\eta)
+$$
+<p>to agree with $df_x(V)$. In this sense $\delta J$ would be something similar to differential of a function. The expression $\delta J_f=\delta J[f(x)]$ can be thought as another function of $x$ or, alternatively, as something eating functions $\eta$ and turning back numbers, i.e., something analogous to the 1-form $df_x$ in the usual case of functions of $\mathbb{R}^n$. Something like the duality between the gradient $\nabla f_x$ and $df_x$ (vectors correspond to functions).</p>
 <p></p>
 <p>c) Since the functional $J$ is coming from a variational problem we can compute an explicit formula for its variational derivative. Let's focus in the case of functions $u:\mathbb{R}\to \mathbb{R}$:</p>
 $$
@@ -89,9 +95,9 @@ $$
 =\int_{\Omega}\dfrac{\partial L}{\partial u}\cdot \eta+\dfrac{\partial L}{\partial u_1}\cdot \eta^{\prime}+\cdots+\dfrac{\partial L}{\partial u_n}\cdot \eta^{n)}dx
 $$
 <p>being $\eta^{j)}$ the $j$th derivative of $\eta$. </p>
-<p>We can apply integration by parts, leaving apart the first term, and obtain</p>
+<p>We can apply integration by parts, leaving apart the first term, and obtain that the expression above equals</p>
 $$
-=\int_{\Omega}\dfrac{\partial L}{\partial u}\cdot \eta dx+\int_{\Omega}-D_x\dfrac{\partial L}{\partial u_1}\cdot \eta dx+\cdots+\int_{\Omega}-D_x \dfrac{\partial L}{\partial u_{n}}\cdot \eta^{n-1)}dx
+\int_{\Omega}\dfrac{\partial L}{\partial u}\cdot \eta dx+\int_{\Omega}-D_x\dfrac{\partial L}{\partial u_1}\cdot \eta dx+\cdots+\int_{\Omega}-D_x \dfrac{\partial L}{\partial u_{n}}\cdot \eta^{n-1)}dx
 $$
 <p>and after $n$ steps:</p>
 $$

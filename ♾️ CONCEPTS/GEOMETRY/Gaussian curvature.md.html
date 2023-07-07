@@ -37,6 +37,7 @@ gtag('config', 'G-LBT9E8N3HS');
 $$
 \mathcal{K}=\kappa_1 \cdot \kappa_2 \tag{1}
 $$
+<p>In this sense, it is the determinant of the <a href="./shape operator.md.html">shape operator</a>.</p>
 <p>Picture from <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 136 (he calls it $\mathcal{K}_{ext}$)</p>
 <p><img src="./../../imagenes/Pasted image 20220415084807.png" style="width:80vw; border-radius: 3px;" ></p>
 <h3 style="margin-left:0px;" id="Definition_2">Definition 2</h3>
@@ -51,7 +52,7 @@ $$
 $$
 \mathcal{K}(p)=\lim _{\Delta_{p} \rightarrow p} \frac{\mathcal{E}\left(\Delta_{p}\right)}{\mathcal{A}\left(\Delta_{p}\right)}
 $$
-<p>Here $\mathcal{E}(\Delta)$ is the sum of the angles of the triangle $\Delta$ minus $\pi$. This is rather informal, but I think it can be formalized as the angle defect of <a href="./../parallel transport.md.html">parallel transport</a> about a geodesic triangle. It is related to <a href="./../../✏️ THEOREMS/DG/Harriot theorem.md.html">Harriot theorem</a>.</p>
+<p>Here $\mathcal{E}(\Delta)$ is the sum of the angles of the triangle $\Delta$ minus $\pi$. This is rather informal, but I think it can be formalized as the angle defect of <a href="./../parallel transport.md.html">parallel transport</a> about a geodesic triangle. It is related to <a href="./../../✏️ THEOREMS/DG/Harriot theorem.md.html">Harriot theorem</a>. Also related to the <a href="./../../✏️ THEOREMS/DG/local Gauss-Bonnet theorem.md.html">local Gauss-Bonnet theorem</a>.</p>
 <p></p>
 <p></p>
 <h3 style="margin-left:0px;" id="Equivalences_of_definitions_incomplete">Equivalences of definitions (incomplete)</h3>
@@ -158,6 +159,69 @@ $$
 <p><img src="./../../imagenes/Pasted image 20211229094631.png" style="width:80vw; border-radius: 3px;" ></p>
 <p>The <a href="./curvature of a connection.md.html">curvature</a> of this connection (in the sense of performing the bracket of the vector fields of the horizontal distribution and then project to the vertical distribution) should be the same as the Gaussian curvature of the surface or, at least, be directly related. For example, observe that if the surface has non-zero Gaussian curvature, then parallel transports do not, in general, commute. This corresponds to the fact that $H$ does not posses integral manifolds, because if we leave $v$ travelling along curves tangent to $H$ (parallel transports) we may arrive to a different $v'\in T_pS$. In other words, flat surfaces (in the sense of Gaussian curvature) let us create copies of it in every $v$, so we can foliate $TS$ with these copies. </p>
 <p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="More_formally">More formally</h3>
+<p>In a Riemannian surface $(S,g)$ consider the Levi-Civita connection $\nabla$ corresponding to the metric $g$. Suppose we have an orthonormal frame $\{e_1,e_2\}$ with dual coframe $\{\omega^1,\omega^2\}$. We know that $\nabla$ is described here by the <a href="./vector bundle connection.md.html#Connection_form_matrix">connection forms</a> </p>
+$$ 
+\Theta=\begin{pmatrix} 0&-T_{12}^1 \omega^1-T_{12}^2\omega^2\\ T_{12}^1 \omega^1+T_{12}^2 \omega^2&0\\ \end{pmatrix},
+$$
+<p>where $d\omega^1=T_{12}^1 \omega^1 \wedge \omega^2$ and $d\omega^2=T_{12}^2 \omega^1 \wedge \omega^2$ (see <a href="./Levi-Civita connection.md.html#Computation_of_the_matrix_of_connection_1-form">here</a>).</p>
+<p></p>
+<p>The <a href="./curvature of a connection.md.html">curvature of the connection</a> is a matrix of 2-forms $\Omega=d\Theta$. Indeed, by mere computations we arrive to </p>
+$$ 
+\Omega=-\left(e_1(T_{12}^2)-e_2(T_{12}^1)+(T_{12}^1)^2+(T_{12}^2)^2\right)\begin{pmatrix} 0& \omega^1 \wedge \omega^2\\ 
+-\omega^1 \wedge \omega^2&0\\ \end{pmatrix}. 
+$$ 
+<p>The coefficient $-\left(e_1(T_{12}^2)-e_2(T_{12}^1)+(T_{12}^1)^2+(T_{12}^2)^2\right)$, which is also obtained as $d\Theta^1_2(e_1,e_2)$, <b>is indeed the Gaussian curvature of the surface</b>. </p>
+<p></p>
+<p>Let's see it for an immersed surface $\iota:S\to \mathbb{R}^3$ (also in <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> section 38.5.1). We consider a point $p\in S$ and an open neighbourhood $U\subset \mathbb R^3$ of $p$. We have the unit normal vector to the surface $n$, and think of a frame $\{\tilde{e}_1,\tilde{e}_2,\tilde{n}\}$ defined on $U$ such that gives rise to $\{e_1,e_2\}$ when restricted to $S$. Analogously, we have the dual coframe $\{\tilde{\omega}_1,\tilde{\omega}_2,\tilde{\zeta}\}$. We can compute here the connection 1-forms matrix $\tilde{\Theta}$ of the standard connection $\nabla_{std}$ with respect to this frame (see <a href="./../../☕REFLECTIONS/connection form for LV in R3.md.html#With_a_general_orthonormal_frame">this</a>). It turns out that</p>
+$$
+\tilde{\Theta}=
+\begin{pmatrix}
+  A
+  & | & 
+  \begin{array}{c}
+  \tilde{\Theta}^1_3\\
+  \tilde{\Theta}^2_3
+  \end{array}
+   \\
+\hline
+ \begin{array}{cc}
+  -\tilde{\Theta}^1_3&
+  -\tilde{\Theta}^2_3
+  \end{array}& |&  0&
+  
+\end{pmatrix}
+$$
+<p>where $A$ is a matrix of 1-forms such that $\iota^*(A)=\Theta$. To see this, observe that since $\nabla$ is the induced connection by the standard metric in $\mathbb R^3$, on the one hand we have</p>
+$$
+\nabla_V e_1=V\lrcorner \Theta^2_1 e_2,
+$$
+<p>and in the other</p>
+$$
+\nabla_V e_1=\mbox{proj}((\nabla_{std})_V \tilde{e}_1)=\mbox{proj}(V\lrcorner A^2_1\tilde{e}_2+V\lrcorner \tilde{\Theta}^3_1 \tilde{n})=V\lrcorner \iota^*(A^2_1)e_2
+$$
+<p>for an arbitrary vector $V$ tangent to $S$.</p>
+<p></p>
+<p>Now, we have to put together several things:</p>
+<p><ul style="margin-left:0px;"><li>First, we know that Gaussian curvature $K$ is the determinant of the <a href="./shape operator.md.html">shape operator</a>.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Second, it turns out that this determinant can be computed as $\tilde{\Theta}^1_3 \wedge \tilde{\Theta}^2_3(e_1,e_2)$ (see <a href="./shape operator.md.html#Shape_operator_and_the_standard_connection_of_R3">here</a> to see why) evaluated in points $p$ of the surface $S$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Then, according to <a href="./../../✏️ THEOREMS/Cartan's second structural equation.md.html">Cartan's second structural equation</a>, since $\mathbb R^3$ is flat</li></ul></p>
+$$
+d\tilde{\Theta}^i_j=\tilde{\Theta}^k_j\wedge \tilde{\Theta}^i_k
+$$
+<p>and then</p>
+$$
+d\tilde{\Theta}^1_2=\tilde{\Theta}^3_2\wedge \tilde{\Theta}^1_3
+$$
+<p>and</p>
+$$
+d\tilde{\Theta}^1_2(e_1,e_2)=\tilde{\Theta}^3_2\wedge \tilde{\Theta}^1_3(e_1,e_2)=-\tilde{\Theta}^1_3\wedge \tilde{\Theta}^3_2(e_1,e_2)=\tilde{\Theta}^1_3\wedge \tilde{\Theta}^2_3(e_1,e_2)
+$$
+<p>If we restrict this identity to $S$ we obtain</p>
+$$
+d{\Theta}^1_2(e_1,e_2)=K.
+$$
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Cartan's_first_structural_equation">Cartan's first structural equation</h1>
+<p>(<a href="./../Bibliography/@lee2006riemannian.md.html">@lee2006riemannian</a> exercise 4-5 page 64)</p>
+<p>Let $\nabla$ be a linear connection on $M$, let $\{e_i\}$ be a local frame on some open subset $U \subset M$, and let $\{\omega^i\}$ be the dual coframe. Denote by $T_{ij}^k$ the <a href="./../♾️ CONCEPTS/GEOMETRY/coframe on a manifold.md.html">structure coefficients</a>.</p>
+<p>We know that there is a uniquely determined matrix of 1-forms $\Theta^i_j$ on $U$, called the <a href="./../♾️ CONCEPTS/GEOMETRY/vector bundle connection.md.html#Connection_form_matrix">connection 1-forms</a> for this frame, such that</p>
+$$
+\nabla_X e_i = X\lrcorner \Theta^j_i e_j
+$$
+<p>for all $X \in T M$.</p>
+<p></p>
+<p>We are going to prove <b>Cartan’s first structure equation</b>:</p>
+<p>$$d\omega^k = \omega^i \wedge \Theta^k_i + \tau^k,$$</p>
+<p>where $\{\tau^1 , . . . , \tau^n\}$ are the torsion 2-forms, defined in terms of the <a href="./../♾️ CONCEPTS/torsion of a connection.md.html">torsion</a> and the frame $\{e_i\}$ by</p>
+<p>$$\tau(X, Y) = \tau^j (X, Y )e_j.$$</p>
+<p>We take $e_1,e_2$ without lost of generality, and observe that the <a href="./../♾️ CONCEPTS/torsion of a connection.md.html">torsion</a> satisfies</p>
+$$
+\tau (e_1, e_2)= \nabla_{e_1} e_2- \nabla_{e_2} e_1-[e_1,e_2]
+$$
+<p>The $k$th component will be</p>
+$$
+\tau^k (e_1, e_2)=e_1\lrcorner \Theta^k_2 -e_2\lrcorner \Theta^k_1 +T_{12}^k
+$$
+<p></p>
+<p>But also $d\omega^k(e_1,e_2)=T_{12}^k$, since  $d\omega^k=\sum_{i<j}T_{ij}^k\omega^i \wedge\omega^j$. It only rests to show that </p>
+$$
+ \omega^i \wedge \Theta^k_i (e_1,e_2)=e_2\lrcorner \Theta^k_1-e_1\lrcorner \Theta^k_2
+$$
+<p>and this is true, since </p>
+$$
+\omega^i \wedge \Theta^k_i (e_1,e_2)=\sum_i\det
+\begin{pmatrix}
+e_1 \lrcorner\omega^i&e_1\lrcorner \Theta^k_i\\
+e_2 \lrcorner\omega^i&e_2\lrcorner \Theta^k_i\\
+\end{pmatrix}
+=e_2\lrcorner \Theta^k_i-e_1\lrcorner \Theta^k_i.
+$$
+<p></p>
+<p><b>Comment</b>: I think that they are use sometimes to recover a connection expressed in a particular frame/coframe if we know the torsion. Mainly with the Levi-Civita connection of a Riemannian metric and orthonormal frames</p>
+<p>In general, you need to know more information about the "relation" of the chosen frame with the connection. If it is assumed that the frame is orthonormal, now this is enough data to recover the metric using the torsion (null torsion, for example). But anyway, if you assume orthornormality you can compute the metric, compute Christoffel symbols and then change to the desired frame, not needing Cartan's first structure equations... I guess they are used as a shortcut, but they are not indeed needed...</p>
+<p></p>
+<p></p>
+<p>Related: <a href="./Cartan's second structural equation.md.html">Cartan's second structural equation</a> </p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

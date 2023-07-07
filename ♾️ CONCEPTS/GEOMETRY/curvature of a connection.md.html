@@ -79,19 +79,21 @@ $$
 <p>The <a href="./../Riemann curvature tensor.md.html">Riemann curvature tensor</a> is a special case of curvature of a connection on a principal bundle.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Vector_bundles">Vector bundles</h2>
-<p></p>
 <p>(see <a href="https://en.wikipedia.org/wiki/Curvature_form" target="_blank">wikipedia</a> )</p>
 <p></p>
-<p>In this case the connection would be a <a href="./vector bundle connection.md.html">vector bundle connection</a>  and the connection 1-form can be <a href="./vector bundle connection.md.html#Connection_form">expressed in local frames</a> as a matrix of 1-forms $\omega$ ($\omega$ is not the same as above). Then the curvature is</p>
+<p>In this case the connection would be a <a href="./vector bundle connection.md.html">vector bundle connection</a>  and the connection 1-form can be <a href="./vector bundle connection.md.html#Connection_form_matrix">expressed in local frames</a> with the connection 1-forms $\Theta$, or better said, a $\mathfrak{gl}(n)$-valued 1-form. Then the curvature is</p>
 $$
-\Omega=d \omega+\omega \wedge \omega
+\Omega=d \Theta-\Theta \wedge \Theta
 $$
 <p>or, in components,</p>
 $$
-\Omega_{j}^{i}=d \omega_{j}^{i}+\sum_{k} \omega_{k}^{i} \wedge \omega_{j}^{k}
+\Omega_{j}^{i}=d \Theta_{j}^{i}-\sum_{k}  \Theta_{j}^{k}\wedge \Theta_{k}^{i}
 $$
+<p>called the <b>curvature 2-forms</b>.</p>
+<p>If the vector bundle is the tangent bundle and the connection is the <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a> of a metric then this curvature is the same as the <a href="./../Riemann curvature tensor.md.html">Riemann curvature tensor</a> of the metric. </p>
 <p></p>
-<p>If the vector bundle is the tangent bundle and the connection is the <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a> of a metric then this curvature is the same as the <a href="./../Riemann curvature tensor.md.html">Riemann curvature tensor</a> of the metric. See the note <a href="./Gaussian curvature.md.html#Relation_to_the_curvature_of_a_connection">Gaussian curvature#Relation to the curvature of a connection</a>.</p>
+<p></p>
+<p>See the note <a href="./Gaussian curvature.md.html#Relation_to_the_curvature_of_a_connection">Gaussian curvature#Relation to the curvature of a connection</a>.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

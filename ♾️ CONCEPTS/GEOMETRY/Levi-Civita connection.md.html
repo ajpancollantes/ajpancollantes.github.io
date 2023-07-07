@@ -42,58 +42,41 @@ gtag('config', 'G-LBT9E8N3HS');
 <p><b>Proof</b> <a href="https://en.wikipedia.org/wiki/Levi-Civita_connection" target="_blank">Wikipedia</a></p>
 <p>$\blacksquare$</p>
 <p></p>
-<h2 style="margin-left:0px;" id="Christoffel_symbols">Christoffel symbols</h2>
+<h2 style="margin-left:0px;" id="Local_expression">Local expression</h2>
+<h3 style="margin-left:0px;" id="In_a_coordinate_chart:_Christoffel_symbols">In a coordinate chart: Christoffel symbols</h3>
 <p>In a local chart $\{x_1,\ldots,x_n\}$ we have a local chart frame, and we can express the Levi-Civita connection as a matrix of 1-forms (see <a href="./vector bundle connection.md.html#Connection_form">here</a>). This gives rise to the <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>.</p>
 <p></p>
-<h2 style="margin-left:0px;" id="Computation_of_the_matrix_of_connection_1-form">Computation of the matrix of connection 1-form</h2>
-<p>Given a <a href="./coframe on a manifold.md.html">coframe</a> which is orthonormal with respect to the metric $g$, we can compute the connection 1-form of the Levi-Civita connection directly from the <a href="./coframe on a manifold.md.html">structure coefficients</a> of the coframe. Let's see it, in the 2-dimensional case.</p>
-<p>Suppose you have an orthonormal basis ${X_1, X_2}$ of tangent vectors (<a href="./frame on a manifold.md.html">frame on a manifold</a>), and a dual coframe ${\omega^1, \omega^2}$, i.e., $\omega^i(X_j) = \delta^i_j$. The structure coefficients of the frame/coframe are defined by the commutation relations of the base vectors: $[X_i, X_j] = -T_{ij}^k X_k$. Also we have that $d\omega^k=T_{ij}^k \omega^i \wedge \omega^j$.</p>
-<p>On the other hand, the <a href="./vector bundle connection.md.html#Connection_form">connection 1-forms</a> of the Levi-Civita connection, $\omega_{j}^k$, are defined by the relation: $\nabla_{X_i} X_j = \omega_{j}^k(X_i) X_k=\omega_{ji}^k X_k$, where $\nabla$ is the covariant derivative associated with the Levi-Civita connection.</p>
-<p>The Levi-Civita connection is compatible with the metric, which means that the covariant derivative of the metric is zero. In terms of the connection 1-forms, this translates into the condition: $\omega_{ij}^k + \omega_{kj}^i = 0$.</p>
-<p>Let's see why. Metric compatibility means that the connection preserves the metric, i.e., $\nabla g = 0$. Specifically, for all vector fields $X, Y, Z$ on $M$, this reads as</p>
+<h3 style="margin-left:0px;" id="In_a_orthonormal_frame:_the_matrix_of_connection_1-form">In a orthonormal frame: the matrix of connection 1-form</h3>
 <p></p>
-<p>$$X (g(Y, Z) )= g(\nabla_X Y, Z) + g(Y, \nabla_X Z) .$$</p>
-<p>The fact that $X_1, X_2$ form an orthonormal basis, i.e., $g(X_i,X_j) = \delta_{ij}$, simplifies calculations quite a bit. In particular</p>
-<p>$$X_j g(X_i, X_k) = g(\nabla_{X_j} X_i, X_k) + g(X_i, \nabla_{X_j} X_k) = \omega_{i}^l(X_j)g(X_l,X_k) + \omega_{k}^l(X_j)g(X_i,X_l) .$$</p>
-<p>However, since the $X_i$ are of constant length 1, we have $X_j g(X_i, X_k) = 0$. Therefore,</p>
-<p>$$0 = \omega_{i}^l(X_j)g(X_l,X_k) + \omega_{k}^l(X_j)g(X_i,X_l) = \omega_{i}^l(X_j)\delta_{lk} + \omega_{k}^l(X_j)\delta_{li} .$$</p>
-<p>As a result, for $i \neq k$, we get $\omega_{i}^k(X_j) = -\omega_{k}^i(X_j)$. For $i=k$, we obtain $\omega_{i}^i(X_j) = 0$.</p>
+<p><b>Example 1</b>: <a href="./../../☕REFLECTIONS/connection form for LV in a surface.md.html">connection form for LV in a surface</a>.</p>
+<p><b>Example 2</b>: <a href="./../../☕REFLECTIONS/connection form for LV in R3.md.html">connection form for LV in R3</a>  </p>
 <p></p>
-<p>Now, since the connection is <a href="./../torsion of a connection.md.html">torsion</a>-free $\nabla_{X_i} X_j-\nabla_{X_j} X_i =[X_i,X_j]=  -T_{ij}^k X_k$, which leads to</p>
+<p>Since our connection is the LC connection and we are in a orthonormal frame, it can be shown that this matrix of 1-forms $\Theta$ satisfies "two good properties":</p>
+<p><ul style="margin-left:0px;"><li>1. <b>Is antisymmetric</b>. The covariant derivative $\nabla$ satisfies the Leibniz rule:</li></ul></p>
 $$
-\left(\omega_{j}^k(X_i)-\omega_{i}^k(X_j)\right) X_k=-T_{ij}^k X_k
+X g(Y, Z) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z). \tag{1}
 $$
+<p>In an orthonormal frame $e_i$, the metric is simple: $g(e_i, e_j) = \delta_{ij}$, where $\delta_{ij}$ is the Kronecker delta.</p>
+<p>The connection 1-forms are defined by the covariant derivative:</p>
 $$
-\omega_{j}^k(X_i)-\omega_{i}^k(X_j)=-T_{ij}^k
+\nabla e_j = \Theta_{j}^k e_k. \tag{2}
 $$
-<p>We can write the 8 equations:</p>
-<p>1. $\omega_{1}^1(X_1)-\omega_{1}^1(X_1)=-T_{11}^1 \rightarrow 0=0$</p>
-<p>2. $\omega_{1}^2(X_1)-\omega_{1}^2(X_1)=-T_{11}^2\rightarrow 0=0$</p>
-<p>3. $\omega_{2}^1(X_1)-\omega_{1}^1(X_2)=-T_{12}^1$</p>
-<p>4. $\omega_{2}^2(X_1)-\omega_{1}^2(X_2)=-T_{12}^2$</p>
-<p>5. $\omega_{1}^1(X_2)-\omega_{2}^1(X_1)=-T_{21}^1$</p>
-<p>6. $\omega_{1}^2(X_2)-\omega_{2}^2(X_1)=-T_{21}^2$</p>
-<p>7. $\omega_{2}^1(X_2)-\omega_{2}^1(X_2)=-T_{22}^1\rightarrow 0=0$</p>
-<p>8. $\omega_{2}^2(X_2)-\omega_{2}^2(X_2)=-T_{22}^2\rightarrow 0=0$</p>
-<p>and we conclude:</p>
-<p>$\omega_{2}^1(X_1)=-T_{12}^1$ from 3,</p>
-<p>$\omega_{1}^2(X_2)=T_{12}^2$ from 4,</p>
-<p>and from this two last equations:</p>
-<p>$\omega_{2}^1(X_2)=-\omega_{1}^2(X_2)=-T_{12}^2$</p>
-<p>$\omega_{1}^2(X_1)=-\omega_{2}^1(X_1)=T_{12}^1$</p>
-<p>Therefore, the connection matrix is</p>
-$$
-\begin{pmatrix}
-0&T_{12}^1 \omega^1+T_{12}^2\omega^2\\ 
--T_{12}^1 \omega^1-T_{12}^2 \omega^2&0\\
-\end{pmatrix}
-$$
-<p>$\blacksquare$</p>
+<p>We want to show that $\Theta_{j}^i = - \Theta_{i}^j$ for all $i$ and $j$.</p>
 <p></p>
-<h2 style="margin-left:0px;" id="About_curvature">About curvature</h2>
-<p>Since it is a particular <a href="./vector bundle connection.md.html">vector bundle connection</a> and therefore a particular <a href="./connection on a fiber bundle.md.html">connection on a fiber bundle</a>, it has a <a href="./curvature of a connection.md.html">curvature of a connection</a> which is a 2-form of a particular kind. On the other hand, the <a href="./Riemannian metric.md.html">Riemannian metric</a> gives rise to the <a href="./../Riemann curvature tensor.md.html">Riemann curvature tensor</a>. Both ideas are related (I have to investigate it more, but something is said <a href="./curvature of a connection.md.html#Vector_bundles">here</a>).</p>
+<p>To do this, consider the formula (1) in the orthonormal basis, setting $X = e_k$, $Y = e_i$, $Z = e_j$, we have:</p>
+<p>$$e_k (\delta_{ij}) = g(\nabla_{e_k} e_i, e_j) + g(e_i, \nabla_{e_k} e_j).$$</p>
+<p>$$0 = g(e_k \lrcorner\Theta_{i}^l e_l, e_j) + g(e_i, e_k \lrcorner\Theta_{j}^m e_m) = e_k\lrcorner \Theta_{i}^j +  e_k\lrcorner \Theta_{j}^i,$$</p>
+<p>for every $k$. Hence, we find $\Theta_{i}^j = - \Theta_{j}^i$.</p>
 <p></p>
-<p></p>
+<p>2. <b>We have</b> $e_i\lrcorner\Theta_{j}^k-e_j\lrcorner\Theta_{i}^k=-T_{ij}^k$</p>
+<p>Since the connection is <a href="./../torsion of a connection.md.html">torsion</a>-free we have </p>
+$$
+\nabla_{e_i} e_j-\nabla_{e_j} e_i =[e_i,e_j]=  -T_{ij}^k e_k,
+$$which leads to
+$$
+\left(e_i\lrcorner\Theta_{j}^k-e_j\lrcorner\Theta_{i}^k\right) e_k=-T_{ij}^k e_k
+$$
+<p>and we have the result</p>
 <p></p>
 <h1 style="margin-left:0px;" id="Uniqueness_of_the_metric?">Uniqueness of the metric?</h1>
 <p>Two metrics can have the same Levi-Civita connection and hence the same geodesics, but differ in other properties like volumes, angles, etc. In more formal terms, this question involves projective equivalence of Riemannian metrics, a topic studied in differential geometry. Two metrics are projectively equivalent if they have the same unparametrized geodesics. There are nontrivial examples of projectively equivalent but distinct Riemannian metrics, even in dimension 2. See also the <a href="./geodesic.md.html#Other_properties">discusion here</a>.</p>

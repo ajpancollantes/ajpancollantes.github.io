@@ -49,9 +49,11 @@ $$
 $$
 <p>See <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 287.</p>
 <p></p>
-<p>It can be shown (<a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 290), that</p>
+<p>It can be shown (<a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 290), that this ideas justifies the following</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Definition">Definition</h2>
 $$
-\left.\mathcal{R}(\mathbf{u}, \mathbf{v}) (\mathbf{w})=\left\{\left[\nabla_{\mathbf{u}}, \nabla_{\mathbf{v}}\right]-\nabla_{[\mathbf{u}, \mathbf{v}]}\right]\right\} (\mathbf{w})
+\left.\mathcal{R}(\mathbf{u}, \mathbf{v}) (\mathbf{w})=\left\{\left[\nabla_{\mathbf{u}}, \nabla_{\mathbf{v}}\right]-\nabla_{[\mathbf{u}, \mathbf{v}]}\right]\right\} (\mathbf{w}) \tag{1}
 $$
 <p></p>
 <p>Indeed, it can be proven that a multilinear map (indeed, a <a href="./tensor.md.html">tensor</a>)</p>
@@ -63,18 +65,29 @@ $$
 R(u,v;w):=\mathcal{R}(\mathbf{u}, \mathbf{v}) (\mathbf{w})
 $$
 <p>which is called the <b>Riemann curvature tensor</b>.</p>
-<p></p>
-<p></p>
 <p>From here we can obtain the <a href="./sectional curvature.md.html">sectional curvature</a>s.</p>
 <p></p>
-<h2 style="margin-left:0px;" id="2-dimensional_case">2-dimensional case</h2>
-<p>In a 2-dimensional Riemannian manifold, the Riemann curvature tensor $R(X,Y)Z$ is completely determined by the <a href="./GEOMETRY/Gaussian curvature.md.html">Gaussian curvature</a> $K$ at the given point $p$. </p>
+<h2 style="margin-left:0px;" id="Relation_to_Gaussian_curvature">Relation to Gaussian curvature</h2>
+<p>In a 2-dimensional Riemannian manifold $(S,g)$,  we consider an <b>orthonormal</b> frame $e_1,e_2$ for the surface $S$ so $\Theta$ is antisymmetric and $\Omega=d\Theta$. If we think of <a href="./../✏️ THEOREMS/Cartan's second structural equation.md.html">Cartan's second structural equation</a></p>
+$$
+R(X,Y;e_1) = \Omega_1^1(X,Y)e_1+\Omega_1^2(X,Y)e_2=-\Omega_2^1(X,Y)e_2.
+$$
+<p>According to <a href="./GEOMETRY/Gaussian curvature.md.html#More_formally">this</a> we have that</p>
+$$
+\Omega_2^1(e_1,e_2)=d\Theta^1_2(e_1,e_2)
+$$
+<p>is the Gaussian curvature, so $K=g(-R(e_1,e_2;e_1),e_2)$.</p>
 <p></p>
-<p>The expression for the Riemann curvature tensor at a point $p$ in terms of the Gaussian curvature $K(p)$ is given by:</p>
+<p></p>
+<p>On the other hand, the expression for the Riemann curvature tensor at a point $p$ in terms of the Gaussian curvature $K(p)$ is given by:</p>
 <p>$$ R(X,Y)Z = K(p) \, g(Y,Z)X - K(p) \, g(X,Z)Y $$</p>
 <p>where $g(X,Z)$ and $g(Y,Z)$ are the inner products of the vectors $X, Z$ and $Y, Z$ respectively. This formula comes from the definition of the Riemann tensor in 2D manifolds, and the fact that the Gaussian curvature $K(p)$ is proportional to the only non-zero component of the Riemann tensor.</p>
 <p></p>
 <p>In this expression, $R(X,Y)Z$ is a new vector field that results from the action of the Riemann curvature tensor on the original vector fields $X, Y, Z$ at the point $p$ in the manifold.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Relation_to_curvature_2-forms">Relation to curvature 2-forms</h1>
+<p>This is the <a href="./../✏️ THEOREMS/Cartan's second structural equation.md.html">Cartan's second structural equation</a>.</p>
+<p></p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

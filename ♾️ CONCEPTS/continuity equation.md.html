@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Continuity_equation">Continuity equation</h1>
+<p>Coming from <a href="./current density and charge density.md.html">current density and charge density</a>.</p>
+<p>If we reduce one more dimension to simplify we we can get a deeper understanding. Imagine particles moving in a 1-dimensional world, for which we draw a spacetime diagram like this one:</p>
+<p><img src="./../imagenes/Pasted image 20220415190844.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>In a little piece of this space (from $x=2$ to $x=3$, for example), we pass from having 2 particles to having 1 particle at times $t=1$ and $t=2$ respectively. This corresponds to the fact that 2 particles have left the room (to the left) and one has arrived (from the right).</p>
+<p>I imagine $\rho(x,t)$ and $j_x(x,t)$ like infinitesimal "flow meter devices" that I install on spacetime event $(x,t)$ to measure how many particles go throw it. Observe that we have a tacit sign convention for $j_x$ depending on the sense you go through the vertical line. At a first glance, this convention is not needed for $\rho$ since time always flows forward. But we can assume a negative density like something travelling backward in time (like Feynman said for positrons).</p>
+<p>If we consider that this flow is a vector field with components $J=(j_x,j_y,j_z,\rho)$ in <a href="./Minkowski space.md.html">Minkowski space</a> $\mathbb{M}^4$, then continuity equation is nothing but the statement</p>
+$$
+\mbox{div}J=0,
+$$
+<p>where $\mbox{div}$ stands for <a href="./divergence.md.html">divergence</a></p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="More_elaborated:_Example_4.22_in">More elaborated: Example 4.22 in </h2>
+<p>Perhaps the most graphic physical illustration of the relationship between conserved densities and fluxes comes from the equations of compressible, in-viscid fluid motion. Let $x \in \mathbb{R}^n$ represent the spatial coordinates, and $u = u(x, t) \in \mathbb{R}^n$ the velocity of a fluid particle at position $x$ and time $t$. Further let $\rho(x, t)$ be the density, and $p(x, t)$ the pressure; in the particular case of isentropic (constant entropy) flow, pressure $p = P(\rho)$ will depend on density alone. The equation of continuity takes the form </p>
+$$
+\frac{\partial \rho}{\partial t} + \text{Div}(\rho u) = 0,
+$$
+<p>where $\text{Div}(\rho u) = \sum_{j=1}^{n} \frac{\partial (\rho u_j)}{\partial x_j}$ is the spatial divergence. This equation is already in the form of a <a href="./conservation law.md.html">conservation law</a>, with density $T = \rho$ and flux $X = \rho u$. This leads to the integral equation for the conservation of mass </p>
+$$
+\frac{d}{dt} \int_V \rho dx = -\int_{\partial V} \rho u \cdot n dS.
+$$ 
+<p>Here $\int_V \rho dx$ is clearly the mass of fluid within the domain $V$, while $\rho u \cdot n$, with $n$ the unit normal to $\partial V$, is the instantaneous mass flux of fluid out of a point on the boundary $\partial V$. Thus we see that the net change in mass inside $V$ equals the flux of fluid into $V$. In particular, if the normal component of velocity $u \cdot n$ on $\partial V$ vanishes, there is no net change in mass within the domain $V$, and we have a law of conservation of mass: </p>
+<p>$$\int_V \rho dx = \text{constant}.$$</p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

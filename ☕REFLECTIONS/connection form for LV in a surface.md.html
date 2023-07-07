@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Levi-Civita_connection_on_a_Riemannian_surface">Levi-Civita connection on a Riemannian surface</h1>
+<p>We are going to compute the <a href="./../♾️ CONCEPTS/GEOMETRY/vector bundle connection.md.html#Connection_form_matrix">vector bundle connection#Connection form matrix</a> for a <a href="./../♾️ CONCEPTS/Riemannian manifold.md.html">Riemannian surface</a>. And also the curvature.</p>
+<p></p>
+<p>Given a <a href="./../♾️ CONCEPTS/GEOMETRY/coframe on a manifold.md.html">coframe</a> which is orthonormal with respect to the metric $g$, we can compute the connection 1-form of the Levi-Civita connection directly from the <a href="./../♾️ CONCEPTS/GEOMETRY/coframe on a manifold.md.html">structure coefficients</a> of the coframe. </p>
+<p>Suppose you have an orthonormal basis ${X_1, X_2}$ of tangent vectors (<a href="./../♾️ CONCEPTS/GEOMETRY/frame on a manifold.md.html">frame on a manifold</a>), and a dual coframe ${\omega^1, \omega^2}$, i.e., $\omega^i(X_j) = \delta^i_j$. The structure coefficients of the frame/coframe are defined by the commutation relations of the base vectors: $[X_i, X_j] = -T_{ij}^k X_k$. Also we have that </p>
+<p>$d\omega^1=T_{12}^1 \omega^1 \wedge \omega^2$ and $d\omega^2=T_{12}^2 \omega^1 \wedge \omega^2$.</p>
+<p>On the other hand, the <a href="./../♾️ CONCEPTS/GEOMETRY/vector bundle connection.md.html#Connection_form">connection 1-forms</a> of the Levi-Civita connection, $\Theta_{j}^k$, are defined by the relation: $\nabla_{X_i} X_j = \Theta_{j}^k(X_i) X_k=\Theta_{ji}^k X_k$, where $\nabla$ is the covariant derivative associated with the Levi-Civita connection.</p>
+<p>The Levi-Civita connection is compatible with the metric, which means that the covariant derivative of the metric is zero. In terms of the connection 1-forms, this translates into the condition: $\Theta_{ij}^k + \Theta_{kj}^i = 0$ (see <a href="./../♾️ CONCEPTS/GEOMETRY/Levi-Civita connection.md.html#In_a_orthonormal_frame_the_matrix_of_connection_1-form">here</a>).</p>
+<p></p>
+<p>Now, since the connection is <a href="./../♾️ CONCEPTS/torsion of a connection.md.html">torsion</a>-free </p>
+$$
+\Theta_{j}^k(X_i)-\Theta_{i}^k(X_j)=-T_{ij}^k
+$$
+<p>(see also <a href="./../♾️ CONCEPTS/GEOMETRY/Levi-Civita connection.md.html#In_a_orthonormal_frame_the_matrix_of_connection_1-form">here</a>).</p>
+<p></p>
+<p>We can write the 8 equations:</p>
+<p>1. $\Theta_{1}^1(X_1)-\Theta_{1}^1(X_1)=-T_{11}^1 \rightarrow 0=0$</p>
+<p>2. $\Theta_{1}^2(X_1)-\Theta_{1}^2(X_1)=-T_{11}^2\rightarrow 0=0$</p>
+<p>3. $\Theta_{2}^1(X_1)-\Theta_{1}^1(X_2)=-T_{12}^1$</p>
+<p>4. $\Theta_{2}^2(X_1)-\Theta_{1}^2(X_2)=-T_{12}^2$</p>
+<p>5. $\Theta_{1}^1(X_2)-\Theta_{2}^1(X_1)=-T_{21}^1$</p>
+<p>6. $\Theta_{1}^2(X_2)-\Theta_{2}^2(X_1)=-T_{21}^2$</p>
+<p>7. $\Theta_{2}^1(X_2)-\Theta_{2}^1(X_2)=-T_{22}^1\rightarrow 0=0$</p>
+<p>8. $\Theta_{2}^2(X_2)-\Theta_{2}^2(X_2)=-T_{22}^2\rightarrow 0=0$</p>
+<p>and we conclude:</p>
+<p>$\Theta_{2}^1(X_1)=-T_{12}^1$ from 3,</p>
+<p>$\Theta_{1}^2(X_2)=T_{12}^2$ from 4,</p>
+<p>and from this two last equations:</p>
+<p>$\Theta_{2}^1(X_2)=-\Theta_{1}^2(X_2)=-T_{12}^2$</p>
+<p>$\Theta_{1}^2(X_1)=-\Theta_{2}^1(X_1)=T_{12}^1$</p>
+<p>Therefore, the connection matrix is</p>
+$$
+\Theta=\begin{pmatrix}
+0&-T_{12}^1 \omega^1-T_{12}^2\omega^2\\ 
+T_{12}^1 \omega^1+T_{12}^2 \omega^2&0\\
+\end{pmatrix}
+$$
+<p>This construction is related to <a href="./../✏️ THEOREMS/Cartan's first structural equation.md.html">Cartan's first structural equation</a>.</p>
+<p></p>
+<p>Since $X_1, X_2$ is an orthonormal frame then the connection is a $\mathfrak{o}(2,\mathbb{R})$-valued 1-form $\Theta$. This is formalized by considering the <a href="./../♾️ CONCEPTS/GEOMETRY/associated connection.md.html">associated connection</a> in the <a href="./../♾️ CONCEPTS/GEOMETRY/principal bundle.md.html">principal bundle</a> called <a href="./../♾️ CONCEPTS/orthonormal frame bundle.md.html">orthonormal frame bundle</a>. Or something like that...</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Curvature">Curvature</h2>
+<p>Since it is a particular <a href="./../♾️ CONCEPTS/GEOMETRY/vector bundle connection.md.html">vector bundle connection</a> and therefore a particular <a href="./../♾️ CONCEPTS/GEOMETRY/connection on a fiber bundle.md.html">connection on a fiber bundle</a>, it has a <a href="./../♾️ CONCEPTS/GEOMETRY/curvature of a connection.md.html">curvature of a connection</a> which is a 2-form of a particular kind. On the other hand, the <a href="./../♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html">Riemannian metric</a> gives rise to the <a href="./../♾️ CONCEPTS/Riemann curvature tensor.md.html">Riemann curvature tensor</a>. Both ideas are related.</p>
+<p></p>
+<p>The <a href="./../♾️ CONCEPTS/GEOMETRY/curvature of a connection.md.html">curvature form</a>, which is an $\mathfrak{o}(2,\mathbb{R})$-valued 2-form, is given by the exterior derivative $\Omega=d\Theta + \Theta \wedge \Theta=d\Theta$. To compute $d\Theta$ observe that</p>
+$$
+d(T_{12}^1 \omega^1+T_{12}^2 \omega^2)=dT_{12}^1 \wedge \omega^1+dT_{12}^2\wedge \omega^2+T_{12}^1 d\omega^1+T_{12}^2d\omega^2=
+$$
+$$
+=(X_1(T_{12}^1)\omega^1+X_2(T_{12}^1)\omega^2)\wedge \omega^1+(X_1(T_{12}^2)\omega^1+X_2(T_{12}^2)\omega^2)\wedge \omega^2+
+$$
+$$
++T_{12}^1 T_{12}^1 \omega^1 \wedge \omega^2+T_{12}^2T_{12}^2 \omega^1 \wedge \omega^2=
+$$
+$$
+=\left(X_1(T_{12}^2)-X_2(T_{12}^1)+(T_{12}^1)^2+(T_{12}^2)^2\right)\omega^1 \wedge \omega^2.
+$$
+<p></p>
+<p>so</p>
+$$
+\Omega=\begin{pmatrix}
+0& -\left(X_1(T_{12}^2)-X_2(T_{12}^1)+(T_{12}^1)^2+(T_{12}^2)^2\right)\omega^1 \wedge \omega^2\\ 
+\left(X_1(T_{12}^2)-X_2(T_{12}^1)+(T_{12}^1)^2+(T_{12}^2)^2\right)\omega^1 \wedge \omega^2&0\\
+\end{pmatrix}
+$$
+<p></p>
+<p>This can be renamed to</p>
+$$
+\Omega=\begin{pmatrix}
+0& K\omega^1\wedge\omega^2\\ 
+-K\omega^1\wedge\omega^2&0\\
+\end{pmatrix}
+$$
+<p>where $K$ is the Gauss curvature (<a href="./../♾️ CONCEPTS/GEOMETRY/Gaussian curvature.md.html#Relation_to_the_curvature_of_a_connection">see here</a>).</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
