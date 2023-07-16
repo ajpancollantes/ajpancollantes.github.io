@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Lax_pair">Lax pair</h1>
+<h2 style="margin-left:0px;" id="Finite_degree_of_freedom">Finite degree of freedom</h2>
+<p>Consider a nonlinear <a href="./DEs/system of ODEs.md.html">system of ODEs</a> </p>
+$$
+\dot{x}_i=F_i,
+$$
+<p>for example one arising in <a href="./../⛳️ NON CLASSIFIED/Hamiltonian mechanics.md.html">Hamiltonian mechanics</a>,</p>
+$$
+\dot{p} = -\frac{\partial H}{\partial q}, \quad \dot{q} = \frac{\partial H}{\partial p}. \tag{1}
+$$
+<p></p>
+<p>A <b>Lax pair</b> for this system is a pair of matrices $L$ and $M$ that satisfy the Lax equation:</p>
+$$
+\frac{dL}{dt} = [L, M] \tag{2}
+$$
+<p>where $[L, M] = LM - ML$ is the commutator of $M$ and $L$, and $\frac{dL}{dt}$ is the time derivative of $L$. The entries of $L$ and $M$ are typically expressed in terms of the variables $x_i$, and we require that equation (1) is satisfied if and only if (2) is satisfied. </p>
+<p></p>
+<p>The exact form of $L$ and $M$ depends on the specific system under consideration, and is not unique. For instance, in the case of the simple <a href="./../⛳️ NON CLASSIFIED/harmonic oscillator.md.html">harmonic oscillator</a> with Hamiltonian $H = \frac{p^2}{2m} + \frac{1}{2}m\omega^2 q^2$, we can choose:</p>
+$$
+L = \begin{pmatrix} p/m & \omega q \\ \omega q & -p/m \end{pmatrix}, \quad M = \begin{pmatrix} 0 & \omega/2 \\ -\omega/2 & 0 \end{pmatrix}
+$$
+<p>Then, the Lax equation $\frac{dL}{dt} = [L,M]$ reproduces the equations of motion for the harmonic oscillator:</p>
+$$
+\dot{p} = -m\omega^2 q
+$$
+$$
+\dot{q} =\frac{p}{m}
+$$
+<p>The key point is that the eigenvalues of the $L$ matrix are conserved quantities (constants of motion), and the eigenvectors provide a "good" transformation of variables (????). </p>
+<p></p>
+<h3 style="margin-left:0px;" id="Isospectral_property">Isospectral property</h3>
+<p>The eigenvalues of $L$ do not change with time, a property known as isospectrality. </p>
+<p>Due to the <a href="./trace.md.html">cyclic property of the trace</a>, we can show that the trace of all the powers of $L$ are conserved quantities.</p>
+<p>In effect, the trace of $L$ is conserved, since </p>
+$$
+\dfrac{d}{dt}tr(L)=tr([L,M])=0.
+$$
+<p>To show $\frac{d}{dt} \mathrm{tr}(L^2) = 0$, observe</p>
+$$
+\frac{d}{dt} \mathrm{tr}(L^2) = \mathrm{tr}\left(\frac{d}{dt} L^2\right) = \mathrm{tr}\left(L\frac{dL}{dt} + \frac{dL}{dt}L\right),
+$$
+<p>where we used the product rule. Substituting the Lax equation for $\frac{dL}{dt}$ gives:</p>
+$$
+\frac{d}{dt} \mathrm{tr}(L^2) = \mathrm{tr}\left(L(LM - ML) + (LM - ML)L\right) = $$
+$$
+=\mathrm{tr}(L^2M - LML + LML - MLL) = \mathrm{tr}(L^2M - MLL)=0.
+$$
+<p></p>
+<p>The same is true for $\frac{d}{dt} \mathrm{tr}(L^3) = 0$ and son on.</p>
+<p></p>
+<p>To see that the eigenvalues of $L$ are conserved, only observe that the <a href="./eigenvalues.md.html#Determination_by_the_trace">eigenvalues are determined by the trace of the powers of the matrix</a>.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>In the previous example of the harmonic oscillator we can find the eigenvalues $\lambda$ and eigenvectors $\psi$ of the $L$ matrix. We solve the characteristic equation:</p>
+$$
+\text{det}(L - \lambda I) = 0
+$$
+<p>where $I$ is the identity matrix. This gives</p>
+$$
+\text{det}\begin{pmatrix} p/m - \lambda & \omega q \\ \omega q & -p/m - \lambda \end{pmatrix} = 0
+$$
+<p>which simplifies to</p>
+$$
+-(p^2/m^2 + \lambda^2) - \omega^2 q^2 = 0
+$$
+<p>We can solve this equation for $\lambda$ to get</p>
+$$
+\lambda = \pm\sqrt{(p^2/m^2 + \omega^2 q^2)}
+$$
+<p>These are the eigenvalues of the $L$ matrix, which correspond to the given Hamiltonian.</p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Spectral_parameter">Spectral parameter</h3>
+<p>In many cases, Lax pairs depend on an auxiliary variable, the so-called spectral parameter, which is not directly related to the dynamics of the model. The Lax pair $L(u)$, $M(u)$ then obeys the Lax equation at <b>all values</b> of $u \in \mathbb{C}$:</p>
+$$
+\frac{d}{dt} L(u) = [M(u), L(u)] \text{ for all }u \in \mathbb{C}.
+$$
+<p>Such a Lax pair, called nonisospectral, must be constructed as always such that this equation is equivalent to the complete set of equations of motion. As a functional equation, it is, in principle, much more constraining than the Lax equation without spectral parameter. This feature is useful for mechanical systems with infinitely many degrees of freedom whose equations of motion could thus be formulated by a finite-dimensional Lax pair. </p>
+<p></p>
+<p>Even for a finite-dimensional system, Lax pairs with spectral parameter often exist. While the spectral parameter is not essential to encode finitely many equations of motion, it is nevertheless useful in several respects.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Infinite_degrees_of_freedom_fields">Infinite degrees of freedom (fields)</h2>
+<p>In this case we have PDEs, for example evolution equations like KdV:</p>
+$$
+u_t-6u u_x+u_{xxx}=0,
+$$
+<p>the <a href="./transport equation.md.html">transport equation</a>, etc, we can apply similar ideas, but now $L,M$ <b>are operators on a Hilbert space</b> instead of matrices.</p>
+<p>For the KdV example we have: </p>
+$$
+L=-\partial_x^2+u(x,t)
+$$
+$$
+M=4\partial_x^3+6u\partial_x+3u_x
+$$
+<p></p>
+<p>In this cases, Lax equation $L_t=[L,M]$ can be replaced by $[L,M]=0$ if we replace $M$ by $M+\partial_t$ (simple computations).</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Isospectral_property">Isospectral property</h3>
+<p>In this case, it can then be shown that the eigenvalues and more generally the spectrum of $L$ are independent of $t$ in the following way.</p>
+<p></p>
+<p>The matrices $L(t)$ are all similar by virtue of the existence of matrices $U(t,s)$ such that</p>
+$$
+L(t)=U(t,s) L(s) U(t,s)^{-1}
+$$
+<p>Observe that in this case, the eigenvalues of $L(t)$ <a href="./eigenvalues.md.html#Invariance_by_similarity_transformation">are the same as</a> those of $L(0)$. </p>
+<p>The existence of $U(t,s)$ is due to the existence of solution for the Cauchy problem</p>
+$$
+\frac{d}{dt} U(t,s) = -M(t) U(t,s), \quad U(s,s) = I,
+$$
+<p>where $I$ denotes the identity matrix. (I guess there is a kind of result for general operators!!??)</p>
+<p></p>
+<p>Indeed, observe that in that case</p>
+$$
+\frac{d}{dt} \left( U(t,s)^{-1} L(t) U(t,s) \right) = 
+$$
+$$
+=-U(t,s)^{-1} \frac{d U(t,s)}{dt} U(t,s)^{-1} L(t) U(t,s) +
+   U(t,s)^{-1} \frac{dL(t)}{dt} U(t,s) +
+   U(t,s)^{-1} L(t) \frac{d U(t,s)}{dt}
+$$
+$$
+=U(t,s)^{-1} M(t) L(t) U(t,s) +
+   U(t,s)^{-1} \frac{dL(t)}{dt} U(t,s) -
+   U(t,s)^{-1} L(t) M(t) U(t,s)
+$$
+$$
+=-U(t,s)^{-1} [L(t),M(t)] U(t,s) +
+   U(t,s)^{-1} \frac{dL(t)}{dt} U(t,s) 
+$$
+$$
+=U(t,s)^{-1} \left(\frac{dL(t)}{dt}-[L(t),M(t)]  \right)U(t,s) =0.
+$$
+<p>This means that the operator $U(t,s)^{-1} L(t) U(t,s)$ does not change with time, and therefore, it must be equal to a constant matrix. Because $U(s, s) = I$, we have</p>
+$$
+U(s,s)^{-1} L(s) U(s,s) = L(s).
+$$
+<p>and then $L(t) = U(t,s) L(s) U(t,s)^{-1}$.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Lax_equation_as_a_compatibility_condition">Lax equation as a compatibility condition</h2>
+<p>The Lax equation, </p>
+$$
+\frac{dL}{dt} = [L, M] \tag{1}
+$$
+<p>is equivalent to the two linear compatibility conditions, </p>
+$$
+L\psi = \lambda\psi \tag{2}
+$$
+<p>and </p>
+$$
+\psi_t = -M\psi \tag{3}
+$$
+<p>Here, $\psi = \psi(x, t)$ is a nonzero simultaneous solution of both of these two equations for some $\lambda \in \mathbb{C}$. </p>
+<p></p>
+<p>Let's see that (2) and (3) implies (1). First, by using the operator analogue of the product rule and then eliminating $\psi_t$ from equation (3) gives </p>
+$$
+\frac{\partial}{\partial t} (L\psi) = \frac{dL}{dt} \psi - LM\psi \tag{4}
+$$
+<p>Second, by using $L\psi = \lambda\psi$ from equation (2) and the fact that $\lambda \in \mathbb{C}$ is a constant, we get </p>
+$$
+\frac{\partial}{\partial t} (L\psi) = \frac{\partial}{\partial t} (\lambda\psi) = -\lambda M\psi = -ML\psi \tag{5}
+$$
+<p>Comparing equations (4) and (5) gives </p>
+$$
+\frac{dL}{dt} \psi - LM\psi = -ML\psi \tag{6}
+$$
+<p>so</p>
+$$
+\frac{dL}{dt} \psi - [L, M]\psi =\left(\frac{dL}{dt} - [L, M]\right)\psi= 0 \tag{7}
+$$
+<p>From here, dividing by $\psi$ (assuming $\psi \neq 0$ and that $\frac{dL}{dt} - [L, M]$ <b>is a multiplication operator</b>, since it is supposed to be representing a given PDE like the KdV) gives back the Lax equation (1).</p>
+<p></p>
+<p>Now, to see that (1) implies (2) and (3), observe that we already know that Lax equation implies conserved eigenvalues. Differentiating the eigenvalue problem equation $L\psi=\lambda \psi$ in time, we obtain:</p>
+$$
+\frac{dL}{dt}\psi + L\frac{d \psi}{dt} = \lambda\frac{d \psi}{dt}.
+$$
+<p>Using the Lax equation, this becomes:</p>
+$$
+(LM - ML)\psi + L\frac{d \psi}{dt} = \lambda\frac{d \psi}{dt}.
+$$
+<p>Rearranging terms and using $L\psi = \lambda\psi$, we get:</p>
+$$
+(L - \lambda)(\frac{d \psi}{dt} + M\psi) = 0.
+$$
+<p></p>
+<p>Suppose, for simplicity, that the $\lambda$-eigenspace of $L$ is one-dimensional, then $\frac{d \psi}{dt} + M\psi=\beta\psi$, which can be interpreted as a evolution equation for $\psi$:</p>
+$$
+\frac{d \psi}{dt} = (−M + \beta)\psi,
+$$
+<p>where $\beta$ is a possibly time-dependent complex number. I think we can get rid of $\beta$ by modifying $M$ at the beginning. </p>
+<p></p>
+<p></p>
+<p>If we replace $\tilde{L}=L-\lambda$ and $\tilde{M}=M+\partial_t$ then equation (1) becomes </p>
+$$
+[\tilde{L},\tilde{M}]=0
+$$
+<p>since</p>
+$$
+[\tilde{L},\tilde{M}]\psi=[L-\lambda, M+\partial_t]\psi=[L,M+\partial_t]\psi=\cdots=0.
+$$
+<p>And equations (2) and (3) become</p>
+$$
+\tilde{L}\psi=0,\quad \tilde{M}\psi=0.
+$$
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="As_a_zero-curvature_condition">As a zero-curvature condition</h2>
+<p>Pending task</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Relation_to_QM">Relation to QM</h2>
+<p>In <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>, observables are operators on a Hilbert space, just as in the case of $L$ of $M$. </p>
+<p>The Lax equation $\dot{L} = [L, M]$ bears a resemblance to the Heisenberg equation of motion for an operator $Q$ in the Heisenberg picture of quantum mechanics: $i\hbar \frac{dQ}{dt} = [Q, H]$, where $H$ is the Hamiltonian. If $H$ and $Q$ are finite dimensional matrices, then $\text{tr}([Q, H]) = 0$ so that $\text{tr}(Q)$ is conserved. But often, operators in quantum mechanics are infinite dimensional and unbounded. The trace of the commutator of such operators may not vanish (or even be finite). In such cases, $\text{tr}(Q)$ may not be a (finite) conserved quantity.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Open_questions">Open questions</h2>
+<p>Can we start with arbitrary operators $L$, $M$ and then the condition $[L,M]=0$ is automatically an integrable system?</p>
+<p>How do we obtain conserved quantities if we have no sense of "trace"?</p>
+<p>What does it have to do with the zero-curvature representation?</p>
+<p>What are the elements of the Hilbert space do these operator act on?</p>
+<p>What does it have to do with the inverse scattering transform?</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
