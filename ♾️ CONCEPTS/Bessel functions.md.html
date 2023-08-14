@@ -31,15 +31,35 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Bessel_functions_of_first_kind">Bessel functions of first kind</h1>
-<p>Denoted by $J_{\nu}$. They are solutions to the ODE...</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Bessel_functions">Bessel functions</h1>
+<p>Bessel functions of the first kind, $J_\alpha(x)$, and of the second kind, $Y_\alpha(x)$, are solutions to the Bessel differential equation:</p>
+<p>$$ x^2 y'' + x y' + (x^2 - \alpha^2) y = 0 $$</p>
 <p></p>
-<h1 style="margin-left:0px;" id="Bessel_functions_of_second_kind">Bessel functions of second kind</h1>
-<p>Denoted by $Y_{\nu}$.</p>
+<p>Here, $\alpha$ can be any real or complex number, and $x$ is the independent variable. </p>
 <p></p>
+<p>1. <b>Domain of $\alpha$</b>:</p>
+<p><ul style="margin-left:0px;"><li>$\alpha$ can be any real or complex number. The value of $\alpha$ determines the order of the Bessel function. For integer orders, the functions have particularly simple representations, but they're well-defined for non-integer orders as well.</li></ul></p>
 <p></p>
+<p>2. <b>Domain of $x$</b>:</p>
+<p><ul style="margin-left:0px;"><li>Bessel functions are defined for all real numbers $x$. Depending on the context:</li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li>- For positive $x$, the Bessel functions oscillate and are well-defined.</li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li>- For $x = 0$:</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- $J_0(0) = 1$ and $J_\alpha(0) = 0$ for $\alpha \neq 0$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- $Y_\alpha(0)$ is not defined (it approaches negative infinity).</li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li>- For negative $x$:</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The Bessel functions can be expressed in terms of their values for positive arguments using certain relations. For example, for integer order $n$:</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$$ J_{-n}(x) = (-1)^n J_n(x) $$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$$ Y_{-n}(x) = (-1)^n Y_n(x) $$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>However, for non-integer $\alpha$, the functions $J_{\alpha}(x)$ and $J_{-\alpha}(x)$ are linearly independent.</li></ul></p>
 <p></p>
-<p>Properties:</p>
+<p>So, in summary:</p>
+<p><ul style="margin-left:0px;"><li>$\alpha$ (order) can be any real or complex number.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$x$ (argument) can be any real number, but one has to be careful at $x = 0$ especially for the Bessel function of the second kind.</li></ul></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Properties:">Properties:</h2>
 $$
 \begin{aligned}
 J_{\nu} J_{-\nu+1}+J_{-\nu} J_{\nu-1} &=\frac{2 \sin \nu \pi}{\pi x}, \\

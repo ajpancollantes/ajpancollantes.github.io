@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Heisenberg_vs_Schrodinger_picture">Heisenberg vs Schrodinger picture</h1>
+<h2 style="margin-left:0px;" id="Schrodinger_picture_in_QM">Schrodinger picture in QM</h2>
+<p>Remember that to solve a <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a> problem we solve the <a href="./../♾️ CONCEPTS/Schrodinger equation.md.html">Schrodinger equation</a></p>
+$$
+i\hbar\dfrac{d}{dt}\Psi=\hat{H}\Psi \tag{1}
+$$
+<p>with initial condition $f(x)$. </p>
+<p></p>
+<p>When we want <b>to observe</b> the system or make a prediction, at a desired time $t$, "we apply" a desired observable $\hat{Q}$ to $\Psi(x,t)$, obtaining the real value:</p>
+$$
+Q(t)=\langle\Psi(x,t)|\hat{Q}|\Psi(x,t)\rangle. \tag{2}
+$$
+<p><img src="./../imagenes/Pasted image 20230809092128.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Schrodinger_picture_in_CM">Schrodinger picture in CM</h2>
+<p>To <b>compare this with Classical Mechanics</b>, for example a particle in a potential, you have to think of the "states" $s$ of the particle as living in an abstract set $S$ (something like the "Configurations of the Real World") and observables like "standardized procedures" to obtain a numerical value from a state. For example, the observable "position" $q$ would be a system of sticks or rods, independent of the state of the particle and independent of time, in the same way that $\hat{Q}$ is independent of $\Psi$ and $t$.</p>
+<p>When we write $q(t)$ we indeed mean the composition of maps</p>
+$$
+t \stackrel{s}{\mapsto} s(t) \stackrel{q}{\mapsto} q(s(t))
+$$
+<p>Observe that these standard procedures are independent of time: we have established beforehand how are we going to take measures with our rods...</p>
+<p><img src="./../imagenes/Pasted image 20230809092302.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>The key difference with QM is that in CM, the authentic state $s$ is not a mathematical object unlike the wavefunction $\Psi$ of QM. So in CM we are forced to write the differential equations in terms of the composed maps, instead of with the states itself.</p>
+<p>But there is a trick. We usually assume the existence of observables that let us create a bijection between the set $S$ and a numerical set, for example $\mathbb R^2$ in the standard example of Hamiltonian mechanics:</p>
+$$
+\begin{array}{rccc}
+\varphi:& S &\to & \mathbb R^2\\
+        & s &\mapsto & (q,p)
+\end{array}
+$$
+<p>So you identify the states $s$ with the pairs $s\equiv (q,p)$ and this way you can write differential equations directly for the states:</p>
+$$
+\dot{s}=(X_H)_s \tag{3}
+$$
+<p>with $X_H$ the corresponding <a href="./../♾️ CONCEPTS/Hamiltonian vector field.md.html">Hamiltonian vector field</a>. This would be Schrodinger equation (1).</p>
+<p></p>
+<p>And now, you have two distinguished observables $\pi_1,\pi_2$, the projections over the first and second coordinates. Indeed, all the "standardized procedures" get transformed under this identification into other "math operations" with $q$ and $p$. Now, you solve problems in a totally analogous  way to Schrodinger picture: evolve the state $s_0$ with the ODE above to a time $t$ and then use a observable (for example $q=\pi_1$) to obtain the prediction $Q(t)=\pi_1(s(t))$. So far, so good.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Heisenberg_picture_in_CM">Heisenberg picture in CM</h2>
+<p>The use (and abuse) we do of $q(t):=q(s(t)), p(t):=p(s(t)),...$ makes us think that observables $q,p,...$ are other kind of entities. They are considered maps associating a numerical value to a time $t$ together with an initial condition $C$, and satisfying some differential equations. </p>
+<p><img src="./../imagenes/Pasted image 20230809094128.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>Observables constitute a commutative <a href="./../♾️ CONCEPTS/c-star algebra.md.html">c-star algebra</a>.</p>
+<p></p>
+<p>And we have that the evolution of one of them is given by the equation</p>
+$$
+\frac{d}{dt} q(t)=\{q,H\} \tag{4}
+$$
+<p>where $H$ is the Hamiltonian and $\{.,.\}$ the <a href="./../♾️ CONCEPTS/Poisson bracket.md.html">Poisson bracket</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Heisenberg_picture_in_QM">Heisenberg picture in QM</h2>
+<p>This different approach to observables like smooth functions let us think of them as elements of an algebra, which is commutative. For different reasons (see <a href="./Why did physics go quantum.md.html">Why did physics go quantum</a>) we suspect that the algebra of observables should be a noncommutative <a href="./../♾️ CONCEPTS/c-star algebra.md.html">c-star algebra</a>. I guess this is related to <a href="./../⛳️ NON CLASSIFIED/Noncommutative Geometry.md.html">Noncommutative Geometry</a>. So instead of time dependent functions of the state space, we take time dependent operators in the wavefunction space.</p>
+<p><img src="./../imagenes/Pasted image 20230809094438.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>These operators, once they are known, are waiting for us to provided a time $t$ and an initial condition $f$ to yield a value, as before.</p>
+<p></p>
+<p>Mathematically, the relation between Schrodinger and Heisenberg picture comes as follows. A formal solution of equation (1) is</p>
+$$
+\Psi=e^{-i \frac{\hat{H}}{\hbar}t}f,
+$$
+<p>indeed this is nothing but other way to write (1).</p>
+<p>Now, for every observable $\hat{Q}$ we define the time-dependent operator</p>
+$$
+\tilde{Q}(t)=e^{i\frac{\hat{H}}{\hbar}t} \hat{Q} e^{-i\frac{\hat{H}}{\hbar}t}.
+$$
+<p>In order to make predictions it is clear that (2) is substituted by</p>
+$$
+Q(t)=\langle f |\tilde{Q}(t)| f \rangle. \tag{5}
+$$
+<p>Observe that $\tilde{Q}$ satisfies</p>
+$$
+\dfrac{d}{dt}\tilde{Q}=-\frac{i}{\hbar}[\tilde{Q},\hat{H}], \tag{6}
+$$
+<p>since</p>
+$$
+\frac{d\tilde{Q}}{dt} = i\frac{\hat{H}}{\hbar} e^{i\frac{\hat{H}}{\hbar}t} \hat{Q} e^{-i\frac{\hat{H}}{\hbar}t} - e^{i\frac{\hat{H}}{\hbar}t} \hat{Q} i\frac{\hat{H}}{\hbar} e^{-i\frac{\hat{H}}{\hbar}t}.
+$$
+<p>and since $e^{-i\frac{\hat{H}}{\hbar}t}$ commutes with $\hat{H}$</p>
+$$
+\frac{d\tilde{Q}}{dt} = i\frac{\hat{H}}{\hbar} \tilde{Q} - \tilde{Q} i\frac{\hat{H}}{\hbar}=-\frac{i}{\hbar}[\tilde{Q},\hat{H}]
+$$
+<p>as desired.</p>
+<p>Observe that equation (6) correspond to equation (4).</p>
+<p></p>
+<p><b>Worked example</b> (to be corrected and adapted)</p>
+<p>Let's solve for the average position of a free particle described by the given wave function in the Heisenberg picture.</p>
+<p></p>
+<p><b>1. Time Evolution of the Position Operator in the Heisenberg Picture</b></p>
+<p>For a unit mass free particle, the Hamiltonian is given by:</p>
+$$ 
+\hat{H} = \frac{\hat{p}^2}{2} 
+$$
+<p>where $\hat{p}$ is the momentum operator.</p>
+<p>The Heisenberg equation of motion for the position operator $\hat{x}_H$ is:</p>
+$$
+\frac{d\hat{x}_H(t)}{dt} = -\frac{i}{\hbar} [\hat{x}_H(t),\hat{H}]
+$$
+<p>In CM this corresponds to $H=\dfrac{1}{2}p^2$, and the equation of motion would be</p>
+$$
+\dot{q}(t)=\{q,H\}.
+$$
+<p>Using the commutation relation between the position and momentum operators:</p>
+<p>$$ [\hat{x}, \hat{p}] = i\hbar $$</p>
+<p>The commutator between $\hat{H}$ and $\hat{x}_H(t)$ is:</p>
+<p>$$ [\hat{H}, \hat{x}_H(t)] = \frac{1}{2m} [\hat{p}^2, \hat{x}_H(t)] $$</p>
+<p>$$ = \frac{1}{2m} (\hat{p} \hat{p} \hat{x}_H(t) - \hat{x}_H(t) \hat{p} \hat{p}) $$</p>
+<p>Given that $[\hat{p}, \hat{x}_H(t)] = -i\hbar$, and using $\hat{p} [\hat{p}, \hat{x}_H(t)] = -i\hbar \hat{p}$, we get:</p>
+<p>$$ [\hat{H}, \hat{x}_H(t)] = \frac{\hat{p}}{m} $$</p>
+<p>Now, plugging this into the Heisenberg equation, we get:</p>
+<p>$$ \frac{d\hat{x}_H(t)}{dt} = \frac{\hat{p}}{m} $$</p>
+<p>Integrating this (and noting that the initial position operator is just $\hat{x}$), we find:</p>
+<p>$$ \hat{x}_H(t) = \hat{x} + \frac{\hat{p}t}{m} $$</p>
+<p></p>
+<p><b>2. Computing the Expectation Value at Time $t = 3$</b></p>
+<p></p>
+<p>$$ \langle x(3) \rangle = \langle f(x) | \hat{x}_H(3) | f(x) \rangle $$</p>
+<p>$$ = \langle f(x) | (\hat{x} + 3\hat{p}) | f(x) \rangle $$</p>
+<p>$$ = \langle f(x) | \hat{x} | f(x) \rangle + 3 \langle f(x) | \hat{p} | f(x) \rangle $$</p>
+<p></p>
+<p>Given $f(x) = (2/\pi)^{1/4} e^{ix/\hbar} e^{-x^2}$:</p>
+<p></p>
+<p>$$ \langle f(x) | \hat{x} | f(x) \rangle = \int dx f^*(x) x f(x) $$</p>
+<p>$$ \langle f(x) | \hat{p} | f(x) \rangle = -i\hbar \int dx f^*(x) \frac{df(x)}{dx} $$</p>
+<p></p>
+<p>Both of these integrals can be computed directly. </p>
+<p></p>
+<p>$$ \langle f(x) | \hat{x} | f(x) \rangle $$ yields $0$ due to the symmetrical nature of the state.</p>
+<p></p>
+<p>$$ \langle f(x) | \hat{p} | f(x) \rangle $$ yields $1$ based on the integral of the given wavefunction and its derivative.</p>
+<p></p>
+<p>Thus, the average position at $t = 3$ is:</p>
+<p></p>
+<p>$$ \langle x(3) \rangle = 0 + 3(1) = 3 $$</p>
+<p></p>
+<p>This result is as expected since the free particle's wave packet moves to the right with an average momentum of $\hbar$, resulting in an average displacement of $3$ units over the time $t = 3$.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -71,43 +71,13 @@ $$
 <p></p>
 <h2 style="margin-left:0px;" id="Formal_approach">Formal approach</h2>
 <h3 style="margin-left:0px;" id="Construction_from_a_covariant_derivative_operator">Construction from a covariant derivative operator</h3>
-<p>Suppose a manifold $M$ with a <a href="./covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$ defined on it. A vector field $X$ on $M$ is <b>constant along a curve</b> $c$ in $M$ if</p>
+<p>Suppose a manifold $M$ with a <a href="./covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$ defined on it. A vector field $X$ on $M$ is <b>constant along a curve</b> $c$ ($X$ is a <a href="./parallel vector field.md.html">parallel vector field</a> along $c$) in $M$ if</p>
 $$
 \nabla_{c'(t)} X=0
 $$
 <p>This is well defined since covariant derivative only depends on the value at a point in the first vector field (see <a href="./GEOMETRY/linear connection.md.html#Definition_as_operator">linear connection#Definition as operator</a>).</p>
 <p></p>
-<p>If the vector field $X(t)$ i<b>s only defined along the curve</b> $c$, we consider the <a href="./covariant derivative along a curve.md.html">covariant derivative along a curve</a>.</p>
-<p><b>Idea of the proof</b></p>
-<p>Suposse a vector field $V(t)$ defined over a curve $\alpha(t)$. Suposse, too, that in a local chart we have</p>
-$$
-V(t)=V_1(t) \partial x_1+V_2(t) \partial x_2
-$$
-<p>and </p>
-$$
-\alpha'(t)=A_1(t) \partial x_1+A_2(t) \partial x_2
-$$
-<p>We cannot calculate $\nabla_{\alpha_{c'(t)}} V(t)$ because we need $V$ to be defined in an open set. But if there exists $D_{\alpha}$ satisfying what it must satisfy, it will make:</p>
-$$
-D_{\alpha}(V(t))=D_{\alpha}(V_1(t) \partial x_1+V_2(t) \partial x_2)=
-$$
-$$
-=D_{\alpha}(V_1(t))\partial x_1+V_1(t)\cdot D_{\alpha}(\partial x_1)+
-$$
-$$
-+D_{\alpha}(V_2(t))\partial x_2+V_2(t)\cdot D_{\alpha}(\partial x_2)
-$$
-<p>and this way, it should be</p>
-$$
-D_{\alpha}(V(t))=\frac{d V_1(t)}{dt}\partial x_1+V_1(t)\cdot \nabla_{\alpha'(t)}(\partial x_1)+
-$$
-$$
-+\frac{d V_2(t)}{dt}\partial x_2+V_2(t)\cdot \nabla_{\alpha'(t)}(\partial x_2)
-$$
-<p>And this expression can be used to define $D$.</p>
-<p>$\blacksquare$</p>
-<p></p>
-<p>With this in mind we can say when a vector field defined along a curve $c$ is <b>constant along</b> the curve: $D_c X=0$ for every $c(t)$.</p>
+<p>If the vector field $X(t)$ i<b>s only defined along the curve</b> $c$, we consider the <a href="./covariant derivative along a curve.md.html">covariant derivative along a curve</a> $D_c$. With this in mind we can say when a vector field defined along a curve $c$ is <b>constant along</b> the curve: $D_c X=0$ for every $c(t)$.</p>
 <p></p>
 <p>In <a href="./../Bibliography/@malament2012topics.md.html">@malament2012topics</a> page 57  it is also shown that</p>
 <p></p>

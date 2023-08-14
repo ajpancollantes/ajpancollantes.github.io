@@ -33,6 +33,35 @@ gtag('config', 'G-LBT9E8N3HS');
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Covariant_derivative_along_a_curve">Covariant derivative along a curve</h1>
 <p>Given a <a href="./covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$ in a manifold $M$, if a vector field $X(t)$ i<b>s only defined along a curve</b> $c$, it is shown in <a href="./../Bibliography/@malament2012topics.md.html">@malament2012topics</a> page 55 that there exist an operator $D_c$ such that if $X$ were the restriction to $c$ of a vector field $\tilde{X}$ defined on an open set then $(D_c X)(t)=(\nabla_{c'(t)}\tilde{X} )(c(t))$.</p>
+<p></p>
+<p><b>Idea of the proof</b></p>
+<p>Suposse a vector field $V(t)$ defined over a curve $\alpha(t)$. Suppose, too, that in a local chart we have</p>
+$$
+V(t)=V_1(t) \partial x_1+V_2(t) \partial x_2
+$$
+<p>and </p>
+$$
+\alpha'(t)=A_1(t) \partial x_1+A_2(t) \partial x_2
+$$
+<p>We cannot calculate $\nabla_{\alpha_{c'(t)}} V(t)$ because we need $V$ to be defined in an open set. But if there exists $D_{\alpha}$ satisfying what it must satisfy, it will make:</p>
+$$
+D_{\alpha}(V(t))=D_{\alpha}(V_1(t) \partial x_1+V_2(t) \partial x_2)=
+$$
+$$
+=D_{\alpha}(V_1(t))\partial x_1+V_1(t)\cdot D_{\alpha}(\partial x_1)+
+$$
+$$
++D_{\alpha}(V_2(t))\partial x_2+V_2(t)\cdot D_{\alpha}(\partial x_2)
+$$
+<p>and this way, it should be</p>
+$$
+D_{\alpha}(V(t))=\frac{d V_1(t)}{dt}\partial x_1+V_1(t)\cdot \nabla_{\alpha'(t)}(\partial x_1)+
+$$
+$$
++\frac{d V_2(t)}{dt}\partial x_2+V_2(t)\cdot \nabla_{\alpha'(t)}(\partial x_2)
+$$
+<p>And this expression can be used to define $D$.</p>
+<p>$\blacksquare$</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

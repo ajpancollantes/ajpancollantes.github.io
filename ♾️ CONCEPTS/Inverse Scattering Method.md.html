@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Inverse_Scattering_Method">Inverse Scattering Method</h1>
+<p>See <a href="./../Bibliography/@Aktosun_2009.md.html">@Aktosun_2009</a>. And also <a href="https://conservancy.umn.edu/bitstream/handle/11299/3929/1927.pdf;jsessionid=52ACE2066EED68FFCF7A18F6D83B1490?sequence=1" target="_blank">INVERSE SCATTERING TRANSFORM, KdV, AND SOLITONS</a> by Aktosun, too.</p>
+<p>The inverse-scattering method is different in the details for different equations. Hence there is no such thing as “the” inverse-scattering method.</p>
+<p>The inverse scattering transform (IST) is a powerful mathematical technique used primarily to solve certain nonlinear partial differential equations (PDEs). It is closely related to the Fourier transform, but it generalizes the concept to handle nonlinear problems. </p>
+<p>Here it is an scheme of how it works:</p>
+<p><img src="./../imagenes/Pasted image 20230805160921.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Given a <a href="./PDE.md.html">PDE</a> with initial condition $u(x,0)=f(x)$ we can imagine a wave-particle propagating in a medium with some inhomogeneity or <b>potential</b> $f(x)$. As the wave encounters this potential, it gets scattered. The scattering data $S(\lambda,0)$, which consists of reflection and transmission coefficients, describes how the wave is affected by the potential.</p>
+<p>We can study how the scattering data evolves along time, obtaining $S(\lambda,t)$, and from here recover $u(x,t)$ be means of an inverse scattering.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="1.">1. </h2>
+<p>Given a potential (or inhomogeneity) and an incident wave, the DST produces the scattering data (reflection and transmission coefficients).</p>
+<p>For a particle in a potential $f(x)$, the time-independent <a href="./Schrodinger equation.md.html">Schrodinger equation</a> is:</p>
+$$ 
+\hat{H} \psi(x) = E \psi(x) 
+$$
+<p>where $\hat{H}$ is the Hamiltonian operator:</p>
+$$ 
+\hat{H} = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} + f(x) 
+$$
+<p>We can interpret $\psi$ as <a href="./stationary state.md.html">stationary state</a>s of a special kind: that ones showing the idea of an incoming wave from the left with a reflection part and a transmitted part. I.e., for $x \to -\infty$, we can consider:</p>
+$$ 
+\psi(x) \approx e^{ikx} + r e^{-ikx} 
+$$
+<p>where:</p>
+<p><ul style="margin-left:0px;"><li>The first term represents an incoming wave.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The second term represents a reflected wave with reflection amplitude $r$.</li></ul></p>
+<p></p>
+<p>For $x \to \infty$, we have:</p>
+$$ 
+\psi(x) \approx t e^{ikx} 
+$$
+<p>This represents the transmitted wave with transmission amplitude $t$.</p>
+<p></p>
+<p>The probability of reflection, $R$, is given by $|r|^2$, and the probability of transmission, $T$, is given by $|t|^2$. Since the particle must be either reflected or transmitted, we have:</p>
+$$ 
+R + T = 1 
+$$
+<p>$$ \implies |r|^2 + |t|^2 = 1 $$</p>
+<p>To find $r$ and $t$, one needs to solve the Schrödinger equation within the region of the potential $u(x)$ and match the solutions at the boundaries of this region with the asymptotic solutions. This generally requires integration and might be more challenging for some potential shapes than others. Interesting example is the scattering of a <a href="./Dirac delta.md.html">Dirac delta</a> barrier (see Griffiths Introduction to QM page 90). </p>
+<p></p>
+<p>Usually this problem is solved using something called Jost solutions.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="2.">2. </h2>
+<p>It is performed by means of the time evolution of the Jost solutions.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="3.">3. </h2>
+<p>Given the scattering data, the IST reconstructs the potential. This is a more challenging problem, analogous to reconstructing an object's shape just by looking at its shadow.</p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

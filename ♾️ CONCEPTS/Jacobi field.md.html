@@ -50,10 +50,43 @@ $$
 <p><b>Definition</b></p>
 <p>A vector field $X$ defined along a <a href="./GEOMETRY/geodesic.md.html">geodesic</a> $\gamma$ is called a Jacobi field if satisfies Jacobi equation, otherwise written</p>
 $$
-\nabla_{U} \nabla_{U} X+R(U, X) U=0
+\nabla_{U} \nabla_{U} X+R(X, U) U=0
 $$
 <p>$\blacksquare$</p>
-<p>So the variation field of a <a href="http://staff.ustc.edu.cn/~wangzuoq/Courses/16S-RiemGeom/Notes/Lec12.pdf" target="_blank">geodesic variation</a> is a Jacobi field. <a href="http://staff.ustc.edu.cn/~wangzuoq/Courses/16S-RiemGeom/Notes/Lec12.pdf" target="_blank">Here</a> it is shown that any Jacobi field can be realized as the variation field of some geodesic variation.</p>
+<p>So the variation field of a <a href="http://staff.ustc.edu.cn/~wangzuoq/Courses/16S-RiemGeom/Notes/Lec12.pdf" target="_blank">geodesic variation</a> is a Jacobi field. <a href="http://staff.ustc.edu.cn/~wangzuoq/Courses/16S-RiemGeom/Notes/Lec13.pdf" target="_blank">Here</a> it is shown that any Jacobi field can be realized as the variation field of some geodesic variation of $\gamma$.</p>
+<p>I.e., there exist a smooth map $F:I\times (-\delta,\delta) \to \mathcal{S}$ with</p>
+<p><ul style="margin-left:0px;"><li>$F(t,0)=\gamma(t)$,</li></ul></p>
+<p><ul style="margin-left:0px;"><li>each curve $\gamma_s: t\mapsto F(t,s)$ is a geodesic for every $s\in (-\delta,\delta)$,</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$J(t)=\partial_s F(t,0)$.</li></ul></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Constant_curvature">Constant curvature</h2>
+<p>See <a href="./../Bibliography/@lee2006riemannian.md.html">@lee2006riemannian</a> lemma 10.8.</p>
+<p><b>Lemma</b>  </p>
+<p>Suppose $(M, g)$ is a Riemannian manifold with constant sectional curvature $C$, and $\gamma$ is a unit speed geodesic in $M$. The <b>normal</b> Jacobi fields along $\gamma$ vanishing at $t = 0$ are precisely the vector fields</p>
+<p>$$ J(t) = u(t)E(t), $$</p>
+<p>where $E$ is any parallel normal vector field along $\gamma$, and $u(t)$ is given by</p>
+$$ 
+u(t) = 
+\begin{cases} 
+t & \text{if } C = 0; \\
+ R\sin(\frac{t}{R}) & \text{if } C = R^2 > 0; \\
+ \sinh(\frac{1}{R}) & \text{if } C = -R^2 < 0.
+\end{cases} 
+$$
+<p></p>
+<h2 style="margin-left:0px;" id="Surfaces">Surfaces</h2>
+<p>In the particular case of a <a href="./GEOMETRY/surface.md.html">surface</a> </p>
+$$
+R(J,U)U = K g(U,U)J - K g(J,U)U 
+$$
+<p>with $K$ the <a href="./GEOMETRY/Gaussian curvature.md.html">Gaussian curvature</a>, so the Jacobi equation is</p>
+$$
+\nabla_{U} \nabla_{U} J+K\left(J - g(J,U)U\right)=0
+$$
+<p>and if $J$ is normal to $U$</p>
+$$
+\nabla_{U} \nabla_{U} J+KJ=0
+$$
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

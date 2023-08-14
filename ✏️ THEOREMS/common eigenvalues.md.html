@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Common_eigenvalues">Common eigenvalues</h1>
+<h2 style="margin-left:0px;" id="Diagonalizable_matrices_case">Diagonalizable matrices case</h2>
+<p><b>Proposition</b></p>
+<p>Two matrices which commute and are also diagonalizable are simultaneously diagonalizable, i.e there exists <b>a common basis of eigenvectors</b>, not necessarily with the same <a href="./../♾️ CONCEPTS/eigenvalues.md.html">eigenvalues</a>. </p>
+<p>$\blacksquare$</p>
+<p>The proof is particularly simple if at least one of the two matrices has distinct eigenvalues. The proof of both cases is in <a href="https://youtu.be/-pRk9HNh7os?t=191" target="_blank">this video</a>.</p>
+<p></p>
+<p><b>Proof</b></p>
+<p>(<a href="https://math.stackexchange.com/a/6260/601797)" target="_blank">Here</a></p>
+<p>Suppose that $A$ and $B$ are $n\times n$ matrices, with complex entries say, that commute.  </p>
+<p>Then we decompose $\mathbb C^n$ as a direct sum of eigenspaces of $A$, say</p>
+<p>$\mathbb C^n = E_{\lambda_1} \oplus \cdots \oplus E_{\lambda_m}$, where $\lambda_1,\ldots, \lambda_m$ are the eigenvalues of $A$, and $E_{\lambda_i}$ is the eigenspace for $\lambda_i$.</p>
+<p>(Here $m \leq n$, but some eigenspaces could be of dimension bigger than one, so we need not have $m = n$.)</p>
+<p></p>
+<p>Now one sees that since $B$ commutes with $A$, $B$ preserves each of the $E_{\lambda_i}$:</p>
+<p>If $A v = \lambda_i v, $ then $A (B v) = (AB)v = (BA)v = B(Av) = B(\lambda_i v) = \lambda_i Bv.$  </p>
+<p></p>
+<p>Now we consider $B$ restricted to each $E_{\lambda_i}$ separately, and decompose</p>
+<p>each $E_{\lambda_i}$ into a sum of eigenspaces for $B$.   Putting all these decompositions together, we get a decomposition of $\mathbb C^n$ into a direct sum of spaces, each of which is a simultaneous eigenspace for $A$ and $B$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="General_case,_including_operators">General case, including operators</h2>
+<p><b>Proposition</b></p>
+<p>If two <a href="./../♾️ CONCEPTS/operator on a normed space.md.html">operators</a> commute, they share a common eigenvector.</p>
+<p>$\blacksquare$</p>
+<p><b>Proof</b></p>
+<p>Check it <a href="https://yutsumura.com/if-matrices-commute-abba-then-they-share-a-common-eigenvector/" target="_blank">here</a> for matrices.</p>
+<p>See <a href="https://youtu.be/-pRk9HNh7os?t=191" target="_blank">this video</a> for operators.</p>
+<p>$\blacksquare$</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Schrodinger_equation">Schrodinger equation</h1>
+<p>The Schrödinger equation is a fundamental equation in <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a> that describes how the quantum state of a system changes over time.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Time-dependent_Schrödinger_equation_TDSE:">Time-dependent Schrödinger equation (TDSE):</h2>
+$$
+i\hbar \frac{\partial}{\partial t} |\psi(t)\rangle = \hat{H} |\psi(t)\rangle \tag{1}
+$$
+<p>Where:</p>
+<p><ul style="margin-left:0px;"><li>$i$ is the imaginary unit.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\hbar$ is the reduced Planck constant, equal to the Planck constant $h$ divided by $2\pi$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\frac{\partial}{\partial t}$ is the partial derivative with respect to time.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$|\psi(t)\rangle$ is the state vector (or wave function) of the system, which is a function of time.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\hat{H}$ is the Hamiltonian operator, which represents the total energy of the system.</li></ul></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Time-independent_Schrödinger_equation_TISE:">Time-independent Schrödinger equation (TISE):</h2>
+<p>When the Hamiltonian operator does not explicitly depend on time, we can consider the time-independent Schrödinger equation:</p>
+$$
+\hat{H} \psi(x) = E \psi(x)\tag{2}
+$$
+<p>Where:</p>
+<p><ul style="margin-left:0px;"><li>$\psi(x)$ is the spatial part of the wave function (state vector), which does not depend on time.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$E$ are the energy eigenvalues of the system.</li></ul></p>
+<p></p>
+<p>The function $\psi(x)$ is called a <b>stationary state</b> or an <b>eigenstate</b> of the Hamiltonian $\hat{H}$. A stationary state is a state in which the probability distribution of the particle's position (or other observables) does not change with time. This does not mean that the wavefunction, which is indeed</p>
+$$
+|\psi(t)\rangle = e^{-i E t/\hbar} \psi(x),
+$$
+<p>doesn't change with time, but rather that its absolute square, $|\psi(x)|^2$, which gives the probability density of finding the particle at position $x$, remains unchanged.</p>
+<p></p>
+<p>In quantum mechanics, any state $|\psi(t)\rangle$ can be expressed as a superposition of these stationary states (eigenstates of the Hamiltonian), which is a direct consequence of the linearity of the Schrödinger equation.</p>
+<p></p>
+<p></p>
+<p><b>Relation between TDSE and TISE:</b></p>
+<p>Suppose we have a solution $\psi_E(x)$ for equation (2) for every $E \in \mathbb R$. Suppose also that the set $\{\psi_E\}_{E\in \mathbb R}$ spans the space of function with which we are dealing. Then, for every $t$:</p>
+$$
+|\psi(t)\rangle=\int c^E(t) \psi_E(x) dE
+$$
+<p>Substituting into (1):</p>
+$$
+\int c_E'(t) \psi_E(x) dE=\int c^E(t) E\psi_E(x) dE
+$$
+<p>and therefore it should be:</p>
+$$
+(c^E)'(t)=c^E(t) E.
+$$
+<p>So $c_E(t)=K_E e^{Et}$, with $K_E$ constants to be determined by the initial data. For example, suppose we are given</p>
+$$
+|\psi(0)\rangle=f(x)=\int c^E_0 \psi_E(x) dE.
+$$
+<p>Then $c_0^E=c_E(0)=K_E e^{E0}=K_E$, and finally</p>
+$$
+|\psi(t)\rangle=\int c^E(t) \psi_E(x) dE=\int c_0^E e^{Et} \psi_E(x) dE
+$$
+<p></p>
+<p></p>
+<p>Related: <a href="./../☕REFLECTIONS/Heisenberg vs Schrodinger picture.md.html">Heisenberg vs Schrodinger picture</a></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

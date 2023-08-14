@@ -31,26 +31,24 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Operator">Operator</h1>
-<p>In a <a href="./FUNCTIONAL ANALYSIS/normed space.md.html">normed space</a>, an operator is a linear mapping between two normed spaces. More specifically, let $(X, \|\cdot\|_X)$ and $(Y, \|\cdot\|_Y)$ be two normed spaces, an operator $T$ from $X$ to $Y$ is a linear transformation that maps each vector $x$ in $X$ to a vector $T(x)$ in $Y$.</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Schrodinger_equations">Schrodinger equations</h1>
 <p></p>
-<p>An important property of operators in normed spaces is that they preserve the norm of vectors. Specifically, if $T$ is an operator from $X$ to $Y$, then for any vector $x$ in $X$, we have $\|T(x)\|_Y \leq \|T\|\,\|x\|_X$, where $\|T\|$ is the operator norm (<a href="./induced matrix norm.md.html">induced matrix norm</a>) of $T$. The operator norm of $T$ is defined as the supremum of the ratios $\|T(x)\|_Y/\|x\|_X$ over all non-zero vectors $x$ in $X$.</p>
+<p>This is not a note for the original Schrodinger equation of <a href="./../../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>, but in the context of <a href="./ODE.md.html">ODE</a>s. They are equations in the form</p>
+<p>$\frac{\partial^2}{\partial x^2} \Psi=g(x)\Psi$.</p>
 <p></p>
-<p>Operators play an important role in functional analysis, where they are used to study linear transformations between normed spaces, such as <a href="./GEOMETRY/differential operator.md.html">differential operator</a>s and integral operators.</p>
+<p>I found them first time appearing from a <a href="./Riccati equation.md.html">Riccati equation</a>.</p>
 <p></p>
-<p>When the operator norm is lesser than 1 it can be applied the <a href="./../✏️ THEOREMS/Banach fixed point theorem.md.html">Banach fixed point theorem</a>, and then 0 is the only fixed point.</p>
-<p></p>
-<p>Examples:</p>
-<p><a href="./translation and momentum operators.md.html">translation and momentum operators</a> </p>
-<p></p>
-<p>Important: <a href="./../✏️ THEOREMS/common eigenvalues.md.html">common eigenvalues</a> </p>
+<p>It is motivated by the <a href="./../Schrodinger equation.md.html">time-independent Schrodinger equation</a> in <a href="./../../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>, i.e., the search of the eigenstates of the Hamiltonian operator</p>
+$$
+-\frac{\hbar^2}{2 m} \frac{d^2 \Psi}{d x^2}+u \Psi=E \Psi
+$$
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>Author of the notes: Antonio J. Pan-Collantes<br>
 <p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
 <p>INDEX:<br>
-	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
 </font></div>
 </body>
 </html>

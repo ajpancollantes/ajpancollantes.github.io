@@ -73,20 +73,20 @@ $$
 <p>It is a way to express the vector bundle connection with respect to a choice of a frame.</p>
 <p>Suppose we choose a particular local <a href="./frame on a manifold.md.html">frame</a> $e=\{e_i\}$ (that is, we restrict to an open subset $U\subseteq M$ and choose sections that span all the others). If we apply the connection to every $e_i$ we obtain</p>
 $$
-\nabla(e_i)=\sum_j e_j \otimes \Theta_i^j
+\nabla(e_i)=\sum_j e_j \otimes \Theta_{\,\,i}^j
 $$
-<p>The square matrix $\Theta=(\Theta_i^j)$ of 1-forms is called the <b>connection form</b>. If our vector bundle is the tangent bundle, the frame is a local chart frame, and the connection is a <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a>, the connection form is not <b>other thing that the usual</b> <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>! So I think this matrix of 1-forms should be called the <b>Christoffel 1-forms</b>.</p>
+<p>The square matrix $\Theta=(\Theta_{\,\, i}^j)$ of 1-forms is called the <b>connection form</b>. If our vector bundle is the tangent bundle, the frame is a local chart frame, and the connection is a <a href="./Levi-Civita connection.md.html">Levi-Civita connection</a>, the connection form is not <b>other thing that the usual</b> <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>! So I think this matrix of 1-forms should be called the <b>Christoffel 1-forms</b>.</p>
 <p>Given a particular local section of $E$, say </p>
 $$
-\sigma= \sum_i \sigma_i e_i
+\sigma= \sum_i \sigma^i e_i
 $$
 <p>we have</p>
 $$
-\nabla(\sigma)=\nabla(\sum_i \sigma_i e_i)=\sum_i e_i\otimes d\sigma_i+\sum_{ij}\sigma_i e_j\otimes \Theta_i^j
+\nabla(\sigma)=\nabla(\sum_i \sigma^i e_i)=\sum_i e_i\otimes d\sigma^i+\sum_{ij}\sigma^i e_j\otimes \Theta_{\,\,i}^j
 $$
 <p>and renaming $i$ and $j$ in the second sum</p>
 $$
-\nabla(\sigma)=\sum_i e_i\otimes\left( d \sigma_i+\sum_j \sigma_j \Theta_j^i\right)
+\nabla(\sigma)=\sum_i e_i\otimes\left( d \sigma^i+\sum_j \sigma^j \Theta_{\,\,j}^i\right)
 $$
 <p>So if we call $\widetilde{\sigma}$ and $\widetilde{\nabla(\sigma)}$ to the column vector of components of $\sigma$ and $\nabla(\sigma)$ respectively we have</p>
 $$

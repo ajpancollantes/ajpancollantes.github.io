@@ -32,6 +32,7 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Fourier_transform">Fourier transform</h1>
+<h2 style="margin-left:0px;" id="Introduction">Introduction</h2>
 <p>Fourier transform of a complex-valued function $f(t)$ is a another complex-valued function $\hat{f}(w)$ that codifies the same information that $f(z)$ in the following way: for every $w\in \mathbb{R}$, the value $\hat{f}(w)$ represent the weight of the function $e^{2\pi iwt}$ in the decomposition of $f(t)$ as a sum of exponential</p>
 $$
 f(t)=\cdots+\hat{f}(1)e^{2\pi it}+\hat{f}(1.1)e^{2\pi i1.1t}+\hat{f}(2)e^{2\pi i2t}+\cdots
@@ -46,7 +47,69 @@ $$
 <p></p>
 <p>A great explanation of the intuition behind Fourier transform: <a href="https://youtu.be/r6sGWTCMz2k?t=889" target="_blank">this video</a>. It also explains why a real function possesses a conjugate symmetric Fourier transform ($\hat{f}(-w)=\overline{\hat{f}(w)}$).</p>
 <p></p>
-<p>It is a particular case of the <a href="./Laplace transform.md.html">Laplace transform</a>. Related <a href="./Mellin transform.md.html">Mellin transform</a>.</p>
+<p>It is a particular case of the <a href="./Laplace transform.md.html">Laplace transform</a>. Related <a href="./Mellin transform.md.html">Mellin transform</a>. See also <a href="./translation and momentum operators.md.html">translation and momentum operators</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Using_Fourier_Series_to_Solve_Linear_PDEs_with_Initial_Data">Using Fourier Series to Solve Linear PDEs with Initial Data</h2>
+<p></p>
+<p>Given a linear PDE $u_t=u_{xx}$ with initial data $u(x,0) = f(x)$, the first step in the solution process is to decompose the initial data function $f(x)$ into its Fourier series representation. This is achieved by expressing $f(x)$ as an infinite sum of complex exponentials.</p>
+$$
+f(x) = \sum_{n=-\infty}^{+\infty} c_n e^{2\pi inx}
+$$
+<p>where the coefficients $c_n$ are given by:</p>
+$$
+c_n = \int_{-\infty}^{+\infty} f(x) e^{-2\pi inx} dx
+$$
+<p>Also, we decompose </p>
+$$
+u(x,t)=\sum_{n=-\infty}^{+\infty} u_n(t) e^{2\pi inx}
+$$
+<p>where $u_n(t)$ represents the time-dependent coefficients of the Fourier series expansion of $u(x,t)$. </p>
+<p></p>
+<p>The next step is to substitute the Fourier series representation of $u(x,t)$ into the given PDE. By doing so, we obtain a set of ordinary differential equations (ODEs) for the coefficients $u_n(t)$. </p>
+<p></p>
+<p>For the given PDE $u_t = u_{xx}$, the substitution yields:</p>
+$$
+\frac{du_n(t)}{dt} = -4\pi^2 n^2 u_n(t)
+$$
+<p></p>
+<p>This is a simple first-order ODE which can be solved for $u_n(t)$. The general solution is:</p>
+$$
+u_n(t) = u_n(0) e^{-4\pi^2 n^2 t}
+$$
+<p>Where $u_n(0)$ is the initial value of the coefficient, which can be obtained from the Fourier series representation of the initial data $u(x,0) = f(x)$. Specifically, $u_n(0) = c_n$, the Fourier coefficient of $f(x)$.</p>
+<p></p>
+<p>Finally, substituting the solution for $u_n(t)$ into the Fourier series representation of $u(x,t)$, we obtain the solution of the PDE in terms of the initial data $f(x)$:</p>
+$$
+u(x,t) = \sum_{n=-\infty}^{+\infty} c_n e^{-4\pi^2 n^2 t} e^{2\pi inx}
+$$
+<h2 style="margin-left:0px;" id="Using_Fourier_Transform_to_Solve_Linear_PDEs_with_Given_Initial_Data">Using Fourier Transform to Solve Linear PDEs with Given Initial Data</h2>
+<p></p>
+<p>For problems defined on an infinite domain, the Fourier series might not be the most suitable tool. Instead, the Fourier Transform is employed to handle such cases. Given a linear PDE $u_t = u_{xx}$ with initial data $u(x,0) = f(x)$, the solution process begins by taking the Fourier Transform of the initial data function $f(x)$. This transforms the function from the spatial domain to the frequency domain. The Fourier Transform of $f(x)$ is given by:</p>
+$$
+f(x) = \int_{-\infty}^{+\infty} \hat{f}(\omega) e^{2\pi i\omega x} d\omega
+$$
+<p>where $\hat{f}(\omega)$ represents the function in the frequency domain.</p>
+<p></p>
+<p>Similarly,</p>
+$$
+u(x,t) = \int_{-\infty}^{+\infty} \hat{u}(\omega,t) e^{2\pi i\omega x} d\omega
+$$
+<p></p>
+<p>Substituting the Fourier Transformed functions into the PDE, we obtain a differential equation in the frequency domain. For the PDE $u_t = u_{xx}$, this yields:</p>
+$$
+\int_{-\infty}^{+\infty} \frac{d\hat{u}(\omega,t)}{dt}  e^{2\pi i\omega x} d\omega= \int_{-\infty}^{+\infty}-4\pi^2 \omega^2 \hat{u}(\omega,t)  e^{2\pi i\omega x} d\omega
+$$
+<p>so</p>
+$$
+\frac{d\hat{u}(\omega,t)}{dt} = -4\pi^2 \omega^2 \hat{u}(\omega,t)
+$$
+<p>This equation is a first-order ODE in the frequency domain, which can be solved for $\hat{u}(\omega,t)$. The general solution is:</p>
+$$
+\hat{u}(\omega,t) = \hat{u}(\omega,0) e^{-4\pi^2 \omega^2 t}
+$$
+<p>Where $\hat{u}(k,0)$ is the initial value in the frequency domain, which is simply $\hat{f}(\omega)$, the Fourier Transform of the initial data $f(x)$.</p>
+<p></p>
+<p>To obtain the solution in the spatial domain, we take the inverse Fourier Transform of $\hat{u}(\omega,t)$. This gives us the solution of the PDE in terms of the initial data $f(x)$.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

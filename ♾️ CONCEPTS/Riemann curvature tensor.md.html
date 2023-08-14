@@ -52,41 +52,93 @@ $$
 <p>It can be shown (<a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 290), that this ideas justifies the following</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Definition">Definition</h2>
+<p><a href="./../Bibliography/@lee2006riemannian.md.html">@lee2006riemannian</a></p>
+<p>The <b>Riemann curvature endomorphism</b> is the map</p>
+$$
+R:\mathfrak{X}(U)\times \mathfrak{X}(U)\times \mathfrak{X}(U)\to \mathfrak{X}(U)
+$$
+<p>defined by</p>
+<p>$$ R(X, Y)Z = \nabla_X \nabla_Y Z - \nabla_Y \nabla_X Z - \nabla_{[X, Y]} Z, $$</p>
+<p>denoted in <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> by</p>
 $$
 \left.\mathcal{R}(\mathbf{u}, \mathbf{v}) (\mathbf{w})=\left\{\left[\nabla_{\mathbf{u}}, \nabla_{\mathbf{v}}\right]-\nabla_{[\mathbf{u}, \mathbf{v}]}\right]\right\} (\mathbf{w}) \tag{1}
 $$
 <p></p>
 <p>Indeed, it can be proven that a multilinear map (indeed, a <a href="./tensor.md.html">tensor</a>)</p>
-$$
-R:\mathfrak{X}(U)\times \mathfrak{X}(U)\times \mathfrak{X}(U)\to \mathfrak{X}(U)
-$$
-<p>by</p>
-$$
-R(u,v;w):=\mathcal{R}(\mathbf{u}, \mathbf{v}) (\mathbf{w})
-$$
-<p>which is called the <b>Riemann curvature tensor</b>.</p>
+<p></p>
+<p>Also, it is called the <b>Riemann curvature tensor</b> to </p>
+<p>$$ Rm(X, Y, Z, W ) = g(R(X, Y)Z, W) $$</p>
+<p></p>
 <p>From here we can obtain the <a href="./sectional curvature.md.html">sectional curvature</a>s.</p>
 <p></p>
-<h2 style="margin-left:0px;" id="Relation_to_Gaussian_curvature">Relation to Gaussian curvature</h2>
+<p></p>
+<h2 style="margin-left:0px;" id="Relation_to_curvature_2-forms">Relation to curvature 2-forms</h2>
+<p>This is the <a href="./../✏️ THEOREMS/Cartan's second structural equation.md.html">Cartan's second structural equation</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Relation_to_Gaussian_curvature_of_surfaces">Relation to Gaussian curvature of surfaces</h2>
 <p>In a 2-dimensional Riemannian manifold $(S,g)$,  we consider an <b>orthonormal</b> frame $e_1,e_2$ for the surface $S$ so $\Theta$ is antisymmetric and $\Omega=d\Theta$. If we think of <a href="./../✏️ THEOREMS/Cartan's second structural equation.md.html">Cartan's second structural equation</a></p>
 $$
 R(X,Y;e_1) = \Omega_1^1(X,Y)e_1+\Omega_1^2(X,Y)e_2=-\Omega_2^1(X,Y)e_2.
 $$
-<p>According to <a href="./GEOMETRY/Gaussian curvature.md.html#More_formally">this</a> we have that</p>
+<p>On the other hand, according to <a href="./GEOMETRY/Gaussian curvature.md.html#More_formally">this</a> we have that</p>
 $$
-\Omega_2^1(e_1,e_2)=d\Theta^1_2(e_1,e_2)
+\Omega_2^1(e_1,e_2)=d\Theta^1_2(e_1,e_2)=K
 $$
 <p>is the Gaussian curvature, so $K=g(-R(e_1,e_2;e_1),e_2)$.</p>
 <p></p>
+<p>So suppose $X=x^ie_i$, $Y=y^ie_i$, $Z=z^ie_i$. Then</p>
+$$
+R(X,Y)Z=R(X,Y)(z^i e_i)=z^i\Omega_i^j(X,Y) e_j=z^i\Omega_i^j(x^ke_k,y^le_l) e_j=
+$$
+$$
+=z^ix^ky^l \Omega_i^j(e_k,e_l)e_j=z^1x^ky^l \Omega_1^2(e_k,e_l)e_2+z^2x^ky^l \Omega_2^1(e_k,e_l)e_1=
+$$
+$$
+=-z^1x^ky^l \Omega_2^1(e_k,e_l)e_2+z^2x^ky^l \Omega_2^1(e_k,e_l)e_1=
+$$
+$$
+=-z^1x^ky^l \Omega_2^1(e_k,e_l)e_2+z^2x^ky^l \Omega_2^1(e_k,e_l)e_1=
+$$
+$$
+=x^ky^l \Omega_2^1(e_k,e_l)(z^2 e_1-z^1 e_2)
+$$
+<p>If we denote $Z^{\perp}=z^2 e_1-z^1 e_2$</p>
+$$
+R(X,Y)Z=x^ky^l \Omega_2^1(e_k,e_l) Z^{\perp}=x^1y^2 \Omega_2^1(e_1,e_2) Z^{\perp}+x^2y^1 \Omega_2^1(e_2,e_1) Z^{\perp}=
+$$
+$$
+=x^1y^2 K Z^{\perp}-x^2y^1 K Z^{\perp}=
+$$
+$$
+=K(x^1y^2-x^2y^1)Z^{\perp}.
+$$
 <p></p>
-<p>On the other hand, the expression for the Riemann curvature tensor at a point $p$ in terms of the Gaussian curvature $K(p)$ is given by:</p>
-<p>$$ R(X,Y)Z = K(p) \, g(Y,Z)X - K(p) \, g(X,Z)Y $$</p>
-<p>where $g(X,Z)$ and $g(Y,Z)$ are the inner products of the vectors $X, Z$ and $Y, Z$ respectively. This formula comes from the definition of the Riemann tensor in 2D manifolds, and the fact that the Gaussian curvature $K(p)$ is proportional to the only non-zero component of the Riemann tensor.</p>
+<p>This formula can be rewritten as</p>
+$$
+R(X,Y)Z = K g(Y,Z)X - K g(X,Z)Y 
+$$
+<p>where $g(X,Z)$ and $g(Y,Z)$ are the inner products of the vectors $X, Z$ and $Y, Z$ respectively. In effect, </p>
+$$
+R(X,Y)Z = K g(Y,Z)X - K g(X,Z)Y = K(y^1z^1 + y^2z^2)X - K(x^1z^1 + x^2z^2)Y=
+$$
+$$
+=K[(y^1z^1 + y^2z^2)x^1 e_1 - (x^1z^1 + x^2z^2)y^1 e_1 + (y^1z^1 + y^2z^2)x^2 e_2 - (x^1z^1 + x^2z^2)y^2 e_2]=
+$$
+$$
+=K[( y^2z^2x^1  - x^2z^2y^1) e_1 + (y^1z^1x^2 - x^1z^1y^2) e_2]=
+$$
+$$
+=K[( y^2x^1  - x^2y^1) z^2e_1 - (-y^1x^2 +x^1y^2) e_2]=
+$$
+$$
+=K(x^1y^2-x^2y^1)Z^{\perp}.
+$$
 <p></p>
-<p>In this expression, $R(X,Y)Z$ is a new vector field that results from the action of the Riemann curvature tensor on the original vector fields $X, Y, Z$ at the point $p$ in the manifold.</p>
-<p></p>
-<h1 style="margin-left:0px;" id="Relation_to_curvature_2-forms">Relation to curvature 2-forms</h1>
-<p>This is the <a href="./../✏️ THEOREMS/Cartan's second structural equation.md.html">Cartan's second structural equation</a>.</p>
+<p><b>Note:</b> in <a href="./../Bibliography/@lee2006riemannian.md.html">@lee2006riemannian</a>, </p>
+<p><b>Lemma 8.7</b>.  The Gaussian curvature of a Riemannian 2-manifold is related to the curvature tensor by the formula</p>
+$$
+Rm(X,Y,Z,W) = K g(Y,Z)g(X,W) - K g(X,Z)g(Y,W).
+$$
 <p></p>
 <p>________________________________________</p>
 <p>________________________________________</p>

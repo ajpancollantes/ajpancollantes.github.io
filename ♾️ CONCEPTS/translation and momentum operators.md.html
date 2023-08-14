@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Translation_operator">Translation operator</h1>
+<p>(personal thinking)</p>
+<p>In a <a href="./FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> like $\mathbb C^5$ we have the position operator</p>
+$$ 
+\hat{X} = \begin{bmatrix} 1 & 0 & 0 & 0 & 0 \\ 0 & 2 & 0 & 0 & 0 \\ 0 & 0 & 3 & 0 & 0 \\ 0 & 0 & 0 & 4 & 0 \\ 0 & 0 & 0 & 0 & 5 \\ \end{bmatrix} 
+$$
+<p>and we can consider the matrix which is something like the translation operator:</p>
+$$
+T=\left(\begin{array}{lllll}
+0 & 0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0
+\end{array}\right)
+$$
+<p>Given a vector $v=(a,b,c,d,e)$, the result of the operator is "translate" the coordinates:</p>
+$$
+Tv=(e,a,b,c,d).
+$$
+<p></p>
+<p>We can consider the matrix $P$ such that the <a href="./matrix exponential.md.html">matrix exponential</a> $e^P=T$, son $P$ can be seen like the generator of translations. I think that $P$ is something like the <b>momentum operator</b> in this setup. This operator has a special basis of eigenvectors, representing the pure momentum states.</p>
+<p>Given a vector $v$ in the initial basis, the coordinates in this new basis is a kind of <a href="./Laplace transform.md.html">Laplace transform</a>. </p>
+<p></p>
+<p>In the continuous case everything is analogous: the vectors are functions $f$ and the Hilbert space is a space of functions. The translation operator is</p>
+$$
+T: f(x) \mapsto f(x-1)
+$$
+<p>According to Taylor's theorem,</p>
+$$
+T(f)(x)=e^{-\partial_x} (f)
+$$
+<p>son we have the momentum operator $P=e^{-\partial_x}$. The eigenvectos of this operator are</p>
+$$
+e^{sx}, s\in \mathbb C
+$$
+<p>So <a href="./Laplace transform.md.html">Laplace transform</a> is nothing but a change of basis. But what <b>I don't understand yet why we choose only some eigenvectors</b> in <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>, i.e., only </p>
+$$
+e^{i\omega x}, \omega \in \mathbb R
+$$
+<p>i.e., why we take <a href="./Fourier transform.md.html">Fourier transform</a>.</p>
+<p></p>
+<p><b>Why Only Certain Eigenvectors?</b>:</p>
+<p><ul style="margin-left:0px;"><li>In quantum mechanics, the states of a system are described by wavefunctions. The wavefunctions that are <b>physically meaningful</b> are those that are square-integrable (bound states), meaning their absolute square integrates to 1 over all space. This ensures that the total probability of finding a particle somewhere in space is 1.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The functions $e^{sx}$ are not square-integrable for all $s \in \mathbb{C}$. However, the functions $e^{i\omega x}$ are orthogonal over all space, and they form a basis for the space of square-integrable functions. This is why the Fourier transform, which uses these functions, is so useful in quantum mechanics.</li></ul></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
