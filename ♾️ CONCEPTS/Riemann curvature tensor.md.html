@@ -71,9 +71,19 @@ $$
 <p></p>
 <p>From here we can obtain the <a href="./sectional curvature.md.html">sectional curvature</a>s.</p>
 <p></p>
+<h2 style="margin-left:0px;" id="Computation_from_the_Christoffel_symbols">Computation from the Christoffel symbols</h2>
+<p>Given a manifold $M$ with the <a href="./GEOMETRY/Levi-Civita connection.md.html">Levi-Civita connection</a> whose <a href="./Christoffel symbols.md.html">Christoffel symbols</a> are denoted by $\Gamma^k_{ij}$, the components of the Riemann curvature tensor, i.e., the maps $R^l_{\ ijk}$ such that </p>
+$$
+(R(X, Y)Z)^l = X^i Y^j Z^k R^l_{\ ijk},
+$$
+<p>can be obtained from these Christoffel symbols via the following expression:</p>
+$$
+R^l_{\ ijk} = \partial_j \Gamma^l_{ik} - \partial_k \Gamma^l_{ij} + \Gamma^l_{mj} \Gamma^m_{ik} - \Gamma^l_{mk} \Gamma^m_{ij}.
+$$
 <p></p>
 <h2 style="margin-left:0px;" id="Relation_to_curvature_2-forms">Relation to curvature 2-forms</h2>
 <p>This is the <a href="./../✏️ THEOREMS/Cartan's second structural equation.md.html">Cartan's second structural equation</a>.</p>
+<p></p>
 <p></p>
 <h2 style="margin-left:0px;" id="Relation_to_Gaussian_curvature_of_surfaces">Relation to Gaussian curvature of surfaces</h2>
 <p>In a 2-dimensional Riemannian manifold $(S,g)$,  we consider an <b>orthonormal</b> frame $e_1,e_2$ for the surface $S$ so $\Theta$ is antisymmetric and $\Omega=d\Theta$. If we think of <a href="./../✏️ THEOREMS/Cartan's second structural equation.md.html">Cartan's second structural equation</a></p>

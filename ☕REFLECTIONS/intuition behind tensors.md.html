@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Intuition_behind_tensors">Intuition behind tensors</h1>
+<p>A answer found in Quora:</p>
+<p>When pipes freeze, the water in them expands and sometimes breaks the pipe. But an interesting thing happens if you look at 100 broken pipes. They almost all have the break running lengthwise along the pipe, never around its circumference. The material of the pipe is about the same in both directions, so why does the pipe break in only one?</p>
+<p>When ice starts to press against the inside of the pipe, the material of the pipe gets put under tension. This means that if you were to cut a small slit in the pipe, you'd have to pull hard on both sides of the slit to keep it closed. Further, the amount you pull depends on the length of the slit. You'll have to pull twice as hard to keep a 2cm slit closed compared to a 1 cm slit. When the tension becomes so high that the metal's own cohesive strength is too weak to hold it together, the pipe bursts.</p>
+<p>The reason it bursts in one direction, though, is that the tension is higher in that direction. The force needed to hold a slit closed depends not only on how long the slit is, but also on the direction of the slit. Ori Barbut showed an explicit calculation of this in his answer to Why is it more difficult to inflate a long balloon than a round one? It turns out that the tension is exactly twice as high in the lengthwise direction as in the circumferential direction.</p>
+<p>Once we know the tension in these two directions, we can figure out the force needed to hold any slit closed. If the slit is 1cm at a 45-degree angle, wrapping diagonally like a barber pole, for example, the force needed is half way between that for a 1cm slit in each of the two original directions.</p>
+<p>All of this holds only so long as the pipe is homogeneous. In general, the tension could change from place to place, and if we have a long, crooked slit it would be more complicated to find the force to hold it closed. As long as our slits are small, though, what we've just said holds.</p>
+<p></p>
+<p><b>This two-dimensional tension is an example of a tensor</b>. Specifically, it is a rank-two tensor. You can think of it as a function. The input to the function is a vector - in this case a vector that describes a slit in the pipe (the slit has magnitude and direction, making it a vector). Its output is another vector - the force needed to hold the slit closed. So a rank-two tensor, in general, is a linear function from vectors to vectors. (The "linear" part is what we assumed by saying a slit twice as long requires twice the force, and that a slit at an angle can be calculated if you know what happens for lengthwise and circumference slits.) The tensor is not the slit itself or the force itself. It is a relationship between the possible slits and the forces that would be needed to hold them closed.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Pressure is another tensor very similar to tension. In fact, pressure is basically just negative tension. Usually, we think of pressure as being just a single number. But really, it is a linear function that maps flat surfaces onto forces (any flat surface has a force on it due to pressure). When the pressure is the same in all directions, we can think of it as just a number, but when it pushes unevenly, like it might inside a crystal whose structure picks out special directions, we need the tensor description.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Many other familiar physical quantities can be represented by tensors, such as the mechanical strain of a solid, the moment of inertia of a mass distribution, the polarizability of a dielectric, the quadrupole moment of a charge distribution, and, in higher mathematics, even the Pythagorean theorem! (The Pythagorean theorem as a tensor is called "the metric".)</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>We can easily generalize the idea to tensors of different rank. A rank-three tensor would have two vectors as input and one vector as output. A rank-four would involve four vectors. A rank one tensor exists, too. It takes in one vector and outputs "zero vectors", meaning just a single number. But a vector can do that, too. Take a vector A, and for any input vector B, output the dot product of A and B. Now the vector A becomes a rank-one tensor! There are even rank-zero tensors - they are just numbers, although we usually refer to them as "scalars" instead.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>When describing the curved geometry of general relativity, a rank-four tensor called the Riemann curvature tensor is used. It has three inputs - a vector pointing in some direction you're interested in, and two more vectors that create a parallelogram when put together. You take the first vector and walk it around the edge of the parallelogram. When it gets back to where it started, it'll be slightly rotated if the spacetime is curved (this is the meaning of "curved spacetime"). The change in the first vector due to this rotation is the output of the tensor.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Relativity is notorious for its heavy use of tensors. Some other important ones there are the metric tensor, mentioned earlier, and the stress-energy tensor, which is the four-dimensional spacetime version of the pressure tensor, as well as various quantities that are derived doing operations on these tensors.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>You will sometimes see the basic definition of a tensor described differently. You can also think of a rank two tensor as taking two vectors as input and having one number as output. This is the same idea as before, but the input would be the slit you cut, and a unit vector in some direction. The number would be the component of the force in that direction. Which way of thinking about it is better depends on the precise situation.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>If you've studied linear algebra, a rank-two tensor is a linear operator. (N.B. I am glossing over the important difference between a vector space and its dual.) If you pick a basis, it becomes no different from a matrix. They are all basically the same idea. The difference is that a matrix is defined as a bunch of numbers in an array with certain rules for how to do algebra on it. A tensor is the actual relationship between physical quantities, and the matrix can represent that tensor.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Usually we don't harp on this very much. Physicists prefer a different way of keeping track of their tensors, called index notation. It takes some getting used to, but it lets us manipulate tensors of rank three, four, or more, which would be impossible with matrices. (A rank-three tensor would require a "matrix" that looks sort of like a cube. Don't confuse the rank of the tensor, which is how many vectors it takes as input, with the dimension you're working in. The ordinary pressure tensor is rank two, meaning two vectors are involved, but dimension three, meaning the vectors are in three dimensions. The Riemann curvature tensor in GR is rank four and dimension four.)</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>One reason physicists like tensors is that the tensor does not depend on the coordinates you use. For our pipe, we could define the x-direction to go down the length of the pipe and the y-direction to go around the pipe. Then, if we wanted a formula for the force needed to hold closed a slit going in some arbitrary direction, it would look pretty sloppy. It would have to tell us to take the x-part of the slit vector and multiply that by T1 times some unit vector, then take the y-part and multiply that by T2 times some unit vector, then add those. Further, we could have taken the x-direction to be wrapping up diagonally around the pole clockwise, and the y-direction to be wrapping up and around the pole counterclockwise. Then we'd have an even more complicated formula with different numbers in it. With a tensor, though, we can simply write F = TS, meaning force is tension acting on the slit, or in index notation</p>
+$$
+F^a=T^a_bS^b
+$$
+<p></p>
+<p>and this formula looks the same no matter what coordinate system we use. (However, as we change coordinate systems, the numerical values of things like Tab</p>
+$$
+T_a^b
+$$
+<p>will change.)</p>
+<p>After all, the coordinates are just some silly choice we made, some imaginary grid we pasted down on the surface. The physics shouldn't depend on that, and tensor notation is a way of making this concept explicit. It's so important, in fact, that some physics literature actually defines a tensor by what happens to it when you change coordinates.</p>
+<p>So a tensor is a way of representing a linear relationship between vector quantities. It is especially important in continuum mechanics, relativity, and some areas of higher math, and we like them because they show the coordinate-independence of physical laws.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

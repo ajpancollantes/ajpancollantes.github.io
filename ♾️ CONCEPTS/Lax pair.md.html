@@ -32,7 +32,7 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Lax_pair">Lax pair</h1>
-<p>It happens that sometimes <a href="./integrable systems.md.html">integrable systems</a> could generally be viewed as those equations that can be obtained from an <b>overdetermined system of linear differential equations</b>, with <b>the original PDE playing the role of the compatibility condition</b>. The overdetermined linear system is the <a href="./Lax pair.md.html">Lax pair</a> associated to the equation</p>
+<p>It happens that sometimes <a href="./integrable systems.md.html">integrable systems</a> could generally be viewed as those equations that can be obtained from an <b>overdetermined system of linear differential equations</b>, with <b>the original PDE playing the role of the compatibility condition</b>. The overdetermined linear system is the Lax pair associated to the equation</p>
 <p>This is by no means a general construction: in practice, there are no general methods of computing a Lax pair for a given system of PDEs. However, when a Lax pair for a system is known, it is enormously useful. One can use Lax pairs to derive infinitely many conserved quantities, describe large classes of solutions, and play a crucial role in the celebrated <a href="./Inverse Scattering Method.md.html">Inverse Scattering Method</a>.</p>
 <p></p>
 <p><b>Note</b>: it seems to me that it is said that a PDE system admits a Lax pair if <b>the PDE system implies</b> the Lax equation $[L,M]=0$.  I guess this is enough to take advantage of the Lax pair...</p>
@@ -64,7 +64,7 @@ $$
 $$
 \dot{q} =\frac{p}{m}
 $$
-<p>The key point is that the eigenvalues of the $L$ matrix are conserved quantities (constants of motion), and the eigenvectors provide a "good" transformation of variables (????). </p>
+<p>The key point is that the eigenvalues of the matrix $L$ are conserved quantities, i.e., constants of motion (see isospectral property below), and the eigenvectors provide a "good" transformation of variables (????). </p>
 <p></p>
 <h3 style="margin-left:0px;" id="Isospectral_property">Isospectral property</h3>
 <p>The eigenvalues of $L$ do not change with time, a property known as isospectrality. </p>
@@ -87,8 +87,6 @@ $$
 <p>The same is true for $\frac{d}{dt} \mathrm{tr}(L^3) = 0$ and son on.</p>
 <p></p>
 <p>To see that the eigenvalues of $L$ are conserved, only observe that the <a href="./eigenvalues.md.html#Determination_by_the_trace">eigenvalues are determined by the trace of the powers of the matrix</a>.</p>
-<p></p>
-<p></p>
 <p></p>
 <p>In the previous example of the harmonic oscillator we can find the eigenvalues $\lambda$ and eigenvectors $\psi$ of the $L$ matrix. We solve the characteristic equation:</p>
 $$
@@ -114,14 +112,14 @@ $$
 $$
 \frac{d}{dt} L(u) = [M(u), L(u)] \text{ for all }u \in \mathbb{C}.
 $$
-<p>Such a Lax pair, called nonisospectral, must be constructed as always such that this equation is equivalent to the complete set of equations of motion. As a functional equation, it is, in principle, much more constraining than the Lax equation without spectral parameter. This feature is useful for mechanical systems with infinitely many degrees of freedom whose equations of motion could thus be formulated by a finite-dimensional Lax pair. </p>
+<p>Such a Lax pair, called nonisospectral, must be constructed, as always, such that this equation is equivalent to the complete set of equations of motion. As a functional equation, it is, in principle, much more constraining than the Lax equation without spectral parameter. This feature is useful for mechanical systems with infinitely many degrees of freedom whose equations of motion could thus be formulated by a finite-dimensional Lax pair. </p>
 <p></p>
 <p>Even for a finite-dimensional system, Lax pairs with spectral parameter often exist. While the spectral parameter is not essential to encode finitely many equations of motion, it is nevertheless useful in several respects.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Infinite_degrees_of_freedom_fields">Infinite degrees of freedom (fields)</h2>
 <p>Idea: see <a href="./integrable systems.md.html#Infinite_degree_of_freedom_fields">also this paragraph</a>.</p>
 <p></p>
-<p>In this case we have PDEs, for example evolution equations like KdV:</p>
+<p>In this case we have PDEs, for example evolution equations like KdV</p>
 $$
 u_t-6u u_x+u_{xxx}=0,
 $$
@@ -250,11 +248,15 @@ $$
 <p></p>
 <p></p>
 <h2 style="margin-left:0px;" id="Relation_to_QM">Relation to QM</h2>
-<p>In <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>, observables are operators on a Hilbert space, just as in the case of $L$ of $M$. </p>
-<p>The Lax equation $\dot{L} = [L, M]$ bears a resemblance to the Heisenberg equation of motion for an operator $Q$ in the Heisenberg picture of quantum mechanics: $i\hbar \frac{dQ}{dt} = [Q, H]$, where $H$ is the Hamiltonian. If $H$ and $Q$ are finite dimensional matrices, then $\text{tr}([Q, H]) = 0$ so that $\text{tr}(Q)$ is conserved. But often, operators in quantum mechanics are infinite dimensional and unbounded. The trace of the commutator of such operators may not vanish (or even be finite). In such cases, $\text{tr}(Q)$ may not be a (finite) conserved quantity.</p>
+<p>In <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>, observables are operators on a Hilbert space, just as $L$ and $M$. </p>
+<p>The Lax equation $\dot{L} = [L, M]$ bears a resemblance to the Heisenberg equation of motion for an operator $Q$ in the <a href="./../☕REFLECTIONS/Heisenberg vs Schrodinger picture.md.html">Heisenberg picture</a> of quantum mechanics: </p>
+$$
+i\hbar \frac{dQ}{dt} = [Q, H],
+$$
+<p>where $H$ is the Hamiltonian. If $H$ and $Q$ are finite dimensional matrices, then $\text{tr}([Q, H]) = 0$ so that $\text{tr}(Q)$ is conserved. But often, operators in quantum mechanics are infinite dimensional and unbounded. The trace of the commutator of such operators may not vanish (or even be finite). In such cases, $\text{tr}(Q)$ may not be a (finite) conserved quantity.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Open_questions">Open questions</h2>
-<p>Can we start with arbitrary operators $L$, $M$ and then the condition $[L,M]=0$ is automatically an integrable system?</p>
+<p>Can we start with arbitrary operators $L$, $M$ and then the condition $[L,M]=0$ is automatically an integrable system? This should be related with <a href="./Inverse Scattering Method.md.html">Inverse Scattering Method</a>...</p>
 <p>How do we obtain conserved quantities if we have no sense of "trace"?</p>
 <p>What does it have to do with the zero-curvature representation?</p>
 <p>What are the elements of the Hilbert space do these operator act on?</p>

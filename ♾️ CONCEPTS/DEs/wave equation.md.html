@@ -32,7 +32,8 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Wave_equation">Wave equation</h1>
-<p>It belongs to <a href="./../../⛳️ NON CLASSIFIED/famous equations.md.html">famous equations</a> </p>
+<h2 style="margin-left:0px;" id="Introduction">Introduction</h2>
+<p>It belongs to the collection of <a href="./../../⛳️ NON CLASSIFIED/famous equations.md.html">famous equations</a>.</p>
 <p></p>
 <p>The goal is to find $u(t,x,y,z)$ such that:</p>
 $$
@@ -40,13 +41,605 @@ u_{tt}=c^2\Delta u
 $$
 <p>where $\Delta$ is the <a href="./../Laplacian operator.md.html">Laplacian operator</a>.</p>
 <p></p>
+<p>Keep an eye: by abuse of language, a wave equation is called any equation that admits wave-like solutions, which take the form $f(\vec{x} \pm \vec{v}t)$. The equation $\frac{\partial^2 f}{\partial t^2} = c^2\nabla^2 f$, despite being called "the" wave equation, is not the only equation that does this.</p>
+<p></p>
 <h2 style="margin-left:0px;" id="As_a_Cauchy_problem">As a Cauchy problem</h2>
 <p>Wave equation stated as a <a href="./Cauchy problem.md.html">Cauchy problem</a>. With initial and boundary conditions</p>
 <p></p>
 <p>See <a href="https://math.stackexchange.com/questions/1533025/initial-boundary-value-problem-for-wave-equation" target="_blank">this link</a></p>
 <p></p>
-<p>Appears D'Alembert formula</p>
-<p><img src="./../../imagenes/Pasted image 20211031195242.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>Appears D'Alembert formula:</p>
+<p>The Cauchy problem for the one-dimensional homogeneous wave equation is given by</p>
+$$
+\begin{aligned}
+&\begin{array}{r}
+u_{t t}-c^2 u_{x x}=0 \quad-\infty<x<\infty, t>0, \\
+u(x, 0)=f(x), \quad u_t(x, 0)=g(x), \quad-\infty<x<\infty .
+\end{array}\\
+\end{aligned}
+$$
+<p>and the solution is given by d'Alembert's formula:</p>
+$$
+\begin{aligned}
+&u(x, 0)=F(x)+G(x)=f(x) .\\
+&u_t(x, 0)=c F^{\prime}(x)-c G^{\prime}(x)=g(x)\\
+\\
+&u(x, t)=\frac{f(x+c t)+f(x-c t)}{2}+\frac{1}{2 c} \int_{x-c t}^{x+c t} g(s) \mathrm{d} s,
+\end{aligned}
+$$
+<p></p>
+<h2 style="margin-left:0px;" id="Derivation">Derivation</h2>
+<p>See anotacioneslatex.tex</p>
+<p></p>
+<p>\subsection{Derivation and general solution}</p>
+<p></p>
+<p>The process above that explain the \textit{brainwave} to obtain the expression for the eigenvector $\xi(j)$ (go to equation \eqref{eigenvectorrelation}) can be performed with the original equation of motion for one of the central masses of several coupled oscillators.</p>
+<p></p>
+<p>Consider</p>
+<p></p>
+$$
+
+m\ddot{\Psi}_j (t)=-k\left( \Psi_{j}(t)-\Psi_{j+1}(t)\right)- k \left(\Psi_{j}(t)- \Psi_{j-1}(t)\right)=
+
+$$
+<p></p>
+$$
+
+=k \Psi_{j-1}(t)-2 k\Psi_{j}(t)+k\Psi_{j+1}(t)
+
+$$
+<p></p>
+<p>We can try to augment the number of \textit{beads} to infinity, while reducing the \textit{distance} to 0. We will obtain a \textit{continuous} system, whose elements will be tagged with $x$ instead with $j$. During the process we will call $d$ to the distance of the beads, so</p>
+<p></p>
+$$
+
+x=jd
+
+$$
+<p></p>
+<p>and</p>
+<p></p>
+$$
+
+\Psi(x,t)=\Psi_j(t)
+
+$$
+<p></p>
+<p>Also, the mass $m$ has to decrease when the distance gets shorter, because otherwise we would arrive to infinite density. This way, $m=\mu d$. For the same reason, the Hook constant $k$ must get greater, since because continuity the differences $\Psi_j-\Psi_{j-1}$ trends to 0 and we wouldn't get oscillation at all.</p>
+<p></p>
+<p>So</p>
+<p></p>
+$$
+
+\mu d \ddot{\Psi}_j(t)=\frac{\kappa}{d}( \Psi_{j+1}(t)-\Psi_{j}(t))- \frac{\kappa}{d} (\Psi_{j}(t)- \Psi_{j-1}(t))
+
+$$
+<p></p>
+<p>or also</p>
+<p></p>
+$$
+
+\mu d \ddot{\Psi}(x,t)=\frac{\kappa}{d}( \Psi(x+d,t)-\Psi(x,t))- \frac{\kappa}{d} (\Psi(x,t)- \Psi(x-d,t))
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Taking $d\rightarrow 0$ <code class="inlineCoed"></code>in two steps'':</p>
+<p></p>
+$$
+
+\mu d \ddot{\Psi}_j(t)=\kappa \deriv{\Psi(x+d/2,t)}{x}-\kappa \deriv{\Psi(x-d/2,t)}{x}
+
+$$
+<p></p>
+<p>and</p>
+<p></p>
+$$
+
+\ddot{\Psi}(x,t)=\frac{\kappa}{\mu}\deriv{^2 }{x^2} \Psi(x,t)
+
+$$
+<p></p>
+<p>which is known as the wave equation. It represents the \textit{continuous case} of infinite oscillating masses.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Usually is taken $v=\sqrt{\frac{\kappa}{\mu}}$, and the equation is rewritten as</p>
+<p></p>
+$$
+
+\deriv{^2 }{t^2}{\Psi}(x,t)=v^2\deriv{^2 }{x^2} \Psi(x,t)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>If we observe the previous dispersion relation in the form</p>
+<p></p>
+$$
+
+\omega_{k}=2 \sqrt{\frac{T}{m d}} \sin \left(\frac{k d}{2}\right)
+
+$$
+<p></p>
+<p>and since $m=\mu d$ and $k d$ is very small:</p>
+<p></p>
+$$
+
+\omega_{k}\approx 2 \sqrt{\frac{T}{\mu d^2}} \frac{k d}{2}=\sqrt{\frac{T}{\mu}} k=v k
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But this last expression could be derived directly like the original dispersion relation: we are inspired in the discrete case and consider that a "normal mode" solution would be</p>
+<p></p>
+$$
+
+\Psi(x,t)=e^{i\omega t} \xi(x)
+
+$$
+<p></p>
+<p>where the complex function $\xi(x)$ take the role of the eigenvector. We infer $\xi(x)=e^{ik x}$ and force $\Psi$ to verify the equation. From here we would obtain</p>
+<p></p>
+$$
+
+\omega_{k}^2=v^2k^2
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But observe two things:</p>
+<p></p>
+<p>\begin{enumerate}</p>
+<p></p>
+<p>\item For every $k$ we get two <code class="inlineCoed"></code>basis'' solutions</p>
+<p></p>
+$$
+
+\Psi^{k}(x,t)=e^{i \omega_{k} t} e^{i k t}
+
+$$
+<p></p>
+<p>and</p>
+<p></p>
+$$
+
+\tilde{\Psi}^{k}(x,t)=e^{-i \omega_{k} t} e^{i k t}
+
+$$
+<p></p>
+<p>the combinations of them ($k \in \RR$) produces all the solutions</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+\Psi(x,t)=\int_{-\infty}^{\infty} C(k) e^{i\omega_k t} e^{i k x} +\tilde{C}(k) e^{-i\omega_k t} e^{i k x}dk
+
+$$
+<p></p>
+<p>\item Begin with</p>
+<p></p>
+$$
+
+\Psi(x,t)=\int_{-\infty}^{\infty} C(k) \Psi^k +\tilde{C}(k) \tilde{\Psi}^k dk
+
+$$
+<p></p>
+<p>Observe that ${\Psi}^k=(\Psi^{-k})^*$ and $\tilde{\Psi}^k=(\tilde{\Psi}^{-k})^*$, so if want for a real solution $\Psi$, i.e., $\Psi=\Psi^*$, since:</p>
+<p></p>
+$$
+
+\Psi(x,t)^*=\int_{-\infty}^{\infty} C(k)^* (\Psi^{k})^* +\tilde{C}(k)^* (\tilde{\Psi}^k)^* dk=
+
+\int_{-\infty}^{\infty} C(k)^* {\Psi}^{-k} +\tilde{C}(k)^* \tilde{\Psi}^{-k} dk=
+
+$$
+<p></p>
+$$
+
+=\int_{-\infty}^{\infty} C(-k)^* {\Psi}^{k} +\tilde{C}(-k)^* \tilde{\Psi}^{k} dk
+
+$$
+<p></p>
+<p>we conclude, by <code class="inlineCoed"></code>Fourier unicity'' (I'm not sure about this):</p>
+<p></p>
+$$
+
+{C}(-k)=C(k)^*
+
+$$
+<p></p>
+$$
+
+\tilde{C}(-k)=\tilde{C}(k)^*
+
+$$
+<p></p>
+<p>So we can write the real solution as</p>
+<p></p>
+$$
+
+\Psi(x,t)=\int_{-\infty}^{0} C(k) \Psi^k +\tilde{C}(k) \tilde{\Psi}^k dk+\int_{0}^{+\infty} C(k) \Psi^k +\tilde{C}(k) \tilde{\Psi}^k dk=
+
+$$
+<p></p>
+$$
+
+=\int_{0}^{+\infty} C(k)^* (\Psi^k)^* +\tilde{C}(k)^* (\tilde{\Psi}^k)^* dk+\int_{0}^{+\infty} C(k) \Psi^k +\tilde{C}(k) \tilde{\Psi}^k dk=
+
+$$
+<p></p>
+<p>\begin{equation}\label{realsolution2}</p>
+<p></p>
+<p>=\int_{0}^{+\infty} 2Re[C(k) \Psi^k +\tilde{C}(k) \tilde{\Psi}^k] dk</p>
+<p></p>
+<p>\end{equation}</p>
+<p></p>
+<p>\end{enumerate}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\subsection{Imposition of initial conditions}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Suppose we want a, for the moment, complex solution that verifies the initial condition $\Psi(x,0)=g(x)\in \CC$ for every $x\in \RR$, we force:</p>
+<p></p>
+$$
+
+g(x)=\int_{-\pi}^{\pi}\left( C(k)+\tilde{C}(k) \right)e^{i k x} dk
+
+$$
+<p></p>
+<p>and therefore $C(k)+\tilde{C}(k)$ will be the Fourier transform of $g$, $\hat{g}$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But we still have more freedom degrees, we can fit an <code class="inlineCoed"></code>initial velocity profile'' $h(x)$:</p>
+<p></p>
+$$
+
+\deriv{\Psi}{t}(x,0)=h(x)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+h(x)=\int_{-\infty}^{\infty} i\omega_k C(k) e^{i k x} -i\omega_k \tilde{C}(k) e^{i k x}dk= \int_{-\infty}^{\infty} i \left( \omega_k C(k) -\omega_k \tilde{C}(k) \right) e^{i k x}dk
+
+$$
+<p></p>
+<p>and therefore $i \left( \omega_k C(k) -\omega_k \tilde{C}(k) \right)$ is the Fourier transform of $h$, $\hat{h}$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>We then solve the equations:</p>
+<p></p>
+$$
+
+\left\{
+
+\begin{array}{rl}
+
+C(k)+\tilde{C}(k)= &\hat{g} \\
+
+i \left( \omega_k C(k) -\omega_k \tilde{C}(k) \right) =& \hat{h}
+
+\end{array}
+
+\right.
+
+$$
+<p></p>
+<p>and we have finished.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\subsection{Travelling waves decomposition}</p>
+<p></p>
+<p>On the onther hand, observe that the general solution is:</p>
+<p></p>
+$$
+
+\Psi(x,t)=\int_{-\infty}^{\infty} C(k) \Psi^k +\tilde{C}(k) \tilde{\Psi}^k dk
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>If we take $t=0$,</p>
+<p></p>
+$$
+
+\Psi(x,0)=\int_{-\infty}^{\infty} C(k) e^{ikx}dk +\int_{-\infty}^{\infty}\tilde{C}(k) e^{ikx} dk=F(x)+G(x)
+
+$$
+<p></p>
+<p>where the functions $F$ and $G$ are inverse Fourier transform of $C$ and $\tilde{C}$ respectively. Then</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>$$F(x+vt)=\int_{-\infty}^{\infty} C(k) e^{i k (x+vt)}=\int_{-\infty}^{\infty} C(k) e^{i kx+\omega_k t}$$</p>
+<p></p>
+<p>and</p>
+<p></p>
+<p>$$G(x-vt)=\int_{-\infty}^{\infty} \tilde{C}(k) e^{i k (x-vt)}=\int_{-\infty}^{\infty} \tilde{C}(k) e^{i kx-\omega_k t}$$</p>
+<p></p>
+<p>and therefore</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+\Psi(x,t)=F(x+vt)+G(x-vt)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\section{Boundary conditions}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>First, we are going to consider the case where we have two extremes are atached to a wall:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\begin{center}</p>
+<p></p>
+<p>\includegraphics[width=8cm]{imagenes/string.jpg}</p>
+<p></p>
+<p>\end{center}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So we have $\Psi(0,t)=\Psi(L,t)=0$. In particular,</p>
+<p></p>
+$$
+
+\Psi(0,t)=F(vt)+G(-vt)=0
+
+$$
+<p></p>
+<p>for every $t$. So we conclude that $G(y)=-F(-y)$ and so</p>
+<p></p>
+$$
+
+\Psi(x,t)=F(x+vt)-F(-x+vt)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>On the other hand, imposing $\Psi(L,t)=0$:</p>
+<p></p>
+$$
+
+\Psi(L,t)=\int_{-\infty}^{\infty} C(k) e^{i k v t+ikL}dk-\int_{-\infty}^{\infty} C(k) e^{i k v t-ikL}dk=
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+=\int_{-\infty}^{\infty} C(k) e^{i k v t} \left[e^{ikL}-e^{-ikL} \right] dk=0
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Let $H(y)$ be the inverse Fourier transform of $C(k)\left[ e^{ikL}-e^{-ikL} \right]$. Then</p>
+<p></p>
+$$
+
+H(vt)=\Psi(L,t)=0
+
+$$
+<p></p>
+<p>for every $t$. So $H\equiv 0$, and then</p>
+<p></p>
+$$
+
+C(k)\left[ e^{ikL}-e^{-ikL} \right]=0
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>If we demand that the protagonist functions fulfill good properties then</p>
+<p></p>
+$$
+
+e^{ikL}-e^{-ikL}=0
+
+$$
+<p></p>
+<p>and therefore</p>
+<p></p>
+$$
+
+2kL=2n\pi
+
+$$
+<p></p>
+<p>and</p>
+<p></p>
+$$
+
+k=\frac{n \pi}{L}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So the most general solution becomes</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+\Psi(x,t)=\int_{-\infty}^{\infty} C(k) e^{i k v t} \left[e^{ikx}-e^{-ikx} \right] dk= \int_{-\infty}^{\infty} C(k) e^{i k v t} 2 i \sin(kx) dk=
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+=\sum_{n=-\infty}^{n=\infty} C_n e^{i \omega_n t} \sin (\frac{n \pi x}{L})
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>If we are looking for real solutions, mixing this ideas with the ones of equation \ref{realsolution2}:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+\Psi(x,t)=C_0+\sum_{n=1}^{+\infty} 2Re[C_n e^{i \omega_n t}] \sin (\frac{n \pi x}{L})=
+
+$$
+<p></p>
+$$
+
+=C_0+\sum_{n=1}^{+\infty} A_n \cos(\frac{n \pi v}{L} t +\phi_n)\sin (\frac{n \pi x}{L})
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\section{Dispersion relation}</p>
+<p></p>
+<p>In the simplest wave equation</p>
+<p></p>
+$$
+
+\deriv{^2\Psi}{t^2}=v^2\deriv{^2\Psi}{x^2}
+
+$$
+<p></p>
+<p>we have a basis solutions of the form</p>
+<p></p>
+$$
+
+e^{i(kx-\omega t)}
+
+$$
+<p></p>
+<p>where necessarily</p>
+<p></p>
+$$
+
+v=\frac{\omega}{k}
+
+$$
+<p></p>
+<p>which is known as the dispersion relation.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But there are other equations, more complicated, that accept solutions of this form. They are sometimes called wave equation, too. But now, when we substitute the solution in the equation we obtain a more complicated relation between $\omega$ and $k$. In other words, the basis waves don't move at the same velocity. The relation is known as dispersive relation because it explain how the different components of the Fourier decomposition of a general solution move. The result is that every comonent move at a different speed so the original shape spreads out when time evolves.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\section{Young double slit}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>We consider that distance of the slit to the screen is far bigger than the slit separation. We will have constructive interference (bright point) when the difference of the path from both slits is a multiple of th wavelength $\lambda$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But since the screen is far away, we get a right angle:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\begin{center}</p>
+<p></p>
+<p>\includegraphics[width=12cm]{imagenes/youngslit.png}</p>
+<p></p>
+<p>\end{center}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>From here we have:</p>
+<p></p>
+$$
+
+sin(\theta)=\frac{n\lambda}{d}
+
+$$
+<p></p>
+<p>where $n\in \ZZ$ and $d$ is the slit separation.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>The destructive interference occurs at</p>
+<p></p>
+$$
+
+sin(\theta)=\frac{n\lambda/2}{d}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>A more useful setup is a \textbf{diffraction grating}, because we have more constructive interference and the bright spots are brighter. But the formula is the same.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\section{Diffraction}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>When a wave goes through a slit it creates an interference pattern in a screen with several fringes. The fringes respond to a formula. They form an angle $\theta$ with the slit such that:</p>
+<p></p>
+$$
+
+sin(\theta)=\frac{m \lambda}{w}
+
+$$
+<p></p>
+<p>with $m\in \ZZ$, $\lambda$ being the wavelength and $w$ the slit length.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\begin{center}</p>
+<p></p>
+<p>\includegraphics[width=12cm]{imagenes/singleslitdiffraction.png}</p>
+<p></p>
+<p>\end{center}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>%=================================================================================</p>
+<p></p>
+<p>%=====================</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

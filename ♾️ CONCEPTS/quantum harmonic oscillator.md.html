@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Quantum_harmonic_oscillator">Quantum harmonic oscillator</h1>
+<p>The quantum harmonic oscillator is a fundamental model in quantum mechanics due to its wide applicability in physics, from simple models of atoms to quantization of fields in quantum field theory. The oscillator's energy levels are quantized, and this can be elegantly described using ladder operators.</p>
+<p></p>
+<p>First, consider the time-independent Schrödinger equation for the harmonic oscillator:</p>
+<p>$$ \hat{H} \psi(x) = E \psi(x) $$</p>
+<p>where $\hat{H}$ is the Hamiltonian operator:</p>
+<p>$$ \hat{H} = \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2 \tag{1}$$</p>
+<p>and $\hat{p}$ and $\hat{x}$ are the momentum and position operators, respectively.</p>
+<p></p>
+<p>The ladder operators $\hat{a}$ and $\hat{a}^\dagger$ (annihilation and creation operators, respectively) are introduced as:</p>
+<p>$$ \hat{a} = \sqrt{\frac{m\omega}{2\hbar}} \left( \hat{x} + \frac{i\hat{p}}{m\omega} \right), \quad \hat{a}^\dagger = \sqrt{\frac{m\omega}{2\hbar}} \left( \hat{x} - \frac{i\hat{p}}{m\omega} \right) $$</p>
+<p>These operators lower and raise the energy levels of the oscillator, respectively. They obey the commutation relation $[\hat{a}, \hat{a}^\dagger] = 1$.</p>
+<p></p>
+<p>Using ladder operators, the Hamiltonian can be rewritten as:</p>
+<p>$$ \hat{H} = \hbar \omega \left( \hat{a}^\dagger \hat{a} + \frac{1}{2} \right) $$</p>
+<p>This form is particularly useful as it manifests the quantization of the oscillator’s energy directly.</p>
+<p></p>
+<p>Now, for the existence of a ground state: if we apply the annihilation operator to an eigenstate of the Hamiltonian $\psi$ with energy $E$, the resultant state $\hat{a} \psi$ is an eigenstate with energy $E - \hbar \omega$. Conversely, applying the creation operator $\hat{a}^\dagger$ to $\psi$ yields a state with energy $E + \hbar \omega$. This implies that we can construct a "ladder" of energy states by repeatedly applying $\hat{a}^\dagger$ or $\hat{a}$. These two facts can be checked by computations. </p>
+<p>Crucially, the energy cannot be negative, according to $(1)$,  so there must be a lowest energy state such that further application of $\hat{a}$ yields zero. This state $| 0 \rangle$, satisfying $\hat{a} | 0 \rangle = 0$, is the ground state. It has the energy $E_0 = \frac{1}{2} \hbar \omega$, which includes the zero-point energy, the non-zero energy that the oscillator possesses in the ground state due to the Heisenberg uncertainty principle.</p>
+<p></p>
+<p>This can be shown in another form by defining the "number" operator $\hat{N}=\hat{a}^\dagger \hat{a}$. The eigenstates of $\hat{N}$ are the same as the eigenstates of $\hat{H}$. Let's call them $|\lambda\rangle$, for every eigenvalue $\lambda$. Now observe that </p>
+$$
+\langle \lambda | \hat{N} | \lambda \rangle = \lambda \langle \lambda | \lambda \rangle = \lambda 
+$$
+<p>and</p>
+$$
+\langle \lambda | \hat{N} | \lambda \rangle = (\langle \lambda | \hat{a}^\dagger)(\hat{a} | \lambda \rangle) = || \hat{a} | \lambda \rangle ||^2 \geq 0
+$$
+<p>from where we conclude $\lambda \geq 0$.</p>
+<p></p>
+<p></p>
+<p><b>Why Discrete Energy Levels</b>:</p>
+<p><img src="./../imagenes/Pasted image 20231222164341.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>see <a href="https://youtu.be/GkUXscdLQQ0?si=M5x7ENWX8WYxdR5b&t=529" target="_blank">this video</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Time_evolution_of_energy_eigenstates_and_coherent_eigenstates">Time evolution of energy eigenstates and coherent eigenstates</h2>
+<p>Energy eigenstates: <a href="./Schrodinger equation.md.html">Schrodinger equation</a>.</p>
+<p></p>
+<p>Coherent states: </p>
+<p>The eigenstates of the annihilation operator, $\hat{a}(|\alpha\rangle)=\alpha |\alpha\rangle$, where $\alpha \in \mathbb C$, are called coherent states. Their time evolution is given by</p>
+$$
+\begin{aligned}
+& |\psi(0)\rangle=\left|\alpha_0\right\rangle \quad \alpha_0=\left|\alpha_0\right| e^{i \varphi} \\
+& |\psi(t)\rangle=e^{-i \omega t / 2}|\alpha\rangle, \text{ where } \alpha=\alpha_0 e^{-i \omega t}
+\end{aligned}
+$$
+<p>(see <a href="https://youtu.be/x0wk98uMyys?si=yiUa2CkfRG2MWN-l&t=938)" target="_blank">this video</a></p>
+<h2 style="margin-left:0px;" id="Comparison_with_classical">Comparison with classical </h2>
+<p></p>
+<p>| Description | Classical Harmonic Oscillator | Quantum Harmonic Oscillator (initial Coherent State $\alpha_0$)   |</p>
+<hr>
+<p>| Position $x(t)$ | $x_0 \cos(\omega t - \varphi)$ | $\sqrt{\frac{2\hbar}{m\omega}} \|\alpha_0\|  \cos(\omega t - \varphi)$ |</p>
+<p>| Momentum $p(t)$ | $-m\omega x_0 \sin(\omega t - \varphi)$ | $-\sqrt{2m\hbar\omega}  \|\alpha_0\|  \sin(\omega t - \varphi)$ |</p>
+<p>| Energy $E(t)$ | $\frac{1}{2}m\omega^2 x_0^2$ | $\hbar\omega \left(  \|\alpha_0\|  ^2 + \frac{1}{2}\right)$ |</p>
+<p>The energy for the quantum case includes the contribution from the zero-point energy $\frac{1}{2}\hbar\omega$, which is absent in the classical case.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

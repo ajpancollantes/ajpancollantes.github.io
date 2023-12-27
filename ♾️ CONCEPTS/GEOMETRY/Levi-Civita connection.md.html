@@ -34,7 +34,7 @@ gtag('config', 'G-LBT9E8N3HS');
 <font size="3vw"><h1 style="margin-left:0px;" id="Levi-Civita_connection">Levi-Civita connection</h1>
 <p>(Before this read <a href="./../../☕REFLECTIONS/relationship parallel transport, covariant derivatives and metrics.md.html">relationship parallel transport, covariant derivatives and metrics</a>)</p>
 <p>Given a <a href="./Riemannian metric.md.html">Riemannian metric</a> $g$ on a manifold $M$, the Levi-Civita connection is a <a href="./vector bundle connection.md.html">vector bundle connection</a> $\nabla$ on the tangent bundle (<a href="./linear connection.md.html">linear connection</a>) which is compatible with $g$, in the sense that:</p>
-<p>1. it preserves the metric, i.e., $\nabla g=0$. This condition means that the inner product of two vectors remains constant when they are parallel transported. On the other hand, remember that a vector bundle connection induces (and indeed is uniquely determined by) a <a href="./principal connection on a principal bundle.md.html">principal connection</a> on the frame bundle (see <a href="./associated connection.md.html#Conversely">this</a>). This condition means that this vector bundle connection induces a principal connection also on the <a href="./../orthonormal frame bundle.md.html">orthonormal frame bundle</a>. Also, this condition implies antisymmetry for the connection matrix (see <a href="./Levi-Civita connection.md.html#Computation_of_the_matrix_of_connection_1-form">below</a>).</p>
+<p>1. it preserves the metric, i.e., $\nabla g=0$. This condition means that the inner product of two vectors remains constant when they are parallel transported. On the other hand, remember that a vector bundle connection induces (and indeed is uniquely determined by) a <a href="./principal connection on a principal bundle.md.html">principal connection</a> on the frame bundle (see <a href="./associated connection.md.html#Conversely">this</a>).  Well, the condition $\nabla g=0$ means that this vector bundle connection induces a principal connection <b>also</b> on the <a href="./../orthonormal frame bundle.md.html">orthonormal frame bundle</a>. In addition, this condition implies antisymmetry for the connection matrix (see <a href="./Levi-Civita connection.md.html#Computation_of_the_matrix_of_connection_1-form">below</a>).</p>
 <p>2. it is <a href="./../torsion of a connection.md.html">torsion-free in the sense of covariant derivatives</a>. I think that this condition can be interpreted in the sense that the <a href="./Cartan geometry.md.html">Cartan geometry</a> that appears from "pasting together" $\nabla$ and the solder form $\theta$ is a <a href="./../torsion of a Cartan geometry.md.html">torsion-free Cartan geometry</a>.</p>
 <p></p>
 <p><b>Theorem</b>. Every <a href="./pseudo-Riemannian manifold.md.html">pseudo-Riemannian manifold</a> $(M,g)$ has a unique Levi-Civita connection.</p>
@@ -47,11 +47,9 @@ gtag('config', 'G-LBT9E8N3HS');
 <p>In a local chart $\{x_1,\ldots,x_n\}$ we have a local chart frame, and we can express the Levi-Civita connection as a matrix of 1-forms (see <a href="./vector bundle connection.md.html#Connection_form">here</a>). This gives rise to the <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>.</p>
 <p></p>
 <h3 style="margin-left:0px;" id="In_a_orthonormal_frame:_the_matrix_of_connection_1-form">In a orthonormal frame: the matrix of connection 1-form</h3>
+<p><a href="https://www.akalin.com/curvature-moving-frames" target="_blank">Here</a> appears an algorithmic way to compute the connection 1-form, and the curvature, from a coframe. Basically, it uses <a href="./../../✏️ THEOREMS/Cartan's first structural equation.md.html">Cartan's first structural equation</a> and these two properties:</p>
 <p></p>
-<p><b>Example 1</b>: <a href="./../../☕REFLECTIONS/connection form for LV in a surface.md.html">connection form for LV in a surface</a>.</p>
-<p><b>Example 2</b>: <a href="./../../☕REFLECTIONS/connection form for LV in R3.md.html">connection form for LV in R3</a>  </p>
 <p></p>
-<p>Since our connection is the LC connection and we are in a orthonormal frame, it can be shown that this matrix of 1-forms $\Theta$ satisfies "two good properties":</p>
 <p><ul style="margin-left:0px;"><li>1. <b>Is antisymmetric</b>. The covariant derivative $\nabla$ satisfies the Leibniz rule:</li></ul></p>
 $$
 X g(Y, Z) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z). \tag{1}
@@ -76,7 +74,13 @@ $$which leads to
 $$
 \left(e_i\lrcorner\Theta_{j}^k-e_j\lrcorner\Theta_{i}^k\right) e_k=-T_{ij}^k e_k
 $$
-<p>and we have the result</p>
+<p>and we have the result. $\blacksquare$</p>
+<p></p>
+<p>We show two examples:</p>
+<p><b>Example 1</b>: <a href="./../../☕REFLECTIONS/connection form for LV in a surface.md.html">connection form for LV in a surface</a>.</p>
+<p><b>Example 2</b>: <a href="./../../☕REFLECTIONS/connection form for LV in R3.md.html">connection form for LV in R3</a>  </p>
+<p></p>
+<p></p>
 <p></p>
 <h1 style="margin-left:0px;" id="Uniqueness_of_the_metric?">Uniqueness of the metric?</h1>
 <p>Two metrics can have the same Levi-Civita connection and hence the same geodesics, but differ in other properties like volumes, angles, etc. In more formal terms, this question involves projective equivalence of Riemannian metrics, a topic studied in differential geometry. Two metrics are projectively equivalent if they have the same unparametrized geodesics. There are nontrivial examples of projectively equivalent but distinct Riemannian metrics, even in dimension 2. See also the <a href="./geodesic.md.html#Other_properties">discusion here</a>.</p>

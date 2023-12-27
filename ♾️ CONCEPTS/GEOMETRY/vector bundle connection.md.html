@@ -32,6 +32,8 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Vector_bundle_connection">Vector bundle connection</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="Definition">Definition</h2>
 <p>Let $E \rightarrow M$ a smooth vector bundle on a manifold $M$. Let $\Gamma(E)$ be the space of sections. A connection on $E$ is an $\mathbb{R}$-linear map</p>
 <p></p>
 $$
@@ -52,6 +54,7 @@ $$
 <p>If we think of sections like a generalization of functions (I personally call them twisted functions) the connection is a device that let us derive this functions.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="As_a_particular_case_of_connection_on_a_fiber_bundle">As a particular case of connection on a fiber bundle</h2>
+<p>(see also <a href="./connection on a fiber bundle.md.html#Particular_case_vector_bundles">this</a>)</p>
 <p>This concept is nothing but a particular case of a <a href="./connection on a fiber bundle.md.html">connection on a fiber bundle</a> when the <a href="./bundle.md.html">bundle</a> is a vector bundle. Let's see that every derivative operator give rise to horizontal subspaces in $TE$.</p>
 <p></p>
 <p><img src="./../../imagenes/Pasted image 20211112091622.png" style="width:80vw; border-radius: 3px;" ></p>
@@ -67,6 +70,8 @@ $$
 <p>Conversely, given a <a href="./connection on a fiber bundle.md.html">connection in the sense of Ehresmann</a> $HE$ we can define a vector bundle connection like this:</p>
 <p><img src="./../../imagenes/Pasted image 20211112155016.png" style="width:80vw; border-radius: 3px;" ></p>
 <p>The isomorphism $\phi$ only exists because we are in a vector <a href="./bundle.md.html">bundle</a>.</p>
+<p></p>
+<p></p>
 <p></p>
 <h2 style="margin-left:0px;" id="Connection_form_matrix">Connection form matrix</h2>
 <p>(<b>Christoffel 1-form, for me</b>)</p>
@@ -114,6 +119,9 @@ b_2\\
 \end{pmatrix}
 $$
 <p>where $X_1\lrcorner \Theta$ is a matrix whose entries are the contraction of $X_1$ with every entry of $\Theta$.</p>
+$$
+\nabla_{e_1} e_2=e_1\lrcorner\Theta^1_2 e_1+e_1 \lrcorner \Theta^2_2 e_2
+$$
 <p></p>
 <h3 style="margin-left:0px;" id="Change_of_frame">Change of frame</h3>
 <p>Observe that an arbitrary matrix of 1-forms is a priori enough to define locally a connection.</p>
@@ -121,14 +129,17 @@ $$
 $$
 e'=e g
 $$
-<p>with $g$ a matrix of smooth functions, it can be show that the new connection form will be</p>
+<p>with $g$ a matrix of smooth functions, it can be shown that the new connection form will be</p>
 $$
 \Theta'=g^{-1} dg+g^{-1} \Theta g
 $$
 <p>This let us define a global connection form as a collection of matrices of 1-forms defined in an open covering of $M$ satisfying certain compatibility condition in the overlaps.</p>
 <p></p>
 <h3 style="margin-left:0px;" id="Relation_to_the_general_connection_1-form">Relation to the general connection 1-form</h3>
-<p><b>Keep an eye</b>: this is not the same that the <a href="./connection on a fiber bundle.md.html#Connection_1-form">connection 1-form</a> of a connection on a fiber bundle, which does not depends on any frame, although they both are related. I am not sure but I think is "almost" the <a href="./principal connection on a principal bundle.md.html#Another_characterization">Yang-Mills field</a> obtained by means of a particular frame of the connection in the frame bundle "related" to the original vector bundle connection. That is, suppose that our vector bundle connection on $E$ is coming from a principal connection on the frame bundle $FE$ (it is always true, see <a href="./associated connection.md.html#Conversely">associated connection#Conversely</a>), given by a 1-form on $FE$, $\tilde{\omega}$. Then, if we select the frame $e=\{e_i\}$ as above, we are providing a section $p_{\alpha}$ of $FE$, and the Yang-Mills field is $p_{\alpha}^*(\tilde{\omega})$. **What is the relation of $\omega$ obtained from $e$ as above and $p_{\alpha}^*(\tilde{\omega})$?** See xournal 182, they are not exactly the same...</p>
+<p><b>Keep an eye</b>: this is not the same that the <a href="./connection on a fiber bundle.md.html#Connection_1-form">connection 1-form</a> of a connection on a fiber bundle, which does not depends on any frame, although they both are related. I am not sure but I think is "almost" the <a href="./principal connection on a principal bundle.md.html#Another_characterization">Yang-Mills field</a> obtained by means of a particular frame of the connection in the frame bundle "related" to the original vector bundle connection. That is, suppose that our vector bundle connection on $E$ is coming from a principal connection on the frame bundle $FE$ (it is always true, see <a href="./associated connection.md.html#Conversely">associated connection#Conversely</a>), given by a 1-form on $FE$, $\tilde{\omega}$. Then, if we select the frame $e=\{e_i\}$ as above, we are providing a section $p_{\alpha}$ of $FE$, and the Yang-Mills field is $p_{\alpha}^*(\tilde{\omega})$. </p>
+<p>**What is the relation of $\Theta$ obtained from $e$ as above and $p_{\alpha}^*(\tilde{\omega})$?** </p>
+<p>They are the same, I think. See <a href="./associated connection.md.html#Particular_case_vector_bundle_connections">this</a>.</p>
+<p></p>
 <p></p>
 <p></p>
 <h2 style="margin-left:0px;" id="Curvature">Curvature</h2>

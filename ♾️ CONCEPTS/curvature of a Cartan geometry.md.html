@@ -40,12 +40,45 @@ $$
 $$
 <p>is called the <b>curvature</b> of the geometry.</p>
 <p>$\blacksquare$</p>
-<p>The <a href="./GEOMETRY/Maurer-Cartan form.md.html#Structural_equation">structural equation</a> of the <a href="./GEOMETRY/Maurer-Cartan form.md.html">Maurer-Cartan form</a> of a Lie group is telling to us that a <a href="./GEOMETRY/Klein geometry.md.html">Klein geometry</a> is flat.</p>
+<p>The <a href="./GEOMETRY/Maurer-Cartan form.md.html#Structural_equation/MC_equation">structural equation</a> of the <a href="./GEOMETRY/Maurer-Cartan form.md.html">Maurer-Cartan form</a> of a Lie group is telling to us that a <a href="./GEOMETRY/Klein geometry.md.html">Klein geometry</a> is flat.</p>
 <p></p>
 <p>On the other hand, the measure of how much $\Omega$ is not in $\mathfrak{h}$ is called the <a href="./torsion of a Cartan geometry.md.html">torsion of a Cartan geometry</a>.</p>
 <p></p>
-<p>I suspect that the curvature of a Cartan geometry is related to the <a href="./GEOMETRY/curvature of a connection.md.html">curvature of a connection</a>, and so to the <a href="./GEOMETRY/curvature of a distribution.md.html">curvature of a distribution</a>. And in this sense, it represents "the deviation of a parallel transported vector along a closed loop to belong to the horizontal distribution". The horizontal distribution would be, I think, an appropriate lifting of the tangent space of $M$... I have to think it more...</p>
+<h2 style="margin-left:0px;" id="Interpretation">Interpretation</h2>
+<p>Why is this called curvature? Only because it reminds the <a href="./../✏️ THEOREMS/Cartan's second structural equation.md.html">Cartan's second structural equation</a>?</p>
 <p></p>
+<p><b>Idea to be developed further:</b> </p>
+<p>The <a href="./../☕REFLECTIONS/Euclidean plane.md.html">Euclidean plane</a> is flat, in the following sense. The Levi-Civita connection has a connection 1-form $\Theta$ (upon fixing a frame $e=\{e_1,e_2\}$) satisfying:</p>
+$$
+d\Theta-\Theta\wedge\Theta=0 \tag{0}
+$$
+<p>The Cartan's second structural equations show that the Riemann curvature tensor (and then the Gaussian curvature) is closely related to the 2-form $\Omega=d\Theta-\Theta\wedge\Theta$, so we conclude that the curvature is zero.</p>
+<p></p>
+<p>This flat connection induces a principal <a href="./GEOMETRY/associated connection.md.html">associated connection</a> $\tilde{\Theta}$ on the orthogonal frame bundle, which, at the end of the day, is the same as the Klein geometry $(E(2),O(2))$. The associated principal connection, I guess, is also flat. I am not able to prove it, yet, but I don't mind for the moment (see <a href="./GEOMETRY/associated connection.md.html#Curvature">here</a> for a sketch). In any case, we again have</p>
+$$
+d\tilde{\Theta}-\tilde{\Theta}\wedge\tilde{\Theta}=0 \tag{1}
+$$
+<p>This principal connection is a $\mathfrak{o}(2)$-valued 1-form which is, in some sense, part of the Cartan connection (an $\mathfrak{e}(2)$-valued 1-form). In this case, the Cartan connection is the Maurer-Cartan form of $E(2)$ $\Theta_{E(2)}$, which of course satisfies</p>
+$$
+d\Theta_{E(2)}-\Theta_{E(2)}\wedge \Theta_{E(2)}=0. \tag{2}
+$$
+<p>This last identity is true for any Lie group $G$. But what about (0) and (1)?  I mean, in the general context of a Klein geometry $(G,H)$ we have that it is flat, in the sense that </p>
+$$
+d\Theta_{G}-\Theta_{G}\wedge \Theta_{G}=0.
+$$
+<p>If the Klein geometry is reductive (as it happens with $(E(2),O(2))$) we have $\mathfrak{g}=\mathfrak{h}+\mathfrak{m}$, and then, to my knowledge, $\Theta_G$ decomposes in an $\mathfrak{h}$-valued 1-form $\tilde{\Theta}$ and an $\mathfrak{m}$-valued 1-form. The form $\tilde{\Theta}$ provides a principal connection on the principal bundle $G\to G/H$. This principal bundle is a kind of frame bundle for $G/H$ so we can consider a moving frame</p>
+$$
+e:G/H \to G
+$$
+<p>and the connection 1-form $\Theta:=e^*(\tilde{\Theta})$ . To try to end this, read first <a href="./torsion of a Cartan geometry.md.html#Interpretation">torsion of a Cartan geometry#Interpretation</a>. I think the key idea is the <b>update</b>.</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p><b>Old stuff</b></p>
+<p>I suspect that the curvature of a Cartan geometry is related to the <a href="./GEOMETRY/curvature of a connection.md.html">curvature of a connection</a>, and so to the <a href="./GEOMETRY/curvature of a distribution.md.html">curvature of a distribution</a>. And in this sense, it represents "the deviation of a parallel transported vector along a closed loop to belong to the horizontal distribution". The horizontal distribution would be, I think, an appropriate lifting of the tangent space of $M$... I have to think it more...</p>
 <p><img src="./None" style="width:80vw; border-radius: 3px;" ></p>
 <p>________________________________________</p>
 <p>________________________________________</p>

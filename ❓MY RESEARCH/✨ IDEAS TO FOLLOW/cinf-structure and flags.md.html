@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Cinf-structure_and_flags">Cinf-structure and flags</h1>
+<h2 style="margin-left:0px;" id="Discussion">Discussion</h2>
+<p>Let $\mathcal{Z}$ be a distribution. For the moment, let's call $\mathcal{C}^{\infty}$-<b>structure</b> to an ordered collections $\langle X_1,\ldots,X_{n-r} \rangle$ that satisfies the <a href="./../♾️ ❗CONCEPTS/cinf-structure.md.html">requirements</a>. And let's call, for the moment,  $\mathcal{C}^{\infty}$-<b>structure of 1-forms</b> to an ordered collection of 1-forms satisfying conditions</p>
+<p>1. $\mathcal{Z}^* =\mathcal{S}\left( \{\omega_{1},\ldots, \omega_{n-r} \}\right)$.</p>
+<p>2. $\mathcal{I}(\{\omega_{k},\ldots, \omega_{n-r}\})$ is a differential ideal for $k=1,\ldots, n-r$.</p>
+<p></p>
+<p></p>
+<p>Lo que está ocurriendo es que dada una $\mathcal{C}^{\infty}$-structure vectorial hay varias $\mathcal{C}^{\infty}$-structures of 1-forms que verifican</p>
+$$
+\mathcal{S}\left( \mathcal{X}_{k} \right)^*=\mathcal{S}\left( \Lambda_{k} \right),\quad\mbox{for}\quad 1\leq k\leq n-r-1.
+$$
+<p>Y recíprocamente, dada una $\mathcal{C}^{\infty}$-structure of 1-forms, hay varias de las que pueden provenir.</p>
+<p>¿Todas llevan al mismo <b>proceso de integración</b>? Entendiendo como tal que tenemos que resolver las mismas Pfaffian equations, aunque quizás con distintos factores integrantes (en último término serían las mismas ecuaciones, porque sacaríamos factor común y despejaríamos).</p>
+<p></p>
+<p>Veamos:</p>
+<p><ul style="margin-left:0px;"><li>Dos $\mathcal{C}^{\infty}$-structures of 1-forms llevan al mismo proceso de resolución si las 1-formas de la primera son  múltiplos de las de la segunda. Es decir, un \emph{proceso} puede provenir de varias $\mathcal{C}^{\infty}$-structures of 1-forms. Esto sería una clase de equivalencia</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Una $\mathcal{C}^{\infty}$-structure of 1-forms puede provenir de varias $\mathcal{C}^{\infty}$-structures vectoriales. Basta con coger una de ellas y sumarle a los vectores $X_j$ combinaciones de $Z_k\in \mathcal{Z}$. Todas las $\mathcal{C}^{\infty}$-structures vectoriales tales que los vector fields son múltiplos pueden ser agrupadas en una clase. Pues bien, hay \textbf{varias clases} que llevan a la misma clase de una $\mathcal{C}^{\infty}$-structure of 1-forms. Podríamos, también, agruparlas en una clase de clases.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Si en el proceso de resolución exigimos el uso de unos factores integrantes concretos, estamos fijando un elemento de la clase de $\mathcal{C}^{\infty}$-structures of 1-forms es. Pero aún así pueden provenir de toda una clase de $\mathcal{C}^{\infty}$-structures vectoriales.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Si existiese en $M$ un fibrado \emph{vertical} se podría canonizar, de manera que para una $\mathcal{C}^{\infty}$-structure of 1-forms dada solamente habría una $\mathcal{C}^{\infty}$-structure vectorial de la que provendría. Es lo que ocurre en el caso de las ODE, cuando se toma representante evolucionario.</li></ul></p>
+<p><img src="./../../imagenes/esquema.jpg" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>IDEA PARA FORMALIZARLO: Decir que vamos a decir que dos $\mathcal{C}^{\infty}$-structures son compatibles si generan la misma cadena de distribuciones. Lo mismo para las $\mathcal{C}^{\infty}$-structures of 1-forms. Si tomamos clases de equivalencia la relación es 1-to-1.</p>
+<p>Las clases de equivalencia, tienen algo que ver con las <a href="./../../♾️ CONCEPTS/flag.md.html">flag</a>s? Serían algo así como un campo de smooth flags.</p>
+<p></p>
+<p>Y con las <a href="./flag manifold.md.html">flag manifold</a>s? En cada punto de nuestra variedad tenemos un espacio vectorial $T_pM$, y por tanto una flag manifold. Tendríamos un fibrado en $M$ en el que cada fibra es una flag manifold. Un "proceso de integración" es una sección de ese fibrado. Localmente siempre existen, de hecho siempre existen estructuras resolubles. La existencia de secciones globales debe tener algo que ver con la topología de ese fribrado. Podría esto usarse para decir cosas de la existencia de soluciones globales de ODEs y PDEs importantes?</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<hr>
+<p></p>
+<h2 style="margin-left:0px;" id="Obsoleto_lo_del_paper_lo_va_a_sustituir">Obsoleto (lo del paper lo va a sustituir)</h2>
+<p>Let $\mathcal{Z}=\mathcal{S}(\{Z_1,\ldots,Z_r\})$ be an involutive distribution. Given a quasi-solvable structure $\langle X_1,\ldots, X_{n-r}\rangle$ for $\mathcal{Z}$, there exists an ordered collection of pointwise linearly independent 1-forms $\langle \omega_1,\ldots, \omega_{n-r}\rangle$ related to it by means of $\mathcal{S}\left( \mathcal{X}_{k} \right)^* =\mathcal{S}\left( \{\omega_{k+1},\ldots, \omega_{n-r} \}\right)$ for $k=1,\ldots, n-r$ and satisfying:</p>
+<p></p>
+<p>1. $\mathcal{Z}^* =\mathcal{S}\left( \{\omega_{1},\ldots, \omega_{n-r} \}\right)$.</p>
+<p></p>
+<p>2. $\mathcal{I}(\{\omega_{k},\ldots, \omega_{n-r}\})$ is a differential ideal for $k=1,\ldots, n-r$.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>Conversely, an ordered collection of 1-forms  $\langle \omega_1,\ldots, \omega_{n-r}\rangle$ satisfying conditions 1 and 2 above gives rise to a quasi-solvable structure $\langle X_1,\ldots, X_{n-r}\rangle$ for $\mathcal{Z}$ such that $\mathcal{S}\left( \mathcal{X}_{k} \right)^* =\mathcal{S}\left( \{\omega_{k+1},\ldots, \omega_{n-r} \}\right)$ for $k=1,\ldots, n-r$.</p>
+<p></p>
+<p>Proof</p>
+<hr>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li>(To be updated)</li></ul></p>
+<p></p>
+<p>Since $\{Z_1,\ldots,Z_r,X_1,\ldots,X_{n-r}\}$ are, pointwise, linearly independent vectors on $M$, they constitute a frame and therefore we can construct the associated dual <a href="./../../♾️ CONCEPTS/GEOMETRY/coframe on a manifold.md.html">coframe</a> (see [Olver 1995] chapter 8)</p>
+$$
+\{\zeta_1,\ldots,\zeta_r,\omega_1,\ldots, \omega_{n-r}\}.
+$$
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>The 1-forms $\{\omega_1,\ldots, \omega_{n-r}\}$ are pointwise linearly independent and we can check that they satisfy the stated conditions. The first one is trivial if we take into account that $\{Z_1,\ldots,Z_r,X_1,\ldots,X_{n-r}\}$ and $\{\zeta_1,\ldots,\zeta_r,\omega_1,\ldots, \omega_{n-r}\}$ are dual basis.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>For the second one, observe that $\mathcal{I}(\{\omega_{k+1},\ldots, \omega_{n-r}\})$ must be a differential ideal for every $k=1,\ldots,n-r-1$, since every $\mathcal{S}\left( \mathcal{X}_k \right)$ is, by remark involutive.</p>
+<p></p>
+<p></p>
+<p>Now, suppose we have a collection of 1-forms $\langle \omega_1,\ldots, \omega_{n-r}\rangle$ satisfying the above conditions. We can find a quasi-solvable structure for $\mathcal{Z}$ by extending $\{Z_1,\ldots,Z_r\}$ to a frame:</p>
+$$
+\{Z_1,\ldots,Z_r,\widetilde{X}_1,\ldots, \widetilde{X}_{n-r}\},
+$$
+<p>and taking the dual coframe</p>
+$$
+\{\zeta_1,\ldots,\zeta_r,\widetilde{\omega}_1,\ldots, \widetilde{\omega}_{n-r}\}.
+$$
+<p></p>
+<p>Since $\operatorname{span}(\{ \widetilde{\omega}_{1p}\ldots,\widetilde{\omega}_{n-rp} \})=\operatorname{span}(\{ {\omega}_{1p}\ldots,{\omega}_{n-rp} \})$ for every $p\in M$ we can replace each $\widetilde{\omega}_i$ by $\omega_i$ and the set</p>
+$$
+\{\zeta_1,\ldots,\zeta_r,{\omega}_1,\ldots, {\omega}_{n-r}\}
+$$
+<p>will be also a coframe. By taking duals again, we obtain the frame</p>
+$$
+\{Z_1,\ldots,Z_r,{X}_1,\ldots, {X}_{n-r}\},
+$$
+<p>and $\langle X_1,\ldots, X_{n-r}\rangle$ is the required quasi-solvable structure, since $\mathcal{S}(\{Z_1,\ldots,Z_r,{X}_1,\ldots, {X}_{k}\})$ is involutive because $\mathcal{I}(\{\omega_{k+1},\ldots, \omega_{n-r}\})$ is a differential ideal ($k=0, \ldots,n-r$).</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

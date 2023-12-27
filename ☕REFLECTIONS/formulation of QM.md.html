@@ -31,7 +31,153 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><p>________________________________________</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Formulation_of_QM">Formulation of QM</h1>
+<p>The Stern-Gerlach experiment and others were impossible to interpret in the classical context: variables that have continuous values that can be measured. So they implied a change of paradigm.</p>
+<p></p>
+<p>Imagine we want to study a portion of the whole universe from this new point of view. The state of the system is no longer described by a point of the *configuration space* $C$, which was a $N$-dimensional manifold, etc. Now, the possible states of the system live in a complex <a href="./../♾️ CONCEPTS/FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> Physicists use to denote the elements of $H$ by </p>
+$$
+|A\rangle, |B\rangle, |C\rangle, \ldots 
+$$
+<p>See <a href="./bra-ket notation.md.html">bra-ket notation</a> for more on this.</p>
+<p>Let $H^*$ be the continuous dual of $H$. Riesz representation theorem gives us an anti-isomorphism between $H$ and $H^*$</p>
+$$
+\begin{array}{rl}
+     H \longmapsto & H^*  \\
+     v \longmapsto & \langle v, \cdot \rangle \\
+\end{array}
+$$
+<p>Moreover, $H^*$ can be identified with the complex conjugate $\overline{H}$. Elements of $H^*$ or $\overline{H}$ will be denoted by</p>
+$$
+\langle A|, \langle B|, \langle C|,
+$$
+<p></p>
+<h2 style="margin-left:0px;" id="Postulates_of_QM">Postulates of QM</h2>
+<p><b>Postulate 1.</b> The states of a quantum mechanics system correspond to unitary elements of a Hilbert space $H$, or its continuous dual $H^*$. Moreover, $e^{i\theta} |A\rangle$ represent the same state than $|A\rangle$. (In fact, we are in a projective space...)</p>
+<p></p>
+<p>What is the inner product for? It is related to the probability, we will see later.</p>
+<p>When we observe a system, we modify it. It has been checked that observations always result in a discrete set of real values; and after observation, the system state change to one of a discrete set of states. This privileged values and states depend on the observation experiment that we are performing. I guess that somebody realized that all this data could be encoded as a linear operator in $H$, call it $M: H\mapsto H$, whose eigenvalues and eigenvectors would be the privileged values and states of the experiment. Be careful: this operator does not really "operate" in the sense that it is not used to transform one state into another along time.</p>
+<p></p>
+<p><b>Postulate 2.</b> The observable quantities in quantum mechanics are represented by linear operators.</p>
+<p></p>
+<p>By physical intuition, the eigenvalues must all be real numbers, of course (<a href="./../♾️ CONCEPTS/Hermitian operator.md.html">Hermitian operator</a>). Also, different results must be associated with different eigenvectors and vice versa: two resultant states (eigenvectors) of an experiment should have different eigenvalues associated.</p>
+<p></p>
+<p>Moreover, if we want the inner product to distinguish probabilities, it will be convenient that the special states outcoming an experiment be orthogonal (because in one state the probability of obtaining the other is 0) and orthonormal (because in one state the probability of obtaining the same is 1). This will be clearer later. But for the moment:</p>
+<p></p>
+<p><b>Postulate 3.</b> Different states obtained as a result of an experiment constitute an orthonormal basis.</p>
+<p></p>
+<p>As a consequence, experiments-observables are associated with linear operators that are necessarily <a href="./../♾️ CONCEPTS/Hermitian operator.md.html">hermitian</a>. Reciprocally, any <a href="./../♾️ CONCEPTS/Hermitian operator.md.html">Hermitian operator</a> will be considered an observable, even if we do not have a real experiment for it. <a href="./../✏️ THEOREMS/spectral theory.md.html">Spectral theorem</a> tells us that any hermitian operator has real eigenvalues and the eigenvectors form an orthonormal basis. *So, we could have rewritten Postulate 2 and 3 as: observables are the same as hermitian operators.*</p>
+<p></p>
+<p>Returning to the inner product and probabilities, it will be convenient the following:</p>
+<p></p>
+<p><b>Postulate 4.</b> In the space $H$ the inner product is such that given an observable $M$ with eigenvalues $m_i$ and eigenvectors $|m_i\rangle$ then </p>
+$$
+\langle S | m_i\rangle^*  \langle S | m_i\rangle=|\langle S | m_i\rangle|^2
+$$
+<p>is the probability of obtaining $m_i$ when we apply the experiment $M$ to $|S\rangle$, i.e. $P(|S\rangle\mapsto m_i)$.</p>
+<p></p>
+<p>This agrees with Postulate 3.</p>
+<p></p>
+<p>In general, the inner product of two states tells us a measurement, although with complex numbers, of the difficulty of distinguishing these two states by means of experiments. For example, $\langle m_i | m_j \rangle=0$ because the experiment $M$ tells us what state the system is in, with no doubt. They are distinguishable.</p>
+<p>Also, $\langle m_i | m_i \rangle=1$ reflects the fact that we cannot distinguish $m_i$ from itself, obviously. For two other states $|A\rangle$ and $|B\rangle$, the quantity $\langle A | B \rangle \in \mathbb C$ expresses the "overlap" between these states, a measurement of what they have in common.</p>
+<p>Postulate 1 tells us that the states are elements of a vector space $H$. In some sense, this means that general states are linear combinations (physicists like to call them "superpositions") of some fundamental states: those which can be obtained by an experiment. So imagine that</p>
+$$
+\begin{array}{l}
+|A\rangle=a_1 |m_1\rangle+a_2 |m_2\rangle\\
+|B\rangle= \qquad \qquad b_2 |m_2\rangle+b_3 |m_3\rangle \end{array}
+$$
+<p></p>
+<p>You can observe that $\langle A | B \rangle=a_2^*b_2$ gives you an idea of what they have in common.</p>
+<p></p>
+<p>And the transformations that maintain as distinguishable the distinguishable states are exactly those preserving the orthogonality, or equivalently, the inner product. I.e., the <a href="./../♾️ CONCEPTS/unitary operator.md.html">unitary operator</a>s. See <a href="https://youtu.be/8mi0PoPvLvs?si=ueccno2rYNBlNMHZ" target="_blank">this video</a>.</p>
+<p></p>
+<p><b>Postulate 5.</b> The evolution of a given state $|A\rangle$ in a non-disturbed system is obtained by multiplying by a <a href="./../♾️ CONCEPTS/unitary operator.md.html">unitary operator</a> $U(t)$.</p>
+<p></p>
+<p>Remember that unitary matrices are the matrices of linear transformation that conserve the inner product. So, in quantum mechanics, the natural flow of times conserves the "overlapiness" of states.</p>
+<p></p>
+<p></p>
+<h3 style="margin-left:0px;" id="An_implementation">An implementation</h3>
+<p>Imagine that in our system we have an experiment-observable $M$, then we can define the inner product in such a way that the states $|m_i\rangle$ form an orthonormal basis, and so $M$ is hermitian:</p>
+$$
+\langle m_i | m_j \rangle=\delta_{ij}
+$$
+<p></p>
+<p>If we prepare the system in any of the states $|m_i\rangle$, the outcome is always $m_i$, and therefore </p>
+$$
+P(|m_i\rangle\mapsto m_i)=|\langle m_i | m_i \rangle|^2 =1,
+$$
+$$
+P(|m_i\rangle\mapsto m_j)=|\langle m_i | m_j \rangle|^2 =0, \quad i\neq j,
+$$
+<p>which is very natural.</p>
+<p></p>
+<p>Now, suppose we perform a second experiment $K$ (with other <a href="./../♾️ CONCEPTS/Hermitian operator.md.html">Hermitian operator</a> associated). This leaves our system in any of the states $|k\rangle$. If we now apply the experiment $M$, it could happen:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>We obtain the $|m_i\rangle$'s with fixed proportions-probabilities $p_i$'s. We identify</li></ul></p>
+$$
+|k\rangle=\sum a_i |m_i\rangle
+$$
+<p>in such a way that $|a_i|^2=p_i$ and looking toward for every other $|\tilde{k}\rangle$ result of $K$, $\langle \tilde{k}|k\rangle=0$. This determine $a_i$ up to a $e^{it \theta} \in \mathbb C$ called phase factor (not totally sure about this last sentence).</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>We obtain the $|m_i\rangle$'s with varying proportions, not depending on $|k\rangle$, actually. In a sense, this means that $|k\rangle$ is independent of $|m_i\rangle$'s. Then we enlarge our basis and inner product with $|k\rangle$, such that $\{|m_i\rangle, |k\rangle \}$ is an orthonormal basis. (I am not sure yet about all of this). The original inner operator $M$ has to be enlarged, too. It acts over $|k\rangle$ as the identity. I suppose that experimentation shows that any other $|k\rangle$ eigenvector of $K$ has the same behavior. In the end, this will result in the tensor product...</li></ul></p>
+<p></p>
+<h3 style="margin-left:0px;" id="Another_example">Another example</h3>
+<p>If the system is a (1+1)-dimensional particle then we have the observable position $\hat{x}$. Its eigenvectors are $|x\rangle$, for each $x \in \mathbb R$, e.g., $|1\rangle,|2\rangle,|7.1\rangle,\ldots$ with eigenvalues $1, 2, 7.1, \ldots$ </p>
+<p>If the particle is in a state $|\Psi\rangle \in \mathcal{H}$, which is a superposition of the eigenstates above. The complex quantity defined as</p>
+$$
+\Psi(x):=\langle \Psi |x \rangle
+$$
+<p>is called the <a href="./../♾️ CONCEPTS/wavefunction.md.html">wavefunction</a> of the particle, and is a function $\mathbb R \to \mathbb C$.</p>
+<p>Because of Postulate 4, $|\Psi(x)|^2$ is the probability of measuring the particle at position $x$.</p>
+<p></p>
+<p>Any observable $A$ (<a href="./../♾️ CONCEPTS/Hermitian operator.md.html">Hermitian operator</a> on $\mathcal H$) can be interpreted as an operator acting on the space of wavefunctions. Consider the state $|\Psi\rangle$, which its corresponding wavefunction $\Psi(x)$, then the state $A|\Psi\rangle$ will have a corresponding wavefunction</p>
+$$
+\langle\Psi|A|x\rangle
+$$
+<p>that we will denote by $\hat{A}(\Psi)(x)$.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Time_evolution">Time evolution</h2>
+<p>From Postulate 5 it can be concluded that the infinitesimal generator of time evolution must be an <a href="./../♾️ CONCEPTS/anti-Hermitian operator.md.html">anti-Hermitian operator</a>. The product of this operator by $i$ is called the Hamiltonian $H$ of the system, and its (all real) eigenvalues are interpreted as energy levels.</p>
+<p>That is</p>
+$$
+|\Psi(t+\epsilon)\rangle=e^{-i H \epsilon}|\Psi(t)\rangle
+$$
+<p>From here is concluded the <a href="./../♾️ CONCEPTS/Schrodinger equation.md.html">Schrodinger equation</a>.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Time_derivative_of_observables">Time derivative of observables</h2>
+<p>Given an observable $A$, the expected value is defined as $\langle A \rangle = \langle \Psi | A | \Psi \rangle$. The time derivative of the expected value of $A$</p>
+$$ 
+\frac{d\langle A \rangle}{dt} = \frac{d}{dt}\langle \Psi | A | \Psi \rangle 
+$$
+<p>satisfies</p>
+$$ 
+\frac{d\langle A \rangle}{dt} = \langle \frac{\partial\Psi}{\partial t} | A | \Psi \rangle + \langle \Psi | A | \frac{\partial\Psi}{\partial t} \rangle 
+$$
+<p>and by Schrodinger equation</p>
+$$ 
+\frac{d\langle A \rangle}{dt} = \langle \frac{1}{i\hbar} H\Psi | A | \Psi \rangle + \langle \Psi | A | \frac{1}{i\hbar} H\Psi \rangle 
+$$
+<p>And</p>
+<p>$$ \frac{d\langle A \rangle}{dt} = \frac{1}{i\hbar} (\langle H\Psi | A | \Psi \rangle - \langle \Psi | A | H\Psi \rangle) $$</p>
+<p>This can be rewritten using the definition of the commutator $[A, H] = AH - HA$:</p>
+$$ 
+\frac{d\langle A \rangle}{dt} = \frac{1}{i\hbar} \langle \Psi | [A, H] | \Psi \rangle=\langle[A,-\frac{i}{\hbar}H]\rangle.$$
+<p>Son therefore, $[A,-\frac{i}{\hbar}H]$ can be thought as the time derivative of the observable $A$. This is completely analogous to what happen with the <a href="./../♾️ CONCEPTS/Poisson bracket.md.html">Poisson bracket</a>s in Classical Mechanics.</p>
+<h2 style="margin-left:0px;" id="Symmetries">Symmetries</h2>
+<p>Are assumed to be unitary transformation (to "maintain the states separated") $S$ which commute with time evolution $U$:</p>
+$$
+SU=US.
+$$
+<p>From here, since $U\approx I-\epsilon i H$, it can be concluded that they commute with the Hamiltonian, that is,  $SH=HS$, or better expressed</p>
+$$
+[H,S]=0.
+$$
+<p>If we consider the infinitesimal generator of $S$, let' say the anti-Hermitian operator $-iA$, it can be checked that</p>
+$$
+[H,A]=0.
+$$
+<p>This lead to <a href="./../✏️ THEOREMS/Noether's theorem.md.html">Noether's theorem</a> in QM, since the commutator of a quantity with the Hamiltonian means a time derivative of the quantity (see above).</p>
+<p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>Author of the notes: Antonio J. Pan-Collantes<br>

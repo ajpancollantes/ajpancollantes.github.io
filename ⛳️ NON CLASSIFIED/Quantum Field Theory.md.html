@@ -32,17 +32,40 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Quantum_Field_Theory">Quantum Field Theory</h1>
+<h2 style="margin-left:0px;" id="First_ideas">First ideas</h2>
 <p><img src="./../imagenes/Pasted image 20220416181636.png" style="width:80vw; border-radius: 3px;" ></p>
-<p>Picture from <a href="https://youtu.be/fjJsX4ektBA?t=2514" target="_blank">this video</a></p>
+<p>Picture from <a href="https://youtu.be/fjJsX4ektBA?t=2514" target="_blank">this video</a>.</p>
 <p></p>
-<p>Feynman approach to <a href="./Quantum Mechanics.md.html">Quantum Mechanics</a> says something about considering several paths instead of only the classical one. This generalizes, in some sense, <a href="./Classical Mechanics.md.html">Classical Mechanics</a> or, more specifically, <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a>. </p>
+<h3 style="margin-left:0px;" id="Lagrangian_point_of_view">Lagrangian point of view</h3>
+<p>Steps:</p>
+<p>1. Lagrangian mechanics for a particle</p>
+<p>2. Lagrangian mechanics for several particles: see <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a> </p>
+<p>3. Lagrangian mechanic for a classical field: see <a href="./Lagrangian field theory.md.html">Lagrangian field theory</a></p>
+<p>4. Feynman approach to QM for a particle</p>
+<p>5. Feynman approach to fields... See also <a href="./../☕REFLECTIONS/Feynman's path integral formulation.md.html">Feynman's path integral formulation</a>.</p>
 <p></p>
-<p>On the other hand we need generalize <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a> when we want to deal with a continuum of degree of freedom, in order to obtain locality and causality (I need to understand this yet, but I think that it has to do with action at a distance, and the lack of simultaneity in <a href="./Special Relativity.md.html">Special Relativity</a>). This gives rise to <a href="./Classical Field Theory.md.html">Classical Field Theory</a> or, more specifically, <a href="./Lagrangian field theory.md.html">Lagrangian field theory</a>.</p>
 <p></p>
-<p>The Quantum Field Theory does the same to <a href="./Quantum Mechanics.md.html">Quantum Mechanics</a>: not a discrete set of quantum particles, but a continuum.</p>
+<p>Old stuff (re read and erase)</p>
+<p>We need to generalize <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a> when we want to deal with a continuum of degree of freedom, in order to obtain locality and causality (I need to understand this yet, but I think that it has to do with action at a distance, and the lack of simultaneity in <a href="./Special Relativity.md.html">Special Relativity</a>). This gives rise to <a href="./Classical Field Theory.md.html">Classical Field Theory</a> or, more specifically, <a href="./Lagrangian field theory.md.html">Lagrangian field theory</a>. The Quantum Field Theory does the same to <a href="./Quantum Mechanics.md.html">Quantum Mechanics</a>: not a discrete set of quantum particles, but a continuum: a <a href="./../♾️ CONCEPTS/quantum field.md.html">quantum field</a>.</p>
 <p></p>
-<h2 style="margin-left:0px;" id="Another_point_of_view">Another point of view</h2>
-<p><a href="./Quantum Mechanics.md.html">Quantum Mechanics</a> for particles can be approached from <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a> (Feynman) or <a href="./Hamiltonian mechanics.md.html">Hamiltonian mechanics</a> (I should review my old notes, starting from <a href="./Quantum Mechanics.md.html#Comparison_with_Classical_Mechanics">here</a>). If we apply the "link" of Hamiltonian mechanics to Quantum mechanics to fields (<a href="./Hamiltonian field theory.md.html">Hamiltonian field theory</a>) instead of particles, we obtain Quantum Field Theory.</p>
+<h3 style="margin-left:0px;" id="Hamiltonian_point_of_view">Hamiltonian point of view</h3>
+<p><a href="./Quantum Mechanics.md.html">Quantum Mechanics</a> for particles can be approached from <a href="./Lagrangian Mechanics.md.html">Lagrangian Mechanics</a> (Feynman) or <a href="./Hamiltonian mechanics.md.html">Hamiltonian mechanics</a> (I should review my old notes, starting from <a href="./Quantum Mechanics.md.html#Comparison_with_Classical_Mechanics">here</a>). If we apply the "link" of Hamiltonian mechanics to Quantum mechanics to fields (<a href="./Hamiltonian field theory.md.html">Hamiltonian field theory</a>) instead of particles, we obtain Quantum Field Theory. </p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="My_personal_approach">My personal approach</h2>
+<h3 style="margin-left:0px;" id="First_attempt">First attempt</h3>
+<p>Consider, for example, the case of <a href="./../☕REFLECTIONS/several coupled oscillators.md.html">several coupled oscillators</a>, for example 4 of them. We have functions $u_i(t)$ each one describing the position of the $i$th particle. The coupling is reflected by means of an <a href="./../♾️ CONCEPTS/evolution equation.md.html">evolution equation</a> defined on a finite dimensional state space (8, in this case, 4 for position and 4 for momentum). When we pass to the <a href="./../♾️ CONCEPTS/DEs/wave equation.md.html">wave equation</a>, what we are doing is a transition from a finite amount of degree of freedom to infinite degree of freedom:</p>
+<p><img src="./../imagenes/Pasted image 20230926104038.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>(see <a href="./../♾️ CONCEPTS/evolution equation.md.html#Infinite_dimensional_case">this</a>, for more on this).</p>
+<p>We are substituting a huge amount of particles by a field. </p>
+<p></p>
+<p>Now, suppose we study each of the 4 particles from the point of view of <a href="./../☕REFLECTIONS/On Physics from the beginning.md.html#Mathematical_model_2_MM2">Quantum Mechanics</a>. Then we don't have access to, for example, $u_1(t)$ directly, but we have a wavefunction $\Psi_1(u_1,t)$ describing probabilities. BLA BLA BLA continue this, or better, give up and try to transition to QFT from <a href="./Hamiltonian field theory.md.html">Hamiltonian field theory</a>.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Second_attemp">Second attemp</h3>
+<p>In a <a href="./Classical Field Theory.md.html">Classical Field Theory</a> every point in space (or spacetime) has a field value. In the corresponding Quantum Field Theory, every point in space/spacetime has an operator associated to it. Unlike in <a href="./Quantum Mechanics.md.html">Quantum Mechanics</a>, position is not an operator, but a label for the space.</p>
+<p></p>
+<p></p>
+<p></p>
 <p></p>
 <p>________________________________________</p>
 <p>________________________________________</p>

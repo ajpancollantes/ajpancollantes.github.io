@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Generalization_of_the_flatness_of_R3">Generalization of the flatness of R3</h1>
+<p>(see <a href="https://mathoverflow.net/q/453290/129995)" target="_blank">my own question and answer in MO</a></p>
+<h2 style="margin-left:0px;" id="Motivation">Motivation</h2>
+<p>Consider the manifold $M=\mathbb R^3$ with the natural vector bundle connection $\nabla$. This connection, like any connection on a vector bundle, induces, or is induced by, a principal connection $\Theta$ on the frame bundle $FM=\mathbb R^3 \times GL(3)$. </p>
+<p>The curvature of this connection is, of course, zero:</p>
+$$
+\Omega=d\Theta-[\Theta,\Theta]=0.
+$$
+<p>The pair $(\mathbb R^3,\Theta)$ can be obtained from the point of view of Cartan geometry. This way we can understand to what extent the flatness of $\mathbb{R}^3$ can be generalized to arbitrary homogeneous spaces. </p>
+<p>We have the affine group $G=\operatorname{Aff}(3)=\mathbb{R}^3 \rtimes \operatorname{GL}(3)$ (we fix it as the "relevant" transformations on $\mathbb R^3$) together with the closed subgroup $H=\operatorname{GL}(3)$ (the "relevant" transformations fixing a point). The Klein geometry $(G,H)$ provides the base space $M$, and the Maurer-Cartan form $A$ of $G$ is a Cartan connection with, of course, zero curvature</p>
+$$
+dA-[A,A]=0,
+$$
+<p>because of the  <a href="./../♾️ CONCEPTS/GEOMETRY/Maurer-Cartan form.md.html#Structural_equation/MC_equation">Maurer-Cartan equation</a>  for any Lie group.</p>
+<p>Since this is a reductive Klein geometry, the Cartan connection $A$ splits</p>
+$$
+A=A_{\mathfrak{h}}+A_{\mathfrak{p}}
+$$
+<p>for every specific choice of the subspace $\mathfrak{p}\subset \mathfrak{g}$ such that $\mathfrak{g}=\mathfrak{h}\oplus \mathfrak{p}$. The part $A_{\mathfrak{h}}$ is a principal connection on the frame bundle $FM$, playing the same role as $\Theta$, but not necessarily equal to $\Theta$ (is a different connection). Why do we have in this case a natural choice of $\mathfrak{p}$ such that $A_{\mathfrak{h}}=\Theta$?</p>
+<h2 style="margin-left:0px;" id="Generalization">Generalization</h2>
+<p>The goal is <b>understand what do we have to require</b> to an arbitrary Klein geometry $(G,H)$ so that it behaves in the same way that $\mathbb R^n$ "with respect to flatness". That is to say, in order to have $G/H$ be flat not only as a <a href="./../♾️ CONCEPTS/GEOMETRY/Cartan geometry.md.html">Cartan geometry</a>, which is trivially true by virtue of Maurer-Cartan equations, but also to have that the principal bundle</p>
+$$
+G\to G/H
+$$
+<p>have a canonical flat principal connection. </p>
+<p>(By the way,  this principal bundle is interpreted as the set of "$G$-frames" for the space $X=G/H$, and the principal connection is a way of deciding if an assignation of G-frames along a curve in $X$ is constant.)</p>
+<p></p>
+<p>And I think that the answer is that $G$ must have a <b>normal subgroup</b> $N$ such that $G$ is <b>the semidirect product</b></p>
+$$
+G=N\rtimes H.
+$$
+<p></p>
+<p>The key would be the following proposition, which I hope is true,</p>
+<p><b>Proposition</b> </p>
+<p>Let $G$ be a Lie group that is the semidirect product of a normal subgroup $N$ and a subgroup $H$, i.e., $G = N \rtimes H$. Then the Lie algebra $\mathfrak{g}$ of $G$ has a canonical decomposition as an $Ad(H)$-module given by </p>
+$$ 
+\mathfrak{g} = \mathfrak{n} \oplus \mathfrak{h}, 
+$$
+<p>where $\mathfrak{n}$ and $\mathfrak{h}$ are the Lie algebras of the subgroups $N$ and $H$, respectively.$\blacksquare$</p>
+<p></p>
+<p><b>Sketch of the proof</b></p>
+<p><ul style="margin-left:0px;"><li>Show that $\mathfrak{g} = \mathfrak{n} \oplus \mathfrak{h}$ as vector spaces.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\mathfrak{g}$ is an $Ad(H)$-module, and of course $Ad(H)(\mathfrak{h})\subset\mathfrak{h}$. But also, since $N$ is normal, we have that $Ad(H)(\mathfrak{n})\subset\mathfrak{n}$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The decomposition is canonical, once $N$ is given.$\blacksquare$</li></ul></p>
+<p></p>
+<p>So, assuming this proposition is true, the requirement of being a semidirect product implies that we have a reductive Klein geometry $G/H$, and then the Maurer-Cartan form splits as $A=A_{\mathfrak{n}}+A_{\mathfrak{h}}$, being $A_{\mathfrak{h}}$ a principal connection on the principal bundle $G\to X$ (see <a href="https://mathoverflow.net/a/433022/129995)" target="_blank">this answer</a>, in a "canonical way" (since $N$ is given). </p>
+<p>Moreover, we have that $\mathfrak{n}$ is not  merely a vector subspace of $\mathfrak{g}$, but a Lie algebra, so $[\mathfrak{n},\mathfrak{n}]\subset \mathfrak{n}$. And because of this we can prove that the flatness in the sense of Cartan geometry ($dA-[A,A]=0$) implies the flatness of the principal connection:</p>
+$$
+0=dA-[A,A]=
+$$
+$$
+=dA_{\mathfrak{n}}+dA_{\mathfrak{h}}-[A_{\mathfrak{n}}+A_{\mathfrak{h}},A_{\mathfrak{n}}+A_{\mathfrak{h}}]=
+$$
+$$
+=dA_{\mathfrak{h}}-[A_{\mathfrak{h}},A_{\mathfrak{h}}]+dA_{\mathfrak{n}}-[A_{\mathfrak{n}},A_{\mathfrak{n}}],
+$$
+<p>and since $dA_{\mathfrak{h}}-[A_{\mathfrak{h}},A_{\mathfrak{h}}]$ is $\mathfrak{h}$-valued and $dA_{\mathfrak{n}}-[A_{\mathfrak{n}},A_{\mathfrak{n}}]$ is $\mathfrak{n}$-valued we have </p>
+$$
+dA_{\mathfrak{h}}-[A_{\mathfrak{h}},A_{\mathfrak{h}}]=0.
+$$
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

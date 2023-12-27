@@ -111,7 +111,17 @@ $$
 $$
 <p>which are called the <a href="./../Christoffel symbols.md.html">Christoffel symbols</a>.</p>
 <p></p>
-<h1 style="margin-left:0px;" id="Worked_example">Worked example </h1>
+<h2 style="margin-left:0px;" id="Extension_to_tensors">Extension to tensors</h2>
+<p>Once we have a covariant derivative on the tangent vector fields of a manifold, it can be extended to any tensor field with the same Christoffel symbols. <a href="https://youtu.be/cEEahoUUGyc?si=PsKRXtXuZscer8H-&t=1209" target="_blank">In this video</a> is explained how can be computed the covariant derivative of 1-forms, and in <a href="https://youtu.be/cEEahoUUGyc?si=uGRDjiJuRweQfn9Q&t=1422" target="_blank">this part of the same video</a> it is applied to any tensor.</p>
+<p>For example, given the vector $v=v^i e_i$, the 1-form $\alpha=\alpha_i \epsilon^i$ and the (0,2)-tensor $g=g_{ij}\epsilon^i\otimes \epsilon^j$:</p>
+$$
+\begin{array}{l}
+\nabla_{\partial_i}(\vec{v})=\left(\frac{\partial v^k}{\partial u^i}+v^j \Gamma_{i j}^k\right) \overrightarrow{e_k} \\
+\nabla_{\partial_i}(\alpha)=\left(\frac{\partial \alpha_k}{\partial u^i}-\alpha_j \Gamma_{i k}^j\right) \epsilon^k \\
+\nabla_{\partial_i}(g)=\left[\frac{\partial g_{r s}}{\partial u^i}-g_{k s} \Gamma_{i r}^k-g_{r k} \Gamma_{i s}^k\right]\left(\epsilon^r \otimes \epsilon^s\right)
+\end{array}
+$$
+<h2 style="margin-left:0px;" id="Worked_example">Worked example </h2>
 <p>Another approach to understanding the problem is as follows:</p>
 <p></p>
 <p>In $\mathbb{R}^2$ with Cartesian coordinates $(x, y)$, we have a basis $\{\frac{\partial}{\partial x}, \frac{\partial}{\partial y}\}$ for the different tangent spaces. Moreover, the tangent vector $\frac{\partial}{\partial x}$ at point $P=(1,2)$ and the vector $\frac{\partial}{\partial x}$ at point $Q=(0,1)$ are "the same," in the sense that I can translate it from $P$ to $Q$. This is because we are assuming the notion of traditional parallelism in $\mathbb{R}^2$.</p>
@@ -219,7 +229,7 @@ $$
 <p></p>
 <p>The components of $\frac{\partial}{\partial t}(\frac{\partial}{\partial t})$, $\frac{\partial}{\partial t}(\frac{\partial}{\partial a})$, $\frac{\partial}{\partial a}(\frac{\partial}{\partial t})$, and $\frac{\partial}{\partial a}(\frac{\partial}{\partial a})$ in the basis $\left< \frac{\partial}{\partial t}, \frac{\partial}{\partial t} \right>$ are called <a href="./../Christoffel symbols.md.html">Christoffel symbols</a> and depend on the notion of parallelism and the chosen coordinates. They are symbolized by $\Gamma_{ij}^k$, and in our case, $\Gamma_{11}^2=2$, and all others are 0.</p>
 <p></p>
-<h1 style="margin-left:0px;" id="Abstract_Index_Notation">Abstract Index Notation</h1>
+<h2 style="margin-left:0px;" id="Abstract_Index_Notation">Abstract Index Notation</h2>
 <p>This whole approach can be given using <a href="./../../⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html">Penrose abstract index notation</a>. In this notation, we would denote:</p>
 $$
 \xi^c \nabla_c \Psi^a = \nabla_{\xi} \Psi

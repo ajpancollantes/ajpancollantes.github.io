@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Example_of_"motion"_in_Quantum_Mechanics">Example of "motion" in Quantum Mechanics</h1>
+<p></p>
+<p><b>Statement</b></p>
+<p>Suppose we have a (2+1)-dimensional spacetime. I have just detected a quantum particle at the position $A=(x, y) = (0, 0)$ with time $t = 0$. Obviously, at time $t = 0$, the probability of finding it at a different position, such as $(2, 6)$, is 0. But what is the probability of detecting the particle at $B=(2, 6)$ at $t = 2$? Assume $m = 1$. </p>
+<p></p>
+<p><b>Development</b></p>
+<p>To calculate the probability of detecting a quantum particle at a different position at a later time, you would generally use the principles of quantum mechanics, specifically the wave function evolution. Since you're dealing with a quantum particle, its behavior is governed by the <a href="./../♾️ CONCEPTS/Schrodinger equation.md.html">Schrodinger equation</a>:</p>
+$$ 
+i\hbar \frac{\partial}{\partial t} \Psi(x, y, t) = \hat{H} \Psi(x, y, t).
+$$
+<p>To solve this problem, you would:</p>
+<p>1. <b>Define the Initial State</b>: Determine the wave function $\Psi(x, y, 0)$ at $t=0$. Since you detected the particle at $A=(0,0)$ at $t=0$, the wave function would be sharply peaked around this point. A <a href="./../♾️ CONCEPTS/Dirac delta.md.html">Dirac delta</a>.</p>
+<p>2. <b>Set Up the Hamiltonian</b>: For a particle with mass $m$ (which you've stated is 1), in a potential $V(x, y)$, the Hamiltonian is typically $\hat{H} = -\frac{\hbar^2}{2m}\nabla^2 + V(x, y)$. You would need to know the potential energy function $V(x, y)$ to proceed.</p>
+<p>3. <b>Evolve the Wave Function</b>: Use the Schrödinger equation to evolve the wave function from $t=0$ to $t=2$. This involves solving partial differential equations, which can be complex and may require numerical methods.</p>
+<p>4. <b>Calculate the Probability</b>: The probability of finding the particle at position $B=(2,6)$ at $t=2$ is given by the square of the magnitude of the wave function at that point and time: $P(2,6,2) = |\Psi(2, 6, 2)|^2$.</p>
+<p></p>
+<p><b>Aside question</b></p>
+<p>What if I want to compute the probability of being at $B=(2,6)$ but going first through $C=(1,1)$ at time $t=1$? How should I proceed?</p>
+<p></p>
+<p><b>Answer</b></p>
+<p>1. <b>Compute the Amplitude for $(1,1)$ at $t=1$</b>: First, you would calculate the probability amplitude for the particle to move from $(0,0)$ at $t=0$ to $(1,1)$ at $t=1$. This involves solving the time-dependent Schrödinger equation as before.</p>
+<p>2. <b>Compute the Amplitude for $(2,6)$ at $t=2$</b>: Next, calculate the probability amplitude for moving from $(1,1)$ at $t=1$ to $(2,6)$ at $t=2$. Again, this involves the Schrödinger equation for this specific leg of the journey.</p>
+<p>3. <b>Multiply the Amplitudes</b>: The principle of quantum superposition implies that the total amplitude for the path going through $(1,1)$ at $t=1$ is the product of the amplitudes of the two legs of the journey.</p>
+<p>4. <b>Calculate the Probability</b>: The probability of the particle being at $(2,6)$ at $t=2$, given it passed through $(1,1)$ at $t=1$, is the square of the magnitude of the total amplitude calculated in the previous step.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>I think these two questions are fundamental to understand <a href="./Feynman's path integral formulation.md.html">Feynman's path integral formulation</a>.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

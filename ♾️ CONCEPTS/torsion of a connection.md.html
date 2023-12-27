@@ -32,6 +32,7 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Torsion">Torsion</h1>
+<h2 style="margin-left:0px;" id="Definition">Definition</h2>
 <p>Given a manifold with a <a href="./covariant derivative operator.md.html">covariant derivative operator</a> $(M,\nabla)$, we can define a tensor named torsion as</p>
 $$
 T (u, v)= \nabla_u v- \nabla_v u-[u,v]
@@ -40,10 +41,10 @@ $$
 $$
 T_{ab}^c X^a Y^b=X^m \nabla_m Y^c-Y^m \nabla_m X^c-[X,Y]^c
 $$
+<h2 style="margin-left:0px;" id="Interpretation">Interpretation</h2>
 <p>Since we know that the <a href="./GEOMETRY/Lie bracket.md.html">Lie bracket</a> $[u,v]$ measures the fail to close a rectangle along flow lines of $u$ and $v$, $T (u, v)$ measures the fail to close a rectangle made of <b>parallel transported vectors</b> along the flow, as you can observe in the picture (taken from <a href="https://math.stackexchange.com/questions/3179501/visualizing-the-lie-bracket-in-connection-with-torsion/3364286#3364286)" target="_blank">here</a>:</p>
 <p><img src="./../imagenes/Pasted image 20220703105722.png" style="width:80vw; border-radius: 3px;" ></p>
 <p><b>Personal thought</b>: I think it should be defined independently of the Lie bracket, in a way that reflects more intrinsically the idea of "the fail to close a rectangle made of <b>parallel transported vectors</b> along the flow".</p>
-<p></p>
 <p>Explanation (see better <a href="./../☕REFLECTIONS/relation of Lie derivative, covariant derivative and torsion.md.html">relation of Lie derivative, covariant derivative and torsion</a>): observe that, as it has been said <a href="./parallel transport.md.html#Covariant_derivative">here</a>,</p>
 $$
 \nabla_u v=\lim_{\epsilon \to 0} \dfrac{(v_Q)_{\parallel}(Q\to P)-v_P}{\epsilon} =

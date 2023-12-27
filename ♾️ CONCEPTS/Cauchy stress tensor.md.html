@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Cauchy_stress_tensor">Cauchy stress tensor</h1>
+<p>This is a topic that is halfway between Physics and Engineering. We are going to deal, in a very simplistic approach, with how the 3D bodies get deformed, but we will alternate between 3D and 2D for visualization issues. Suppose we have a body that occupies a region of space $\Omega$ and suffers an small transformation into a new region $\Omega'$ in a very general way, that includes deformation, traslation and rotation. We interpret that every particle of the body which in the initial state was in position $x\in \Omega$ gets transformed to $T(x)\in \Omega'$</p>
+$$
+T:\Omega \longmapsto \Omega'
+$$
+<p>If we think of the transformation as being the resulting action of forces applied on the constituent particles of the body, and we assume that these particles were initially at rest (a solid) we can state that the forces in every point $x$ are approximately:</p>
+$$
+F(x) \approx \lambda( T(x)-x)
+$$
+<p>for some constant $\lambda \in \mathbb{R}$</p>
+<p><img src="./../imagenes/Pasted image 20231213121509.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>This is because we can look at $T$ as the result of a continuous transformation $T_t$ depending on a parameter $t$ such that $T_0=I$ and $T_1=T$. This way, $\alpha(t)=T_t(x)$ is the curve describing the evolution of particle $x$, and by Taylor expansion we have</p>
+$$
+T_1(x)=x+\frac{d}{dt}T_t(x)|_{t=0}+\frac{1}{2}\frac{d^2 }{ dt^2}T_t(x)|_{t=0}+\cdots
+$$
+<p></p>
+<p>and since particles were initially at rest</p>
+<p></p>
+$$
+
+T(x)\approx x+\frac{1}{2\mu}F(x)
+
+$$
+<p></p>
+<p>where we are assuming, also, that the body has constant density $\mu$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Studying the whole transformations is complicated, non linear. So we better take care of the local study of every point, assuming that the transformation is very small, as we usually do (it is the same simplification that we do when we pass from studying the curve described by a particle to the tangent vector of that curve). We can imagine that every point $x$ is surrounded by a sphere of very near points $y$, and we want to know how the latter get transformed. That is, we center our attention over $x$ and $T(x)$, and watch the relative displacement of the surrounding $y$s. In the end, this is like saying that a vector $v$ leaving from $x$ is associated with</p>
+<p></p>
+$$
+
+dF_x(v)
+
+$$
+<p></p>
+<p>since, as we observe in the picture on the right, $v$ is associated with</p>
+<p></p>
+$$
+
+w=T(y)-(T(x)+y-x)=T(y)-y-(T(x)-x)=F(y)-F(x)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So, what is the physical meaning of $dF_x$? In the same way that $dT_x$ (usually called deformation gradient) describes us the infinitesimal transformation of an infinitesimal piece of the object, $dF_x(=dT_x-I_x)$ tells us, in some sense, the contribution to deformation applied to the piece in every direction. This is the precursor of the Cauchy stress tensor. We can think of it like a linear map that tells us how directions get transformed into new directions. That is, the vector that we have to add to every direction to obtain the new one. We will call it deformation force.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But now, since we concern only with deformations, it would be good if we can remove the rotation part (the traslation part is removed by derivation), but this is allowed by the polar decomposition. We have that</p>
+<p></p>
+$$
+
+dT_x= R_x \cdot U_x
+
+$$
+<p></p>
+<p>where $R$ is a rotation matrix and $U$ is a symmetric matrix called the right stretch tensor, and it contains the relevant information about the pure deformation. Observe that if we had begin with a transformation such that $R_x=I$ for our point of interest $x$, or if we multiply our original transformation by the constant matrix $R_x^{-1}$, then the matrices $dT_x$ and $dF_x$ would be symmetric, and therefore, diagonalizable.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So let's assume $dF_x$ is symmetric and go back to the physical meaning. If we change to the diagonal basis, the matrix $dF_x$ is telling us that in every main direction going out the particle $x$ we are experiencing a "deformation force" (I think that the technical name is stress) parallel to that direction. Something like pressure when we are under water, but not necessarily the same for every direction, and not necessarily inward. The result is a non-symmetric scale change.</p>
+<p><img src="./../imagenes/Pasted image 20231213121644.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But what if we continue in our original basis? When we focus on a direction going out the center point, we assign a vector whose meaning is, again, the <code class="inlineCoed"></code>deformation force'' or <code class="inlineCoed"></code>stress'' that suffers the infinitesimal piece of the body around $x$. This vector can be decomposed in two: a vector $v$ parallel to the studied direction, and other $v_{\perp}$ perpendicular to it, that tells us how we must displace the plane orthogonal to the studied direction. It looks as if you need four numbers to describe the deformation, but in the other basis you only needed two!</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Here is needed that you make a mental effort to see that you have the same deformation information that giving a special basis and two scalars meaning the scale change in every direction. Because the special basis itself has to be specified (in the plane case, angle), so you actually need three numbers. And on the other hand, the lateral displacement of the orthogonal planes to every main direction must be equal, as you can understand, intuitively, in the picture below (becauser there is no rotation!):</p>
+<p><img src="./../imagenes/Pasted image 20231213121714.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>so you actually need tree numbers, again. This is the explanation that Cauchy tensor being symmetric.</p>
+<p></p>
+<p>Finally, only say that this is a very simple approach. Force and deformation are not so simply related, because it depends on the material we are using. But the important idea to get clear is that deformation is a new kind of information, not so simple like scalars and vectors. We need a tensor.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

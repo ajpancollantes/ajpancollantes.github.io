@@ -31,7 +31,9 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Principal_bundle">Principal bundle</h1>
+<font size="3vw"><h1 style="margin-left:0px;" id="Principal_bundles">Principal bundles</h1>
+<h2 style="margin-left:0px;" id="First_approach">First approach</h2>
+<h3 style="margin-left:0px;" id="Definition_and_remarks">Definition and remarks</h3>
 <p>We come from the context <a href="./G-bundle.md.html">G-bundle</a>s.</p>
 <p>Given a <a href="./G-bundle.md.html">G-bundle</a> $P\stackrel{\pi}{\rightarrow} M$ we will call it a principal $G$-bundle if the standard fibre is $S=G$ and there exists a free <b>right</b> action $\rho$ of $G$ on $P$ such that</p>
 <p><ul style="margin-left:0px;"><li>The orbits of $\rho$ are the fibres of $P$.</li></ul></p>
@@ -44,12 +46,36 @@ $$
 \tilde{\psi}(m)(hg)=\rho(\tilde{\psi}(m)(h),g)
 $$
 <p></p>
-<p>Observe that this is <b>equivalent to saying that we have a fibrewise right action of $G$ over $P$ that is free and transitive over each fibre</b>. Each fibre is, then, a <a href="./../ALGEBRA/homogeneous space.md.html">G-torsor</a>. We will denote $\rho_g(-)=\rho(-,g)$ when needed for clarity.</p>
+<p>Observe that this is <b>equivalent to saying that we have a fibrewise right action of $G$ over $P$ that is free and transitive over each fibre</b>. Each fibre is, then, a <a href="./../ALGEBRA/homogeneous space.md.html">G-torsor</a>. We will use indistinctly the notations $\rho_g(p)=\rho(p,g)=pg=R_g(p)$ when needed for clarity.</p>
 <p></p>
 <p>We will write  </p>
 <p><img src="./../../imagenes/Pasted image 20211231171000.png" style="width:24vw; border-radius: 3px;" ></p>
 <p></p>
-<h1 style="margin-left:0px;" id="Alternative_approach">Alternative approach</h1>
+<h3 style="margin-left:0px;" id="Infinitesimal_behavior_of_the_right_action">Infinitesimal behavior of the right action</h3>
+<p>Let $P$ be a right principal $G$-bundle over a smooth manifold $M$, and let $\pi: P \rightarrow M$ be the projection map. Let $R_g: P \rightarrow P$ denote the right action of the group $G$ on $P$, defined by $R_g(p) = p \cdot g$ for $p \in P$ and $g \in G$.</p>
+<p></p>
+<p>We consider the differential of the projection map, denoted $d\pi: TP \rightarrow TM$, which is a linear map between the tangent spaces at corresponding points. Moreover, let $(R_g)_*: TP \rightarrow TP$ be the pushforward (differential) of $R_g$.</p>
+<p></p>
+<p>The behavior of $d\pi$ with respect to $(R_g)_*$ is characterized by the following commutative diagram:</p>
+$$
+\begin{array}{ccc}
+TP & \xrightarrow{(R_g)_*} & TP \\
+\downarrow d\pi & & \downarrow d\pi \\
+TM & = & TM
+\end{array}
+$$
+<p>This means that for each $v \in TP$, the following equation holds:</p>
+$$
+d\pi \circ (R_g)_* (v) = d\pi(v)
+$$
+<p>In a specific point $p$</p>
+$$
+d\pi_p \circ (R_g)_* (v) = d\pi_{pg^{-1}}(v)
+$$
+<p>This commutative property encapsulates the equivariance of $d\pi$ under the right $G$-action and indicates that the differential $d\pi$ is essentially "constant" along the $G$-orbits in $P$.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Alternative_approach">Alternative approach</h2>
 <p>Given a <a href="./G-bundle.md.html">G-bundle</a> $E\to M$ with standard fibre $S$, the associated principal $G$-bundle $P$ <b>is, in a sense, a generalized frame bundle</b> for the original bundle. To see this, observe that the principal $G$-bundle can be obtained in the following way. Given a trivializing atlas $\{(U_{\alpha},\phi_{\alpha})\}$ of $E$, we can define for every $m\in M$ the set</p>
 $$
 P_m:=\{\tilde{\phi}_{\alpha}(m) \circ g: \alpha \text{ such that }m\in U_{\alpha}, g\in G\}
@@ -77,7 +103,7 @@ $$
 <p></p>
 <p>(It can be proven with the final topology and the fact of $G$ being a Lie group...)</p>
 <p></p>
-<h2 style="margin-left:0px;" id="Components_of_a_section">Components of a section</h2>
+<h3 style="margin-left:0px;" id="Components_of_a_section">Components of a section</h3>
 <p>Thus, given a <a href="./G-bundle.md.html">G-bundle</a> and its associated principal $G$-bundle constructed in this way, we can define the <b>components</b> of $v\in E_m$ with respect to any $\phi \in P_m$:</p>
 $$
 \phi^{-1}(v)\in S.
@@ -89,7 +115,7 @@ $$
 <p>and $e$ being the identity in $G$.</p>
 <p>In some context they are called <a href="./moving frame.md.html">moving frame</a>s or choice of a <a href="./../gauge theory.md.html">gauge</a>. In case that the <a href="./G-bundle.md.html">G-bundle</a> $E$ is the tangent bundle of the manifold, the concept of $G$-frame is the usual <a href="./frame on a manifold.md.html">frame</a>.</p>
 <p></p>
-<h1 style="margin-left:0px;" id="Trivializations_vs_sections">Trivializations vs sections</h1>
+<h3 style="margin-left:0px;" id="Trivializations_vs_sections">Trivializations vs sections</h3>
 <p></p>
 <p>The orbit of $G$ at $p\in P$ is just the fiber $\pi^{-1}(\pi(p))$ and, moreover, $\pi^{-1}(\pi(p))\cong G$. We can imagine $\pi^{-1}(\pi(p))$ like $G$ but without a ditinguished point $e$. For example, a circle bundle ($G=S^1=\{e^{i\cdot t}\}$) has a fiber wich could be rotated but no point is matched with the identity.  That is, every fiber is a $G$-torsor or principal <a href="./../ALGEBRA/homogeneous space.md.html">homogeneous space</a>.</p>
 <p></p>
@@ -104,16 +130,19 @@ p'=p\cdot \tau(p,p')
 $$
 <p>and we will write $p^{-1}p'=\tau(p,p')$. Think of it like the subtraction of points in affine space.</p>
 <p></p>
-<h4 style="margin-left:0px;" id="Proposition">Proposition</h4>
-<p>Local sections of a $G$-principal bundle are in one to one correspondence with local trivializations.</p>
+<p><b>Proposition</b></p>
+<p>Local sections of a $G$-principal bundle are in one to one correspondence with local trivializations.$\blacksquare$</p>
 <p></p>
-<h4 style="margin-left:0px;" id="Proof">Proof</h4>
+<p><b>Proof</b></p>
 <p>The idea is that sections mark a distinguished point in every fiber. Then it only rest to use the translation function defined above. $\blacksquare$</p>
 <p></p>
 <p>It turns out that a $G$-principal bundle is <b>trivial if and only if has a global section</b>.</p>
 <p></p>
 <h2 style="margin-left:0px;" id="Connections">Connections</h2>
 <p>A fundamental idea is that of a <a href="./principal connection on a principal bundle.md.html">principal connection on a principal bundle</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Group_reduction">Group reduction</h2>
+<p>See <a href="./extension and reduction of a principal bundle.md.html">extension and reduction of a principal bundle</a> </p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

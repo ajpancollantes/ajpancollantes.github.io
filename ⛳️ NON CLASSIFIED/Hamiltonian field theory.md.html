@@ -33,15 +33,27 @@ gtag('config', 'G-LBT9E8N3HS');
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Hamiltonian_field_theory">Hamiltonian field theory</h1>
 <p>In theoretical physics, Hamiltonian field theory is the field-theoretic analogue to classical <a href="./Hamiltonian mechanics.md.html">Hamiltonian mechanics</a>. It is a formalism in classical field theory alongside <a href="./Lagrangian field theory.md.html">Lagrangian field theory</a>.</p>
-<p>Compared to it, in this case we introduce a function in the dual first order jet bundle $J^1(E)^{\dagger}$ , the Hamiltonian</p>
+<p></p>
+<p>The transition from <a href="./Hamiltonian mechanics.md.html">Hamiltonian mechanics</a> to Hamiltonian field theory can be thought of as generalizing the formalism from a finite number of particles to a field, which has an infinite number of degrees of freedom.</p>
+<p></p>
+<p>In Hamiltonian mechanics, you usually deal with a system of $N$ particles, and the state of the system is described by position $\mathbf{q} = (q_1, q_2, \ldots, q_N)$ and momentum $\mathbf{p} = (p_1, p_2, \ldots, p_N)$ coordinates. The Hamiltonian function $H(\mathbf{q}, \mathbf{p}, t)$ then generates the time evolution of the system via Hamilton's equations:</p>
 $$
-H:J^1(E)^{\dagger} \to \mathbb{R}
+\dot{q}_i = \frac{\partial H}{\partial p_i}, \quad \dot{p}_i = -\frac{\partial H}{\partial q_i}
 $$
-<p>The solution of the system is given by the well-known Hamilton equations</p>
+<p>for $i = 1, 2, \ldots, N$.</p>
+<p></p>
+<p>In Hamiltonian field theory, instead of having discrete $N$ particles, you have a field $\phi(x, t)$, which can be thought of as having a continuum of degrees of freedom indexed by the spacetime point $x$. Analogous to positions and momenta, in field theory, you introduce field variables $\phi(x)$ and their conjugate momenta $\pi(x)$. The Hamiltonian density $\mathcal{H}[\phi(x), \pi(x), x]$ now plays a similar role to the Hamiltonian $H$ in mechanics. The equations of motion are then derived in a way analogous to Hamilton's equations but with partial derivatives replacing ordinary derivatives and integrals replacing sums.</p>
+<p></p>
+<p>The Hamiltonian for the entire field configuration is obtained by integrating the Hamiltonian density over all space:</p>
 $$
-\frac{\partial H}{\partial u^{\alpha}}=-\frac{\partial p_{\alpha}^{i}}{\partial x^{i}} \quad \text { and } \quad \frac{\partial H}{\partial p_{\alpha}^{i}}=\frac{\partial u^{\alpha}}{\partial x^{i}}
+H = \int d^3x \, \mathcal{H}[\phi(x), \pi(x), x].
 $$
-<p>The relation between <a href="./Lagrangian field theory.md.html">Lagrangian field theory</a> and this one is unveiled by the <a href="./../♾️ CONCEPTS/Legendre transform.md.html">Legendre transform</a>...</p>
+<p>Using variational principles, one can derive the equations of motion for the field variables $\phi(x)$ and $\pi(x)$, which are often partial differential equations. The initial conditions for these equations would then indeed be the field and its conjugate momentum at $t = 0$:</p>
+$$
+\phi(x, t=0) = \phi_0(x), \quad \pi(x, t=0) = \pi_0(x).
+$$
+<p></p>
+<p>So we obtain <a href="./../♾️ CONCEPTS/evolution equation.md.html">evolution equation</a>s for the fields.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

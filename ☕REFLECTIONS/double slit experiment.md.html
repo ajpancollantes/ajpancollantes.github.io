@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Double_slit_experiment">Double slit experiment</h1>
+<p></p>
+<p>In the double-slit experiment, the probability amplitude of an electron arriving at a particular point is a complex number. The probability of observing the electron at that point is given by the square of the magnitude of the total probability amplitude. </p>
+<p></p>
+<p>If we consider two paths (like in the double-slit experiment), each path, say 1 and 2, has its own probability amplitude, $\psi_1$ and $\psi_2$. The total probability amplitude at a point is the sum of the amplitudes for each path:</p>
+$$ 
+\psi_{\text{total}} = \psi_1 + \psi_2.
+$$
+<p>The probability $P$ of finding the electron at that point is the magnitude squared of $\psi_{\text{total}}$:</p>
+$$ 
+P = |\psi_{\text{total}}|^2 
+$$
+<p>This magnitude squared can be expressed as:</p>
+<p>$$ P = |\psi_1 + \psi_2|^2 $$</p>
+<p>Expanding this, we get:</p>
+<p>$$ P = |\psi_1|^2 + |\psi_2|^2 + \psi_1^*\psi_2 + \psi_1\psi_2^* $$</p>
+<p>Here, $|\psi_1|^2$ and $|\psi_2|^2$ represent the probabilities for each individual path (like the probabilities for each slit in the double-slit experiment), and $\psi_1^*\psi_2 + \psi_1\psi_2^*$ represents the interference term.</p>
+<p>If $\psi_1$ and $\psi_2$ are expressed in terms of their magnitudes and phases, $\psi_1 = |\psi_1|e^{i\phi_1}$ and $\psi_2 = |\psi_2|e^{i\phi_2}$, then the interference term involves the phase difference $\delta = \phi_2 - \phi_1$:</p>
+<p>$$ \psi_1^*\psi_2 + \psi_1\psi_2^* = 2|\psi_1||\psi_2|\cos(\delta) $$</p>
+<p></p>
+<p>So, the probability $P$ can be written as:</p>
+<p>$$ P = |\psi_1|^2 + |\psi_2|^2 + 2|\psi_1||\psi_2|\cos(\delta) $$</p>
+<p></p>
+<p>This shows how the interference pattern arises from the phase difference between the two paths. When the phase difference is such that $\cos(\delta)$ is positive, the probability is enhanced (constructive interference), and when $\cos(\delta)$ is negative, the probability is reduced (destructive interference).</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Classical_limit">Classical limit</h2>
+<p>If the particles are balls instead of electrons, then decoherence appears. Decoherence refers to the process by which a quantum system loses its quantum behavior (like superposition and interference) and starts behaving classically. This happens because the phases $\phi_1, \phi_2$ of the wavefunction become randomized due to interactions with the environment. As a result, the phase difference $\delta = \phi_2 - \phi_1$ in the interference term $2|\psi_1||\psi_2|\cos(\delta)$ becomes effectively random. When averaging over many such random phase differences, the interference term averages to zero.</p>
+<p>I also think that the mass make that the wavelength is very short, and this contributes to the randomization of $\phi_i$.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

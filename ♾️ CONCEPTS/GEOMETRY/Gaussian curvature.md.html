@@ -171,9 +171,15 @@ $$
 $$ 
 \Omega=-\left(e_1(T_{12}^2)-e_2(T_{12}^1)+(T_{12}^1)^2+(T_{12}^2)^2\right)\begin{pmatrix} 0& \omega^1 \wedge \omega^2\\ 
 -\omega^1 \wedge \omega^2&0\\ \end{pmatrix}. 
-$$ 
-<p>The coefficient $-\left(e_1(T_{12}^2)-e_2(T_{12}^1)+(T_{12}^1)^2+(T_{12}^2)^2\right)$, which is also obtained as $d\Theta^1_2(e_1,e_2)$, <b>is indeed the Gaussian curvature of the surface</b>. </p>
+$$
 <p></p>
+<p>Gauss equation says that</p>
+$$
+d\Theta^1_2=K \omega^1 \wedge \omega^2
+$$
+<p>(<a href="./../../Bibliography/@ivey2016cartan.md.html">@ivey2016cartan</a> page 47). Then $d\Theta^1_2(e_1,e_2)=-\left(e_1(T_{12}^2)-e_2(T_{12}^1)+(T_{12}^1)^2+(T_{12}^2)^2\right)$ <b>is indeed the Gaussian curvature of the surface</b>. </p>
+<p></p>
+<p><b>Proof of Gauss equation</b></p>
 <p>Let's see it for an immersed surface $\iota:S\to \mathbb{R}^3$ (also in <a href="./../../Bibliography/@needham2021visual.md.html">@needham2021visual</a> section 38.5.1). We consider a point $p\in S$ and an open neighbourhood $U\subset \mathbb R^3$ of $p$. We have the unit normal vector to the surface $n$, and think of a orthonormal frame $\{\tilde{e}_1,\tilde{e}_2,\tilde{n}\}$ defined on $U$ such that gives rise to $\{e_1,e_2,n\}$ when restricted to $S$. Analogously, we have the dual coframe $\{\tilde{\omega}_1,\tilde{\omega}_2,\tilde{\zeta}\}$. We can compute here the connection 1-forms matrix $\tilde{\Theta}$ of the standard connection $\nabla_{std}$ with respect to this frame (see <a href="./../../☕REFLECTIONS/connection form for LV in R3.md.html#With_a_general_orthonormal_frame">this</a>). It turns out that</p>
 $$
 \tilde{\Theta}=
@@ -213,7 +219,8 @@ $$
 d{\Theta}^1_2(e_1,e_2)=K.
 $$
 <p></p>
-<p><b>Pending task</b>: I want to describe all this last with the <a href="./../../☕REFLECTIONS/method of moving frames.md.html">method of moving frames</a>. I think I can show that $K$ is one of the invariants provided by the MC form, but for the elements of <a href="./../Euclidean group.md.html">Euclidean group</a> $E(3)$. So $K$ is invariant under congruence (like median curvature, I guess). But I don't know yet how to show it for general <a href="./../isometry.md.html">isometries</a> of the surface. It is maybe explained <a href="https://math.stackexchange.com/questions/2843178/proof-of-theorem-egregium-with-moving-frames" target="_blank">here</a>. May is also interesting <a href="http://www.numdam.org/article/AST_1985__S131__67_0.pdf" target="_blank">this paper of Chern</a>. (See also <a href="./../../Bibliography/@ivey2016cartan.md.html">@ivey2016cartan</a> page 47)</p>
+<p><b>Pending task</b>: I want to describe all latter stuff with the <a href="./../../☕REFLECTIONS/method of moving frames.md.html">method of moving frames</a>. I think I can show that $K$ is one of the invariants provided by the MC form, but for the elements of <a href="./../Euclidean group.md.html">Euclidean group</a> $E(3)$. So $K$ is invariant under congruence (like median curvature, I guess). But I don't know yet how to show it for general <a href="./../isometry.md.html">isometries</a> of the surface. It is maybe explained <a href="https://math.stackexchange.com/questions/2843178/proof-of-theorem-egregium-with-moving-frames" target="_blank">here</a>. May is also interesting <a href="http://www.numdam.org/article/AST_1985__S131__67_0.pdf" target="_blank">this paper of Chern</a>. (See also <a href="./../../Bibliography/@ivey2016cartan.md.html">@ivey2016cartan</a> page 47)</p>
+<p>Maybe this is also related to what is said in <a href="./../../☕REFLECTIONS/Generalization of the flatness of R3.md.html">Generalization of the flatness of R3</a>.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

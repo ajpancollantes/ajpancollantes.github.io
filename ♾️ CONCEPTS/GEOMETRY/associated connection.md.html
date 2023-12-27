@@ -42,14 +42,59 @@ H_w:=d(\beta_{\xi})_u(H_u)
 $$
 <p>At this way, we also carry the parallel transport concept to the associated bundle. \cite{goldberg}</p>
 <p></p>
+<h2 style="margin-left:0px;" id="Particular_case:_vector_bundle_connections">Particular case: vector bundle connections</h2>
+<p>In the case of a vector bundle connection with associated principal bundle the frame bundle, the induced connection is obtained, in the sense of its connection 1-form, by simply pulling back with a particular frame. Let's see in the case of the tangent bundle.</p>
+<p></p>
+<p>Suppose we have a vector bundle connection $\nabla$ on the bundle $TM \to M$, induced by a principal connection on the frame bundle $FM \to M$ which is described by a 1-form on $FM$, $\tilde{\Theta}$. Then, if we select the frame $p=\{e_i\}$ in $M$, we are providing a section $p$ of $FM$, and we can consider the $\mathfrak{gl}(n)$-valued 1-form $p^*(\tilde{\Theta})$ on $M$.</p>
+<p>On the other hand, the frame $p$ let us to write down a connection matrix $\Theta$ (whose entries are 1-forms) for the connection $\nabla$. Given a vector field $X$ on $M$, the connection $\nabla$ gives us a way to differentiate it:</p>
+<p>$$ \nabla_X e_i = \sum_j \Theta^j_i(X) e_j $$</p>
+<p>Where $\Theta^j_i(X)$ are the components of the $\mathfrak{gl}(n)$-valued 1-form $\Theta$ for the given frame.</p>
+<p></p>
+<p><b>Claim</b>: </p>
+$$
+p^*(\tilde{\Theta}) = \Theta.
+$$
+<p></p>
+<p>How does $p^*(\tilde{\Theta})$ acts on $X$?</p>
+<p></p>
+<p>Consider a point $p\in M$, we have</p>
+$$
+p^*(\tilde{\Theta})(X_p)=\tilde{\Theta} (p_*(X_p)).
+$$
+<p>Now, since $\tilde{\Theta}$ is the connection induced by $\Theta$, you can compute $\tilde{\Theta}(V)$ for a vector $V\in T_f(FM)$, and $f\in FM$ such that $\pi(f)=p$ and $d\pi_f(V)=X$. What $\tilde{\Theta}(V)$ does is consider $V$ as an infinitesimal curve in $FM$ $(p(t),v_1(t),v_2(t),\ldots)$ and extract the components of  $\nabla_X v_1,\nabla_X v_2,\ldots)$.</p>
+<p>But in the case $V=p_*(X_p)$, this curve is precisely $(p(t),e_1(t),e_2(t),\ldots)$ so </p>
+$$
+\tilde{\Theta} (p_*(X_p))=\Theta(X_p).
+$$
+<p></p>
 <h2 style="margin-left:0px;" id="Conversely">Conversely</h2>
 <p>In the case of $G=GL(n)$ there is  <b>a converse</b>. Any <a href="./linear connection.md.html">linear connection</a> on a vector bundle $E$ is induced from a unique <a href="./principal connection on a principal bundle.md.html">principal connection</a> on the <a href="./frame bundle.md.html">frame bundle</a>. See <a href="https://math.stackexchange.com/a/47931/601797" target="_blank">this answer</a> in Mathstackexchange or <a href="./../../Bibliography/@cap2009parabolic.md.html">@cap2009parabolic</a> page 42. </p>
 <p></p>
 <p><b>Special (and important) case</b>: when the <a href="./principal bundle.md.html">principal bundle</a> is the <a href="./frame bundle.md.html">frame bundle</a> and the <a href="./associated bundle.md.html">associated bundle</a> is the <a href="./tangent bundle.md.html">tangent bundle</a>. There is an good reflection in the note <a href="./../../☕REFLECTIONS/connections summary.md.html">connections summary</a>.</p>
 <p></p>
+<h2 style="margin-left:0px;" id="Curvature">Curvature</h2>
+<p>In the context given <a href="./associated connection.md.html#Particular_case_vector_bundle_connections">above</a>. The <a href="./curvature of a connection.md.html#Principal_$G$-bundles">curvature of the frame bundle</a> is given by</p>
+$$
+\tilde{\Omega}=d\tilde{\Theta}+\frac{1}{2}[\tilde{\Theta},\tilde{\Theta}]
+$$
+<p>and the curvature <a href="./curvature of a connection.md.html#Vector_bundles">curvature of the connection on the tangent bundle</a> , in the frame $p$, is</p>
+$$
+\Omega=d \Theta-\Theta \wedge \Theta
+$$
+<p>It is clear that if $\tilde{\Omega}=0$ then $\Omega=0$. I think that the opposite is also true:</p>
+<p>Given two vectors $V,W\in T_f FM$ with $d\pi(V)=X,d\pi(W)=Y$, $X,Y\in T_pM$ they can be interpreted as infinitesimal curves $\tilde{\alpha},\tilde{\beta}$ through $f$, i.e., curves $\alpha,\beta$ inside $M$ with moving frames over them. I guess that by means of a local trivialization we can find a local section $p:M \to FM$ such that restricted $\alpha,\beta$ we obtain the frames represented by $V,W$, that is,</p>
+$$
+p_*(X)=V, \quad p_*(Y)=W.
+$$
+<p>And then, </p>
+$$
+\tilde{\Omega}(V,W)=\tilde{\Omega}(p_*(X),p_*(Y))=p^*(\tilde{\Omega})(X,Y)=\Omega(X,Y)=0.
+$$
+<p></p>
+<p></p>
 <h1 style="margin-left:0px;" id="Example">Example</h1>
 <p>(xournal 197)</p>
-<p>Consider the worked example <a href="./vector bundle connection.md.html#Worked_example_1">here</a>, where we construct the connection 1-form of a connection on the tangent bundle of $\mathbb R^2$ from a <a href="./../covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$. Now, let's see how to express the induced principal connection on the frame bundle in terms of its <a href="./principal connection on a principal bundle.md.html#Connection_1-form">1-form</a>. Consider a frame $f\in FM$ at $p=(x_1,x_2)$. Since $FM$ is in this case $Aff(2)=\mathbb R^2\rtimes GL(2)$ it can be seen as a subgroup of $GL(3)$ and then</p>
+<p>Consider the worked example <a href="./vector bundle connection.md.html#Worked_example_1">here</a>, where we construct the connection 1-form of a connection on the tangent bundle of $\mathbb R^2$ from a <a href="./../covariant derivative operator.md.html">covariant derivative operator</a> $\nabla$. Now, let's see how to <b>express the induced principal connection on the frame bundle</b> in terms of its <a href="./principal connection on a principal bundle.md.html#Connection_1-form">1-form</a>. Consider a frame $f\in FM$ at $p=(x_1,x_2)$. Since $FM$ is in this case $Aff(2)=\mathbb R^2\rtimes GL(2)$ it can be seen as a subgroup of $GL(3)$ and then</p>
 $$
 f=
 \begin{pmatrix}

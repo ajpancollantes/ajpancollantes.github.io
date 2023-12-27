@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Feynman's_path_integral_formulation">Feynman's path integral formulation</h1>
+<p></p>
+<p>See <a href="https://www.youtube.com/watch?v=WFbgfknnWqA" target="_blank">this video</a> for intuition and also <a href="https://youtu.be/Sp5SvdDh2u8?si=iAj64tI4MCgwvMal&t=1196" target="_blank">this other one</a>. It explain why it coincides with the <a href="./../♾️ CONCEPTS/principle of least action.md.html">principle of least action</a> in the limit.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Quantum_mechanics">Quantum mechanics</h2>
+<p>A quantum particle, according to Feynman ideas, follows all possible paths at the same time. Suppose the particle is detected at point The probability of finding the particle at a given point is the sum of the amplitudes of all the paths that end at that point. The amplitude of a path is given by the exponential of the action of the path divided by $\hbar$.</p>
+$$
+\mathcal{A} = \exp\left(\frac{i}{\hbar}S\right)
+$$
+<p>where $S$ is the action of the path. The action is defined as</p>
+$$
+S = \int_{t_1}^{t_2} L(q,\dot{q}) dt
+$$
+<p>where $L$ is the <a href="./../⛳️ NON CLASSIFIED/Lagrangian Mechanics.md.html#Jet_space_approach">Lagrangian</a> of the system. </p>
+<p></p>
+<p>If we discretize this process in "finite jumps", all this should be concluded (or, at least, visualized) from the <a href="./quantum approach to particle motion- an example.md.html">quantum approach to particle motion- an example</a>.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Quantum_field_theory">Quantum field theory</h2>
+<p>How does this connect to <a href="./../⛳️ NON CLASSIFIED/Quantum Field Theory.md.html">Quantum Field Theory</a>?</p>
+<p><ul style="margin-left:0px;"><li>The path integral formulation extends naturally to fields (<a href="./../♾️ CONCEPTS/quantum field.md.html">quantum field</a>s). Instead of summing over all possible paths of a particle, we sum over all possible field configurations. The action $S$ now involves integrals over space and time, and the Lagrangian $L$ is replaced by a Lagrangian density $\mathcal{L}$ which is a function of the fields and their derivatives.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>The amplitude for a field configuration is given by</li></ul></p>
+$$
+\mathcal{A} = \exp\left(\frac{i}{\hbar}S[\phi]\right)
+$$
+<p>where $\phi$ represents the fields, and</p>
+$$
+S[\phi] = \int d^4x \, \mathcal{L}(\phi, \partial_\mu \phi)
+$$
+<p>where $d^4x$ represents integration over spacetime.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

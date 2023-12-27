@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Cinf-structures">Cinf-structures</h1>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>Let $\mathcal{Z}=\mathcal{S}(Z_1,\ldots,Z_r)$ be an involutive distribution on a $n$-dimensional smooth manifold $M$. Let $\langle X_1,\ldots, X_{n-r}\rangle$ be an ordered collection of independent vector fields and define</p>
+$$
+\mathcal{X}_k=\{ Z_1,\ldots,Z_r, X_1,\ldots,X_k\}
+$$
+<p></p>
+<p>for $k=1,\ldots,n-r$; and $\mathcal{X}_0=\{ Z_1,\ldots,Z_r\}$. We say that $\langle X_1,\ldots, X_{n-r}\rangle$ is a cinf-structure  for $\mathcal{Z}$ if:</p>
+<p></p>
+<p>1. $\mathcal{X}_k$ is a set of independent vectors for any $p\in M$ and for every $k=1,\ldots,n-r$.</p>
+<p>2. The vector field $X_k$ is a $\mathcal{C}^{\infty}$-<a href="./cinf-symmetry of distribution.md.html">symmetry</a> of the rank $r+k$ distribution $\mathcal{S}(\mathcal{X}_k)$, for every $k=1,\ldots,n-r$.</p>
+<p></p>
+<p>They remind me the idea of <a href="./../../♾️ CONCEPTS/flag.md.html">flag</a>: we have in $M$ not only a smooth field of $k$-planes (a <a href="./../../♾️ CONCEPTS/GEOMETRY/distribution.md.html">distribution</a>), but a smooth field of flags.</p>
+<p></p>
+<p>$\mathcal{C}^{\infty}$-structures can be <a href="./cinf-structure of 1-forms.md.html">described from a dual point of view</a>, i.e., by means of 1-forms $\langle \omega_1,\ldots, \omega_{n-r}\rangle$.</p>
+<p></p>
+<p></p>
+<p>La existencia de una $\mathcal{C}^{\infty}$-structure permite <a href="./../✏️❗ OWN RESULTS/integrability by Pfaffian equations.md.html">entontrar las integral submanifolds de la distribución </a> mediante la resolución de Pfaff equations.</p>
+<p></p>
+<h1 style="margin-left:0px;" id="Visual_scheme_for_the_coefficients_of_a_Cinf-structure">Visual scheme for the coefficients of a Cinf-structure</h1>
+<p>The brackets of the vector fields $\{Z_i,X_j\}$ can be seen with the following picture (see [xournal 128]):</p>
+<p><img src="./../../imagenes/Pasted image 20211225173000.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>If the <a href="./cinf-symmetry of distribution.md.html">cinf-symmetry of distribution</a> are in evolutionary form (in the sense of <a href="./../../♾️ CONCEPTS/GEOMETRY/symmetry of a distribution.md.html#Shuffling_symmetries">shuffling symmetries</a>) the picture would be</p>
+<p><img src="./../../imagenes/Pasted image 20211225173716.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>In the case of an <a href="./../../♾️ CONCEPTS/DEs/ODE.md.html">ODE</a> and a <a href="./../../♾️ CONCEPTS/DEs/lambdasymmetry.md.html">lambdasymmetry</a> in canonical form the picture would be :</p>
+<p><img src="./../../imagenes/Pasted image 20211225174123.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>And for an <a href="./../../♾️ CONCEPTS/DEs/ODE.md.html">ODE</a> with a <a href="./cinf-structure.md.html">cinf-structure</a> in diagonal form (that is,  $X_1=\partial_{u}+\ldots,X_2=\partial_{u_1}+\ldots,X_3=\partial_{u_2}+\ldots,$ and so on) the picture, I think, would be. UPDATE: I THINK THIS IS WRONG!</p>
+<p><img src="./../../imagenes/Pasted image 20211225174731.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p></p>
+<p>These pictures are the same for the <a href="./cinf-structure of 1-forms.md.html">cinf-structure of 1-forms</a>. You have to take into account the result in the note <a href="./../../♾️ CONCEPTS/GEOMETRY/coframe on a manifold.md.html">coframe on a manifold</a> that relates the brackets of the frame with the exterior derivative of the coframe.</p>
+<p><img src="./../../imagenes/Pasted image 20211225175138.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>For the coefficients see also [xournal 129] page 2.</p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

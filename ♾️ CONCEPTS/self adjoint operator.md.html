@@ -32,12 +32,30 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Self_adjoint_operator">Self adjoint operator</h1>
-<p>(also self-adjoint operator)</p>
+<p>(also self-adjoint operator or Hermitian operator)</p>
+<h2 style="margin-left:0px;" id="Introduction">Introduction</h2>
 <p>A coordinate free expression (and an infinite dimensional generalization) of <a href="./self adjoint matrix.md.html">self adjoint matrix</a>s.</p>
 <p></p>
 <p>I think that in finite dimensional case, their matrix with respect to an orthonormal basis is a <a href="./self adjoint matrix.md.html">self adjoint matrix</a>.</p>
 <p></p>
-<p>I also think there is a version of <a href="./../✏️ THEOREMS/spectral theory.md.html">spectral theorem</a> for these operators.</p>
+<p>There is a version of <a href="./../✏️ THEOREMS/spectral theory.md.html">spectral theorem</a> for these operators. </p>
+<p>One important property of such operators is that the eigenvalues of a self-adjoint operator are necessarily real. Indeed, if $k$ is any eigenvalue with corresponding (normalized) eigenvector $v$, we see </p>
+$$
+k = k\langle v,v \rangle = \langle kv, v \rangle  = \langle Sv, v \rangle = \langle v,Sv \rangle = \langle v, kv \rangle = \overline k \langle v, v \rangle = \overline k
+$$
+<p>showing that $k$ is real.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="In_Quantum_Mechanics">In Quantum Mechanics</h2>
+<p>They correspond to <a href="./../☕REFLECTIONS/states and obervables.md.html">observables</a> in <a href="./../⛳️ NON CLASSIFIED/Quantum Mechanics.md.html">Quantum Mechanics</a>. </p>
+<p>If we multiply them by the complex unit $i$ we obtain antiHermitian operators, which constitute the "Lie algebra" of the "group" of <a href="./unitary operator.md.html">unitary operator</a>s. That is, given a self-adjoint operator $A$ in a <a href="./FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> then $e^{iA}$ is an <a href="./unitary operator.md.html">unitary operator</a>. In fact, its Hermitian adjoint is $e^{-iA^\dagger} = e^{-iA}$ because $A$ is Hermitian ($A = A^\dagger$). Now, we compute $e^{iA} e^{-iA}$ and $e^{-iA} e^{iA}$:</p>
+$$
+e^{iA} e^{-iA} = e^{iA - iA} = e^0 = I
+$$
+$$
+e^{-iA} e^{iA} = e^{-iA + iA} = e^0 = I
+$$
+<p>where we use the fact that $[A,-A]=0$.</p>
+<p></p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

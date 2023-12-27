@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Pauli_matrices">Pauli matrices</h1>
+<p>The matrices</p>
+$$
+\sigma_x=\left[\begin{array}{cc}
+{0} & {1} \\
+{1} & {0}
+\end{array}\right], \sigma_y=\left[\begin{array}{cc}
+{0} & {-i} \\
+{i} & {0}
+\end{array}\right], \sigma_z=\left[\begin{array}{cc}
+{1} & {0} \\
+{0} & {-1}
+\end{array}\right]
+$$
+<p>See <a href="./unitary matrix.md.html#What_is_the_Lie_algebra_of_$SU2$?">this</a>.</p>
+<p>They satisfy:</p>
+<p><ul style="margin-left:0px;"><li>$\sigma_j^2=Id$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\sigma_i \sigma_j=-\sigma_j \sigma_i$ for $i\neq j$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Both are summarized in $\sigma_i \sigma_j+\sigma_j \sigma_i=2I\delta_{ij}$ (anti-commutator $\{\sigma_i,\sigma_j\}=\sigma_i \sigma_j+\sigma_j \sigma_i$)</li></ul></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Pauli_vectors">Pauli vectors</h2>
+<p>Given a vector $v=(x,y,z)\in \mathbb R^3$, the corresponding matrix</p>
+$$
+\sigma_v=x\sigma_x+y\sigma_y+z\sigma_z=
+$$
+$$
+\left[\begin{array}{cc}
+{z} & {x-i y} \\
+{x+i y} & {-z}
+\end{array}\right]
+$$
+<p>is called a <b>Pauli vector</b>. This injection</p>
+$$
+\mathbb R^3\to M_2(\mathbb C)
+$$
+<p>let us understand the vector space $\mathbb R^3$ as an algebra. Some of the operations have a nice geometric interpretation:</p>
+<p><ul style="margin-left:0px;"><li>The square of a vector is the length of the vector times $Id$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Perpendicular vectors anti-commute: if $v\cdot w=0$ then $\sigma_v \sigma_w=-\sigma_w \sigma_v$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Negative conjugation by a unit Pauli vector is a reflection in the plane perpendicular to the vector. For example, negative conjugation by $\sigma_z$ is a reflection in the $xy$-plane:</li></ul></p>
+$$
+\begin{aligned}
+& \sigma_x \rightarrow -\sigma_z \sigma_x \sigma_z=\sigma_x \\
+& \sigma_y \rightarrow -\sigma_z \sigma_y \sigma_z=\sigma_y \\
+& \sigma_z \rightarrow -\sigma_z \sigma_z \sigma_z=-\sigma_z
+\end{aligned}
+$$
+<p></p>
+<p>We are entering the world of <a href="./Geometric Algebra.md.html">Geometric Algebra</a>s.</p>
+<p><ul style="margin-left:0px;"><li>Rotations: are the composition of two reflections. They correspond to</li></ul></p>
+$$
+V\to AVA^{\dagger}, \quad A\in SU(2)
+$$
+<p></p>
+<h2 style="margin-left:0px;" id="Important_facts">Important facts</h2>
+<p><ul style="margin-left:0px;"><li>Pauli matrices multiplied by $i$ give rise to the Lie algebra $\mathfrak{su}(2)$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>On the other hand, they constitute a representation of the <a href="./Clifford algebra.md.html">Clifford algebra</a> $Cl_3$.</li></ul></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Relation_to_spinors">Relation to spinors</h2>
+<p>(See <a href="https://youtu.be/gfwbf8n41CY?si=pDicDmHDfiY1HbAj&t=888)" target="_blank">this video</a></p>
+<p>This is, to my knowledge, with <a href="./spinors.md.html">spinors</a> $S=\mathbb C^2$, with basis $s_b$, in the following way. Consider the dual space $S^{dual}$, with dual basis $\mathfrak{s}^a$. Then we can think of a map $\sigma:\mathbb R^3 \to S \otimes S^{dual}$:</p>
+$$
+\begin{aligned}
+e_x&\to \sigma_x=s_2\otimes \mathfrak{s}^1+s_1\otimes \mathfrak{s}^2\\
+e_y&\to \sigma_y=is_2\otimes \mathfrak{s}^1-is_1\otimes \mathfrak{s}^2\\
+e_z&\to \sigma_z=s_1\otimes \mathfrak{s}^1-s_2\otimes \mathfrak{s}^2\\
+\end{aligned}
+$$
+<p>This map has three indices: $\sigma^{\,a}_{i\, b}$ and acts on a general $v=v^ie_i \in \mathbb R^3$ sending it to $V^a_{\quad b}s_b\otimes \mathfrak{s}^a$, ie.,</p>
+<p></p>
+$$
+\sigma^{\,a}_{i\, b} v_i=V^a_{\quad b}
+$$
+<p></p>
+<p>It can be thought as if one vector index $i$ is equivalent to two spinorial indices $a,b$.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

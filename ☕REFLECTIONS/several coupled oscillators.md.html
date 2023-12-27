@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Several_coupled_oscillators">Several coupled oscillators</h1>
+<p>Old stuff, to be rewritten. See the source in anotacioneslatex.tex.</p>
+<p></p>
+<p>They are important physical system what can be modeled, by approximation in their lagrangian to second order Taylor expansion, by</p>
+$$
+M\ddot{X}=-K X
+$$
+<p>where $M$ and $K$ are symmetric matrices ($M$ comes from kinetic energy in the lagrangian and $K$ is the Hessian matrix of a potential function $V$ also in the exact lagrangian).</p>
+<p></p>
+<p>To solve it, we construct the associated first order system:</p>
+$$
+
+Y=\left(\begin{array}{c}
+
+X \\
+
+\dot{X}
+
+\end{array}\right)
+
+$$
+<p>and then</p>
+$$
+\dot{Y}=\left(\begin{array}{cc}
+0 & I \\
+-M^{-1} K &0
+\end{array}\right) \cdot Y
+$$
+$$
+\dot{Y}=A\cdot Y
+$$
+<p>To find eigenvalues and eigenvectors in order to use equation \ref{soluciondefinitiva} we observe that</p>
+<p></p>
+<p>\begin{itemize}</p>
+<p></p>
+<p>\item $\lambda$ is eigenvalue of $A$ iff $\lambda^2$ is eigenvalue of $-M^{-1}K$. This is so because the block matrix determinant formula</p>
+$$
+det\left(\begin{array}{cc}
+
+H & B \\
+
+C & D
+
+\end{array}\right)=det(H-BD^{-1}C)\cdot det(D)$$
+<p></p>
+<p>applied to $\lambda I-A$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+\item If $$\xi=\left( \begin{array}{c}
+\psi \\
+\eta
+\end{array}\right)$$
+<p>is an eigenvector of $A$ associated to $\lambda$ then $\psi$ is an eigenvector of $-M^{-1}K$ associated to $\lambda^2$. This is so because</p>
+$$
+
+A\xi=\left(\begin{array}{cc}
+
+0 & I \\
+
+-M^{-1} K &0
+
+\end{array}\right) \cdot \left( \begin{array}{c}
+
+\psi \\
+
+\eta
+
+\end{array}\right)=\left( \begin{array}{c}
+
+\eta \\
+
+-M^{-1}K\psi
+
+\end{array}\right)=\left( \begin{array}{c}
+
+\lambda \psi \\
+
+\lambda \eta
+
+\end{array}\right)
+$$
+<p>So,</p>
+$$
+
+A^2\xi=\left(\begin{array}{cc}
+
+-M^{-1} K & 0 \\
+
+0 &-M^{-1} K
+
+\end{array}\right) \cdot \left( \begin{array}{c}
+
+\psi \\
+
+\eta
+
+\end{array}\right)=\left( \begin{array}{c}
+
+-M^{-1} K \psi \\
+
+-M^{-1} K \eta
+
+\end{array}\right)=
+
+\left( \begin{array}{c}
+
+\lambda^2\psi \\
+
+\lambda^2 \eta
+
+\end{array}\right)
+
+$$
+<p>And therefore</p>
+$$
+-M^{-1} K \psi =\lambda^2\psi
+$$
+<p>Reciprocally, if $(\delta, \psi)$ is a pair such that $- M ^ { - 1 } K \psi = \delta \psi$ (of course $\delta$ is real and negative) then is easy to check that we have two eigenvalues with two eigenvectors for </p>
+$$
+\left(\begin{array}{cc}
+
+0 & I \\
+
+-M^{-1} K &0
+
+\end{array}\right) $: the pair $(\sqrt{\delta},\left( \begin{array}{c}
+
+\psi\\
+
+\sqrt{\delta} \psi
+
+\end{array}\right))$ and the pair $(-\sqrt{\delta},\left( \begin{array}{c}
+
+\psi\\
+
+-\sqrt{\delta} \psi
+
+\end{array}\right)$$
+<p></p>
+<p>\end{itemize}</p>
+<p></p>
+<p>All the eigenvalues of $-M^{-1} K$ are reals, since is a symmetric matrix and they always can be diagonalized. Moreover, they are all negative numbers, because this matrix reflect a stable equilibrium point, i.e., from it potential energy increases in whatever direction we take. So we conclude:</p>
+<p></p>
+<p>\begin{itemize}</p>
+<p></p>
+<p>\item All the eigenvalues are pure imaginary ones. There is no $e^{\alpha t}$ terms.</p>
+<p></p>
+<p>\item For every eigenvalue of $A$ it can be chosen an eigenvector </p>
+$$
+\psi=\left( \begin{array}{c}
+
+\xi \\
+
+\eta
+
+\end{array}\right)
+$$
+such that $\xi$ is real (because is an eigenvector of $-M^{-1} K$ and their eigenvalues are all real). So $$
+Im(\psi)=\left( \begin{array}{c}
+
+0 \\
+
+Im(\eta)
+
+\end{array}\right).
+$$
+<p>\end{itemize}</p>
+<p></p>
+<p>So for every eigenvalue-eigenvector of $-M^{-1}K$, $(\lambda_n,\xi)$, we have two solutions:</p>
+<p></p>
+$$
+
+\Psi^{n}=e^{i\omega_n t} \xi^n
+
+$$
+<p></p>
+$$
+
+\tilde{\Psi}^{n}=e^{-i\omega_n t} \xi^n
+
+$$
+<p></p>
+<p>where $\omega_n=\frac{\sqrt{\lambda_n}}{i} \in \RR$ (remember $\lambda_n$ is negative). It may seem that this both solutions have the same initial value, which is a contradiction, but they have different initial velocities!</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Moreover, observe that$</p>
+<p></p>
+<p>(\tilde{\Psi}^{n})^*=\Psi^n</p>
+<p></p>
+<p>$, because we can choose $\xi^n$ to be real.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So if we look for \textbf{real solutions} we have that</p>
+<p></p>
+$$
+
+\Psi(t)=\sum_n C_n \Psi^n+\tilde{C}_n\tilde{\Psi}^n
+
+$$
+<p></p>
+$$
+
+(\Psi(t))^*=\sum_n C_n^* (\Psi^n)^*+(\tilde{C}_n)^*(\tilde{\Psi}^n)^*
+
+$$
+<p></p>
+<p>must be equal, and since the solutions form a vector space we conclude that $C_n^*=\tilde{C}_n$</p>
+<p></p>
+<p>and so</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+\Psi(t)=\sum_n C_n \Psi^n+C_n^*({\Psi}^n)^*=\sum_n 2Re[C_n\Psi^n]=\sum_n A_n cos(\omega_n t+ \phi_n) \xi^n
+
+$$
+<p></p>
+<p>where $A_n$ and $\phi_n$, determined by initial conditions, are reals and have absorbed the constant to leave $\xi^n$ as a real vector.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\bigbreak</p>
+<p></p>
+<p>These fundamental solutions are called \textbf{normal modes}. The constants $\omega_k$ are called \textbf{fundamental frecuencies.}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<h1 style="margin-left:0px;" id="A_chain_of_a_huge_amount_of_coupled_oscillators">A chain of a huge amount of coupled oscillators</h1>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\begin{center}</p>
+<p></p>
+<p>\includegraphics[width=15cm]{imagenes/noscillators.png}</p>
+<p></p>
+<p>\end{center}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>We are going to study $N$ masses connected to a string with tension. We leave open ends, for the moment.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Let $\Psi_j (t)$ be the displacement from the equilibrium of every mass $j$. Let the mass be $m$ and the distance between the mass be $d$. Sometimes we will take $x=jd$ and write</p>
+<p></p>
+$$
+
+\Psi(x,t)=\Psi_{x/d} (t)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Analyzing every mass individually we obtain</p>
+<p></p>
+$$
+
+\ddot{\Psi}_1=-\frac{2T}{md}\Psi_1+\frac{T}{md}\Psi_2
+
+$$
+<p></p>
+$$
+
+\ddot{\Psi}_2=\frac{T}{md}\Psi_1-\frac{2T}{md}\Psi_2+\frac{T}{md}\Psi_3
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+\cdots
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>In general:</p>
+<p></p>
+$$
+
+\ddot{\Psi}=\frac{1}{md}\left( \begin{array}{cccc}
+
+{- T} & {T} & {0} & {0} \\
+
+{T} & {-2 T} & {T} & {0} \\
+
+{...} & {...} & {...} & ...\\
+
+{0} & {0} & {T} & {-T}
+
+\end{array}\right)
+
+\cdot \Psi
+
+$$
+<p></p>
+<p>or in short</p>
+<p></p>
+$$
+
+\ddot{\Psi}=-M^{-1}K\cdot \Psi
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Observe that the matrix $-M^{-1}K$ is symmetric and all their eigenvalues are negatives, since it comes from a stable equilibrium point (see section \ref{coupledoscillators}). Moreover, from this section and the previous ones we know that a basis for solutions of this differential equation is</p>
+<p></p>
+$$
+
+A cos(\omega t+ \phi) \psi
+
+$$
+<p></p>
+<p>where $-\omega^2$ is an eigenvalue of $-M^{-1}K$,</p>
+<p></p>
+<p>$\psi$ is an eigenvector for this eigenvalue, and $A$ and $\phi$ are real constants determined by the initial conditions: the $A$'s by the initial positions and the $\phi$'s by the initial velocities.</p>
+<p></p>
+<p>\bigbreak</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\textbf{When $N$ is really big} is very difficult to find the eigenvalues by linear algebra, so we can proceed in a different way.</p>
+<p></p>
+<p>Also, the vector $\psi$ is a very large vector, since the number of masses $N$ will tend to infinity, and we want to study the <code class="inlineCoed"></code>shape'' of their components. In fact, when $N$ goes to infinity $\psi$ will be a function of position, giving the displacement of the masses in the initial time.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>As usual, we will follow with the complex solution for $\Psi$ and take the real part in the final step. We think in solutions like</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+\Psi_j(t)=e^{i\omega t} \xi(j)
+
+$$
+<p></p>
+<p>where $\xi$ is a complex eigenvector of infinite length (keep an eye: in section \ref{coupledoscillators} we saw that with finite masses we can force $\xi$ to be real, but with infinite masses, a priori, we cannot).</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>To find infinite length eigenvectors we use the trick of \ref{symmetrytrick}. Since this infinite chain of oscillating masses has translation symmetry, we check that</p>
+<p></p>
+$$
+
+-M^{-1}K S=S (-M^{-1}K)
+
+$$
+<p></p>
+<p>where</p>
+<p></p>
+$$
+
+-M^{-1}K= \left(\begin{array}{cccccc}{\ddots} & {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\ddots} \\ {\cdots} & {-2 B} & {C} & {0} & {0} & {\cdots} \\ {\cdots} & {C} & {-2 B} & {C} & {0} & {\cdots} \\ {\cdots} & {0} & {C} & {-2 B} & {C} & {\cdots} \\ {\cdots} & {0} & {0} & {C} & {-2 B} & {\cdots} \\ {\ddots} & {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\ddots}\end{array}\right)
+
+$$
+<p></p>
+<p>and</p>
+<p></p>
+$$
+
+S=\left(\begin{array}{cccccc}{\ddots} & {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\ddots} \\ {\cdots} & {0} & {1} & {0} & {0} & {\cdots} \\ {\cdots} & {0} &0& {1} & {0} & {\cdots} \\ {\cdots} & {0} & {0} & 0 &{1} & {\cdots} \\ {\cdots} & {0} & {0} & {0} & 0 & {\cdots} \\ {\ddots} & {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\ddots}\end{array}\right)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>What are the eigenvectors for $S$? We can take any $\beta \in \RR$, and then produce an eigenvector $\xi$. Observe that</p>
+<p></p>
+$$
+
+S\xi (j)=\xi(j+1)=\beta \xi(j)
+
+$$
+<p></p>
+<p>so if we take $\xi(0)=1$ we conclude $\xi(j)=\beta^j$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Moreover, since $j\in \ZZ$ we conclude that $|\beta|=1$ and therefore must be $\alpha \in [-\pi, \pi]$ such that $\beta=e^{i\alpha}$. In conclussion, for every $\alpha \in [-\pi, \pi]$ we have the eigenpair $(e^{i\alpha},\xi^{\alpha})$ where $\xi^{\alpha}(j)=e^{i\alpha j}$, respect to $S$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>But, what is the eigenvalue respect to $-M^{-1}K$?</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+(-M^{-1}K \xi^{\alpha})(j) =-2 B e^{i\alpha j}+C e^{i\alpha (j-1)}+C e^{i\alpha (j+1)}=
+
+(-2B+Ce^{-i\alpha}+Ce^{i\alpha})e^{i\alpha j}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+=(-2B+C(e^{-i\alpha}+e^{i\alpha}))e^{i\alpha j}=(2C\cos(\alpha)-2B)e^{i\alpha j}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>So $\xi^{\alpha}$ is an eigenvector of $-M^{-1}K$ associated to the eigenvalue $2C\cos(\alpha)-2B$, which must be negative (probably $C=B$, and we would get that).</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Now, think that the pair $(2C\cos(\alpha)-2B,\xi^{\alpha})$ produces two solutions for the associated first order system (and then <code class="inlineCoed"></code>truncated''):</p>
+<p></p>
+$$
+
+\Psi^{\alpha}(t)=e^{i\omega_{\alpha} t} \xi^{\alpha}
+
+$$
+<p></p>
+$$
+
+\tilde{\Psi}^{\alpha}(t)=e^{-i\omega_{\alpha} t} \xi^{\alpha}
+
+$$
+<p></p>
+<p>where $\omega_{\alpha}=\frac{\sqrt{2C\cos(\alpha)-2B}}{i} \in \RR$. In the particular case where $B=C=\frac{T}{md}$,</p>
+<p></p>
+$$
+
+\omega_{\alpha}=2\sqrt{\frac{T}{md}}|\sin{\frac{\alpha}{2}}|
+
+$$
+<p></p>
+<p>which is known as \textit{dispersion relation}</p>
+<p></p>
+<p>\bigbreak</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>A few remarks:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\begin{itemize}</p>
+<p></p>
+<p>\item The general solution is a linear combination of $\Psi^{\alpha}$'s and $\tilde{\Psi}^{\alpha}$'s. But since $\alpha$ has no restriction, beyond $\alpha \in [-\pi, \pi]$, because we don't have boundary conditions, $\alpha$ varies continuously. So, instead of a linear combination we get</p>
+<p></p>
+$$
+
+\Psi=\int_{-\pi}^{\pi} C(\alpha) \Psi^{\alpha} +\tilde{C}(\alpha) \tilde{\Psi}^{\alpha}d \alpha
+
+$$
+<p></p>
+<p>Observe that this has been developed with a trick: we forgot the initial and final rows of the matrix $-M^{-1}K$ since we are dealing with a big $N$. This is the reason why we are finding more than $N$ eigenvalues (infinite, actually): since we are no taking into account the initial and final restriction, it is totally as if we had infinite masses.</p>
+<p></p>
+<p>\item Let's look for the general \textbf{real} solution. First, observe that:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+(\Psi^{\alpha})^*=e^{-i\omega_{\alpha} t} (\xi^{ \alpha})^*=e^{-i\omega_{\alpha} t} \xi^{ -\alpha}=\tilde{\Psi}^{-\alpha}
+
+$$
+<p></p>
+$$
+
+(\tilde{\Psi}^{\alpha})^*=e^{i\omega_{\alpha} t} (\xi^{ \alpha})^*=e^{i\omega_{\alpha} t} \xi^{ -\alpha}={\Psi}^{-\alpha}
+
+$$
+<p></p>
+<p>Then</p>
+<p></p>
+$$
+
+\Psi^*=\int_{-\pi}^{\pi} C^*(\alpha) (\Psi^{\alpha})^* +\tilde{C}^*(\alpha) (\tilde{\Psi}^{\alpha})^*d \alpha=
+
+\int_{-\pi}^{\pi} C^*(\alpha) \tilde{\Psi}^{-\alpha} +\tilde{C}^*(\alpha) {\Psi}^{-\alpha}d \alpha=
+
+$$
+<p></p>
+$$
+
+=\int_{-\pi}^{\pi} C^*(-\alpha) \tilde{\Psi}^{\alpha} +\tilde{C}^*(-\alpha) {\Psi}^{\alpha}d \alpha
+
+$$
+<p></p>
+<p>Since it must be $\Psi=\Psi^*$, and so :</p>
+<p></p>
+$$
+
+C^*(-\alpha)=\tilde{C}(\alpha)
+
+$$
+<p></p>
+<p>(I don't know how to prove this!!, but the idea is that $\Psi^{\alpha}$ and $\tilde{\Psi}^{\alpha}$ constitute a basis for the vector space of solutions) and therefore:</p>
+<p></p>
+$$
+
+\Psi=\int_{-\pi}^{\pi} C(\alpha) \Psi^{\alpha} +\tilde{C}(\alpha) \tilde{\Psi}^{\alpha}d \alpha=\int_0^{\pi} 2Re[C(\alpha) \Psi^{\alpha} +\tilde{C}(\alpha) \tilde{\Psi}^{\alpha}]d\alpha
+
+$$
+<p></p>
+<p>\item The parameter $\alpha$ is the seed for the wave number. Let $d$ be the distance between the masses, we can write $x=d\cdot j$ to be the position in the horizontal direction. If we try to write everything int terms of $x$ instead $j$ is useful to choose $\kappa=\frac{\alpha}{d}$ for the trial solution for the eigenvector. The normal modes would be:</p>
+<p></p>
+$$
+
+\Psi^{\kappa}(x, t)=a \cdot cos(\omega_{\kappa} t+\kappa x+\phi)
+
+$$
+<p></p>
+<p>\item Dispersion relation is a name for the functional relation between wave number $\kappa$ and frecuency $\omega_{\kappa}$. In this case is</p>
+<p></p>
+$$
+
+\omega_{\kappa}=2\sqrt{\frac{T}{md}}sin(\frac{\kappa d}{2 })
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\item The idea for choosing $\xi(j)=A e^{i \alpha j}$ can be seen from other point of view.</p>
+<p></p>
+<p>The eigenvectors satisfy the relation</p>
+<p></p>
+<p>\begin{equation}\label{eigenvectorrelation}</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>md \omega^{2} \xi(j)=-2 T \xi(j)+T \xi(j-1)+T \xi(j +1)</li></ul></p>
+<p></p>
+<p>\end{equation}</p>
+<p></p>
+<p>where we forget the first and the last relation because we assume $N$ very very large</p>
+<p></p>
+<p>One can observe that if $d$ is very small and taking into account the name change $x=jd$, equation \ref{eigenvectorrelation} can be interpreted (approximately) as:</p>
+<p></p>
+$$
+
+- m\omega^2 \xi(x)=T\left[ \frac{\xi(x+d)-\xi(x)}{d}-\frac{\xi(x)-\xi(x-d)}{d}\right] \approx T [\xi'(x+d/2)]-\xi'(x-d/2)]
+
+$$
+<p></p>
+<p>and so</p>
+<p></p>
+$$
+
+- m\omega^2 \xi(x)\approx T d \xi''(x)
+
+$$
+<p></p>
+<p>But since $m=d\mu$, where $\mu$ is the density and is supposed to be constant</p>
+<p></p>
+$$
+
+- \frac{\mu \omega^2}{T} \xi(x)\approx \xi''(x)
+
+$$
+<p></p>
+<p>We have got an equation quite similar but in the variable $x$ or $j$ if you prefer, so is natural to choice $\xi(j)=A e^{i \alpha j}$.</p>
+<p></p>
+<p>\end{itemize}</p>
+<p></p>
+<p>\section{Boundary conditions}</p>
+<p></p>
+<p>We have studied an infinite system. If we want to come back to a finite system we impose boundary conditions, so we reduce the number of fundamental solutions that are allowed.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Particular case: $N=4$. We have:</p>
+<p></p>
+$$
+
+\ddot{\Psi}=\frac{1}{md}\left( \begin{array}{cccc}{- T} & {T} & {0} & {0} \\
+
+{T} & {-2 T} & {T} & {0} \\
+
+{0} & {T} & {-2T} & T\\ {0} & {0} & {T} & {-T}\end{array}\right)
+
+\cdot \Psi
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>We solve using Mathematica and find, evidently, four eigenvalues:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+-\omega_1^2=\frac{(-2-\sqrt{2}) T}{d m},-\omega_2^2=-\frac{2 T}{d m},-\omega_3^2= \frac{(-2+\sqrt{2}) T}{d m}, -\omega_4^2=0
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>and four eigenvectors</p>
+<p></p>
+$$
+
+\xi_1=(-1,1+\sqrt{2},-1-\sqrt{2}, 1), \xi_2=(1,-1,-1,1),
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+$$
+
+\xi_3=(-1,1-\sqrt{2},-1+\sqrt{2}, 1), \xi_4=(1,1,1,1)
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>With pictures ($T=2 ; m=1 ; d=0.5$):</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>\begin{tabular}{cc}</p>
+<p></p>
+<p>\includegraphics[width=60mm]{imagenes/sol1.png} &</p>
+<p></p>
+<p>\includegraphics[width=60mm]{imagenes/sol2.png} \\</p>
+<p></p>
+<p>\includegraphics[width=60mm]{imagenes/sol3.png} &</p>
+<p></p>
+<p>\includegraphics[width=60mm]{imagenes/sol4.png} \\</p>
+<p></p>
+<p>\end{tabular}</p>
+<p></p>
+<p>Could we obtain the same with the big-N-technique? Let's see. We start with infinite vibrating masses with displacement $\Psi_j(t)$, and so infinite fundamental frequencies</p>
+<p></p>
+$$
+
+\omega_{\alpha}=2 \sqrt{\frac{T}{m d}} \sin (\alpha / 2)
+
+$$
+<p></p>
+<p>one for every $\alpha \in [0,\pi]$.</p>
+<p></p>
+<p>If we want to restrict to this particular case, we have to impose some conditions: \textbf{boundary conditions}. For example, if we force $\Psi_0=\Psi_1$ and $\Psi_4=\Psi_5$ we are removing the effect of masses 0 and 5 over the masses ranging from 1 to 4 (as desired). Let's study this two conditions: we are going to impose $\Psi_0=\Psi_1$ and $\Psi_4=\Psi_5$ and watch what $\alpha$'s survive.</p>
+<p></p>
+$$
+
+e^{i\omega_{\alpha}t} [ C(\alpha)+C(-\alpha)]=e^{i\omega_{\alpha}t} [ C(\alpha) e^{i\alpha}+C(-\alpha) e^{-i\alpha}]
+
+$$
+<p></p>
+$$
+
+C(\alpha)+C(-\alpha)= C(\alpha) e^{i\alpha}+C(-\alpha) e^{-i\alpha}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>and together with</p>
+<p></p>
+$$
+
+e^{i\omega_{\alpha}t} [ C(\alpha) e^{i\alpha 4}+C(-\alpha) e^{-i\alpha 4}]=e^{i\omega_{\alpha}t} [ C(\alpha) e^{i\alpha 5}+C(-\alpha) e^{-i\alpha 5}]
+
+$$
+<p></p>
+<p>we arrive to</p>
+<p></p>
+$$
+
+\alpha=\frac{\pi n}{4}
+
+$$
+<p></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>Let's study this values one by one:</p>
+<p></p>
+<p>\begin{enumerate}</p>
+<p></p>
+<p>\item n=0. Then $\alpha=0$, $\omega_{\alpha}^2=0$ and $\xi=(1,1,1,1)$.</p>
+<p></p>
+<p>Correspond to the case $\omega_{4}$ following Mathematica.</p>
+<p></p>
+<p>\item $n=1$. Then $\alpha=\frac{\pi}{4}$, and $\omega_{\alpha}^2=\frac{T}{md}(2-\sqrt{2})$. We are in case 3 from Mathematica. The eigenvector obtained is $\xi=(e^{i\frac{\pi}{4}},e^{i\frac{\pi}{2}},e^{i\frac{3\pi}{4}},e^{i\pi})$, which is complex and do not coincide with the one obtained by Mathematica. But since $-\alpha$ produces the same eigenvalue, we can mix the previous eigenvector with $(e^{-i\frac{\pi}{4}},e^{-i\frac{\pi}{2}},e^{-i\frac{3\pi}{4}},e^{-i\pi})$ to make new eigenvectors for this eigenvalue. In fact is a (long) computation to check that the linear combination of this complex vectors that produces the same that the real above eigenvector is</p>
+<p></p>
+$$
+
+\left\{\left(x \rightarrow-\frac{1}{2}+i\left(-\frac{1}{2}+\frac{1}{\sqrt{2}}\right), y \rightarrow-\frac{1}{2}+i\left(\frac{1}{2}-\frac{1}{\sqrt{2}}\right)\right\}\right.
+
+$$
+<p></p>
+<p>I found it by using Mathematica.</p>
+<p></p>
+<p>\item $n=2$. Then $\alpha=\frac{\pi}{2}$, and $\omega_{\alpha}^2=2\frac{T}{md}$. This correspond with case $\omega_2$ above. The eigenvector is not the same, but the phenomenom is the same that for $n=1$: we can recover by mixing both eigenvectors corresponding to $\alpha$ and $-\alpha$.</p>
+<p></p>
+<p>\item $n=3$. Then $\alpha=\frac{3\pi}{4}$, and $\omega_{\alpha}^2=\frac{T}{md}(2+\sqrt{2})$. Idem.</p>
+<p></p>
+<p>\item $n=4$. Then $\alpha=\pi$. Condition $\Psi_0^{\pi}=\Psi_1^{\pi}$ implies $C(\pi)+C(-\pi)=0$. Moreover, since $e^{i\pi j}=e^{-i\pi j}$, we deduce that $C(\pi)\Psi^{\pi}+C(-\pi)\Psi^{-\pi}=0$, so we can ignore this normal mode.</p>
+<p></p>
+<p>\item $n=5$. Then $\alpha=\pi+\frac{\pi}{4}$. As we reasoned above, this would be the same case as $\pi+\frac{\pi}{4}-2\pi=-\frac{3 \pi}{4}$ which, in fact, is paired with $\alpha=\frac{3\pi}{4}$ (case $n=3$)</p>
+<p></p>
+<p>\item All the remaining cases are repeated</p>
+<p></p>
+<p>\end{enumerate}</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

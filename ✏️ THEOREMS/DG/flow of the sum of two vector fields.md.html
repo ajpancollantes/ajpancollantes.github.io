@@ -32,34 +32,15 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Flow_of_the_sum_of_vector_fields">Flow of the sum of vector fields</h1>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>In the case where $[V,W]=0$, it is pretty easy to show that $$\varphi_{V+W}^t = \varphi_V^t\circ\varphi_W^t,$$ </p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
+<p>In the case where $[V,W]=0$, it is pretty easy to show that </p>
+$$
+\varphi_{V+W}^t = \varphi_V^t\circ\varphi_W^t.
+$$
 <p>In the general non-commuting case, the flow $\phi^t_{V+W}$ equals to first order both $\phi^t_V \circ \phi^t_W$ and $\phi^t_W \circ \phi^t_V$. Morally, the second order approximation should be 'halfway between' the two aforementioned flows. Since $\phi^{t}_V \circ \phi^{t}_W \circ \phi^{-t}_V \circ \phi^{-t}_W$ is approximated by $\phi^{t^2}_{[V,W]}$, we expect to have</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>$$ \phi^t_{V+W}(x)= \left(\phi^{t^2}_{\frac{1}{2}[V,W]} \circ \phi^t_W \circ \phi^t_V\right)(x) \, .$$</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>It happens to be the first few terms of the Zassenhaus formula (in reverse order) for the exponential map ; Notice that we can interpret a vector field on a manifold $M$ as an element of the Lie algebra of the infinite dimensional Lie group $\mathrm{Diff}(M)$, so that taking the exponential map $\mathfrak{diff}(M) \to \mathrm{Diff}(M)$ corresponds to integrating vector fields.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Related to, the Zassenhaus formula:</p>
-<p></p>
 $$
-
-e^{t(X+Y)}=e^{t X} e^{t Y} e^{-\frac{t^{2}}{2}[X, Y]} e^{\frac{t^{3}}{6}(2[Y,[X, Y]]+[X,[X, Y]])} e^{\left.\frac{-t^{4}}{24}([[[X, Y], X], X]+3[[X, Y], X], Y]+3[[[X, Y], Y], Y]\right)} \ldots
-
+\phi^t_{V+W}(x)= \left(\phi^{t^2}_{\frac{1}{2}[V,W]} \circ \phi^t_W \circ \phi^t_V\right)(x) \, .
 $$
+<p>It happens to be the first few terms of the <a href="./../Zassenhaus formula.md.html">Zassenhaus formula</a> (in reverse order) for the exponential map. Notice that we can interpret a vector field on a manifold $M$ as an element of the Lie algebra of the infinite dimensional Lie group $\mathrm{Diff}(M)$, so that taking the exponential map $\mathfrak{diff}(M) \to \mathrm{Diff}(M)$ corresponds to integrating vector fields.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

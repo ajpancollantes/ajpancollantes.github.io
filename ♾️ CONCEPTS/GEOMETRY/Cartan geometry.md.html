@@ -44,7 +44,7 @@ gtag('config', 'G-LBT9E8N3HS');
 <p>To understand the idea of a Cartan connection, a good starting point is to analyse first the particular case of a smooth manifold with an <a href="./linear connection.md.html">affine connection</a>. An affine connection on a manifold $M$ is vinculated to a <a href="./principal connection on a principal bundle.md.html">principal connection</a> $\omega$ on the <a href="./frame bundle.md.html">frame bundle</a> $P$ of $M$ (see <a href="./associated connection.md.html#Conversely">here</a>). This device let us speak about <a href="./geodesic.md.html">geodesic</a>s, <a href="./../parallel transport.md.html">parallel transport</a>, and so on. </p>
 <p></p>
 <p><b>Now, let's think: what is a vector $v\in T_pP$?</b> </p>
-<p>The point $p\in P$ represents a point $x$ in the manifold together with a choice of a basis for $T_x M$, and $v$ represents the beginning of a curve $\alpha$ in $M$ leaving $x$ and a choice of a basis for every $T_{\alpha(t)}M$. <b>The value of $\omega_p(v)$ is an "extra data" that tells us how the basis is changing when we move along</b> $\alpha$ .  This is "not natural", and must be introduced by hand. </p>
+<p>The point $p\in P$ represents a point $x$ in the manifold together with a choice of a basis for $T_x M$, and $v$ represents the beginning of a curve $\alpha$ in $M$ leaving $x$ and a choice of a basis for every $T_{\alpha(t)}M$. <b>The value of $\omega_p(v)\in \mathfrak{gl}(n)$ is an "extra data" that tells us how the basis is changing when we move along</b> $\alpha$ .  This is "not natural", and must be introduced by hand. </p>
 <p></p>
 <p>But observe that, in addition, the projection of $v$, the vector $d\pi_p(v)=\alpha'(0)\in T_xM$, have (tautological) coordinates $(v_1,\ldots,v_n)$ in the basis represented by $p$. </p>
 <p><img src="./../../imagenes/Pasted image 20220111071639.png" style="width:80vw; border-radius: 3px;" ></p>
@@ -61,14 +61,14 @@ $$
 <p>This additional structure of the <a href="./frame bundle.md.html">frame bundle</a> is what is usually called a <a href="./solder form.md.html">solder form</a>. <b>The value of $\theta_p(v)$ tells us how much are we moving in $M$ independently of the change in the basis.</b></p>
 <p></p>
 <p><b>The pair $(\omega,\theta)$ is the geometry of the manifold. In what sense?</b></p>
-<p>Suppose I am situated in a point $x\in M$ with a choice of a basis of $T_xM$ (to do Physics, for example). So I have chosen a point $p\in P=FM$. If I move to other configurations (point+basis) I am describing a curve $\gamma(t)$ with $\gamma(0)=p$. Suppose a small (but not infinitesimal) time $t$. Since for any $p\in P$ we have $p=point+basis$, we will denote $X(p)=point$ and $B(p)=basis$. All of this is "loosely speaking", of course. We can consider the following approximations (since $t$ is small):</p>
+<p>Suppose I am situated in a point $x\in M$ with a choice of a basis of $T_xM$ (to do some Physics, for example). So I have chosen a point $p\in P=FM$. If I move to other configurations (point+basis) I am describing a curve $\gamma(t)$ with $\gamma(0)=p$. Suppose a small (but not infinitesimal) time $t$. Since for any $p\in P$ we have $p=point+basis$, we will denote $X(p)=point$ and $B(p)=basis$. All of this is "loosely speaking", of course. We can consider the following approximations (since $t$ is small):</p>
 <p><ul style="margin-left:0px;"><li>$\gamma(t) \asymp p+v$, $v\in T_p P$.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>$B(\gamma(t))\asymp B(p)+\omega_p(v)$. Observe that, in some sense, $B(p)\in GL(n)$ and $\omega_p(v)\in \mathfrak{gl}(n)$, so it would be something like $B(p)+\omega_p(v)\approx B(p) e^{t\omega_p(v)}$...</li></ul></p>
 <p><ul style="margin-left:0px;"><li>$X(\gamma(t))=X(p)+\theta_p(v)$. So $\theta_p(v)$ is a kind of translation [^1].</li></ul></p>
 <p></p>
-<p>What we are doing here is to treat $M$ and their "configurations" as if after zooming it on $p$ it behaves like $\mathbb{R}^n$ together with $GL(n)$. The construction above let us formalize these approximations.</p>
+<p>What we are doing here is to treat $M$ and their "configurations" as if after zooming it on $p$ it behaves like $\mathbb{R}^n$ seen as the quotient $Aff(n)/GL(n)$. The construction above let us formalize these approximations.</p>
 <p></p>
-<p>Finally, observe that the pair $(\omega,\theta)$ (the principal connection and the solder form) defines a 1-form $\eta$ on $P$, with values in the Lie algebra $\mathfrak {g}$ of the semidirect product $G=\mathbb{R}^n \rtimes H$, which provides us with an isomorphism of each tangent space $T_pP$ with $\mathfrak{g}$. It induces a principal connection α on the associated principal $G$-bundle $P \times_{H} G$. <b>This is what is called a Cartan connection</b>. </p>
+<p>Finally, observe that the pair $\eta=(\omega,\theta)$ (the principal connection and the solder form) defines a 1-form $\eta$ on $P$, with values in the Lie algebra $\mathfrak {g}$ of the semidirect product $G=\mathbb{R}^n \rtimes H$, which provides us with an isomorphism of each tangent space $T_pP$ with $\mathfrak{g}$. It induces a principal connection α on the associated principal $G$-bundle $P \times_{H} G$. <b>This is what is called a Cartan connection</b>. </p>
 <p>The trivialization of $TP$ achieved in this way </p>
 $$\begin{array}{ccc}TP&\to & P\times \mathfrak{h} \times \mathbb{R}^n\\v\in T_pP & \to &(p,\omega_p(v),\theta_p(v))
 \end{array}
@@ -77,7 +77,7 @@ $$
 <p></p>
 <h3 style="margin-left:0px;" id="Generalization_of_Riemannian_manifolds">Generalization of Riemannian manifolds</h3>
 <p></p>
-<p>Important: see <a href="./Cartan geometry.md.html#Generalization_of_affine_connections">this section first</a>.</p>
+<p>Important: see <a href="./Cartan geometry.md.html#Generalization_of_manifolds_with_affine_connections">this section first</a>.</p>
 <p>There are two kind of Cartan geometries related to the classical point of view of <a href="./pseudo-Riemannian manifold.md.html">pseudo-Riemannian manifold</a>s. They are <a href="./../Euclidean geometry.md.html">Euclidean geometry</a>s and <a href="./../Riemannian geometry.md.html">Riemannian geometry</a>s.</p>
 <p></p>
 <p>Given a <a href="./../Riemannian geometry.md.html">Riemannian geometry</a> on $M$, it determines a (pseudo)-<a href="./Riemannian metric.md.html">Riemannian metric</a> on $M$ up to constant scale factor (see <a href="./../../Bibliography/@sharpe2000differential.md.html">@sharpe2000differential</a> Proposition 3.2 page 238). </p>
@@ -137,7 +137,13 @@ $$
 <p></p>
 <p>Important case: <a href="./../reductive Cartan geometry.md.html">reductive Cartan geometry</a>.</p>
 <p></p>
-<h1 style="margin-left:0px;" id="Example:_hamster_in_a_ball">Example: hamster in a ball</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="Curvature">Curvature</h2>
+<p>See <a href="./../curvature of a Cartan geometry.md.html">curvature of a Cartan geometry</a></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Torsion">Torsion</h2>
+<p>See <a href="./../torsion of a Cartan geometry.md.html">torsion of a Cartan geometry</a></p>
+<h2 style="margin-left:0px;" id="Example:_hamster_in_a_ball">Example: hamster in a ball</h2>
 <p>[Wise 2009]</p>
 <p><img src="./../../imagenes/Pasted image 20220109122314.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
@@ -156,7 +162,7 @@ A_p(v)\in \mathfrak{so}(3) \backslash \mathfrak{so}(2)
 $$
 <p>The maps $A_p$ must be isomorphisms in order to exist a total correspondence between changes in $S^2=G/H$ (the world as perceived by the hamster) and changes in $P$. </p>
 <p></p>
-<h1 style="margin-left:0px;" id="Example:_An_explorer_of_th_15th_century">Example: An explorer of th 15th century</h1>
+<h2 style="margin-left:0px;" id="Example:_An_explorer_of_th_15th_century">Example: An explorer of th 15th century</h2>
 <p></p>
 <p>Consider a person standing on a flat planar 'model Earth', tangent to the actual spherical Earth. The plane rolls as he walks. This rolling gives a $E(2)/SO(2)$ Cartan geometry of the Earth's surface. He could use the rolling motion  to try drawing  a local map of the Earth on the plane</p>
 <p></p>

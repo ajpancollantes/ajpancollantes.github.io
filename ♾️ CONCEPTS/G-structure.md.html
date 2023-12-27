@@ -37,14 +37,19 @@ gtag('config', 'G-LBT9E8N3HS');
 <p>For a manifold $M$ the <a href="./GEOMETRY/frame bundle.md.html">frame bundle</a> $FM$ is a $GL(n)$-<a href="./GEOMETRY/principal bundle.md.html">principal bundle</a>. Given a subgroup $G$ of $GL(n)$ we call a $G$-structure on $M$ to a $G$-principal bundle $P$ which is a subbundle of $FM$.$\blacksquare$</p>
 <p></p>
 <p>This is a particular case of <a href="./GEOMETRY/extension and reduction of a principal bundle.md.html#Definition_from_Mathoverflow">reduction of group structure</a> with respect to the inclusion $G\to GL(n)$.</p>
+<p>Indeed, according to Sternberg, <b>Lectures on differential geometry</b>:</p>
+<p><b>Definition</b></p>
+<p>A $G$-structure on an $n$-dimensional manifold $M$ is defined as a reduction of $FM$ to the group $G$. $\blacksquare$</p>
 <p></p>
-<p>When $M$ and $G$ are given, and $G$ is a closed subgroup of $GL(n)$ the existence problem  becomes the problem of finding a cross section  in a certain bundle. Since $GL(n)$ acts on $FM$ on the right, $G$ also acts on $FM$. If $G$ is closed the quotient $FM/G$ is also a bundle, in particular is the <a href="./GEOMETRY/associated bundle.md.html">associated bundle</a> to $FM$ with fibre $GL(n)/G$. It is classical (see [Kobayashi 1972] page 9) that the G-structures on $M$ are in a natural one-to-one correspondence with cross sections</p>
-$$
-\sigma: M\to FM/G.
-$$
+<h2 style="margin-left:0px;" id="Equivalence_to_existence_of_a_section">Equivalence to existence of a section</h2>
+<p>When $M$ and $G$ are given, and $G$ is a closed subgroup of $GL(n)$ the existence problem becomes the problem of finding a cross section in a certain bundle. Since $GL(n)$ acts on $FM$ on the right, $G$ also acts on $FM$. If $G$ is closed the quotient $FM/G$ is also a bundle, in particular is the <a href="./GEOMETRY/associated bundle.md.html">associated bundle</a> to $FM$ with fibre $GL(n)/G$. </p>
+<p>In <a href="./../Bibliography/@KobayashiNomizu1996.md.html">@KobayashiNomizu1996</a> can be found: </p>
+<p><b>Proposition 5.6.</b> The structure group $G$ of $P(M, G)$ is reducible to a closed subgroup $H$ if and only if the associated bundle $E(M, G/H, G, P)$ admits a cross-section $\alpha: M \rightarrow E = P/H$.$\blacksquare$</p>
+<p><b>Remark</b> The correspondence is 1:1.$\blacksquare$</p>
+<p></p>
 <p>See the <a href="./G-structure.md.html#Example">example below</a>.</p>
 <p></p>
-<h1 style="margin-left:0px;" id="Relation_to_tensors">Relation to tensors</h1>
+<h2 style="margin-left:0px;" id="Relation_to_tensors">Relation to tensors</h2>
 <p>If we have a tensor field defined in a manifold $M$ it let us to define a subgroup $G$ of $GL(n)$ (the subgroup that leaves invariant the copy of the tensor in $\mathbb{R}^n$) and a $G$-structure on $M$.</p>
 <p></p>
 <p>I suppose the converse is true: a $G$-structure let us define one or several tensor fields in $M$. The group $G$ is possibly (I'm not sure) characterized by some tensors in $\mathbb{R}^n$, $T_i$, of type $(r_i,s_i)$, which are their _invariants_. We can cover $M$ with trivializing neighbourhoods of $E$, $\{U_{\alpha}\}$, and select the <a href="./GEOMETRY/principal bundle.md.html#Components_of_a_section">G-frames</a> corresponding to $(x,e)\in U_{\alpha}\times G$. Finally, we can define the tensor fields whose expression in this frames is given by $T_i$.</p>
@@ -65,7 +70,7 @@ $$
 All these ideas are related to <a href="./GEOMETRY/Cartan geometry.md.html">Cartan geometry</a>. It seems (I'm not sure enough yet) like if a G-structure $P$ on $M$ together with a connection (a <a href="./GEOMETRY/principal connection on a principal bundle.md.html">principal connection</a> on $P,$ that is, a $\mathfrak{g}$-valued 1-form with properties) is the same as providing to $M$ a Cartan geometry modelled on $$
 G\to \mathbb{R}^n \rtimes G
 $$
-<p>This is not valid for a general <a href="./extension and restriction of principal bundles.md.html">reduction of a principal bundle</a> because we don't have solder form??</p>
+<p>This is not valid for a general <a href="./GEOMETRY/extension and reduction of a principal bundle.md.html">reduction of a principal bundle</a> because we don't have solder form??</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

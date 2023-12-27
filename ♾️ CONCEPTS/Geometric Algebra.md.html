@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Geometric_algebra">Geometric algebra</h1>
+<p>Related: <a href="./Clifford algebra.md.html">Clifford algebra</a>.</p>
+<h2 style="margin-left:0px;" id="An_Intuitive_Introduction">An Intuitive Introduction</h2>
+<p>For a more in-depth explanation, you can refer to "What is Geometric Algebra?" in the Calibre Library. In a nutshell, the exterior algebra can be constructed for any vector space $V$, using $V$ itself rather than its dual $V^*$. This results in a graded algebra:</p>
+$$
+\Lambda( V ) = \Lambda^0( V ) \oplus \Lambda^1( V ) \oplus \Lambda^2( V ) \oplus \cdots \oplus \Lambda^n( V )
+$$
+<p>The elements of this algebra can be interpreted as scalars, vectors, bivectors, trivectors, etc. A bivector $u \wedge v$ can be understood as the plane spanned by $u, v$ along with the area of the parallelogram and the orientation from $u$ to $v$. Similar interpretations can be made for a $k$-vector.</p>
+<p></p>
+<p>In the algebra $\Lambda(V)$, we have operations like addition, scalar multiplication, inner product for vectors, and wedge product for any $k$-vectors. All of these can be generalized by a new operation known as the <b>geometric product</b>. For vectors, it takes the following form:</p>
+$$
+uv = u \cdot v + u \wedge v
+$$
+<h3 style="margin-left:0px;" id="Geometric_Algebra_in_2D_and_Complex_Numbers">Geometric Algebra in 2D and Complex Numbers</h3>
+<p>When we set $V = \mathbb{R}^2$, it can be shown that $G^2 = \Lambda(\mathbb{R}^2)$ naturally contains complex numbers. Given a basis $\{ e_1, e_2 \}$, we have:</p>
+$$
+\begin{aligned}
+e_1 e_1 &= 1, \\
+e_2 e_2 &= 1, \\
+e_1 e_2 &= -e_2 e_1, \\
+(e_1 e_2)^2 &= -1,
+\end{aligned}
+$$
+<p>Therefore, we interpret $e_1 e_2$ as $i$. Furthermore, it can be shown that:</p>
+<p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^2)$ is isomorphic to $\mathbb{C}$, complete with its usual internal rotations.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^2)$ acts on $\Lambda^1(\mathbb{R}^2) = \mathbb{R}^2$ as rotations. Specifically, the exponent $e^{I \theta}$ rotates a vector $a \in \mathbb{R}^2$ by $2\theta$ through the formula $a' = e^{-I \theta} a e^{I \theta}$.</li></ul></p>
+<p></p>
+<p><b>Note</b>: Although $e^{I \theta}$ acts on $\Lambda^1(\mathbb{R}^2)$ to produce a rotation of $\theta$, which seems natural, this behavior is not generalizable to all dimensions.</p>
+<h3 style="margin-left:0px;" id="Geometric_Algebra_in_3D_and_Quaternions">Geometric Algebra in 3D and Quaternions</h3>
+<p>When we take $V = \mathbb{R}^3$, $G^3 = \Lambda(\mathbb{R}^3)$ contains <a href="./quaternions.md.html">quaternions</a> $\mathbb{H}$ in a natural way. With a fixed basis $\{ e_1, e_2, e_3 \}$, it turns out that $e_2 e_3, e_1 e_3, e_1 e_3$ behave like the imaginary units $i, j, k$ in $\mathbb{H}$. Therefore:</p>
+<p><ul style="margin-left:0px;"><li>$V$ are the pure imaginary quaternions.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^3)$ is isomorphic to $\mathbb{H}$, maintaining its usual internal properties.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>An unitary vector $a \in \mathbb{R}^3$ defines a reflection in $\mathbb{R}^3$ along the plane orthogonal to it through the formula $x' = -a x a$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^3)$ acts on $\Lambda^1(\mathbb{R}^3) = \mathbb{R}^3$ as rotations. Specifically, the exponent $e^{B \theta}$ rotates a vector $a \in \mathbb{R}^3$ by $2\theta$ along the plane given by $B$ using the formula $e^{-B \theta} a e^{B \theta}$.</li></ul></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Axiomatic_approach">Axiomatic approach</h2>
+<p>We can invert the entire construction process to define a geometric algebra as follows:</p>
+<p><b>Definition:</b>  </p>
+<p>A geometric algebra is a set $\mathcal{G}$ equipped with two composition laws—addition and multiplication (referred to as the *geometric product*)—that meet the following criteria:</p>
+<p></p>
+<p>1. $\mathcal{G}$ is a (potentially non-commutative) <b>graded</b> ring with a unit element. The neutral elements for addition and multiplication are denoted by 0 and 1, respectively.</p>
+<p></p>
+<p>2. The grade-0 elements, $\mathcal{G}_0$, constitute a field with characteristic 0 that includes the neutral elements 0 and 1. The elements of $\mathcal{G}_0$ commute under multiplication with any element in $\mathcal{G}$, meaning they are contained in the *center* of $\mathcal{G}$. Hence, $\mathcal{G}$ can be viewed as an <b>associative algebra</b> over $\mathcal{G}_0$.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Elements of $\mathcal{G}_0$ are called scalars or 0-vectors.</li></ul></p>
+<p></p>
+<p>3. $\mathcal{G}$ includes a subset $\mathcal{G}_1$ that is closed under addition, and its elements are termed 1-vectors.</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>The square of a 1-vector is a scalar, and if $a \neq 0$,</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+   a^2 = |a|^2 \neq 0
+   $$
+<p></p>
+<p>4. For $\mathbf{a} \in \mathcal{G}_1$ and $\mathbf{A}_k \in \mathcal{G}_k$, we can define the inner product as</p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+   \mathbf{a} \cdot \mathbf{A}_{k} = \frac{1}{2} (\mathbf{a} \mathbf{A}_{k} - (-1)^{k} \mathbf{A}_{k} \mathbf{a})
+   $$
+<p><ul style="margin-left:0px;"><li>and the outer product as</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+   \mathbf{a} \wedge \mathbf{A}_{k} = \frac{1}{2} (\mathbf{a} \mathbf{A}_{k} + (-1)^{k} \mathbf{A}_{k} \mathbf{a})
+   $$
+<p><ul style="margin-left:0px;"><li>Consequently,</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+   \mathbf{a} \mathbf{A}_{k} = \mathbf{a} \cdot \mathbf{A}_{k} + \mathbf{a} \wedge \mathbf{A}_{k}
+   $$
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p><ul style="margin-left:0px;"><li>We <b>assume</b> that:</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- $a \cdot A_k \in \mathcal{G}_{k-1}$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- $a \wedge A_k \in \mathcal{G}_{k+1}$</li></ul></p>
+<p></p>
+<p>5. There exists a certain $n \in \mathbb{N}$ such that for every $A_n \in \mathcal{G}_n$,</p>
+$$
+a \wedge A_n = 0
+$$
+<p>and</p>
+$$
+   \mathcal{G}_j \neq \emptyset
+$$
+<p>for $j = 0, 1, \ldots, n$.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Some_remarks:">Some remarks:</h3>
+<p><ul style="margin-left:0px;"><li>The neutral $0 \in \mathcal{G}_0$ (as a scalar) is identical to $0 \in \mathcal{G}_1$ (as a 1-vector).</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>The first part of axiom 3 is equivalent to: *for any $u, v \in \mathcal{G}_1, u \cdot v \in \mathcal{G}_0$*. Thus, it can be deduced from axiom 4.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Elements of $\mathcal{G}_r$ are known as $r$-vectors. If an element contains only one term, it is called a simple $r$-vector or $r$-blade. In general, a geometric product of $r$ vectors (which are not necessarily orthogonal) is termed an $r$-versor.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>If $\mathcal{G}_1$ has dimension 3, then one can show that the linear combination of 2-blades can always be reduced to a single 2-blade (for instance, in $\mathbb{R}^3$, two planes always share a common line). However, this does not hold in higher dimensions.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Concerning axiom 2, every ring $R$ (even a non-commutative one) can be viewed as an associative algebra over its center. Conversely, if $R$ is an associative algebra over a commutative subring $S$, then $S$ is a subset of the center of $R$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Within the list of axioms, we have incompletely defined two products. Several properties can be shown about these products that one would intuitively expect, such as the associativity of the wedge product and the distributive rules for both the inner and wedge products.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>The definitions of the inner and wedge products within the axioms can and should be generalized to any pair $A_r, B_s$ of multivectors:</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+  \mathbf{A}_{r} \cdot \mathbf{B}_{s} :=\left\langle\mathbf{A}_{r} \mathbf{B}_{s}\right\rangle_{|r-s|}
+  $$
+<p><ul style="margin-left:0px;"><li>and</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+  \mathbf{A}_{r} \wedge \mathbf{B}_{s} :=\left\langle\mathbf{A}_{r} \mathbf{B}_{s}\right\rangle_{r+s}
+  $$
+<p><ul style="margin-left:0px;"><li>where $\langle \quad \rangle_j$ signifies projection over $\mathcal{G}_j$.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>To understand the significance of $a \cdot B$, let $B = b \wedge c$. Following the definitions, we find:</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+  a \cdot (b \wedge c) = \frac{1}{4}[a b c - a c b - b c a + c b a]
+  $$
+<p><ul style="margin-left:0px;"><li>Manipulating this equation leads to:</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+  a \cdot (b \wedge c) = (a \cdot b) c - (a \cdot c) b
+  $$
+<p><ul style="margin-left:0px;"><li>This expression shows that $a \cdot (b \wedge c)$ is a vector contained in the plane spanned by $b$ and $c$ and is orthogonal to the projection of $a$ onto that plane.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Two vectors are orthogonal if $u \cdot v = 0$. This implies $u v = u \wedge v$, and vice versa. For three orthogonal vectors $\{ e_i \}$, $e_i \cdot e_j = 0$ implies:</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+  e_1 e_2 e_3 = e_1 \wedge e_2 \wedge e_3
+  $$
+<p></p>
+<p><ul style="margin-left:0px;"><li>Another useful definition is that of <b>reversion</b>. It is the unique operation in $\mathcal{G}$ satisfying:</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+  \begin{aligned}
+  (A B)^{\dagger} &= B^{\dagger} A^{\dagger}, \\
+  (A+B)^{\dagger} &= A^{\dagger} + B^{\dagger}, \\
+  \langle A^{\dagger} \rangle_{0} &= \langle A \rangle_{0}, \\
+  \mathbf{a}^{\dagger} &= \mathbf{a} \quad \text{ if } \quad \mathbf{a} = \langle \mathbf{a} \rangle_{1}
+  \end{aligned}
+  $$
+<p><ul style="margin-left:0px;"><li>This implies:</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+  (\mathbf{a}_{1} \mathbf{a}_{2} \ldots \mathbf{a}_{r})^{\dagger} = \mathbf{a}_{r} \ldots \mathbf{a}_{2} \mathbf{a}_{1}
+  $$
+<p></p>
+<p><ul style="margin-left:0px;"><li>Yet another definition is <b>magnitude</b>. For any multivector $A \in \mathcal{G}$:</li></ul></p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+  |A| = \left\langle A^{\dagger} A \right\rangle_{0}^{1 / 2}
+  $$
+<p></p>
+<p><ul style="margin-left:0px;"><li>Finally, a <b>rotor</b> is defined as a geometric product of an even number of unit vectors such that $R^{-1} = R^{\dagger}$.</li></ul></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Geometric_interpretations">Geometric interpretations</h2>
+<p>(see anotacioneslatex.tex)</p>
+<h2 style="margin-left:0px;" id="On_the_relation_to_complex_numbers">On the relation to complex numbers</h2>
+<p>(see anotacioneslatex.tex)</p>
+<h2 style="margin-left:0px;" id="Angles_and_trigonometry">Angles and trigonometry</h2>
+<p>(see anotacioneslatex.tex)</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

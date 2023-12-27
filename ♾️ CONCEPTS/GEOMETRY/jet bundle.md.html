@@ -33,10 +33,10 @@ gtag('config', 'G-LBT9E8N3HS');
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Jet_space_or_jet_bundle">Jet space or jet bundle</h1>
 <p></p>
-<p>___</p>
-<p>Keep an eye: $J^n(\mathbb{R}^p,\mathbb{R}^q):=J^n(\mathbb{R}^p \times\mathbb{R}^q)$</p>
-<p>___  </p>
-<h2 style="margin-left:0px;" id="First_approach_">First approach (</h2>
+<p><b>Note</b>. In some texts the notation $J^n(\mathbb{R}^p,\mathbb{R}^q)$ is used to mean what here we dentote by $J^n(\mathbb{R}^p \times\mathbb{R}^q)$ being $\mathbb{R}^p \times\mathbb{R}^q \to \mathbb{R}^p$ the trivial bundle.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="First_approach">First approach </h2>
+<p>(<a href="./../../Bibliography/@saunders1989geometry.md.html">@saunders1989geometry</a>)</p>
 <p>Let $\pi: E\mapsto M$ be a <a href="./bundle.md.html">smooth vector bundle</a>, with $dim(E_x)=q$. We can interpret it as $M$ being a manifold of independent variables and sections of $\pi$ as functions on $M$. The set of sections forms a $C^{\infty}(M)$-module. </p>
 <p></p>
 <p>Two sections $s, \tilde{s}$ are said to be $k$-equivalent at a point $x\in M$ if their graphs are tangent to each other with order $k$ at $s(x)=\tilde{s}(x) \in E$. By "their graphs are tangent" we mean that if we express the sections as functions $f$ and $\tilde{f}$ in a local trivialization, the partial derivatives of $f$ and $\tilde{f}$ at $x$ coincide up to order $k$. This fact does not depend on the chosen trivialization.</p>
@@ -46,7 +46,6 @@ $$
 J^k(E)=\bigcup_{x\in M} J^k (E)_x.
 $$
 <p>In this <a href="./bundle.md.html">bundle</a> we have special coordinates called the <b>derivative coordinates</b>. Let $(U,u)$ be <a href="./bundle.md.html">adapted coordinates</a> on $E$, with $u=(x^i, u^{\alpha})$. The <b>derivative coordinates</b> induced by $(U,u)$ are $(\tilde{U}, \tilde{u})$ where</p>
-<p></p>
 <p>* $\tilde{U}=\{[s]_x^k: x\in M, s(x)\in U\}$</p>
 <p>* $\tilde{u}=(x^i, u^{\alpha},u_I^{\alpha})$ where</p>
 <p><ul style="margin-left:20px;"><li>$x^i([s]_x^k)=x^i(s(x))$</li></ul></p>
@@ -67,14 +66,14 @@ $$
 <p>being $s:M\rightarrow E$ a section, are called <b>holonomic sections</b> or $k$-graphs (see <a href="./../../Bibliography/@bryant2013exterior.md.html">@bryant2013exterior</a> page 23 Theorem 3.2.) and will be denoted by $j^k s$.</p>
 <p></p>
 <p>The jet space or jet bundle $J^k(E)$ has a natural <a href="./distribution.md.html">distribution</a> called the <a href="./Cartan distribution.md.html">Cartan distribution</a>.</p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<h3 style="margin-left:0px;" id="Infinity_jet_bundle">Infinity jet bundle</h3>
+<p></p>
+<h3 style="margin-left:0px;" id="Infinite_jet_bundle">Infinite jet bundle</h3>
 <p>The <b>infinite jet space</b>  $J^{\infty}(E)$ is defined as the <a href="./../ALGEBRA/inverse limit.md.html">inverse limit</a> of the <a href="./../ALGEBRA/inverse limit.md.html">inverse system</a> </p>
 $$
 \cdots \rightarrow J^{k+1}(\pi) \stackrel{\pi_{k+1, k}}{\longrightarrow} J^{k}(\pi) \rightarrow \cdots \rightarrow J^{1}(\pi) \stackrel{\pi_{1,0}}{\longrightarrow} J^{0}(\pi)=E \stackrel{\pi}{\rightarrow} M
 $$
 <p></p>
-<p>In this case, <a href="./Cartan distribution.md.html">Cartan distribution</a> is involutive and its dimension agrees with $\mbox{dim}M$. We get a decomposition of $TJ^{\infty}(E)$ in a vertical bundle (the subspace of $T_p J^{\infty}(E)$ tangent to the fibre) and an horizontal one (the subspace belonging to the Cartan distribution). This decomposition induces a similar decomposition in the cotangent space $T^*J^{\infty}(E)$, and also in the ring of differential forms $\Omega^*(J^*(E))$ giving rise to the <a href="./../variational bicomplex.md.html">variational bicomplex</a>.</p>
+<p>In this case, <a href="./Cartan distribution.md.html">Cartan distribution</a> is involutive (see <a href="https://en.wikipedia.org/wiki/Jet_bundle)" target="_blank">wikipedia</a> and its dimension agrees with $\mbox{dim}M$. We get a decomposition of $TJ^{\infty}(E)$ in a vertical bundle (the subspace of $T_p J^{\infty}(E)$ tangent to the fibre) and an horizontal one (the subspace belonging to the Cartan distribution). This decomposition induces a similar decomposition in the cotangent space $T^*J^{\infty}(E)$, and also in the ring of differential forms $\Omega^*(J^*(E))$ giving rise to the <a href="./../variational bicomplex.md.html">variational bicomplex</a>.</p>
 <p></p>
 <p></p>
 <h2 style="margin-left:0px;" id="Second_approach:_Sketch_of_the_formalization_a_la_Olver_for_the_extended_jet_bundle">Second approach: Sketch of the formalization a la Olver for the extended jet bundle</h2>
@@ -82,7 +81,7 @@ $$
 $$
 \partial_{J} f^{\alpha}\left(x_{0}\right)=\partial_{J} \tilde{f}^{\alpha}\left(x_{0}\right), \quad \alpha=1, \ldots, q, \quad 0 \leqslant \# J \leqslant k
 $$
-<p>This idea is independent of the coordinate chart, and therefore we can define an equivalence relation between submanifolds <b>being tangent up to order $k$ at $x$</b>. The equivalence class $[N]_x^k$ is called a jet. The union of all jets at $x$ is the jet space at x $J^k(M)_x$ and the jet bundle is</p>
+<p>This idea is independent of the coordinate chart, and therefore we can define an equivalence relation between submanifolds <b>being tangent up to order $k$ at $x$</b>. The equivalence class $[N]_x^k$ is called a jet. The union of all jets at $x$ is the jet space at $x$, $J^k(M)_x$ and the jet bundle is</p>
 $$
 J^k(M)=\bigcup_{x\in M} J^k(M)_x
 $$
@@ -90,47 +89,26 @@ $$
 <p></p>
 <h2 style="margin-left:0px;" id="Third_approach:_Sketch_of_the_formalization_of_Wikipedia">Third approach: Sketch of the formalization of Wikipedia</h2>
 <p></p>
-<p>\begin{itemize}</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\item Between functions $f,g:\mathbb{R} \mapsto \mathbb{R}$ we define an equivalence relation $E^k_x$ for $x\in \mathbb{R}$: $f E^k_x g$ iff</li></ul></p>
-<p></p>
+<p><ul style="margin-left:0px;"><li>Between functions $f,g:\mathbb{R} \mapsto \mathbb{R}$ we define an equivalence relation $E^k_x$ for $x\in \mathbb{R}$: $f E^k_x g$ iff</li></ul></p>
 $$
-
-f^{j)}(x)=g^{j)}(x)
-
+  f^{j)}(x)=g^{j)}(x)
 $$
+<p>for $j=0\ldots k$. The equivalence class of $f$ is denoted by $[f]^k_x$ and is called the $k$-jet of $f$.</p>
 <p></p>
-<p>for $j=0\ldots k$. The equivalence class of $f$ is denoted by $[f]^k_x$ is called the $k$-jet of $f$.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\item For $\alpha, \beta: \mathbb{R} \mapsto M$, being $M$ a manifold and such that $\alpha(0)=\beta(0)=x\in M$, we say that $\alpha E^k_x \beta$ iff for every $\varphi:M\mapsto \mathbb{R}$</li></ul></p>
-<ul style="margin-left:0px;"><li>$$</li></ul>
- (\varphi \circ \alpha) E^k_x (\varphi \circ \beta)
- $$
-<p></p>
-<p><ul style="margin-left:0px;"><li>This is like saying that curves $\alpha$ and $\beta$ has $k$-order contact. The equivalence class of $\alpha$ is denoted by $[\alpha]^k_x$ is called the $k$-jet of $\alpha$. We will denote by</li></ul></p>
-<p></p>
-<ul style="margin-left:0px;"><li>$$</li></ul>
-
- J_{0}^{k}(\mathbb{R}, M)_{x}
-
- $$
-<p></p>
-<p><ul style="margin-left:0px;"><li>the set of all $k$-jets at $x$. As $x$ varies over $M$ the set $J_{0}^{k}(\mathbb{R}, M)_{x}$ produces a fibre bundle known as the $k$-th order tangent bundle: $T^k M$.</li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>\item If $f,g: M\mapsto N$ are maps over two manifolds, we say that $f E^k_x g$ iff for every $\gamma : \mathbb{R} \rightarrow M$</li></ul></p>
-<ul style="margin-left:0px;"><li>$$</li></ul>
- (f\circ \gamma) E^k_x (g\circ \gamma)
- $$
-<p></p>
-<p><ul style="margin-left:0px;"><li>\item In the previous case, if we take $N$ as a fiber bundle over $M$, we can consider $f$ and $g$ to be sections. The set of all $k$-jets at $x$ is denoted by</li></ul></p>
-<ul style="margin-left:0px;"><li>$$</li></ul>
- J_x^k(M,N)
+<p><ul style="margin-left:0px;"><li>For $\alpha, \beta: \mathbb{R} \mapsto M$, being $M$ a manifold and such that $\alpha(0)=\beta(0)=x\in M$, we say that $\alpha E^k_x \beta$ iff for every $\varphi:M\mapsto \mathbb{R}$</li></ul></p>
 $$
-<p><ul style="margin-left:0px;"><li>and if we consider $x$ varying at $M$ we can construct a fiber bundle over $M$ denoted $J^k(N)$.</li></ul></p>
+  (\varphi \circ \alpha) E^k_x (\varphi \circ \beta)
+$$
+<p>This is like saying that curves $\alpha$ and $\beta$ have $k$-order contact. The equivalence class of $\alpha$ is denoted by $[\alpha]^k_x$ and is called the $k$-jet of $\alpha$. We will denote by</p>
+$$
+J_{0}^{k}(\mathbb{R}, M)_{x}
+$$the set of all $k$-jets at $x$. As $x$ varies over $M$ the set $J_{0}^{k}(\mathbb{R}, M)_{x}$ produces a fibre bundle known as the $k$-th order tangent bundle: $T^k M$.
 <p></p>
-<p>\end{itemize}</p>
+<p><ul style="margin-left:0px;"><li>If $f,g: M\mapsto N$ are maps over two manifolds, we say that $f E^k_x g$ iff for every $\gamma : \mathbb{R} \rightarrow M$</li></ul></p>
+$$
+(f\circ \gamma) E^k_x (g\circ \gamma)
+$$
+<p><ul style="margin-left:0px;"><li>In the previous case, if we take $N$ as a fiber bundle over $M$, we can consider $f$ and $g$ to be sections. The set of all $k$-jets at $x$ is denoted by $J_x^k(M,N)$, and if we consider $x$ varying at $M$ we can construct a fiber bundle over $M$ denoted $J^k(N)$.</li></ul></p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

@@ -46,7 +46,15 @@ $$
 <p>Observe that $G$ acts transitively on $X$ and $H$ is the <a href="./group action.md.html">isotropy group</a> of a point $x\in X.$ This construction can therefore be reversed and say that a Klein geometry is a <a href="./../ALGEBRA/homogeneous space.md.html">homogeneous space</a> $(X,G)$, and $H$ appears as the isotropy group of certain $x_0 \in X$. The choice of $x_0$ is not important, because all the isotropy groups are conjugate.</p>
 <p></p>
 <p>This theorem shows that this reversed construction is fine even in the smooth manifolds category:</p>
-<p><img src="./../../imagenes/Pasted image 20211231182647.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><b>Theorem</b> Let $G$ be a Lie group and $H$ be a closed Lie subgroup of $G$. Then there exists a unique smooth structure on the quotient space $G/H$, denoted by $N$, such that $N$ becomes a smooth manifold and the natural action of $G$ on $N$ is smooth. Further, suppose $M$ is a smooth manifold on which $G$ acts smoothly and transitively. Let $x_0 \in M$ and $G_{x_0}$ denote the stability subgroup at $x_0$. Then the map</p>
+<p></p>
+$$
+g G_{x_0} \mapsto g \cdot x_0
+$$
+<p></p>
+<p>is a smooth diffeomorphism from $G/G_{x_0}$ onto $M$.$\blacksquare$</p>
+<p><b>Proof</b> Theorem 2.9.4 in V. S Varadarajan. Lie Groups, Lie Algebras, and Their Representations. 1st ed. Springer,1984$\blacksquare$</p>
+<p></p>
 <p>What this theorem says is that if there is a Lie group and a Lie subgroup, their quotient is a smooth manifold. On the other hand, it also says that if there is a Lie group that acts smoothly and transitively on a smooth manifold, then the stabilizer of any point (which is closed) can be quoted with the Lie group which then becomes the manifold in question.</p>
 <p><b>Observation</b>: if the group is not closed the action is not <a href="./../proper action.md.html">proper</a> and the quotient is not a manifold. See example in <a href="./../../Bibliography/@sharpe2000differential.md.html">@sharpe2000differential</a> page 146.</p>
 <p></p>
@@ -125,6 +133,7 @@ $$
 <p><img src="./../../imagenes/Pasted image 20220101101808.png" style="width:80vw; border-radius: 3px;" ></p>
 <p></p>
 <h1 style="margin-left:0px;" id="About_recovering_the_geometric_properties_of_$X$_from_the_pair_$G,H$">About recovering the geometric properties of $X$ from the pair $(G,H)$</h1>
+<p>See <a href="./../../☕REFLECTIONS/Where is the geometry in a Klein geometry?.md.html">Where is the geometry in a Klein geometry?</a></p>
 <p></p>
 <p>I have found that the key is in the <a href="./adjoint representation.md.html">adjoint representation</a> of $H$ over $\mathfrak{g}$. Because in this context we can look for invariant subspaces and I guess that "inside" is hidden the information for the geometry. I have seen a good explanation in *Parabolic Geometries*, by Andreas Cap and  Jan Slovak, page 6, but I don't fully understand yet.</p>
 <p><ul style="margin-left:0px;"><li></li></ul></p>

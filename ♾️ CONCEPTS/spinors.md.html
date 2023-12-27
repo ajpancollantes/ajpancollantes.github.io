@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Spinors">Spinors</h1>
+<p></p>
+<h2 style="margin-left:0px;" id="Definition">Definition</h2>
+<p>According to <a href="https://youtu.be/T0V08u4t-cg?si=WqN9lAbf8LYBTn8U&t=1305" target="_blank">this video</a>, they are elements of the complex <a href="./projective space.md.html">projective complex line</a> $\mathbb P \mathbb C^2$, in other words, the Bloch sphere.</p>
+<p></p>
+<p>Spinor space can be thought as the set of quantum states of a two-level quantum system, like the spin of the electron. </p>
+<p></p>
+<p>In other contexts, spinors are, simply, $\mathbb C^2$... I think that spinors are indeed elements of $\mathbb C^2$, but when they represent quantum states we assume that the multiplication by a complex number doesn't change the state. </p>
+<p></p>
+<p>... To be developed...</p>
+<p></p>
+<p>They transform under the <a href="./spin group.md.html">spin group</a>.</p>
+<p></p>
+<p>Related: <a href="./Pauli matrices.md.html">Pauli matrices</a>.</p>
+<p></p>
+<p><b>Another definition</b>: element of minimal left ideal  in a <a href="./Clifford algebra.md.html">Clifford algebra</a> (<a href="https://youtu.be/j6reYs3q_2g?si=lSbT4HzqklS3WEDl&t=1548)" target="_blank">here</a></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Pauli_spinors_vs_Weyl_spinors">Pauli spinors vs Weyl spinors</h2>
+<p><img src="./../imagenes/Pasted image 20231018201159.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>From [this video](<img src="./../imagenes/Pasted image 20231018201239.png" style="width:80vw; border-radius: 3px;" >).</p>
+<p></p>
+<p>There are also the Dirac spinors, related to the <a href="./../☕REFLECTIONS/Dirac equation.md.html">Dirac equation</a>.</p>
+<h2 style="margin-left:0px;" id="Physical_realization">Physical realization</h2>
+<h3 style="margin-left:0px;" id="Light_polarization">Light polarization</h3>
+<h3 style="margin-left:0px;" id="Stern-Gerlach_experiment">Stern-Gerlach experiment</h3>
+<p>Let's suppose that we feed a Stern-Gerlach machine with a beam of electrons prepared in a specific state; we will get two outcomes with different frequencies (probabilities). These outcomes and their probabilities are encoded in a vector of a Hilbert space. When I rotate the electron gun with a different spatial orientation (in our everyday 3D space), the probabilities change, suggesting that the electron is in a different state, another vector of the Hilbert space. However, the angle formed by this vector compared to the original one is half of the spatial rotation. We can say that on the 3D vectors of everyday life we are applying an element of SO(3), and on the Hilbert space, we are applying an element of SU(2), which is its covering space. The question is that starting from the initial orientation, I can reach the final orientation in many different ways. For example, I can stay as I am, which is a rotation of 0º, and that implies a 0º rotation in the electron's internal state; or I can rotate the electron gun 360º around any axis, which would mean having rotated the electron's internal state by 180º. <b>Although the gun is in the same position and orientation as before, internally the electron is in a different state</b>. This won't be noticeable in a simple experiment because global phases don't show, but it could influence an interference experiment.</p>
+<p></p>
+<p><b>How do those experiments roughly go?</b></p>
+<p>(see in calibre the pdf: "Spin rotation subtleties, Spin entanglement- experiments phase shift")</p>
+<p>What happens if we take the spin wavefunction of a particle, break it into two pieces, and let it interfere with itself? How can you do this? Use a classic two-slit experiment. You can observe strange interference effects. Imagine the following peculiar device:</p>
+<p><img src="./../imagenes/Pasted image 20230928161053.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
+<p>The particle starts in the spin-up state $\psi_A = |0\rangle$. What we will do is shoot spins through the device and measure the number of spins that get through to point B:</p>
+<p></p>
+$$
+\psi_B = e^{-iH\hat{t}/\hbar} = \psi_A = \psi_{\text{path1}} + \psi_{\text{path2}}
+$$
+<p></p>
+<p>This is the classic description of interference, where we superpose two quantum states and see if they constructively or destructively interfere. But what are the quantum states for the two paths?</p>
+<p></p>
+$$
+\psi_{\text{path1}} = |0\rangle
+$$
+<p></p>
+<p>and</p>
+<p></p>
+$$
+\psi_{\text{path2}} = e^{-i\hat{S}_z \hbar \Delta\phi} |0\rangle
+$$
+<p></p>
+<p>where $\Delta\phi = \frac{eB_0}{m} \Delta t$ and $\Delta t$ is the transit time.</p>
+<p></p>
+<p>Now let's suppose that $B_0$ and $\Delta t$ are tuned so that $\Delta\phi = 2\pi$. What happens? Naively, we might think nothing would happen because a $2\pi$ rotation brings you right back to where you started. However, this would be incorrect. We need to note the following:</p>
+<p></p>
+$$
+\psi_{\text{path2}} = e^{-i\hat{S}_z \hbar \cdot 2\pi} |0\rangle = e^{-i\pi} |0\rangle
+$$
+<p></p>
+<p>So $\psi_{\text{path2}} = -|0\rangle$! Normally, we ignore the "-" sign since it's an overall phase factor, but now we can't since the particle is going to interfere with itself. So what happens at point B?</p>
+<p></p>
+$$
+\psi_B = |0\rangle + (-|0\rangle) = 0
+$$
+<p></p>
+<p>How many particles get through? ZERO!</p>
+<p></p>
+<p>This phenomenon has been experimentally observed in what are now classic experiments with neutrons. </p>
+<p>See H. Rauch et al., Phys. Lett. 64A, 425 (1975) and S. A. Werner et al., Phys. Rev. Lett. 35, 1053 (1975).</p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

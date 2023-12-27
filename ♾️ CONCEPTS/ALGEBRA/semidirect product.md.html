@@ -32,22 +32,23 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Semidirect_product">Semidirect product</h1>
+<h2 style="margin-left:0px;" id="Definition_a_remarks">Definition a remarks</h2>
 <p>We start with a proposition:</p>
 <p><b>Proposition</b></p>
-<p>Let $G$ be a group, $N$ a normal subgroup and $H$ a subgroup. The following are equivalent:</p>
+<p>Let $G$ be a group, $N$ a <a href="./normal subgroup.md.html">normal subgroup</a> and $H$ a subgroup. The following are equivalent:</p>
 <p>1. There exists a group homomorphism $\phi: G \rightarrow H$ such that $\phi|_H=id$ and $\mbox{Ker}(\phi)=N.$</p>
 <p>2. It is satisfied that $G=NH$ and $H\cap N=\{e\}.$</p>
 <p></p>
 <p>When any of those requirements is satisfied we write </p>
 $$
 G=N\rtimes H
-$$$\blacksquare$
+$$
+<p>$\blacksquare$</p>
 <p><b>Definition</b></p>
 <p>When we have the context given by condition 1 or 2 we say that $G$ is the <b>semidirect product of $N$ and $H$</b> and we write $G=N \rtimes H$.</p>
 <p>$\blacksquare$</p>
 <p></p>
-<p></p>
-<h3 style="margin-left:0px;" id="Remarks">Remarks</h3>
+<p><b>Remarks</b></p>
 <p><ul style="margin-left:0px;"><li>The "converse" is not true. Given a normal subgroup $N$ of $G$, $G$ is not necessarily the semidirect product of $N$ and $G/N$. For example: $\mathbb Z/4\mathbb Z$ which contains $\mathbb Z/2\mathbb Z$. I have to think it.</li></ul></p>
 <p></p>
 <p><ul style="margin-left:0px;"><li><b>Another characterization</b>. An exact sequence $0 \rightarrow N \rightarrow G \rightarrow H \rightarrow 0$ to be isomorphic to one of the form $0 \rightarrow N \rightarrow N \rtimes H \rightarrow H \rightarrow 0$ is if $G \rightarrow H$ has a section.</li></ul></p>
@@ -58,17 +59,15 @@ NH=\{nh: n\in N, h\in H\}.
 $$
 <p><ul style="margin-left:0px;"><li>Under condition 2 every $g\in G$ can be written in an unique way as a product $g=nh$, $n\in N, h\in H$. If $nh=n'h'$ then $(n')^{-1}n=h'h^{-1} \in N\cap H$ and therefore $(n')^{-1}n=h'h^{-1}=e.$</li></ul></p>
 <p><ul style="margin-left:0px;"><li>Condition 1 is like saying that the main group $G$ can be seen like a bundle, since we have a idempotent map $\phi: G \rightarrow H$. The standard fibre is $N$.</li></ul></p>
-<p></p>
 <p><img src="./../../imagenes/Pasted image 20210928191634.png" style="width:80vw; border-radius: 3px;" ></p>
+<p></p>
 <p>Image from Mathematics for Physics, an ilustrated handbook, page 40.</p>
 <p></p>
-<p></p>
-<p></p>
-<h3 style="margin-left:0px;" id="Proof">Proof</h3>
+<p><b>Proof</b></p>
 <p><img src="./../../imagenes/Pasted image 20211230180557.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>$\blacksquare$</p>
 <p></p>
-<p></p>
-<h3 style="margin-left:0px;" id="The_product_in_$G$">The product in $G$</h3>
+<h2 style="margin-left:0px;" id="The_product_in_$G$">The product in $G$</h2>
 <p>The product in $G$ takes a special form: given $g=(n,h)$ and $g'=(n',h')$ then $gg'=(\bar{n},\bar{h})$ and</p>
 $$
 \bar{n}\bar{h}=nhn'h'=nhn'h^{-1}hh'
@@ -82,17 +81,19 @@ $$
 $$
 <p>We can think in $N$ as translations and $H$ as rotations.</p>
 <p></p>
-<p></p>
-<h1 style="margin-left:0px;" id="Key_example">Key example</h1>
+<h2 style="margin-left:0px;" id="Key_example">Key example</h2>
 <p>Suppose the group $E(2)$ of isometries of the euclidean plane, or rigid motions. It is known that any element of $E(2)$ can be seen as the composition of a translation (an element of $\mathbb{R}^2$) and a linear isometry (an element of $O(2)$, that is, a rotation with centre at the origin or a reflection with axis through the origin). This decomposition is unique.</p>
 <p></p>
 <p>Moreover, translations are a normal subgroup of $E(2)$: you can see it intuitively "moving things on a table" or by computation:</p>
 $$
 v\mapsto R(R^{-1}v+t)=R R^{-1}v+Rt=v+Rt
 $$
-<p>Therefore $E(2)=\mathbb{R}^2 \rtimes O(2).$ </p>
+<p>Therefore </p>
+$$
+E(2)=\mathbb{R}^2 \rtimes O(2).
+$$ 
 <p></p>
-<p>In general, if we know consider any subgroup $H$ of $GL(n)$ we can consider the subgroup $G$ of $GL(n+1)$</p>
+<p>In general, if we now consider any subgroup $H$ of $GL(n)$ we can consider the subgroup $G$ of $GL(n+1)$</p>
 $$
 G=\left\{\begin{pmatrix}
 B & v\\
@@ -142,13 +143,31 @@ $$
 $$
 <p>Moreover, the map is also injective, as it is easy to check. </p>
 <p></p>
+<h2 style="margin-left:0px;" id="Another_approach">Another approach</h2>
+<p>Within this approach we can <b>create</b> a group being the semidirect product of two given groups.</p>
 <p></p>
+<p><b>Definition.</b> Let $H$ and $N$ be groups, and let $\phi: H \rightarrow \text{Aut}(N)$ be a group homomorphism such that $\phi(h)$ defines a group action of $h$ on $N$. The semidirect product $N \rtimes_{\phi} H$ is the Cartesian product $N \times H$ endowed with the multiplication operation</p>
+$$
+\cdot : (n, h) \cdot (n', h') = (n \phi(h)(n'), hh') \quad \forall n, n' \in N, \, h, h' \in H,
+$$
+<p>where $\phi(h)(n')$ denotes the action of $h$ on $n'$.$\blacksquare$</p>
 <p></p>
+<p>It can be shown that it is indeed a group.</p>
 <p></p>
-<h1 style="margin-left:0px;" id="Another_approach">Another approach</h1>
-<p><img src="./../../imagenes/Pasted image 20211231183650.png" style="width:80vw; border-radius: 3px;" ></p>
-<p>It can be shown that it is a group.</p>
+<h2 style="margin-left:0px;" id="About_the_Lie_algebras">About the Lie algebras</h2>
+<p>I think it can be proven the following proposition</p>
+<p><b>Proposition</b> </p>
+<p>Let $G$ be a Lie group that is the semidirect product of a normal subgroup $N$ and a subgroup $H$, i.e., $G = N \rtimes H$. Then the Lie algebra $\mathfrak{g}$ of $G$ has a canonical decomposition as an $Ad(H)$-module given by </p>
+$$ 
+\mathfrak{g} = \mathfrak{n} \oplus \mathfrak{h}, 
+$$
+<p>where $\mathfrak{n}$ and $\mathfrak{h}$ are the Lie algebras of the subgroups $N$ and $H$, respectively.$\blacksquare$</p>
 <p></p>
+<p><b>Proof</b></p>
+<p>The idea is:</p>
+<p><ul style="margin-left:0px;"><li>Show that $\mathfrak{g} = \mathfrak{n} \oplus \mathfrak{h}$ as vector spaces</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\mathfrak{g}$ is an $Ad(H)$-module, and of course $Ad(H)(\mathfrak{h})\subset\mathfrak{h}$. But also, since $N$ is normal, we have that $Ad(H)(\mathfrak{n})\subset\mathfrak{n}$</li></ul></p>
+<p>$\blacksquare$</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

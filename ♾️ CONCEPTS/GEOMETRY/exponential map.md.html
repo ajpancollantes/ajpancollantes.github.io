@@ -112,7 +112,7 @@ P\cdot e^X=exp_p(V).
 $$
 <p></p>
 <p></p>
-<h1 style="margin-left:0px;" id="Inverse_relation_with_"differentiation"">Inverse relation with "differentiation"</h1>
+<h2 style="margin-left:0px;" id="Inverse_relation_with_"differentiation"">Inverse relation with "differentiation"</h2>
 <p>It is important to note that $\phi_V(t,e)=e^{tv}$. But this is obvious from <a href="./../../✏️ THEOREMS/DG/flow theorem for vector fields.md.html#Important_property">flow theorem for vector fields#Important property</a>. Indeed</p>
 $$
 e^{tv}=\phi_{tV}(1,e)=\phi_V(t,e).
@@ -123,40 +123,36 @@ v=\frac{d}{dt}|_{t=0} e^{tv}
 $$
 <p>expression that I like to call <b>inverse relation between exponential and differentiation at the origin</b>. In a sense, is like saying that exponentiation is like an "integration process" (see the picture of the section Motivation).</p>
 <p></p>
-<hr>
-<p>Now, think of </p>
+<h2 style="margin-left:0px;" id="Local_diffeomorphism_of_the_Exponential_Map">Local diffeomorphism of the Exponential Map</h2>
+<p>Consider the exponential map</p>
 $$
 exp: \mathfrak{g} \mapsto G
 $$
-<p>and its differential at $0$</p>
+<p>along with its differential at $0$:</p>
 $$
-d (exp)_o: T_o \mathfrak{g} \mapsto \mathfrak{g}
-$$
-<p></p>
-<p>Since this is the identity map, by inverse function theorem $exp$ is a diffeomorphism in a neighbourhood of $0\in \mathfrak{g}$ and $e\in G$, say $U_e$.</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>Proposition 1.24 in Peter Olver says that any $g\in G$ is product of $g_i\in U_e$. So \textbf{for any $g\in G$}:</p>
-<p></p>
-$$
-
-g=g_1\cdot g_2\cdot \cdots=exp(v_1)\cdot exp(v_2)\cdot \cdots
-
+d (exp)_0: T_0 \mathfrak{g} \mapsto \mathfrak{g}
 $$
 <p></p>
-<p>for certain $v_i \in \mathfrak{g}$.</p>
+<p>The differential is the identity map, which implies, by the inverse function theorem, $exp$ acts as a diffeomorphism in a neighbourhood of $0\in \mathfrak{g}$ and $e\in G$. This neighbourhood is denoted as $U_e$. This ensures that the exponential map is always a local diffeomorphism at the origin of the Lie algebra. As a result, <b>it sets up a local chart for a neighbourhood of the identity</b> in the Lie group.</p>
 <p></p>
-<hr>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<h1 style="margin-left:0px;" id="Surjectivity_of_the_exponential_map">Surjectivity of the exponential map</h1>
+<h3 style="margin-left:0px;" id="Global_Behavior_of_the_Exponential_Map">Global Behavior of the Exponential Map</h3>
+<p>It's essential to note that while the map acts as a diffeomorphism locally, its behavior can be different when viewed globally. Specifically:</p>
+<p><ul style="margin-left:0px;"><li>The exponential map may not be injective, which means distinct elements in the Lie algebra could end up mapping to the same element in the Lie group. This has to do with <a href="./../covering group.md.html">covering group</a>s.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The map might not be surjective. This implies there could be some elements in the Lie group that the exponential map cannot reach starting from the Lie algebra. Regarding the surjectivity we have two partial results:</li></ul></p>
+<h4 style="margin-left:0px;" id="Product_Representation_in_$G$">Product Representation in $G$</h4>
+<p>According to Proposition 1.24 in <a href="./../../Bibliography/@olver86.md.html">@olver86</a>, any element $g\in G$ can be expressed as a product of elements $g_i$ that belong to $U_e$. Formally, for any $g\in G$:</p>
+$$
+g=g_1\cdot g_2\cdot \cdots = exp(v_1)\cdot exp(v_2)\cdot \cdots
+$$
+<p>where each $v_i$ is an element of $\mathfrak{g}$.</p>
 <p></p>
-<p><b>Proposition</b></p>
-<p>If ${G}$ is a compact connected Lie group, then the exponential map is surjective. </p>
-<p></p>
-<p><b>Proof</b></p>
-<p>The proof is not trivial. See here:</p>
+<h4 style="margin-left:0px;" id="Surjectivity_of_the_Exponential_Map">Surjectivity of the Exponential Map</h4>
+<p><b>Proposition</b>  </p>
+<p>For a compact connected Lie group $G$, the exponential map is surjective.</p>
+<p><b>Proof</b>  </p>
+<p>The proof is intricate and is provided in an external source. For a detailed understanding, refer to:</p>
 <p><a href="https://terrytao.wordpress.com/2011/06/25/two-small-facts-about-lie-groups/" target="_blank">https://terrytao.wordpress.com/2011/06/25/two-small-facts-about-lie-groups/</a></p>
+<p></p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

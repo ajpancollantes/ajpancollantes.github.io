@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Where_is_the_geometry_in_a_Klein_geometry?">Where is the geometry in a Klein geometry?</h1>
+<p>Suppose we have a <a href="./../♾️ CONCEPTS/GEOMETRY/Klein geometry.md.html">Klein geometry</a> $M=G/H$, so we have a $H$-principal bundle $\pi: G\to M$. Suppose it is a reductive Klein geometry, so we have an $Ad(H)$-invariant decomposition of the Lie algebra $\mathfrak{g}$. Then, the Maurer-Cartan form $A$ of $G$ can be accordingly decomposed</p>
+$$
+\mathfrak{g} = \mathfrak{h} \oplus \mathfrak{m},
+$$
+<p>where $\mathfrak{m}$ is a complementary subspace to $\mathfrak{h}$ in $\mathfrak{g}$ that is invariant under the adjoint action of $H$, i.e., $Ad(h)\mathfrak{m} \subseteq \mathfrak{m}$ for all $h \in H$.</p>
+<p></p>
+<p>Consider the Maurer-Cartan form $A \in \Omega^1(G, \mathfrak{g})$, an $G$-equivariant map that associates to each $g \in G$ and $v \in T_g G$ an element $A_g(v) \in \mathfrak{g}$. In this context, one can decompose $A$ in accordance with the Lie algebra decomposition:</p>
+$$
+A = A_{\mathfrak{h}} + A_{\mathfrak{m}},
+$$
+<p>where $A_{\mathfrak{h}} \in \Omega^1(G, \mathfrak{h})$ and $A_{\mathfrak{m}} \in \Omega^1(G, \mathfrak{m})$ are the respective components of the Maurer-Cartan form with respect to the decomposition. </p>
+<p></p>
+<p>If we fix a particular $\mathfrak{m}$ and a particular linear isomorphism $i: \mathbb R^n\to \mathfrak m$ we have that given $p\in G$ with $\pi(p)=x$ the following map is a linear isomorphism</p>
+$$
+\varphi_p :  \mathbb R^n\stackrel{i}{\to}\mathfrak m\stackrel{(A_{\mathfrak m})_p^{-1}}{\to}\ker((A_{\mathfrak h})_p)  \stackrel{d\pi_p}{\to} T_{x}M ,
+$$
+<p>since $(A_{\mathfrak m})_p$ is a linear isomorphism.</p>
+<p></p>
+<p>On the other hand, for $M$ we have the frame bundle $\pi_{FM}: FM \to M$, which is a principal bundle with the group $GL(n)$. Recall that $F_xM=\{b:\mathbb R^n \to T_x M, b \text{ linear isomorphism} \}$. </p>
+<p></p>
+<p>We can <b>define a map</b> $h: H \to GL(n)$ such that the map:</p>
+$$
+\Phi: G \to FM,\quad \Phi(p)=\varphi_p
+$$
+<p>is a bundle morphism over $M$ that respects the group actions, i.e.:</p>
+<p>1. $\pi_{FM} \circ \Phi = \pi$.</p>
+<p>2. $\Phi(pg) = \Phi(p) \cdot h(g)$, whenever $p \in G$ and $g$ is in $H$.</p>
+<p></p>
+<p>Specifically, set</p>
+$$
+h(g) = i^{-1} \circ Ad(g) \circ i,
+$$
+<p>where $Ad(g) : \mathfrak{m} \to \mathfrak{m}$ is the adjoint action of $g$. Then, for $v\in \mathbb R^n$</p>
+$$
+\Phi(pg)(v)=\varphi_{pg}(v)= d\pi_{pg}\circ(A_{\mathfrak m})_{pg}^{-1}\circ i (v).
+$$
+<p>Observe that $((R_{g^{-1}})^* A_{\mathfrak{m}})_{pg} =(A_{\mathfrak{m}})_p\circ (R_{g^{-1}})_*$ by definition of pullback, and by the properties of the Maurer Cartan form $((R_{g^{-1}})^* A_{\mathfrak{m}})_{pg} = Ad(g) \circ (A_{\mathfrak{m}})_{pg}$, so we have</p>
+$$
+(A_{\mathfrak{m}})_{pg}^{-1}=(R_{g})_* \circ (A_{\mathfrak{m}})_p^{-1}\circ Ad(g).
+$$
+<p>On the other hand, since $G$ is an $H$-principal bundle, $d\pi_{pg}=d\pi_p \circ (R_{g^{-1}})_*$ (see <a href="./../♾️ CONCEPTS/GEOMETRY/principal bundle.md.html#Infinitesimal_behavior_of_the_right_action">this</a>). So finally we obtain</p>
+$$
+\Phi(pg)(v)=d\pi_p \circ (A_{\mathfrak{m}})_p^{-1} \circ Ad(g) \circ i(v)=\varphi_p(h(g)(v))=\Phi(p) \cdot h(g) (v).
+$$
+<p></p>
+<p>What we have, then, is nothing but <b>a group reduction</b> of $FM$, or equivalently, an H-structure on $M$. Since they are <a href="./../♾️ CONCEPTS/G-structure.md.html#Equivalence_to_existence_of_a_section">in 1-to-1 relation</a> with sections of $FM/H$, what we have introduced in $M$ is a choice of a preferred basis in every point $x$ in $M$. And the set of preferred basis is, in a sense, a geometry in $M$</p>
+<p></p>
+<p>Examples:</p>
+<p><ul style="margin-left:0px;"><li>Rn with a connection (differential geometry)</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Rn with a volume form</li></ul></p>
+<p><ul style="margin-left:0px;"><li>Rn with an orientation</li></ul></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
