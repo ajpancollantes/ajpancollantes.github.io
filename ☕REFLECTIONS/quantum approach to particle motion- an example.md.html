@@ -42,8 +42,8 @@ $$
 i\hbar \frac{\partial}{\partial t} \Psi(x, y, t) = \hat{H} \Psi(x, y, t).
 $$
 <p>To solve this problem, you would:</p>
-<p>1. <b>Define the Initial State</b>: Determine the wave function $\Psi(x, y, 0)$ at $t=0$. Since you detected the particle at $A=(0,0)$ at $t=0$, the wave function would be sharply peaked around this point. A <a href="./../♾️ CONCEPTS/Dirac delta.md.html">Dirac delta</a>.</p>
-<p>2. <b>Set Up the Hamiltonian</b>: For a particle with mass $m$ (which you've stated is 1), in a potential $V(x, y)$, the Hamiltonian is typically $\hat{H} = -\frac{\hbar^2}{2m}\nabla^2 + V(x, y)$. You would need to know the potential energy function $V(x, y)$ to proceed.</p>
+<p>1. <b>Define the Initial State</b>: Determine the wave function $\Psi(x, y, 0)$ at $t=0$. Since you detected the particle at $A=(0,0)$ at $t=0$, the wave function would be sharply peaked around this point. A <a href="./../♾️ CONCEPTS/Dirac delta.md.html">Dirac delta</a>, or something like that.</p>
+<p>2. <b>Set Up the Hamiltonian</b>: For a particle with mass $m=1$, in a potential $V(x, y)$, the Hamiltonian is typically $\hat{H} = -\frac{\hbar^2}{2m}\nabla^2 + V(x, y)$. You would need to know the potential energy function $V(x, y)$ to proceed.</p>
 <p>3. <b>Evolve the Wave Function</b>: Use the Schrödinger equation to evolve the wave function from $t=0$ to $t=2$. This involves solving partial differential equations, which can be complex and may require numerical methods.</p>
 <p>4. <b>Calculate the Probability</b>: The probability of finding the particle at position $B=(2,6)$ at $t=2$ is given by the square of the magnitude of the wave function at that point and time: $P(2,6,2) = |\Psi(2, 6, 2)|^2$.</p>
 <p></p>
@@ -53,7 +53,7 @@ $$
 <p><b>Answer</b></p>
 <p>1. <b>Compute the Amplitude for $(1,1)$ at $t=1$</b>: First, you would calculate the probability amplitude for the particle to move from $(0,0)$ at $t=0$ to $(1,1)$ at $t=1$. This involves solving the time-dependent Schrödinger equation as before.</p>
 <p>2. <b>Compute the Amplitude for $(2,6)$ at $t=2$</b>: Next, calculate the probability amplitude for moving from $(1,1)$ at $t=1$ to $(2,6)$ at $t=2$. Again, this involves the Schrödinger equation for this specific leg of the journey.</p>
-<p>3. <b>Multiply the Amplitudes</b>: The principle of quantum superposition implies that the total amplitude for the path going through $(1,1)$ at $t=1$ is the product of the amplitudes of the two legs of the journey.</p>
+<p>3. <b>Multiply the Amplitudes</b>: The total amplitude for the path going through $(1,1)$ at $t=1$ is the product of the amplitudes of the two legs of the journey. Why? I don't understand this yet. See section 2 in Feynman "Space-time approach to non-relativistic quantum mechanics".</p>
 <p>4. <b>Calculate the Probability</b>: The probability of the particle being at $(2,6)$ at $t=2$, given it passed through $(1,1)$ at $t=1$, is the square of the magnitude of the total amplitude calculated in the previous step.</p>
 <p></p>
 <p></p>

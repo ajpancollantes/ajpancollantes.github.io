@@ -64,8 +64,10 @@ $$
 <p><b>Sketch of the construction</b>: if we begin with an algebra $\mathcal{A}$ (it could be $L^{\infty}(\Omega, \Sigma, P)$ or not) we recover a $\sigma$-algebra $\Sigma$ by selecting all the $p\in \mathcal{A}$ such that $p^2=p=p^*$. Think if $p \in L^{\infty}$ is like that, $p(\omega)=0$ or $p(\omega)=1$, and $p$ works like and indicator function of a set $A_p \in \Sigma$. The inclusion $\subseteq$ relation in $\Sigma$ is recovered by means of the relation: $p\subseteq q$ iff $p\cdot q=p$. And so we can recover the elementary events and the sample space $\Omega$.</p>
 <p></p>
 <p></p>
-<h2 style="margin-left:0px;" id="Step_to_quantum_probability">Step to quantum probability</h2>
-<p><b>And now, here comes the key idea</b>: making a mental effort you can see any $f\in L^{\infty}$ like an operator on a Hilbert space. What Hilbert space? Well, is $L^2(\Omega,\Sigma,P)$, and as weird as it can look,  you can think that is nothing else than $\mathbb C^n$ when $\Omega$ has cardinal $n$. So, in a finite $\Omega$ you can associate to $f$ the linear map</p>
+<h2 style="margin-left:0px;" id="Quantum_probability">Quantum probability</h2>
+<p>I have written two times about quantum probability. I have to re-read and merge both text (I don't know which is better)</p>
+<h3 style="margin-left:0px;" id="Text_1:">Text 1:</h3>
+<p>Coming from <a href="./probability theory.md.html#Classical_probability">above</a>. <b>And now, here comes the key idea</b>: making a mental effort you can see any $f\in L^{\infty}$ like an operator on a Hilbert space. What Hilbert space? Well, is $L^2(\Omega,\Sigma,P)$, and as weird as it can look,  you can think that is nothing else than $\mathbb C^n$ when $\Omega$ has cardinal $n$. So, in a finite $\Omega$ you can associate to $f$ the linear map</p>
 $$
 M_f:\mathbb C^n \longmapsto \mathbb C^n
 $$
@@ -171,6 +173,119 @@ $$
 <p>and we obtain 2'5. Something between $f(a)$ and $f(3)$. It looks like if we are filling the holes of the sample space $\Omega$. </p>
 <p></p>
 <p>Another key idea to develop: as subspaces and even as linear maps, events and states are the same. I compute the probability of an event given a state by projecting the state vector over the event subspace: the squared length is the probability and the resulting vector is the new state, or by means of the trace if I consider them operators. They should be treated on the same footing.</p>
+<p></p>
+<h3 style="margin-left:0px;" id="Text_2:">Text 2:</h3>
+<p></p>
+<h4 style="margin-left:0px;" id="With_classical_probability">With classical probability</h4>
+<p>We are going to analyse, from the beginning, the <a href="./../♾️ CONCEPTS/Stern-Gerlach experiment.md.html">Stern-Gerlach experiment</a> from a mathematical viewpoint, and try to see why is natural the <a href="./../☕REFLECTIONS/formulation of QM.md.html">formulation of QM</a>. Imagine that electrons have an <b>internal configuration</b> that can be observed with a Stern-Gerlach device ($SG$) when they are shot with an electron gun. We align the machine with the $z$ axis (we call this configuration $SG_z$) and it gives us two outputs when electrons arrive: for example, <b>red</b> and <b>green</b>. Our first idea would be to think that there are two kinds of electrons or <b>two states of the electron</b>. </p>
+<p></p>
+<p>From the point of view of set theory, improved with basic probability theory, our first thought is: "ok, I have a set of electrons $\tilde{\Omega}$ and a map that sends their elements to the set $\{r,g\}$ with different frequencies. So, since there are (approximately) an infinite number of electrons, I can take a partition of $\tilde{\Omega}$ and shrink all data to a new set $\Omega=\{r,g\}$ with a probability measure $P$, and we would have no loss of information.</p>
+<p></p>
+<p>Then, we observe that if we have a copy of this machine and rotate it (or keep it fixed and rotate the gun that shoot the electrons in the opposite direction) to the $x$ axis (let's call $SG_x$ to this second machine) then we obtain two other outputs (<b>big</b> and <b>small</b>, for example) with a new probability distribution $P'$. If we assume a classical behavior of the states of the electron, i.e., we can use machine $SG_z$ on an electron and then machine $SG_x$ on the same electron and that does not change the <b>state</b> itself, we can obtain a joint probability distribution $\tilde{P}$, and conclude that there are four different states: </p>
+$$
+\Omega=\{rb, rs, gb, gs\}
+$$
+<p>with a new probability function. Our new set appears like a Cartesian product of the previous "sets of possibilities".</p>
+<p>Observe that the joint distribution is not necessarily</p>
+$$
+\tilde{P}(zx)=P(z)P'(x)
+$$
+<p>being this the case only when the variables are independent. For example, maybe there is a correlation between being red and being big.</p>
+<p></p>
+<h4 style="margin-left:0px;" id="A_different_approach">A different approach</h4>
+<p>All of this could have been <b>translated into math</b> in a very different way, far more complicated, but that it will pay off later.</p>
+<p>A finite set $B$ with $N$ elements can be viewed as a <a href="./../♾️ CONCEPTS/FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a></p>
+$$
+\ell^2(B) =\left\{ x:B \rightarrow \mathbb{C} \right\}=\mathbb{C}^N
+$$
+<p>with inner product</p>
+$$
+\langle x | y \rangle=\sum_{b \in B} x(b)y(b)
+$$
+<p>This way we have "enriched" the set: </p>
+<p>1. we conserve the original elements of the set, codified in the rays through the canonical basis; but we get new objects, the <b>superposition</b> of the elements. This new objects may not have an interpretation for us, at a first glance. </p>
+<p>2. And we also have a measure of "how <b>independent</b>" this objects are: the inner product. For example, the original elements are totally independent, since their inner product is 0.</p>
+<p></p>
+<p>Let's come back to Stern-Gerlach. Instead of thinking as before in the set $\Omega=\{r,g\}$, we take the Hilbert space</p>
+$$
+\mathcal{H}_1=\ell^2(\Omega)=\mathbb{C}^2
+$$
+<p>with the usual inner product. </p>
+<p></p>
+<p>The canonical basis elements of $\mathcal{H}_1$ (or better said, the rays through them) will represent the states $r$ and $g$, and the probability function $P$ will be encoded in a unitary vector $s_1 \in \mathcal{H}_1$ (or better said, the ray through it) in such a way that </p>
+$$
+P(r)=\|proj_r (s_1)\|_2^2=|\langle s_1 |r \rangle|^2=\langle s_1| proj_r(s_1) \rangle
+$$
+<p>represents the probability of obtaining the output $r$ when using the first machine. And the same for $g$. Observe that we are treating on an equal footing the states ($r$ or $g$) and the probability measure.</p>
+<p></p>
+<p>So far, two questions can arise:</p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>We have chosen in $\mathcal{H}_1$ the <b>usual inner product</b> (equivalent to $\|\cdot \|_2$). Why not other inner product or even why not a simpler mathematical object like an absolute value norm? That is, why don't we take, for example, $\|v\|_1=|v_1|+|v_2|$ and encode probabilities in $\|proj_r(s_1)\|_1$ without the square? Well, the only $p$-norm satisfying the <b>parallelogram rule</b> is $\|\cdot\|_2$, and this rule is needed to form an inner product from the norm. The finer approach of inner product will be needed later because it let us use further mathematics concepts (orthogonality, unitary Lie groups,...). Moreover, even intuitively the inner product approach is desirable because it gives us a measurement of the independence of the elements represented by the rays in the Hilbert space.</li></ul></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>Why don't we use real numbers and take as probabilities the absolute values of the component instead of the square? Once we fix the use of the 2-norm, we need to deal with <b>amplitudes</b> (i.e., numbers whose square give probabilities) because we want to keep with us the <b>addition of probabilities for incompatible events</b>, from the classical setup.<img src="./../imagenes/Pasted image 20220619085248.png" style="width:80vw; border-radius: 3px;" ></li></ul></p>
+<p><ul style="margin-left:0px;"><li>And also, <a href="./why complex numbers in QM.md.html">why complex numbers in QM</a>?</li></ul></p>
+<p></p>
+<p>Within this approach to sets as Hilbert spaces, <b>subsets are encoded as subspaces</b>, the <b>union of sets is translated as the direct sum of subspaces</b>, <b>intersection of sets as intersections</b> of subspaces and the <b>complement of a set as the orthogonal complement</b> of the subspace.</p>
+<p></p>
+<h4 style="margin-left:0px;" id="Random_variables_vs_operators">Random variables vs operators</h4>
+<p>Let's continue with $(\mathcal{H}_1, \langle | \rangle{}{})$. If we had numerical data instead of qualitative one (i.e., suppose that instead of "red" and "green", our machine give us two fixed values 0'7 and 1'8, or in other words, a random variable) we would codify this, within this new approach, in the idea of an operator. That is, a linear map</p>
+$$
+F:\mathcal{H}_1 \longmapsto\mathcal{H}_1
+$$
+<p>such that</p>
+$$
+F(r)=0'7 r; F(g)=1'8 g
+$$
+<p>i.e.,</p>
+$$
+F=\begin{pmatrix}
+0'7 & 0\\ 
+0 & 1'8
+\end{pmatrix}
+$$
+<p>The random variable registers the idea of a <b>measurement</b>. This new approach to them may look very artificial, but it retains the same information that the classical probability approach:</p>
+<p><ul style="margin-left:0px;"><li>We recuperate the values, for example for $r$, with</li></ul></p>
+$$
+\langle r | F(r)\rangle
+$$
+<p><ul style="margin-left:0px;"><li>The expected value of $F$, provided that probabilities are given by the vector $s_1$, would be</li></ul></p>
+$$
+\langle s_1| F(s_1)\rangle
+$$
+<p>When we take our second machine $SG_x$ we have other Hilbert space, say $\mathcal{H}_2$, and other state $s_2 \in \mathcal{H}_2$ encoding probabilities of $b$ and $s$. Suppose that this machine also gives numerical values, so that we have another operator $G:\mathcal{H}_2\mapsto \mathcal{H}_2$, also diagonal in the canonical basis of $\mathcal{H}_2$.</p>
+<p>If we assume, as before, a classical behavior of the states, we can model this with a new Hilbert space</p>
+$$
+\mathcal{H}=\mathcal{H}_1 \otimes \mathcal{H}_2
+$$
+<p>whose basis will be denoted by $\{rb, rs, gb, gs\}$. This <a href="./../♾️ CONCEPTS/tensor product.md.html">tensor product</a>  plays the role of cartesian product in the previous set up.</p>
+<p></p>
+<p>We can think that the state describing the system would be</p>
+$$
+s_1 \otimes s_2
+$$
+<p>but in fact this is only an special case when the two machines are yielding the equivalent to "independent variables" (the joint probability is the product of the probabilities). In general, it is valid any $\Psi \in \mathcal{H}_1 \otimes \mathcal{H}_2$ provided that the coefficients in the linear combination</p>
+$$
+\Psi=a_1 rb+a_2 rs+a_3 gb+a_4 gs
+$$
+<p>are such that</p>
+$$
+|a_1|^2+|a_2|^2=P(r)
+$$
+$$
+|a_3|^2+|a_4|^2=P(g)
+$$
+$$
+|a_1|^2+|a_3|^2=P(b)
+$$
+$$
+|a_2|^2+|a_4|^2=P(s)
+$$
+$$
+|a_1|^2+|a_2|^2+|a_3|^2+|a_4|^2=1
+$$
+<p>where the second and the fourth equations could be deduced, so we can remove it.</p>
+<p><img src="./../imagenes/Pasted image 20220619093717.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>The random variable represented by the operator $F$ corresponds here to $F\otimes Id$ (<a href="./../♾️ CONCEPTS/tensor product.md.html#Kronecker_product">Kronecker product</a>), and $G$ to $Id \otimes G$.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
