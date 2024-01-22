@@ -31,28 +31,32 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Riemann_zeta_function">Riemann zeta function</h1>
-<p>The Riemann zeta function or Euler–Riemann zeta function, $\zeta(s)$, is a mathematical function of a complex variable $s$, and can be expressed as:</p>
+<font size="3vw"><h1 style="margin-left:0px;" id="Generalized_momentum">Generalized momentum</h1>
+<p>Given a <a href="./../⛳️ NON CLASSIFIED/Lagrangian Mechanics.md.html">Lagrangian classical system</a> with $(\mathcal C, L)$ with coordinates $q_i$, the generalized momentum or conjugate momentum is</p>
 $$
-\zeta(s)=\sum_{n=1}^{\infty} \frac{1}{n^{s}}=\frac{1}{1^{s}}+\frac{1}{2^{s}}+\frac{1}{3^{s}}+\cdots, \text { if } \operatorname{Re}(s)>1
+p_i:=\frac{\partial L}{\partial \dot{q}_i}
 $$
-<p></p>
-<p>For $\operatorname{Re}(s)\leq 1$ is defined as the unique <a href="./analytic continuation.md.html">analytic continuation</a>. </p>
-<p></p>
-<p>See <a href="https://www.youtube.com/watch?v=sD0NjbwqlYw&t=4s" target="_blank">this video</a> for more info.</p>
-<p></p>
-<p></p>
-<p>It is known that $-2k$ are zeroes of $\zeta$ but there are others. Also it is known that any other zero must lie in</p>
+<p><b>Motivation:</b> If we compare the <a href="./Euler-Lagrange.md.html">Euler-Lagrange</a> equations</p>
 $$
-\{s \in \mathbb{C}: 0<\operatorname{Re}(s)<1\}
+\frac{\partial L}{\partial q}-\frac{\mathrm{d}}{\mathrm{d} t} \frac{\partial L}{\partial \dot{q}}=0
 $$
-<p>called the <b>critical strip</b>. The set $\{s \in \mathbb{C}: 0<\operatorname{Re}(s)=\frac{1}{2}\}$ is called the critical line, and the <b>Riemann hypothesis</b> asserts that all the other zeroes lie in it. This has to do with prime numbers.</p>
+<p>with Newton equation</p>
+$$
+\frac{d}{dt}p=F
+$$
+<p>we get the feeling that </p>
+<p><ul style="margin-left:0px;"><li>on the one hand, $F=\frac{\partial L}{\partial q}=\frac{\partial }{\partial q}(T-V)=-\frac{\partial V}{\partial q}$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>on the other, $\frac{\partial L}{\partial \dot{q}}$ must play the role of $p$.</li></ul></p>
 <p></p>
-<p>The zeroes of Riemann zeta function are important because they give the <a href="./Fourier transform.md.html">Fourier transform</a> of a function that counts the distribution of primes.</p>
-<p></p>
-<p>This is also related to <a href="./Mellin transform.md.html">Mellin transform</a>, but I don't understand yet...</p>
-<p></p>
-<p>How is this related to prime numbers? The imaginary part of the zeroes of $\zeta$ are related to the distribution of primes. We can construct a kind of series with cosine and logarithms that gives rise to kind of wave whose peaks appear in the primes or prime powers. The zeroes of $\zeta$ are related to the frequency of this wave. See <a href="https://youtu.be/YTCE2SXguwU?si=BQoKShwyOwOqJFW_&t=885" target="_blank">this video</a>.</p>
+<p>It turns out that generalized momentum is a covector. Roughly speaking, it can be understood in the following way. The Lagrangian $L$ is a modification of the kinetic energy $T$, which is a "kind of" squared length of the velocity $\dot{q}_i$. In a vector space with an inner product $g(-,-)$, a length is computed in the following way:</p>
+<p><ul style="margin-left:0px;"><li>we take the vector $v$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>we obtain the dual vector $g(v,-)$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>we compute $Length=g(v,v)$</li></ul></p>
+<p>Therefore, loosely speaking</p>
+$$
+\frac{\partial Length}{\partial v}=\frac{\partial g(v,v)}{\partial v}=g(v,-)
+$$
+<p>which is a covector.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

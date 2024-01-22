@@ -43,6 +43,23 @@ $$
 <p></p>
 <p>Keep an eye: by abuse of language, a wave equation is called any equation that admits wave-like solutions, which take the form $f(\vec{x} \pm \vec{v}t)$. The equation $\frac{\partial^2 f}{\partial t^2} = c^2\nabla^2 f$, despite being called "the" wave equation, is not the only equation that does this.</p>
 <p></p>
+<h2 style="margin-left:0px;" id="Exponential_solutions">Exponential solutions</h2>
+<p>To find exponential solutions to this wave equation, we can try a solution of the form:</p>
+<p>$$ u(t, x, y, z) = e^{i(kx + ly + mz - \omega t)} $$</p>
+<p>where $k, l, m$ are the wave numbers in the $x, y, z$ directions, respectively, and $\omega$ is the angular frequency of the wave. The $i$ is the imaginary unit. This form of the solution is chosen because it represents a wave-like solution, which you mentioned as a characteristic of equations that can be called wave equations.</p>
+<p></p>
+<p>Let's calculate the second time derivative and the spatial derivatives of $u$ and substitute them into the wave equation:</p>
+<p></p>
+<p>1. $u_{tt} = -\omega^2 e^{i(kx + ly + mz - \omega t)}$</p>
+<p>2. $\Delta u = \left( -k^2 - l^2 - m^2 \right) e^{i(kx + ly + mz - \omega t)}$</p>
+<p></p>
+<p>Substituting these into the wave equation, we get:</p>
+<p>$$ -\omega^2 e^{i(kx + ly + mz - \omega t)} = c^2 \left( -k^2 - l^2 - m^2 \right) e^{i(kx + ly + mz - \omega t)} $$</p>
+<p></p>
+<p>For this equation to hold for all $t, x, y,$ and $z$, the coefficients of the exponentials on both sides must be equal. This leads to the dispersion relation:</p>
+<p>$$ \omega^2 = c^2 \left( k^2 + l^2 + m^2 \right) $$</p>
+<p></p>
+<p>Thus, the exponential functions of the form $e^{i(kx + ly + mz - \omega t)}$ are solutions to the wave equation provided that their wave numbers and frequency satisfy the dispersion relation $\omega^2 = c^2(k^2 + l^2 + m^2)$. This represents a wide range of possible solutions, as any $k, l,$ and $m$ that satisfy this relation will give a valid solution.</p>
 <h2 style="margin-left:0px;" id="As_a_Cauchy_problem">As a Cauchy problem</h2>
 <p>Wave equation stated as a <a href="./Cauchy problem.md.html">Cauchy problem</a>. With initial and boundary conditions</p>
 <p></p>
@@ -636,10 +653,6 @@ $$
 <p>\end{center}</p>
 <p></p>
 <p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>%=================================================================================</p>
-<p></p>
-<p>%=====================</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

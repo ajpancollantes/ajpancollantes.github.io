@@ -32,7 +32,7 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Formulation_of_QM">Formulation of QM</h1>
-<p>The Stern-Gerlach experiment and others were impossible to interpret in the classical context: variables that have continuous values that can be measured. So they implied a change of paradigm.</p>
+<p>The <a href="./../♾️ CONCEPTS/Stern-Gerlach experiment.md.html">Stern-Gerlach experiment</a> and others were impossible to interpret in the classical context: variables that have continuous values that can be measured. So they implied a change of paradigm.</p>
 <p></p>
 <p>Imagine we want to study a portion of the whole universe from this new point of view. The state of the system is no longer described by a point of the *configuration space* $C$, which was a $N$-dimensional manifold, etc. Now, the possible states of the system live in a complex <a href="./../♾️ CONCEPTS/FUNCTIONAL ANALYSIS/Hilbert space.md.html">Hilbert space</a> Physicists use to denote the elements of $H$ by </p>
 $$
@@ -77,8 +77,8 @@ $$
 <p></p>
 <p>This agrees with Postulate 3.</p>
 <p></p>
-<p>In general, the inner product of two states tells us a measurement, although with complex numbers, of the difficulty of distinguishing these two states by means of experiments. For example, $\langle m_i | m_j \rangle=0$ because the experiment $M$ tells us what state the system is in, with no doubt. They are distinguishable.</p>
-<p>Also, $\langle m_i | m_i \rangle=1$ reflects the fact that we cannot distinguish $m_i$ from itself, obviously. For two other states $|A\rangle$ and $|B\rangle$, the quantity $\langle A | B \rangle \in \mathbb C$ expresses the "overlap" between these states, a measurement of what they have in common.</p>
+<p>In general, the inner product of two states tells us a measure, although with complex numbers, of the difficulty of distinguishing these two states by means of experiments. For example, $\langle m_i | m_j \rangle=0$ because the experiment $M$ tells us what state the system is in, with no doubt. They are distinguishable.</p>
+<p>Also, $\langle m_i | m_i \rangle=1$ reflects the fact that we cannot distinguish $m_i$ from itself, obviously. For two other states $|A\rangle$ and $|B\rangle$, the quantity $\langle A | B \rangle \in \mathbb C$ expresses the "overlap" between these states, a measure of what they have in common.</p>
 <p>Postulate 1 tells us that the states are elements of a vector space $H$. In some sense, this means that general states are linear combinations (physicists like to call them "<a href="./../♾️ CONCEPTS/quantum superposition.md.html">quantum superposition</a>s") of some fundamental states: those which can be obtained by an experiment. So imagine that</p>
 $$
 \begin{array}{l}
@@ -92,7 +92,26 @@ $$
 <p></p>
 <p><b>Postulate 5.</b> The evolution of a given state $|A\rangle$ in a non-disturbed system is obtained by multiplying by a <a href="./../♾️ CONCEPTS/unitary operator.md.html">unitary operator</a> $U(t)$.</p>
 <p></p>
-<p>Remember that unitary matrices are the matrices of linear transformation that conserve the inner product. So, in quantum mechanics, the natural flow of times conserves the "overlapiness" of states.</p>
+<p>Remember that unitary matrices are the matrices of linear transformation that conserve the inner product. So, in quantum mechanics, the natural flow of times conserves the "overlapiness" of states. This postulate gives rise to the <a href="https://youtu.be/8mi0PoPvLvs?si=wZEvccu1MKF0Uk0O" target="_blank">derivation of Schrodinger equation</a>.</p>
+<p></p>
+<p><b>Additional postulate 6 (?)</b>. <b>Composite Systems Postulate</b>: For a composite system consisting of two or more subsystems, the state space of the composite system is the tensor product of the state spaces of the subsystems. See <a href="./../♾️ CONCEPTS/tensor product.md.html#Quantum_mechanics">tensor product#Quantum mechanics</a>.</p>
+<p></p>
+<p><b>Additional postulate 7 (?)</b>. For system of identical particles, it is needed a new postulate: the symmetrization postulate: </p>
+<p>For a system of identical particles, the only kets of its state space that can describe physical states are:</p>
+<p></p>
+<p>1. <b>Totally symmetric</b> kets with respect to permutations of identical particles; the particles that obey this are called <b>bosons</b></p>
+<p></p>
+<p><ul style="margin-left:0px;"><li>or</li></ul></p>
+<p></p>
+<p>2. <b>Totally antisymmetric</b> kets with respect to permutations of identical particles; the particles that obey this are called <b>fermions</b>.</p>
+<p></p>
+<p>In other words, the tensor product $V$ has to be reduced to one of the subspaces $V_+$ or $V_-$</p>
+$$
+V=V_1 \otimes V_2 \otimes \cdots \oplus V_N \Longrightarrow\left\{\begin{array}{l}
+V_{+} \\
+V_{-}
+\end{array}\right.
+$$
 <p></p>
 <p></p>
 <h3 style="margin-left:0px;" id="An_implementation">An implementation</h3>

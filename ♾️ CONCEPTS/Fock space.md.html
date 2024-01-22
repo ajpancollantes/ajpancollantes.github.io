@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Fock_space">Fock space</h1>
+<p>Fock space provides a framework for dealing with systems that have a variable number of particles, like a gas of photons or electrons.</p>
+<p></p>
+<p>1. <b>Basic Concept</b>: A Fock space is a type of Hilbert space, which is a complete space with an inner product. In the context of quantum mechanics, Hilbert spaces are used to describe the state space of a quantum system.</p>
+<p></p>
+<p>2. <b>Construction of Fock Space</b>:</p>
+<p><ul style="margin-left:0px;"><li>- <b>Single-Particle Hilbert Space</b>: Start with a Hilbert space $\mathcal{H}$ that describes the state of a single particle.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- <b>Many-Particle State Spaces</b>: Consider the tensor product of $n$ copies of $\mathcal{H}$ to describe the state of $n$ particles. This space is denoted as $\mathcal{H}^{\otimes n}$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- <b>Symmetrization and Antisymmetrization</b>: For bosons (particles that follow Bose-Einstein statistics), use the symmetrized tensor product. For fermions (particles that follow Fermi-Dirac statistics), use the antisymmetrized tensor product. This step ensures compliance with the Pauli exclusion principle for fermions. See <a href="https://youtu.be/-HMZNk6VlZ0?si=NrXZ2nrTKZnGp5gl" target="_blank">this video</a> to remember this.</li></ul></p>
+<p></p>
+<p>3. <b>Direct Sum</b>: The Fock space $\mathcal{F}$ is then the direct sum of all these tensor product spaces for $n = 0, 1, 2, \ldots$ particles. Mathematically, it is expressed as:</p>
+<ul style="margin-left:0px;"><li>$$</li></ul>
+   \mathcal{F} = \bigoplus_{n=0}^{\infty} \mathcal{H}^{\otimes n}
+   $$
+<p><ul style="margin-left:0px;"><li>Here, $\mathcal{H}^{\otimes 0}$ is the space that contains only the vacuum state, representing a system with no particles.</li></ul></p>
+<p></p>
+<p>4. <b>Creation and Annihilation Operators</b>: In Fock space, you can define creation and annihilation operators that add or remove particles from the system. These operators are fundamental in the formulation of quantum field theory. They are analogous to the raising and lowering operators (or ladder operators) of the <a href="./quantum harmonic oscillator.md.html">quantum harmonic oscillator</a>. They also appears in the quantum <a href="./angular momentum.md.html">angular momentum</a>.</p>
+<p></p>
+<p>Fock space forms the foundation for much of the formalism used in <a href="./../⛳️ NON CLASSIFIED/Quantum Field Theory.md.html">Quantum Field Theory</a>. </p>
+<p></p>
+<p><b>Example.</b> Consider the element $\Psi = a_3 \oplus a_5\in \mathcal F$, where $a_3 \in \mathcal{H}^{\otimes 3}$ and $a_5 \in \mathcal{H}^{\otimes 5}$. It represents a state that is a superposition of two distinct states, one from the 3-particle sector and another from the 5-particle sector of the Fock space:</p>
+<p><ul style="margin-left:0px;"><li>- $a_3 \in \mathcal{H}^{\otimes 3}$ is a state in the 3-particle Hilbert space. It describes a system consisting of three particles.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>- $a_5 \in \mathcal{H}^{\otimes 5}$ is a state in the 5-particle Hilbert space. It describes a system consisting of five particles.</li></ul></p>
+<p>The notation $\Psi = a_3 \oplus a_5$ indicates a superposition of these two states. This means the overall state $\Psi$ is neither purely a 3-particle state nor purely a 5-particle state. Instead, it's a quantum superposition of both. In a physical sense, if you were to measure the number of particles in this state, you would find either three or five particles, depending on the outcome of the quantum measurement. Such states can represent, for example, situations where the number of particles is not fixed due to processes like particle creation and annihilation.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p><b>Example</b>.</p>
+<p>In <a href="https://youtu.be/D36VXLx0hOc?si=-i0hZ3JgJ6bONh85&t=3279" target="_blank">Susskind's video</a>, the state, for example, $|1,2,2,0,0,\ldots\rangle$ is a state for 5 particles, one is state $\psi_1$, 2 in state $\psi_2$ and 2 in state $\psi_3$. So $|1,2,2,0,0,\ldots\rangle\in \mathcal{H}^{\otimes 5}$.$\blacksquare$</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

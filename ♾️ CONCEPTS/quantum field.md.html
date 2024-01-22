@@ -32,13 +32,36 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Quantum_field">Quantum field</h1>
-<p>Operator-valued distribution of spacetime coordinates that somehow describe the physical content of a relativistic quantum mechanical system. I have to re-read <a href="https://physics.stackexchange.com/a/362428/207777" target="_blank">this answer</a>.</p>
 <p></p>
-<p><b>Some conclusions:</b></p>
 <p><ul style="margin-left:0px;"><li>A field itself, either in classical physics or in its quantization, is simply a function on spacetime, assigning to each spacetime point the "value" of that field at that point. Or rather, more generally it is a section of a bundle over spacetime manifold.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>In case of a quantum field, the field operators $\phi(x)$ at different spacetime points $x$ are different operators, but they all act on the same underlying Hilbert space.</li></ul></p>
-<p><ul style="margin-left:0px;"><li>There is a single, fixed Hilbert space of states, on which all the operators $\phi(x)$ act, not a different Hilbert space for each $x$. The Hilbert space in question is usually a Fock space, which is a direct sum of tensor product spaces, each one corresponding to a certain number of particles. The Hilbert space provides the "stage" on which all these operators act, and it's constructed to be rich enough to accommodate all the phenomena we wish to describe, such as particle interactions, creation, and annihilation.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>There is a single, fixed Hilbert space of states, on which all the operators $\phi(x)$ act, not a different Hilbert space for each $x$. The Hilbert space in question is usually a <a href="./Fock space.md.html">Fock space</a>, which is a direct sum of tensor product spaces, each one corresponding to a certain number of particles. The Hilbert space provides the "stage" on which all these operators act, and it's constructed to be rich enough to accommodate all the phenomena we wish to describe, such as particle interactions, creation, and annihilation.</li></ul></p>
 <p></p>
+<p><ul style="margin-left:0px;"><li>According to Susskind (<a href="https://youtu.be/D36VXLx0hOc?si=gRIfo3yUskpOs46M&t=5628" target="_blank">here</a> and <a href="https://youtu.be/l6vR825BR3c?si=ljNsjvihTDLkVVsC&t=1607)" target="_blank">better here</a>, a quantum field is a linear combination</li></ul></p>
+$$
+\Psi(x)=\sum_i a_i^{-}\psi_i(x)
+$$
+<p>where: </p>
+<p><ul style="margin-left:0px;"><li>$\{|\psi_i\rangle\}$ is an orthonormal basis of eigenstates for the Hamiltonian $\hat{H}$ of a certain 1-particle system.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\psi_i(x)=\langle x|\psi_i\rangle$ are the wavefunctions of these states</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$a_i^{-}$ is the annihilation operator which operates on the <a href="./Fock space.md.html">Fock space</a>.</li></ul></p>
+<p></p>
+<p>According to this derivation of Susskind</p>
+<p><img src="./../imagenes/Pasted image 20240118160315.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>the quantum field or, better said, its Hermitean conjugate $\Psi^{\dagger}(x)$, when applied to the empty state $|0\rangle$, it creates a single particle localized at position $x$.</p>
+<p>Similarly, </p>
+$$
+\Psi^{\dagger}(y)\Psi^{\dagger}(x)|0\rangle
+$$
+<p>is a two particle state, one at $x$ and one at $y$.</p>
+<p></p>
+<p>Moreover, <a href="https://youtu.be/l6vR825BR3c?si=idJaoaNEMc6_e9In&t=2390" target="_blank">here</a> Susskind shows that $\int dx \Psi^{\dagger}(x)\Psi(x)=\sum_i N_i$, where $N_i$ is the <a href="./quantum harmonic oscillator.md.html">number operator</a>. So this integral represents an operator which gives us, when applied to a state, the total number of particles. Therefore, $\Psi^{\dagger}(x)\Psi(x)$ represents the "particle density", and it can be measured. Indeed, it is $\int_R dx \Psi^{\dagger}(x)\Psi(x)$, with $R$ a small region of space, what can be measured.</p>
+<p></p>
+<p>Also, he shows that in case that $\omega_i$ is the eigenvalue associated to $\psi_i$, then</p>
+$$
+\hat{E}:=\int dx \Psi^{\dagger}(x)\hat{H}\Psi(x)=\sum_i N_i\omega_1
+$$
+<p>where $\hat{H}$ is the Hamiltonian of the 1-particle system. So the operator $\hat{E}$ is the Hamiltonian of the quantum field theory.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

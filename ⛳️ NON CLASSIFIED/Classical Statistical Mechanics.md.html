@@ -34,6 +34,32 @@ gtag('config', 'G-LBT9E8N3HS');
 <font size="3vw"><h1 style="margin-left:0px;" id="Classical_Statistical_Mechanics">Classical Statistical Mechanics</h1>
 <p></p>
 <p>When in the XIX century a major problem of theoretical physics was the description of complex systems, with $10^{23}$ degrees of freedom, as required for the foundations of thermodynamics and statistical mechanics, it became clear that new mathematical ideas were needed; one could not reasonably think to consider a <a href="./../♾️ CONCEPTS/DEs/Cauchy problem.md.html">Cauchy problem</a> $10^{23}$ initial data. This led to abandon the idea that a physical state is described by a point in phase space and to rather describe a state as a <a href="./probability theory.md.html">probability measure</a> on the phase space. In this way probability theory and random variables entered in a crucial and philosophically important way into the framework of <a href="./Physics.md.html">Physics</a>, at the basis of Classical Statistical Mechanics.</p>
+<p></p>
+<p>What follows is from "From Classical to Quantum Mechanics:”How to translate physical ideas into</p>
+<p>mathematical language” H. Bergeron", in Calibre.</p>
+<p></p>
+<p>The <a href="./../♾️ CONCEPTS/Hamiltonian equations.md.html">Hamiltonian equations</a> for a particle</p>
+$$
+\frac{\partial p}{\partial t} = -\frac{\partial H}{\partial q},
+$$
+$$
+\frac{\partial q}{\partial t} = \frac{\partial H}{\partial p}.
+$$
+<p>correspond to the ideal case of a particle perfectly localized in Phase Space and we can represent this situation by the probability density $\rho(\mathbf{p}, \mathbf{q}, t) = \delta(\mathbf{p} - \mathbf{p}_0(t))\delta(\mathbf{q} - \mathbf{q}_0(t))$. Now, if we build a general density $\rho$ as superpositions of "δs" as $\rho = \Sigma_i p_i\delta_{\mathbf{p}_i(t),\mathbf{q_i}(t)}$, we find that $\rho$ verifies Liouville equation:</p>
+$$
+\frac{\partial \rho}{\partial t} = - \{H, \rho\} \tag{6}
+$$
+<p>So we say classically that (6) describes the evolution of any probability density $\rho$.</p>
+<p></p>
+<p>Now, starting from a density $\rho$ that verifies (6), we can look at the evolution of the expectation value $< f >_t$ of an observable $f(\mathbf{p}, \mathbf{q}, t)$ defined as:</p>
+$$
+< f(\mathbf{p}, \mathbf{q}, t) >_t = \int d^3\mathbf{p} d^3\mathbf{q} \rho(\mathbf{q}, \mathbf{p}, t) f(\mathbf{p}, \mathbf{q}, t)
+$$
+<p>After a few algebra, we find:</p>
+<p></p>
+$$
+\frac{d}{dt} < f >_t = < \frac{\partial f}{\partial t} >_t + < \{H, f\} >_t
+$$
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

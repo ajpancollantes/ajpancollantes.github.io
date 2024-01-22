@@ -32,10 +32,25 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Double_slit_experiment">Double slit experiment</h1>
+<p>Interesting text calibre [doubleslit].</p>
 <p></p>
-<p>In the double-slit experiment, the probability amplitude of an electron arriving at a particular point is a complex number. The probability of observing the electron at that point is given by the square of the magnitude of the total probability amplitude. </p>
+<p>In the classic double-slit experiment, particles such as electrons or photons are fired at a barrier with two slits. When not observed, the particles pass through both slits simultaneously, behaving like waves and creating an interference pattern on a screen of <a href="./../♾️ CONCEPTS/particle detector.md.html">particle detector</a>s behind the barrier. This pattern indicates that each particle is behaving like a wave and is going through both slits at once.</p>
 <p></p>
-<p>If we consider two paths (like in the double-slit experiment), each path, say 1 and 2, has its own probability amplitude, $\psi_1$ and $\psi_2$. The total probability amplitude at a point is the sum of the amplitudes for each path:</p>
+<p>However, if you measure which slit the particle goes through, the interference pattern disappears, and the particles behave like classical particles, going through only one slit or the other. This change suggests that the act of measurement forces the particle to 'choose' a path, behaving like a particle instead of a wave.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Low_level_approach">Low level approach</h2>
+<p>We formulate the Schrödinger equation for a free particle in two spatial dimensions. We start with the time-dependent <a href="./../♾️ CONCEPTS/Schrodinger equation.md.html">Schrodinger equation</a>:</p>
+$$ 
+i\hbar \frac{\partial \Psi(x,y,t)}{\partial t} = -\frac{\hbar^2}{2m} \left( \frac{\partial^2 \Psi(x,y,t)}{\partial x^2} + \frac{\partial^2 \Psi(x,y,t)}{\partial y^2} \right) 
+$$
+<p>This equation describes the evolution of the wave function of a free particle moving in a two-dimensional space. Let's assume two narrow slits at positions $y_1$​ and $y_2$​ on the y-axis and $x=x_{slit}$. The wave function $\Psi$ must be zero at all points except at the slits, representing the walls that block the wave. In a simplified model, we can assume infinite potential outside the slits and zero potential at the slits.</p>
+<p>We solve this equation, with an initial condition like a <a href="./../♾️ CONCEPTS/Gaussian wave packet.md.html">Gaussian wave packet</a>, and with the boundary condition above that represent the slits. Then, we analyze the probability distribution $|\Psi(x,y,t)|^2$ at $x=x_{detector}$  and a given time $t$ to observe the interference pattern.</p>
+<p></p>
+<p>This is all very complicated to be done analytically, so numerical methods are required. <a href="https://youtu.be/K-YDj2odL8I?si=cHVFCZT5GpkyZzjY" target="_blank">Here</a> is a simulation.</p>
+<h2 style="margin-left:0px;" id="High_level_approach">High level approach</h2>
+<p>It is very well explained <a href="https://tinkerings.org/2018/11/13/plotting-feynmans-amplitude-spiral-after-50-years/" target="_blank">here</a> and in Feynman lectures. In the double-slit experiment, the probability amplitude of an electron arriving at a particular point is a complex number. The probability of observing the electron at that point is given by the square of the magnitude of the total probability amplitude. </p>
+<p></p>
+<p>If we consider two paths, each path, say slit 1 and slit 2, has its own probability amplitude, $\psi_1$ and $\psi_2$. The total probability amplitude at a point is the sum of the amplitudes for each path:</p>
 $$ 
 \psi_{\text{total}} = \psi_1 + \psi_2.
 $$
@@ -47,7 +62,8 @@ $$
 <p>$$ P = |\psi_1 + \psi_2|^2 $$</p>
 <p>Expanding this, we get:</p>
 <p>$$ P = |\psi_1|^2 + |\psi_2|^2 + \psi_1^*\psi_2 + \psi_1\psi_2^* $$</p>
-<p>Here, $|\psi_1|^2$ and $|\psi_2|^2$ represent the probabilities for each individual path (like the probabilities for each slit in the double-slit experiment), and $\psi_1^*\psi_2 + \psi_1\psi_2^*$ represents the interference term.</p>
+<p>Here, $|\psi_1|^2$ and $|\psi_2|^2$ represent the probabilities for each individual path, and $\psi_1^*\psi_2 + \psi_1\psi_2^*$ represents the interference term. </p>
+<p></p>
 <p>If $\psi_1$ and $\psi_2$ are expressed in terms of their magnitudes and phases, $\psi_1 = |\psi_1|e^{i\phi_1}$ and $\psi_2 = |\psi_2|e^{i\phi_2}$, then the interference term involves the phase difference $\delta = \phi_2 - \phi_1$:</p>
 <p>$$ \psi_1^*\psi_2 + \psi_1\psi_2^* = 2|\psi_1||\psi_2|\cos(\delta) $$</p>
 <p></p>
@@ -56,9 +72,32 @@ $$
 <p></p>
 <p>This shows how the interference pattern arises from the phase difference between the two paths. When the phase difference is such that $\cos(\delta)$ is positive, the probability is enhanced (constructive interference), and when $\cos(\delta)$ is negative, the probability is reduced (destructive interference).</p>
 <p></p>
+<p>At his point, it is not clear to me how $\delta$ is related to the "position on the detectors column". But I think it is related to <a href="./Feynman's path integral formulation.md.html">Feynman's path integral formulation</a> and <a href="./../♾️ CONCEPTS/propagator.md.html">propagator</a>s.</p>
+<p>See the answer to <a href="https://physics.stackexchange.com/questions/796526/understanding-different-approaches-to-the-double-slit-experiment-in-quantum-mech#comment1788861_796526" target="_blank">my own question at PSE</a>.</p>
 <h2 style="margin-left:0px;" id="Classical_limit">Classical limit</h2>
-<p>If the particles are balls instead of electrons, then decoherence appears. Decoherence refers to the process by which a quantum system loses its quantum behavior (like superposition and interference) and starts behaving classically. This happens because the phases $\phi_1, \phi_2$ of the wavefunction become randomized due to interactions with the environment. As a result, the phase difference $\delta = \phi_2 - \phi_1$ in the interference term $2|\psi_1||\psi_2|\cos(\delta)$ becomes effectively random. When averaging over many such random phase differences, the interference term averages to zero.</p>
-<p>I also think that the mass make that the wavelength is very short, and this contributes to the randomization of $\phi_i$.</p>
+<p>If the particles are balls instead of electrons, then decoherence appears. Decoherence refers to the process by which a quantum system loses its quantum behavior (like superposition and interference) and starts behaving classically. This happens because the phases $\phi_1, \phi_2$ of the wavefunction become randomized (uncontrolled) due to interactions with the environment. As a result, the phase difference $\delta = \phi_2 - \phi_1$ in the interference term $2|\psi_1||\psi_2|\cos(\delta)$ becomes effectively random. When averaging over many such random phase differences, the interference term averages to zero.</p>
+<p>I also think that the mass make the wavelength to be very short, and this contributes to the randomization of $\phi_i$.</p>
+<p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Delayed-choice">Delayed-choice</h2>
+<p>See calibre [doubleslit].</p>
+<p>The "delayed choice" experiment is a fascinating variation of the famous double-slit experiment in quantum mechanics, and it highlights some of the more perplexing aspects of quantum theory, particularly how the act of measurement can affect the outcome.</p>
+<p></p>
+<p>The delayed choice experiment adds a twist to this experiment. In this version, the decision to observe which slit the particle went through is delayed until after the particle has passed through the slit(s). Surprisingly, the results indicate that the particles seem to 'know' whether they are going to be observed and adjust their behavior accordingly, even retroactively. If you decide to measure which slit the particle went through after it has passed the slit but before it hits the screen, it behaves like a particle (no interference pattern). If you don't measure, it behaves like a wave (interference pattern is observed).</p>
+<p></p>
+<p>To measure which slit the particle went we use entangled particles, for example photons. The first photon goes through the slits, and the measurement performed on the second photon, with a <a href="./../♾️ CONCEPTS/particle detector.md.html">particle detector</a>, is designed to determine which path or slit the first photon took. This involves measuring an observable that is entangled with the path information of the first photon. The key observable in this context is usually the polarization or phase of the second photon.</p>
+<p></p>
+<p>Here's a simplified breakdown of how it works:</p>
+<p></p>
+<p>1. <b>Entanglement in Specific Properties:</b> When the pair of entangled photons is created, they are entangled in such a way that certain properties (like polarization) are correlated. This means measuring one of these properties in one photon gives information about the corresponding property in the other.</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>2. <b>Path Information:</b> In the experiment, the path that the first photon takes (which slit it goes through) is made to correlate with the observable property (like polarization) of the second photon. This is achieved through a specific setup where the paths after the slits lead to different polarization states or phase shifts.</p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p>3. <b>Measurement of the Observable:</b> When the second photon is measured for this specific property (polarization or phase), the measurement reveals which path the first photon took. For instance, if photon A (the first photon) goes through the left slit, photon B (the entangled partner) will have a certain polarization, and if photon A goes through the right slit, photon B will have a different polarization. By measuring the polarization of photon B, one can infer the path of photon A.</p>
+<p></p>
+<p>This experiment raises deep questions about the nature of reality and the role of the observer in quantum mechanics. It suggests that particles can behave differently depending on choices made in the future, challenging our traditional understanding of cause and effect.</p>
+<p></p>
+<p>In summary, the delayed choice experiment demonstrates that the act of measurement can retroactively affect the behavior of particles, a result that is both intriguing and deeply puzzling within the framework of classical physics.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
