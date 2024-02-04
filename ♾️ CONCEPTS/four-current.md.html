@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Four-current">Four-current</h1>
+<p>Related: <a href="https://youtu.be/jYEnF5HjZU4?si=lRQXkCErrZTL8QAd&t=232" target="_blank">this video</a>.</p>
+<p>Electromagnetic effects happens by the existence of moving particles with charge. We can imagine that we have infinite charged particles, and their movement being described by infinite curves. But this is not the optimal way to think of them.</p>
+<p></p>
+<p></p>
+<p>First of all, recall that when we study a really large number of mass particles in <a href="./../⛳️ NON CLASSIFIED/Classical Mechanics.md.html">Classical Mechanics</a> is better to pass to <a href="./Continuum Mechanics.md.html">Continuum Mechanics</a>. This way, we substitute a huge number of positions by a distribution of mass density (a 3-form, if we are in 3D space). We count how many particles are in a infinitesimal cube centered at $(x,y,z)$ and construct the differential form</p>
+$$
+\omega=\rho(x,y,z)dxdydz
+$$
+<p>that let us recover the mass which is enclosed by a volume $V$ by means of</p>
+$$
+\int_V \rho(x,y,z)dxdydz
+$$
+<p><img src="./../imagenes/Pasted image 20220415190540.png" style="width:80vw; border-radius: 3px;" ></p>
+<p><ul style="margin-left:0px;"><li></li></ul></p>
+<p></p>
+<p>In what follows, we will work with two spatial dimensions, to get clearer pictures. So we have a mass density</p>
+$$
+\omega=\rho(x,y,t)dxdy
+$$
+<p><img src="./../imagenes/Pasted image 20220415190617.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>(observe we have made our density depends on time, by the way).</p>
+<p></p>
+<p>But this is not the whole story. Because although we let $\rho$ depends on $t$, this does not capture the movement of the infinite particles. The differential form $\omega$ only tell us how many particles are there in the infinitesimal red square in any time $t$. For example, only with $\rho(t,x,y)dxdy$ we cannot distinguish between a bunch of static particles:<img src="./../imagenes/Pasted image 20231214072131.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>and moving particles</p>
+<p><img src="./../imagenes/Pasted image 20231214072359.png" style="width:80vw; border-radius: 3px;" ></p>
+<p>So we must include three new quantities to code directions: $j_x$, $j_y$ and $j_z$. Let's speak about $j_x$, the others are analogous: it represents the number of particles that pass through an infinitesimal segment ($dy$ in the picture above) in an infinitesimal amount of time $dt$. If we pass to a spacetime diagram, we observe that we are speaking about something totally analogous to the density, but instead of a pure spatial window (the square $dxdy$) we look at a spacetime window $dydt$</p>
+<p><img src="./../imagenes/Pasted image 20220415190700.png" style="width:80vw; border-radius: 3px;" >  </p>
+<p></p>
+<p>This points to the ideas of <a href="./../⛳️ NON CLASSIFIED/Special Relativity.md.html">Special Relativity</a>, which treats space and time on an equal footing. In fact, we can collect them all in a 4-vector $J=( j_x,j_y,j_z,\rho)$ that transforms well according to Lorentz transformations. It is called the <b>four-current</b> or <b>4-current</b>. <b>Update</b>: indeed it is a 1-form, see <a href="./../Bibliography/@needham2021visual.md.html">@needham2021visual</a> page 403.</p>
+<p></p>
+<p>If we use charge instead of mass, we can perform the same analysis. In this case $\rho$ is called <b>charge density</b> and $j=(j_x,j_y,j_z)$ is called <b>current density</b>. Just as mass is data that determines the behavior of a system when gravity acts, $\rho$ and $j$ are data to specify the electromagnetic field.</p>
+<p></p>
+<p>If we assume that no charge can disappear from one place and appear into another without going through the wall of the laboratory (local charge conservation)  we get the <a href="./continuity equation.md.html">continuity equation</a></p>
+$$
+\partial_{\mu} J^{\mu}=0
+$$
+<p>or also</p>
+$$
+\frac{\partial \rho}{\partial t}=-\left(\frac{\partial j_{x}}{\partial x}+\frac{\partial j_{y}}{\partial y}+\frac{\partial j_{z}}{\partial z}\right)
+$$
+<p></p>
+<p>For more info see The Theoretical Minimun vol 3, page 310 and so on.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>
