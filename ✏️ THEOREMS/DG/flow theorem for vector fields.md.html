@@ -99,11 +99,15 @@ $$
 $$
 \frac{d}{dt} \phi_t(x)=X(\phi_t(x))
 $$
-<p>and then, taking derivatives with respect to the coordinates $x_1,\ldots,x_n$ we obtain</p>
+<p>and then, taking derivatives with respect to the coordinates $x_1,\ldots,x_n$ we obtain the matrix equation</p>
 $$
 \frac{d}{dt} d(\phi_t)_x=dX_{\phi_t(x)} d(\phi_t)_x.
 $$
-<p>We now apply <a href="./../Liouville's formula.md.html">Liouville's formula</a> to this linear system, obtaining</p>
+<p>We can consider the linear system given by</p>
+$$
+\dot{y}=dX_{\phi_t(x)} y,\quad y: \mathbb R\to \mathbb R^n,
+$$
+<p>and then $d(\phi_t)_x$ is a matrix whose columns are solutions to it. We now apply <a href="./../Liouville's formula.md.html">Liouville's formula</a> to this linear system, obtaining</p>
 $$
 J(t,x)=J(t_0,x)e^{\int_{t_0}^t \mbox{tr}dX_{\phi_s(x)}ds}
 $$
