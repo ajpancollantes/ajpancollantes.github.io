@@ -1,0 +1,652 @@
+https://ajpancollantes.github.io/Bibliography/@Aktosun_2009.md.html
+https://ajpancollantes.github.io/Bibliography/@Carinena2023.md.html
+https://ajpancollantes.github.io/Bibliography/@KobayashiNomizu1996.md.html
+https://ajpancollantes.github.io/Bibliography/@MR2001541.md.html
+https://ajpancollantes.github.io/Bibliography/@Morando_mu_variational.md.html
+https://ajpancollantes.github.io/Bibliography/@PaolaPfaffian.md.html
+https://ajpancollantes.github.io/Bibliography/@Stephani.md.html
+https://ajpancollantes.github.io/Bibliography/@arnold1992ordinary.md.html
+https://ajpancollantes.github.io/Bibliography/@barcoThesis.md.html
+https://ajpancollantes.github.io/Bibliography/@basarab.md.html
+https://ajpancollantes.github.io/Bibliography/@berrone2003inverse.md.html
+https://ajpancollantes.github.io/Bibliography/@blumanlibro.md.html
+https://ajpancollantes.github.io/Bibliography/@bongaartsshort.md.html
+https://ajpancollantes.github.io/Bibliography/@bryant2013exterior.md.html
+https://ajpancollantes.github.io/Bibliography/@cap2009parabolic.md.html
+https://ajpancollantes.github.io/Bibliography/@chicone2006ordinary.md.html
+https://ajpancollantes.github.io/Bibliography/@conmorando.md.html
+https://ajpancollantes.github.io/Bibliography/@feigin1975characteristic.md.html
+https://ajpancollantes.github.io/Bibliography/@fels1999moving.md.html
+https://ajpancollantes.github.io/Bibliography/@fels2007integrating.md.html
+https://ajpancollantes.github.io/Bibliography/@gaetamorando.md.html
+https://ajpancollantes.github.io/Bibliography/@govinder1995determination.md.html
+https://ajpancollantes.github.io/Bibliography/@griffiths1974cartan.md.html
+https://ajpancollantes.github.io/Bibliography/@hu2015inverse.md.html
+https://ajpancollantes.github.io/Bibliography/@ivey2016cartan.md.html
+https://ajpancollantes.github.io/Bibliography/@landsberg1997exterior.md.html
+https://ajpancollantes.github.io/Bibliography/@lawvere2009conceptual.md.html
+https://ajpancollantes.github.io/Bibliography/@lee2006riemannian.md.html
+https://ajpancollantes.github.io/Bibliography/@lee2013smooth.md.html
+https://ajpancollantes.github.io/Bibliography/@lychagin2007contact.md.html
+https://ajpancollantes.github.io/Bibliography/@malament2012topics.md.html
+https://ajpancollantes.github.io/Bibliography/@malham2016introduction.md.html
+https://ajpancollantes.github.io/Bibliography/@muriel01ima1.md.html
+https://ajpancollantes.github.io/Bibliography/@needham2021visual.md.html
+https://ajpancollantes.github.io/Bibliography/@olver86.md.html
+https://ajpancollantes.github.io/Bibliography/@pancinf-structures.md.html
+https://ajpancollantes.github.io/Bibliography/@paola.frobenius.md.html
+https://ajpancollantes.github.io/Bibliography/@saunders1989geometry.md.html
+https://ajpancollantes.github.io/Bibliography/@sergyeyev2018new.md.html
+https://ajpancollantes.github.io/Bibliography/@sharpe2000differential.md.html
+https://ajpancollantes.github.io/Bibliography/@sherring1992geometric.md.html
+https://ajpancollantes.github.io/Bibliography/@strocchi2008introduction.md.html
+https://ajpancollantes.github.io/Bibliography/@warner.md.html
+https://ajpancollantes.github.io/Home.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/4-dimensional spaces.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Bell's experiment.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Dirac equation.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Elliptic, hyperbolic and parabolic geometry.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Euclidean plane.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Feynman's path integral formulation.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Generalization of the flatness of R3.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Heisenberg approach to QM.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Heisenberg vs Schrodinger picture.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Hermitian form, inner product and symplectic form relationship.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/On Many Worlds, entanglement and hidden variables.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/On Physics from the beginning.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Time zones example.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Where is the geometry in a Klein geometry?.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Why complex numbers in QM.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/Why did physics go quantum.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/about Lie algebras and involutive sets of vector fields.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/about solvable algebras and solvable structures.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/bra-ket notation.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/change of coordinates in quantum mechanics.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/complex eigenvalues.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/complexification of a vector space.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/connection form for LV in R3.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/connection form for LV in a surface.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/connections summary.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/covariance and contravariance in linear algebra.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/covariance and contravariance on manifolds.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/curvature like a driving force.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/double slit experiment.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/duality in exterior algebras.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/example left invariants vector fields and Maurer-Cartan form.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/formulation of QM.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/general covariance and contravariance.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/integration and derivation.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/intuition behind tensors.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/method of moving frames.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/outline of Galois theory.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/particle with position and spin.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/quantum approach to particle motion- an example.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/relation SO(3) and SU(2).md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/relation of Lie derivative, covariant derivative and torsion.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/relation symplectic form and Riemannian metric.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/relationship parallel transport, covariant derivatives and metrics.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/several coupled oscillators.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/states and obervables.md.html
+https://ajpancollantes.github.io/☕REFLECTIONS/visualization of Lie groups.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/Galois group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/differential ideal.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/dual vector space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/homogeneous space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/inverse limit.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/local ring.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/localization of a module.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/localization of a ring.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/locally free module.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/normal subgroup.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/projective module.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/semidirect product.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/solvable Lie algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/solvable group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRA/splitting field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRAIC GEOMETRY/locally free O-module.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRAIC GEOMETRY/locally free sheaf.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRAIC GEOMETRY/presheaf.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ALGEBRAIC GEOMETRY/sheaf.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ANALYSIS/Padé aproximant.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ANALYSIS/canonical immersion theorem.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ANALYSIS/canonical submersion theorem.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/ANALYSIS/submersion.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Banach algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Bessel functions.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Boolean algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/CATEGORY THEORY/adjoint functors.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/CATEGORY THEORY/category of sets.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/CATEGORY THEORY/category.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/CATEGORY THEORY/coproduct in categories.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/CATEGORY THEORY/functor.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/CATEGORY THEORY/group as a category.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/CATEGORY THEORY/groupoid.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/CATEGORY THEORY/monoid.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/CATEGORY THEORY/product in categories.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Cauchy characteristic vector fields.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Cauchy complete.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Cauchy stress tensor.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Cauchy's theorem.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Christoffel symbols.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Clifford algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/Abel equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/Cauchy problem.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/Cinf_k symmetry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/Lie point symmetry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/Navier-Stokes equations.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/ODE.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/Riccati equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/Schrodinger equation (general family).md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/Vessiot distribution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/characteristics of first-order partial differential equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/first integral.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/generalized Cinf-symmetry ODE.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/generalized symmetry of an ODE.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/generating function.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/integrating factor.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/lambdasymmetry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/prolongation formula for vector fields.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/prolongation of a diffeomorphism.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/quadrature.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/strong symmetry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/symmetry group of a DE system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/system of DEs.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/system of ODEs.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/system of first order ODEs.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/system of first order linear ODEs- complex case.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/system of first order linear ODEs- real case.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DEs/wave equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DISCRETE DG/2-complex.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DISCRETE DG/Discrete Differential Geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DISCRETE DG/discrete differential.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DISCRETE DG/discrete inmersion.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/DISCRETE DG/discrete k-form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Dirac delta.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Euclidean geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Euclidean group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Euler characteristic.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Euler operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Euler-Lagrange.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/FUNCTIONAL ANALYSIS/Banach space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/FUNCTIONAL ANALYSIS/Hilbert space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/FUNCTIONAL ANALYSIS/inner product space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/FUNCTIONAL ANALYSIS/normed space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Finsler manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Fock space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Fourier transform.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Frobenius integrable 1-form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/G-structure.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Cartan distribution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Cartan geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/G-bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Gauss map.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Gaussian curvature.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Hodge star operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Klein geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Levi-Civita connection.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Lie algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Lie bracket.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Lie derivative for tensors in general.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Lie derivative of forms.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Lie derivative of vector fields.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Maurer-Cartan form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Moebius transformations.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Pfaffian equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Pfaffian system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Poincare half plane.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Ricci curvature tensor.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Riemannian metric.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Riemannian volume form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Theorema Egregium.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/Weingarten map.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/adjoint representation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/associated bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/associated connection.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/coframe on a manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/commutator subalgebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/completely integrable distribution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/completely non-integrable.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/connection on a fiber bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/cross section.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/curvature of a connection.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/curvature of a curve.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/curvature of a distribution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/differential operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/distribution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/embedded manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/exponential map.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/extension and reduction of a principal bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/first fundamental form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/foliation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/frame bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/frame on a manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/functional dependence.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/fundamental vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/geodesic.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/group action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/group representation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/horizontal cotangent bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/hyperbolic geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/immersed manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/integral submanifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/interior product.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/involutive distribution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/isothermal coordinates.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/jet bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/linear connection.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/moving frame.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/normal and geodesic curvature of a curve.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/normal curvature of an immersed surface.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/orbifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/principal bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/principal connection on a principal bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/principal curvatures.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/projectable vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/prolongation of a section.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/pseudo-Riemannian manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/pseudosphere.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/second fundamental form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/shape operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/solder form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/solvable structure.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/structure 1-form of a distribution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/surface.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/symmetry of a distribution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/torsion of a curve.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/transversal algebra of symmetries.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/transverse geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/vector bundle connection.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/GEOMETRY/vertical bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Gaussian wave packet.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Gelfand spectrum.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Geometric Algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Grassmannian bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Grassmannian manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Hamiltonian equations.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Hamiltonian group action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Hamiltonian symmetry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Hamiltonian vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Hermitian matrix.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Hermitian operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Hessian matrix.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Inverse Scattering Method.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Jacobi equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Jacobi field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Jacobi last multiplier.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Jordan canonical form of a matrix.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Kaluza-Klein theory.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Killing vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Laplace transform.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Laplace's equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Laplacian operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Lax pair.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Legendre transform.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Lie algebra action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Lie group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Lie series.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Lipschitz continuous function.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Lorentz boost.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Lorentz group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Mellin transform.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Minkowski space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/PDE.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Pauli matrices.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Poincare disk.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Poincare group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Poisson algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Poisson bracket.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Poisson manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Poisson map.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Poisson's equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Polya vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Relativistic Field Theory.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Riemann curvature tensor.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Riemann normal coordinates.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Riemann sphere.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Riemann zeta function.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Riemannian geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Riemannian manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/SO(3).md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Schrodinger equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Stern-Gerlach experiment.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Stokes' theorem.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Viviani's theorem.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/Wronskian.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/absolute parallelism.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/affine group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/angular momentum.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/anti-Hermitian operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/automorphism.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/basis and change of basis.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/c-star algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/canonical commutation relations.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/center of a ring-group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/central algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/centralizer.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/classical Hamiltonian system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/closed map.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/coherent sheaf.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/conformal map.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/conjugate transpose.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/conservation law.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/contact transformation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/continuity equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/contorsion.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/contractible space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/covariant derivative along a curve.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/covariant derivative operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/covering group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/covering system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/curl.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/curvature of a Cartan geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/decomposable k-form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/derivation in an algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/determinant.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/differential function.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/distribution (functional analysis).md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/divergence.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/dynamical system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/eigenvalues.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/eigenvector.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/emission spectrum.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/endomorphism.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/energy of a curve.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/energy-momentum tensor.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/entire function.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/equivalent Lagrangians.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/evolution equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/evolutionary vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/exact sequence.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/excited state.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/exponential map for Riemannian manifolds.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/exterior algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/exterior covariant derivative.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/exterior derivative.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/exterior differential system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/extrema.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/extrinsic curvature.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/f-related vector fields.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/faithful action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/flag of foliations.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/flag.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/flow of observables in CM.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/four-current.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/four-momentum.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/free action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/gauge theory.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/general linear group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/general relativity theory.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/generalized momentum.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/genus.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/geodesic flow.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/geodesic polar coordinates.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/geodesic vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/geodesically complete manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/global Gauss-Bonnet theorem.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/heat equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/holomorphic.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/holonomic constraint.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/holonomy.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/homogeneous linear PDE.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/induced matrix norm.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/inhomogeneous linear PDE.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/inner automorphism.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/integrable systems.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/integral of motions.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/inverse Jacobi multiplier.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/isometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/lattice.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/left invariant vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/left-invariant differential form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/length of a curve.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/local chart connection.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/local group of transformations.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/locally compact.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/mZK equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/material derivative.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/matrix algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/matrix exponential.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/mean square deviation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/method of characteristics.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/metric space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/module.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/n-volume in an m-dimensional vector space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/nonholonomic constraint.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/nonlocal symmetry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/normal topological space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/one-parameter subgroup.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/operator on a normed space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/orthogonal and special orthogonal groups.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/orthogonal matrix.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/orthonormal frame bundle.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/paracompact.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/parallel curves.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/parallel transport.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/parallel vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/parallelizable manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/particle detector.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/partition of unity.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/point transformation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/positive functional.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/pregeodesic vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/principal bundle morphism.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/principal direction.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/principle of least action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/projection.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/projective linear group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/projective space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/propagator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/proper action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/quadratic form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/quantum field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/quantum harmonic oscillator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/quantum superposition.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/quasi-linear homogeneous first-order PDEs system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/quaternions.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/quotient action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/quotient representation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/radical of a Lie algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/random variable.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/reductive Cartan geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/reductive Klein geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/regular action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/regular value.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/sectional curvature.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/self adjoint matrix.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/self adjoint operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/short exact sequence.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/similarity solution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/simple Lie algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/simple module.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/skew-symmetric matrix.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/spectrum of a ring.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/spin group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/spinors.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/star shaped space.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/stationary state.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/stereographic projection.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/subaction.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/submanifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/subrepresentation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/superintegrable system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symmetric group.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symmetric operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symmetry algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symmetry group of a physical system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symmetry of a Pfaffian system.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symmetry of an EDS.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symplectic form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symplectic group action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symplectic manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symplectic vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/symplectomorphism.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/system of linear first order homogeneous PDEs.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/system of linear first order inhomogeneous PDEs.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/tensor algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/tensor field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/tensor product.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/tensor.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/terminal object.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/time evolution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/topos.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/torsion of a Cartan geometry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/torsion of a connection.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/total derivative operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/total divergence.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/total vector field.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/totally-geodesic manifold.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/trace.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/transitive action.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/translation and momentum operators.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/transport equation.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/travelling wave solution.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/uniformly continuous function.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/unitary matrix.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/unitary operator.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/universal enveloping algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/universal property.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/variational bicomplex.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/variational derivative.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/variational problem.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/variational-Noether symmetry.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/volume form.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/von Neumann algebra.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/wavefunction.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/wedge product.md.html
+https://ajpancollantes.github.io/♾️ CONCEPTS/work and energy.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Abstract Algebra.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Analysis.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Basic geometry.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Classical Field Theory.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Classical Mechanics.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Classical Statistical Mechanics.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Fluid mechanics.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Hamiltonian field theory.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Hamiltonian mechanics.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Koopman-von Neumann classical mechanics.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Lagrangian Mechanics.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Lagrangian field theory.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Linear Algebra.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Logic.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Noncommutative Geometry.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Penrose diagramatic notation.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Physics.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Quantum Field Theory.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Quantum Mechanics.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/Special Relativity.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/axiomatic Newtonian mechanics.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/famous equations.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/harmonic oscillator.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/probability theory.md.html
+https://ajpancollantes.github.io/⛳️ NON CLASSIFIED/raising and lowering indices.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Baker-Campbell-Hausdorff formula.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Banach fixed point theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Basarab 1991, proposition 2.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Bessel's inequality.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Bolzano-Weierstrass theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Bäcklund theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Cartan lemma.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Cartan's first structural equation.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Cartan's second structural equation.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Cartan-Janet theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Cauchy integral formula.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Cauchy-Schwarz inequality.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Clairaut's theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/Cartan formula.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/Frobenius theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/Harriot theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/Pithagoras theorem inner product spaces.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/Serre-Swan theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/canonical form of a regular vector field.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/canonical form of commuting vector fields.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/dual characterization involutiveness.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/dual description of the distribution.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/flow of the sum of two vector fields.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/flow theorem for vector fields.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/formulas for Lie derivative, exterior derivatives, bracket, interior product.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/infinitesimal Stokes' theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/local Gauss-Bonnet theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/DG/vector bundle-module of section identification.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Gauss lemma.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Gelfand-Naimark theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Godel theorems.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Hairy Ball Theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Hopf-Rinow theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/IBD property for vectors.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Liouville's formula.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/MC form for a matrix group.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Meusnier's theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Minding's theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Noether's theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Pfaff-Darboux theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Poincare lemma.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Poincare-Hopf Theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Runge-Kutta.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Stone's theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Stone–Weierstrass theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Weierstrass theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/Zassenhaus formula.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/bilinear forms diagonalization.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/block matrix determinant formula.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/common eigenvectors.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/commutativity of flows.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/conservation of momentum.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/existence of solutions for a system of first order linear inhomogeneous PDEs.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/extension of a frame.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/global Frobenius theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/inverse function theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/matrix diagonalization.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/normal subgroup vs ideal of Lie algebra.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/polar decomposition.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/preimage theorem.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/relation between strong and standard symmetries ODE.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/relation between the determinant and the trace.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/resolution of identity.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/singular value decomposition.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/spectral theory.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/symmetric matrix.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/teorema cuadraturas basarab.md.html
+https://ajpancollantes.github.io/✏️ THEOREMS/trigonometric formulas.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/Comparison of structures.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/Fornberg-Whitham equation with cinf-structures.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/Global vision of solving ODEs.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/ODE visualization in the two jet bundles.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/alternative Lie method for first-order ODEs.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/corank 1 distributions.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/solution space of an ODE.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/symmetrizing factors in the case of corank 1.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/visualization of DE systems.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/☕REFLECTIONS/visualization of k-forms.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/♾️ ❗CONCEPTS/cinf-structure of 1-forms.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/♾️ ❗CONCEPTS/cinf-structure.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/♾️ ❗CONCEPTS/cinf-symmetry of distribution.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/♾️ ❗CONCEPTS/symmetrising factor.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❓ CONJECTURES/conjecture_qsolv structure refinada.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❗ OWN RESULTS/IBD property for distributions.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❗ OWN RESULTS/algorithm for cinf-structures.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❗ OWN RESULTS/equivalence of cinf-sym and qsolv str in second order.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❗ OWN RESULTS/int_factor vs sym _function relationship.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❗ OWN RESULTS/integrability by Pfaffian equations.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❗ OWN RESULTS/lemma of belongingness to ideal.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❗ OWN RESULTS/método atrás-adelante.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❗ OWN RESULTS/prolongation formula for dynamical Cinf-symmetries.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✏️❗ OWN RESULTS/symmetrising factor lemma.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/000 Organization of ideas.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/Analytic vs geometric reduction.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/Prolongation formula for Cinf-structures.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/Riemannian metric for an ODE.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/Sharma-Tasso-Olver equation with cinf-sructures.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/about the substitution of the constants.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/algebraic treatment of cinf-structures.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/cinf-structure and flags.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/cinf-structure from non-solvable symmetry algebra.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/completar una PDE con datos de Cauchy.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/ideas about JLM.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/reduction of a distribution by a symmetry.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/relation Cinf-symmetries distribution with lambda-preservation.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/sigma-prolongation and cinf-structures.md.html
+https://ajpancollantes.github.io/❓MY RESEARCH/✨ IDEAS TO FOLLOW/trocear una ODE orden m.md.html
