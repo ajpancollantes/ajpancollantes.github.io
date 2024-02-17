@@ -1,0 +1,8 @@
+User-agent: *
+
+# Permitir el acceso a todo el sitio
+Allow: /
+
+
+
+
