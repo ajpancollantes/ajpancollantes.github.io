@@ -33,15 +33,115 @@ gtag('config', 'G-LBT9E8N3HS');
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Spin_groups">Spin groups</h1>
 <p></p>
-<p>The spin group $Spin(n,m)$ is the double cover of the group $SO(n,m)$ (the <a href="./orthogonal and special orthogonal groups.md.html">special orthogonal group</a>). The latter is the group of </p>
+<p>The spin group $Spin(n,m)$ is the double cover of the group $SO(n,m)$ (the <a href="./orthogonal and special orthogonal groups.md.html">special orthogonal group</a>). The latter is the group of special orthogonal group of signature $n,m$.</p>
 <p></p>
 <p><b>Spin Groups:</b></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li>The double cover of $SO(2)$ is $\text{Spin}(2)$, which is isomorphic to $U(1)=SU(1)$. They are the unit complex numbers.</li></ul></p>
-<p></p>
+<p><ul style="margin-left:0px;"><li>The double cover of $SO(2)$ is $\text{Spin}(2)$, which is isomorphic to $U(1)=SU(1)$. They are the unitary complex numbers.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>The double cover of $SO(3)$ is given by $Spin(3)$. This is isomorphic to $SU(2)$ and can also be represented by unit quaternions.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The double cover of $SO^+(1,3)$ is $Spin(1,3)$, which is equivalent to $SL(2, \mathbb{C})$, the special linear group of 2x2 complex matrices. The complex Lie algebra $\mathfrak{sl}(2, \mathbb{C})$ associated with the Special Linear group of 2x2 complex matrices with determinant 1 can be decomposed into a direct sum of two real algebras isomorphic to $\mathfrak{su}(2)$. This decomposition is expressed as</li></ul></p>
+$$
+\mathfrak{sl}(2, \mathbb{C}) = \mathfrak{su}(2) \oplus (\pm i)\mathfrak{su}(2),
+$$
+<p>where $\mathfrak{su}(2)$ represents the algebra of <b>rotation generators in three-dimensional space</b>, and $(\pm i)\mathfrak{su}(2)$ corresponds to the algebra of <b>boost generators</b> (<a href="./Lorentz boost.md.html">Lorentz boost</a>s) which in physical terms relate to transformations altering an object's velocity without rotation. The coefficients $-i$ and $+i$ have to do with chirality...</p>
 <p></p>
-<p><ul style="margin-left:0px;"><li>The double cover of $SO^+(1,3)$ is $Spin(1,3)$, which is equivalent to $SL(2, \mathbb{C})$.</li></ul></p>
+<p>The group $SO^+(1,3)$ contains six "basis" matrices:</p>
+<p>Rotations:</p>
+$$
+\Lambda_{yz}(\theta) = 
+\begin{bmatrix}
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & \cos\theta & -\sin\theta \\
+0 & 0 & \sin\theta & \cos\theta \\
+\end{bmatrix}
+$$
+$$
+\Lambda_{zx}(\theta) = 
+\begin{bmatrix}
+1 & 0 & 0 & 0\\
+0 & \cos\theta & 0 & \sin\theta \\
+0 & 0 & 1 & 0 \\
+0 & -\sin\theta & 0 & \cos\theta \\
+\end{bmatrix}
+$$
+$$
+\Lambda_{xy}(\theta) = 
+\begin{bmatrix}
+1 & 0 & 0 & 0\\
+0 & \cos\theta & -\sin\theta & 0 \\
+0 & \sin\theta & \cos\theta & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+$$
+<p></p>
+<p></p>
+<p>Boosts:</p>
+$$
+\Lambda_{tx}(\phi) = 
+\begin{bmatrix}
+\cosh\phi & -\sinh\phi & 0 & 0\\
+-\sinh\phi & \cosh\phi & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+$$
+$$
+\Lambda_{ty}(\phi) = 
+\begin{bmatrix}
+\cosh\phi & 0 & -\sinh\phi & 0\\
+0 & 1 & 0 & 0\\
+-\sinh\phi & 0 & \cosh\phi & 0\\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+$$
+$$
+\Lambda_{tz}(\phi) = 
+\begin{bmatrix}
+\cosh\phi & 0 & 0 & -\sinh\phi\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+-\sinh\phi & 0 & 0 & \cosh\phi\\
+\end{bmatrix}
+$$
+<p>They can be seen like associated to the following matrices (or their opposites) in $Spin(1,3)=SL(2,\mathbb C)$:</p>
+$$
+\begin{bmatrix}
+\cos \frac{\theta}{2} & -i\sin \frac{\theta}{2} \\
+-i\sin \frac{\theta}{2} & \cos \frac{\theta}{2} \\
+\end{bmatrix}
+$$
+$$
+\begin{bmatrix}
+\cos \frac{\theta}{2} & -\sin \frac{\theta}{2} \\
+\sin \frac{\theta}{2} & \cos \frac{\theta}{2} \\
+\end{bmatrix}
+$$
+$$
+\begin{bmatrix}
+e^{-i\theta/2} & 0 \\
+0 & e^{i\theta/2} \\
+\end{bmatrix}
+$$
+$$
+\begin{bmatrix}
+\cosh \frac{\phi}{2} & -\sinh \frac{\phi}{2} \\
+-\sinh \frac{\phi}{2} & \cosh \frac{\phi}{2} \\
+\end{bmatrix}
+$$
+$$
+\begin{bmatrix}
+\cosh \frac{\phi}{2} & i\sinh \frac{\phi}{2} \\
+-i\sinh \frac{\phi}{2} & \cosh \frac{\phi}{2} \\
+\end{bmatrix}
+$$
+$$
+\begin{bmatrix}
+e^{-\phi/2} & 0 \\
+0 & e^{\phi/2} \\
+\end{bmatrix}
+$$
+<p></p>
+<p></p>
 <p></p>
 <p>Related: <a href="./Clifford algebra.md.html">Clifford algebra</a>s</p>
 <p>________________________________________</p>

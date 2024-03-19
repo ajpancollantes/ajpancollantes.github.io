@@ -32,17 +32,25 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Evolutionary_vector_field">Evolutionary vector field</h1>
-<p>A evolutionary vector field $V$ is a vector field on the <a href="./GEOMETRY/jet bundle.md.html#Infinity_jet_bundle">infinite jet bundle</a> of a bundle $E\to M$, such that  is vertical with respect to the projection $\pi: J^{\infty}(E)\to M$ and it preserves the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>.</p>
-<p></p>
-<p>Since they preserve the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a> they satisfy the <a href="./DEs/prolongation formula for vector fields.md.html">prolongation formula</a>, so they can be written as</p>
+<p>See Definition 5.4 <a href="./../Bibliography/@olver86.md.html">@olver86</a>.</p>
+<p>A evolutionary vector field $V$ is a vector field on the <a href="./GEOMETRY/jet bundle.md.html#Infinity_jet_bundle">infinite jet bundle</a> of a bundle $E\to M$, such that  is vertical with respect to the projection $\pi: J^{\infty}(E)\to M$ and it preserves the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>. Since they preserve the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a> they satisfy the <a href="./DEs/prolongation formula for vector fields.md.html">prolongation formula</a>, so they can be written as</p>
 $$
 V= Q_{\alpha} \partial_{u^{\alpha}}+\sum_{i,\sigma}(D_\sigma Q_{\alpha})\frac{\partial}{\partial u^{\alpha}_\sigma}.
 $$
-<p>Here $D_\sigma$ is the composition of total derivatives corresponding to the multi-index $\sigma$, and $\{ Q_{\alpha}\}$ is a smooth map usually called <a href="./DEs/generating function.md.html">generating function</a>.</p>
+<p>Here $D_\sigma$ is the composition of total derivatives corresponding to the multi-index $\sigma$, and $\{ Q_{\alpha}\}$ is a smooth map usually called the <b>characteristic</b> or <a href="./DEs/generating function.md.html">generating function</a> (Lychagin).</p>
 <p></p>
-<p>Consider a section $s:M\to E$ of the original bundle. It can be <a href="./GEOMETRY/prolongation of a section.md.html">prolonged</a> to a section $\tilde{s}:M\to J^{\infty}(E)$. The obtained section represents the original section together with "all its derivatives", and it is tangent to the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>. Since $V$ preserves this distribution, the flow of $V$, let's call it $\tilde{\theta}_t$, sends $\tilde{s}$ to another section $\tilde{r}_t$ also tangent to <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>, so we can consider that it comes from a section $r_t:M\to E$.</p>
+<p>Any vector field in the jet bundle </p>
+$$
+\mathbf{v}_Q=\sum_{\alpha=1}^q Q_\alpha[u] \frac{\partial}{\partial u^\alpha}
+$$
+<p>has an <b>evolutionary representative</b>, which is the evolutionary vector field with characteristic</p>
+$$
+Q_\alpha=\phi_\alpha-\sum_{i=1}^p \xi^i u_i^\alpha, \quad \alpha=1, \ldots, q
+$$
 <p></p>
 <p><b>How can we interpret this?</b></p>
+<p>Consider a section $s:M\to E$ of the original bundle. It can be <a href="./GEOMETRY/prolongation of a section.md.html">prolonged</a> to a section $\tilde{s}:M\to J^{\infty}(E)$. The obtained section represents the original section together with "all its derivatives", and it is tangent to the <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>. Since $V$ preserves this distribution, the flow of $V$, let's call it $\tilde{\theta}_t$, sends $\tilde{s}$ to another section $\tilde{r}_t$ also tangent to <a href="./GEOMETRY/Cartan distribution.md.html">Cartan distribution</a>, so we can consider that it comes from a section $r_t:M\to E$.</p>
+<p></p>
 <p>For simplicity, suppose $E=\mathbb R \times \mathbb R$ is a trivial bundle, and sections $s:M\to E$ are identified with smooth functions $f:\mathbb R \to \mathbb R$.  In this case an evolutionary vector field as the form</p>
 $$
 V= Q {\partial u}+D_x( Q) {\partial u_{1}}+\cdots

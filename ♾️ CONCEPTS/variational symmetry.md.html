@@ -31,33 +31,43 @@ gtag('config', 'G-LBT9E8N3HS');
 </head>
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
-<font size="3vw"><h1 style="margin-left:0px;" id="Variational_symmetry_/_Noether_symmetry">Variational symmetry / Noether symmetry</h1>
+<font size="3vw"><h1 style="margin-left:0px;" id="Variational_symmetry">Variational symmetry </h1>
+<p></p>
+<p><b>Definition 4.10. <a href="./../Bibliography/@olver86.md.html">@olver86</a></b></p>
+<p>A local group of transformations $G$ acting on $M \subseteq \Omega_0 \times U$ is a <b>variational symmetry group</b> of the a <a href="./variational problem.md.html">variational problem</a> $J[u]=\int_{\Omega}L(x,u^{(n)})dx$ if whenever $\Omega$ is a subdomain with closure $\bar{\Omega} \subseteq \Omega_0$, $u = f(\textbf{x})$ is a smooth function defined over $\Omega$ whose graph lies in $M$, and $g \in G$ is such that $\tilde{u} = \tilde{f}(\textbf{x}) = g \cdot f(\textbf{x})$ is a single-valued function defined over $\Omega \subseteq \Omega_0$, then</p>
+$$
+\int_{\hat{\Omega}} L(\textbf{x}, \text{pr}^{(n)}(\tilde{f}(\textbf{x}))) d\textbf{x} = \int_{\Omega} L(\textbf{x}, \text{pr}^{(n)}(f(\textbf{x}))) d\textbf{x}.
+$$
+<p>$\blacksquare$</p>
+<h2 style="margin-left:0px;" id="Induced_symmetry_in_Euler-Lagrange_equations">Induced symmetry in Euler-Lagrange equations</h2>
 <p>We are going to proceed with one independent variable $t$ and one dependent variable $x$ for simplicity, but can be generalized to any bundle $E$ with coordinates $(x_i,u^{\alpha})$.</p>
-<p></p>
-<p>Given a <a href="./variational problem.md.html">variational problem</a> </p>
-$$
-J[x(t)]=\int_{\Omega}L(t,x(t),\frac{dx}{dt}(t))dt
-$$
-<p>a <b>Noether symmetry</b> (also known as <b>divergence symmetry</b>) is a one-parameter <a href="./local group of transformations.md.html">local group of transformations</a> </p>
-$$
-t'=t'(t,x,s)\quad \quad x'=x'(t,x,s)
-$$
-<p>such that</p>
-$$
-L\left(t',x',\dot{x}'\right)dt'=L\left(t,x,\dot{x}\right)dt+dF(t,x,s)
-$$
-<p>for all values of $s$ where the transformation is defined and for some smooth function $F$. When $F=0$ it is called a <b>variational symmetry</b>.</p>
-<p></p>
-<p>A Noether symmetry sends solutions of the <a href="./Euler-Lagrange.md.html">Euler-Lagrange</a> equations associated to $L$ to solutions. Observe that:</p>
+<p>A variational symmetry group (even a Noether symmetry group) sends solutions of the <a href="./Euler-Lagrange.md.html">Euler-Lagrange</a> equations associated to $L$ to solutions. Observe that:</p>
 $$
 \begin{aligned}
 \int_{t_{0}^{\prime}}^{t_{1}^{\prime}} L\left(x^{\prime}, \frac{\mathrm{d} x^{\prime}}{\mathrm{d} t^{\prime}}, t^{\prime}\right) \mathrm{d} t^{\prime} &=\int_{t_{0}}^{t_{1}} L\left(x, \frac{\mathrm{d} x}{\mathrm{~d} t}, t\right) \mathrm{d} t \\
 &+\int_{t_{0}}^{t_{1}} \frac{\mathrm{d}}{\mathrm{d} t} F(x, t, s) \mathrm{d} t
 \end{aligned}
 $$
-<p>and since the last term in the right hand side is constant for curves with the same endpoints, a curve maximizes/minimizes the lhs if and only if maximizes/minimizes the firs term of the rhs. I suppose that Noether symmetries give rise to a special kind of <a href="./DEs/generalized symmetry of an ODE.md.html">generalized symmetries</a> of the corresponding Euler-Lagrange equations.</p>
+<p>and since the last term in the right hand side is constant for curves with the same endpoints, a curve maximizes/minimizes the lhs if and only if maximizes/minimizes the firs term of the rhs. This is formalized for variational symmetries in Theorem 4.14 in <a href="./../Bibliography/@olver86.md.html">@olver86</a>. In particular, if $G$ is a variational symmetry group of the variational problem $J$ then it is a symmetry group of the associated Euler-Lagrange equations.</p>
 <p></p>
-<p>A variational symmetry is stronger, since it <b>preserves the value</b> of the functional $J$ (since $F=0$).</p>
+<p>I suppose that Noether symmetries and variational symmetries give rise to a distinguished kind of <a href="./DEs/generalized symmetry of an ODE.md.html">generalized symmetries</a>, even of <a href="./DEs/Lie point symmetry.md.html">Lie point symmetry</a>s, of the corresponding Euler-Lagrange equations.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Infinitesimal_criterion_for_variational_symmetries">Infinitesimal criterion for variational symmetries</h2>
+<p>Theorem 4.12. <a href="./../Bibliography/@olver86.md.html">@olver86</a>.</p>
+<p><b>Theorem</b></p>
+<p>A connected group of transformations $G$ acting on $M \subseteq \Omega_0 \times U$ is a variational symmetry group of the functional $J$ if and only if</p>
+$$
+\text{pr}^{(n)} v(L) + L \text{Div} \xi = 0
+$$
+<p>for all $(x, u^{(n)}) \in M^{(n)}$ and every infinitesimal generator</p>
+$$
+v = \sum_{i=1}^{p} \xi^i(x, u) \frac{\partial}{\partial x^i} + \sum_{\alpha=1}^{q} \phi_\alpha(x, u) \frac{\partial}{\partial u^\alpha}
+$$
+<p>(note that $J$ above is "of first-order" but it can be generalized straightforwardly).</p>
+<p>$\blacksquare$</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Noether_symmetry">Noether symmetry</h2>
+<p>They are more general. See <a href="./Noether symmetry.md.html">Noether symmetry</a>.</p>
 <p></p>
 <p>________________________________________</p>
 <p>________________________________________</p>

@@ -32,8 +32,8 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Solvable_group">Solvable group</h1>
-<p></p>
-<p>A group is solvable if we find a finite sequence of normal subgroups $(A_0, \ldots, A_r)$ such that </p>
+<h2 style="margin-left:0px;" id="General_groups">General groups</h2>
+<p><b>Definition</b>. A group is solvable if we find a finite sequence of normal subgroups $(A_0, \ldots, A_r)$ such that </p>
 $$
 I=A_{0} \triangleleft A_{1} \triangleleft \ldots \triangleleft A_{r}=G
 $$
@@ -42,13 +42,26 @@ $$
 A_{k+1}/A_{k}
 $$
 <p>is abelian.</p>
+<p>$\blacksquare$</p>
+<p>Remarks:</p>
+<p><ul style="margin-left:0px;"><li>The $A_{k+1}/A_{k}$  are called normal factors.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>The sequence $(A_0, \ldots, A_r)$ is called normal series. If each term of the series is <a href="./normal subgroup.md.html">normal</a> not in the whole group but only in the preceding term, then the series is called subnormal series.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>It turns out that it is enough the existence of a subnormal series with abelian normal factors (see <a href="https://encyclopediaofmath.org/wiki/Solvable_group)" target="_blank">here</a></li></ul></p>
 <p></p>
-<p>The $A_{k+1}/A_{k}$  are called normal factors.</p>
-<p>The sequence $(A_0, \ldots, A_r)$ is called normal series. If each term of the series is <a href="./normal subgroup.md.html">normal</a> not in the whole group but only in the preceding term, then the series is called subnormal series.</p>
+<h2 style="margin-left:0px;" id="Lie_groups">Lie groups</h2>
+<p>In the case of <a href="./../Lie group.md.html">Lie group</a>s we have this slightly different definition:</p>
+<p><b>Definition</b> (<a href="./../../Bibliography/@olver86.md.html">@olver86</a>). Let $G$ be a Lie group with Lie algebra $\mathfrak{g}$. Then $G$ is solvable if there exists a chain of Lie subgroups </p>
+$$
+\{e\} = G_0 \subseteq G_1 \subseteq G_2 \subseteq \ldots \subseteq G_{r-1} \subseteq G_r \subseteq G
+$$
+<p>such that for each $k = 1, \ldots, r$, $G_{k-1}$ is a $k$-<b>dimensional subgroup of</b> $G$ and $G_{k-1}$ is a normal subgroup of $G_k$. </p>
 <p></p>
-<p>It turns out that it is enough the existence of a subnormal series with Abelian normal factors (see <a href="https://encyclopediaofmath.org/wiki/Solvable_group)" target="_blank">here</a></p>
+<p>Equivalently, $\mathfrak{g}$ is a <a href="./solvable Lie algebra.md.html">solvable Lie algebra</a>.</p>
+<p>$\blacksquare$</p>
 <p></p>
-<p>Taking into account the <a href="./../../✏️ THEOREMS/normal subgroup vs ideal of Lie algebra.md.html">normal subgroup vs ideal of Lie algebra</a> relationship, it looks intuitive understand that a solvable Lie group correspond to a <a href="./solvable Lie algebra.md.html">solvable Lie algebra</a>.</p>
+<p>Taking into account the <a href="./../../✏️ THEOREMS/normal subgroup vs ideal of Lie algebra.md.html">normal subgroup vs ideal of Lie algebra</a> relationship, it looks intuitive understand the equivalences in the definition above.</p>
+<p></p>
+<p>On the other hand, a solvable Lie group is solvable like a general group since (I think) every 1-dimensional Lie group is abelian.</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

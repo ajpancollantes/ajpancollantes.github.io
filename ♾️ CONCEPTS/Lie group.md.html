@@ -32,12 +32,12 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Lie_groups">Lie groups</h1>
-<h2 style="margin-left:0px;" id="Definition_and_introduction">Definition and introduction</h2>
+<h2 style="margin-left:0px;" id="Definition_and_some_properties">Definition and some properties</h2>
 <p>A Lie group is a manifold $G$ together with two smooth operations satisfying the group definition. </p>
 <p></p>
+<p>Some interesting elementary properties:</p>
 <p><b>Proposition</b></p>
 <p>The identity component $G_0$ of a Lie group $G$ is a closed normal subgroup.  $\blacksquare$</p>
-<p></p>
 <p><b>Proof</b></p>
 <p>First, a connected component is always closed. </p>
 <p></p>
@@ -46,7 +46,6 @@ $$
 G \longmapsto G
 $$
 <p>by left multiplication. But since $h$ and $e$ are in the same connected component, $gh$ and $g$ are in the same component (and the same that $e$). Therefore, $gh\in G_0$, and it is a subgroup.</p>
-<p></p>
 <p>And finally, since the map</p>
 $$
 \phi_g:h \longmapsto ghg^{-1}
@@ -63,38 +62,10 @@ $$
 <p>Every connected Lie group $G$ has a simply connected universal covering group $G^*$ (see section <a href="./covering group.md.html">covering group</a>).</p>
 <p>$\blacksquare$</p>
 <p></p>
-<p></p>
-<p>Now, for $g\in G$ we define:</p>
-$$
-L_g: x \mapsto g\cdot x
-$$
-<p>and</p>
-$$
-R_g: x \mapsto  x \cdot g
-$$
-<p>called left and right multiplication respectively.</p>
-<p></p>
-<p>A vector field in $G$ is left-invariant if $d(L_g)_p (X(p))=X(g\cdot p)$. That is to say: $X(g)=d(L_g)_e(X(e))$ for all $g$, and being $e$ the identity of $G$. Left invariant vector fields are closed under the Lie bracket, so they constitute a Lie algebra $\mathfrak { g } \cong T  _ { e }  G$.</p>
-<p></p>
-<p></p>
-<h2 style="margin-left:0px;" id="Parallelizable_manifolds">Parallelizable manifolds</h2>
-<p>A Lie group is a <a href="./parallelizable manifold.md.html">parallelizable manifold</a>. The tangent spaces at different points can be identified using left translations, so we have $TG\approx G\times T_e G$. This is related to the <a href="./GEOMETRY/Maurer-Cartan form.md.html">Maurer-Cartan form</a>.</p>
-<h2 style="margin-left:0px;" id="Lie_algebra_and_Lie_groups_correspondence">Lie algebra and Lie groups correspondence</h2>
-<p>We have that:</p>
-<p></p>
-<p>Every finite-dimensional real Lie algebra is the Lie algebra of some simply connected Lie group. (<b>Lie's third theorem</b>)</p>
-<p></p>
-<p>And it can be shown that if two simply connected Lie groups have the same Lie algebra, they are isomorphic.</p>
-<p></p>
-<p>Given two groups with isomorphic Lie algebras you can only infer that they are isomorphic in some neighbourhood of identity. Moreover, they would have the same universal covering group, so both are quotient of the same group by a discrete subgroup.</p>
-<p></p>
-<p></p>
 <p>The following is a general result used in the context of <a href="./covering group.md.html">covering group</a>s:</p>
-<p></p>
 <p><b>Proposition</b></p>
 <p>Let $G$ be a connected Lie group and $N$ a discrete normal subgroup of $G$. Then $N$ is contained in the center $Z(G)$. </p>
 <p>$\blacksquare$</p>
-<p></p>
 <p><b>Proof</b></p>
 <p>Let $g\in N$ and consider the map </p>
 $$
@@ -105,6 +76,36 @@ $$
 <p>And so $gh=hg$ for every $h\in G$.</p>
 <p>$\blacksquare$</p>
 <p></p>
+<p></p>
+<h2 style="margin-left:0px;" id="Lie_algebra_and_Lie_groups_correspondence">Lie algebra and Lie groups correspondence</h2>
+<p>For $g\in G$ we define:</p>
+$$
+L_g: x \mapsto g\cdot x
+$$
+<p>and</p>
+$$
+R_g: x \mapsto  x \cdot g
+$$
+<p>called left and right multiplication respectively.</p>
+<p></p>
+<p>A vector field in $G$ is left-invariant if $d(L_g)_p (X(p))=X(g\cdot p)$. That is to say: $X(g)=d(L_g)_e(X(e))$ for all $g$, and being $e$ the identity of $G$. Left invariant vector fields are closed under the Lie bracket, so they constitute a <a href="./GEOMETRY/Lie algebra.md.html">Lie algebra</a> $\mathfrak { g } \cong T  _ { e }  G$.</p>
+<p></p>
+<p>We have that:</p>
+<p><b>Theorem</b>(<b>Lie's third theorem</b>). Every finite-dimensional real Lie algebra is the Lie algebra of some simply connected Lie group. $\blacksquare$</p>
+<p></p>
+<p>And it can be shown that if two simply connected Lie groups have the same Lie algebra, they are isomorphic.</p>
+<p></p>
+<p>Given two groups with isomorphic Lie algebras you can only infer that they are isomorphic in some neighborhood of identity. Moreover, they would have the same universal covering group, so both are quotient of the same group by a discrete subgroup.</p>
+<p></p>
+<p><b>Proposition</b>. A connected Lie group is abelian if and only if the Lie algebra is abelian (see <a href="https://math.stackexchange.com/a/2126148/601797)" target="_blank">this</a>. $\blacksquare$ </p>
+<p></p>
+<p><b>Proposition</b>. A connected, one-dimensional Lie group $G$ is isomorphic to $\mathbb{R}$ or $S^1$ (see <a href="https://math.stackexchange.com/q/2142295/601797)" target="_blank">this</a>. $\blacksquare$</p>
+<p></p>
+<p><b>Corollary</b>. Every connected 1-dimensional Lie group is commutative.$\blacksquare$ </p>
+<p></p>
+<h2 style="margin-left:0px;" id="Parallelizable_manifolds">Parallelizable manifolds</h2>
+<p>A Lie group is a <a href="./parallelizable manifold.md.html">parallelizable manifold</a>. The tangent spaces at different points can be identified using left translations, so we have $TG\approx G\times T_e G$. This is related to the <a href="./GEOMETRY/Maurer-Cartan form.md.html">Maurer-Cartan form</a>.</p>
+<p></p>
 <h2 style="margin-left:0px;" id="Examples">Examples </h2>
 <p><ul style="margin-left:0px;"><li>$(\mathbb{R}^n, +)$</li></ul></p>
 <p>They all are abelian groups. They are translations.</p>
@@ -114,7 +115,7 @@ $$
 <p></p>
 <p><ul style="margin-left:0px;"><li>$GL(n)$, $GL(n,\mathbb{R})$, $GL(n,\mathbb{C})$, <a href="./general linear group.md.html">general linear group</a>.</li></ul></p>
 <p></p>
-<p><ul style="margin-left:0px;"><li>$SL(2)$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$SL(2)$. Special linear group.</li></ul></p>
 <p>Matrices of rank 2 whose determinant is 1. Inside it we have three subgroups:</p>
 $$
 K=\left\{\left(\begin{array}{cc}{\cos \theta} & {-\sin \theta} \\ {\sin \theta} & {\cos \theta}\end{array}\right)\right\}, \quad A=\left\{\left(\begin{array}{cc}{r} & {0} \\ {0} & {1 / r}\end{array}\right) : r>0\right\}, \quad N=\left\{\left(\begin{array}{cc}{1} & {x} \\ {0} & {1}\end{array}\right)\right\}
@@ -123,9 +124,9 @@ $$
 $$
 SL(2)=KAN
 $$
-<p>This is called Iwasawa decomposition. From here can be concluded that $SL(2)$ is homeomorphic to the interior of a solid torus. See \textit{Decomposing SL(2,R)} in Calibre.</p>
+<p>This is called Iwasawa decomposition. From here can be concluded that $SL(2)$ is homeomorphic to the interior of a solid torus. See Decomposing SL(2,R) in Calibre.</p>
 <p></p>
-<p><ul style="margin-left:0px;"><li>$SL(n)$</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$SL(n)$. Special linear group.</li></ul></p>
 <p>Matrices of rank $n$ whose determinant is 1. It is a manifold of dimension $n^2-1$. Geometrically, it corresponds with the volume and orientations preserving transformations of $\mathbb{R}^n$. </p>
 <p></p>
 <p><ul style="margin-left:0px;"><li>$Aff(\mathbb{R}^n)$, the <a href="./affine group.md.html">affine group</a>.</li></ul></p>

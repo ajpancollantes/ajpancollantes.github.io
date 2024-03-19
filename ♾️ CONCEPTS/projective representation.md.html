@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Projective_representation">Projective representation</h1>
+<h2 style="margin-left:0px;" id="Definition">Definition</h2>
+<p>A projective representation of a group is a homomorphism (a structure-preserving map) from the group to the <a href="./projective linear group.md.html">projective linear group</a>, rather than to the general linear group of invertible matrices. </p>
+<p>In more technical terms, for a group $G$, a projective representation is a map $\rho: G \rightarrow GL(V)$ such that for all elements $g, h \in G$, the relation</p>
+$$ 
+\rho(g) \rho(h) = c(g, h) \rho(gh) 
+$$
+<p>holds, where $c(g, h)$ is a scalar function known as a <b>2-cocycle</b>, and $gh$ denotes the group operation. This equation means that the matrix multiplication of the images of $g$ and $h$ is the same as the image of the product $gh$, up to a multiplicative scalar $c(g, h)$.</p>
+<p></p>
+<h2 style="margin-left:0px;" id="Importance_in_Physics">Importance in Physics</h2>
+<p>Projective representations are especially important in quantum mechanics. The symmetry operations in quantum mechanics often correspond to projective representations of groups rather than ordinary representations. This is because the state of a quantum system is not determined by a vector in a Hilbert space but by a ray, or a line through the origin, which corresponds to all scalar multiples of a vector. Therefore, when quantum states are transformed, it is only the direction of the vector (or the ray) that matters, not its length, leading naturally to projective representations.</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

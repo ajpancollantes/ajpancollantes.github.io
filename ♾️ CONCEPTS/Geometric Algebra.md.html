@@ -55,15 +55,29 @@ e_1 e_2 &= -e_2 e_1, \\
 \end{aligned}
 $$
 <p>Therefore, we interpret $e_1 e_2$ as $i$. Furthermore, it can be shown that:</p>
-<p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^2)$ is isomorphic to $\mathbb{C}$, complete with its usual internal rotations.</li></ul></p>
-<p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^2)$ acts on $\Lambda^1(\mathbb{R}^2) = \mathbb{R}^2$ as rotations. Specifically, the exponent $e^{I \theta}$ rotates a vector $a \in \mathbb{R}^2$ by $2\theta$ through the formula $a' = e^{-I \theta} a e^{I \theta}$.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^2)$ is isomorphic to $\mathbb{C}$, with its usual internal rotations.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^2)$ acts on $\Lambda^1(\mathbb{R}^2) = \mathbb{R}^2$ as dilation-rotations. Specifically, the exponent $e^{I \theta}$ rotates a vector $a \in \mathbb{R}^2$ by $2\theta$ through the formula $a' = e^{-I \theta} a e^{I \theta}$.</li></ul></p>
 <p></p>
 <p><b>Note</b>: Although $e^{I \theta}$ acts on $\Lambda^1(\mathbb{R}^2)$ to produce a rotation of $\theta$, which seems natural, this behavior is not generalizable to all dimensions.</p>
+<p></p>
+<p>Complex number has a doubled "personality": they represent vectors and operations on vectors. On the other hand, the real and imaginary part of a product of complex number has no geometric meaning. From the Geometric Algebra view, everything is more coherent. The geometric algebra that start with $\mathbb{R}^2$, say $\mathcal{G}^2$, provide us with:</p>
+<p><ul style="margin-left:0px;"><li>The real plane $\mathbb{R}^2$ itself, that is, its grade 1 members.</li></ul></p>
+<p><ul style="margin-left:0px;"><li>An even subalgebra $\mathbb{R} \oplus \mathcal{G}^2_2$ that operates over $\mathbb{R}^2$ in the sandwiched way.</li></ul></p>
+<p></p>
+<p>The geometric product <b>on this even subalgebra</b> is similar to the complex product. And moreover, acts over $\mathbb{R}^2$ in the expected way: rotation-dilation. But we have two unexpected issues:</p>
+<p><ul style="margin-left:0px;"><li>The action is not only by multiplication, but on the sandwich way...</li></ul></p>
+<p><ul style="margin-left:0px;"><li>We have an identification of $\mathcal{G}_1 ^2$ with $\mathbb{R} \oplus \mathcal{G}_2 ^2$ via $v\mapsto e_1 v$. The geometric product at $\mathcal{G}_1 ^2$ yields an element of $\mathbb{R} \oplus \mathcal{G}_2 ^2$ that can be returned back to $\mathcal{G}_1 ^2$, giving rise to a vector product that is not the usual complex product. On the contrary, it corresponds to</li></ul></p>
+$$
+zw^*
+$$
+<p>With this product, both real and imaginary part has geometric meaning: the cosine of the angle and the area of the parallelogram.</p>
+<p></p>
 <h3 style="margin-left:0px;" id="Geometric_Algebra_in_3D_and_Quaternions">Geometric Algebra in 3D and Quaternions</h3>
 <p>When we take $V = \mathbb{R}^3$, $G^3 = \Lambda(\mathbb{R}^3)$ contains <a href="./quaternions.md.html">quaternions</a> $\mathbb{H}$ in a natural way. With a fixed basis $\{ e_1, e_2, e_3 \}$, it turns out that $e_2 e_3, e_1 e_3, e_1 e_3$ behave like the imaginary units $i, j, k$ in $\mathbb{H}$. Therefore:</p>
 <p><ul style="margin-left:0px;"><li>$\Lambda^2(\mathbb{R}^3)$ are the pure imaginary quaternions.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^3)$ is isomorphic to $\mathbb{H}$, maintaining its usual internal properties.</li></ul></p>
 <p><ul style="margin-left:0px;"><li>An unitary vector $a \in \mathbb{R}^3$ defines a reflection in $\mathbb{R}^3$ along the plane orthogonal to it through the formula $x' = -a x a$.</li></ul></p>
+<p><img src="./../imagenes/Pasted image 20240211084234.png" style="width:80vw; border-radius: 3px;" ></p>
 <p><ul style="margin-left:0px;"><li>$\mathbb{R} \oplus \Lambda^2(\mathbb{R}^3)$ acts on $\Lambda^1(\mathbb{R}^3) = \mathbb{R}^3$ as rotations. Specifically, the exponent $e^{B \theta}$ rotates a vector $a \in \mathbb{R}^3$ by $2\theta$ along the plane given by $B$ using the formula $e^{-B \theta} a e^{B \theta}$.</li></ul></p>
 <p></p>
 <h2 style="margin-left:0px;" id="Axiomatic_approach">Axiomatic approach</h2>
@@ -113,17 +127,11 @@ $$
 <p></p>
 <h3 style="margin-left:0px;" id="Some_remarks:">Some remarks:</h3>
 <p><ul style="margin-left:0px;"><li>The neutral $0 \in \mathcal{G}_0$ (as a scalar) is identical to $0 \in \mathcal{G}_1$ (as a 1-vector).</li></ul></p>
-<p></p>
 <p><ul style="margin-left:0px;"><li>The first part of axiom 3 is equivalent to: *for any $u, v \in \mathcal{G}_1, u \cdot v \in \mathcal{G}_0$*. Thus, it can be deduced from axiom 4.</li></ul></p>
-<p></p>
 <p><ul style="margin-left:0px;"><li>Elements of $\mathcal{G}_r$ are known as $r$-vectors. If an element contains only one term, it is called a simple $r$-vector or $r$-blade. In general, a geometric product of $r$ vectors (which are not necessarily orthogonal) is termed an $r$-versor.</li></ul></p>
-<p></p>
 <p><ul style="margin-left:0px;"><li>If $\mathcal{G}_1$ has dimension 3, then one can show that the linear combination of 2-blades can always be reduced to a single 2-blade (for instance, in $\mathbb{R}^3$, two planes always share a common line). However, this does not hold in higher dimensions.</li></ul></p>
-<p></p>
 <p><ul style="margin-left:0px;"><li>Concerning axiom 2, every ring $R$ (even a non-commutative one) can be viewed as an associative algebra over its center. Conversely, if $R$ is an associative algebra over a commutative subring $S$, then $S$ is a subset of the center of $R$.</li></ul></p>
-<p></p>
 <p><ul style="margin-left:0px;"><li>Within the list of axioms, we have incompletely defined two products. Several properties can be shown about these products that one would intuitively expect, such as the associativity of the wedge product and the distributive rules for both the inner and wedge products.</li></ul></p>
-<p></p>
 <p><ul style="margin-left:0px;"><li>The definitions of the inner and wedge products within the axioms can and should be generalized to any pair $A_r, B_s$ of multivectors:</li></ul></p>
 <ul style="margin-left:0px;"><li>$$</li></ul>
   \mathbf{A}_{r} \cdot \mathbf{B}_{s} :=\left\langle\mathbf{A}_{r} \mathbf{B}_{s}\right\rangle_{|r-s|}
@@ -172,8 +180,7 @@ $$
 <p></p>
 <h2 style="margin-left:0px;" id="Geometric_interpretations">Geometric interpretations</h2>
 <p>(see anotacioneslatex.tex)</p>
-<h2 style="margin-left:0px;" id="On_the_relation_to_complex_numbers">On the relation to complex numbers</h2>
-<p>(see anotacioneslatex.tex)</p>
+<p></p>
 <h2 style="margin-left:0px;" id="Angles_and_trigonometry">Angles and trigonometry</h2>
 <p>(see anotacioneslatex.tex)</p>
 <p>________________________________________</p>

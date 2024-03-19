@@ -33,27 +33,18 @@ gtag('config', 'G-LBT9E8N3HS');
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="System_of_first_order_linear_ODEs_real_case">System of first order linear ODEs (real case)</h1>
 <p>It is a particular case of <a href="./system of first order linear ODEs- complex case.md.html">the linear complex case</a> and, more in general, of the <a href="./system of first order ODEs.md.html">system of first order ODEs</a>.</p>
-<p><ul style="margin-left:0px;"><li>If $A$ is a real matrix, given a solution $\varphi(t)$, the conjugate function is just the solution of the system whose initial value is the conjugate of that of $\varphi(t)$.</li></ul></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
+<p>If $A$ is a real matrix, given a solution $\varphi(t)$, the conjugate function is just the solution of the system whose initial value is the conjugate of that of $\varphi(t)$.</p>
 <p>By uniqueness of solutions, if we take any real initial condition, $v\in \mathbb{R}^n$ then</p>
-<p></p>
 $$
 e^{At}\cdot v
 $$
-<p></p>
 <p>must be real, and so $e^{At}$ is a real matrix. </p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
 <p></p>
 <p>What form does the elements of this matrix have? In the <a href="./system of first order linear ODEs- complex case.md.html#3_The_rest_of_the_cases">note of the complex case</a> we stated that</p>
 $$
 e^{At}=M e^{Jt} M^{-1}
 $$
-<p></p>
 <p>Solutions are then made by mixing quasi-polynomials by mean of complex number, so the results are linear combinations of real and imaginary parts of these quasi-polinomials:</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
 <h3 style="margin-left:0px;" id="Proposition">Proposition</h3>
 <p>Let $\dot{z}=Az$ a system of first order linear equations, with $A:\mathbb{R}^n \mapsto \mathbb{R}^n$ a linear operator. Then, if $A$ has  real eigenvalues $\lambda_i$ with algebraic multiplicities $n_i$ and complex eigenvalues $\alpha_j\pm i \omega_j$ with multiplicities $\mu_j$ then every component of a solution $\varphi(t)$ has the form:</p>
 <p></p>
@@ -125,37 +116,19 @@ $$
 <p><ul style="margin-left:0px;"><li></li></ul></p>
 <p></p>
 <p>In conclusion, in equation (1) above, $c_{m,i}$, $a_{m,j}$, $b_{m,j}$ are "connected" in such a way that they only suppose $n$ degrees of freedom: they are linear functions of real and imaginary parts of $c_k$ and we have that the first $r$ $c_k$s are real and the last $2c$ are paired by conjugation .</p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
 <p>Sometimes it is preferred other expression of the general solution. For $k=r+1..r+c$ the terms above can be rewritten:</p>
-<p></p>
 $$
-
  2Re[c_{k} e^{\lambda_{k} t} \xi_{k}]=
-
- Re(\xi_k)e^{\alpha_k t} \cdot \left(2Re(c_k)cos(\omega_k t)-2Im(c_k)Sin(\omega_k t)\right)+ 
-
+Re(\xi_k)e^{\alpha_k t} \cdot \left(2Re(c_k)cos(\omega_k t)-2Im(c_k)Sin(\omega_k t)\right)+ 
 $$
-<p></p>
 $$
-
 +Im(\xi_k)e^{\alpha_k t} \cdot \left(-2Im(c_k)cos(\omega_k t)-2Re(c_k)Sin(\omega_k t)\right)+ 
-
 $$
-<p></p>
 <p>that can be clean be means of a change of names and trigonometric properties into:</p>
-<p></p>
-<p>\label{soluciondefinitiva}</p>
 $$
 e^{\alpha_k t}A_k cos(\omega_k t+\phi_k) \cdot v_k^1+ e^{\alpha_k t}A_k sin(\omega_k t+\phi_k) \cdot v_k^2 
 $$
-<p></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p><ul style="margin-left:0px;"><li></li></ul></p>
-<p></p>
-<p>where $v_k^1=Re(\xi_k) $, $v_k^2=Im(\xi_k) $, $A_k=|2c_k|$ and $\phi_k=arg(2 c_k))$</p>
+<p>where $v_k^1=Re(\xi_k)$, $v_k^2=Im(\xi_k)$, $A_k=|2c_k|$ and $\phi_k=arg(2 c_k))$</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>

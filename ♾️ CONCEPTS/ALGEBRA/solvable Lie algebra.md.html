@@ -38,6 +38,23 @@ $$
 $$
 <p>If this series arrives to 0 in a finite number of steps it is said that $\mathfrak{g}$ is solvable.</p>
 <p></p>
+<p>Equivalently:</p>
+<p><b>Definition</b> (<a href="./../../Bibliography/@olver86.md.html">@olver86</a>). A Lie algebra $\mathfrak{g}$ is a solvable Lie algebra if there exists a chain of subalgebras </p>
+$$
+\{0\} = \mathfrak{g}_0 \subseteq \mathfrak{g}_1 \subseteq \mathfrak{g}_2 \subseteq \ldots \subseteq \mathfrak{g}_{r-1} \subseteq \mathfrak{g}_r = \mathfrak{g}
+$$
+<p>such that for each $k$, $\dim \mathfrak{g}_{k-1} = k$ and $\mathfrak{g}_{k-1}$ is a normal subalgebra of $\mathfrak{g}_k$:</p>
+$$
+[\mathfrak{g}_{k-1},\mathfrak{g}_k]\subseteq \mathfrak{g}_{k-1}.
+$$
+<p>The requirement for solvability is equivalent to the existence of a basis $\{v_1, \ldots, v^r\}$ of $\mathfrak{g}$ such that </p>
+$$
+[v_i, v_j] = \sum_{k}^{j-1} c_{ij}^k v_k
+$$
+<p>whenever $i < j$.</p>
+<p>$\blacksquare$</p>
+<p></p>
+<p>Other characterizations:</p>
 <p><b>Theorem</b></p>
 <p>A Lie algebra $\mathfrak{g}$ is solvable if and only if there exists a sequence of subalgebras</p>
 $$
@@ -54,8 +71,7 @@ $$
 <p>such that $\mbox{dim}(L^i)=i$ for $i=1,\ldots,n$.$\blacksquare$</p>
 <p>See Ruiz_2014, page 8.</p>
 <p></p>
-<p>It can be <a href="https://www.sciencedirect.com/science/article/abs/pii/S0079816908616700" target="_blank">shown</a>  that a connected Lie group is <a href="./solvable group.md.html">solvable</a> if and only if its Lie algebra is <a href="./solvable Lie algebra.md.html">solvable</a>.</p>
-<p></p>
+<p>It can be <a href="https://www.sciencedirect.com/science/article/abs/pii/S0079816908616700" target="_blank">shown</a>  that a connected Lie group is <a href="./solvable group.md.html">solvable</a> if and only if its Lie algebra is solvable.</p>
 <p></p>
 <p>On the other hand, if $\mathfrak{g}$ is a finite dimensional Lie algebra, there exists a unique maximal solvable ideal called the <a href="./../radical of a Lie algebra.md.html">radical of a Lie algebra</a>.</p>
 <p>________________________________________</p>

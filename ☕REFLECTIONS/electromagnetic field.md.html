@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBT9E8N3HS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LBT9E8N3HS');
+</script>
+<script> MathJax={tex:{inlineMath: [['$', '$']]}};</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	img { max-width:900px; }
+	.codeblock { 
+	background: #B0B0B0; padding:1px 10px 0px 10px; border-radius: 5px; overflow-x:auto; 
+	}
+	code {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+	.inlineCoed {
+ font-family: monospace; font-size: inherit; color: #202020; 
+	}
+</style>
+</head>
+<body style="background: #F0F0F0;">
+<div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
+<font size="3vw"><h1 style="margin-left:0px;" id="Electromagnetic_field">Electromagnetic field</h1>
+<p>It is the fundamental notion for <a href="./../⛳️ NON CLASSIFIED/Optics.md.html">Optics</a>.</p>
+<h3 style="margin-left:0px;" id="Electromagnetic_field">Electromagnetic field</h3>
+<p>Electric and magnetic fields are connected by Maxwell's equations. They are a summary of a lot of relations worked out during the 19th century that explain how these fields evolve with time, one influenced by the other. This set of equations was a big achievement for science.</p>
+$$
+\begin{align}
+\vec{\nabla} \cdot \vec{E} &= \frac{\rho}{\varepsilon_{0}} \\
+\vec{\nabla} \cdot \vec{B} &= 0 \\
+\vec{\nabla} \times \vec{E} &= -\frac{\partial \vec{B}}{\partial t} \\
+\vec{\nabla} \times \vec{B} &= \mu_{0} \vec{j} + \mu_{0} \varepsilon_{0} \frac{\partial \vec{E}}{\partial t}
+\end{align}
+$$
+<p></p>
+<p>Here, $\rho$ and $j$ are data about the distribution and movement of the charges affecting the fields. See <a href="./../♾️ CONCEPTS/four-current.md.html">four-current</a>.</p>
+<p></p>
+<p>On the other hand, it was discovered by Lorentz that a particle with electric charge subjected to an electric field $E$ and a magnetic field $B$ experiences a force (Lorentz force law):</p>
+$$
+F = e[E + v \times B]
+$$
+<p>where $v$ is the speed of the particle.</p>
+<p></p>
+<p>But there were two facts that led to a modification of all this stuff. </p>
+<p>One was the development of Lagrangian mechanics. The perspective was changed: forces are not the fundamental objects that one acquires from experimentation; instead, the least action principle is the key. Physicists look for Lagrangians whose Euler-Lagrange equations explain the phenomena. Moreover, the evolution of the fields can be explained in a similar way, from a Lagrangian and the least action principle (classical field theory).</p>
+<p></p>
+<p>The other fact was the development of special relativity. All scientific laws have to be adapted to be Lorentz invariant, with this new paradigm.</p>
+<p></p>
+<p>The result was that physicists realized the existence of two new objects, more fundamental than $E$ and $B$. One is the <b>vector potential</b> $A_{\mu}$ (a 1-form) and the other is <b>the electromagnetic tensor</b> $F_{\mu \nu}$ (a 2-form).</p>
+<p></p>
+<p><b>The vector potential $A_{\mu}$</b>: When formulated in terms of $E$ and $B$ there is no way to express the dynamics of charged particles as an action principle. For that, the vector potential is essential. We invent an action that involves a mysterious $A_{\mu}$. Then we write the Euler-Lagrange equations and compare with Lorentz force law to obtain that we can define $A_{\mu}$ such that:</p>
+$$
+\vec{E} = -\frac{\partial \vec{A}}{\partial t} + \vec{\nabla} A_{0}
+$$
+<p>and</p>
+$$
+\vec{B} = \vec{\nabla} \times \vec{A}
+$$
+<p>There is a point here. Is $A_{\mu}$ anything physical or is it only a mathematical trick to sum up electric and magnetic field? Both perspectives are valid.</p>
+<p></p>
+<p>It turns out that the Lagrangian for the particle inside the electromagnetic field is</p>
+$$
+\mathcal{L} = -m \sqrt{1 - \dot{x}^{2}} + e A_{0}(t, x) + e \dot{X}^{p} A_{p}(t, x)
+$$
+<p>and the equation of motion, under special relativity, is</p>
+$$
+m \frac{d}{dt} \frac{\dot{X}_{p}}{\sqrt{1 - \dot{x}^{2}}} = e\left(\frac{\partial A_{0}}{\partial X^{p}} - \frac{\partial A_{p}}{\partial t}\right) + e \dot{X}^{n}\left(\frac{\partial A_{n}}{\partial X^{p}} - \frac{\partial A_{p}}{\partial X^{n}}\right)
+$$
+<p>or</p>
+$$
+m \frac{d}{dt} \frac{\dot{X}_{p}}{\sqrt{1 - \dot{x}^{2}}} = e(\vec{E} + \vec{v} \times \vec{B})_{p}
+$$
+<p>It can be written in pure relativistic form (4-vectors) in the following way:</p>
+$$
+m \frac{d U_{\mu}}{d \tau} = e\left(\frac{\partial A_{\nu}}{\partial X^{\mu}} - \frac{\partial A_{\mu}}{\partial X^{\nu}}\right) U^{\nu}
+$$
+<p></p>
+<p><b>The electromagnetic tensor</b>: On the other hand, the electromagnetic tensor is</p>
+$$
+F_{\mu \nu} = \frac{\partial A_{\nu}}{\partial X^{\mu}} - \frac{\partial A_{\mu}}{\partial X^{\nu}}
+$$
+<p>This tensor encodes $E$ and $B$:</p>
+$$
+F_{\mu \nu} = \left( \begin{array}{cccc} 0 & -E_{x} & -E_{y} & -E_{z} \\ +E_{x} & 0 & +B_{z} & -B_{y} \\ +E_{y} & -B_{z} & 0 & +B_{x} \\ +E_{z} & +B_{y} & -B_{x} & 0 \end{array} \right)
+$$
+<p>It lets express the equation of motion for the charged particle as</p>
+$$
+m \frac{d^{2} X_{\mu}}{d \tau^{2}} = e F_{\mu \nu} U^{\nu}
+$$
+<p>and Maxwell's equations get reduced to</p>
+$$
+\mathrm{d} \boldsymbol{F} = 0, \quad \mathrm{d}^{*} \boldsymbol{F} = 4 \pi^{*} \boldsymbol{J}
+$$
+<p>or in index notation</p>
+$$
+\partial_{\mu} F_{\nu \sigma} + \partial_{\nu} F_{\sigma \mu} + \partial_{\sigma} F_{\mu \nu} = 0
+$$
+$$
+\partial_{\nu} F^{\mu \nu} = J^{\mu}
+$$
+<p>or in <a href="./../⛳️ NON CLASSIFIED/Penrose abstract index notation.md.html">Penrose abstract index notation</a></p>
+$$
+\nabla_{[a} F_{b c]} = 0
+$$
+$$
+\nabla_{a} F^{a b} = 4 \pi J^{b}
+$$
+<p></p>
+<p>We can think that Maxwell's equations are the analogous of the equation of motion of a particle but for the electromagnetic field. So it would be great if they, instead of being obtained empirically (we postulate their existence from the experiments), they were derived from a Lagrangian (also postulated, of course) with the action principle (Euler-Lagrange). That would confer a more compact approach to electromagnetism, giving the same treatment to particles and fields.</p>
+<p></p>
+<p>The first half of Maxwell's equations are deduced only from math. Susskind (Theoretical Minimum 3) calls it the Bianchi identity (page 300).</p>
+<p></p>
+<p>For the second half, the Lagrangian turns out to be</p>
+<p></p>
+$$
+\mathcal{L} = -\frac{1}{4} F_{\mu \nu} F^{\mu \nu}
+$$
+<p></p>
+<p>when we are in the vacuum. Euler-Lagrange equations from here lead to </p>
+<p></p>
+$$
+\partial_{\nu} F^{\mu \nu} = 0
+$$
+<p></p>
+<p>It can be guessed that, if we have the moving charges in the ambient, the Lagrangian would be the same but with the additional term</p>
+<p></p>
+$$
+J^{\mu}(x) A_{\mu}(x)
+$$
+<p></p>
+<p>This modified Lagrangian leads to an action (that is gauge invariant) that yields the equation</p>
+<p></p>
+$$
+\partial_{\nu} F^{\mu \nu} = J^{\mu}
+$$
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>________________________________________</p>
+<p>Author of the notes: Antonio J. Pan-Collantes<br>
+<p><a href="mailto:antonio.pan@uca.es">antonio.pan@uca.es</a></p><br>
+<p>INDEX:<br>
+	<iframe src="../treeview.html" width="90%" frameBorder="0" height="900px"></iframe>
+</font></div>
+</body>
+</html>

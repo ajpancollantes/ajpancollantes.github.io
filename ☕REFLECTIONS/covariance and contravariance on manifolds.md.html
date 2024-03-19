@@ -32,27 +32,27 @@ gtag('config', 'G-LBT9E8N3HS');
 <body style="background: #F0F0F0;">
 <div style="width:90vw; padding:5vw; margin:0px; z-index: 5; text-align:left; background-color: #DCDCDC; border-radius: 5px; position:absolute; top:0; left:0px;">
 <font size="3vw"><h1 style="margin-left:0px;" id="Covariance_and_contravariance_on_manifolds">Covariance and contravariance on manifolds</h1>
-<p>Todo esto se explica mejor en <a href="./covariance and contravariance in linear algebra.md.html">covariance and contravariance in linear algebra</a>.</p>
-<p>Si tenemos dos cartas para una misma región de una variedad $M$, denotadas $x$ e $y$, relacionadas mediante una transformación </p>
+<p>Explained also in <a href="./covariance and contravariance in linear algebra.md.html">covariance and contravariance in linear algebra</a>.</p>
+<p>If we have two charts for the same region of a manifold $M$, denoted $x$ and $y$, related through a transformation</p>
 $$
 \phi: x \to y
 $$
-<p>la matriz</p>
+<p>the matrix</p>
 $$
 d \phi=\frac{\partial y^b}{\partial x^a}
 $$
-<p>es la que convierte las coordenadas de los vectores del espacio tangente en la base proporcionada por $x$ a las coordenadas de la base proporcionada por $y$. </p>
-<p>Pero $d \phi$ y $d \phi^{-1}$ no son solamente cambios de coordenadas, también se pueden interpretar como una transformación de vectores (esto ocurre desde el nivel del álgebra lineal, las matrices pueden ser cambios de bases o trasformación del espacio, {\it si dejamos la segunda base fija}). Pero entonces, la matriz que transforma la base aportada por la carta $x$ en la base aportada por la base $y$ no es $d\phi$, sino </p>
+<p>is the one that converts the coordinates of the tangent space vectors in the base provided by $x$ to the coordinates of the base provided by $y$.</p>
+<p>But $d \phi$ and $d \phi^{-1}$ are not just changes of coordinates, they can also be interpreted as a transformation of vectors (this occurs from the level of linear algebra, matrices can be base changes or transformation of space, *if we leave the second base fixed*). However, then, the matrix that transforms the base provided by the chart $x$ into the base provided by $y$ is not $d\phi$, but</p>
 $$
 d \phi^{-1}=\frac{\partial x^a}{\partial y^b}
 $$
-<p>Además, si para transformar las coordenadas de los vectores de la carta $x$ en las coordenadas en $y$ hemos usado matrices columna y la matriz multiplicaba al vector por la izquierda, para convertir los vectores de la base de la carta $x$ en los de la base de la carta $y$ usamos matrices fila (aunque por dentro sean vectores) y multiplicación a la derecha. Que se puede pasar a la forma cómoda (columnas y multiplicación por izquierda) haciendo la transpuesta.</p>
-<p>Luego la matriz para transformar uno en otro es:</p>
+<p>Moreover, if to transform the coordinates of the vectors from chart $x$ into the coordinates in $y$ we have used column matrices and the matrix multiplied the vector from the left, to convert vectors from the base of chart $x$ into those of the base of chart $y$ we use row matrices (although internally they are vectors) and multiplication from the right. This can be switched to the comfortable form (columns and multiplication from the left) by taking the transpose.</p>
+<p>So, the matrix to transform one into the other is:</p>
 $$
 d \left(\phi^{-1} \right)^t=\left(\frac{\partial x^a}{\partial y^b} \right)^t
 $$
-<p>Es decir, los vectores <b>en sí</b> se transforman en una dirección, pero las coordenadas se transforman en <b>la contraria</b>. De ahí el nombre de <b>contravarianza</b>.</p>
-<p>Es algo análogo a lo que ocurre cuando cambiamos la hora. Si adelantamos la hora nuestra coordenada temporal está a +1 pero realmente estamos desplazándonos hacia atrás (-1) porque a la misma hora que ayer ahora es más temprano (hay más luz)</p>
+<p>That is, vectors <b>themselves</b> transform in one direction, but their coordinates transform in <b>the opposite</b> direction. Hence the name <b>contravariance</b>.</p>
+<p>It's somewhat analogous to what happens when we change the time. If we advance our clock, our temporal coordinate is at +1 but we are actually moving backwards (-1) because at the same hour as yesterday it is now earlier (there's more light).</p>
 <p></p>
 <p>Summing up:</p>
 <p><img src="./../imagenes/Pasted image 20230201090857.png" style="width:80vw; border-radius: 3px;" ></p>

@@ -34,15 +34,31 @@ gtag('config', 'G-LBT9E8N3HS');
 <font size="3vw"><h1 style="margin-left:0px;" id="Spinors">Spinors</h1>
 <p></p>
 <h2 style="margin-left:0px;" id="Definition">Definition</h2>
-<p>According to <a href="https://youtu.be/T0V08u4t-cg?si=WqN9lAbf8LYBTn8U&t=1305" target="_blank">this video</a>, they are elements of the complex <a href="./projective space.md.html">projective complex line</a> $\mathbb P \mathbb C^2$, in other words, the Bloch sphere.</p>
+<p>See <a href="https://math.stackexchange.com/a/3295484/601797" target="_blank">this mathstackexchange answer</a>.</p>
+<p>Let $Spin(n)$ denote the <a href="./spin group.md.html">spin group</a> (the 2-fold covering group) of $SO(n)$. Then <b>spinors</b> (with respect to the group $Spin(n)$) are elements of a vector space $V$ on which $Spin(n)$ acts via a (usually) irreducible finite-dimensional linear representation $(V,\rho)$ which does not descend to a representation of $SO(n)$. (In this generality, <b>the notion of a spinor depends on the particular choice of a linear representation</b>.) </p>
+<p>In most cases, $V$ is taken to be a fundamental representation of $Spin(n)$ constructed via the Clifford algebra $Cl(n)$. See <a href="./Clifford algebra.md.html#The_spin_group_and_the_spinors">Clifford algebra#The spin group and the spinors</a>.</p>
+<p>Thus, spinors are <b>not</b> elements of the spin-group. Regarding spinors as such is an abuse of notation which one should avoid. </p>
+<p></p>
+<p>One frequently generalizes this definition of spinors to include not just vectors (in a suitable vector space $V$) but <b>spinor fields</b> which are (smooth) sections of some  vector bundle over an $n$-dimensional <a href="./Lorentzian manifold.md.html">Lorentzian manifold</a> $M$. Such a vector bundle is derived from a spinor representation $(V,\rho)$ via the <a href="./GEOMETRY/associated bundle.md.html">associated bundle</a> construction applied to the <a href="./GEOMETRY/principal bundle.md.html">principal bundle</a> with group $Spin(n)$. With this definition, in local coordinates, spinors appear as (smooth) maps </p>
+$$
+U_\alpha\subset R^n\to V,
+$$
+<p>which transform, under local change of coordinates, according to the spinor representation $(V,\rho)$. </p>
+<p></p>
+<p><b>Edit.</b> The nicest detailed treatment of spinors that I know, from the mathematical viewpoint, is in the book: </p>
+<p></p>
+<p>1. <cite authors="Lawson, H. Blaine jun.; Michelsohn, Marie-Louise">_Lawson, H. Blaine jun.; Michelsohn, Marie-Louise_, Spin geometry, Princeton Mathematical Series. 38. Princeton, NJ: Princeton University Press. xii, 427 p.  (1989). <a href="https://zbmath.org/?q=an:0688.57001" target="_blank">ZBL0688.57001</a>.</cite></p>
+<p></p>
+<p>Specifically: Chapter I, sections 1-6 (explaining spin groups and their representations); Chapter II, section 1, 3, finally defining spinor fields. (This is before you get to the Dirac operators; Dirac operators are covered in sections 4-7 of Chapter II.) </p>
+<h2 style="margin-left:0px;" id="Disconnected_ideas">Disconnected ideas</h2>
+<p>According to <a href="https://youtu.be/T0V08u4t-cg?si=WqN9lAbf8LYBTn8U&t=1305" target="_blank">this eigenchris video</a>, they are elements of the <a href="./projective space.md.html">projective complex line</a> $\mathbb P \mathbb C^2$, in other words, the Bloch sphere.</p>
 <p></p>
 <p>Spinor space can be thought as the set of quantum states of a two-level quantum system, like the spin of the electron. </p>
 <p></p>
 <p>In other contexts, spinors are, simply, $\mathbb C^2$... I think that spinors are indeed elements of $\mathbb C^2$, but when they represent quantum states we assume that the multiplication by a complex number doesn't change the state. </p>
 <p></p>
 <p>... To be developed...</p>
-<p></p>
-<p>They transform under the <a href="./spin group.md.html">spin group</a>.</p>
+<p>But physicists also refer to spinors as section of a <a href="./spinor bundle.md.html">spinor bundle</a>. They transform under the <a href="./spin group.md.html">spin group</a>.</p>
 <p></p>
 <p>Related: <a href="./Pauli matrices.md.html">Pauli matrices</a>.</p>
 <p></p>
@@ -50,7 +66,8 @@ gtag('config', 'G-LBT9E8N3HS');
 <p></p>
 <h2 style="margin-left:0px;" id="Pauli_spinors_vs_Weyl_spinors">Pauli spinors vs Weyl spinors</h2>
 <p><img src="./../imagenes/Pasted image 20231018201159.png" style="width:80vw; border-radius: 3px;" ></p>
-<p>From [this video](<img src="./../imagenes/Pasted image 20231018201239.png" style="width:80vw; border-radius: 3px;" >).</p>
+<p><img src="./../imagenes/Pasted image 20240213092147.png" style="width:36vw; border-radius: 3px;" ></p>
+<p>From <a href="https://www.youtube.com/watch?v=4NJBvkjpC3E" target="_blank">this eigenchris video</a>.</p>
 <p></p>
 <p>There are also the Dirac spinors, related to the <a href="./../☕REFLECTIONS/Dirac equation.md.html">Dirac equation</a>.</p>
 <h2 style="margin-left:0px;" id="Physical_realization">Physical realization</h2>

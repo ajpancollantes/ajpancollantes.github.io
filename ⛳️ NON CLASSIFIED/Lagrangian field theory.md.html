@@ -40,8 +40,10 @@ gtag('config', 'G-LBT9E8N3HS');
 <p></p>
 <p>One motivation for the development of the Lagrangian formalism on fields, and more generally, for <a href="./Classical Field Theory.md.html">Classical Field Theory</a>, is to provide a clean mathematical foundation for <a href="./Quantum Field Theory.md.html">Quantum Field Theory</a>, which is infamously beset by formal difficulties that make it unacceptable as a mathematical theory. </p>
 <p></p>
+<p></p>
+<p>A kind of dual approach is that of <a href="./Hamiltonian field theory.md.html">Hamiltonian field theory</a>.</p>
 <h2 style="margin-left:0px;" id="Mathematical_description">Mathematical description</h2>
-<p>From the mathematical point of view, classical fields may be described by sections $\phi$ of a bundle $E\to M$ (where $M$ represents spacetime(?)). Physics is incorporated by introducing an horizontal $n$-form (where $n=dim(M)$) on the first order <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> $J^1(E)$, the Lagrangian density</p>
+<p>From the mathematical point of view, classical fields may be described by sections $\phi$ of a bundle $E\to M$ (where $M$ represents spacetime). Physics is incorporated by introducing an horizontal $n$-form (where $n=dim(M)$) on the first order <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a> $J^1(E)$, the Lagrangian density</p>
 $$
 \lambda=L(x_i,u^{\alpha},u^{\alpha}_i)dx_1\wedge \cdots \wedge dx_n.
 $$
@@ -50,13 +52,48 @@ $$
 $$
 S[\phi]=\int_R (j^1\phi)^*(\lambda)
 $$
-<p>being $R$ a compact region of $M$.</p>
+<p>being $R$ a compact region of $M$, where $j^1\phi$ is the prolongation to the first <a href="./../♾️ CONCEPTS/GEOMETRY/jet bundle.md.html">jet bundle</a>.</p>
 <p></p>
 <p>The condition of $\phi$ extremizing this functional is equivalent to satisfying <a href="./../♾️ CONCEPTS/Euler-Lagrange.md.html#Infinite_degree_of_freedom_fields">Euler-Lagrange</a> equations, but in this case is a <a href="./../♾️ CONCEPTS/DEs/system of DEs.md.html">system of PDEs</a>, not <a href="./../♾️ CONCEPTS/DEs/ODE.md.html">ODE</a>s.</p>
 <p>But I think there is a more geometrical object called <a href="./Poincare-Cartan form.md.html">Poincare-Cartan form</a>.</p>
 <p></p>
+<h2 style="margin-left:0px;" id="Noether's_theorem">Noether's theorem</h2>
+<p>See <a href="./../✏️ THEOREMS/Noether's theorem.md.html#In_Lagrangian_field_theory">Noether's theorem#In Lagrangian field theory</a> to understand what it is said in No-nonsense qft, pag155. Apply it in two cases:</p>
+<h3 style="margin-left:0px;" id="Spacetime_symmetries">Spacetime symmetries</h3>
+<p>... under construction...</p>
+<p>We are dealing with a spacetime symmetry if the Lagrangian density, denoted as $L(\phi(x_{\mu}), \partial_\mu \phi(x_{\mu}), x_{\mu})$, remains unchanged under a transformation from $x_{\mu}$ to $x'_{\mu}$. Mathematically, this implies:</p>
+$$ 
+\delta L = L(\phi(x_{\mu}), \partial_\mu \phi(x_{\mu}), x_{\mu}) - L(\phi'(x'_{\mu}), \partial_\mu \phi'(x'_{\mu}), x'_{\mu}) = 0. 
+$$
+<p>We have that:</p>
+$$
+\begin{aligned}
+x_\mu & \rightarrow x_\mu^{\prime}=x_\mu+\delta x_\mu \\
+\phi & \rightarrow \phi^{\prime}=\phi+\delta \phi \\
+\left(\partial_\mu \phi\right) & \rightarrow\left(\partial_\mu \phi\right)^{\prime}=\left(\partial_\mu \phi\right)+\delta\left(\partial_\mu \phi\right)
+\end{aligned}
+$$
+<p>and then, the transformed Lagrangian becomes, up to first order:</p>
+$$
+\begin{aligned}
+L\left(\left(\phi^{\prime}\left(x_\mu^{\prime}\right), \partial_\mu \phi^{\prime}\left(x_\mu^{\prime}\right), x_\mu^{\prime}\right)=\right. & L\left(\left(\phi\left(x_\mu\right), \partial_\mu \phi\left(x_\mu\right), x_\mu\right)\right. \\
+& +\frac{\partial L}{\partial \phi} \delta \phi+\frac{\partial L}{\partial\left(\partial_\mu \phi\right)} \delta\left(\partial_\mu \phi\right)+\frac{\partial L}{\partial x_\mu} \delta x_\mu .
+\end{aligned}
+$$
+<p>and then</p>
+$$
+\delta L=\frac{\partial L}{\partial \phi} \delta \phi+\frac{\partial L}{\partial\left(\partial_\mu \phi\right)} \delta\left(\partial_\mu \phi\right)+\frac{\partial L}{\partial x_\mu} \delta x_\mu .
+$$
+<p>Suppose we have, <b>for example</b>, translational symmetry $x_{\mu} \rightarrow x_{\mu}^{\prime}=x_{\mu}+a_{\mu}$. Then</p>
+$$
+0=\frac{\partial L}{\partial \phi} \delta \phi+\frac{\partial L}{\partial\left(\partial_\mu \phi\right)} \delta\left(\partial_\mu \phi\right)+\frac{\partial L}{\partial x_\mu} \delta x_\mu .
+$$
 <p></p>
-<p>A kind of dual approach is that of <a href="./Hamiltonian field theory.md.html">Hamiltonian field theory</a>.</p>
+<p></p>
+<p></p>
+<p>...to be continued... </p>
+<h3 style="margin-left:0px;" id="Internal_symmetries">Internal symmetries</h3>
+<p>...to be continued...</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
 <p>________________________________________</p>
