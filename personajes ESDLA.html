@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relaciones Personajes - El Señor de los Anillos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Fondo suave */
+            color: #333;
+            /* Evitar que el body tenga scroll si el SVG es grande */
+            /* overflow: hidden; */
+        }
+        .character-node {
+            cursor: pointer;
+            transition: filter 0.2s ease-in-out;
+        }
+        .character-node:hover {
+            filter: brightness(1.1);
+        }
+        .character-label {
+            font-size: 9px; /* Ligeramente más pequeño para acomodar más nombres */
+            font-weight: 600;
+            text-anchor: middle;
+            fill: #1a202c; /* Texto oscuro */
+            pointer-events: none; /* Para que no interfiera con el click en el círculo */
+            /* Evitar selección de texto */
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ */
+            user-select: none; /* Standard syntax */
+        }
+        .connection-line {
+            stroke: #cbd5e1; /* Línea gris claro */
+            stroke-width: 1.5;
+            transition: stroke 0.2s ease-in-out, stroke-width 0.2s ease-in-out;
+        }
+        .highlighted-line {
+            stroke: #4a5568; /* Línea gris oscuro */
+            stroke-width: 3;
+        }
+        .dimmed {
+            opacity: 0.3;
+            transition: opacity 0.2s ease-in-out;
+        }
+        .active {
+            opacity: 1.0;
+        }
+         /* Colores por grupo */
+        .fill-hobbit { fill: #68d391; } /* Verde */
+        .fill-wizard { fill: #63b3ed; } /* Azul */
+        .fill-human-gondor { fill: #f6ad55; } /* Naranja Gondor */
+        .fill-human-rohan { fill: #a57a5a; } /* Marrón Rohan */
+        .fill-elf { fill: #4fd1c5; } /* Turquesa */
+        .fill-dwarf { fill: #e53e3e; } /* Rojo */
+        .fill-dark { fill: #718096; } /* Gris oscuro Sauron */
+        .fill-ent { fill: #8b5cf6; } /* Morado Ent */
+        .fill-other { fill: #facc15; } /* Amarillo Gollum */
+        .fill-dark-wizard { fill: #a0aec0; } /* Gris claro Saruman */
+        .fill-nazgul { fill: #2d3748; } /* Gris muy oscuro Nazgul */
+
+
+        /* Tooltip simple para nombres largos */
+        [data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            /* Ajustar posición para que no interfiera con el hover */
+            bottom: calc(100% + 5px); /* 5px por encima del nodo */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2d3748; /* Fondo oscuro */
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 10;
+            pointer-events: none; /* El tooltip no debe interceptar eventos */
+        }
+         [data-tooltip] {
+            position: relative; /* Necesario para el posicionamiento absoluto del ::after */
+        }
+
+        /* Estilo para el contenedor del SVG y el panel de información */
+        .diagram-container {
+            display: flex;
+            flex-direction: column; /* Stack vertical en pantallas pequeñas */
+            align-items: flex-start; /* Alinear arriba */
+            justify-content: center;
+            min-height: 100vh; /* Asegurar altura mínima */
+            padding: 1rem; /* Padding general */
+        }
+        .svg-wrapper {
+             width: 100%; /* Ocupar ancho completo */
+             margin-bottom: 1rem; /* Espacio debajo del SVG en móvil */
+        }
+        .info-panel-wrapper {
+            width: 100%; /* Ocupar ancho completo */
+            position: sticky; /* Hacerlo pegajoso si hay scroll */
+            top: 1rem; /* Espacio desde arriba */
+            max-height: 90vh; /* Altura máxima con scroll */
+            overflow-y: auto; /* Scroll si el contenido es largo */
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.5rem; /* 8px */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Media query para pantallas más grandes (tablets y desktops) */
+        @media (min-width: 1024px) { /* lg breakpoint de Tailwind */
+            .diagram-container {
+                flex-direction: row; /* Lado a lado en pantallas grandes */
+                align-items: flex-start; /* Alinear arriba */
+            }
+            .svg-wrapper {
+                width: 75%; /* 3/4 del ancho */
+                margin-bottom: 0; /* Sin margen inferior */
+                margin-right: 1rem; /* Espacio a la derecha */
+            }
+            .info-panel-wrapper {
+                width: 25%; /* 1/4 del ancho */
+            }
+        }
+
+
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-green-100 to-yellow-100">
+
+    <div class="diagram-container">
+
+        <div class="svg-wrapper">
+            <h1 class="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-800">Personajes de El Señor de los Anillos</h1>
+            <svg id="relation-svg" class="w-full rounded-lg shadow-lg bg-white" viewBox="0 0 800 700">
+                <g id="lines-group"></g>
+                <g id="nodes-group"></g>
+            </svg>
+             <p class="text-center text-sm text-gray-600 mt-2">Pasa el ratón para ver conexiones, haz clic para ver detalles.</p>
+        </div>
+
+        <div id="info-panel" class="info-panel-wrapper">
+            <h2 id="info-name" class="text-xl font-semibold mb-2 text-gray-700">Selecciona un personaje</h2>
+            <p id="info-description" class="text-sm text-gray-600 mb-3">Haz clic en un círculo del diagrama para ver la descripción del personaje y con quién se relaciona.</p>
+            <h3 class="text-md font-semibold mb-1 text-gray-700">Relaciones:</h3>
+            <ul id="info-connections" class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                <li>Ninguna seleccionada</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        const characters = [
+           // Comunidad del Anillo (Núcleo) - Posiciones ajustadas
+          { id: 'frodo', name: 'Frodo', group: 'hobbit', description: 'Portador del Anillo. Tío: Bilbo; Mejor amigo: Samwise; Mentor: Gandalf; Compañeros: Comunidad; Adversario/Guía: Gollum.', connections: ['sam', 'merry', 'pippin', 'gandalf', 'aragorn', 'boromir', 'legolas', 'gimli', 'sauron', 'galadriel', 'elrond', 'bilbo', 'gollum', 'faramir'], x: 400, y: 350 },
+          { id: 'sam', name: 'Sam', group: 'hobbit', description: 'Amigo inseparable y compañero leal de Frodo. Esposa: Rosie Cotton (mencionada).', connections: ['frodo', 'merry', 'pippin', 'gandalf', 'aragorn', 'gollum', 'rosie'], x: 350, y: 430 },
+          { id: 'merry', name: 'Merry', group: 'hobbit', description: 'Amigo de Pippin. Miembro de la Comunidad. Aliado de Théoden y Éowyn (lucha contra el Rey Brujo).', connections: ['frodo', 'sam', 'pippin', 'gandalf', 'aragorn', 'barbol', 'theoden', 'eowyn', 'reybrujo'], x: 450, y: 430 },
+          { id: 'pippin', name: 'Pippin', group: 'hobbit', description: 'Amigo de Merry. Miembro de la Comunidad. Aliado de Denethor y Gandalf (sirve en Gondor).', connections: ['frodo', 'sam', 'merry', 'gandalf', 'aragorn', 'barbol', 'denethor'], x: 400, y: 500 },
+          { id: 'gandalf', name: 'Gandalf', group: 'wizard', description: 'Mago, mentor y guía. Ex amigo/Adversario: Saruman. Aliado de los Pueblos Libres.', connections: ['frodo', 'sam', 'merry', 'pippin', 'aragorn', 'legolas', 'gimli', 'boromir', 'elrond', 'galadriel', 'sauron', 'bilbo', 'saruman', 'barbol', 'theoden', 'denethor', 'faramir'], x: 550, y: 300 }, // Pippin ya está incluido via 'pippin'
+          { id: 'aragorn', name: 'Aragorn', group: 'human-gondor', description: 'Heredero de Isildur y Rey de Gondor. Esposo: Arwen; Mentor: Elrond; Compañeros: Comunidad; Figura paterna para los hobbits.', connections: ['frodo', 'sam', 'merry', 'pippin', 'gandalf', 'legolas', 'gimli', 'boromir', 'arwen', 'elrond', 'isildur', 'theoden', 'eomer', 'eowyn'], x: 580, y: 400 },
+          { id: 'legolas', name: 'Legolas', group: 'elf', description: 'Príncipe Elfo, arquero experto. Amigo: Gimli; Compañeros: Comunidad; Padre: Thranduil (mencionado).', connections: ['frodo', 'gandalf', 'aragorn', 'gimli', 'boromir', 'elrond', 'galadriel', 'thranduil', 'eomer'], x: 250, y: 230 }, // Añadida conexión con Eomer
+          { id: 'gimli', name: 'Gimli', group: 'dwarf', description: 'Guerrero Enano. Amigo: Legolas; Compañeros: Comunidad; Padre: Glóin (mencionado).', connections: ['frodo', 'gandalf', 'aragorn', 'legolas', 'boromir', 'elrond', 'galadriel', 'gloin', 'eomer'], x: 550, y: 200 }, // Añadida conexión con Eomer
+          { id: 'boromir', name: 'Boromir', group: 'human-gondor', description: 'Hijo de Denethor, hermano de Faramir. Miembro de la Comunidad, tentado por el Anillo.', connections: ['frodo', 'gandalf', 'aragorn', 'legolas', 'gimli', 'denethor', 'elrond', 'faramir'], x: 650, y: 500 },
+
+          // Elfos y Aliados
+          { id: 'galadriel', name: 'Galadriel', group: 'elf', description: 'Reina de Lothlórien. Esposo: Celeborn; Aliada de la Comunidad.', connections: ['gandalf', 'legolas', 'gimli', 'elrond', 'frodo', 'celeborn'], x: 150, y: 300 },
+          { id: 'celeborn', name: 'Celeborn', group: 'elf', description: 'Señor de Lothlórien, esposo de Galadriel.', connections: ['galadriel'], x: 100, y: 250 },
+          { id: 'elrond', name: 'Elrond', group: 'elf', description: 'Señor de Rivendel. Hija: Arwen; Padre adoptivo de Aragorn; Amigo de Gandalf.', connections: ['gandalf', 'aragorn', 'legolas', 'gimli', 'boromir', 'galadriel', 'arwen', 'frodo', 'isildur', 'bilbo'], x: 250, y: 400 },
+          { id: 'arwen', name: 'Arwen', group: 'elf', description: 'Princesa Elfa, renuncia a la inmortalidad por Aragorn. Padre: Elrond.', connections: ['aragorn', 'elrond'], x: 300, y: 500 },
+
+          // Humanos de Gondor
+          { id: 'denethor', name: 'Denethor', group: 'human-gondor', description: 'Senescal Regente de Gondor. Hijos: Boromir y Faramir.', connections: ['boromir', 'faramir', 'pippin', 'gandalf'], x: 730, y: 580 },
+          { id: 'faramir', name: 'Faramir', group: 'human-gondor', description: 'Hijo de Denethor, hermano de Boromir. Aliado de Gondor. Esposa: Éowyn.', connections: ['boromir', 'denethor', 'eowyn', 'frodo', 'gandalf'], x: 700, y: 650 },
+
+           // Humanos de Rohan
+          { id: 'theoden', name: 'Théoden', group: 'human-rohan', description: 'Rey de Rohan. Tío de Éowyn y Éomer. Asesor corrupto: Gríma.', connections: ['eowyn', 'eomer', 'grima', 'gandalf', 'aragorn', 'merry'], x: 150, y: 550 },
+          { id: 'eowyn', name: 'Éowyn', group: 'human-rohan', description: 'Sobrina de Théoden, hermana de Éomer. Derrota al Rey Brujo. Esposa de Faramir.', connections: ['theoden', 'eomer', 'aragorn', 'faramir', 'merry', 'reybrujo'], x: 100, y: 630 },
+          { id: 'eomer', name: 'Éomer', group: 'human-rohan', description: 'Sobrino y sucesor de Théoden, hermano de Éowyn. Mariscal de la Marca.', connections: ['theoden', 'eowyn', 'aragorn', 'gimli', 'legolas'], x: 200, y: 630 },
+          { id: 'grima', name: 'Gríma', group: 'human-rohan', description: 'Consejero traidor de Théoden, espía de Saruman.', connections: ['theoden', 'saruman'], x: 50, y: 550 }, // Conexión con Saruman añadida
+
+          // Antagonistas y Otros
+          { id: 'sauron', name: 'Sauron', group: 'dark', description: 'El Señor Oscuro, creador del Anillo Único. Enemigo principal.', connections: ['frodo', 'gandalf', 'isildur', 'saruman', 'gollum', 'reybrujo'], x: 400, y: 80 },
+          { id: 'isildur', name: 'Isildur', group: 'human-gondor', description: 'Antiguo rey que cortó el Anillo de Sauron pero no lo destruyó. Ancestro de Aragorn.', connections: ['sauron', 'aragorn', 'elrond'], x: 600, y: 80 },
+          { id: 'bilbo', name: 'Bilbo', group: 'hobbit', description: 'Tío de Frodo, anterior portador del Anillo. Vive en Rivendel.', connections: ['frodo', 'gandalf', 'elrond', 'gollum'], x: 200, y: 500 },
+          { id: 'gollum', name: 'Gollum', group: 'other', description: 'Criatura corrompida por el Anillo (antes Sméagol). Guía y persigue a Frodo.', connections: ['frodo', 'bilbo', 'sauron', 'sam'], x: 400, y: 580 },
+          { id: 'saruman', name: 'Saruman', group: 'dark-wizard', description: 'Mago corrompido, aliado de Sauron. Creador de los Uruk-hai.', connections: ['gandalf', 'sauron', 'grima', 'barbol'], x: 700, y: 250 },
+          { id: 'barbol', name: 'Bárbol', group: 'ent', description: 'El Ent más viejo, pastor de árboles. Amigo de Merry y Pippin, enemigo de Saruman.', connections: ['gandalf', 'merry', 'pippin', 'saruman'], x: 80, y: 400 },
+          { id: 'reybrujo', name: 'Rey Brujo', group: 'nazgul', description: 'Líder de los Nazgûl, sirviente principal de Sauron. Derrotado por Éowyn y Merry.', connections: ['sauron', 'eowyn', 'merry'], x: 550, y: 80 },
+
+          // Mencionados (sin nodo visual para no saturar)
+          { id: 'thranduil', name: 'Thranduil', description: 'Rey Elfo del Bosque Negro, padre de Legolas.', connections: ['legolas'] },
+          { id: 'gloin', name: 'Glóin', description: 'Enano, padre de Gimli, compañero de Bilbo.', connections: ['gimli'] },
+          { id: 'rosie', name: 'Rosie Cotton', description: 'Hobbit, esposa de Samwise Gamgee.', connections: ['sam'] },
+          // Celeborn ya tiene nodo visual
+        ];
+
+        const svg = document.getElementById('relation-svg');
+        const linesGroup = document.getElementById('lines-group');
+        const nodesGroup = document.getElementById('nodes-group');
+        const infoPanel = document.getElementById('info-panel');
+        const infoName = document.getElementById('info-name');
+        const infoDescription = document.getElementById('info-description');
+        const infoConnections = document.getElementById('info-connections');
+
+        // Filtra personajes que no tienen coordenadas (mencionados)
+        const displayCharacters = characters.filter(c => c.x !== undefined && c.y !== undefined);
+        const characterMap = new Map(characters.map(c => [c.id, c])); // Mapa completo para buscar nombres
+        const nodeElements = new Map();
+        const lineElements = new Map();
+
+        // Dibuja las líneas de conexión (solo para personajes visibles)
+        displayCharacters.forEach(char => {
+            if (!char.connections) return;
+            char.connections.forEach(connId => {
+                const targetChar = characterMap.get(connId);
+                // Solo dibuja la línea si el personaje conectado también es visible
+                if (targetChar && targetChar.x !== undefined && targetChar.y !== undefined) {
+                    const lineId = [char.id, connId].sort().join('-');
+                    if (!lineElements.has(lineId)) {
+                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', char.x);
+                        line.setAttribute('y1', char.y);
+                        line.setAttribute('x2', targetChar.x);
+                        line.setAttribute('y2', targetChar.y);
+                        line.setAttribute('class', 'connection-line');
+                        line.dataset.char1 = char.id;
+                        line.dataset.char2 = connId;
+                        linesGroup.appendChild(line);
+                        lineElements.set(lineId, line);
+                    }
+                }
+            });
+        });
+
+        // Dibuja los nodos de personajes (solo visibles)
+        displayCharacters.forEach(char => {
+            const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            group.setAttribute('class', 'character-node');
+            group.dataset.id = char.id;
+            group.setAttribute('data-tooltip', char.name); // Tooltip con nombre
+
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', char.x);
+            circle.setAttribute('cy', char.y);
+            circle.setAttribute('r', 18); // Radio ligeramente más pequeño
+            // Asigna color por grupo, usa 'human-gondor' si es 'human' genérico
+            const groupClass = char.group === 'human' ? 'human-gondor' : (char.group || 'other');
+            circle.setAttribute('class', `fill-${groupClass} stroke-2 stroke-gray-700`);
+
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', char.x);
+            text.setAttribute('y', char.y + 28); // Posición del texto debajo
+            text.setAttribute('class', 'character-label');
+            text.textContent = char.name;
+
+            group.appendChild(circle);
+            group.appendChild(text);
+            nodesGroup.appendChild(group);
+            nodeElements.set(char.id, group);
+
+            // Event Listeners
+            group.addEventListener('mouseenter', () => highlightConnections(char.id));
+            group.addEventListener('mouseleave', () => clearHighlights());
+            group.addEventListener('click', () => displayInfo(char.id));
+        });
+
+        let activeNodeId = null; // Variable to track the currently clicked node
+
+        function highlightConnections(charId) {
+            // Only highlight if no node is actively selected (clicked)
+            if (activeNodeId !== null && activeNodeId !== charId) return;
+
+            const character = characterMap.get(charId);
+            // Solo actúa si el personaje es visible
+            if (!character || character.x === undefined || !character.connections) return;
+
+            // Atenuar todo excepto el nodo activo y sus conexiones si existe
+            nodesGroup.childNodes.forEach(node => {
+                 if (activeNodeId === null || node.dataset.id === activeNodeId || characterMap.get(activeNodeId)?.connections?.includes(node.dataset.id)) {
+                     node.classList.remove('dimmed');
+                 } else {
+                     node.classList.add('dimmed');
+                 }
+            });
+             linesGroup.childNodes.forEach(line => {
+                 const lineData = line.dataset;
+                 if (activeNodeId === null || lineData.char1 === activeNodeId || lineData.char2 === activeNodeId) {
+                    line.classList.remove('dimmed');
+                 } else {
+                     line.classList.add('dimmed');
+                 }
+             });
+
+
+            // Resaltar nodo principal (hovered)
+            const mainNode = nodeElements.get(charId);
+            if (mainNode) {
+                mainNode.classList.remove('dimmed'); // Asegurarse de que no esté atenuado
+                mainNode.classList.add('active'); // Marcar como activo (para estilo hover si es necesario)
+            }
+
+             // Resaltar nodos y líneas conectadas (solo si son visibles)
+            character.connections.forEach(connId => {
+                const connectedChar = characterMap.get(connId);
+                 // Solo resalta si el nodo conectado es visible
+                if (connectedChar && connectedChar.x !== undefined) {
+                    const connectedNode = nodeElements.get(connId);
+                    if (connectedNode) {
+                        connectedNode.classList.remove('dimmed');
+                        connectedNode.classList.add('active');
+                    }
+
+                    const lineId = [charId, connId].sort().join('-');
+                    const connectedLine = lineElements.get(lineId);
+                    if (connectedLine) {
+                        connectedLine.classList.remove('dimmed');
+                        connectedLine.classList.add('highlighted-line');
+                        connectedLine.classList.add('active');
+                    }
+                }
+            });
+        }
+
+        function clearHighlights() {
+             // Only clear if no node is actively selected
+            if (activeNodeId !== null) return;
+
+            nodesGroup.childNodes.forEach(node => node.classList.remove('dimmed', 'active'));
+            linesGroup.childNodes.forEach(line => {
+                 line.classList.remove('dimmed', 'highlighted-line', 'active');
+             });
+        }
+
+        function displayInfo(charId) {
+            const character = characterMap.get(charId);
+            if (!character) return;
+
+            // Si hacemos clic en el mismo nodo activo, lo desactivamos
+            if (activeNodeId === charId) {
+                activeNodeId = null;
+                infoName.textContent = "Selecciona un personaje";
+                infoDescription.textContent = "Haz clic en un círculo del diagrama para ver la descripción del personaje y con quién se relaciona.";
+                infoConnections.innerHTML = '<li>Ninguna seleccionada</li>';
+                // Quitar anillo y highlights
+                nodesGroup.childNodes.forEach(node => {
+                    const circle = node.querySelector('circle');
+                    if (circle) {
+                        circle.classList.remove('ring-4', 'ring-offset-2', 'ring-indigo-400');
+                    }
+                    node.classList.remove('dimmed', 'active'); // Quitar atenuación y estado activo
+                });
+                 linesGroup.childNodes.forEach(line => {
+                     line.classList.remove('dimmed', 'highlighted-line', 'active');
+                 });
+
+                return; // Salir de la función
+            }
+
+            // Si había otro nodo activo, quitarle el anillo
+            if (activeNodeId !== null) {
+                 const previousNode = nodeElements.get(activeNodeId);
+                 if (previousNode) {
+                     const previousCircle = previousNode.querySelector('circle');
+                     if (previousCircle) {
+                         previousCircle.classList.remove('ring-4', 'ring-offset-2', 'ring-indigo-400');
+                     }
+                 }
+            }
+
+
+            // Establecer el nuevo nodo activo
+            activeNodeId = charId;
+
+            // Actualizar panel de información
+            infoName.textContent = character.name;
+            infoDescription.textContent = character.description;
+
+            infoConnections.innerHTML = ''; // Limpiar lista anterior
+            if (character.connections && character.connections.length > 0) {
+                character.connections.forEach(connId => {
+                    const connectedChar = characterMap.get(connId);
+                    if (connectedChar) { // Muestra el nombre aunque no sea visible
+                        const li = document.createElement('li');
+                        li.textContent = connectedChar.name;
+                        infoConnections.appendChild(li);
+                    }
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = 'Ninguna relación principal mostrada.';
+                infoConnections.appendChild(li);
+            }
+
+             // Resaltar el nodo seleccionado y sus conexiones, atenuar el resto
+             nodesGroup.childNodes.forEach(node => {
+                const circle = node.querySelector('circle');
+                const isConnected = character.connections?.includes(node.dataset.id);
+                const isSelf = node.dataset.id === charId;
+
+                if (isSelf) {
+                    node.classList.remove('dimmed');
+                    node.classList.add('active');
+                    if (circle) {
+                        circle.classList.add('ring-4', 'ring-offset-2', 'ring-indigo-400'); // Añadir anillo al seleccionado
+                    }
+                } else if (isConnected && nodeElements.has(node.dataset.id)) { // Solo si es visible
+                     node.classList.remove('dimmed');
+                     node.classList.add('active');
+                     if (circle) {
+                          circle.classList.remove('ring-4', 'ring-offset-2', 'ring-indigo-400'); // Quitar anillo si lo tuviera
+                     }
+                } else {
+                    node.classList.add('dimmed');
+                    node.classList.remove('active');
+                     if (circle) {
+                          circle.classList.remove('ring-4', 'ring-offset-2', 'ring-indigo-400'); // Quitar anillo si lo tuviera
+                     }
+                }
+            });
+
+            linesGroup.childNodes.forEach(line => {
+                 const lineData = line.dataset;
+                 if (lineData.char1 === charId || lineData.char2 === charId) {
+                     line.classList.remove('dimmed');
+                     line.classList.add('highlighted-line');
+                     line.classList.add('active');
+                 } else {
+                     line.classList.add('dimmed');
+                     line.classList.remove('highlighted-line', 'active');
+                 }
+             });
+        }
+
+        // Opcional: hacer clic fuera del SVG o en el fondo para deseleccionar
+        document.addEventListener('click', (event) => {
+            const svgElement = document.getElementById('relation-svg');
+            const infoPanelElement = document.getElementById('info-panel');
+            // Si el clic NO fue dentro de un nodo del SVG ni dentro del panel de info
+            if (!svgElement.contains(event.target) || event.target === svgElement) {
+                 // Y si tampoco fue dentro del panel de info (para permitir copiar texto)
+                 if (!infoPanelElement.contains(event.target)) {
+                     if (activeNodeId !== null) {
+                         // Simular clic en el nodo activo para deseleccionar
+                         displayInfo(activeNodeId);
+                     }
+                 }
+            }
+        });
+
+
+        // Ajustar viewBox dinámicamente (opcional)
+        window.addEventListener('resize', () => {
+            // Podría ajustarse si fuera necesario, pero el viewBox fijo suele ser suficiente.
+        });
+
+    </script>
+
+</body>
+</html>
+
