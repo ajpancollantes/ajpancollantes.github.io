@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Matrix Transformation Visualizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars from flashing during resize */
+        }
+        canvas {
+            touch-action: none; /* prevent scrolling on mobile */
+        }
+        .matrix-input {
+            width: 80px;
+            height: 60px;
+            font-size: 1.5rem;
+            text-align: center;
+            border: 2px solid #4A5568; /* gray-700 */
+            background-color: #2D3748; /* gray-800 */
+            color: white;
+            border-radius: 0.5rem;
+            transition: border-color 0.2s;
+        }
+        .matrix-input:focus {
+            outline: none;
+            border-color: #4299E1; /* blue-400 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col md:flex-row h-screen antialiased">
+
+    <!-- Controls Panel -->
+    <div class="w-full md:w-80 lg:w-96 bg-gray-800 p-6 shadow-2xl flex flex-col space-y-6 overflow-y-auto">
+        <h1 class="text-2xl font-bold text-center text-blue-300">Matrix Transformation</h1>
+        
+        <!-- Matrix Input -->
+        <div>
+            <h2 class="text-lg font-semibold mb-3 text-center">Define Transformation Matrix</h2>
+            <div class="flex justify-center items-center space-x-4">
+                <!-- Left Bracket -->
+                <div class="text-8xl font-thin text-gray-500">[</div>
+                
+                <!-- Matrix Values -->
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" id="m00" class="matrix-input" value="1" step="0.1">
+                    <input type="number" id="m01" class="matrix-input" value="1" step="0.1">
+                    <input type="number" id="m10" class="matrix-input" value="0" step="0.1">
+                    <input type="number" id="m11" class="matrix-input" value="1" step="0.1">
+                </div>
+                
+                <!-- Right Bracket -->
+                <div class="text-8xl font-thin text-gray-500">]</div>
+            </div>
+        </div>
+
+        <!-- Slider Control -->
+        <div class="space-y-3 pt-4">
+            <label for="slider" class="text-lg font-semibold text-center block">Transformation Progress (t)</label>
+            <input type="range" id="slider" min="0" max="100" value="0" class="w-full h-3 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+            <div id="slider-value" class="text-center text-blue-300 font-mono text-lg">t = 0.00</div>
+        </div>
+
+        <!-- Current Matrix Display -->
+        <div class="pt-4 flex-grow flex flex-col justify-center">
+            <h3 class="text-lg font-semibold mb-3 text-center">Current Interpolated Matrix</h3>
+            <div class="bg-gray-900 rounded-lg p-4 font-mono text-center text-lg leading-relaxed shadow-inner">
+                <div id="current-matrix">
+                    [ 1.00, 0.00 ]<br>
+                    [ 0.00, 1.00 ]
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center text-gray-400 text-sm pt-4">
+            <p>Adjust the matrix values and move the slider to see the plane transform.</p>
+        </div>
+    </div>
+
+    <!-- Canvas -->
+    <div class="flex-grow flex items-center justify-center p-4 bg-gray-900">
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const mInputs = [
+            document.getElementById('m00'), document.getElementById('m01'),
+            document.getElementById('m10'), document.getElementById('m11')
+        ];
+        const slider = document.getElementById('slider');
+        const sliderValueDisplay = document.getElementById('slider-value');
+        const currentMatrixDisplay = document.getElementById('current-matrix');
+
+        const GRID_COLOR = 'rgba(75, 85, 99, 0.7)'; // gray-600
+        const AXIS_COLOR = 'rgba(156, 163, 175, 1)'; // gray-400
+        const CIRCLE_COLOR = 'rgba(96, 165, 250, 0.5)'; // blue-400 with alpha
+        const CIRCLE_STROKE = 'rgba(147, 197, 253, 1)'; // blue-300
+        const I_HAT_COLOR = 'rgba(248, 113, 113, 1)'; // red-400
+        const J_HAT_COLOR = 'rgba(74, 222, 128, 1)'; // green-400
+
+        let scale, centerX, centerY;
+        let userMatrix = [1, 1, 0, 1];
+
+        // --- Setup and Resize ---
+        function setupCanvas() {
+            const container = canvas.parentElement;
+            const size = Math.min(container.clientWidth, container.clientHeight) * 0.9;
+            canvas.width = size;
+            canvas.height = size;
+
+            // Set up coordinate system
+            scale = size / 8; // e.g., view from -4 to 4
+            centerX = canvas.width / 2;
+            centerY = canvas.height / 2;
+            
+            draw();
+        }
+
+        // --- Drawing Functions ---
+        function draw() {
+            // Get values
+            userMatrix = mInputs.map(input => parseFloat(input.value) || 0);
+            const t = slider.value / 100;
+            sliderValueDisplay.textContent = `t = ${t.toFixed(2)}`;
+
+            // Linear interpolation between Identity and User Matrix
+            // T = (1-t)I + tM
+            const identity = [1, 0, 0, 1];
+            const interpolatedMatrix = [
+                (1 - t) * identity[0] + t * userMatrix[0], // a (m00)
+                (1 - t) * identity[1] + t * userMatrix[1], // c (m01)
+                (1 - t) * identity[2] + t * userMatrix[2], // b (m10)
+                (1 - t) * identity[3] + t * userMatrix[3], // d (m11)
+            ];
+
+            // Update display
+            currentMatrixDisplay.innerHTML =
+                `[ ${interpolatedMatrix[0].toFixed(2)}, ${interpolatedMatrix[1].toFixed(2)} ]<br>` +
+                `[ ${interpolatedMatrix[2].toFixed(2)}, ${interpolatedMatrix[3].toFixed(2)} ]`;
+
+            // Clear and prepare canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(centerX, centerY);
+
+            // The canvas transform function maps matrix elements differently than standard notation
+            // a = m00, b = m10, c = m01, d = m11
+            const [a, c, b, d] = interpolatedMatrix;
+
+            drawGrid(a, b, c, d);
+            drawTransformedCircle(a, b, c, d);
+            drawBasisVectors(a, b, c, d);
+
+            ctx.restore();
+        }
+
+        function drawGrid(a, b, c, d) {
+            ctx.save();
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = GRID_COLOR;
+            const gridSize = 1;
+
+            // Apply transformation to the grid
+            ctx.transform(a, b, c, d, 0, 0);
+
+            const numLines = Math.ceil(4 / gridSize);
+            for (let i = -numLines; i <= numLines; i++) {
+                // Vertical lines
+                ctx.beginPath();
+                ctx.moveTo(i * gridSize * scale, -4 * scale);
+                ctx.lineTo(i * gridSize * scale, 4 * scale);
+                ctx.stroke();
+
+                // Horizontal lines
+                ctx.beginPath();
+                ctx.moveTo(-4 * scale, i * gridSize * scale);
+                ctx.lineTo(4 * scale, i * gridSize * scale);
+                ctx.stroke();
+            }
+            ctx.restore();
+
+            // Draw main axes on top (untransformed)
+            ctx.strokeStyle = AXIS_COLOR;
+            ctx.lineWidth = 2;
+            // X-axis
+            ctx.beginPath();
+            ctx.moveTo(-centerX, 0);
+            ctx.lineTo(centerX, 0);
+            ctx.stroke();
+            // Y-axis
+            ctx.beginPath();
+            ctx.moveTo(0, -centerY);
+            ctx.lineTo(0, centerY);
+            ctx.stroke();
+        }
+
+        function drawTransformedCircle(a, b, c, d) {
+            const radius = 2 * scale; // Circle with radius 2 units
+            ctx.save();
+            ctx.transform(a, b, c, d, 0, 0);
+            
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+            
+            ctx.fillStyle = CIRCLE_COLOR;
+            ctx.fill();
+            ctx.strokeStyle = CIRCLE_STROKE;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawBasisVectors(a, b, c, d) {
+            // Transform vectors i=(1,0) and j=(0,1)
+            const i_hat_x = a * 1 + c * 0;
+            const i_hat_y = b * 1 + d * 0;
+            const j_hat_x = a * 0 + c * 1;
+            const j_hat_y = b * 0 + d * 1;
+
+            // Draw i-hat
+            drawVector(i_hat_x, i_hat_y, I_HAT_COLOR, 'î');
+
+            // Draw j-hat
+            drawVector(j_hat_x, j_hat_y, J_HAT_COLOR, 'ĵ');
+        }
+
+        function drawVector(x, y, color, label) {
+            const endX = x * scale;
+            const endY = -y * scale; // Invert Y for canvas coordinates
+
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(endX, endY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 5;
+            ctx.stroke();
+
+            // Draw arrowhead
+            const angle = Math.atan2(endY, endX);
+            ctx.save();
+            ctx.translate(endX, endY);
+            ctx.rotate(angle);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(-12, 6);
+            ctx.lineTo(-12, -6);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+            
+            // Draw label
+            ctx.fillStyle = color;
+            ctx.font = 'bold 24px Inter';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            // Position label slightly away from the arrowhead
+            const labelX = endX + Math.cos(angle) * 25;
+            const labelY = endY + Math.sin(angle) * 25;
+            ctx.fillText(label, labelX, labelY);
+        }
+
+        // --- Event Listeners ---
+        mInputs.forEach(input => input.addEventListener('input', draw));
+        slider.addEventListener('input', draw);
+        window.addEventListener('resize', setupCanvas);
+
+        // Initial call
+        setupCanvas();
+    </script>
+</body>
+</html>
+
