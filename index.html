@@ -1,6 +1,358 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Refresh" content="0; url='./Home.md.html'" />
-	</head>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antonio J. Pan-Collantes - Mathematician & Professor</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Antonio J. Pan-Collantes",
+      "url": "https://ajpancollantes.example.com/",
+      "image": "https://sites.google.com/gm.uca.es/ajpancollantes/_/rsrc/1655113945899/home/foto_AJP.png?authuser=0",
+      "jobTitle": "Mathematics Professor",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "University of Cádiz"
+      },
+      "email": "mailto:antonio.pan@uca.es",
+      "knowsAbout": [
+        "Symmetries of differential equations",
+        "Solvable structures",
+        "Foliations",
+        "Mathematical physics",
+        "Algebra",
+        "Robotics"
+      ],
+       "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://ajpancollantes.example.com/"
+      }
+    }
+    </script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #cccccc;
+            font-family: 'Open Sans', sans-serif;
+        }
+        /* Applying custom fonts */
+        .font-serif {
+            font-family: 'Merriweather', serif;
+        }
+        .font-sans {
+            font-family: 'Open Sans', sans-serif;
+        }
+        /* Accent color style */
+        .text-accent {
+            color: #d4af37;
+        }
+        .bg-accent {
+            background-color: #d4af37;
+        }
+        .border-accent {
+            border-color: #d4af37;
+        }
+        /* Soft shadow for graphic elements */
+        .soft-shadow {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        .soft-shadow-light {
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        /* Styling for lists */
+        .custom-list li {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .custom-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+            font-weight: bold;
+        }
+        /* Spinner for loading state */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #d4af37;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header & Navigation -->
+        <header class="p-6 md:p-8 flex justify-between items-center sticky top-0 bg-[#0b0f19]/80 backdrop-blur-sm z-50">
+            <div class="font-serif text-white text-xl md:text-2xl font-bold">
+                AJPC
+            </div>
+            <nav class="hidden md:flex items-center space-x-8 font-sans text-sm">
+                <a href="#about" class="text-white hover:text-accent transition-colors duration-300">About</a>
+                <a href="#teaching" class="text-white hover:text-accent transition-colors duration-300">Teaching</a>
+                <a href="#research" class="text-white hover:text-accent transition-colors duration-300">Research</a>
+                <a href="#talks" class="text-white hover:text-accent transition-colors duration-300">Talks</a>
+                <a href="#contact" class="bg-accent text-[#0b0f19] font-bold py-2 px-5 rounded-md hover:bg-yellow-600 transition-colors duration-300">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </div>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+<section id="about" class="text-center py-20 md:py-32 px-6">
+    <img src="https://lh6.googleusercontent.com/Z-czD0jbr2TEMzAy9rzF6CCDn9gTgFRZ8vLu_L2NhXDvSMSdDJEBBNctmBlhn7tqSbFSf6qiSM4OvCIl9bMH11FQFEsGtC3qTfMXgi5NcON5L6qGWd3lDr-77GgPoC9ii9Zyol_D9ip3KFKM0i3Qe45jIhkchJOxKRUMGoIyN8JQEM9Fg3UHOg=w1280" 
+         alt="Photo of Antonio J. Pan-Collantes"
+         class="w-64 h-64 md:w-80 md:h-80 mx-auto mb-8 border-4 border-gray-700 soft-shadow"
+         onerror="this.onerror=null;this.src='https://placehold.co/400x400/0b0f19/ffffff?text=AJPC';">
+    <h1 class="font-serif text-4xl md:text-6xl font-black text-white leading-tight mb-4">Antonio J. Pan-Collantes</h1>
+    <p class="max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-10">
+        Mathematics Professor at the <span class="text-accent font-semibold">University of Cádiz</span>. My work focuses on the intersection of geometry and analysis, exploring symmetries in differential equations, solvable structures, and their applications in mathematical physics.
+    </p>
+    <a href="#research" class="bg-accent text-[#0b0f19] font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-600 transition-colors duration-300 inline-block">
+        Explore My Research
+    </a>
+</section>
+
+
+            <!-- Teaching Section -->
+            <section id="teaching" class="py-24 px-6 bg-gray-900/30">
+                <div class="max-w-5xl mx-auto">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-12 text-center">Teaching</h2>
+                    <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
+                        <div>
+                            <h3 class="font-serif text-2xl text-accent mb-4">University of Cádiz</h3>
+                            <ul class="space-y-3 custom-list">
+                                <li><span class="font-semibold text-white">B.Sc. in Computer Engineering:</span> Algebra</li>
+                                <li><span class="font-semibold text-white">B.Sc. in Marine Sciences:</span> Mathematics</li>
+                                <li><span class="font-semibold text-white">B.Sc. in Chemical Engineering:</span> Mathematics I & Advanced Mathematics</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl text-accent mb-4">Secondary & High School</h3>
+                            <p class="mb-4">Experience at IES San Juan de Dios teaching:</p>
+                            <ul class="space-y-3 custom-list">
+                                <li><span class="font-semibold text-white">Core Subjects:</span> Mathematics & Computer Science</li>
+                                <li><span class="font-semibold text-white">Specialized Field:</span> Robotics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Research Section -->
+            <section id="research" class="py-24 px-6">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Research & Publications</h2>
+                    <p class="text-lg mb-12">
+                        My research explores the underlying structures of differential equations. Here is a selection of my published papers, preprints, and other academic contributions.
+                    </p>
+                </div>
+                
+                <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+                    <!-- Published Papers -->
+                    <div class="bg-gray-900/50 p-6 rounded-xl soft-shadow-light md:col-span-2">
+                        <h3 class="font-serif text-2xl font-bold text-accent mb-4">Published Papers</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex justify-between items-center">
+                                <span>*Surfaces associated with first-order ODEs*. Mediterranean Journal of Mathematics, 2025.</span>
+                                <button onclick="getExplanation('Surfaces associated with first-order ODEs')" class="ml-4 flex-shrink-0 text-sm bg-accent/20 text-accent font-bold py-1 px-3 rounded-md hover:bg-accent/40 transition-colors">✨ Explain</button>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span>*Classification of traveling wave solutions of the modified Zakharov–Kuznetsov equation*. Chaos, Solitons & Fractals, 2025.</span>
+                                <button onclick="getExplanation('Classification of traveling wave solutions of the modified Zakharov–Kuznetsov equation')" class="ml-4 flex-shrink-0 text-sm bg-accent/20 text-accent font-bold py-1 px-3 rounded-md hover:bg-accent/40 transition-colors">✨ Explain</button>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span>*Autonomous second-order ODEs: a geometric approach*. Axioms, 2024.</span>
+                                <button onclick="getExplanation('Autonomous second-order ODEs: a geometric approach')" class="ml-4 flex-shrink-0 text-sm bg-accent/20 text-accent font-bold py-1 px-3 rounded-md hover:bg-accent/40 transition-colors">✨ Explain</button>
+                            </li>
+                             <li class="flex justify-between items-center">
+                                <span>*Integration of Differential Equations by 𝓒∞-structures*. Mathematics, 2023.</span>
+                                <button onclick="getExplanation('Integration of Differential Equations by C-infinity-structures')" class="ml-4 flex-shrink-0 text-sm bg-accent/20 text-accent font-bold py-1 px-3 rounded-md hover:bg-accent/40 transition-colors">✨ Explain</button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Other research items... -->
+                    <div class="bg-gray-900/50 p-6 rounded-xl soft-shadow-light">
+                        <h3 class="font-serif text-xl font-bold text-accent mb-4">Preprints</h3>
+                        <ul class="space-y-2 custom-list">
+                            <li>First Integrals Without Integrating Factors or Symmetries (2025)</li>
+                            <li>Classification of the travelling wave solutions to the Sharma–Tasso–Olver equation (2025)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900/50 p-6 rounded-xl soft-shadow-light">
+                        <h3 class="font-serif text-xl font-bold text-accent mb-4">Book Chapters</h3>
+                        <ul class="space-y-2 custom-list">
+                           <li>Integration of first-order ODEs by Jacobi fields (2025)</li>
+                        </ul>
+                    </div>
+                     <div class="bg-gray-900/50 p-6 rounded-xl soft-shadow-light">
+                        <h3 class="font-serif text-xl font-bold text-accent mb-4">PhD Thesis</h3>
+                        <p>New methods for the integration of distributions of vector fields.</p>
+                    </div>
+                    <div class="bg-gray-900/50 p-6 rounded-xl soft-shadow-light">
+                        <h3 class="font-serif text-xl font-bold text-accent mb-4">Research Stays</h3>
+                         <ul class="space-y-2 custom-list">
+                           <li>Slezská univerzita, Opava (CZ)</li>
+                           <li>Università Degli Studi Di Milano, Milan (IT)</li>
+                           <li>IMPA, Angra dos Reis (BR)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conferences and Talks Section -->
+            <section id="talks" class="py-24 px-6 bg-gray-900/30">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Conferences & Talks</h2>
+                    <p class="text-lg mb-12">
+                        Sharing knowledge and engaging with the scientific community is a vital part of my work. Here are some of my recent and upcoming speaking engagements.
+                    </p>
+                </div>
+                <div class="max-w-5xl mx-auto space-y-6">
+                    <div class="bg-[#0b0f19] p-6 rounded-xl soft-shadow-light border-l-4 border-accent">
+                        <h3 class="font-serif text-xl font-bold text-white mb-1">C∞-structures approach for the travelling wave solutions of the gKdV equation</h3>
+                        <p class="text-sm text-gray-400 mb-2">AGMA 2025, Odesa, Ukraine – May 2025</p>
+                        <a href="#" class="text-accent font-semibold hover:underline">Slides & Video &rarr;</a>
+                    </div>
+                    <div class="bg-[#0b0f19] p-6 rounded-xl soft-shadow-light border-l-4 border-accent">
+                        <h3 class="font-serif text-xl font-bold text-white mb-1">Surfaces associated with first-order ODEs</h3>
+                        <p class="text-sm text-gray-400 mb-2">Symmetry 2024, Thailand – January 2024</p>
+                        <a href="#" class="text-accent font-semibold hover:underline">Slides &rarr;</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact & Footer Section -->
+            <footer id="contact" class="py-20 px-6 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Let's Connect</h2>
+                <p class="max-w-xl mx-auto mb-8">
+                    For academic collaborations, speaking opportunities, or any inquiries, please feel free to reach out.
+                </p>
+                <a href="mailto:antonio.pan@uca.es" class="bg-accent text-[#0b0f19] font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-600 transition-colors duration-300 inline-block mb-12">
+                    antonio.pan@uca.es
+                </a>
+                <div class="border-t border-gray-800 pt-8 mt-8 text-sm text-gray-500">
+                    <p>&copy; 2025 Antonio J. Pan-Collantes. All rights reserved.</p>
+                    <p class="mt-2">Inspired design, developed with passion.</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Explanation Modal -->
+    <div id="explanation-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+        <div class="bg-[#0b0f19] border border-gray-700 rounded-xl p-6 md:p-8 max-w-2xl w-full soft-shadow">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-serif text-xl text-accent font-bold">✨ Simplified Explanation</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white">&times;</button>
+            </div>
+            <div id="modal-content">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Gemini API Integration ---
+
+        const modal = document.getElementById('explanation-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        async function getExplanation(paperTitle) {
+            // 1. Open modal and show loading state
+            openModal();
+            modalContent.innerHTML = `
+                <div class="flex flex-col items-center justify-center p-8">
+                    <div class="loader"></div>
+                    <p class="mt-4 text-gray-400">Communicating with the AI... Please wait.</p>
+                </div>
+            `;
+
+            // 2. Prepare the prompt for the Gemini API
+            const prompt = `You are a helpful science communicator specializing in mathematics and physics. Explain the potential topic of the following academic paper in simple, accessible terms for a university student. Keep the explanation concise (2-4 sentences). Do not make up facts. Base your explanation on the title and common knowledge in the field. Respond in English. Paper Title: "${paperTitle}"`;
+            
+            const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // API key is handled by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                // 3. Make the API call
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                
+                // 4. Display the result
+                if (result.candidates && result.candidates.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    modalContent.innerHTML = `<p class="text-lg leading-relaxed">${text}</p>`;
+                } else {
+                    throw new Error("No content received from the API.");
+                }
+
+            } catch (error) {
+                // 5. Handle errors
+                console.error("Error fetching explanation:", error);
+                modalContent.innerHTML = `
+                    <div class="text-red-400">
+                        <p class="font-bold">Oops! Something went wrong.</p>
+                        <p class="text-sm mt-2">Could not get an explanation at this time. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Close modal if clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
 </html>
