@@ -150,33 +150,41 @@
             exp_z: (z) => exp(z),
         };
         
-        // --- Path Definitions (gamma(t) for t from 0 to 1) ---
-        const paths = {
-            spiral_single: (t) => {
-                const r = 0.1 + 1.9 * t;
-                const theta = 4 * Math.PI * t;
-                return C(r * Math.cos(theta), r * Math.sin(theta));
-            },
-            spiral_double: (t) => {
-                const r_min = 0.5;
-                const r_max = 2.0;
-                // Radius goes from min to max and back to min using a sine wave for a closed loop
-                const r = r_min + (r_max - r_min) * Math.sin(Math.PI * t);
-                const theta = 8 * Math.PI * t; // Wind twice
-                return C(r * Math.cos(theta), r * Math.sin(theta));
-            },
-            circle: (t) => {
-                const r = 1.5; // Radius
-                const theta = 2 * Math.PI * t;
-                return C(r * Math.cos(theta), r * Math.sin(theta));
-            },
-            line: (t) => {
-                // Straight line from (-1.5 - 1i) to (1.5 + 1.5i)
-                const start = C(-1.5, -1);
-                const end = C(1.5, 1.5);
-                return add(start, mul(sub(end, start), C(t, 0)));
-            }
-        };
+      // --- Path Definitions (gamma(t) for t from 0 to 1) ---
+const paths = {
+    spiral_single: (t) => {
+        const r = 0.1 + 1.9 * t;
+        const theta = 4 * Math.PI * t;
+        return C(r * Math.cos(theta), r * Math.sin(theta));
+    },
+    spiral_double: (t) => {
+        const r_min = 0.5;
+        const r_max = 2.0;
+        // Smooth radial oscillation from r_min to r_max and back
+        const r = r_min + (r_max - r_min) * Math.sin(Math.PI * t);
+        const theta = 4 * Math.PI * t; // Wind twice around the origin
+        return C(r * Math.cos(theta), r * Math.sin(theta));
+    },
+    circle: (t) => {
+        const r = 1.5; // Radius
+        const theta = 2 * Math.PI * t;
+        return C(r * Math.cos(theta), r * Math.sin(theta));
+    },
+    circle_centered_1_plus_i: (t) => {
+        const center = C(1, 1);
+        const r = 1.0; // Radius
+        const theta = 2 * Math.PI * t;
+        const point = C(r * Math.cos(theta), r * Math.sin(theta));
+        return add(center, point);
+    },
+    line: (t) => {
+        // Straight line from (-1.5 - 1i) to (1.5 + 1.5i)
+        const start = C(-1.5, -1);
+        const end = C(1.5, 1.5);
+        return add(start, mul(sub(end, start), C(t, 0)));
+    }
+};
+
 
         // --- Drawing Configuration ---
         const d_center = { x: domainCanvas.width / 2, y: domainCanvas.height / 2 };
