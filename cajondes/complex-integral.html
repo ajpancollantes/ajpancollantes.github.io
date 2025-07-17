@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizing Complex Integration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        canvas {
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            height: auto;
+        }
+        .info-box {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Visualizing Complex Integration</h1>
+            <p class="mt-2 text-lg text-gray-600">An interactive demonstration of Tristan Needham's approach.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                         <h3 class="font-semibold text-center text-lg mb-2">Domain (z-plane)</h3>
+                         <canvas id="domainCanvas" width="400" height="400"></canvas>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow">
+                         <h3 class="font-semibold text-center text-lg mb-2">Range (w-plane) & Integral Sum</h3>
+                         <canvas id="rangeCanvas" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h2 class="text-2xl font-bold mb-4">Controls</h2>
+                
+                <div class="mt-4">
+                    <label for="pathSelect" class="block text-sm font-medium text-gray-700">Integration Path γ:</label>
+                    <select id="pathSelect" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <option value="spiral_single" selected>Spiral (1 loop, open)</option>
+                        <option value="spiral_double">Spiral (2 loops, closed)</option>
+                        <option value="circle">Circle</option>
+                        <option value="line">Straight Line</option>
+                    </select>
+                </div>
+                
+                <div class="mt-4">
+                    <label for="functionSelect" class="block text-sm font-medium text-gray-700">Complex Function f(z):</label>
+                    <select id="functionSelect" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <option value="identity">f(z) = z</option>
+                        <option value="z_squared" selected>f(z) = z²</option>
+                        <option value="z_cubed">f(z) = z³</option>
+                        <option value="one_over_z">f(z) = 1/z</option>
+                        <option value="one_over_z_squared">f(z) = z⁻²</option>
+                        <option value="exp_z">f(z) = eᶻ</option>
+                    </select>
+                </div>
+
+                <div class="mt-6">
+                    <label for="partitions" class="block text-sm font-medium text-gray-700">Number of Partitions: <span id="partitionsValue" class="font-bold text-indigo-600">10</span></label>
+                    <input type="range" id="partitions" min="2" max="200" value="10" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                </div>
+
+                <div id="result" class="mt-6 p-4 bg-indigo-50 rounded-lg">
+                    <h3 class="font-semibold text-indigo-800">Approximation Result:</h3>
+                    <p id="sumValue" class="text-indigo-900 text-lg font-mono"></p>
+                </div>
+                
+                <hr class="my-6 border-gray-200">
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Visual Explanation</h2>
+                    <p class="mb-4 text-gray-700">This visualizes the integral ∫γ f(z)dz as the sum: 
+                        <span class="font-mono bg-gray-100 p-1 rounded">∑ f(zⱼ) ⋅ Δzⱼ</span>
+                    </p>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li><strong>The Path γ (Domain):</strong> The light purple curve on the left is the path of integration.</li>
+                        <li><strong><span style="color:#ef4444;">■</span> Displacement Vectors (Δzⱼ):</strong> The path is broken into small <strong style="color:#ef4444;">red</strong> arrows. Each is a tiny step along the path.</li>
+                        <li><strong><span style="color:#16a34a;">●</span> Sample Points (zⱼ):</strong> At the midpoint of each red arrow, we place a <strong style="color:#16a34a;">green</strong> dot. This is where we'll evaluate the function.</li>
+                        <li><strong>Transformation (w-plane):</strong> Each <strong style="color:#ef4444;">red</strong> arrow Δzⱼ is multiplied by f(zⱼ). This multiplication rotates and scales the arrow, resulting in a new <strong style="color:#3b82f6;">blue</strong> arrow in the right-hand canvas.</li>
+                        <li><strong><span style="color:#3b82f6;">■</span> The Sum:</strong> These new <strong style="color:#3b82f6;">blue</strong> arrows are chained together head-to-tail.</li>
+                        <li><strong><span style="color:#8b5cf6;">■</span> The Integral:</strong> The final <strong style="color:#8b5cf6;">purple</strong> arrow, from the start of the chain to the end, is the total sum—our approximation of the integral.</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Canvas and Context Setup ---
+        const domainCanvas = document.getElementById('domainCanvas');
+        const d_ctx = domainCanvas.getContext('2d');
+        const rangeCanvas = document.getElementById('rangeCanvas');
+        const r_ctx = rangeCanvas.getContext('2d');
+
+        // --- UI Elements ---
+        const partitionsSlider = document.getElementById('partitions');
+        const partitionsValue = document.getElementById('partitionsValue');
+        const sumValue = document.getElementById('sumValue');
+        const functionSelect = document.getElementById('functionSelect');
+        const pathSelect = document.getElementById('pathSelect');
+
+        // --- Global State ---
+        let numPartitions = 10;
+        let currentFunction = 'z_squared';
+        let currentPath = 'spiral_single';
+
+        // --- Complex Number Helpers ---
+        const C = (re, im) => ({ re, im });
+        const add = (a, b) => C(a.re + b.re, a.im + b.im);
+        const sub = (a, b) => C(a.re - b.re, a.im - b.im);
+        const mul = (a, b) => C(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re);
+        const div = (a, b) => {
+            const den = b.re * b.re + b.im * b.im;
+            if (Math.abs(den) < 1e-9) return C(Infinity, Infinity);
+            return C(
+                (a.re * b.re + a.im * b.im) / den,
+                (a.im * b.re - a.re * b.im) / den
+            );
+        };
+        const exp = (c) => {
+            const r = Math.exp(c.re);
+            return C(r * Math.cos(c.im), r * Math.sin(c.im));
+        };
+
+        // --- Function Definitions ---
+        const functions = {
+            identity: (z) => z,
+            z_squared: (z) => mul(z, z),
+            z_cubed: (z) => mul(mul(z, z), z),
+            one_over_z: (z) => div(C(1, 0), z),
+            one_over_z_squared: (z) => div(C(1, 0), mul(z, z)),
+            exp_z: (z) => exp(z),
+        };
+        
+        // --- Path Definitions (gamma(t) for t from 0 to 1) ---
+        const paths = {
+            spiral_single: (t) => {
+                const r = 0.1 + 1.9 * t;
+                const theta = 4 * Math.PI * t;
+                return C(r * Math.cos(theta), r * Math.sin(theta));
+            },
+            spiral_double: (t) => {
+                const r_min = 0.5;
+                const r_max = 2.0;
+                // Radius goes from min to max and back to min using a sine wave for a closed loop
+                const r = r_min + (r_max - r_min) * Math.sin(Math.PI * t);
+                const theta = 8 * Math.PI * t; // Wind twice
+                return C(r * Math.cos(theta), r * Math.sin(theta));
+            },
+            circle: (t) => {
+                const r = 1.5; // Radius
+                const theta = 2 * Math.PI * t;
+                return C(r * Math.cos(theta), r * Math.sin(theta));
+            },
+            line: (t) => {
+                // Straight line from (-1.5 - 1i) to (1.5 + 1.5i)
+                const start = C(-1.5, -1);
+                const end = C(1.5, 1.5);
+                return add(start, mul(sub(end, start), C(t, 0)));
+            }
+        };
+
+        // --- Drawing Configuration ---
+        const d_center = { x: domainCanvas.width / 2, y: domainCanvas.height / 2 };
+        const r_center = { x: rangeCanvas.width / 2, y: rangeCanvas.height / 2 };
+        const d_scale = 80;
+        let r_scale = 20;
+
+        // --- Coordinate Transformation ---
+        const d_map = (z) => ({ x: d_center.x + z.re * d_scale, y: d_center.y - z.im * d_scale });
+        const r_map = (w) => ({ x: r_center.x + w.re * r_scale, y: r_center.y - w.im * r_scale });
+
+        // --- Drawing Helpers ---
+        function drawAxes(ctx, center) {
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, center.y);
+            ctx.lineTo(ctx.canvas.width, center.y);
+            ctx.moveTo(center.x, 0);
+            ctx.lineTo(center.x, ctx.canvas.height);
+            ctx.stroke();
+        }
+
+        function drawArrow(ctx, from_x, from_y, to_x, to_y, color) {
+            const headlen = 8;
+            const dx = to_x - from_x;
+            const dy = to_y - from_y;
+            const angle = Math.atan2(dy, dx);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(from_x, from_y);
+            ctx.lineTo(to_x, to_y);
+            ctx.lineTo(to_x - headlen * Math.cos(angle - Math.PI / 6), to_y - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.moveTo(to_x, to_y);
+            ctx.lineTo(to_x - headlen * Math.cos(angle + Math.PI / 6), to_y - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.stroke();
+        }
+        
+        function drawPath(ctx, pathFunc, mapFunc, color, segments) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            const p_start = mapFunc(pathFunc(0));
+            ctx.moveTo(p_start.x, p_start.y);
+            for (let i = 1; i <= segments; i++) {
+                const p = mapFunc(pathFunc(i / segments));
+                ctx.lineTo(p.x, p.y);
+            }
+            ctx.stroke();
+        }
+
+        // --- Main Drawing Logic ---
+        function draw() {
+            // 1. Get current selections
+            const f = functions[currentFunction];
+            const path = paths[currentPath];
+
+            // 2. Clear canvases and draw axes
+            d_ctx.clearRect(0, 0, domainCanvas.width, domainCanvas.height);
+            r_ctx.clearRect(0, 0, rangeCanvas.width, rangeCanvas.height);
+            drawAxes(d_ctx, d_center);
+            
+            // 3. Draw the full path outline on the domain canvas
+            drawPath(d_ctx, path, d_map, '#a78bfa', 100);
+
+            // 4. Initialize variables for the sum
+            let totalSum = C(0, 0);
+            let currentSumPos = C(0, 0);
+            const dt = 1.0 / numPartitions;
+            
+            // --- Auto-scaling for the range canvas ---
+            let max_r_mag = 0;
+            let tempSum = C(0,0);
+            for (let i = 0; i < numPartitions; i++) {
+                 const t0 = i * dt;
+                 const t1 = (i + 1) * dt;
+                 const t_mid = (i + 0.5) * dt;
+                 const z0 = path(t0);
+                 const z1 = path(t1);
+                 const z_mid = path(t_mid);
+                 const dz = sub(z1, z0);
+                 const w = f(z_mid);
+                 const product = mul(w, dz);
+                 tempSum = add(tempSum, product);
+                 const mag = Math.sqrt(tempSum.re*tempSum.re + tempSum.im*tempSum.im);
+                 if(mag > max_r_mag) max_r_mag = mag;
+            }
+            r_scale = (rangeCanvas.width / 2.5) / (max_r_mag || 1);
+            drawAxes(r_ctx, r_center); // Redraw axes with potentially new scale
+
+            // 5. Loop through partitions to calculate and draw
+            for (let i = 0; i < numPartitions; i++) {
+                const t0 = i * dt;
+                const t1 = (i + 1) * dt;
+                const t_mid = (i + 0.5) * dt;
+
+                const z0 = path(t0);
+                const z1 = path(t1);
+                const z_mid = path(t_mid);
+
+                const p0 = d_map(z0);
+                const p1 = d_map(z1);
+                const p_mid = d_map(z_mid);
+
+                const dz = sub(z1, z0);
+                drawArrow(d_ctx, p0.x, p0.y, p1.x, p1.y, '#ef4444'); // red
+                
+                d_ctx.fillStyle = '#16a34a'; // green
+                d_ctx.beginPath();
+                d_ctx.arc(p_mid.x, p_mid.y, 4, 0, 2 * Math.PI);
+                d_ctx.fill();
+
+                const w = f(z_mid);
+                const product = mul(w, dz);
+
+                const sum_start_p = r_map(currentSumPos);
+                const sum_end_p = r_map(add(currentSumPos, product));
+                drawArrow(r_ctx, sum_start_p.x, sum_start_p.y, sum_end_p.x, sum_end_p.y, '#3b82f6'); // blue
+
+                currentSumPos = add(currentSumPos, product);
+                totalSum = currentSumPos;
+            }
+
+            // 6. Draw the final sum vector on the range canvas
+            const origin_p = r_map(C(0, 0));
+            const final_p = r_map(totalSum);
+            drawArrow(r_ctx, origin_p.x, origin_p.y, final_p.x, final_p.y, '#8b5cf6'); // purple
+
+            // 7. Update the displayed value
+            sumValue.textContent = `${totalSum.re.toFixed(3)} + ${totalSum.im.toFixed(3)}i`;
+        }
+
+        // --- Event Listeners ---
+        partitionsSlider.addEventListener('input', (e) => {
+            numPartitions = parseInt(e.target.value);
+            partitionsValue.textContent = numPartitions;
+            draw();
+        });
+        
+        functionSelect.addEventListener('change', (e) => {
+            currentFunction = e.target.value;
+            draw();
+        });
+
+        pathSelect.addEventListener('change', (e) => {
+            currentPath = e.target.value;
+            draw();
+        });
+
+        // --- Initial Draw ---
+        window.onload = draw;
+        window.onresize = draw;
+
+    </script>
+</body>
+</html>
