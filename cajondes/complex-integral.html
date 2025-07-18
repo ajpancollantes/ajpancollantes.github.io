@@ -74,8 +74,13 @@
                 </div>
 
                 <div class="mt-6">
-                    <label for="partitions" class="block text-sm font-medium text-gray-700">Number of Partitions: <span id="partitionsValue" class="font-bold text-indigo-600">10</span></label>
-                    <input type="range" id="partitions" min="2" max="200" value="10" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    <label for="partitions" class="block text-sm font-medium text-gray-700">Number of Partitions: <span id="partitionsValue" class="font-bold text-indigo-600">50</span></label>
+                    <input type="range" id="partitions" min="2" max="200" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                </div>
+
+                <div class="mt-6">
+                    <label for="tSlider" class="block text-sm font-medium text-gray-700">Path Parameter (t): <span id="tValue" class="font-bold text-indigo-600">1.00</span></label>
+                    <input type="range" id="tSlider" min="0" max="1" value="1" step="0.01" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                 </div>
 
                 <div id="result" class="mt-6 p-4 bg-indigo-50 rounded-lg">
@@ -114,12 +119,15 @@
         // --- UI Elements ---
         const partitionsSlider = document.getElementById('partitions');
         const partitionsValue = document.getElementById('partitionsValue');
+        const tSlider = document.getElementById('tSlider');
+        const tValue = document.getElementById('tValue');
         const sumValue = document.getElementById('sumValue');
         const functionSelect = document.getElementById('functionSelect');
         const pathSelect = document.getElementById('pathSelect');
 
         // --- Global State ---
-        let numPartitions = 10;
+        let numPartitions = 50;
+        let t_max = 1.0;
         let currentFunction = 'z_squared';
         let currentPath = 'spiral_single';
 
@@ -151,7 +159,7 @@
             exp_z: (z) => exp(z),
         };
         
-      // --- Path Definitions (gamma(t) for t from 0 to 1) ---
+            // --- Path Definitions (gamma(t) for t from 0 to 1) ---
 const paths = {
     spiral_single: (t) => {
         const r = 0.1 + 1.9 * t;
@@ -185,7 +193,6 @@ const paths = {
         return add(start, mul(sub(end, start), C(t, 0)));
     }
 };
-
 
         // --- Drawing Configuration ---
         const d_center = { x: domainCanvas.width / 2, y: domainCanvas.height / 2 };
@@ -225,9 +232,10 @@ const paths = {
             ctx.stroke();
         }
         
-        function drawPath(ctx, pathFunc, mapFunc, color, segments) {
+        function drawPathOutline(ctx, pathFunc, mapFunc, color, segments) {
             ctx.strokeStyle = color;
             ctx.lineWidth = 1.5;
+            ctx.globalAlpha = 0.3; // Make the full path faint
             ctx.beginPath();
             const p_start = mapFunc(pathFunc(0));
             ctx.moveTo(p_start.x, p_start.y);
@@ -236,49 +244,45 @@ const paths = {
                 ctx.lineTo(p.x, p.y);
             }
             ctx.stroke();
+            ctx.globalAlpha = 1.0; // Reset alpha
         }
 
         // --- Main Drawing Logic ---
         function draw() {
-            // 1. Get current selections
             const f = functions[currentFunction];
             const path = paths[currentPath];
 
-            // 2. Clear canvases and draw axes
             d_ctx.clearRect(0, 0, domainCanvas.width, domainCanvas.height);
             r_ctx.clearRect(0, 0, rangeCanvas.width, rangeCanvas.height);
             drawAxes(d_ctx, d_center);
             
-            // 3. Draw the full path outline on the domain canvas
-            drawPath(d_ctx, path, d_map, '#a78bfa', 100);
+            // Draw the full path outline faintly
+            drawPathOutline(d_ctx, path, d_map, '#a78bfa', 100);
 
-            // 4. Initialize variables for the sum
             let totalSum = C(0, 0);
             let currentSumPos = C(0, 0);
             const dt = 1.0 / numPartitions;
+            const partitionsToDraw = Math.ceil(numPartitions * t_max);
             
-            // --- Auto-scaling for the range canvas ---
+            // Auto-scaling for the range canvas based on the full path
             let max_r_mag = 0;
             let tempSum = C(0,0);
             for (let i = 0; i < numPartitions; i++) {
-                 const t0 = i * dt;
-                 const t1 = (i + 1) * dt;
-                 const t_mid = (i + 0.5) * dt;
-                 const z0 = path(t0);
-                 const z1 = path(t1);
-                 const z_mid = path(t_mid);
+                 const t = (i + 0.5) * dt;
+                 const z0 = path(i * dt);
+                 const z1 = path((i + 1) * dt);
                  const dz = sub(z1, z0);
-                 const w = f(z_mid);
+                 const w = f(path(t));
                  const product = mul(w, dz);
                  tempSum = add(tempSum, product);
                  const mag = Math.sqrt(tempSum.re*tempSum.re + tempSum.im*tempSum.im);
                  if(mag > max_r_mag) max_r_mag = mag;
             }
             r_scale = (rangeCanvas.width / 2.5) / (max_r_mag || 1);
-            drawAxes(r_ctx, r_center); // Redraw axes with potentially new scale
+            drawAxes(r_ctx, r_center);
 
-            // 5. Loop through partitions to calculate and draw
-            for (let i = 0; i < numPartitions; i++) {
+            // Loop up to the value of the t-slider
+            for (let i = 0; i < partitionsToDraw; i++) {
                 const t0 = i * dt;
                 const t1 = (i + 1) * dt;
                 const t_mid = (i + 0.5) * dt;
@@ -292,9 +296,9 @@ const paths = {
                 const p_mid = d_map(z_mid);
 
                 const dz = sub(z1, z0);
-                drawArrow(d_ctx, p0.x, p0.y, p1.x, p1.y, '#ef4444'); // red
+                drawArrow(d_ctx, p0.x, p0.y, p1.x, p1.y, '#ef4444');
                 
-                d_ctx.fillStyle = '#16a34a'; // green
+                d_ctx.fillStyle = '#16a34a';
                 d_ctx.beginPath();
                 d_ctx.arc(p_mid.x, p_mid.y, 4, 0, 2 * Math.PI);
                 d_ctx.fill();
@@ -304,18 +308,16 @@ const paths = {
 
                 const sum_start_p = r_map(currentSumPos);
                 const sum_end_p = r_map(add(currentSumPos, product));
-                drawArrow(r_ctx, sum_start_p.x, sum_start_p.y, sum_end_p.x, sum_end_p.y, '#3b82f6'); // blue
+                drawArrow(r_ctx, sum_start_p.x, sum_start_p.y, sum_end_p.x, sum_end_p.y, '#3b82f6');
 
                 currentSumPos = add(currentSumPos, product);
-                totalSum = currentSumPos;
             }
+            totalSum = currentSumPos;
 
-            // 6. Draw the final sum vector on the range canvas
             const origin_p = r_map(C(0, 0));
             const final_p = r_map(totalSum);
-            drawArrow(r_ctx, origin_p.x, origin_p.y, final_p.x, final_p.y, '#8b5cf6'); // purple
+            drawArrow(r_ctx, origin_p.x, origin_p.y, final_p.x, final_p.y, '#8b5cf6');
 
-            // 7. Update the displayed value
             sumValue.textContent = `${totalSum.re.toFixed(3)} + ${totalSum.im.toFixed(3)}i`;
         }
 
@@ -323,6 +325,12 @@ const paths = {
         partitionsSlider.addEventListener('input', (e) => {
             numPartitions = parseInt(e.target.value);
             partitionsValue.textContent = numPartitions;
+            draw();
+        });
+
+        tSlider.addEventListener('input', (e) => {
+            t_max = parseFloat(e.target.value);
+            tValue.textContent = t_max.toFixed(2);
             draw();
         });
         
