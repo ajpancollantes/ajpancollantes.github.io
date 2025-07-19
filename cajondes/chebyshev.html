@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime-Counting vs. Chebyshev Functions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://css.gg/css?=|info" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .serif {
+            font-family: 'Source Serif 4', serif;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #9ca3af;
+            shape-rendering: crispEdges;
+        }
+        .axis text {
+            font-size: 12px;
+            fill: #4b5563;
+        }
+        .line {
+            fill: none;
+            stroke-width: 2.5px;
+        }
+        .pi-line {
+            stroke: #3b82f6;
+        }
+        .theta-line {
+            stroke: #ef4444;
+        }
+        .psi-line {
+            stroke: #16a34a;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+            background: #1f2937;
+            color: white;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 serif">Prime Function Explorer</h1>
+            <p class="mt-2 text-lg text-slate-600">An Interactive Visualization of the Prime-Counting & Chebyshev Functions</p>
+        </header>
+
+        <div class="bg-white p-6 rounded-2xl shadow-lg">
+            <!-- Chart container -->
+            <div id="chart-container" class="relative"></div>
+            
+            <!-- Controls and Info -->
+            <div class="mt-8 px-2">
+                <div class="mb-6">
+                    <label for="x-slider" class="block text-lg font-medium text-slate-700 mb-2">Explore up to x = <span id="x-value" class="font-bold text-blue-600">100</span></label>
+                    <input id="x-slider" type="range" min="10" max="1000" value="100" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl">
+                        <h3 class="text-lg font-semibold text-blue-800 serif">Prime-Counting: <span class="italic">π(x)</span></h3>
+                        <p class="text-3xl font-bold text-blue-600 mt-2" id="pi-value">0</p>
+                        <p class="text-sm text-slate-500 mt-1">Counts primes ≤ x</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 p-4 rounded-xl">
+                        <h3 class="text-lg font-semibold text-red-800 serif">1st Chebyshev: <span class="italic">ϑ(x)</span></h3>
+                        <p class="text-3xl font-bold text-red-600 mt-2" id="theta-value">0.00</p>
+                        <p class="text-sm text-slate-500 mt-1">Sum of ln(p) for primes p ≤ x</p>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 p-4 rounded-xl">
+                        <h3 class="text-lg font-semibold text-green-800 serif">2nd Chebyshev: <span class="italic">ψ(x)</span></h3>
+                        <p class="text-3xl font-bold text-green-600 mt-2" id="psi-value">0.00</p>
+                        <p class="text-sm text-slate-500 mt-1">Sum of ln(p) for prime powers pᵏ ≤ x</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="text-center mt-8 text-slate-500 text-sm">
+            <p>The Prime Number Theorem states that <span class="italic">π(x) ~ x/ln(x)</span> and <span class="italic">ϑ(x) ~ ψ(x) ~ x</span>. This visualization helps illustrate their growth.</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- Pre-computation and Helper Functions ---
+        const MAX_PRIME_LIMIT = 1000;
+        let precomputedData = [];
+
+        // Sieve of Eratosthenes to find primes up to a limit
+        function sieve(n) {
+            const isPrime = new Array(n + 1).fill(true);
+            isPrime[0] = isPrime[1] = false;
+            for (let p = 2; p * p <= n; p++) {
+                if (isPrime[p]) {
+                    for (let i = p * p; i <= n; i += p)
+                        isPrime[i] = false;
+                }
+            }
+            const primeNumbers = [];
+            for (let i = 2; i <= n; i++) {
+                if (isPrime[i]) {
+                    primeNumbers.push(i);
+                }
+            }
+            return primeNumbers;
+        }
+
+        // Pre-calculates all three functions for efficiency
+        function precomputeAllData(limit) {
+            const primes = sieve(limit);
+            const data = [];
+            let pi = 0;
+            let primeIndex = 0;
+
+            // Create a lookup for theta values for easier psi calculation
+            const thetaValues = new Array(limit + 1).fill(0);
+            let tempTheta = 0;
+            let tempPrimeIndex = 0;
+            for (let i = 2; i <= limit; i++) {
+                if (tempPrimeIndex < primes.length && i === primes[tempPrimeIndex]) {
+                    tempTheta += Math.log(primes[tempPrimeIndex]);
+                    tempPrimeIndex++;
+                }
+                thetaValues[i] = tempTheta;
+            }
+            
+            // Calculate all values up to the limit
+            for (let x = 2; x <= limit; x++) {
+                if (primeIndex < primes.length && x === primes[primeIndex]) {
+                    pi++;
+                    primeIndex++;
+                }
+                
+                // The second Chebyshev function psi(x) is the sum of theta(x^(1/k)) for k >= 1
+                let psi = 0;
+                for (let k = 1; ; k++) {
+                    const root = Math.pow(x, 1/k);
+                    if (root < 2) break;
+                    psi += thetaValues[Math.floor(root)];
+                }
+
+                data.push({ x: x, pi: pi, theta: thetaValues[x], psi: psi });
+            }
+            return data;
+        }
+
+        // --- Chart Setup ---
+        const margin = { top: 20, right: 40, bottom: 50, left: 60 };
+        let width, height;
+
+        const svg = d3.select("#chart-container").append("svg");
+        const chartGroup = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear();
+        const y = d3.scaleLinear();
+
+        const xAxis = chartGroup.append("g").attr("class", "axis x-axis");
+        const yAxis = chartGroup.append("g").attr("class", "axis y-axis");
+
+        const piLine = d3.line().x(d => x(d.x)).y(d => y(d.pi));
+        const thetaLine = d3.line().x(d => x(d.x)).y(d => y(d.theta));
+        const psiLine = d3.line().x(d => x(d.x)).y(d => y(d.psi));
+
+        const piPath = chartGroup.append("path").attr("class", "line pi-line");
+        const thetaPath = chartGroup.append("path").attr("class", "line theta-line");
+        const psiPath = chartGroup.append("path").attr("class", "line psi-line");
+        
+        // --- Tooltip for interactivity ---
+        const tooltip = d3.select("body").append("div").attr("class", "tooltip");
+        const focusCirclePi = chartGroup.append('circle').attr('r', 5).attr('class', 'pi-line').style('opacity', 0);
+        const focusCircleTheta = chartGroup.append('circle').attr('r', 5).attr('class', 'theta-line').style('opacity', 0);
+        const focusCirclePsi = chartGroup.append('circle').attr('r', 5).attr('class', 'psi-line').style('opacity', 0);
+
+        // --- Core Drawing and Update Function ---
+        function updateChart(maxX) {
+            // 1. Filter precomputed data based on slider
+            const data = precomputedData.filter(d => d.x <= maxX);
+            if (data.length === 0) return;
+
+            // 2. Update scales
+            x.domain([0, maxX]);
+            y.domain([0, d3.max(data, d => d.psi) * 1.1]); // psi is the largest function
+
+            // 3. Update axes
+            xAxis.transition().duration(300).call(d3.axisBottom(x));
+            yAxis.transition().duration(300).call(d3.axisLeft(y));
+
+            // 4. Update lines
+            piPath.datum(data).transition().duration(300).attr("d", piLine);
+            thetaPath.datum(data).transition().duration(300).attr("d", thetaLine);
+            psiPath.datum(data).transition().duration(300).attr("d", psiLine);
+            
+            // 5. Update info boxes
+            const finalDataPoint = data[data.length - 1];
+            document.getElementById('x-value').textContent = maxX;
+            document.getElementById('pi-value').textContent = finalDataPoint.pi;
+            document.getElementById('theta-value').textContent = finalDataPoint.theta.toFixed(2);
+            document.getElementById('psi-value').textContent = finalDataPoint.psi.toFixed(2);
+
+            // --- Interactive Tooltip Logic ---
+            const focusRect = chartGroup.selectAll('.focus-rect').data([null]);
+            focusRect.enter().append('rect')
+                .attr('class', 'focus-rect')
+                .style('fill', 'none')
+                .style('pointer-events', 'all')
+                .merge(focusRect)
+                .attr('width', width)
+                .attr('height', height)
+                .on('mouseover', () => {
+                    tooltip.style('opacity', 1);
+                    focusCirclePi.style('opacity', 1);
+                    focusCircleTheta.style('opacity', 1);
+                    focusCirclePsi.style('opacity', 1);
+                })
+                .on('mouseout', () => {
+                    tooltip.style('opacity', 0);
+                    focusCirclePi.style('opacity', 0);
+                    focusCircleTheta.style('opacity', 0);
+                    focusCirclePsi.style('opacity', 0);
+                })
+                .on('mousemove', (event) => {
+                    const x0 = x.invert(d3.pointer(event)[0]);
+                    const bisect = d3.bisector(d => d.x).left;
+                    const i = bisect(data, x0, 1);
+                    if (i >= data.length) return;
+                    const d0 = data[i - 1];
+                    const d1 = data[i];
+                    const d = x0 - d0.x > d1.x - x0 ? d1 : d0;
+                    
+                    focusCirclePi.attr('cx', x(d.x)).attr('cy', y(d.pi));
+                    focusCircleTheta.attr('cx', x(d.x)).attr('cy', y(d.theta));
+                    focusCirclePsi.attr('cx', x(d.x)).attr('cy', y(d.psi));
+
+                    tooltip.html(
+                        `<strong>x = ${d.x}</strong><br/>
+                         <span style="color:#3b82f6;">π(x) = ${d.pi}</span><br/>
+                         <span style="color:#ef4444;">ϑ(x) = ${d.theta.toFixed(2)}</span><br/>
+                         <span style="color:#16a34a;">ψ(x) = ${d.psi.toFixed(2)}</span>`
+                    )
+                    .style('left', (event.pageX + 15) + 'px')
+                    .style('top', (event.pageY - 28) + 'px');
+                });
+        }
+        
+        // --- Resize and Initial Draw ---
+        function handleResize() {
+            const container = document.getElementById('chart-container');
+            width = container.clientWidth - margin.left - margin.right;
+            height = Math.min(width * 0.6, 450) - margin.top - margin.bottom;
+
+            svg.attr("width", width + margin.left + margin.right)
+               .attr("height", height + margin.top + margin.bottom);
+
+            chartGroup.attr("width", width).attr("height", height);
+            
+            x.range([0, width]);
+            y.range([height, 0]);
+
+            xAxis.attr("transform", `translate(0,${height})`);
+            
+            const sliderValue = +document.getElementById('x-slider').value;
+            updateChart(sliderValue);
+        }
+
+        // --- Event Listeners ---
+        document.getElementById('x-slider').addEventListener('input', function() {
+            updateChart(+this.value);
+        });
+        window.addEventListener('resize', handleResize);
+
+        // --- Initial Call ---
+        precomputedData = precomputeAllData(MAX_PRIME_LIMIT);
+        handleResize();
+    </script>
+</body>
+</html>
