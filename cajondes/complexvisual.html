@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Function Visualizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        canvas {
+            background-color: #111827; /* bg-gray-900 */
+            cursor: grab;
+        }
+        canvas:active {
+            cursor: grabbing;
+        }
+        .control-panel {
+            background-color: rgba(31, 41, 55, 0.8); /* bg-gray-800 with opacity */
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 flex flex-col h-screen">
+
+    <!-- Main Content -->
+    <div class="flex-grow relative">
+        <canvas id="complexCanvas"></canvas>
+        
+        <!-- Control Panel -->
+        <div id="controls" class="control-panel absolute bottom-4 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-2xl w-11/12 max-w-2xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                <!-- Function Selector -->
+                <div>
+                    <label for="functionSelect" class="block text-sm font-medium text-gray-300 mb-1">Function: f(z)</label>
+                    <select id="functionSelect" class="w-full bg-gray-700 border border-gray-600 text-white rounded-md p-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="z^2">z2</option>
+                        <option value="z^3">z³</option>
+                        <option value="e^z">eᶻ</option>
+                        <option value="1/(1-e^z)">1 / (1 - eᶻ)</option>
+                        <option value="1/(1+e^-z)">1 / (1 + e-ᶻ)</option>
+                        
+                    </select>
+                </div>
+
+                <!-- Transformation Slider -->
+                <div class="flex flex-col">
+                    <label for="transformSlider" class="block text-sm font-medium text-gray-300 mb-1">Transformation: <span id="sliderValue">0.00</span></label>
+                    <input id="transformSlider" type="range" min="0" max="1" value="0" step="0.01" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                </div>
+            </div>
+             <div class="text-center text-xs text-gray-400 mt-3">
+                Drag on the canvas to pan. Use mouse wheel to zoom.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Complex Number Class ---
+        // A simple class to handle complex number arithmetic.
+        class Complex {
+            constructor(re, im) {
+                this.re = re;
+                this.im = im;
+            }
+
+            // Add two complex numbers
+            add(z) {
+                return new Complex(this.re + z.re, this.im + z.im);
+            }
+
+            // Subtract a complex number
+            subtract(z) {
+                return new Complex(this.re - z.re, this.im - z.im);
+            }
+
+            // Multiply two complex numbers
+            multiply(z) {
+                const re = this.re * z.re - this.im * z.im;
+                const im = this.re * z.im + this.im * z.re;
+                return new Complex(re, im);
+            }
+
+            // Complex exponentiation (e^z)
+            static exp(z) {
+                const factor = Math.exp(z.re);
+                const re = factor * Math.cos(z.im);
+                const im = factor * Math.sin(z.im);
+                return new Complex(re, im);
+            }
+
+            // Complex division (this / z)
+            divide(z) {
+                const denominator = z.re * z.re + z.im * z.im;
+                if (denominator === 0) return new Complex(Infinity, Infinity);
+                const re = (this.re * z.re + this.im * z.im) / denominator;
+                const im = (this.im * z.re - this.re * z.im) / denominator;
+                return new Complex(re, im);
+            }
+            
+            // Magnitude squared
+            magnitudeSq() {
+                return this.re * this.re + this.im * this.im;
+            }
+        }
+
+        // --- Transformation Functions ---
+        const transformations = {
+            'z^2': (z) => z.multiply(z),
+            'z^3': (z) => z.multiply(z).multiply(z),
+            'e^z': (z) => Complex.exp(z),
+            '1/(1-e^z)': (z) => {
+                const one = new Complex(1, 0);
+                const ez = Complex.exp(z);
+                const denominator = one.subtract(ez);
+                if (denominator.re === 0 && denominator.im === 0) {
+                    return new Complex(Infinity, Infinity);
+                }
+                return one.divide(denominator);
+            },
+            '1/(1+e^-z)': (z) => {
+                const one = new Complex(1, 0);
+                const emz = Complex.exp(new Complex(-z.re, -z.im));
+                const denominator = one.add(emz);
+                if (denominator.re === 0 && denominator.im === 0) {
+                    return new Complex(Infinity, Infinity);
+                }
+                return one.divide(denominator);
+            }
+        };
+
+        // --- Canvas and Drawing Globals ---
+        const canvas = document.getElementById('complexCanvas');
+        const ctx = canvas.getContext('2d');
+        const slider = document.getElementById('transformSlider');
+        const sliderValueDisplay = document.getElementById('sliderValue');
+        const functionSelect = document.getElementById('functionSelect');
+
+        let width, height;
+        let scale = 80; // Pixels per unit
+        let origin = { x: 0, y: 0 }; // Pan offset
+        let isDragging = false;
+        let lastMousePos = { x: 0, y: 0 };
+        
+        // --- Core Drawing Logic ---
+        function setup() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            origin = { x: width / 2, y: height / 2 };
+            draw();
+        }
+
+        // Main drawing function, called on any change
+        function draw() {
+            const t = parseFloat(slider.value);
+            const func = transformations[functionSelect.value];
+
+            // Clear canvas
+            ctx.fillStyle = '#111827'; // bg-gray-900
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw axes
+            ctx.strokeStyle = 'rgba(156, 163, 175, 0.4)'; // gray-400 with opacity
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, origin.y);
+            ctx.lineTo(width, origin.y);
+            ctx.moveTo(origin.x, 0);
+            ctx.lineTo(origin.x, height);
+            ctx.stroke();
+            
+            drawGrid(t, func);
+        }
+        
+        // Draws the transformed grid
+        function drawGrid(t, func) {
+            const step = 1.0;
+            const lineDensity = 0.25; // How many lines per unit
+            const viewBounds = {
+                reMin: -origin.x / scale,
+                reMax: (width - origin.x) / scale,
+                imMin: -(height - origin.y) / scale,
+                imMax: (origin.y) / scale
+            };
+
+            // Draw vertical lines
+            ctx.strokeStyle = 'rgba(59, 130, 246, 0.6)'; // blue-500
+            ctx.lineWidth = 1.5;
+            for (let re = Math.floor(viewBounds.reMin / step) * step; re <= viewBounds.reMax; re += step) {
+                drawTransformedLine(re, viewBounds.imMin, re, viewBounds.imMax, t, func, lineDensity);
+            }
+
+            // Draw horizontal lines
+            ctx.strokeStyle = 'rgba(239, 68, 68, 0.6)'; // red-500
+            ctx.lineWidth = 1.5;
+            for (let im = Math.floor(viewBounds.imMin / step) * step; im <= viewBounds.imMax; im += step) {
+                drawTransformedLine(viewBounds.reMin, im, viewBounds.reMax, im, t, func, lineDensity);
+            }
+        }
+
+        // Draws a single transformed line segment by segment
+        function drawTransformedLine(reStart, imStart, reEnd, imEnd, t, func, density) {
+            ctx.beginPath();
+            let firstPoint = true;
+
+            const nPoints = Math.max(100, Math.sqrt((reEnd-reStart)**2 + (imEnd-imStart)**2) * scale * density);
+
+            for (let i = 0; i <= nPoints; i++) {
+                const p = i / nPoints;
+                const re = reStart + p * (reEnd - reStart);
+                const im = imStart + p * (imEnd - imStart);
+
+                const z = new Complex(re, im);
+                const fz = func(z);
+
+                // Check for singularities or extreme values
+                if (!isFinite(fz.re) || !isFinite(fz.im) || fz.magnitudeSq() > 1e6) {
+                    firstPoint = true; // Start a new line segment after the singularity
+                    continue;
+                }
+
+                // Linear interpolation: z_interp = (1-t)*z + t*f(z)
+                const interpRe = (1 - t) * z.re + t * fz.re;
+                const interpIm = (1 - t) * z.im + t * fz.im;
+
+                const canvasX = origin.x + interpRe * scale;
+                const canvasY = origin.y - interpIm * scale;
+
+                if (firstPoint) {
+                    ctx.moveTo(canvasX, canvasY);
+                    firstPoint = false;
+                } else {
+                    ctx.lineTo(canvasX, canvasY);
+                }
+            }
+            ctx.stroke();
+        }
+
+        // --- Event Handlers ---
+        function handleSliderInput() {
+            sliderValueDisplay.textContent = parseFloat(slider.value).toFixed(2);
+            requestAnimationFrame(draw);
+        }
+
+        function handleFunctionChange() {
+            requestAnimationFrame(draw);
+        }
+        
+        function handleMouseDown(e) {
+            isDragging = true;
+            lastMousePos = { x: e.clientX, y: e.clientY };
+            canvas.style.cursor = 'grabbing';
+        }
+
+        function handleMouseUp() {
+            isDragging = false;
+            canvas.style.cursor = 'grab';
+        }
+
+        function handleMouseMove(e) {
+            if (!isDragging) return;
+            const dx = e.clientX - lastMousePos.x;
+            const dy = e.clientY - lastMousePos.y;
+            origin.x += dx;
+            origin.y += dy;
+            lastMousePos = { x: e.clientX, y: e.clientY };
+            requestAnimationFrame(draw);
+        }
+
+        function handleWheel(e) {
+            e.preventDefault();
+            const zoomFactor = 1.1;
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            // Get world coordinates before zoom
+            const worldX = (mouseX - origin.x) / scale;
+            const worldY = (mouseY - origin.y) / -scale;
+
+            if (e.deltaY < 0) {
+                // Zoom in
+                scale *= zoomFactor;
+            } else {
+                // Zoom out
+                scale /= zoomFactor;
+            }
+
+            // Get new origin so that the point under the mouse stays the same
+            origin.x = mouseX - worldX * scale;
+            origin.y = mouseY + worldY * scale;
+            
+            requestAnimationFrame(draw);
+        }
+
+        // --- Initialization ---
+        slider.addEventListener('input', handleSliderInput);
+        functionSelect.addEventListener('change', handleFunctionChange);
+        canvas.addEventListener('mousedown', handleMouseDown);
+        window.addEventListener('mouseup', handleMouseUp);
+        canvas.addEventListener('mousemove', handleMouseMove);
+        canvas.addEventListener('wheel', handleWheel);
+        
+        window.addEventListener('resize', setup);
+
+        // Initial setup
+        setup();
+        handleSliderInput(); // To set initial value display
+    </script>
+</body>
+</html>
