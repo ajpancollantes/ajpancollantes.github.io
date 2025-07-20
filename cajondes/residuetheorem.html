@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Residue Theorem Visualization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .canvas-container {
+            touch-action: none;
+        }
+        .info-box {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 flex flex-col lg:flex-row h-screen overflow-hidden">
+
+    <!-- Controls Panel -->
+    <div class="w-full lg:w-96 bg-gray-800/50 backdrop-blur-sm p-6 space-y-6 overflow-y-auto border-r border-gray-700">
+        <div class="flex flex-col items-center pb-4 border-b border-gray-700">
+            <h1 class="text-2xl font-bold text-cyan-400">Residue Theorem</h1>
+            <p class="text-sm text-gray-400 text-center mt-2">Visualize Cauchy's Residue Theorem</p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-gray-900/70 p-4 rounded-lg">
+            <h2 class="font-semibold text-lg mb-2 text-gray-100">How to Use</h2>
+            <ol class="list-decimal list-inside text-gray-400 space-y-1 text-sm">
+                <li>Click 'Add Singularity' to place points ($z_k$) on the canvas.</li>
+                <li>Set the residue for each singularity below.</li>
+                <li>Click and drag on the canvas to draw a path ($\gamma$).</li>
+                <li>The integral is calculated automatically.</li>
+            </ol>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-2 gap-4">
+            <button id="addSingularityBtn" class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">Add Singularity</button>
+            <button id="clearPathBtn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">Clear Path</button>
+        </div>
+
+        <!-- Singularities List -->
+        <div id="singularitiesList" class="space-y-4">
+            <h2 class="text-lg font-semibold text-gray-100">Singularities & Residues</h2>
+            <!-- Singularities will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Main Canvas -->
+    <div class="flex-grow flex flex-col relative canvas-container">
+        <canvas id="complexPlane" class="flex-grow w-full h-full"></canvas>
+        
+        <!-- Result Display -->
+        <div id="resultBox" class="absolute bottom-4 right-4 bg-gray-900/70 info-box p-4 rounded-lg border border-gray-700 shadow-2xl max-w-md">
+            <h3 class="font-bold text-lg text-cyan-400">Calculation</h3>
+            <p class="font-mono text-sm text-gray-300 mt-2">
+                $\int_\gamma f(z) dz = 2\pi i \sum_{k} n(\gamma, z_k) \cdot \text{Res}(f, z_k)$
+            </p>
+            <div id="calculationResult" class="mt-3 pt-3 border-t border-gray-700 font-mono text-lg text-white">
+                $2\pi i \cdot (0)$
+            </div>
+        </div>
+        
+        <!-- Tooltip for coordinates -->
+        <div id="tooltip" class="absolute hidden bg-gray-900/80 text-white text-xs rounded py-1 px-2 pointer-events-none"></div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('complexPlane');
+            const ctx = canvas.getContext('2d');
+            const singularitiesList = document.getElementById('singularitiesList');
+            const addSingularityBtn = document.getElementById('addSingularityBtn');
+            const clearPathBtn = document.getElementById('clearPathBtn');
+            const calculationResult = document.getElementById('calculationResult');
+            const tooltip = document.getElementById('tooltip');
+
+            let singularities = [];
+            let path = [];
+            let isDrawing = false;
+            let nextSingularityId = 0;
+            let draggedSingularity = null;
+            let dragOffset = { x: 0, y: 0 };
+
+            // --- Canvas and Drawing Setup ---
+            function resizeCanvas() {
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                draw();
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            
+            function drawGrid() {
+                const { width, height } = canvas.getBoundingClientRect();
+                const step = 50;
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.lineWidth = 0.5;
+
+                // Vertical lines
+                for (let x = step; x < width; x += step) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, height);
+                    ctx.stroke();
+                }
+                // Horizontal lines
+                for (let y = step; y < height; y += step) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(width, y);
+                    ctx.stroke();
+                }
+
+                // Axes
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.lineWidth = 1;
+                // X-axis (Real)
+                ctx.beginPath();
+                ctx.moveTo(0, height / 2);
+                ctx.lineTo(width, height / 2);
+                ctx.stroke();
+                // Y-axis (Imaginary)
+                ctx.beginPath();
+                ctx.moveTo(width / 2, 0);
+                ctx.lineTo(width / 2, height);
+                ctx.stroke();
+                
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.font = '12px Inter';
+                ctx.textAlign = 'left';
+                ctx.fillText('Re', width - 20, height / 2 - 5);
+                ctx.fillText('Im', width / 2 + 5, 15);
+            }
+
+            function drawPath() {
+                if (path.length < 2) return;
+                ctx.strokeStyle = '#f87171'; // red-400
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(path[0].x, path[0].y);
+                for (let i = 1; i < path.length; i++) {
+                    ctx.lineTo(path[i].x, path[i].y);
+                }
+                if (!isDrawing) {
+                    ctx.closePath();
+                }
+                ctx.stroke();
+            }
+
+            function drawSingularities() {
+                singularities.forEach(s => {
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, 6, 0, 2 * Math.PI);
+                    ctx.fillStyle = s.isInside ? '#34d399' : '#fbbf24'; // green-400 if inside, amber-400 if outside
+                    ctx.fill();
+                    ctx.strokeStyle = '#111827'; // gray-900
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                });
+            }
+
+            function draw() {
+                const { width, height } = canvas.getBoundingClientRect();
+                ctx.clearRect(0, 0, width, height);
+                drawGrid();
+                drawPath();
+                drawSingularities();
+            }
+
+            // --- UI and State Management ---
+            function addSingularity() {
+                const { width, height } = canvas.getBoundingClientRect();
+                const id = nextSingularityId++;
+                singularities.push({
+                    id: id,
+                    x: width / 2 + (Math.random() - 0.5) * 200,
+                    y: height / 2 + (Math.random() - 0.5) * 200,
+                    residueRe: 1,
+                    residueIm: 0,
+                    isInside: false
+                });
+                updateSingularitiesUI();
+                updateCalculation();
+                draw();
+            }
+            
+            function removeSingularity(id) {
+                singularities = singularities.filter(s => s.id !== id);
+                updateSingularitiesUI();
+                updateCalculation();
+                draw();
+            }
+
+            function updateSingularityResidue(id, part, value) {
+                const s = singularities.find(s => s.id === id);
+                if (s) {
+                    s[part] = parseFloat(value) || 0;
+                    updateCalculation();
+                }
+            }
+
+            function updateSingularitiesUI() {
+                singularitiesList.innerHTML = '<h2 class="text-lg font-semibold text-gray-100">Singularities & Residues</h2>';
+                if (singularities.length === 0) {
+                    singularitiesList.innerHTML += '<p class="text-sm text-gray-500">No singularities added yet.</p>';
+                }
+                singularities.forEach((s, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-gray-700/50 p-3 rounded-lg';
+                    div.innerHTML = `
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-300">Singularity $z_{${index+1}}$</span>
+                            <button data-id="${s.id}" class="remove-btn text-gray-400 hover:text-red-400">&times;</button>
+                        </div>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+                            <div>
+                                <label for="res-re-${s.id}" class="block text-xs text-gray-400">Res (Real)</label>
+                                <input type="number" id="res-re-${s.id}" data-id="${s.id}" data-part="residueRe" class="residue-input w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-white" value="${s.residueRe}" step="0.1">
+                            </div>
+                            <div>
+                                <label for="res-im-${s.id}" class="block text-xs text-gray-400">Res (Imaginary)</label>
+                                <input type="number" id="res-im-${s.id}" data-id="${s.id}" data-part="residueIm" class="residue-input w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-white" value="${s.residueIm}" step="0.1">
+                            </div>
+                        </div>
+                    `;
+                    singularitiesList.appendChild(div);
+                });
+
+                document.querySelectorAll('.remove-btn').forEach(btn => {
+                    btn.onclick = (e) => removeSingularity(parseInt(e.target.dataset.id));
+                });
+                document.querySelectorAll('.residue-input').forEach(input => {
+                    input.oninput = (e) => updateSingularityResidue(parseInt(e.target.dataset.id), e.target.dataset.part, e.target.value);
+                });
+            }
+
+            // --- Mathematical Calculations ---
+            function getWindingNumber(point, polygon) {
+                if (polygon.length < 3) return 0;
+                let angle = 0;
+                for (let i = 0; i < polygon.length; i++) {
+                    const p1 = polygon[i];
+                    const p2 = polygon[(i + 1) % polygon.length];
+                    
+                    const dx1 = p1.x - point.x;
+                    const dy1 = p1.y - point.y;
+                    const dx2 = p2.x - point.x;
+                    const dy2 = p2.y - point.y;
+
+                    const det = dx1 * dy2 - dx2 * dy1;
+                    const dot = dx1 * dx2 + dy1 * dy2;
+                    
+                    angle += Math.atan2(det, dot);
+                }
+                return Math.round(angle / (2 * Math.PI));
+            }
+
+            function updateCalculation() {
+                let totalResidueRe = 0;
+                let totalResidueIm = 0;
+
+                singularities.forEach(s => {
+                    const windingNumber = getWindingNumber(s, path);
+                    s.isInside = windingNumber !== 0;
+                    if (s.isInside) {
+                        totalResidueRe += windingNumber * s.residueRe;
+                        totalResidueIm += windingNumber * s.residueIm;
+                    }
+                });
+                
+                // Format the output string
+                let resultString;
+                if (totalResidueRe === 0 && totalResidueIm === 0) {
+                    resultString = "$2\\pi i \\cdot (0) = 0$";
+                } else {
+                    let residueStr = '';
+                    if (totalResidueRe !== 0) {
+                        residueStr += totalResidueRe.toFixed(2);
+                    }
+                    if (totalResidueIm !== 0) {
+                        if (totalResidueRe !== 0 && totalResidueIm > 0) {
+                            residueStr += ' + ';
+                        } else if (totalResidueIm < 0) {
+                            residueStr += ' - ';
+                        }
+                        residueStr += `${Math.abs(totalResidueIm).toFixed(2)}i`;
+                    }
+                    
+                    // Final result: 2πi * (a + bi) = 2π(-b + ai)
+                    let finalRe = -2 * Math.PI * totalResidueIm;
+                    let finalIm = 2 * Math.PI * totalResidueRe;
+
+                    let finalStr = '';
+                    if (Math.abs(finalRe) > 1e-9) {
+                        finalStr += finalRe.toFixed(2);
+                    }
+                    if (Math.abs(finalIm) > 1e-9) {
+                         if (finalStr.length > 0 && finalIm > 0) {
+                            finalStr += ' + ';
+                        } else if (finalIm < 0) {
+                             finalStr += ' - ';
+                         }
+                         finalStr += `${Math.abs(finalIm).toFixed(2)}i`;
+                    }
+                    if (finalStr.length === 0) finalStr = '0';
+
+                    resultString = `$2\\pi i \\cdot (${residueStr}) = ${finalStr}$`;
+                }
+
+                calculationResult.innerHTML = resultString;
+                // Re-render MathJax
+                if (window.MathJax) {
+                    MathJax.typesetPromise([calculationResult]);
+                }
+                draw();
+            }
+
+            // --- Event Listeners ---
+            function getMousePos(evt) {
+                const rect = canvas.getBoundingClientRect();
+                return {
+                    x: evt.clientX - rect.left,
+                    y: evt.clientY - rect.top
+                };
+            }
+
+            canvas.addEventListener('mousedown', (e) => {
+                const pos = getMousePos(e);
+                
+                // Check if dragging a singularity
+                draggedSingularity = null;
+                for (let i = singularities.length - 1; i >= 0; i--) {
+                    const s = singularities[i];
+                    const dist = Math.sqrt((pos.x - s.x) ** 2 + (pos.y - s.y) ** 2);
+                    if (dist < 10) { // 10px grab radius
+                        draggedSingularity = s;
+                        dragOffset.x = s.x - pos.x;
+                        dragOffset.y = s.y - pos.y;
+                        return; // Prioritize dragging over drawing
+                    }
+                }
+
+                // If not dragging, start drawing
+                isDrawing = true;
+                path = [pos];
+            });
+
+            canvas.addEventListener('mousemove', (e) => {
+                const pos = getMousePos(e);
+                
+                // Update tooltip with coordinates
+                const { width, height } = canvas.getBoundingClientRect();
+                const real = ((pos.x - width / 2) / 50).toFixed(2);
+                const imag = (-(pos.y - height / 2) / 50).toFixed(2);
+                tooltip.style.left = `${e.clientX + 15}px`;
+                tooltip.style.top = `${e.clientY + 15}px`;
+                tooltip.style.display = 'block';
+                tooltip.textContent = `z = ${real} + ${imag}i`;
+
+
+                if (draggedSingularity) {
+                    draggedSingularity.x = pos.x + dragOffset.x;
+                    draggedSingularity.y = pos.y + dragOffset.y;
+                    updateCalculation();
+                    draw();
+                } else if (isDrawing) {
+                    path.push(pos);
+                    draw();
+                }
+            });
+
+            canvas.addEventListener('mouseup', () => {
+                isDrawing = false;
+                draggedSingularity = null;
+                updateCalculation();
+                draw();
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+                if (isDrawing) { // If mouse leaves while drawing, end the path
+                    isDrawing = false;
+                    updateCalculation();
+                    draw();
+                }
+            });
+
+            addSingularityBtn.addEventListener('click', addSingularity);
+            clearPathBtn.addEventListener('click', () => {
+                path = [];
+                updateCalculation();
+                draw();
+            });
+
+            // --- Initialization ---
+            function init() {
+                // Add MathJax script
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+                script.async = true;
+                document.head.appendChild(script);
+                
+                // Initial setup
+                resizeCanvas();
+                addSingularity();
+                addSingularity();
+                updateSingularitiesUI();
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html>
