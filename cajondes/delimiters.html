@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Delimiter Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-3xl bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8">
+        <h1 class="text-2xl md:text-3xl font-bold text-center mb-4 text-gray-800 dark:text-white">LaTeX Delimiter Converter</h1>
+        <p class="text-center text-gray-600 dark:text-gray-400 mb-6">Paste your text below and choose a conversion format.</p>
+        
+        <!-- Text Area for Input -->
+        <div class="mb-4">
+            <label for="text-input" class="sr-only">Text Input</label>
+            <textarea 
+                id="text-input"
+                rows="15"
+                class="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                placeholder="Paste your text here, e.g., This is an inline formula: $E=mc^2$. And this is a display formula: $$ \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2} $$"
+            ></textarea>
+        </div>
+
+        <!-- Conversion Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+                onclick="convertToLatex()"
+                class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                Convert to  `\(…\)` & `\[…\]`
+            </button>
+            <button 
+                onclick="convertToDollars()"
+                class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                Convert to `$...$` & `$$...$$`
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to get the textarea element
+        function getTextArea() {
+            return document.getElementById('text-input');
+        }
+
+        /**
+         * Converts dollar-sign delimited LaTeX formulas to parenthesis-based ones.
+         * It replaces $$...$$ with \[...\] and $...$ with \(...\).
+         * The replacement for $$...$$ is done first to avoid conflicts with the single-dollar replacement.
+         */
+        function convertToLatex() {
+            const textArea = getTextArea();
+            let text = textArea.value;
+            
+            // First, replace all double-dollar signs $$...$$ with \[...\]
+            // We use a regular expression with the 'g' flag for a global search
+            // and the 's' (dotAll) flag to allow '.' to match newline characters.
+            // This is crucial for multi-line display formulas.
+            text = text.replace(/\$\$(.*?)\$\$/gs, '\\[$1\\]');
+
+            // Next, replace all single-dollar signs $...$ with \(...\)
+            // This is for inline math, which typically doesn't span multiple lines,
+            // so the 's' flag is not used here.
+            text = text.replace(/\$(.*?)\$/g, '\\($1\\)');
+
+            textArea.value = text;
+        }
+
+        /**
+         * Converts parenthesis-based LaTeX formulas back to dollar-sign delimited ones.
+         * It replaces \[...\] with $$...$$ and \(...\) with $...$.
+         * The replacement for \[...\] is done first to avoid conflicts.
+         */
+        function convertToDollars() {
+            const textArea = getTextArea();
+            let text = textArea.value;
+
+            // First, replace all escaped square brackets \[...\] with $$...$$
+            // We need to escape the backslashes and brackets in the regex.
+            // The 's' (dotAll) flag is used to handle multi-line formulas.
+            text = text.replace(/\\\[(.*?)\\\]/gs, '$$$$$1$$$$');
+
+            // Next, replace all escaped parentheses \(...\) with $...$
+            // This is for inline math, so no 's' flag.
+            text = text.replace(/\\\((.*?)\\\)/g, '$$$1$$');
+
+            textArea.value = text;
+        }
+    </script>
+
+</body>
+</html>
