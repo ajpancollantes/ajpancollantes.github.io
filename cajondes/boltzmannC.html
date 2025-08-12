@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maximum-Entropy: Continuous Case</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js for visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for a clean, modern look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem; /* p-6 */
+        }
+        /* Custom slider styles */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0; /* slate-200 */
+            border-radius: 9999px;
+            outline: none;
+            opacity: 0.9;
+            transition: opacity .2s;
+        }
+        input[type="range"]:hover {
+            opacity: 1;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #4f46e5; /* indigo-600 */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #4f46e5; /* indigo-600 */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Maximum-Entropy Distribution (Continuous)</h1>
+            <p class="text-slate-600 mt-2">Visualizing the truncated exponential distribution for a variable in [1, 12].</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column: Controls and Metrics -->
+            <div class="lg:col-span-1 space-y-8">
+                <!-- Controls Card -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4 text-slate-800">Controls</h2>
+                    <label for="mean-slider" class="block font-medium text-slate-700 mb-2">Target Mean (μ)</label>
+                    <div class="flex items-center gap-4">
+                        <input type="range" id="mean-slider" min="1.01" max="11.99" step="0.01" value="3.00" class="flex-grow">
+                        <span id="mean-value" class="font-mono text-lg font-semibold text-indigo-600 w-16 text-center">3.00</span>
+                    </div>
+                </div>
+
+                <!-- Metrics Card -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4 text-slate-800">Computed Metrics</h2>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-slate-600">Computed Mean:</span>
+                            <span id="computed-mean" class="font-mono text-lg font-medium text-slate-900">...</span>
+                        </div>
+                         <div class="flex justify-between items-baseline">
+                            <span class="text-slate-600">Lagrange Multiplier (λ):</span>
+                            <span id="lambda-value" class="font-mono text-lg font-medium text-slate-900">...</span>
+                        </div>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-slate-600">Differential Entropy (H):</span>
+                            <span id="entropy-value" class="font-mono text-lg font-medium text-slate-900">...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Visualization -->
+            <div class="lg:col-span-2">
+                <!-- Chart Card -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4 text-slate-800">Probability Density Function (PDF)</h2>
+                    <div class="relative h-96">
+                        <canvas id="distribution-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM ELEMENTS ---
+            const slider = document.getElementById('mean-slider');
+            const meanValueDisplay = document.getElementById('mean-value');
+            const computedMeanDisplay = document.getElementById('computed-mean');
+            const lambdaDisplay = document.getElementById('lambda-value');
+            const entropyDisplay = document.getElementById('entropy-value');
+            const ctx = document.getElementById('distribution-chart').getContext('2d');
+
+            // --- CONSTANTS ---
+            const A = 1; // Lower bound of the interval
+            const B = 12; // Upper bound of the interval
+            const UNIFORM_MEAN = (A + B) / 2; // 6.5
+
+            // --- CHART.JS SETUP ---
+            let distributionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [], // x-values for the plot
+                    datasets: [{
+                        label: 'Probability Density',
+                        data: [], // y-values (p(x))
+                        borderColor: 'rgba(79, 70, 229, 1)', // indigo-600
+                        backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                        borderWidth: 2,
+                        fill: true,
+                        pointRadius: 0, // No points on the line
+                        tension: 0.1 // Slight curve
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Probability Density p(x)',
+                                font: { size: 14 }
+                            },
+                            grid: { color: '#e2e8f0' }
+                        },
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Value (x)',
+                                font: { size: 14 }
+                            },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: (tooltipItems) => `x = ${tooltipItems[0].label}`,
+                                label: (context) => `p(x) = ${context.raw.toFixed(4)}`
+                            }
+                        }
+                    },
+                    animation: { duration: 200 }
+                }
+            });
+
+            // --- CORE LOGIC: CONTINUOUS CASE ---
+
+            /**
+             * Calculates the expected mean for a given lambda in the continuous case.
+             * This uses the analytical solution to the integral.
+             * @param {number} lambda - The Lagrange multiplier.
+             * @returns {number} The expected mean.
+             */
+            function getExpectedMean(lambda) {
+                // Handle the lambda = 0 case (uniform distribution) separately to avoid division by zero.
+                if (Math.abs(lambda) < 1e-9) {
+                    return UNIFORM_MEAN;
+                }
+                
+                const exp_la = Math.exp(-lambda * A);
+                const exp_lb = Math.exp(-lambda * B);
+
+                const mean = ( (A * exp_la - B * exp_lb) / (exp_la - exp_lb) ) + (1 / lambda);
+                return mean;
+            }
+
+            /**
+             * Finds the value of lambda that produces the target mean using the bisection method.
+             * @param {number} targetMean - The desired mean of the distribution.
+             * @returns {number} The solved value for lambda.
+             */
+            function solveForLambda(targetMean) {
+                if (Math.abs(targetMean - UNIFORM_MEAN) < 1e-9) {
+                    return 0;
+                }
+
+                let lambdaMin = -10, lambdaMax = 10;
+                const iterations = 100;
+
+                if (targetMean > UNIFORM_MEAN) {
+                    lambdaMax = 0;
+                } else {
+                    lambdaMin = 0;
+                }
+
+                for (let i = 0; i < iterations; i++) {
+                    const lambdaMid = (lambdaMin + lambdaMax) / 2;
+                    // Avoid lambda being exactly zero in the loop
+                    const meanMid = getExpectedMean(lambdaMid === 0 ? 1e-10 : lambdaMid);
+                    
+                    if (meanMid > targetMean) {
+                        lambdaMin = lambdaMid;
+                    } else {
+                        lambdaMax = lambdaMid;
+                    }
+                }
+                return (lambdaMin + lambdaMax) / 2;
+            }
+
+            // --- UPDATE FUNCTION ---
+
+            /**
+             * Main function to update the entire visualization based on the target mean.
+             * @param {number} targetMean - The mean value from the slider.
+             */
+            function updateVisualization(targetMean) {
+                // 1. Update display
+                meanValueDisplay.textContent = targetMean.toFixed(2);
+                
+                // 2. Solve for lambda
+                const lambda = solveForLambda(targetMean);
+                lambdaDisplay.textContent = lambda.toFixed(4);
+
+                // 3. Calculate normalization constant C and entropy H
+                let C, entropy;
+                const computedMean = getExpectedMean(lambda);
+
+                if (Math.abs(lambda) < 1e-9) {
+                    C = 1 / (B - A);
+                    entropy = Math.log(B - A);
+                } else {
+                    const exp_la = Math.exp(-lambda * A);
+                    const exp_lb = Math.exp(-lambda * B);
+                    C = lambda / (exp_la - exp_lb);
+                    entropy = Math.log((exp_la - exp_lb) / lambda) + lambda * computedMean;
+                }
+                
+                computedMeanDisplay.textContent = computedMean.toFixed(4);
+                entropyDisplay.textContent = entropy.toFixed(4);
+
+                // 4. Generate data for the plot
+                const plotPoints = 200;
+                const xValues = [];
+                const yValues = [];
+                for (let i = 0; i <= plotPoints; i++) {
+                    const x = A + (B - A) * i / plotPoints;
+                    const y = C * Math.exp(-lambda * x);
+                    xValues.push(x.toFixed(2));
+                    yValues.push(y);
+                }
+                
+                // 5. Update the chart
+                distributionChart.data.labels = xValues;
+                distributionChart.data.datasets[0].data = yValues;
+                distributionChart.update();
+            }
+
+            // --- EVENT LISTENERS & INITIALIZATION ---
+            slider.addEventListener('input', (e) => {
+                updateVisualization(parseFloat(e.target.value));
+            });
+
+            // Initial call
+            updateVisualization(parseFloat(slider.value));
+        });
+    </script>
+</body>
+</html>
