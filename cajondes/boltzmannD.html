@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maximum-Entropy 12-Sided Die</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js for visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for a clean, modern look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem; /* p-6 */
+        }
+        /* Custom slider styles */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0; /* slate-200 */
+            border-radius: 9999px;
+            outline: none;
+            opacity: 0.9;
+            transition: opacity .2s;
+        }
+        input[type="range"]:hover {
+            opacity: 1;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #4f46e5; /* indigo-600 */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #4f46e5; /* indigo-600 */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Maximum-Entropy Distribution</h1>
+            <p class="text-slate-600 mt-2">Visualizing the probability distribution for a 12-sided die with a constrained mean.</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column: Controls and Metrics -->
+            <div class="lg:col-span-1 space-y-8">
+                <!-- Controls Card -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4 text-slate-800">Controls</h2>
+                    <label for="mean-slider" class="block font-medium text-slate-700 mb-2">Target Mean (μ)</label>
+                    <div class="flex items-center gap-4">
+                        <input type="range" id="mean-slider" min="1.01" max="11.99" step="0.01" value="3.00" class="flex-grow">
+                        <span id="mean-value" class="font-mono text-lg font-semibold text-indigo-600 w-16 text-center">3.00</span>
+                    </div>
+                </div>
+
+                <!-- Metrics Card -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4 text-slate-800">Computed Metrics</h2>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-slate-600">Computed Mean:</span>
+                            <span id="computed-mean" class="font-mono text-lg font-medium text-slate-900">...</span>
+                        </div>
+                         <div class="flex justify-between items-baseline">
+                            <span class="text-slate-600">Lagrange Multiplier (λ):</span>
+                            <span id="lambda-value" class="font-mono text-lg font-medium text-slate-900">...</span>
+                        </div>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-slate-600">Entropy (H):</span>
+                            <span id="entropy-value" class="font-mono text-lg font-medium text-slate-900">...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Visualization and Data Table -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Chart Card -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4 text-slate-800">Probability Distribution (pᵢ)</h2>
+                    <div class="relative h-64 md:h-80">
+                        <canvas id="distribution-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Data Table Card -->
+                <div class="card overflow-x-auto">
+                    <h2 class="text-xl font-semibold mb-4 text-slate-800">Distribution Data</h2>
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200">
+                                <th class="p-2 font-semibold text-slate-600">Face (i)</th>
+                                <th class="p-2 font-semibold text-slate-600 text-right">Probability (pᵢ)</th>
+                                <th class="p-2 font-semibold text-slate-600 text-right">Cumulative (Σpᵢ)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-table-body" class="font-mono">
+                            <!-- Rows will be generated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM ELEMENTS ---
+            const slider = document.getElementById('mean-slider');
+            const meanValueDisplay = document.getElementById('mean-value');
+            const computedMeanDisplay = document.getElementById('computed-mean');
+            const lambdaDisplay = document.getElementById('lambda-value');
+            const entropyDisplay = document.getElementById('entropy-value');
+            const tableBody = document.getElementById('data-table-body');
+            const ctx = document.getElementById('distribution-chart').getContext('2d');
+
+            // --- CONSTANTS ---
+            const N_FACES = 12;
+            const FACES = Array.from({ length: N_FACES }, (_, i) => i + 1);
+            const UNIFORM_MEAN = (N_FACES + 1) / 2; // 6.5
+
+            // --- CHART.JS SETUP ---
+            let distributionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: FACES,
+                    datasets: [{
+                        label: 'Probability',
+                        data: [], // Initial empty data
+                        backgroundColor: 'rgba(79, 70, 229, 0.7)', // indigo-600 with opacity
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Probability',
+                                font: { size: 14 }
+                            },
+                            grid: {
+                                color: '#e2e8f0' // slate-200
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Die Face',
+                                font: { size: 14 }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `p(${context.label}) = ${context.raw.toFixed(4)}`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 200 // Faster animation for smoother slider interaction
+                    }
+                }
+            });
+
+            // --- CORE LOGIC: NUMERICAL SOLVER ---
+
+            /**
+             * Calculates the expected mean for a given lambda.
+             * E[i] = Σ i * exp(-λ*i) / Σ exp(-λ*i)
+             * @param {number} lambda - The Lagrange multiplier.
+             * @returns {number} The expected mean.
+             */
+            function getExpectedMean(lambda) {
+                let numerator = 0;
+                let denominator = 0;
+                for (let i = 1; i <= N_FACES; i++) {
+                    const term = Math.exp(-lambda * i);
+                    numerator += i * term;
+                    denominator += term;
+                }
+                // Handle case where denominator is zero (for very large lambda)
+                return denominator === 0 ? 1 : numerator / denominator;
+            }
+
+            /**
+             * Finds the value of lambda that produces the target mean using the bisection method.
+             * @param {number} targetMean - The desired mean of the distribution.
+             * @returns {number} The solved value for lambda.
+             */
+            function solveForLambda(targetMean) {
+                // If mean is 6.5, distribution is uniform, so lambda is 0.
+                if (Math.abs(targetMean - UNIFORM_MEAN) < 1e-9) {
+                    return 0;
+                }
+
+                // Bisection method setup
+                let lambdaMin = -10; // A reasonable lower bound
+                let lambdaMax = 10;  // A reasonable upper bound
+                const iterations = 100; // Sufficient for high precision
+
+                // The function E(λ) is monotonically decreasing.
+                // If targetMean > 6.5, we need λ < 0.
+                // If targetMean < 6.5, we need λ > 0.
+                // We adjust the search interval accordingly.
+                if (targetMean > UNIFORM_MEAN) {
+                    lambdaMax = 0;
+                } else {
+                    lambdaMin = 0;
+                }
+
+                for (let i = 0; i < iterations; i++) {
+                    const lambdaMid = (lambdaMin + lambdaMax) / 2;
+                    const meanMid = getExpectedMean(lambdaMid);
+                    
+                    if (meanMid > targetMean) {
+                        // Our mean is too high, we need to increase lambda
+                        lambdaMin = lambdaMid;
+                    } else {
+                        // Our mean is too low, we need to decrease lambda
+                        lambdaMax = lambdaMid;
+                    }
+                }
+                return (lambdaMin + lambdaMax) / 2;
+            }
+
+            // --- UPDATE FUNCTION ---
+
+            /**
+             * Main function to update the entire visualization based on the target mean.
+             * @param {number} targetMean - The mean value from the slider.
+             */
+            function updateVisualization(targetMean) {
+                // 1. Update the slider's text display
+                meanValueDisplay.textContent = targetMean.toFixed(2);
+                
+                // 2. Solve for lambda
+                const lambda = solveForLambda(targetMean);
+                lambdaDisplay.textContent = lambda.toFixed(4);
+
+                // 3. Calculate probabilities p_i
+                const unnormalizedProbs = FACES.map(i => Math.exp(-lambda * i));
+                const partitionFunc = unnormalizedProbs.reduce((sum, p) => sum + p, 0);
+                const probs = unnormalizedProbs.map(p => p / partitionFunc);
+
+                // 4. Calculate metrics
+                const computedMean = probs.reduce((sum, p, index) => sum + p * FACES[index], 0);
+                const entropy = -probs.reduce((sum, p) => sum + (p > 0 ? p * Math.log(p) : 0), 0);
+                
+                computedMeanDisplay.textContent = computedMean.toFixed(4);
+                entropyDisplay.textContent = entropy.toFixed(4);
+
+                // 5. Update the data table
+                let cumulativeProb = 0;
+                tableBody.innerHTML = ''; // Clear existing rows
+                FACES.forEach((face, index) => {
+                    const p = probs[index];
+                    cumulativeProb += p;
+                    const row = `
+                        <tr class="border-b border-slate-100 last:border-b-0">
+                            <td class="p-2 font-medium text-slate-700">${face}</td>
+                            <td class="p-2 text-right">${p.toFixed(5)}</td>
+                            <td class="p-2 text-right">${cumulativeProb.toFixed(5)}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+                
+                // 6. Update the chart
+                distributionChart.data.datasets[0].data = probs;
+                distributionChart.update();
+            }
+
+            // --- EVENT LISTENERS & INITIALIZATION ---
+            slider.addEventListener('input', (e) => {
+                updateVisualization(parseFloat(e.target.value));
+            });
+
+            // Initial call to render the page with the default slider value
+            updateVisualization(parseFloat(slider.value));
+        });
+    </script>
+</body>
+</html>
