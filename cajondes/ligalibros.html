@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga de Libros Familiar</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for the line chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        /* Custom styles for the race track */
+        .race-track {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background-color: #d1d5db;
+            border-radius: 1rem;
+            padding: 1rem;
+            overflow: hidden;
+            border: 4px solid #9ca3af;
+        }
+        .lane {
+            position: relative;
+            height: 60px;
+            border-bottom: 2px dashed #a1a1aa;
+            display: flex;
+            align-items: center;
+        }
+        .lane:last-child {
+            border-bottom: none;
+        }
+        .car {
+            position: absolute;
+            left: 0;
+            font-size: 2.5rem; /* Car emoji size */
+            transition: left 0.3s ease-out; /* Smooth movement */
+            /* Flip the car to face right and center it on its position */
+            transform: translateX(-50%) scaleX(-1);
+        }
+        .finish-line {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #000,
+                #000 10px,
+                #fff 10px,
+                #fff 20px
+            );
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">🏆 Liga de Libros Familiar 🏆</h1>
+            <p class="text-lg text-slate-600 mt-2">Visualización de nuestro progreso de lectura</p>
+        </header>
+
+        <!-- Main Content: Will be populated after data is fetched -->
+        <main id="main-content" class="space-y-8">
+             <!-- Loading State -->
+            <div id="loading-state" class="text-center p-8">
+                <p class="text-lg text-slate-600">Cargando datos desde Google Sheets... 🚀</p>
+            </div>
+            <!-- Content will be hidden initially -->
+            <div id="dashboard-content" class="hidden space-y-8">
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <!-- Date and Controls -->
+                        <div class="w-full md:w-2/3">
+                            <label for="date-slider" id="slider-label" class="block mb-2 font-semibold text-slate-700">Control de Tiempo</label>
+                            <div class="flex items-center gap-4">
+                                <button id="play-pause-btn" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                                    ▶️ Iniciar
+                                </button>
+                                <input id="date-slider" type="range" min="0" value="0" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                            </div>
+                        </div>
+                        <!-- Current Scores -->
+                        <div id="current-scores" class="w-full md:w-1/3 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-2 text-center">
+                            <!-- Scores will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Line Chart Visualization -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg">
+                        <h2 class="text-2xl font-bold mb-4 text-center">Evolución de Páginas Leídas</h2>
+                        <canvas id="reading-chart"></canvas>
+                    </div>
+
+                    <!-- Car Race Visualization -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg">
+                        <h2 class="text-2xl font-bold mb-4 text-center">¡La Gran Carrera de la Lectura!</h2>
+                        <div class="race-track">
+                            <div class="finish-line"></div>
+                            <div id="race-lanes">
+                                <!-- Lanes will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // --- DATA SETUP & CONFIG ---
+        const googleSheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ0Vc1Ijm_uCkVmH8Kx0qMlGGisAu1afvtK6AJ0infBbNK0wQcvstfsH1QJivNV8ZN5D7Ov68Ni5D8u/pub?gid=0&single=true&output=csv';
+
+        // --- GLOBAL VARIABLES ---
+        let readingChart;
+        let animationInterval;
+        let isPlaying = false;
+        const animationSpeed = 100; // ms per step
+
+        const readers = [
+            { name: 'Aarón', color: '#38bdf8', car: '🏎️' }, // sky-400
+            { name: 'Julio', color: '#fb923c', car: '🚓' }, // orange-400
+            { name: 'Mamá', color: '#f472b6', car: '🚗' }, // pink-400
+            { name: 'Papá', color: '#4ade80', car: '🚙' }  // green-400
+        ];
+        
+        // Global scope for processed data to be accessible by update functions
+        let processedData = [];
+        let maxPages = 0;
+
+        // --- DOM ELEMENTS (will be assigned after document loads) ---
+        let slider, sliderLabel, playPauseBtn, scoresContainer, raceLanesContainer, chartCtx;
+
+        /**
+         * Fetches data from the Google Sheet and parses the CSV.
+         * @returns {Promise<Array|null>} A promise that resolves to the parsed data array, or null on error.
+         */
+        async function fetchAndParseData() {
+            try {
+                const response = await fetch(googleSheetURL);
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                const csvText = await response.text();
+                
+                // Simple CSV to JSON parsing
+                const lines = csvText.trim().split(/\r?\n/); // Handles different line endings
+                const headers = lines[0].split(',').map(h => h.trim());
+                
+                return lines.slice(1).map(line => {
+                    const values = line.split(',').map(v => v.trim());
+                    const entry = {};
+                    headers.forEach((header, index) => {
+                        // All columns except the first one ('Fecha') are numbers
+                        const isNumeric = header !== 'Fecha';
+                        const value = values[index];
+                        entry[header] = isNumeric ? Number(value) || 0 : value;
+                    });
+                    return entry;
+                });
+            } catch (error) {
+                console.error('Error fetching or parsing data:', error);
+                const mainContent = document.getElementById('main-content');
+                mainContent.innerHTML = `
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative" role="alert">
+                        <strong class="font-bold">¡Error!</strong>
+                        <span class="block sm:inline">No se pudieron cargar los datos desde Google Sheets. Revisa la URL o tu conexión a internet.</span>
+                    </div>
+                `;
+                return null;
+            }
+        }
+
+        // --- DATA PROCESSING ---
+        /**
+         * Parses a date string (D/M/YY or D/M/YYYY) into a Date object.
+         * @param {string} dateString - The date string to parse.
+         * @returns {Date} A Date object.
+         */
+        const parseDate = (dateString) => {
+            const parts = dateString.split('/');
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1; // JS months are 0-indexed
+            let year = parseInt(parts[2], 10);
+            if (year < 100) year += 2000;
+            return new Date(year, month, day);
+        };
+
+        // --- INITIALIZATION ---
+        /**
+         * Initializes the entire application visuals and event listeners.
+         * This function is called after data has been successfully fetched.
+         */
+        function initializeDashboard() {
+            // Assign DOM elements now that they are visible
+            slider = document.getElementById('date-slider');
+            sliderLabel = document.getElementById('slider-label');
+            playPauseBtn = document.getElementById('play-pause-btn');
+            scoresContainer = document.getElementById('current-scores');
+            raceLanesContainer = document.getElementById('race-lanes');
+            chartCtx = document.getElementById('reading-chart').getContext('2d');
+
+            // Process the fetched raw data
+            processedData = rawData.map(d => ({ ...d, dateObj: parseDate(d.Fecha) }));
+            maxPages = Math.max(...processedData.map(d => Math.max(...readers.map(r => d[r.name] || 0))));
+
+            // Setup the UI components
+            setupSlider();
+            setupRaceTrack();
+            createChart();
+            addEventListeners();
+            updateVisualizations(0); // Show initial state
+        }
+
+        function setupSlider() {
+            slider.max = processedData.length - 1;
+        }
+
+        function setupRaceTrack() {
+            raceLanesContainer.innerHTML = '';
+            readers.forEach(reader => {
+                const laneHTML = `
+                    <div class="lane">
+                        <div id="car-${reader.name}" class="car">${reader.car}</div>
+                        <span class="ml-16 font-bold text-slate-700">${reader.name}</span>
+                    </div>
+                `;
+                raceLanesContainer.innerHTML += laneHTML;
+            });
+        }
+
+        function addEventListeners() {
+            slider.addEventListener('input', (e) => {
+                updateVisualizations(parseInt(e.target.value));
+                if (isPlaying) pauseAnimation();
+            });
+            playPauseBtn.addEventListener('click', toggleAnimation);
+        }
+
+        // --- CHART CREATION ---
+        function createChart() {
+            const datasets = readers.map(reader => ({
+                label: reader.name,
+                data: [],
+                borderColor: reader.color,
+                backgroundColor: reader.color + '33',
+                borderWidth: 3,
+                pointRadius: 0,
+                pointHoverRadius: 6,
+                fill: true,
+                tension: 0.3
+            }));
+
+            readingChart = new Chart(chartCtx, {
+                type: 'line',
+                data: { labels: [], datasets: datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: { unit: 'month', tooltipFormat: 'dd/MM/yyyy', displayFormats: { month: 'MMM yyyy' } },
+                            title: { display: true, text: 'Fecha' }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Páginas Leídas' },
+                            max: maxPages * 1.05 // Set a fixed max value with a 5% buffer
+                        }
+                    },
+                    plugins: { legend: { position: 'top' }, tooltip: { mode: 'index', intersect: false } },
+                    interaction: { mode: 'index', intersect: false }
+                }
+            });
+        }
+
+        // --- UPDATE LOGIC ---
+        function updateVisualizations(index) {
+            if (!processedData[index]) return; // Safety check
+            const currentDataPoint = processedData[index];
+            const dataUpToIndex = processedData.slice(0, index + 1);
+
+            sliderLabel.textContent = `Control de Tiempo: ${currentDataPoint.Fecha}`;
+            slider.value = index;
+
+            updateChartData(dataUpToIndex);
+            updateScores(currentDataPoint);
+            updateRace(currentDataPoint);
+        }
+
+        function updateChartData(data) {
+            readingChart.data.labels = data.map(d => d.dateObj);
+            readingChart.data.datasets.forEach((dataset, i) => {
+                const readerName = readers[i].name;
+                dataset.data = data.map(d => ({ x: d.dateObj, y: d[readerName] }));
+            });
+            readingChart.update('none');
+        }
+        
+        function updateScores(dataPoint) {
+            scoresContainer.innerHTML = '';
+            readers.forEach(reader => {
+                const scoreHTML = `
+                    <div class="p-2 rounded-lg" style="background-color: ${reader.color}33;">
+                        <div class="font-bold text-slate-800">${reader.name}</div>
+                        <div class="text-xl font-semibold" style="color: ${reader.color};">${dataPoint[reader.name]}</div>
+                    </div>
+                `;
+                scoresContainer.innerHTML += scoreHTML;
+            });
+        }
+
+        function updateRace(dataPoint) {
+            readers.forEach(reader => {
+                const carElement = document.getElementById(`car-${reader.name}`);
+                if (carElement) {
+                    const pagesRead = dataPoint[reader.name];
+                    const positionPercent = maxPages > 0 ? (pagesRead / maxPages) * 90 : 0; 
+                    carElement.style.left = `${positionPercent}%`;
+                }
+            });
+        }
+
+        // --- ANIMATION CONTROL ---
+        function toggleAnimation() {
+            if (isPlaying) {
+                pauseAnimation();
+            } else {
+                startAnimation();
+            }
+        }
+        
+        function startAnimation() {
+            isPlaying = true;
+            playPauseBtn.innerHTML = '⏸️ Pausar';
+            playPauseBtn.classList.replace('bg-sky-500', 'bg-amber-500');
+            playPauseBtn.classList.replace('hover:bg-sky-600', 'hover:bg-amber-600');
+
+            if (parseInt(slider.value) >= processedData.length - 1) {
+                slider.value = 0;
+            }
+
+            animationInterval = setInterval(() => {
+                let currentIndex = parseInt(slider.value);
+                if (currentIndex < processedData.length - 1) {
+                    currentIndex++;
+                    updateVisualizations(currentIndex);
+                } else {
+                    pauseAnimation();
+                }
+            }, animationSpeed);
+        }
+
+        function pauseAnimation() {
+            isPlaying = false;
+            clearInterval(animationInterval);
+            playPauseBtn.innerHTML = '▶️ Reanudar';
+            playPauseBtn.classList.replace('bg-amber-500', 'bg-sky-500');
+            playPauseBtn.classList.replace('hover:bg-amber-600', 'hover:bg-sky-600');
+        }
+
+        // --- START THE APP ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            rawData = await fetchAndParseData();
+
+            // If data is fetched successfully, initialize the dashboard
+            if (rawData && rawData.length > 0) {
+                document.getElementById('loading-state').style.display = 'none';
+                document.getElementById('dashboard-content').classList.remove('hidden');
+                initializeDashboard();
+            }
+            // If fetching fails, an error message is already displayed.
+        });
+
+    </script>
+</body>
+</html>
