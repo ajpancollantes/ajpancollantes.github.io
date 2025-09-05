@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boat on a Choppy Sea: An SDE Simulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; 
+        }
+        .info-card {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center h-screen p-4">
+
+    <div class="w-full max-w-6xl mx-auto flex flex-col h-full">
+
+        <!-- Header -->
+        <header class="text-center mb-4">
+            <h1 class="text-3xl font-bold text-cyan-400">Boat on a Choppy Sea (SDE)</h1>
+            <p class="text-gray-300">dX_t = a dt + H(t) dW_t</p>
+        </header>
+        
+        <!-- Canvas for the simulation -->
+        <div class="relative w-full h-1/2 md:h-2/3 bg-blue-900/50 border-2 border-cyan-400/50 rounded-lg shadow-2xl overflow-hidden flex items-center justify-center">
+            <canvas id="simulationCanvas"></canvas>
+            <!-- Overlay Info -->
+            <div id="infoOverlay" class="absolute top-2 left-2 p-3 bg-gray-900/70 info-card rounded-lg text-sm">
+                <p>Time (t): <span id="timeDisplay" class="font-mono text-yellow-300">0.00</span></p>
+                <p>Position (X_t): <span id="displacementDisplay" class="font-mono text-green-400">0.00</span></p>
+            </div>
+             <!-- Center Line -->
+            <div class="absolute w-0.5 h-full bg-cyan-400/30" style="left: 50%;"></div>
+        </div>
+
+        <!-- Controls -->
+        <div class="w-full mt-4 p-4 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Strategy Selection -->
+                <div class="flex flex-col space-y-2">
+                    <label for="strategySelector" class="text-lg font-medium">Strategy H(t)</label>
+                    <select id="strategySelector" class="bg-gray-700 border border-gray-600 rounded-md p-2 text-white appearance-none">
+                        <option value="manual">Manual Control</option>
+                        <option value="time_increasing">Increasing Risk</option>
+                        <option value="cautious">Cautious Adapting</option>
+                        <option value="periodic">Periodic Exposure</option>
+                    </select>
+                    <p id="strategyDescription" class="text-sm text-gray-400 h-12">You control the sail exposure directly.</p>
+                </div>
+
+                <!-- Sail Control (Diffusion) -->
+                <div class="flex flex-col space-y-2">
+                    <label for="sailSlider" class="text-lg font-medium">Sail H(t): <span id="sailValue" class="font-bold text-cyan-400">1.0</span></label>
+                    <input id="sailSlider" type="range" min="0" max="5" value="1" step="0.1" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                    <p class="text-sm text-gray-400">Wave sensitivity (diffusion).</p>
+                </div>
+                
+                <!-- Engine Control (Drift) -->
+                <div class="flex flex-col space-y-2">
+                    <label for="driftSlider" class="text-lg font-medium">Engine Drift (a): <span id="driftValue" class="font-bold text-cyan-400">0.0</span></label>
+                    <input id="driftSlider" type="range" min="-10" max="10" value="0" step="0.5" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                    <p class="text-sm text-gray-400">Deterministic force.</p>
+                </div>
+
+                <!-- Volatility Control -->
+                <div class="flex flex-col space-y-2">
+                    <label for="volatilitySlider" class="text-lg font-medium">Wave Choppiness: <span id="volatilityValue" class="font-bold text-cyan-400">1.0</span></label>
+                    <input id="volatilitySlider" type="range" min="0.1" max="3" value="1" step="0.1" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                    <p class="text-sm text-gray-400">Scales random shocks.</p>
+                </div>
+            </div>
+             <!-- Action Buttons -->
+            <div class="flex space-x-4 justify-center mt-4">
+                <button id="resetButton" class="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg shadow-md transition-transform transform hover:scale-105">Reset</button>
+                <button id="pauseButton" class="px-6 py-2 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-lg shadow-md transition-transform transform hover:scale-105">Pause</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('simulationCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // UI Elements
+        const sailSlider = document.getElementById('sailSlider');
+        const sailValue = document.getElementById('sailValue');
+        const driftSlider = document.getElementById('driftSlider');
+        const driftValue = document.getElementById('driftValue');
+        const volatilitySlider = document.getElementById('volatilitySlider');
+        const volatilityValue = document.getElementById('volatilityValue');
+        const strategySelector = document.getElementById('strategySelector');
+        const strategyDescription = document.getElementById('strategyDescription');
+        const resetButton = document.getElementById('resetButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const displacementDisplay = document.getElementById('displacementDisplay');
+
+        // --- Strategies Definition ---
+        const strategies = {
+            'manual': {
+                description: 'You control the sail exposure directly with the slider.',
+                calculate: (t, x) => parseFloat(sailSlider.value)
+            },
+            'time_increasing': {
+                description: 'Sail exposure increases with time (H(t) = 0.5 * t). More aggressive over time.',
+                calculate: (t, x) => Math.min(0.5 * t, 5) // Cap at max slider value
+            },
+            'cautious': {
+                description: 'Sail exposure decreases as displacement grows (H(t) = 3 / (1 + |X_t|/10)). A cautious, risk-averse strategy.',
+                calculate: (t, x) => Math.min(3 / (1 + Math.abs(x)/10), 5)
+            },
+            'periodic': {
+                description: 'Sail exposure follows a sine wave (H(t) = 2.5 * |sin(t)| + 0.5). Cyclical risk-taking.',
+                calculate: (t, x) => 2.5 * Math.abs(Math.sin(t)) + 0.5
+            }
+        };
+
+        // --- Simulation Parameters ---
+        let boat = { pos: 0, width: 40, height: 20 };
+        let time = 0;
+        let dt = 0.02; // Time step
+        let position = 0; // The SDE value X_t
+        let animationFrameId;
+        let isPaused = false;
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            draw();
+        }
+
+        function resetSimulation() {
+            time = 0;
+            position = 0;
+            if (isPaused) {
+                pauseButton.click();
+            }
+            draw();
+        }
+
+        function getBrownianIncrement(stdDev) {
+            let u1 = Math.random(), u2 = Math.random();
+            let z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
+            return z0 * stdDev;
+        }
+
+        function update() {
+            if (isPaused) return;
+
+            // 1. Get user inputs
+            const selectedStrategy = strategySelector.value;
+            const volatility = parseFloat(volatilitySlider.value);
+            const drift = parseFloat(driftSlider.value);
+            
+            // 2. Calculate H(t) based on selected strategy
+            const H_t = strategies[selectedStrategy].calculate(time, position);
+            
+            if (selectedStrategy !== 'manual') {
+                sailSlider.value = H_t;
+            }
+            sailValue.textContent = H_t.toFixed(2);
+
+            // 3. Simulate SDE step: dX = a*dt + H*dW
+            const dW = getBrownianIncrement(Math.sqrt(dt)) * volatility;
+            const dX = drift * dt + H_t * dW;
+            position += dX;
+
+            // 4. Update state
+            time += dt;
+
+            // Reset if boat goes off-screen
+            if (Math.abs(position) > canvas.width / 20) {
+                 resetSimulation();
+            }
+
+            timeDisplay.textContent = time.toFixed(2);
+            displacementDisplay.textContent = position.toFixed(2);
+        }
+
+        function drawBoat(x, y) {
+            ctx.save();
+            ctx.translate(x, y);
+
+            // Hull
+            ctx.fillStyle = '#8B4513';
+            ctx.beginPath();
+            ctx.moveTo(-boat.width / 2, 0);
+            ctx.quadraticCurveTo(0, boat.height/2, boat.width/2, 0);
+            ctx.lineTo(boat.width / 2, -boat.height / 2);
+            ctx.lineTo(-boat.width / 2, -boat.height / 2);
+            ctx.closePath();
+            ctx.fill();
+            ctx.strokeStyle = '#5A2D0C';
+            ctx.stroke();
+
+            // Mast
+            ctx.fillStyle = '#A0522D';
+            ctx.fillRect(-2, -boat.height/2 - 25, 4, 25);
+
+            // Sail
+            const sailSize = parseFloat(sailSlider.value) / 5.0;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.beginPath();
+            ctx.moveTo(2, -boat.height/2 - 23);
+            ctx.lineTo(2, -boat.height/2 - 3);
+            ctx.lineTo(2 + 15 * sailSize, -boat.height/2 - 13);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.restore();
+        }
+        
+        function drawWater() {
+            const waterY = canvas.height / 2 + 10;
+            ctx.fillStyle = '#0284c7'; // sky-600
+            ctx.fillRect(0, waterY, canvas.width, canvas.height - waterY);
+
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1.5;
+            for (let i = 0; i < 5; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, waterY + 20 * (i+1) + Math.sin(time*2 + i)*5);
+                for(let x=0; x < canvas.width; x+=20) {
+                    ctx.lineTo(x, waterY + 20 * (i+1) + Math.sin(time*2 + i + x/50)*5);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0c4a6e'; // sky-800
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            drawWater();
+            
+            // Calculate boat's screen position
+            // The position '0' is at the center of the canvas.
+            // We scale the position by 10 for better visibility.
+            const screenX = canvas.width / 2 + position * 10;
+            const screenY = canvas.height / 2;
+
+            drawBoat(screenX, screenY);
+        }
+        
+        function animate() {
+            update();
+            draw();
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        // --- Event Listeners ---
+        strategySelector.addEventListener('change', (e) => {
+            const selected = e.target.value;
+            strategyDescription.textContent = strategies[selected].description;
+            sailSlider.disabled = selected !== 'manual';
+            resetSimulation();
+        });
+
+        sailSlider.addEventListener('input', (e) => {
+            sailValue.textContent = parseFloat(e.target.value).toFixed(1);
+        });
+
+        driftSlider.addEventListener('input', (e) => {
+            driftValue.textContent = parseFloat(e.target.value).toFixed(1);
+        });
+        
+        volatilitySlider.addEventListener('input', (e) => {
+            volatilityValue.textContent = parseFloat(e.target.value).toFixed(1);
+        });
+
+        resetButton.addEventListener('click', () => {
+             cancelAnimationFrame(animationFrameId);
+             resetSimulation();
+             animate();
+        });
+
+        pauseButton.addEventListener('click', () => {
+            isPaused = !isPaused;
+            pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+            pauseButton.classList.toggle('bg-orange-600', !isPaused);
+            pauseButton.classList.toggle('hover:bg-orange-500', !isPaused);
+            pauseButton.classList.toggle('bg-green-600', isPaused);
+            pauseButton.classList.toggle('hover:bg-green-500', isPaused);
+        });
+        
+        window.addEventListener('resize', resizeCanvas);
+
+        // --- Initial Setup ---
+        window.onload = () => {
+            resizeCanvas();
+            resetSimulation();
+            animate();
+        };
+    </script>
+</body>
+</html>
+
