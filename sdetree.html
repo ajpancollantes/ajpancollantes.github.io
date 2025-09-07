@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stochastic Tree Growth Simulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .latex {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-green-800">Stochastic Tree Growth Simulation</h1>
+            <p class="mt-2 text-lg text-gray-600">Modeling Asymptotic Growth with Randomness using SDEs</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Explanation Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 class="text-2xl font-bold mb-4 text-gray-700 border-b pb-2">The Mathematical Model</h2>
+                
+                <div class="space-y-6 text-gray-700">
+                    <p>
+                        Stochastic Differential Equations (SDEs) are powerful tools for modeling systems that evolve over time while being influenced by random, unpredictable factors. A perfect example from nature is the growth of a tree, which is subject to variable conditions like weather, resource availability, and pests.
+                    </p>
+
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">1. The Deterministic Growth (Logistic Model)</h3>
+                        <p>
+                            First, we model the ideal, predictable part of the growth. A tree's growth is fastest when it's young and slows down as it approaches its maximum possible height (<span class="latex">H<sub>max</sub></span>). This is an asymptotic behavior well-described by the <strong class="text-green-700">logistic growth model</strong>. The rate of change of height (<span class="latex">H</span>) is:
+                        </p>
+                        <div class="bg-gray-100 p-3 my-2 rounded-md text-center text-sm">
+                            <span class="latex">dH(t) = r &middot; H(t) &middot; (1 - H(t)/H<sub>max</sub>) &middot; dt</span>
+                        </div>
+                        <p class="text-sm">
+                            Here, <span class="latex">r</span> is the intrinsic growth rate. This equation ensures that growth tapers off as <span class="latex">H(t)</span> gets closer to <span class="latex">H<sub>max</sub></span>.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">2. Introducing Randomness</h3>
+                        <p>
+                           To account for random environmental "shocks" (like a sudden drought or a particularly sunny week), we add a stochastic term. The effect of this randomness is often proportional to the size of the tree. We model this using a <strong class="text-green-700">Brownian motion</strong> term, <span class="latex">dW(t)</span>.
+                        </p>
+                         <div class="bg-gray-100 p-3 my-2 rounded-md text-center text-sm">
+                            <span class="latex">&sigma; &middot; H(t) &middot; dW(t)</span>
+                        </div>
+                        <p class="text-sm">
+                            The parameter <span class="latex">&sigma;</span> (sigma) represents the volatility or the magnitude of the random effects. <span class="latex">dW(t)</span> is the noise process.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">3. The Complete SDE</h3>
+                        <p>
+                            Combining both parts gives us the full SDE for the tree's height <span class="latex">H(t)</span>:
+                        </p>
+                        <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 my-2 rounded-md text-center text-md font-semibold">
+                            <span class="latex">dH(t) = r H(t)(1 - H(t)/H<sub>max</sub>)dt + &sigma;H(t)dW(t)</span>
+                        </div>
+                        <p>
+                            This model beautifully captures both the determined, goal-seeking nature of biological growth and the unpredictable reality of its environment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simulation Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 class="text-2xl font-bold mb-4 text-gray-700 border-b pb-2">Live Simulation</h2>
+                <div class="relative w-full aspect-square bg-sky-100 rounded-lg overflow-hidden border border-gray-300">
+                    <canvas id="simulationCanvas"></canvas>
+                    <div id="stats" class="absolute top-2 left-2 bg-white/70 backdrop-blur-sm p-2 rounded-md text-sm text-gray-700">
+                        <p>Height: <span id="heightStat" class="font-mono">0.10</span> m</p>
+                        <p>Time: <span id="timeStat" class="font-mono">0.00</span> years</p>
+                    </div>
+                </div>
+                
+                <!-- ADDED: Graph Section -->
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-600 text-center">Height vs. Time Graph</h3>
+                    <div class="relative w-full h-56 bg-white rounded-lg overflow-hidden border border-gray-200 p-2">
+                        <canvas id="graphCanvas"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Controls -->
+                <div class="mt-4 space-y-3">
+                    <div class="grid grid-cols-2 gap-4">
+                        <button id="startStopBtn" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">Start</button>
+                        <button id="resetBtn" class="w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">Reset</button>
+                    </div>
+                    <div class="pt-2">
+                        <label for="growthRate" class="block text-sm font-medium text-gray-600">Growth Rate (<span class="latex">r</span>): <span id="growthRateValue">0.5</span></label>
+                        <input type="range" id="growthRate" min="0.1" max="2" step="0.1" value="0.5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    </div>
+                    <div>
+                        <label for="maxHeight" class="block text-sm font-medium text-gray-600">Max Height (<span class="latex">H<sub>max</sub></span>): <span id="maxHeightValue">50</span> m</label>
+                        <input type="range" id="maxHeight" min="10" max="100" step="5" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    </div>
+                    <div>
+                        <label for="volatility" class="block text-sm font-medium text-gray-600">Volatility (<span class="latex">&sigma;</span>): <span id="volatilityValue">0.1</span></label>
+                        <input type="range" id="volatility" min="0" max="0.5" step="0.01" value="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Canvas and context setup ---
+            const canvas = document.getElementById('simulationCanvas');
+            const ctx = canvas.getContext('2d');
+            const container = canvas.parentElement;
+
+            // --- Simulation state and parameters ---
+            let H = 0.1; // Initial height
+            let t = 0;
+            let r = 0.5;
+            let H_max = 50;
+            let sigma = 0.1;
+            const dt = 0.02; // Time step
+
+            let isRunning = false;
+            let animationFrameId;
+            let history = [];
+
+            // --- UI Elements ---
+            const heightStat = document.getElementById('heightStat');
+            const timeStat = document.getElementById('timeStat');
+            const startStopBtn = document.getElementById('startStopBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const growthRateSlider = document.getElementById('growthRate');
+            const maxHeightSlider = document.getElementById('maxHeight');
+            const volatilitySlider = document.getElementById('volatility');
+            const growthRateValue = document.getElementById('growthRateValue');
+            const maxHeightValue = document.getElementById('maxHeightValue');
+            const volatilityValue = document.getElementById('volatilityValue');
+            
+            // --- Graph Elements ---
+            const graphCanvas = document.getElementById('graphCanvas');
+            const graphCtx = graphCanvas.getContext('2d');
+
+            // --- Utility functions ---
+            // Box-Muller transform to get a standard normal random number
+            function randn_bm() {
+                let u = 0, v = 0;
+                while (u === 0) u = Math.random();
+                while (v === 0) v = Math.random();
+                return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+            }
+
+            // --- Canvas drawing functions ---
+            function resizeCanvas() {
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+                drawScene();
+            }
+
+            function drawTree(height) {
+                const groundLevel = canvas.height - 20;
+                const scale = (canvas.height - 40) / H_max;
+                const treeHeightPixels = Math.max(2, height * scale);
+                const treeX = canvas.width / 2;
+
+                // Trunk
+                const trunkWidth = Math.max(2, treeHeightPixels * 0.1);
+                const trunkHeight = treeHeightPixels * 0.4;
+                ctx.fillStyle = '#654321'; // Brown
+                ctx.fillRect(treeX - trunkWidth / 2, groundLevel - trunkHeight, trunkWidth, trunkHeight);
+
+                // Foliage
+                const foliageHeight = treeHeightPixels * 0.7;
+                const foliageWidth = Math.max(5, treeHeightPixels * 0.5);
+                ctx.fillStyle = '#228B22'; // Forest Green
+                ctx.beginPath();
+                ctx.moveTo(treeX, groundLevel - treeHeightPixels);
+                ctx.lineTo(treeX + foliageWidth / 2, groundLevel - trunkHeight);
+                ctx.lineTo(treeX - foliageWidth / 2, groundLevel - trunkHeight);
+                ctx.closePath();
+                ctx.fill();
+            }
+            
+            function drawGround() {
+                ctx.fillStyle = '#8B4513'; // Saddle Brown
+                ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+                
+                ctx.fillStyle = '#006400'; // Dark Green grass
+                ctx.fillRect(0, canvas.height - 20, canvas.width, 5);
+            }
+
+            function drawScene() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawGround();
+                drawTree(H);
+            }
+            
+            // --- Graph Drawing ---
+            function resetHistory() {
+                history = [{ t: 0, h: H }];
+            }
+
+            function resizeGraphCanvas() {
+                const graphContainer = graphCanvas.parentElement;
+                graphCanvas.width = graphContainer.clientWidth;
+                graphCanvas.height = graphContainer.clientHeight;
+                drawGraph();
+            }
+
+            function drawGraph() {
+                graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
+
+                const padding = 30;
+                const plotWidth = graphCanvas.width - padding * 1.5;
+                const plotHeight = graphCanvas.height - padding * 1.5;
+                const plotOriginX = padding;
+                const plotOriginY = graphCanvas.height - padding;
+
+                const tMax = t > 0 ? t : 1;
+                const hMax = H_max;
+
+                // Draw axes
+                graphCtx.beginPath();
+                graphCtx.moveTo(plotOriginX, padding / 2);
+                graphCtx.lineTo(plotOriginX, plotOriginY);
+                graphCtx.lineTo(plotWidth + padding, plotOriginY);
+                graphCtx.strokeStyle = '#9ca3af'; // gray-400
+                graphCtx.stroke();
+                
+                // Draw labels and ticks
+                graphCtx.fillStyle = '#6b7280'; // gray-500
+                graphCtx.font = '10px Inter';
+                graphCtx.textAlign = 'center';
+                graphCtx.textBaseline = 'middle';
+                
+                // Y-axis labels
+                graphCtx.fillText(hMax.toFixed(0), plotOriginX - 15, padding / 2);
+                graphCtx.fillText('0', plotOriginX - 10, plotOriginY);
+                graphCtx.save();
+                graphCtx.translate(10, graphCanvas.height / 2);
+                graphCtx.rotate(-Math.PI / 2);
+                graphCtx.fillText('Height (m)', 0, 0);
+                graphCtx.restore();
+                
+                // X-axis labels
+                graphCtx.textAlign = 'right';
+                graphCtx.fillText(tMax.toFixed(1), plotWidth + padding, plotOriginY + 10);
+                graphCtx.textAlign = 'center';
+                graphCtx.fillText('Time (years)', graphCanvas.width / 2, plotOriginY + 20);
+
+                // Plot data line
+                if (history.length < 2) return;
+                
+                graphCtx.beginPath();
+                const firstPoint = history[0];
+                let startX = plotOriginX + (firstPoint.t / tMax) * plotWidth;
+                let startY = plotOriginY - (firstPoint.h / hMax) * plotHeight;
+                graphCtx.moveTo(startX, startY);
+
+                for (let i = 1; i < history.length; i++) {
+                    const point = history[i];
+                    const x = plotOriginX + (point.t / tMax) * plotWidth;
+                    const y = plotOriginY - (point.h / hMax) * plotHeight;
+                    graphCtx.lineTo(x, y);
+                }
+                
+                graphCtx.strokeStyle = '#16a34a'; // green-600
+                graphCtx.lineWidth = 2;
+                graphCtx.stroke();
+                graphCtx.lineWidth = 1;
+            }
+
+            // --- Simulation Logic ---
+            function step() {
+                // Euler-Maruyama integration method
+                const drift = r * H * (1 - H / H_max);
+                const diffusion = sigma * H * randn_bm() * Math.sqrt(dt);
+                
+                const dH = drift * dt + diffusion;
+                
+                H += dH;
+                if (H < 0.1) H = 0.1; // Tree can't have negative or zero height
+
+                t += dt;
+                history.push({ t, h: H });
+            }
+
+            function updateUI() {
+                heightStat.textContent = H.toFixed(2);
+                timeStat.textContent = t.toFixed(2);
+            }
+            
+            function simulationLoop() {
+                if (!isRunning) return;
+
+                step();
+                drawScene();
+                drawGraph();
+                updateUI();
+                
+                animationFrameId = requestAnimationFrame(simulationLoop);
+            }
+
+            // --- Event Handlers ---
+            function handleStartStop() {
+                isRunning = !isRunning;
+                if (isRunning) {
+                    startStopBtn.textContent = 'Pause';
+                    startStopBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    startStopBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
+                    simulationLoop();
+                } else {
+                    startStopBtn.textContent = 'Start';
+                    startStopBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
+                    startStopBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    cancelAnimationFrame(animationFrameId);
+                }
+            }
+
+            function handleReset() {
+                isRunning = false;
+                cancelAnimationFrame(animationFrameId);
+                startStopBtn.textContent = 'Start';
+                startStopBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
+                startStopBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                
+                H = 0.1;
+                t = 0;
+                
+                resetHistory();
+                updateParameters(); // re-read slider values
+                drawScene();
+                drawGraph();
+                updateUI();
+            }
+            
+            function updateParameters() {
+                r = parseFloat(growthRateSlider.value);
+                H_max = parseFloat(maxHeightSlider.value);
+                sigma = parseFloat(volatilitySlider.value);
+
+                growthRateValue.textContent = r.toFixed(2);
+                maxHeightValue.textContent = H_max.toFixed(0);
+                volatilityValue.textContent = sigma.toFixed(2);
+                
+                // If not running, redraw with new max height scale
+                if (!isRunning) {
+                    resizeCanvas();
+                    resizeGraphCanvas();
+                }
+            }
+
+            // --- Initial Setup ---
+            startStopBtn.addEventListener('click', handleStartStop);
+            resetBtn.addEventListener('click', handleReset);
+            growthRateSlider.addEventListener('input', updateParameters);
+            maxHeightSlider.addEventListener('input', updateParameters);
+            volatilitySlider.addEventListener('input', updateParameters);
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                resizeGraphCanvas();
+            });
+            
+            // Initial call to set everything up
+            resetHistory();
+            updateParameters();
+            resizeCanvas();
+            resizeGraphCanvas();
+        });
+    </script>
+</body>
+</html>
+
