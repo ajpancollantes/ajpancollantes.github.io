@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stochastic Lotka-Volterra Simulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars from appearing */
+        }
+        .info-panel {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center h-screen p-4">
+
+    <div class="absolute top-4 left-4 md:top-6 md:left-6 bg-gray-800 bg-opacity-70 p-4 rounded-lg shadow-lg info-panel max-w-sm">
+        <h1 class="text-2xl font-bold text-cyan-300">Stochastic Lotka-Volterra System</h1>
+        <p class="mt-2 text-gray-300 text-sm">
+            This simulates the predator (y) - prey (x) dynamics. The deterministic model is given by:
+            $$ \frac{dx}{dt} = \alpha x - \beta xy $$
+            $$ \frac{dy}{dt} = \delta xy - \gamma y $$
+            Use the slider to introduce noise, creating a Stratonovich SDE:
+            $$ dx = (\dots)dt + \sigma x dW_x $$
+            $$ dy = (\dots)dt + \sigma y dW_y $$
+            Observe how noise affects the stable cycles.
+        </p>
+    </div>
+
+    <canvas id="simulationCanvas" class="rounded-lg shadow-2xl bg-gray-800"></canvas>
+
+    <div class="mt-4 w-full max-w-md bg-gray-800 bg-opacity-70 p-4 rounded-lg shadow-lg info-panel">
+        <label for="noiseSlider" class="block text-center font-medium text-lg text-cyan-300">Noise Intensity (σ): <span id="noiseValue">0.00</span></label>
+        <input id="noiseSlider" type="range" min="0" max="0.2" step="0.005" value="0" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer mt-2">
+        <button id="resetButton" class="w-full mt-4 bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+            Reset Simulation
+        </button>
+    </div>
+
+    <script>
+        // Get canvas and context
+        const canvas = document.getElementById('simulationCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // UI Elements
+        const noiseSlider = document.getElementById('noiseSlider');
+        const noiseValueSpan = document.getElementById('noiseValue');
+        const resetButton = document.getElementById('resetButton');
+
+        // --- Simulation Parameters ---
+        let alpha = 1.1;  // Prey growth rate
+        let beta = 0.4;   // Predation rate
+        let delta = 0.4;  // Predator growth rate from predation
+        let gamma = 0.9;  // Predator death rate
+
+        // Initial populations
+        let x = 2.0; // Prey population
+        let y = 1.0; // Predator population
+
+        // Noise intensity (sigma)
+        let sigma = 0.0;
+
+        // Time step
+        const dt = 0.01;
+
+        // Scaling factor to fit simulation on canvas
+        let scale;
+        
+        let lastX, lastY;
+
+        // --- Helper Functions ---
+        
+        // Function to generate a normally distributed random number (Box-Muller transform)
+        function randn_bm() {
+            let u = 0, v = 0;
+            while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+            while(v === 0) v = Math.random();
+            return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+        }
+
+        // Function to set canvas size and scale
+        function setupCanvas() {
+            const size = Math.min(window.innerWidth * 0.9, window.innerHeight * 0.7, 600);
+            canvas.width = size;
+            canvas.height = size;
+            scale = canvas.width / 6; // Adjust scale to fit typical orbits
+            resetSimulation();
+        }
+
+        // Function to reset the simulation state
+        function resetSimulation() {
+            // Clear canvas
+            ctx.fillStyle = '#1f2937'; // bg-gray-800
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Reset populations
+            x = 2.0;
+            y = 1.0;
+            
+            // Set initial last points for drawing lines
+            lastX = x * scale;
+            lastY = canvas.height - y * scale;
+            
+            // Draw axis lines
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            // X-axis (Prey)
+            ctx.moveTo(0, canvas.height);
+            ctx.lineTo(canvas.width, canvas.height);
+            // Y-axis (Predator)
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, canvas.height);
+            ctx.stroke();
+            
+            // Add axis labels
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.font = '12px Inter';
+            ctx.textAlign = 'right';
+            ctx.fillText('Prey (x) →', canvas.width - 10, canvas.height - 10);
+            ctx.save();
+            ctx.rotate(-Math.PI/2);
+            ctx.textAlign = 'right';
+            ctx.fillText('Predator (y) →', -10, 15);
+            ctx.restore();
+        }
+
+        // --- Simulation Loop ---
+        function animate() {
+            // Deterministic part (Lotka-Volterra equations)
+            const dxdt = alpha * x - beta * x * y;
+            const dydt = delta * x * y - gamma * y;
+
+            // Stochastic part (noise)
+            const dWx = randn_bm() * Math.sqrt(dt);
+            const dWy = randn_bm() * Math.sqrt(dt);
+
+            // Update populations using Euler-Maruyama method for SDEs
+            x += dxdt * dt + sigma * x * dWx;
+            y += dydt * dt + sigma * y * dWy;
+
+            // Prevent populations from going negative
+            x = Math.max(0.01, x);
+            y = Math.max(0.01, y);
+
+            // --- Drawing ---
+            const canvasX = x * scale;
+            const canvasY = canvas.height - (y * scale);
+            
+            // Create a color gradient based on populations
+            const preyRatio = Math.min(1, x / 4);
+            const predatorRatio = Math.min(1, y / 4);
+            
+            const r = Math.floor(255 * predatorRatio);
+            const g = Math.floor(255 * preyRatio);
+            const b = 150 - Math.floor(100 * predatorRatio);
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(canvasX, canvasY);
+            ctx.strokeStyle = `rgb(${r}, ${g}, ${b}, 0.8)`;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Update last positions
+            lastX = canvasX;
+            lastY = canvasY;
+
+            requestAnimationFrame(animate);
+        }
+
+        // --- Event Listeners ---
+        noiseSlider.addEventListener('input', (e) => {
+            sigma = parseFloat(e.target.value);
+            noiseValueSpan.textContent = sigma.toFixed(3);
+        });
+
+        resetButton.addEventListener('click', resetSimulation);
+        window.addEventListener('resize', setupCanvas);
+
+        // --- Initial Setup ---
+        setupCanvas();
+        noiseValueSpan.textContent = parseFloat(noiseSlider.value).toFixed(3);
+        sigma = parseFloat(noiseSlider.value);
+        animate();
+    </script>
+</body>
+</html>
+
