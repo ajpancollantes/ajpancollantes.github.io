@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Exponential Visualization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Hides the number input arrows in Chrome, Safari, Edge */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* Hides the number input arrows in Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-5xl text-center mb-8">
+        <h1 class="text-4xl font-bold text-slate-900">Complex Exponential Visualization</h1>
+        <p class="text-lg text-slate-600 mt-2">Visualizing the mapping of $f(z) = e^z$</p>
+        <p class="mt-4 text-slate-700">The colored line in the <strong>Domain (z-plane)</strong> represents the set of complex numbers $z = x + ib$. As you move the slider, type a value, or use arrow keys, the value of $b$ and the color changes. The <strong>Codomain (w-plane)</strong> accumulates the resulting rays ($e^z = e^x \cdot e^{ib}$), showing how the exponential function maps horizontal lines to rays from the origin.</p>
+    </div>
+
+    <!-- Main container for the two plots -->
+    <div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Domain Plot -->
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+            <h2 class="text-2xl font-semibold text-center mb-4">Domain (z-plane)</h2>
+            <canvas id="domainCanvas" class="w-full rounded-lg aspect-square"></canvas>
+        </div>
+        <!-- Codomain Plot -->
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+            <h2 class="text-2xl font-semibold text-center mb-4">Codomain (w-plane)</h2>
+            <canvas id="codomainCanvas" class="w-full rounded-lg aspect-square"></canvas>
+        </div>
+    </div>
+
+    <!-- Controls Section -->
+    <div class="w-full max-w-5xl bg-white p-6 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center">
+         <label for="bValueInput" class="text-lg font-medium mb-3">Imaginary Component (b)</label>
+        <div class="flex items-center w-full max-w-2xl">
+            <input type="number" id="bValueInput" min="-15" max="15" step="0.1" value="0.00" class="w-28 text-center text-lg font-bold text-indigo-600 bg-slate-100 rounded-lg p-2 border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none tabular-nums">
+            <input type="range" id="bSlider" min="-15" max="15" step="0.1" value="0" class="w-full mx-4 h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer range-lg">
+            <button id="resetButton" class="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        // Use MathJax to render LaTeX
+        function loadMathJax() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+            script.async = true;
+            document.head.appendChild(script);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMathJax();
+
+            const domainCanvas = document.getElementById('domainCanvas');
+            const codomainCanvas = document.getElementById('codomainCanvas');
+            const slider = document.getElementById('bSlider');
+            const bValueInput = document.getElementById('bValueInput');
+            const resetButton = document.getElementById('resetButton');
+
+            const canvasSize = 500;
+            domainCanvas.width = canvasSize;
+            domainCanvas.height = canvasSize;
+            codomainCanvas.width = canvasSize;
+            codomainCanvas.height = canvasSize;
+
+            const ctxDomain = domainCanvas.getContext('2d');
+            const ctxCodomain = codomainCanvas.getContext('2d');
+            
+            ctxCodomain.globalAlpha = 0.7;
+
+            const CENTER_X = domainCanvas.width / 2;
+            const CENTER_Y = domainCanvas.height / 2;
+            const PLOT_RANGE = 16;
+            const SCALE = domainCanvas.width / (2 * PLOT_RANGE);
+            const TICK_SIZE = 8;
+
+            function drawAxes(ctx) {
+                ctx.save();
+                ctx.strokeStyle = '#cbd5e1'; // slate-300
+                ctx.lineWidth = 1;
+
+                // Main Axes
+                ctx.beginPath();
+                ctx.moveTo(0, CENTER_Y);
+                ctx.lineTo(domainCanvas.width, CENTER_Y); // Real axis
+                ctx.moveTo(CENTER_X, 0);
+                ctx.lineTo(CENTER_X, domainCanvas.height); // Imaginary axis
+                ctx.stroke();
+
+                ctx.fillStyle = '#64748b'; // slate-500
+                ctx.font = '16px Inter';
+                ctx.fillText('Re', domainCanvas.width - 30, CENTER_Y - 12);
+                ctx.fillText('Im', CENTER_X + 12, 20);
+
+                for (let i = -Math.floor(PLOT_RANGE); i <= Math.floor(PLOT_RANGE); i++) {
+                    if (i === 0 || i % 5 !== 0) continue;
+                    // X-axis ticks
+                    ctx.beginPath();
+                    ctx.moveTo(CENTER_X + i * SCALE, CENTER_Y - TICK_SIZE / 2);
+                    ctx.lineTo(CENTER_X + i * SCALE, CENTER_Y + TICK_SIZE / 2);
+                    ctx.stroke();
+                    ctx.fillText(i, CENTER_X + i * SCALE - (i > 0 ? 8 : 12), CENTER_Y + 20);
+                    
+                    // Y-axis ticks
+                    ctx.beginPath();
+                    ctx.moveTo(CENTER_X - TICK_SIZE / 2, CENTER_Y - i * SCALE);
+                    ctx.lineTo(CENTER_X + TICK_SIZE / 2, CENTER_Y - i * SCALE);
+                    ctx.stroke();
+                    ctx.fillText(i, CENTER_X - 25, CENTER_Y - i * SCALE + 5);
+                }
+                ctx.restore();
+            }
+
+            function draw() {
+                const b = parseFloat(slider.value);
+                const minB = parseFloat(slider.min);
+                const maxB = parseFloat(slider.max);
+
+                // --- 1. Calculate Color ---
+                const hue = ((b - minB) / (maxB - minB)) * 360;
+                const color = `hsl(${hue}, 90%, 55%)`;
+
+                // --- 2. Update Domain Canvas ---
+                ctxDomain.clearRect(0, 0, domainCanvas.width, domainCanvas.height);
+                drawAxes(ctxDomain);
+                
+                const y_canvas = CENTER_Y - b * SCALE;
+                ctxDomain.beginPath();
+                ctxDomain.moveTo(0, y_canvas);
+                ctxDomain.lineTo(domainCanvas.width, y_canvas);
+                ctxDomain.strokeStyle = color;
+                ctxDomain.lineWidth = 4;
+                ctxDomain.lineCap = 'round';
+                ctxDomain.stroke();
+
+                // --- 3. Update Codomain Canvas (Accumulate) ---
+                const angle = -b; 
+                const rayLength = domainCanvas.width * 2;
+                const endX = CENTER_X + rayLength * Math.cos(angle);
+                const endY = CENTER_Y + rayLength * Math.sin(angle);
+
+                ctxCodomain.beginPath();
+                ctxCodomain.moveTo(CENTER_X, CENTER_Y);
+                ctxCodomain.lineTo(endX, endY);
+                ctxCodomain.strokeStyle = color;
+                ctxCodomain.lineWidth = 3;
+                ctxCodomain.lineCap = 'round';
+                ctxCodomain.stroke();
+            }
+            
+            // --- Event Listeners and Syncing ---
+            
+            // Syncs the slider and input field, then redraws
+            function syncAndDraw(newValue) {
+                const min = parseFloat(slider.min);
+                const max = parseFloat(slider.max);
+                let b = parseFloat(newValue);
+
+                if (isNaN(b)) return; // Ignore invalid input
+
+                // Clamp the value to the valid range
+                b = Math.max(min, Math.min(max, b));
+
+                // Update both UI controls
+                slider.value = b;
+                bValueInput.value = b.toFixed(2);
+                
+                // Redraw everything
+                draw();
+            }
+            
+            slider.addEventListener('input', (e) => syncAndDraw(e.target.value));
+            bValueInput.addEventListener('change', (e) => syncAndDraw(e.target.value));
+            
+            document.addEventListener('keydown', (event) => {
+                if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+                event.preventDefault(); // Prevent page scrolling
+
+                const step = parseFloat(slider.step);
+                let currentB = parseFloat(slider.value);
+                
+                if (event.key === 'ArrowLeft') {
+                    currentB -= step;
+                } else if (event.key === 'ArrowRight') {
+                    currentB += step;
+                }
+                
+                syncAndDraw(currentB);
+            });
+
+            resetButton.addEventListener('click', () => {
+                ctxCodomain.clearRect(0, 0, codomainCanvas.width, codomainCanvas.height);
+                drawAxes(ctxCodomain);
+            });
+
+            // --- Initial Setup ---
+            drawAxes(ctxCodomain);
+            syncAndDraw(slider.value); // Initial draw
+        });
+    </script>
+</body>
+</html>
+
