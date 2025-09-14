@@ -3,313 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complex Function Visualizer</title>
+    <title>Holomorphic Function Visualizer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             overflow: hidden;
         }
         canvas {
-            background-color: #111827; /* bg-gray-900 */
-            cursor: grab;
+            background-color: #1a202c; /* Equivalent to dark gray bg-gray-800 */
+            border-radius: 0.5rem;
+            touch-action: none;
         }
-        canvas:active {
-            cursor: grabbing;
-        }
-        .control-panel {
-            background-color: rgba(31, 41, 55, 0.8); /* bg-gray-800 with opacity */
-            backdrop-filter: blur(10px);
+        .label {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-200 flex flex-col h-screen">
+<body class="bg-gray-900 text-gray-200 flex flex-col h-screen antialiased">
 
-    <!-- Main Content -->
-    <div class="flex-grow relative">
-        <canvas id="complexCanvas"></canvas>
-        
-        <!-- Control Panel -->
-        <div id="controls" class="control-panel absolute bottom-4 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-2xl w-11/12 max-w-2xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                <!-- Function Selector -->
-                <div>
-                    <label for="functionSelect" class="block text-sm font-medium text-gray-300 mb-1">Function: f(z)</label>
-                    <select id="functionSelect" class="w-full bg-gray-700 border border-gray-600 text-white rounded-md p-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                        <option value="z^2">z2</option>
-                        <option value="z^3">z³</option>
-                        <option value="e^z">eᶻ</option>
-                        <option value="1/(1-e^z)">1 / (1 - eᶻ)</option>
-                        <option value="1/(1+e^-z)">1 / (1 + e-ᶻ)</option>
-                        
-                    </select>
-                </div>
-
-                <!-- Transformation Slider -->
-                <div class="flex flex-col">
-                    <label for="transformSlider" class="block text-sm font-medium text-gray-300 mb-1">Transformation: <span id="sliderValue">0.00</span></label>
-                    <input id="transformSlider" type="range" min="0" max="1" value="0" step="0.01" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
-                </div>
+    <!-- Header -->
+    <header class="p-4 bg-gray-800/50 backdrop-blur-sm border-b border-gray-700">
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-cyan-400">Complex Function Visualizer</h1>
+                <p class="text-gray-400 mt-1">See how functions f: ℂ → ℂ transform the plane. Hover over the left grid.</p>
             </div>
-             <div class="text-center text-xs text-gray-400 mt-3">
-                Drag on the canvas to pan. Use mouse wheel to zoom.
+            <div class="mt-4 sm:mt-0">
+                <label for="function-select" class="mr-2 font-medium">Select Function f(z):</label>
+                <select id="function-select" class="bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-cyan-500 focus:border-cyan-500">
+                    <!-- Options will be populated by JS -->
+                </select>
             </div>
         </div>
-    </div>
+    </header>
 
-    <script>
-        // --- Complex Number Class ---
-        // A simple class to handle complex number arithmetic.
-        class Complex {
-            constructor(re, im) {
-                this.re = re;
-                this.im = im;
-            }
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-6" id="canvas-container">
+        <!-- Domain Panel -->
+        <div class="relative rounded-lg shadow-lg">
+            <canvas id="domain-canvas"></canvas>
+            <div class="label text-white">Domain (z-plane)</div>
+        </div>
+        <!-- Image Panel -->
+        <div class="relative rounded-lg shadow-lg">
+            <canvas id="image-canvas"></canvas>
+            <div class="label text-white">Image (w-plane)</div>
+        </div>
+    </main>
 
-            // Add two complex numbers
-            add(z) {
-                return new Complex(this.re + z.re, this.im + z.im);
-            }
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Canvas and Context Setup ---
+    const domainCanvas = document.getElementById('domain-canvas');
+    const imageCanvas = document.getElementById('image-canvas');
+    const domainCtx = domainCanvas.getContext('2d');
+    const imageCtx = imageCanvas.getContext('2d');
+    const container = document.getElementById('canvas-container');
 
-            // Subtract a complex number
-            subtract(z) {
-                return new Complex(this.re - z.re, this.im - z.im);
-            }
+    // --- Configuration ---
+    const GRID_DENSITY = 20; // Number of cells along one axis
+    const DOMAIN_MIN = -2;
+    const DOMAIN_MAX = 2;
+    const IMAGE_MIN = -4;
+    const IMAGE_MAX = 4;
 
-            // Multiply two complex numbers
-            multiply(z) {
-                const re = this.re * z.re - this.im * z.im;
-                const im = this.re * z.im + this.im * z.re;
-                return new Complex(re, im);
-            }
+    const COLORS = {
+        grid: 'rgba(100, 116, 139, 0.4)',
+        highlight: '#38bdf8', // light blue
+        fill: 'rgba(56, 189, 248, 0.3)',
+    };
+    
+    let gridData = [];
+    let highlightedCellIndex = -1;
+    let currentFunction;
 
-            // Complex exponentiation (e^z)
-            static exp(z) {
-                const factor = Math.exp(z.re);
-                const re = factor * Math.cos(z.im);
-                const im = factor * Math.sin(z.im);
-                return new Complex(re, im);
-            }
+    // --- Complex Number Utilities ---
+    // Represents a complex number z = re + i*im
+    const C = (re, im) => ({ re, im });
 
-            // Complex division (this / z)
-            divide(z) {
-                const denominator = z.re * z.re + z.im * z.im;
-                if (denominator === 0) return new Complex(Infinity, Infinity);
-                const re = (this.re * z.re + this.im * z.im) / denominator;
-                const im = (this.im * z.re - this.re * z.im) / denominator;
-                return new Complex(re, im);
-            }
-            
-            // Magnitude squared
-            magnitudeSq() {
-                return this.re * this.re + this.im * this.im;
-            }
+    const add = (z1, z2) => C(z1.re + z2.re, z1.im + z2.im);
+    const sub = (z1, z2) => C(z1.re - z2.re, z1.im - z2.im);
+    const mul = (z1, z2) => C(z1.re * z2.re - z1.im * z2.im, z1.re * z2.im + z1.im * z2.re);
+    const inv = (z) => {
+        const d = z.re * z.re + z.im * z.im;
+        if (d === 0) return C(Infinity, Infinity);
+        return C(z.re / d, -z.im / d);
+    };
+    const conj = (z) => C(z.re, -z.im);
+    const exp = (z) => {
+        const factor = Math.exp(z.re);
+        return C(factor * Math.cos(z.im), factor * Math.sin(z.im));
+    };
+    const pow = (z, n) => {
+        let result = C(1, 0);
+        for (let i = 0; i < n; i++) {
+            result = mul(result, z);
         }
+        return result;
+    };
+    const log = (z) => {
+        const mag = Math.sqrt(z.re * z.re + z.im * z.im);
+        if (mag === 0) return C(-Infinity, 0); // log(0) is undefined, maps to -infinity
+        const arg = Math.atan2(z.im, z.re);
+        return C(Math.log(mag), arg);
+    };
+    
+    // --- Function Definitions ---
+    const functions = {
+        'f(z) = z (Identity)': { func: z => z, holomorphic: true },
+        'f(z) = z² (Holomorphic)': { func: z => pow(z, 2), holomorphic: true },
+        'f(z) = z³ (Holomorphic)': { func: z => pow(z, 3), holomorphic: true },
+        'f(z) = exp(z) (Holomorphic)': { func: z => exp(z), holomorphic: true },
+        'f(z) = log(z) (Holomorphic)': { func: z => log(z), holomorphic: true },
+        'f(z) = 1/z (Holomorphic)': { func: z => inv(z), holomorphic: true },
+        'f(z) = conj(z) (Not Holomorphic)': { func: z => conj(z), holomorphic: false },
+        'f(z) = z + Im(z) (Constant Shear)': { func: z => C(z.re + z.im, z.im), holomorphic: false },
+        'f(z) = x+y² + iy (Variable Shear)': { func: z => C(z.re + z.im * z.im, z.im), holomorphic: false },
+        'f(z) = Re(z) (Not Holomorphic)': { func: z => C(z.re, 0), holomorphic: false },
+        'f(z) = z + conj(z) (Not Holomorphic)': { func: z => add(z, conj(z)), holomorphic: false },
+        'f(z) = z * conj(z) (Not Holomorphic)': { func: z => mul(z, conj(z)), holomorphic: false }
+    };
 
-        // --- Transformation Functions ---
-        const transformations = {
-            'z^2': (z) => z.multiply(z),
-            'z^3': (z) => z.multiply(z).multiply(z),
-            'e^z': (z) => Complex.exp(z),
-            '1/(1-e^z)': (z) => {
-                const one = new Complex(1, 0);
-                const ez = Complex.exp(z);
-                const denominator = one.subtract(ez);
-                if (denominator.re === 0 && denominator.im === 0) {
-                    return new Complex(Infinity, Infinity);
-                }
-                return one.divide(denominator);
-            },
-            '1/(1+e^-z)': (z) => {
-                const one = new Complex(1, 0);
-                const emz = Complex.exp(new Complex(-z.re, -z.im));
-                const denominator = one.add(emz);
-                if (denominator.re === 0 && denominator.im === 0) {
-                    return new Complex(Infinity, Infinity);
-                }
-                return one.divide(denominator);
-            }
+    // --- Coordinate Transformation ---
+    const mapToCanvas = (val, min, max, canvasSize) => {
+        return ((val - min) / (max - min)) * canvasSize;
+    };
+    
+    const mapPointToCanvas = (z, min, max, canvas) => {
+        return {
+            x: mapToCanvas(z.re, min, max, canvas.width),
+            y: mapToCanvas(-z.im, min, max, canvas.height) // Invert Y-axis for standard math coords
         };
+    };
+    
+    const mapCanvasToPoint = (px, py, min, max, canvas) => {
+        const re = (px / canvas.width) * (max - min) + min;
+        const im = -((py / canvas.height) * (max - min) - max);
+        return C(re, im);
+    };
 
-        // --- Canvas and Drawing Globals ---
-        const canvas = document.getElementById('complexCanvas');
-        const ctx = canvas.getContext('2d');
-        const slider = document.getElementById('transformSlider');
-        const sliderValueDisplay = document.getElementById('sliderValue');
-        const functionSelect = document.getElementById('functionSelect');
-
-        let width, height;
-        let scale = 80; // Pixels per unit
-        let origin = { x: 0, y: 0 }; // Pan offset
-        let isDragging = false;
-        let lastMousePos = { x: 0, y: 0 };
-        
-        // --- Core Drawing Logic ---
-        function setup() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            origin = { x: width / 2, y: height / 2 };
-            draw();
-        }
-
-        // Main drawing function, called on any change
-        function draw() {
-            const t = parseFloat(slider.value);
-            const func = transformations[functionSelect.value];
-
-            // Clear canvas
-            ctx.fillStyle = '#111827'; // bg-gray-900
-            ctx.fillRect(0, 0, width, height);
-
-            // Draw axes
-            ctx.strokeStyle = 'rgba(156, 163, 175, 0.4)'; // gray-400 with opacity
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(0, origin.y);
-            ctx.lineTo(width, origin.y);
-            ctx.moveTo(origin.x, 0);
-            ctx.lineTo(origin.x, height);
-            ctx.stroke();
-            
-            drawGrid(t, func);
-        }
-        
-        // Draws the transformed grid
-        function drawGrid(t, func) {
-            const step = 1.0;
-            const lineDensity = 0.25; // How many lines per unit
-            const viewBounds = {
-                reMin: -origin.x / scale,
-                reMax: (width - origin.x) / scale,
-                imMin: -(height - origin.y) / scale,
-                imMax: (origin.y) / scale
-            };
-
-            // Draw vertical lines
-            ctx.strokeStyle = 'rgba(59, 130, 246, 0.6)'; // blue-500
-            ctx.lineWidth = 1.5;
-            for (let re = Math.floor(viewBounds.reMin / step) * step; re <= viewBounds.reMax; re += step) {
-                drawTransformedLine(re, viewBounds.imMin, re, viewBounds.imMax, t, func, lineDensity);
-            }
-
-            // Draw horizontal lines
-            ctx.strokeStyle = 'rgba(239, 68, 68, 0.6)'; // red-500
-            ctx.lineWidth = 1.5;
-            for (let im = Math.floor(viewBounds.imMin / step) * step; im <= viewBounds.imMax; im += step) {
-                drawTransformedLine(viewBounds.reMin, im, viewBounds.reMax, im, t, func, lineDensity);
+    // --- Core Logic ---
+    function generateGrid() {
+        gridData = [];
+        const step = (DOMAIN_MAX - DOMAIN_MIN) / GRID_DENSITY;
+        for (let i = 0; i < GRID_DENSITY; i++) {
+            for (let j = 0; j < GRID_DENSITY; j++) {
+                const re = DOMAIN_MIN + i * step;
+                const im = DOMAIN_MIN + j * step;
+                
+                const z00 = C(re, im);
+                const z10 = C(re + step, im);
+                const z01 = C(re, im + step);
+                const z11 = C(re + step, im + step);
+                
+                const w00 = currentFunction.func(z00);
+                const w10 = currentFunction.func(z10);
+                const w01 = currentFunction.func(z01);
+                const w11 = currentFunction.func(z11);
+                
+                gridData.push({
+                    domain: [z00, z10, z11, z01],
+                    image: [w00, w10, w11, w01]
+                });
             }
         }
+    }
 
-        // Draws a single transformed line segment by segment
-        function drawTransformedLine(reStart, imStart, reEnd, imEnd, t, func, density) {
-            ctx.beginPath();
-            let firstPoint = true;
+    function draw() {
+        // Clear canvases
+        domainCtx.clearRect(0, 0, domainCanvas.width, domainCanvas.height);
+        imageCtx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
 
-            const nPoints = Math.max(100, Math.sqrt((reEnd-reStart)**2 + (imEnd-imStart)**2) * scale * density);
+        gridData.forEach((cell, index) => {
+            // Draw Domain Cell
+            const domainPath = new Path2D();
+            const pStart = mapPointToCanvas(cell.domain[0], DOMAIN_MIN, DOMAIN_MAX, domainCanvas);
+            domainPath.moveTo(pStart.x, pStart.y);
+            for(let i = 1; i < cell.domain.length; i++) {
+                const p = mapPointToCanvas(cell.domain[i], DOMAIN_MIN, DOMAIN_MAX, domainCanvas);
+                domainPath.lineTo(p.x, p.y);
+            }
+            domainPath.closePath();
+            domainCtx.strokeStyle = COLORS.grid;
+            domainCtx.stroke(domainPath);
 
-            for (let i = 0; i <= nPoints; i++) {
-                const p = i / nPoints;
-                const re = reStart + p * (reEnd - reStart);
-                const im = imStart + p * (imEnd - imStart);
-
-                const z = new Complex(re, im);
-                const fz = func(z);
-
-                // Check for singularities or extreme values
-                if (!isFinite(fz.re) || !isFinite(fz.im) || fz.magnitudeSq() > 1e6) {
-                    firstPoint = true; // Start a new line segment after the singularity
-                    continue;
-                }
-
-                // Linear interpolation: z_interp = (1-t)*z + t*f(z)
-                const interpRe = (1 - t) * z.re + t * fz.re;
-                const interpIm = (1 - t) * z.im + t * fz.im;
-
-                const canvasX = origin.x + interpRe * scale;
-                const canvasY = origin.y - interpIm * scale;
-
-                if (firstPoint) {
-                    ctx.moveTo(canvasX, canvasY);
-                    firstPoint = false;
+            // Draw Image Cell
+            const imagePath = new Path2D();
+            const wStart = mapPointToCanvas(cell.image[0], IMAGE_MIN, IMAGE_MAX, imageCanvas);
+            imagePath.moveTo(wStart.x, wStart.y);
+            for(let i = 1; i < cell.image.length; i++) {
+                const p = mapPointToCanvas(cell.image[i], IMAGE_MIN, IMAGE_MAX, imageCanvas);
+                // Prevent drawing if values are infinite
+                if (isFinite(p.x) && isFinite(p.y)) {
+                    imagePath.lineTo(p.x, p.y);
                 } else {
-                    ctx.lineTo(canvasX, canvasY);
+                    // If we encounter infinity, we just move to the next valid point
+                    const nextValid = cell.image.slice(i).find(pt => isFinite(pt.re) && isFinite(pt.im));
+                    if(nextValid) {
+                        const nextP = mapPointToCanvas(nextValid, IMAGE_MIN, IMAGE_MAX, imageCanvas);
+                        imagePath.moveTo(nextP.x, nextP.y);
+                    }
                 }
             }
-            ctx.stroke();
-        }
+            imagePath.closePath();
+            imageCtx.strokeStyle = COLORS.grid;
+            imageCtx.stroke(imagePath);
 
-        // --- Event Handlers ---
-        function handleSliderInput() {
-            sliderValueDisplay.textContent = parseFloat(slider.value).toFixed(2);
-            requestAnimationFrame(draw);
-        }
-
-        function handleFunctionChange() {
-            requestAnimationFrame(draw);
-        }
-        
-        function handleMouseDown(e) {
-            isDragging = true;
-            lastMousePos = { x: e.clientX, y: e.clientY };
-            canvas.style.cursor = 'grabbing';
-        }
-
-        function handleMouseUp() {
-            isDragging = false;
-            canvas.style.cursor = 'grab';
-        }
-
-        function handleMouseMove(e) {
-            if (!isDragging) return;
-            const dx = e.clientX - lastMousePos.x;
-            const dy = e.clientY - lastMousePos.y;
-            origin.x += dx;
-            origin.y += dy;
-            lastMousePos = { x: e.clientX, y: e.clientY };
-            requestAnimationFrame(draw);
-        }
-
-        function handleWheel(e) {
-            e.preventDefault();
-            const zoomFactor = 1.1;
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-
-            // Get world coordinates before zoom
-            const worldX = (mouseX - origin.x) / scale;
-            const worldY = (mouseY - origin.y) / -scale;
-
-            if (e.deltaY < 0) {
-                // Zoom in
-                scale *= zoomFactor;
-            } else {
-                // Zoom out
-                scale /= zoomFactor;
+            // Highlight
+            if (index === highlightedCellIndex) {
+                domainCtx.fillStyle = COLORS.fill;
+                domainCtx.fill(domainPath);
+                domainCtx.strokeStyle = COLORS.highlight;
+                domainCtx.lineWidth = 2;
+                domainCtx.stroke(domainPath);
+                
+                imageCtx.fillStyle = COLORS.fill;
+                imageCtx.fill(imagePath);
+                imageCtx.strokeStyle = COLORS.highlight;
+                imageCtx.lineWidth = 2;
+                imageCtx.stroke(imagePath);
+                
+                // Reset line width for next iterations
+                domainCtx.lineWidth = 1;
+                imageCtx.lineWidth = 1;
             }
+        });
+    }
 
-            // Get new origin so that the point under the mouse stays the same
-            origin.x = mouseX - worldX * scale;
-            origin.y = mouseY + worldY * scale;
-            
+    // --- Event Handlers ---
+    function handleMouseMove(e) {
+        const rect = domainCanvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const mousePoint = mapCanvasToPoint(x, y, DOMAIN_MIN, DOMAIN_MAX, domainCanvas);
+        
+        const step = (DOMAIN_MAX - DOMAIN_MIN) / GRID_DENSITY;
+        const gridX = Math.floor((mousePoint.re - DOMAIN_MIN) / step);
+        const gridY = Math.floor((mousePoint.im - DOMAIN_MIN) / step);
+
+        let newIndex = -1;
+        if (gridX >= 0 && gridX < GRID_DENSITY && gridY >= 0 && gridY < GRID_DENSITY) {
+            newIndex = gridX * GRID_DENSITY + gridY;
+        }
+
+        if (newIndex !== highlightedCellIndex) {
+            highlightedCellIndex = newIndex;
+            requestAnimationFrame(draw);
+        }
+    }
+    
+    function handleMouseLeave() {
+        if (highlightedCellIndex !== -1) {
+            highlightedCellIndex = -1;
+            requestAnimationFrame(draw);
+        }
+    }
+
+    function handleFunctionChange() {
+        const selectedKey = document.getElementById('function-select').value;
+        currentFunction = functions[selectedKey];
+        generateGrid();
+        requestAnimationFrame(draw);
+    }
+
+    // --- Initialization ---
+    function setup() {
+        // Populate dropdown
+        const select = document.getElementById('function-select');
+        for (const key in functions) {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = key;
+            select.appendChild(option);
+        }
+        select.addEventListener('change', handleFunctionChange);
+
+        // Set initial function
+        currentFunction = functions[select.options[0].value];
+        
+        // Setup canvases
+        function resizeCanvases() {
+            const size = container.children[0].clientWidth;
+            domainCanvas.width = size;
+            domainCanvas.height = size;
+            imageCanvas.width = size;
+            imageCanvas.height = size;
+            generateGrid();
             requestAnimationFrame(draw);
         }
 
-        // --- Initialization ---
-        slider.addEventListener('input', handleSliderInput);
-        functionSelect.addEventListener('change', handleFunctionChange);
-        canvas.addEventListener('mousedown', handleMouseDown);
-        window.addEventListener('mouseup', handleMouseUp);
-        canvas.addEventListener('mousemove', handleMouseMove);
-        canvas.addEventListener('wheel', handleWheel);
-        
-        window.addEventListener('resize', setup);
+        window.addEventListener('resize', resizeCanvases);
+        resizeCanvases();
 
-        // Initial setup
-        setup();
-        handleSliderInput(); // To set initial value display
-    </script>
+        // Attach event listeners
+        domainCanvas.addEventListener('mousemove', handleMouseMove);
+        domainCanvas.addEventListener('mouseleave', handleMouseLeave);
+        
+    }
+
+    setup();
+});
+</script>
+
 </body>
 </html>
+
+
+
