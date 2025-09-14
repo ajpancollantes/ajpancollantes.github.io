@@ -29,20 +29,26 @@
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-200 flex flex-col h-screen antialiased">
-
+<body class="bg-gray-900 text-gray-200 flex flex-col h-screen">
     <!-- Header -->
-    <header class="p-4 bg-gray-800/50 backdrop-blur-sm border-b border-gray-700">
+    <header class="bg-gray-800 shadow-md p-4">
         <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold text-cyan-400">Complex Function Visualizer</h1>
-                <p class="text-gray-400 mt-1">See how functions f: ℂ → ℂ transform the plane. Hover over the left grid.</p>
-            </div>
-            <div class="mt-4 sm:mt-0">
-                <label for="function-select" class="mr-2 font-medium">Select Function f(z):</label>
-                <select id="function-select" class="bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-cyan-500 focus:border-cyan-500">
-                    <!-- Options will be populated by JS -->
-                </select>
+            <h1 class="text-2xl font-bold text-white mb-4 sm:mb-0">Holomorphic Function Visualizer</h1>
+            <div class="mt-4 sm:mt-0 flex flex-col sm:flex-row sm:items-center gap-4">
+                <!-- Grid Density Slider -->
+                <div class="flex items-center">
+                     <label for="grid-slider" class="mr-3 font-medium whitespace-nowrap">Grid Size:</label>
+                     <input id="grid-slider" type="range" min="10" max="80" value="20" class="w-32 h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+                     <span id="grid-value" class="ml-3 text-cyan-400 font-mono w-8">20</span>
+                </div>
+                <!-- Function Selector -->
+                <div class="flex items-center">
+                    <label for="function-select" class="mr-3 font-medium">Function f(z):</label>
+                    <select id="function-select" class="bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-cyan-500 focus:border-cyan-500">
+                        <!-- Options will be populated by JS -->
+                    </select>
+                </div>
+                 <button id="reset-view-btn" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">Reset View</button>
             </div>
         </div>
     </header>
@@ -69,23 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const domainCtx = domainCanvas.getContext('2d');
     const imageCtx = imageCanvas.getContext('2d');
     const container = document.getElementById('canvas-container');
-
-    // --- Configuration ---
-    const GRID_DENSITY = 20; // Number of cells along one axis
-    const DOMAIN_MIN = -2;
-    const DOMAIN_MAX = 2;
-    const IMAGE_MIN = -4;
-    const IMAGE_MAX = 4;
-
-    const COLORS = {
-        grid: 'rgba(100, 116, 139, 0.4)',
-        highlight: '#38bdf8', // light blue
-        fill: 'rgba(56, 189, 248, 0.3)',
-    };
-    
-    let gridData = [];
-    let highlightedCellIndex = -1;
-    let currentFunction;
 
     // --- Complex Number Utilities ---
     // Represents a complex number z = re + i*im
@@ -117,6 +106,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const arg = Math.atan2(z.im, z.re);
         return C(Math.log(mag), arg);
     };
+
+    // --- Configuration ---
+    let gridDensity = 20; // Will be controlled by a slider
+    const DOMAIN_MIN = -2;
+    const DOMAIN_MAX = 2;
+    let image_view = {
+        center: C(0, 0),
+        width: 8
+    };
+
+    const COLORS = {
+        grid: 'rgba(100, 116, 139, 0.4)',
+        highlight: '#38bdf8', // light blue
+        fill: 'rgba(56, 189, 248, 0.3)',
+    };
+    
+    let gridData = [];
+    let highlightedCellIndex = -1;
+    let currentFunction;
+    
+    // State for panning and zooming
+    let isPanning = false;
+    let lastMousePos = { x: 0, y: 0 };
     
     // --- Function Definitions ---
     const functions = {
@@ -139,25 +151,35 @@ document.addEventListener('DOMContentLoaded', () => {
         return ((val - min) / (max - min)) * canvasSize;
     };
     
-    const mapPointToCanvas = (z, min, max, canvas) => {
+    const mapPointToCanvas = (z, view_center, view_width, canvas) => {
+        const view_height = view_width * (canvas.height / canvas.width);
+        const re_min = view_center.re - view_width / 2;
+        const re_max = view_center.re + view_width / 2;
+        const im_min = view_center.im - view_height / 2;
+        const im_max = view_center.im + view_height / 2;
+
         return {
-            x: mapToCanvas(z.re, min, max, canvas.width),
-            y: mapToCanvas(-z.im, min, max, canvas.height) // Invert Y-axis for standard math coords
+            x: mapToCanvas(z.re, re_min, re_max, canvas.width),
+            y: mapToCanvas(-z.im, im_min, im_max, canvas.height) // Invert Y-axis
         };
     };
     
-    const mapCanvasToPoint = (px, py, min, max, canvas) => {
-        const re = (px / canvas.width) * (max - min) + min;
-        const im = -((py / canvas.height) * (max - min) - max);
+    const mapCanvasToPoint = (px, py, view_center, view_width, canvas) => {
+        const view_height = view_width * (canvas.height / canvas.width);
+        const re_min = view_center.re - view_width / 2;
+        const im_min = view_center.im - view_height / 2;
+        
+        const re = (px / canvas.width) * view_width + re_min;
+        const im = -(((py / canvas.height) * view_height) - im_min - view_height);
         return C(re, im);
     };
 
     // --- Core Logic ---
     function generateGrid() {
         gridData = [];
-        const step = (DOMAIN_MAX - DOMAIN_MIN) / GRID_DENSITY;
-        for (let i = 0; i < GRID_DENSITY; i++) {
-            for (let j = 0; j < GRID_DENSITY; j++) {
+        const step = (DOMAIN_MAX - DOMAIN_MIN) / gridDensity;
+        for (let i = 0; i < gridDensity; i++) {
+            for (let j = 0; j < gridDensity; j++) {
                 const re = DOMAIN_MIN + i * step;
                 const im = DOMAIN_MIN + j * step;
                 
@@ -184,13 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
         domainCtx.clearRect(0, 0, domainCanvas.width, domainCanvas.height);
         imageCtx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
 
+        const domain_view_width = DOMAIN_MAX - DOMAIN_MIN;
+        const domain_center = C(DOMAIN_MIN + domain_view_width / 2, DOMAIN_MIN + domain_view_width / 2);
+
         gridData.forEach((cell, index) => {
             // Draw Domain Cell
             const domainPath = new Path2D();
-            const pStart = mapPointToCanvas(cell.domain[0], DOMAIN_MIN, DOMAIN_MAX, domainCanvas);
+            const pStart = mapPointToCanvas(cell.domain[0], domain_center, domain_view_width, domainCanvas);
             domainPath.moveTo(pStart.x, pStart.y);
             for(let i = 1; i < cell.domain.length; i++) {
-                const p = mapPointToCanvas(cell.domain[i], DOMAIN_MIN, DOMAIN_MAX, domainCanvas);
+                const p = mapPointToCanvas(cell.domain[i], domain_center, domain_view_width, domainCanvas);
                 domainPath.lineTo(p.x, p.y);
             }
             domainPath.closePath();
@@ -199,10 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Draw Image Cell
             const imagePath = new Path2D();
-            const wStart = mapPointToCanvas(cell.image[0], IMAGE_MIN, IMAGE_MAX, imageCanvas);
+            const wStart = mapPointToCanvas(cell.image[0], image_view.center, image_view.width, imageCanvas);
             imagePath.moveTo(wStart.x, wStart.y);
             for(let i = 1; i < cell.image.length; i++) {
-                const p = mapPointToCanvas(cell.image[i], IMAGE_MIN, IMAGE_MAX, imageCanvas);
+                const p = mapPointToCanvas(cell.image[i], image_view.center, image_view.width, imageCanvas);
                 // Prevent drawing if values are infinite
                 if (isFinite(p.x) && isFinite(p.y)) {
                     imagePath.lineTo(p.x, p.y);
@@ -210,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // If we encounter infinity, we just move to the next valid point
                     const nextValid = cell.image.slice(i).find(pt => isFinite(pt.re) && isFinite(pt.im));
                     if(nextValid) {
-                        const nextP = mapPointToCanvas(nextValid, IMAGE_MIN, IMAGE_MAX, imageCanvas);
+                        const nextP = mapPointToCanvas(nextValid, image_view.center, image_view.width, imageCanvas);
                         imagePath.moveTo(nextP.x, nextP.y);
                     }
                 }
@@ -245,16 +270,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const rect = domainCanvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
-        const mousePoint = mapCanvasToPoint(x, y, DOMAIN_MIN, DOMAIN_MAX, domainCanvas);
         
-        const step = (DOMAIN_MAX - DOMAIN_MIN) / GRID_DENSITY;
+        const domain_view_width = DOMAIN_MAX - DOMAIN_MIN;
+        const domain_center = C(DOMAIN_MIN + domain_view_width / 2, DOMAIN_MIN + domain_view_width / 2);
+        const mousePoint = mapCanvasToPoint(x, y, domain_center, domain_view_width, domainCanvas);
+        
+        const step = (DOMAIN_MAX - DOMAIN_MIN) / gridDensity;
         const gridX = Math.floor((mousePoint.re - DOMAIN_MIN) / step);
         const gridY = Math.floor((mousePoint.im - DOMAIN_MIN) / step);
 
         let newIndex = -1;
-        if (gridX >= 0 && gridX < GRID_DENSITY && gridY >= 0 && gridY < GRID_DENSITY) {
-            newIndex = gridX * GRID_DENSITY + gridY;
+        if (gridX >= 0 && gridX < gridDensity && gridY >= 0 && gridY < gridDensity) {
+            newIndex = gridX * gridDensity + gridY;
         }
 
         if (newIndex !== highlightedCellIndex) {
@@ -277,6 +304,66 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(draw);
     }
 
+    function handleGridSlider(e) {
+        gridDensity = parseInt(e.target.value, 10);
+        document.getElementById('grid-value').textContent = gridDensity;
+        generateGrid();
+        requestAnimationFrame(draw);
+    }
+
+    // --- Image Canvas Navigation Handlers ---
+    function handleImageMouseDown(e) {
+        isPanning = true;
+        lastMousePos = { x: e.clientX, y: e.clientY };
+        imageCanvas.style.cursor = 'grabbing';
+    }
+
+    function handleImageMouseUp() {
+        isPanning = false;
+        imageCanvas.style.cursor = 'grab';
+    }
+
+    function handleImageMouseMove(e) {
+        if (!isPanning) return;
+        
+        const dx = e.clientX - lastMousePos.x;
+        const dy = e.clientY - lastMousePos.y;
+
+        const deltaRe = (dx / imageCanvas.width) * image_view.width;
+        const deltaIm = (dy / imageCanvas.height) * (image_view.width * imageCanvas.height / imageCanvas.width);
+
+        image_view.center = C(image_view.center.re - deltaRe, image_view.center.im + deltaIm);
+
+        lastMousePos = { x: e.clientX, y: e.clientY };
+        requestAnimationFrame(draw);
+    }
+    
+    function handleImageWheel(e) {
+        e.preventDefault();
+        const rect = imageCanvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const pointBeforeZoom = mapCanvasToPoint(x, y, image_view.center, image_view.width, imageCanvas);
+
+        const zoomFactor = e.deltaY < 0 ? 0.85 : 1.15; // Zoom in or out
+        image_view.width *= zoomFactor;
+        
+        const pointAfterZoom = mapCanvasToPoint(x, y, image_view.center, image_view.width, imageCanvas);
+
+        const delta = sub(pointAfterZoom, pointBeforeZoom);
+        image_view.center = sub(image_view.center, delta);
+        
+        requestAnimationFrame(draw);
+    }
+    
+    function resetView() {
+        image_view.center = C(0, 0);
+        image_view.width = 8;
+        requestAnimationFrame(draw);
+    }
+
+
     // --- Initialization ---
     function setup() {
         // Populate dropdown
@@ -288,6 +375,12 @@ document.addEventListener('DOMContentLoaded', () => {
             select.appendChild(option);
         }
         select.addEventListener('change', handleFunctionChange);
+        
+        // Grid slider
+        document.getElementById('grid-slider').addEventListener('input', handleGridSlider);
+
+        // Reset button
+        document.getElementById('reset-view-btn').addEventListener('click', resetView);
 
         // Set initial function
         currentFunction = functions[select.options[0].value];
@@ -310,6 +403,13 @@ document.addEventListener('DOMContentLoaded', () => {
         domainCanvas.addEventListener('mousemove', handleMouseMove);
         domainCanvas.addEventListener('mouseleave', handleMouseLeave);
         
+        // Listeners for image canvas navigation
+        imageCanvas.addEventListener('mousedown', handleImageMouseDown);
+        window.addEventListener('mouseup', handleImageMouseUp); // Listen on window to catch mouseup outside canvas
+        window.addEventListener('mousemove', handleImageMouseMove); // Listen on window to allow smooth panning
+        imageCanvas.addEventListener('wheel', handleImageWheel);
+        imageCanvas.style.cursor = 'grab';
+        
     }
 
     setup();
@@ -318,6 +418,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-
-
 
