@@ -160,17 +160,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return {
             x: mapToCanvas(z.re, re_min, re_max, canvas.width),
-            y: mapToCanvas(-z.im, im_min, im_max, canvas.height) // Invert Y-axis
+            // The y-axis is inverted in canvas vs complex plane.
+            // So we map the z.im value from a reversed range [im_max, im_min].
+            y: mapToCanvas(z.im, im_max, im_min, canvas.height)
         };
     };
     
     const mapCanvasToPoint = (px, py, view_center, view_width, canvas) => {
         const view_height = view_width * (canvas.height / canvas.width);
         const re_min = view_center.re - view_width / 2;
-        const im_min = view_center.im - view_height / 2;
+        const im_max = view_center.im + view_height / 2;
         
         const re = (px / canvas.width) * view_width + re_min;
-        const im = -(((py / canvas.height) * view_height) - im_min - view_height);
+        const im = im_max - (py / canvas.height) * view_height; // Reverse the mapping
         return C(re, im);
     };
 
@@ -332,6 +334,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const deltaRe = (dx / imageCanvas.width) * image_view.width;
         const deltaIm = (dy / imageCanvas.height) * (image_view.width * imageCanvas.height / imageCanvas.width);
 
+        // Subtract deltaRe to move content with mouse horizontally.
+        // Add deltaIm to move content with mouse vertically. THIS is the fix.
         image_view.center = C(image_view.center.re - deltaRe, image_view.center.im + deltaIm);
 
         lastMousePos = { x: e.clientX, y: e.clientY };
@@ -418,4 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
+
 
