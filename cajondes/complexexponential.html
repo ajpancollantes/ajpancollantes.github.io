@@ -3,33 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complex Exponential Visualization</title>
+    <title>Complex Function Visualization</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Hides the number input arrows in Chrome, Safari, Edge */
+        /* Hides the number input arrows */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
-        /* Hides the number input arrows in Firefox */
         input[type=number] {
             -moz-appearance: textfield;
+        }
+        /* Styles for the function selector buttons */
+        .func-btn {
+            padding: 0.5rem 1.25rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            border: 2px solid transparent;
+            background-color: #e2e8f0; /* slate-200 */
+            color: #475569; /* slate-600 */
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .func-btn:hover {
+            background-color: #cbd5e1; /* slate-300 */
+        }
+        .func-btn.active {
+            background-color: #4f46e5; /* indigo-600 */
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
         }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col items-center justify-center min-h-screen p-4">
-
-    <div class="w-full max-w-5xl text-center mb-8">
-        <h1 class="text-4xl font-bold text-slate-900">Complex Exponential Visualization</h1>
-        <p class="text-lg text-slate-600 mt-2">Visualizing the mapping of $f(z) = e^z$</p>
-        <p class="mt-4 text-slate-700">The colored line in the <strong>Domain (z-plane)</strong> represents the set of complex numbers $z = x + ib$. As you move the slider, type a value, or use arrow keys, the value of $b$ and the color changes. The <strong>Codomain (w-plane)</strong> accumulates the resulting rays ($e^z = e^x \cdot e^{ib}$), showing how the exponential function maps horizontal lines to rays from the origin.</p>
+    <div class="w-full max-w-5xl text-center mb-6">
+        <h1 id="main-title" class="text-4xl font-bold text-slate-900">Complex Function Visualization</h1>
+        <p id="function-latex" class="text-lg text-slate-600 mt-2"></p>
     </div>
 
+    <!-- Function Selector -->
+    <div id="functionSelector" class="flex flex-wrap justify-center gap-3 mb-6">
+        <button data-func="exp" class="func-btn active">e<sup>z</sup></button>
+        <button data-func="cos" class="func-btn">cos(z)</button>
+        <button data-func="sin" class="func-btn">sin(z)</button>
+        <button data-func="cosh" class="func-btn">cosh(z)</button>
+        <button data-func="sinh" class="func-btn">sinh(z)</button>
+    </div>
+
+    <div class="w-full max-w-5xl text-center mb-8">
+        <p id="function-description" class="text-slate-700"></p>
+    </div>
+    
     <!-- Main container for the two plots -->
     <div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Domain Plot -->
@@ -43,7 +73,7 @@
             <canvas id="codomainCanvas" class="w-full rounded-lg aspect-square"></canvas>
         </div>
     </div>
-
+    
     <!-- Controls Section -->
     <div class="w-full max-w-5xl bg-white p-6 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center">
          <label for="bValueInput" class="text-lg font-medium mb-3">Imaginary Component (b)</label>
@@ -53,7 +83,7 @@
             <button id="resetButton" class="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors">Reset</button>
         </div>
     </div>
-
+    
     <script>
         // Use MathJax to render LaTeX
         function loadMathJax() {
@@ -65,35 +95,73 @@
         
         document.addEventListener('DOMContentLoaded', () => {
             loadMathJax();
-
             const domainCanvas = document.getElementById('domainCanvas');
             const codomainCanvas = document.getElementById('codomainCanvas');
             const slider = document.getElementById('bSlider');
             const bValueInput = document.getElementById('bValueInput');
             const resetButton = document.getElementById('resetButton');
+            const functionSelector = document.getElementById('functionSelector');
+            const functionLatex = document.getElementById('function-latex');
+            const functionDescription = document.getElementById('function-description');
 
             const canvasSize = 500;
             domainCanvas.width = canvasSize;
             domainCanvas.height = canvasSize;
             codomainCanvas.width = canvasSize;
             codomainCanvas.height = canvasSize;
-
+            
             const ctxDomain = domainCanvas.getContext('2d');
             const ctxCodomain = codomainCanvas.getContext('2d');
-            
+                        
             ctxCodomain.globalAlpha = 0.7;
-
             const CENTER_X = domainCanvas.width / 2;
             const CENTER_Y = domainCanvas.height / 2;
             const PLOT_RANGE = 16;
             const SCALE = domainCanvas.width / (2 * PLOT_RANGE);
             const TICK_SIZE = 8;
+            
+            let currentFunction = 'exp';
+
+            const functionData = {
+                'exp': {
+                    latex: '$f(z) = e^z$',
+                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $e^z = e^x \\cdot e^{ib}$ transforms horizontal lines into rays from the origin.'
+                },
+                'cos': {
+                    latex: '$f(z) = \\cos(z)$',
+                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $\\cos(z) = \\cos(x)\\cosh(b) - i\\sin(x)\\sinh(b)$ transforms horizontal lines into confocal ellipses.'
+                },
+                'sin': {
+                    latex: '$f(z) = \\sin(z)$',
+                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $\\sin(z) = \\sin(x)\\cosh(b) + i\\cos(x)\\sinh(b)$ transforms horizontal lines into confocal ellipses.'
+                },
+                'cosh': {
+                    latex: '$f(z) = \\cosh(z)$',
+                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $\\cosh(z) = \\cosh(x)\\cos(b) + i\\sinh(x)\\sin(b)$ transforms horizontal lines into confocal hyperbolas.'
+                },
+                'sinh': {
+                    latex: '$f(z) = \\sinh(z)$',
+                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $\\sinh(z) = \\sinh(x)\\cos(b) + i\\cosh(x)\\sin(b)$ transforms horizontal lines into confocal hyperbolas.'
+                }
+            };
+            
+            function typesetMath() {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    window.MathJax.typesetPromise();
+                }
+            }
+
+            function updateText() {
+                const data = functionData[currentFunction];
+                functionLatex.innerHTML = data.latex;
+                functionDescription.innerHTML = data.description;
+                typesetMath();
+            }
 
             function drawAxes(ctx) {
                 ctx.save();
                 ctx.strokeStyle = '#cbd5e1'; // slate-300
                 ctx.lineWidth = 1;
-
                 // Main Axes
                 ctx.beginPath();
                 ctx.moveTo(0, CENTER_Y);
@@ -101,12 +169,10 @@
                 ctx.moveTo(CENTER_X, 0);
                 ctx.lineTo(CENTER_X, domainCanvas.height); // Imaginary axis
                 ctx.stroke();
-
                 ctx.fillStyle = '#64748b'; // slate-500
                 ctx.font = '16px Inter';
                 ctx.fillText('Re', domainCanvas.width - 30, CENTER_Y - 12);
                 ctx.fillText('Im', CENTER_X + 12, 20);
-
                 for (let i = -Math.floor(PLOT_RANGE); i <= Math.floor(PLOT_RANGE); i++) {
                     if (i === 0 || i % 5 !== 0) continue;
                     // X-axis ticks
@@ -115,7 +181,6 @@
                     ctx.lineTo(CENTER_X + i * SCALE, CENTER_Y + TICK_SIZE / 2);
                     ctx.stroke();
                     ctx.fillText(i, CENTER_X + i * SCALE - (i > 0 ? 8 : 12), CENTER_Y + 20);
-                    
                     // Y-axis ticks
                     ctx.beginPath();
                     ctx.moveTo(CENTER_X - TICK_SIZE / 2, CENTER_Y - i * SCALE);
@@ -126,19 +191,60 @@
                 ctx.restore();
             }
 
+            function drawHyperbola(ctx, b, isCosh) {
+                const numPoints = 200;
+                const xRange = PLOT_RANGE * 1.5;
+
+                // Positive x branch
+                ctx.beginPath();
+                for (let i = 0; i <= numPoints; i++) {
+                    const x = (i / numPoints) * xRange;
+                    let u, v;
+                    if (isCosh) {
+                        u = Math.cosh(x) * Math.cos(b);
+                        v = Math.sinh(x) * Math.sin(b);
+                    } else { // isSinh
+                        u = Math.sinh(x) * Math.cos(b);
+                        v = Math.cosh(x) * Math.sin(b);
+                    }
+                    const canvasX = CENTER_X + u * SCALE;
+                    const canvasY = CENTER_Y - v * SCALE;
+                    if (i === 0) ctx.moveTo(canvasX, canvasY);
+                    else ctx.lineTo(canvasX, canvasY);
+                }
+                ctx.stroke();
+
+                // Negative x branch
+                ctx.beginPath();
+                for (let i = 0; i <= numPoints; i++) {
+                    const x = -(i / numPoints) * xRange;
+                    let u, v;
+                    if (isCosh) {
+                        u = Math.cosh(x) * Math.cos(b); // cosh is even
+                        v = Math.sinh(x) * Math.sin(b); // sinh is odd
+                    } else { // isSinh
+                        u = Math.sinh(x) * Math.cos(b); // sinh is odd
+                        v = Math.cosh(x) * Math.sin(b); // cosh is even
+                    }
+                    const canvasX = CENTER_X + u * SCALE;
+                    const canvasY = CENTER_Y - v * SCALE;
+                    if (i === 0) ctx.moveTo(canvasX, canvasY);
+                    else ctx.lineTo(canvasX, canvasY);
+                }
+                ctx.stroke();
+            }
+
             function draw() {
                 const b = parseFloat(slider.value);
                 const minB = parseFloat(slider.min);
                 const maxB = parseFloat(slider.max);
-
                 // --- 1. Calculate Color ---
                 const hue = ((b - minB) / (maxB - minB)) * 360;
                 const color = `hsl(${hue}, 90%, 55%)`;
-
+                
                 // --- 2. Update Domain Canvas ---
                 ctxDomain.clearRect(0, 0, domainCanvas.width, domainCanvas.height);
                 drawAxes(ctxDomain);
-                
                 const y_canvas = CENTER_Y - b * SCALE;
                 ctxDomain.beginPath();
                 ctxDomain.moveTo(0, y_canvas);
@@ -147,40 +253,48 @@
                 ctxDomain.lineWidth = 4;
                 ctxDomain.lineCap = 'round';
                 ctxDomain.stroke();
-
+                
                 // --- 3. Update Codomain Canvas (Accumulate) ---
-                const angle = -b; 
-                const rayLength = domainCanvas.width * 2;
-                const endX = CENTER_X + rayLength * Math.cos(angle);
-                const endY = CENTER_Y + rayLength * Math.sin(angle);
-
-                ctxCodomain.beginPath();
-                ctxCodomain.moveTo(CENTER_X, CENTER_Y);
-                ctxCodomain.lineTo(endX, endY);
                 ctxCodomain.strokeStyle = color;
                 ctxCodomain.lineWidth = 3;
                 ctxCodomain.lineCap = 'round';
-                ctxCodomain.stroke();
+
+                switch (currentFunction) {
+                    case 'exp':
+                        const angle = -b; 
+                        const rayLength = domainCanvas.width * 2;
+                        const endX = CENTER_X + rayLength * Math.cos(angle);
+                        const endY = CENTER_Y + rayLength * Math.sin(angle);
+                        ctxCodomain.beginPath();
+                        ctxCodomain.moveTo(CENTER_X, CENTER_Y);
+                        ctxCodomain.lineTo(endX, endY);
+                        ctxCodomain.stroke();
+                        break;
+                    case 'cos':
+                    case 'sin':
+                        const A = Math.cosh(b) * SCALE;
+                        const B = Math.abs(Math.sinh(b) * SCALE);
+                        ctxCodomain.beginPath();
+                        ctxCodomain.ellipse(CENTER_X, CENTER_Y, A, B, 0, 0, 2 * Math.PI);
+                        ctxCodomain.stroke();
+                        break;
+                    case 'cosh':
+                        drawHyperbola(ctxCodomain, b, true);
+                        break;
+                    case 'sinh':
+                        drawHyperbola(ctxCodomain, b, false);
+                        break;
+                }
             }
             
-            // --- Event Listeners and Syncing ---
-            
-            // Syncs the slider and input field, then redraws
             function syncAndDraw(newValue) {
                 const min = parseFloat(slider.min);
                 const max = parseFloat(slider.max);
                 let b = parseFloat(newValue);
-
-                if (isNaN(b)) return; // Ignore invalid input
-
-                // Clamp the value to the valid range
+                if (isNaN(b)) return;
                 b = Math.max(min, Math.min(max, b));
-
-                // Update both UI controls
                 slider.value = b;
                 bValueInput.value = b.toFixed(2);
-                
-                // Redraw everything
                 draw();
             }
             
@@ -189,30 +303,41 @@
             
             document.addEventListener('keydown', (event) => {
                 if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-                event.preventDefault(); // Prevent page scrolling
-
+                event.preventDefault();
                 const step = parseFloat(slider.step);
                 let currentB = parseFloat(slider.value);
-                
-                if (event.key === 'ArrowLeft') {
-                    currentB -= step;
-                } else if (event.key === 'ArrowRight') {
-                    currentB += step;
-                }
-                
+                if (event.key === 'ArrowLeft') currentB -= step;
+                else if (event.key === 'ArrowRight') currentB += step;
                 syncAndDraw(currentB);
             });
-
+            
             resetButton.addEventListener('click', () => {
                 ctxCodomain.clearRect(0, 0, codomainCanvas.width, codomainCanvas.height);
                 drawAxes(ctxCodomain);
             });
 
+            functionSelector.addEventListener('click', (e) => {
+                if (e.target.tagName !== 'BUTTON') return;
+                const selectedFunc = e.target.dataset.func;
+                if (selectedFunc === currentFunction) return;
+
+                currentFunction = selectedFunc;
+
+                functionSelector.querySelector('.active').classList.remove('active');
+                e.target.classList.add('active');
+                
+                updateText();
+
+                ctxCodomain.clearRect(0, 0, codomainCanvas.width, codomainCanvas.height);
+                drawAxes(ctxCodomain);
+                syncAndDraw(slider.value); 
+            });
+            
             // --- Initial Setup ---
+            updateText();
             drawAxes(ctxCodomain);
             syncAndDraw(slider.value); // Initial draw
         });
     </script>
 </body>
 </html>
-
