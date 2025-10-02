@@ -82,10 +82,13 @@
             <input type="range" id="bSlider" min="-15" max="15" step="0.1" value="0" class="w-full mx-4 h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer range-lg">
             <button id="resetButton" class="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors">Reset</button>
         </div>
+        <div class="mt-4 flex items-center">
+            <input type="checkbox" id="animationToggle" checked class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+            <label for="animationToggle" class="ml-2 block text-sm font-medium text-gray-700 select-none cursor-pointer">Animate Drawing</label>
+        </div>
     </div>
     
     <script>
-        // Use MathJax to render LaTeX
         function loadMathJax() {
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
@@ -101,6 +104,7 @@
             const bValueInput = document.getElementById('bValueInput');
             const resetButton = document.getElementById('resetButton');
             const functionSelector = document.getElementById('functionSelector');
+            const animationToggle = document.getElementById('animationToggle');
             const functionLatex = document.getElementById('function-latex');
             const functionDescription = document.getElementById('function-description');
 
@@ -121,67 +125,46 @@
             const TICK_SIZE = 8;
             
             let currentFunction = 'exp';
+            let animationFrameId = null;
 
             const functionData = {
-                'exp': {
-                    latex: '$f(z) = e^z$',
-                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $e^z = e^x \\cdot e^{ib}$ transforms horizontal lines into rays from the origin.'
-                },
-                'cos': {
-                    latex: '$f(z) = \\cos(z)$',
-                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $\\cos(z) = \\cos(x)\\cosh(b) - i\\sin(x)\\sinh(b)$ transforms horizontal lines into confocal ellipses.'
-                },
-                'sin': {
-                    latex: '$f(z) = \\sin(z)$',
-                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $\\sin(z) = \\sin(x)\\cosh(b) + i\\cos(x)\\sinh(b)$ transforms horizontal lines into confocal ellipses.'
-                },
-                'cosh': {
-                    latex: '$f(z) = \\cosh(z)$',
-                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $\\cosh(z) = \\cosh(x)\\cos(b) + i\\sinh(x)\\sin(b)$ transforms horizontal lines into confocal hyperbolas.'
-                },
-                'sinh': {
-                    latex: '$f(z) = \\sinh(z)$',
-                    description: 'The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. The mapping $\\sinh(z) = \\sinh(x)\\cos(b) + i\\cosh(x)\\sin(b)$ transforms horizontal lines into confocal hyperbolas.'
-                }
+                'exp': { latex: '$f(z) = e^z$', description: 'The mapping $e^z = e^x \\cdot e^{ib}$ transforms horizontal lines into rays from the origin.' },
+                'cos': { latex: '$f(z) = \\cos(z)$', description: 'The mapping $\\cos(z) = \\cos(x)\\cosh(b) - i\\sin(x)\\sinh(b)$ transforms horizontal lines into confocal ellipses.' },
+                'sin': { latex: '$f(z) = \\sin(z)$', description: 'The mapping $\\sin(z) = \\sin(x)\\cosh(b) + i\\cos(x)\\sinh(b)$ transforms horizontal lines into confocal ellipses.' },
+                'cosh': { latex: '$f(z) = \\cosh(z)$', description: 'The mapping $\\cosh(z) = \\cosh(x)\\cos(b) + i\\sinh(x)\\sin(b)$ transforms horizontal lines into confocal hyperbolas.' },
+                'sinh': { latex: '$f(z) = \\sinh(z)$', description: 'The mapping $\\sinh(z) = \\sinh(x)\\cos(b) + i\\cosh(x)\\sin(b)$ transforms horizontal lines into confocal hyperbolas.' }
             };
             
             function typesetMath() {
-                if (window.MathJax && window.MathJax.typesetPromise) {
-                    window.MathJax.typesetPromise();
-                }
+                if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
             }
 
             function updateText() {
                 const data = functionData[currentFunction];
                 functionLatex.innerHTML = data.latex;
-                functionDescription.innerHTML = data.description;
+                functionDescription.innerHTML = `The colored line in the <strong>Domain (z-plane)</strong> represents $z = x + ib$. The <strong>Codomain (w-plane)</strong> accumulates the output. ${data.description}`;
                 typesetMath();
             }
 
             function drawAxes(ctx) {
                 ctx.save();
-                ctx.strokeStyle = '#cbd5e1'; // slate-300
+                ctx.strokeStyle = '#cbd5e1';
                 ctx.lineWidth = 1;
-                // Main Axes
                 ctx.beginPath();
-                ctx.moveTo(0, CENTER_Y);
-                ctx.lineTo(domainCanvas.width, CENTER_Y); // Real axis
-                ctx.moveTo(CENTER_X, 0);
-                ctx.lineTo(CENTER_X, domainCanvas.height); // Imaginary axis
+                ctx.moveTo(0, CENTER_Y); ctx.lineTo(canvasSize, CENTER_Y);
+                ctx.moveTo(CENTER_X, 0); ctx.lineTo(CENTER_X, canvasSize);
                 ctx.stroke();
-                ctx.fillStyle = '#64748b'; // slate-500
+                ctx.fillStyle = '#64748b';
                 ctx.font = '16px Inter';
-                ctx.fillText('Re', domainCanvas.width - 30, CENTER_Y - 12);
+                ctx.fillText('Re', canvasSize - 30, CENTER_Y - 12);
                 ctx.fillText('Im', CENTER_X + 12, 20);
                 for (let i = -Math.floor(PLOT_RANGE); i <= Math.floor(PLOT_RANGE); i++) {
                     if (i === 0 || i % 5 !== 0) continue;
-                    // X-axis ticks
                     ctx.beginPath();
                     ctx.moveTo(CENTER_X + i * SCALE, CENTER_Y - TICK_SIZE / 2);
                     ctx.lineTo(CENTER_X + i * SCALE, CENTER_Y + TICK_SIZE / 2);
                     ctx.stroke();
                     ctx.fillText(i, CENTER_X + i * SCALE - (i > 0 ? 8 : 12), CENTER_Y + 20);
-                    // Y-axis ticks
                     ctx.beginPath();
                     ctx.moveTo(CENTER_X - TICK_SIZE / 2, CENTER_Y - i * SCALE);
                     ctx.lineTo(CENTER_X + TICK_SIZE / 2, CENTER_Y - i * SCALE);
@@ -191,111 +174,132 @@
                 ctx.restore();
             }
 
-            function drawHyperbola(ctx, b, isCosh) {
-                const numPoints = 200;
-                const xRange = PLOT_RANGE * 1.5;
-
-                // Positive x branch
-                ctx.beginPath();
-                for (let i = 0; i <= numPoints; i++) {
-                    const x = (i / numPoints) * xRange;
-                    let u, v;
-                    if (isCosh) {
-                        u = Math.cosh(x) * Math.cos(b);
-                        v = Math.sinh(x) * Math.sin(b);
-                    } else { // isSinh
-                        u = Math.sinh(x) * Math.cos(b);
-                        v = Math.cosh(x) * Math.sin(b);
-                    }
-                    const canvasX = CENTER_X + u * SCALE;
-                    const canvasY = CENTER_Y - v * SCALE;
-                    if (i === 0) ctx.moveTo(canvasX, canvasY);
-                    else ctx.lineTo(canvasX, canvasY);
-                }
-                ctx.stroke();
-
-                // Negative x branch
-                ctx.beginPath();
-                for (let i = 0; i <= numPoints; i++) {
-                    const x = -(i / numPoints) * xRange;
-                    let u, v;
-                    if (isCosh) {
-                        u = Math.cosh(x) * Math.cos(b); // cosh is even
-                        v = Math.sinh(x) * Math.sin(b); // sinh is odd
-                    } else { // isSinh
-                        u = Math.sinh(x) * Math.cos(b); // sinh is odd
-                        v = Math.cosh(x) * Math.sin(b); // cosh is even
-                    }
-                    const canvasX = CENTER_X + u * SCALE;
-                    const canvasY = CENTER_Y - v * SCALE;
-                    if (i === 0) ctx.moveTo(canvasX, canvasY);
-                    else ctx.lineTo(canvasX, canvasY);
-                }
-                ctx.stroke();
-            }
-
-            function draw() {
-                const b = parseFloat(slider.value);
-                const minB = parseFloat(slider.min);
-                const maxB = parseFloat(slider.max);
-                // --- 1. Calculate Color ---
-                const hue = ((b - minB) / (maxB - minB)) * 360;
+            function drawDomainAndGetColor(b) {
+                const hue = ((b - parseFloat(slider.min)) / (parseFloat(slider.max) - parseFloat(slider.min))) * 360;
                 const color = `hsl(${hue}, 90%, 55%)`;
-                
-                // --- 2. Update Domain Canvas ---
-                ctxDomain.clearRect(0, 0, domainCanvas.width, domainCanvas.height);
+                ctxDomain.clearRect(0, 0, canvasSize, canvasSize);
                 drawAxes(ctxDomain);
                 const y_canvas = CENTER_Y - b * SCALE;
                 ctxDomain.beginPath();
-                ctxDomain.moveTo(0, y_canvas);
-                ctxDomain.lineTo(domainCanvas.width, y_canvas);
+                ctxDomain.moveTo(0, y_canvas); 
+                ctxDomain.lineTo(canvasSize, y_canvas);
                 ctxDomain.strokeStyle = color;
                 ctxDomain.lineWidth = 4;
                 ctxDomain.lineCap = 'round';
                 ctxDomain.stroke();
-                
-                // --- 3. Update Codomain Canvas (Accumulate) ---
+                return color;
+            }
+            
+            function getCodomainPath(b) {
+                const points = [];
+                const numSegments = 250;
+                for (let i = 0; i <= numSegments; i++) {
+                    const progress = i / numSegments;
+                    let x, u, v;
+                    switch (currentFunction) {
+                        case 'exp':
+                            x = progress * PLOT_RANGE * 1.5;
+                            u = Math.exp(x) * Math.cos(b); v = Math.exp(x) * Math.sin(b);
+                            break;
+                        case 'cos':
+                        case 'sin':
+                            x = -Math.PI * 2 + progress * (Math.PI * 4);
+                            if (currentFunction === 'cos') { u = Math.cos(x) * Math.cosh(b); v = -Math.sin(x) * Math.sinh(b); } 
+                            else { u = Math.sin(x) * Math.cosh(b); v = Math.cos(x) * Math.sinh(b); }
+                            break;
+                        case 'cosh':
+                        case 'sinh':
+                            x = -PLOT_RANGE + progress * (2 * PLOT_RANGE);
+                            if (currentFunction === 'cosh') { u = Math.cosh(x) * Math.cos(b); v = Math.sinh(x) * Math.sin(b); } 
+                            else { u = Math.sinh(x) * Math.cos(b); v = Math.cosh(x) * Math.sin(b); }
+                            break;
+                    }
+                    points.push({ x: CENTER_X + u * SCALE, y: CENTER_Y - v * SCALE });
+                }
+                return points;
+            }
+
+            function drawPointer(ctx, x, y, color) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, 2 * Math.PI);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            function drawCodomainInstantly(b, color) {
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                const pathPoints = getCodomainPath(b);
                 ctxCodomain.strokeStyle = color;
                 ctxCodomain.lineWidth = 3;
                 ctxCodomain.lineCap = 'round';
+                ctxCodomain.beginPath();
+                pathPoints.forEach((p, i) => {
+                    if (i === 0) ctxCodomain.moveTo(p.x, p.y);
+                    else ctxCodomain.lineTo(p.x, p.y);
+                });
+                ctxCodomain.stroke();
+            }
 
-                switch (currentFunction) {
-                    case 'exp':
-                        const angle = -b; 
-                        const rayLength = domainCanvas.width * 2;
-                        const endX = CENTER_X + rayLength * Math.cos(angle);
-                        const endY = CENTER_Y + rayLength * Math.sin(angle);
-                        ctxCodomain.beginPath();
-                        ctxCodomain.moveTo(CENTER_X, CENTER_Y);
-                        ctxCodomain.lineTo(endX, endY);
-                        ctxCodomain.stroke();
-                        break;
-                    case 'cos':
-                    case 'sin':
-                        const A = Math.cosh(b) * SCALE;
-                        const B = Math.abs(Math.sinh(b) * SCALE);
-                        ctxCodomain.beginPath();
-                        ctxCodomain.ellipse(CENTER_X, CENTER_Y, A, B, 0, 0, 2 * Math.PI);
-                        ctxCodomain.stroke();
-                        break;
-                    case 'cosh':
-                        drawHyperbola(ctxCodomain, b, true);
-                        break;
-                    case 'sinh':
-                        drawHyperbola(ctxCodomain, b, false);
-                        break;
-                }
+            function animateCodomain(b, color) {
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                
+                const duration = 1000;
+                let startTime = null;
+                const preAnimationState = ctxCodomain.getImageData(0, 0, canvasSize, canvasSize);
+                const pathPoints = getCodomainPath(b);
+
+                const frame = (timestamp) => {
+                    if (!startTime) startTime = timestamp;
+                    const progress = Math.min((timestamp - startTime) / duration, 1);
+                    const pointsToDraw = Math.ceil(pathPoints.length * progress);
+                    
+                    ctxCodomain.putImageData(preAnimationState, 0, 0);
+                    
+                    ctxCodomain.strokeStyle = color;
+                    ctxCodomain.lineWidth = 3;
+                    ctxCodomain.lineCap = 'round';
+                    ctxCodomain.beginPath();
+                    for (let i = 0; i < pointsToDraw; i++) {
+                        const p = pathPoints[i];
+                        if (i === 0) ctxCodomain.moveTo(p.x, p.y);
+                        else ctxCodomain.lineTo(p.x, p.y);
+                    }
+                    ctxCodomain.stroke();
+
+                    if (pointsToDraw > 0) {
+                        const lastP = pathPoints[pointsToDraw - 1];
+                        drawPointer(ctxCodomain, lastP.x, lastP.y, color);
+                    }
+
+                    if (progress < 1) {
+                        animationFrameId = requestAnimationFrame(frame);
+                    } else {
+                        ctxCodomain.putImageData(preAnimationState, 0, 0);
+                        drawCodomainInstantly(b, color); // Final draw to make it stick
+                        animationFrameId = null;
+                    }
+                };
+                animationFrameId = requestAnimationFrame(frame);
             }
             
             function syncAndDraw(newValue) {
-                const min = parseFloat(slider.min);
-                const max = parseFloat(slider.max);
-                let b = parseFloat(newValue);
+                const b = Math.max(parseFloat(slider.min), Math.min(parseFloat(slider.max), parseFloat(newValue)));
                 if (isNaN(b)) return;
-                b = Math.max(min, Math.min(max, b));
+                
                 slider.value = b;
                 bValueInput.value = b.toFixed(2);
-                draw();
+                const color = drawDomainAndGetColor(b);
+                
+                if (animationToggle.checked) {
+                    animateCodomain(b, color);
+                } else {
+                    drawCodomainInstantly(b, color);
+                }
             }
             
             slider.addEventListener('input', (e) => syncAndDraw(e.target.value));
@@ -304,40 +308,38 @@
             document.addEventListener('keydown', (event) => {
                 if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
                 event.preventDefault();
-                const step = parseFloat(slider.step);
-                let currentB = parseFloat(slider.value);
-                if (event.key === 'ArrowLeft') currentB -= step;
-                else if (event.key === 'ArrowRight') currentB += step;
+                let currentB = parseFloat(slider.value) + (event.key === 'ArrowLeft' ? -1 : 1) * parseFloat(slider.step);
                 syncAndDraw(currentB);
             });
             
             resetButton.addEventListener('click', () => {
-                ctxCodomain.clearRect(0, 0, codomainCanvas.width, codomainCanvas.height);
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+                ctxCodomain.clearRect(0, 0, canvasSize, canvasSize);
                 drawAxes(ctxCodomain);
             });
 
             functionSelector.addEventListener('click', (e) => {
-                if (e.target.tagName !== 'BUTTON') return;
-                const selectedFunc = e.target.dataset.func;
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                const selectedFunc = btn.dataset.func;
                 if (selectedFunc === currentFunction) return;
 
                 currentFunction = selectedFunc;
-
                 functionSelector.querySelector('.active').classList.remove('active');
-                e.target.classList.add('active');
+                btn.classList.add('active');
                 
                 updateText();
-
-                ctxCodomain.clearRect(0, 0, codomainCanvas.width, codomainCanvas.height);
-                drawAxes(ctxCodomain);
+                resetButton.click();
                 syncAndDraw(slider.value); 
             });
             
-            // --- Initial Setup ---
             updateText();
+            drawAxes(ctxDomain);
             drawAxes(ctxCodomain);
-            syncAndDraw(slider.value); // Initial draw
+            syncAndDraw(slider.value);
         });
     </script>
 </body>
 </html>
+
