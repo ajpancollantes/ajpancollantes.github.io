@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Preguntas Moodle XML</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax for rendering formulas -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .math-preview {
+            font-family: 'Times New Roman', serif;
+        }
+        /* Moodle-like styles for preview */
+        .que {
+            border: 1px solid #dee2e6;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            background-color: #fff;
+        }
+        .qtext {
+            margin-bottom: 1rem;
+            font-size: 1.1em;
+        }
+        .answer div {
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        .answer div:last-child {
+            border-bottom: none;
+        }
+        /* Drag and Drop styles */
+        .dragging {
+            opacity: 0.5;
+            background: #e2e8f0;
+        }
+        .drag-over {
+            border-top: 2px solid #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 h-screen flex flex-col text-slate-800 font-sans">
+    <div id="root" class="h-full flex flex-col"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+        // --- Utility Functions for XML Parsing/Generation ---
+
+        const parseXML = (xmlText) => {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+            const quiz = xmlDoc.getElementsByTagName("quiz")[0];
+            const items = [];
+
+            if (!quiz) return [];
+
+            const children = Array.from(quiz.children);
+
+            children.forEach((node) => {
+                if (node.tagName === "question") {
+                    const type = node.getAttribute("type");
+                    
+                    const item = {
+                        id: Math.random().toString(36).substr(2, 9),
+                        type: type,
+                        rawNode: node,
+                        name: getTagValue(node, "name/text"),
+                        questiontext: getTagValue(node, "questiontext/text"),
+                        answers: [],
+                        category: type === 'category' ? getTagValue(node, "category/text") : null
+                    };
+
+                    if (type !== 'category') {
+                        const answers = Array.from(node.getElementsByTagName("answer"));
+                        item.answers = answers.map(ans => ({
+                            id: Math.random().toString(36).substr(2, 9),
+                            fraction: ans.getAttribute("fraction"),
+                            text: getTagValue(ans, "text"),
+                            feedback: getTagValue(ans, "feedback/text")
+                        }));
+                    }
+
+                    items.push(item);
+                }
+            });
+
+            return items;
+        };
+
+        const getTagValue = (parent, path) => {
+            const parts = path.split('/');
+            let current = parent;
+            for (let part of parts) {
+                current = current.getElementsByTagName(part)[0];
+                if (!current) return "";
+            }
+            return current.textContent;
+        };
+
+        const generateXML = (items) => {
+            let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<quiz>\n';
+
+            items.forEach(item => {
+                if (item.type === 'category') {
+                    xml += `
+  <question type="category">
+    <category>
+      <text>${escapeXml(item.category)}</text>
+    </category>
+  </question>
+`;
+                } else {
+                    xml += `
+  <question type="${item.type || 'multichoice'}">
+    <name>
+      <text>${escapeXml(item.name)}</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[${item.questiontext}]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>Respuesta correcta</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>Respuesta incorrecta.</p>]]></text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+`;
+                    item.answers.forEach(ans => {
+                        xml += `    <answer fraction="${ans.fraction}" format="html">
+      <text><![CDATA[${ans.text}]]></text>
+      <feedback format="html">
+        <text><![CDATA[${ans.feedback || ''}]]></text>
+      </feedback>
+    </answer>
+`;
+                    });
+
+                    xml += `  </question>\n`;
+                }
+            });
+
+            xml += '</quiz>';
+            return xml;
+        };
+
+        const escapeXml = (unsafe) => {
+            if (!unsafe) return "";
+            return unsafe.replace(/[<>&'"]/g, function (c) {
+                switch (c) {
+                    case '<': return '&lt;';
+                    case '>': return '&gt;';
+                    case '&': return '&amp;';
+                    case '\'': return '&apos;';
+                    case '"': return '&quot;';
+                }
+            });
+        };
+
+        const Icon = ({ name, size = 16, className = "" }) => {
+            React.useEffect(() => {
+                lucide.createIcons();
+            }, [name]);
+            return <i data-lucide={name} width={size} height={size} className={className}></i>;
+        };
+
+        // --- Components ---
+
+        const SidebarItem = ({ item, isActive, onClick, onDelete, index, onDragStart, onDrop, onDragOver }) => {
+            const isCategory = item.type === 'category';
+            
+            return (
+                <div 
+                    draggable
+                    onDragStart={(e) => onDragStart(e, index)}
+                    onDragOver={(e) => onDragOver(e, index)}
+                    onDrop={(e) => onDrop(e, index)}
+                    onClick={onClick}
+                    className={`group flex items-center justify-between p-3 cursor-pointer border-b text-sm transition-colors select-none
+                        ${isActive ? 'bg-blue-50 border-l-4 border-l-blue-500' : 'hover:bg-gray-50 border-l-4 border-l-transparent'}
+                        ${isCategory ? 'bg-gray-100 font-bold text-gray-700' : ''}
+                    `}
+                >
+                    <div className="flex items-center gap-2 overflow-hidden pointer-events-none">
+                        {isCategory ? (
+                            <Icon name="folder" size={16} className="text-gray-500 shrink-0" />
+                        ) : (
+                            <Icon name="grip-vertical" size={16} className="text-gray-300 shrink-0" />
+                        )}
+                        <span className="truncate">
+                            {isCategory ? item.category.split('/').pop() : item.name}
+                        </span>
+                    </div>
+                    <button 
+                        onClick={(e) => { e.stopPropagation(); onDelete(); }}
+                        className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-100 text-red-500 rounded"
+                        title="Eliminar"
+                    >
+                        <Icon name="trash-2" size={14} />
+                    </button>
+                </div>
+            );
+        };
+
+        const Editor = ({ item, onChange, categories, currentCategory, onMoveToCategory }) => {
+            if (!item) return <div className="p-10 text-center text-gray-400">Selecciona una pregunta para editar</div>;
+
+            const isCategory = item.type === 'category';
+
+            if (isCategory) {
+                return (
+                    <div className="p-6">
+                        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+                            <Icon name="folder-edit" /> Editar Categoría
+                        </h2>
+                        <label className="block mb-2 text-sm font-medium">Ruta de la Categoría</label>
+                        <input 
+                            type="text" 
+                            value={item.category} 
+                            onChange={(e) => onChange({...item, category: e.target.value})}
+                            className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                            placeholder="$course$/top/Mi Categoria"
+                        />
+                        <p className="text-xs text-gray-500 mt-2">Formato usual: $course$/top/NombreCategoria</p>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="p-6 overflow-y-auto h-full pb-20">
+                    <div className="flex justify-between items-start mb-6">
+                         <h2 className="text-xl font-bold flex items-center gap-2 text-gray-800">
+                            <Icon name="edit" /> Editar Pregunta
+                        </h2>
+                        
+                        {/* Category Selector */}
+                        <div className="w-1/2">
+                            <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Categoría</label>
+                            <select 
+                                value={currentCategory ? currentCategory.id : ""} 
+                                onChange={(e) => onMoveToCategory(item.id, e.target.value)}
+                                className="w-full p-2 text-sm border rounded bg-blue-50 border-blue-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                            >
+                                <option value="" disabled>-- Sin Categoría --</option>
+                                {categories.map(cat => (
+                                    <option key={cat.id} value={cat.id}>
+                                        {cat.category.split('/').pop()}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div className="mb-4">
+                        <label className="block mb-1 text-sm font-semibold text-gray-600">Nombre (Identificador)</label>
+                        <input 
+                            type="text" 
+                            value={item.name} 
+                            onChange={(e) => onChange({...item, name: e.target.value})}
+                            className="w-full p-2 border rounded focus:border-blue-500 outline-none"
+                        />
+                    </div>
+
+                    <div className="mb-6">
+                        <label className="block mb-1 text-sm font-semibold text-gray-600">Enunciado (HTML + LaTeX)</label>
+                        <textarea 
+                            value={item.questiontext} 
+                            onChange={(e) => onChange({...item, questiontext: e.target.value})}
+                            className="w-full p-2 border rounded h-32 font-mono text-sm focus:border-blue-500 outline-none"
+                        />
+                        <p className="text-xs text-gray-400 mt-1">Usa \( ... \) para fórmulas en línea y \[ ... \] para bloque.</p>
+                    </div>
+
+                    <div className="mb-2 flex justify-between items-center border-b pb-2">
+                        <h3 className="font-bold text-gray-700">Respuestas</h3>
+                        <button 
+                            onClick={() => onChange({
+                                ...item, 
+                                answers: [...item.answers, { id: Date.now(), text: "", fraction: "0", feedback: "" }]
+                            })}
+                            className="text-xs bg-green-50 text-green-600 px-2 py-1 rounded hover:bg-green-100 flex items-center gap-1"
+                        >
+                            <Icon name="plus" size={12} /> Añadir Respuesta
+                        </button>
+                    </div>
+
+                    <div className="space-y-4">
+                        {item.answers.map((ans, idx) => (
+                            <div key={ans.id || idx} className="bg-gray-50 p-3 rounded border border-gray-200 relative group">
+                                <div className="flex gap-2 mb-2">
+                                    <div className="flex-grow">
+                                        <label className="text-xs font-semibold text-gray-500 uppercase">Texto Respuesta</label>
+                                        <textarea 
+                                            value={ans.text}
+                                            onChange={(e) => {
+                                                const newAnswers = [...item.answers];
+                                                newAnswers[idx].text = e.target.value;
+                                                onChange({...item, answers: newAnswers});
+                                            }}
+                                            className="w-full p-2 border rounded text-sm"
+                                            rows="2"
+                                        />
+                                    </div>
+                                    <div className="w-24 shrink-0">
+                                        <label className="text-xs font-semibold text-gray-500 uppercase">Calif. (%)</label>
+                                        <input 
+                                            type="number" 
+                                            value={ans.fraction}
+                                            onChange={(e) => {
+                                                const newAnswers = [...item.answers];
+                                                newAnswers[idx].fraction = e.target.value;
+                                                onChange({...item, answers: newAnswers});
+                                            }}
+                                            className="w-full p-2 border rounded text-sm text-center"
+                                        />
+                                    </div>
+                                </div>
+                                <button 
+                                    onClick={() => {
+                                        const newAnswers = item.answers.filter((_, i) => i !== idx);
+                                        onChange({...item, answers: newAnswers});
+                                    }}
+                                    className="absolute top-2 right-2 text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                                    title="Borrar respuesta"
+                                >
+                                    <Icon name="x" size={16} />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const Preview = ({ item }) => {
+            const contentRef = useRef(null);
+
+            useEffect(() => {
+                if (window.MathJax && contentRef.current) {
+                    window.MathJax.typesetPromise([contentRef.current]).catch((err) => console.log(err));
+                }
+            }, [item]);
+
+            if (!item || item.type === 'category') {
+                return (
+                    <div className="flex items-center justify-center h-full text-gray-400 bg-gray-100">
+                        <div className="text-center">
+                            <Icon name="eye" size={48} className="mx-auto mb-2 opacity-50" />
+                            <p>Vista previa no disponible para este elemento</p>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="p-6 bg-white h-full overflow-y-auto">
+                    <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-800 border-b pb-4">
+                        <Icon name="monitor" /> Vista Previa (Moodle)
+                    </h2>
+                    
+                    <div ref={contentRef} className="que multichoice">
+                        <div className="info mb-2 text-xs text-gray-500 font-bold uppercase tracking-wide">
+                            {item.name}
+                        </div>
+                        <div className="content">
+                            <div 
+                                className="qtext text-gray-900 mb-4"
+                                dangerouslySetInnerHTML={{ __html: item.questiontext }}
+                            />
+                            
+                            <div className="ablock">
+                                <div className="prompt text-sm text-gray-600 mb-2">Seleccione una:</div>
+                                <div className="answer">
+                                    {item.answers.map((ans, i) => (
+                                        <div key={i} className="flex gap-2 items-start mb-2">
+                                            <input type="radio" name="preview_radio" disabled className="mt-1.5" />
+                                            <div className="flex-grow">
+                                                <div dangerouslySetInnerHTML={{ __html: ans.text }} />
+                                                <span className={`text-xs font-mono px-1 rounded ${parseFloat(ans.fraction) > 0 ? 'bg-green-100 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                                                    {ans.fraction}%
+                                                </span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [items, setItems] = useState([]);
+            const [selectedId, setSelectedId] = useState(null);
+            const [draggedItemIndex, setDraggedItemIndex] = useState(null);
+            const fileInputRef = useRef(null);
+            const appendInputRef = useRef(null);
+
+            const selectedItem = useMemo(() => items.find(i => i.id === selectedId), [items, selectedId]);
+
+            // Calculate active categories
+            const categories = useMemo(() => items.filter(i => i.type === 'category'), [items]);
+
+            // Find the current category for the selected item
+            const currentCategory = useMemo(() => {
+                if (!selectedItem || selectedItem.type === 'category') return null;
+                const idx = items.findIndex(i => i.id === selectedId);
+                // Search backwards
+                for (let i = idx; i >= 0; i--) {
+                    if (items[i].type === 'category') return items[i];
+                }
+                return null;
+            }, [items, selectedId, selectedItem]);
+
+            const handleFileUpload = (e, append = false) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (evt) => {
+                    const newItems = parseXML(evt.target.result);
+                    if (append) {
+                        setItems(prev => [...prev, ...newItems]);
+                        alert(`Se han añadido ${newItems.length} preguntas.`);
+                    } else {
+                        setItems(newItems);
+                        if (newItems.length > 0) setSelectedId(newItems[0].id);
+                    }
+                };
+                reader.readAsText(file);
+                e.target.value = null;
+            };
+
+            const handleExport = () => {
+                const xmlString = generateXML(items);
+                const blob = new Blob([xmlString], { type: "text/xml" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = "moodle-quiz-exportado.xml";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
+            const updateItem = (updatedItem) => {
+                setItems(prev => prev.map(item => item.id === updatedItem.id ? updatedItem : item));
+            };
+
+            const deleteItem = (id) => {
+                if (confirm("¿Seguro que quieres borrar este elemento?")) {
+                    setItems(prev => prev.filter(item => item.id !== id));
+                    if (selectedId === id) setSelectedId(null);
+                }
+            };
+
+            const addCategory = () => {
+                const newCat = {
+                    id: Date.now().toString(),
+                    type: 'category',
+                    category: '$course$/top/Nueva Categoría',
+                    name: 'Nueva Categoría',
+                    answers: []
+                };
+                setItems(prev => [...prev, newCat]);
+                setSelectedId(newCat.id);
+            };
+
+            const moveItemToCategory = (itemId, targetCategoryId) => {
+                const itemIndex = items.findIndex(i => i.id === itemId);
+                const catIndex = items.findIndex(i => i.id === targetCategoryId);
+                
+                if (itemIndex === -1 || catIndex === -1) return;
+
+                const newItems = [...items];
+                const [item] = newItems.splice(itemIndex, 1);
+                
+                // If moving down, index shifts because we removed item first
+                // If moving up, we insert after category
+                // Simpler logic: remove first, find cat index again
+                
+                const newCatIndex = newItems.findIndex(i => i.id === targetCategoryId);
+                newItems.splice(newCatIndex + 1, 0, item);
+                
+                setItems(newItems);
+            };
+
+            // Drag and Drop Handlers
+            const onDragStart = (e, index) => {
+                setDraggedItemIndex(index);
+                e.dataTransfer.effectAllowed = "move";
+                // Optional: set drag image
+            };
+
+            const onDragOver = (e, index) => {
+                e.preventDefault(); // Necessary to allow dropping
+            };
+
+            const onDrop = (e, index) => {
+                if (draggedItemIndex === null) return;
+                
+                const newItems = [...items];
+                const [draggedItem] = newItems.splice(draggedItemIndex, 1);
+                newItems.splice(index, 0, draggedItem);
+                
+                setItems(newItems);
+                setDraggedItemIndex(null);
+            };
+
+            return (
+                <div className="flex flex-col h-screen bg-white">
+                    {/* Header */}
+                    <header className="bg-slate-900 text-white p-4 shadow-md flex justify-between items-center z-10 shrink-0">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-orange-500 p-2 rounded-lg">
+                                <Icon name="file-code" className="text-white" />
+                            </div>
+                            <h1 className="text-xl font-bold tracking-tight">Moodle XML Editor</h1>
+                        </div>
+                        <div className="flex gap-2">
+                            <input type="file" accept=".xml" ref={fileInputRef} className="hidden" onChange={(e) => handleFileUpload(e, false)} />
+                            <input type="file" accept=".xml" ref={appendInputRef} className="hidden" onChange={(e) => handleFileUpload(e, true)} />
+                            
+                            <button onClick={() => fileInputRef.current.click()} className="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-sm font-medium flex items-center gap-2 transition">
+                                <Icon name="upload" size={16} /> Importar XML
+                            </button>
+                            
+                            {items.length > 0 && (
+                                <>
+                                    <button onClick={() => appendInputRef.current.click()} className="bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded text-sm font-medium flex items-center gap-2 transition">
+                                        <Icon name="plus-circle" size={16} /> Anexar XML
+                                    </button>
+                                    <button onClick={handleExport} className="bg-green-600 hover:bg-green-700 px-3 py-2 rounded text-sm font-medium flex items-center gap-2 transition">
+                                        <Icon name="download" size={16} /> Exportar XML
+                                    </button>
+                                </>
+                            )}
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="flex-grow flex overflow-hidden">
+                        {/* Sidebar */}
+                        <aside className="w-1/3 min-w-[300px] max-w-md border-r bg-white flex flex-col shadow-sm z-0">
+                            <div className="p-3 border-b bg-gray-50 flex justify-between items-center">
+                                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Estructura ({items.length})</span>
+                                <button onClick={addCategory} className="text-xs flex items-center gap-1 text-blue-600 hover:bg-blue-50 px-2 py-1 rounded">
+                                    <Icon name="folder-plus" size={14} /> Nueva Cat.
+                                </button>
+                            </div>
+                            <div className="bg-yellow-50 p-2 text-xs text-yellow-800 border-b flex gap-2">
+                                <Icon name="info" size={12} className="shrink-0 mt-0.5" />
+                                <span>Arrastra las preguntas para ordenarlas o cambiar su categoría (están agrupadas bajo la carpeta superior).</span>
+                            </div>
+                            <div className="flex-grow overflow-y-auto">
+                                {items.length === 0 ? (
+                                    <div className="p-8 text-center text-gray-400">
+                                        <p className="text-sm">No hay preguntas cargadas.</p>
+                                    </div>
+                                ) : (
+                                    items.map((item, index) => (
+                                        <SidebarItem 
+                                            key={item.id} 
+                                            index={index}
+                                            item={item} 
+                                            isActive={item.id === selectedId} 
+                                            onClick={() => setSelectedId(item.id)}
+                                            onDelete={() => deleteItem(item.id)}
+                                            onDragStart={onDragStart}
+                                            onDragOver={onDragOver}
+                                            onDrop={onDrop}
+                                        />
+                                    ))
+                                )}
+                            </div>
+                        </aside>
+
+                        {/* Editor & Preview Split */}
+                        <div className="flex-grow flex">
+                            {/* Editor Pane */}
+                            <div className="w-1/2 border-r bg-white overflow-hidden relative">
+                                {selectedItem ? (
+                                    <Editor 
+                                        item={selectedItem} 
+                                        onChange={updateItem} 
+                                        categories={categories}
+                                        currentCategory={currentCategory}
+                                        onMoveToCategory={moveItemToCategory}
+                                    />
+                                ) : (
+                                    <div className="flex flex-col items-center justify-center h-full text-gray-300">
+                                        <Icon name="arrow-left" size={48} className="mb-4" />
+                                        <p className="text-lg">Selecciona un elemento de la izquierda</p>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Preview Pane */}
+                            <div className="w-1/2 bg-gray-50 overflow-hidden relative">
+                                <Preview item={selectedItem} />
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
