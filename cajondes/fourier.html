@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fourier Epicycles Visualization</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- P5.js for Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    
+    <!-- Math.js for parsing expressions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.0/math.js"></script>
+
+    <style>
+        body { margin: 0; background-color: #0f172a; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        canvas { display: block; border-radius: 0.5rem; }
+        .latex-input { font-family: 'Courier New', monospace; }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+        // --- Math Helpers ---
+
+        const parseLatexToMathJS = (latex) => {
+            let s = latex;
+            s = s.replaceAll('\\pi', ' (pi) '); 
+            s = s.replaceAll('\\sin', ' sin ');
+            s = s.replaceAll('\\cos', ' cos ');
+            s = s.replaceAll('\\exp', ' exp ');
+            s = s.replaceAll('\\sqrt', ' sqrt ');
+            s = s.replaceAll('\\cdot', ' * ');
+            s = s.replaceAll('\\left', ' ');
+            s = s.replaceAll('\\right', ' ');
+            s = s.replace(/\^\{([^}]+)\}/g, '^($1)');
+            return s;
+        };
+
+        // Resample points to be uniformly spaced (Arc-length parameterization)
+        // This is crucial for hand-drawn paths to have constant speed in the DFT
+        const resamplePath = (points, numSamples) => {
+            if (!points || points.length < 2) return [];
+
+            let totalLen = 0;
+            const dists = [];
+            for (let i = 0; i < points.length - 1; i++) {
+                const dx = points[i+1].x - points[i].x;
+                const dy = points[i+1].y - points[i].y;
+                const d = Math.sqrt(dx*dx + dy*dy);
+                totalLen += d;
+                dists.push(d);
+            }
+
+            if (totalLen === 0) return points;
+
+            const resampled = [];
+            const step = totalLen / (numSamples - 1);
+            
+            // Push start point
+            // Note: Canvas Y is down, Math Y is up. We convert here.
+            resampled.push({ re: points[0].x, im: -points[0].y });
+
+            let currentDist = 0;
+            let currentIdx = 0;
+
+            for (let i = 1; i < numSamples; i++) {
+                const targetDist = i * step;
+                
+                while (currentDist + dists[currentIdx] < targetDist && currentIdx < dists.length - 1) {
+                    currentDist += dists[currentIdx];
+                    currentIdx++;
+                }
+
+                const segmentStart = points[currentIdx];
+                const segmentEnd = points[currentIdx + 1];
+                const segmentLen = dists[currentIdx];
+                
+                let t = 0;
+                if (segmentLen > 0) {
+                    t = (targetDist - currentDist) / segmentLen;
+                }
+
+                const rx = segmentStart.x + (segmentEnd.x - segmentStart.x) * t;
+                const ry = segmentStart.y + (segmentEnd.y - segmentStart.y) * t;
+                
+                resampled.push({ re: rx, im: -ry });
+            }
+
+            // Center the points around (0,0)
+            let sumRe = 0, sumIm = 0;
+            for(let p of resampled) { sumRe += p.re; sumIm += p.im; }
+            const avgRe = sumRe / resampled.length;
+            const avgIm = sumIm / resampled.length;
+            
+            return resampled.map(p => ({ re: p.re - avgRe, im: p.im - avgIm }));
+        };
+
+        const computeDFT = (points, order) => {
+            const numSamples = points.length;
+            const dt = 1 / numSamples;
+            const coeffs = [];
+            
+            // Sorting indices: 0, 1, -1, 2, -2 ...
+            let indices = [0];
+            for(let k=1; k<=order; k++) {
+                indices.push(k);
+                indices.push(-k);
+            }
+
+            for (let k of indices) {
+                let sumRe = 0;
+                let sumIm = 0;
+                
+                for (let n = 0; n < numSamples; n++) {
+                    const t = n * dt;
+                    const angle = -2 * Math.PI * k * t;
+                    const cVal = points[n]; 
+                    
+                    const rotRe = Math.cos(angle);
+                    const rotIm = Math.sin(angle);
+                    
+                    const termRe = cVal.re * rotRe - cVal.im * rotIm;
+                    const termIm = cVal.re * rotIm + cVal.im * rotRe;
+                    
+                    sumRe += termRe;
+                    sumIm += termIm;
+                }
+                
+                coeffs.push({
+                    freq: k,
+                    re: sumRe * dt,
+                    im: sumIm * dt
+                });
+            }
+            return coeffs;
+        };
+
+        const generatePointsFromFormula = (expressionStr) => {
+            let compiled;
+            try {
+                compiled = math.compile(expressionStr);
+            } catch (e) {
+                throw new Error("Compilation error: " + e.message);
+            }
+
+            const numSamples = 1000; 
+            const dt = 1 / numSamples;
+            const points = [];
+            
+            for (let i = 0; i < numSamples; i++) {
+                const t = i * dt;
+                try {
+                    const scope = { t: t, i: math.i, pi: math.pi, e: math.e };
+                    const val = compiled.evaluate(scope);
+                    
+                    let re = 0, im = 0;
+                    if (typeof val === 'number') {
+                        re = val;
+                    } else if (val && val.re !== undefined) {
+                        re = val.re;
+                        im = val.im;
+                    }
+                    points.push({ re, im });
+                } catch (e) {
+                    throw new Error("Eval error at t=" + t); 
+                }
+            }
+            return points;
+        };
+
+        const formatComplex = (re, im) => {
+            const r = re.toFixed(3);
+            const i = Math.abs(im).toFixed(3);
+            const sign = im >= 0 ? "+" : "-";
+            return `${r} ${sign} ${i}i`;
+        };
+
+        // --- Components ---
+
+        const CanvasP5 = ({ coeffs, targetPoints, isPlaying, mode, onDrawComplete }) => {
+            const containerRef = useRef(null);
+            const p5Instance = useRef(null);
+            const timeRef = useRef(0);
+            const pathRef = useRef([]);
+            const drawingRef = useRef([]); // Stores raw points during drawing
+            const isDrawingRef = useRef(false);
+
+            // Reset logic
+            useEffect(() => {
+                pathRef.current = [];
+                timeRef.current = 0;
+            }, [coeffs]);
+
+            useEffect(() => {
+                if (!containerRef.current) return;
+
+                const sketch = (p) => {
+                    p.setup = () => {
+                        const w = containerRef.current.clientWidth;
+                        const h = containerRef.current.clientHeight;
+                        p.createCanvas(w, h);
+                        p.frameRate(60);
+                    };
+
+                    p.windowResized = () => {
+                        if(containerRef.current) {
+                            p.resizeCanvas(containerRef.current.clientWidth, containerRef.current.clientHeight);
+                        }
+                    };
+
+                    p.mousePressed = () => {
+                        // Only handle drawing if we are in drawing mode and inside canvas
+                        if (mode === 'drawing' && p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+                            isDrawingRef.current = true;
+                            drawingRef.current = [];
+                            drawingRef.current.push({ x: p.mouseX, y: p.mouseY });
+                            return false; // prevent default
+                        }
+                    };
+
+                    p.mouseDragged = () => {
+                        if (isDrawingRef.current) {
+                            drawingRef.current.push({ x: p.mouseX, y: p.mouseY });
+                            return false; 
+                        }
+                    };
+
+                    p.mouseReleased = () => {
+                        if (isDrawingRef.current) {
+                            isDrawingRef.current = false;
+                            if (drawingRef.current.length > 5) {
+                                onDrawComplete(drawingRef.current);
+                            }
+                        }
+                    };
+
+                    p.draw = () => {
+                        p.background(15, 23, 42); 
+
+                        // Handle Drawing Mode UI
+                        if (mode === 'drawing' && isDrawingRef.current) {
+                            p.stroke(255);
+                            p.strokeWeight(2);
+                            p.noFill();
+                            p.beginShape();
+                            for(let pt of drawingRef.current) {
+                                p.vertex(pt.x, pt.y);
+                            }
+                            p.endShape();
+                            
+                            p.noStroke();
+                            p.fill(255);
+                            p.textAlign(p.CENTER);
+                            p.text("Release to calculate", p.width/2, 30);
+                            return; // Skip Fourier viz while drawing
+                        }
+                        
+                        // If waiting for input in drawing mode
+                        if (mode === 'drawing' && (!coeffs || coeffs.length === 0) && !isDrawingRef.current) {
+                            p.noStroke();
+                            p.fill(100, 116, 139);
+                            p.textAlign(p.CENTER);
+                            p.textSize(16);
+                            p.text("Draw a closed loop with your mouse", p.width/2, p.height/2);
+                            return;
+                        }
+
+                        // Visualization Mode
+                        if (!coeffs || coeffs.length === 0) {
+                             if (mode === 'formula') {
+                                p.fill(255);
+                                p.noStroke();
+                                p.textAlign(p.CENTER);
+                                p.text("Invalid Formula", p.width/2, p.height/2);
+                             }
+                             return;
+                        }
+
+                        p.translate(p.width / 2, p.height / 2);
+                        
+                        // Auto-scale to fit the curve
+                        let maxDist = 0.1;
+                        for(let pt of targetPoints) {
+                            const d = Math.sqrt(pt.re*pt.re + pt.im*pt.im);
+                            if(d > maxDist) maxDist = d;
+                        }
+                        const scale = (Math.min(p.width, p.height) * 0.4) / maxDist;
+
+                        // 1. Draw Target Curve (Ghost)
+                        p.noFill();
+                        p.stroke(255, 255, 255, 30);
+                        p.strokeWeight(3);
+                        p.beginShape();
+                        for (let pt of targetPoints) {
+                            p.vertex(pt.re * scale, -pt.im * scale);
+                        }
+                        // Close loop for aesthetics if drawing mode or periodic
+                        p.endShape(p.CLOSE);
+
+                        // 2. Epicycles
+                        let x = 0;
+                        let y = 0;
+                        const t = timeRef.current;
+
+                        for (let i = 0; i < coeffs.length; i++) {
+                            const c = coeffs[i];
+                            const prevX = x;
+                            const prevY = y;
+
+                            const angle = 2 * Math.PI * c.freq * t;
+                            const rotRe = Math.cos(angle);
+                            const rotIm = Math.sin(angle);
+
+                            const termRe = c.re * rotRe - c.im * rotIm;
+                            const termIm = c.re * rotIm + c.im * rotRe;
+
+                            x += termRe * scale;
+                            y -= termIm * scale; 
+
+                            // Draw Circle
+                            p.noFill();
+                            p.stroke(255, 255, 255, 30);
+                            p.strokeWeight(1);
+                            const radius = 2 * Math.sqrt(termRe**2 + termIm**2) * scale;
+                            p.ellipse(prevX, prevY, radius);
+
+                            // Draw Arm
+                            p.stroke(255, 255, 255, 150);
+                            p.line(prevX, prevY, x, y);
+                        }
+
+                        // 3. Trace Path
+                        pathRef.current.push({ x, y });
+                        // Keep path strictly within one cycle length for visuals
+                        if (pathRef.current.length > 2000) pathRef.current.shift();
+
+                        p.noFill();
+                        p.stroke(56, 189, 248); // sky-400
+                        p.strokeWeight(2);
+                        p.beginShape();
+                        for (let pt of pathRef.current) {
+                            p.vertex(pt.x, pt.y);
+                        }
+                        p.endShape();
+
+                        // 4. Update Time
+                        if (isPlaying) {
+                            timeRef.current += 0.002;
+                            if (timeRef.current > 1) {
+                                timeRef.current = 0;
+                                pathRef.current = []; 
+                            }
+                        }
+                    };
+                };
+
+                p5Instance.current = new p5(sketch, containerRef.current);
+
+                return () => {
+                    if (p5Instance.current) p5Instance.current.remove();
+                };
+            }, [coeffs, targetPoints, isPlaying, mode, onDrawComplete]);
+
+            return <div ref={containerRef} className="w-full h-full cursor-crosshair" />;
+        };
+
+
+        const App = () => {
+            const [mode, setMode] = useState('formula'); // 'formula' | 'drawing'
+            const [latexInput, setLatexInput] = useState("e^{2\\pi i t} + 0.5 e^{-2\\pi i t} + 0.25 e^{8\\pi i t}");
+            const [drawnPointsRaw, setDrawnPointsRaw] = useState(null);
+            const [order, setOrder] = useState(5);
+            const [isPlaying, setIsPlaying] = useState(true);
+            const [error, setError] = useState(null);
+
+            // Compute coefficients based on current mode
+            const data = useMemo(() => {
+                setError(null);
+                try {
+                    let points = [];
+                    
+                    if (mode === 'formula') {
+                         const mathStr = parseLatexToMathJS(latexInput);
+                         points = generatePointsFromFormula(mathStr);
+                    } else if (mode === 'drawing') {
+                        if (!drawnPointsRaw) return { coeffs: [], points: [] };
+                        // Resample user drawing to 1000 points
+                        points = resamplePath(drawnPointsRaw, 1000);
+                    }
+
+                    if (points.length === 0) return { coeffs: [], points: [] };
+
+                    // Compute DFT
+                    const coeffs = computeDFT(points, order);
+                    
+                    const hasNaN = points.some(p => isNaN(p.re) || isNaN(p.im));
+                    if (hasNaN) throw new Error("Calculation resulted in undefined values.");
+                    
+                    return { coeffs, points };
+
+                } catch (err) {
+                    setError(err.message);
+                    return { coeffs: [], points: [] };
+                }
+            }, [latexInput, order, mode, drawnPointsRaw]);
+
+            const sortedCoeffs = useMemo(() => {
+                if (!data.coeffs) return [];
+                return [...data.coeffs].sort((a, b) => a.freq - b.freq);
+            }, [data.coeffs]);
+
+            const handleOrderChange = (delta) => {
+                setOrder(prev => Math.max(0, prev + delta));
+            };
+
+            const handleDrawComplete = (rawPoints) => {
+                setDrawnPointsRaw(rawPoints);
+            };
+
+            return (
+                <div className="flex flex-col h-screen overflow-hidden bg-slate-900">
+                    {/* Header */}
+                    <div className="bg-slate-800 p-4 shadow-xl z-20 border-b border-slate-700">
+                        <div className="max-w-7xl mx-auto flex flex-col xl:flex-row gap-6 items-start xl:items-center justify-between">
+                            
+                            {/* Input Mode Selector & Input */}
+                            <div className="flex-1 w-full xl:mr-8 flex flex-col md:flex-row gap-4">
+                                {/* Mode Toggle */}
+                                <div className="flex bg-slate-900 rounded-lg p-1 border border-slate-700 h-10 self-start md:self-center shrink-0">
+                                    <button 
+                                        onClick={() => setMode('formula')}
+                                        className={`px-4 text-xs font-bold rounded flex items-center gap-2 transition-all ${mode === 'formula' ? 'bg-slate-700 text-white shadow' : 'text-slate-400 hover:text-slate-200'}`}
+                                    >
+                                        <span>ƒ(x)</span> Formula
+                                    </button>
+                                    <button 
+                                        onClick={() => { setMode('drawing'); setDrawnPointsRaw(null); }}
+                                        className={`px-4 text-xs font-bold rounded flex items-center gap-2 transition-all ${mode === 'drawing' ? 'bg-sky-600 text-white shadow' : 'text-slate-400 hover:text-slate-200'}`}
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.174 6.812-5.274-6.002A2.008 2.008 0 0 0 14.409 0H2a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V8.16a2.008 2.008 0 0 0-.58-1.348ZM4 22V6h10.5l5.5 6.333V22H4Z"></path></svg>
+                                        Freehand
+                                    </button>
+                                </div>
+
+                                {/* Dynamic Input Area */}
+                                <div className="flex-1 w-full">
+                                    {mode === 'formula' ? (
+                                        <div className="relative group">
+                                            <input 
+                                                type="text" 
+                                                value={latexInput}
+                                                onChange={(e) => setLatexInput(e.target.value)}
+                                                className={`w-full bg-slate-950/50 border ${error ? 'border-red-500 focus:border-red-500' : 'border-slate-600 focus:border-sky-500'} text-white px-4 py-2.5 rounded-lg font-mono text-sm focus:outline-none focus:ring-1 focus:ring-sky-500/50 transition-all shadow-inner`}
+                                                placeholder="e.g. e^{2\pi i t}"
+                                            />
+                                            {error && <div className="absolute top-full mt-1 text-red-400 text-xs bg-slate-800 p-1 rounded shadow border border-red-500/30">{error}</div>}
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center gap-4 bg-slate-950/30 border border-slate-700/50 px-4 py-2.5 rounded-lg text-sm text-slate-400">
+                                            <span className="flex items-center gap-2">
+                                                <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+                                                Draw on canvas below
+                                            </span>
+                                            {drawnPointsRaw && <button onClick={() => setDrawnPointsRaw(null)} className="text-xs text-sky-400 hover:underline">Clear & Redraw</button>}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Controls Section */}
+                            <div className="flex items-center gap-6 w-full xl:w-auto bg-slate-700/30 p-2 rounded-xl border border-slate-700/50">
+                                <div>
+                                    <div className="flex justify-between mb-1 px-1">
+                                        <label className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Terms (n)</label>
+                                    </div>
+                                    <div className="flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-600">
+                                        <button 
+                                            onClick={() => handleOrderChange(-1)} 
+                                            className="w-8 h-8 flex items-center justify-center hover:bg-slate-700 rounded text-slate-200 font-bold transition-colors"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                        </button>
+                                        <div className="w-10 text-center font-mono text-md text-sky-400 select-none">
+                                            {order}
+                                        </div>
+                                        <button 
+                                            onClick={() => handleOrderChange(1)} 
+                                            className="w-8 h-8 flex items-center justify-center hover:bg-slate-700 rounded text-slate-200 font-bold transition-colors"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div className="w-px h-10 bg-slate-600/50"></div>
+
+                                <button 
+                                    onClick={() => setIsPlaying(!isPlaying)}
+                                    className={`p-3 rounded-full transition-all shadow-lg hover:scale-105 active:scale-95 ${isPlaying ? 'bg-sky-500 text-white hover:bg-sky-400' : 'bg-slate-600 text-slate-300 hover:bg-slate-500'}`}
+                                    title={isPlaying ? "Pause" : "Play"}
+                                >
+                                    {isPlaying ? (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                    ) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main Content Area */}
+                    <div className="flex-1 flex overflow-hidden">
+                        {/* Canvas Area */}
+                        <div className="flex-1 relative bg-slate-900 overflow-hidden select-none">
+                            <CanvasP5 
+                                coeffs={data.coeffs} 
+                                targetPoints={data.points} 
+                                isPlaying={isPlaying} 
+                                mode={mode}
+                                onDrawComplete={handleDrawComplete}
+                            />
+                            
+                            {/* Legend Overlay */}
+                            <div className="absolute top-6 left-6 bg-slate-900/80 backdrop-blur p-3 rounded-lg border border-slate-700/50 text-xs text-slate-400 pointer-events-none select-none shadow-xl">
+                                <div className="flex items-center gap-3 mb-2">
+                                    <div className="w-8 h-8 rounded border-2 border-slate-600 flex items-center justify-center relative opacity-50">
+                                        <div className="w-full h-full border border-white opacity-30 rounded-sm"></div>
+                                    </div>
+                                    <div>
+                                        <div className="font-bold text-slate-300">Target</div>
+                                        <div className="opacity-75">{mode === 'formula' ? 'Formula' : 'Your Drawing'}</div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded border-2 border-slate-600 flex items-center justify-center relative bg-slate-800">
+                                        <div className="w-4 h-4 rounded-full border border-sky-400"></div>
+                                        <div className="absolute w-full h-0.5 bg-sky-400 rotate-45"></div>
+                                    </div>
+                                    <div>
+                                        <div className="font-bold text-sky-400">Fourier Approx</div>
+                                        <div className="opacity-75">{order} Epicycles</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Sidebar: Coefficients List */}
+                        <div className="w-64 bg-slate-800 border-l border-slate-700 overflow-y-auto flex flex-col z-10">
+                            <div className="p-4 border-b border-slate-700 bg-slate-800 sticky top-0 z-10">
+                                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Coefficients (cₙ)</h3>
+                                <div className="text-[10px] text-slate-500 mt-1">Sorted by frequency (-n to n)</div>
+                            </div>
+                            <div className="p-2">
+                                {sortedCoeffs.map((c) => (
+                                    <div key={c.freq} className="flex items-center gap-2 p-2 rounded hover:bg-slate-700/50 transition-colors border-b border-slate-700/30 last:border-0 group">
+                                        <div className={`w-8 h-8 flex items-center justify-center rounded text-xs font-mono font-bold ${c.freq === 0 ? 'bg-sky-500/20 text-sky-400' : 'bg-slate-700 text-slate-400'}`}>
+                                            {c.freq}
+                                        </div>
+                                        <div className="flex-1 font-mono text-xs">
+                                            <div className="text-slate-200">{formatComplex(c.re, c.im)}</div>
+                                            <div className="text-[10px] text-slate-500">mag: {(Math.sqrt(c.re**2 + c.im**2)).toFixed(3)}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                                {sortedCoeffs.length === 0 && (
+                                    <div className="text-slate-500 text-xs p-4 text-center italic">
+                                        {mode === 'drawing' && !drawnPointsRaw ? 'Draw on canvas to see data.' : 'No coefficients.'}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
