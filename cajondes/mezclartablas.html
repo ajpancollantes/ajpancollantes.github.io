@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mezclador de Calificaciones</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f13;
+    --surface: #1a1a22;
+    --surface2: #22222e;
+    --border: #2e2e3e;
+    --accent: #7c6af7;
+    --accent2: #f7a26a;
+    --warn: #f7c96a;
+    --ok: #6af7a2;
+    --text: #e8e8f0;
+    --muted: #7a7a9a;
+    --danger: #f76a6a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+
+  header {
+    margin-bottom: 2.5rem;
+    border-left: 4px solid var(--accent);
+    padding-left: 1.2rem;
+  }
+
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .panel-header .tag {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .tag-1 { background: var(--accent); color: #fff; }
+  .tag-2 { background: var(--accent2); color: #1a1a00; }
+
+  .panel-header span {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  textarea {
+    width: 100%;
+    height: 240px;
+    background: var(--surface);
+    border: none;
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    padding: 1rem;
+    resize: vertical;
+    outline: none;
+    line-height: 1.6;
+  }
+
+  textarea::placeholder { color: var(--border); }
+
+  .info-bar {
+    padding: 0.4rem 1rem;
+    background: var(--surface2);
+    font-size: 0.68rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    min-height: 1.8rem;
+  }
+
+  /* Mapping section */
+  .mapping-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .mapping-header {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mapping-header .hint {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+
+  .mapping-body {
+    padding: 1rem;
+  }
+
+  #mapping-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .mapping-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--surface2);
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .mapping-row label { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+
+  .mapping-row select {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .arrow { color: var(--accent); font-size: 1rem; }
+
+  .btn-add {
+    background: none;
+    border: 1px dashed var(--border);
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-add:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-remove {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0 0.2rem;
+    opacity: 0.6;
+    transition: opacity 0.15s;
+  }
+
+  .btn-remove:hover { opacity: 1; }
+
+  /* Actions */
+  .actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+
+  .btn-merge {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 0.7rem 2rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: all 0.15s;
+  }
+
+  .btn-merge:hover { background: #9b8dfb; transform: translateY(-1px); }
+  .btn-merge:active { transform: translateY(0); }
+
+  .btn-copy {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.7rem 1.2rem;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-copy:hover { border-color: var(--ok); color: var(--ok); }
+
+  .stats {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  .stats .ok { color: var(--ok); }
+  .stats .warn { color: var(--warn); }
+  .stats .miss { color: var(--muted); }
+
+  /* Result */
+  .result-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .result-header {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .tag-3 { background: var(--ok); color: #001a0a; }
+
+  #result-area {
+    width: 100%;
+    height: 300px;
+    background: var(--surface);
+    border: none;
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    padding: 1rem;
+    resize: vertical;
+    outline: none;
+    line-height: 1.6;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    font-size: 0.65rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+
+  .legend span { display: flex; align-items: center; gap: 0.3rem; }
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .dot-ok { background: var(--ok); }
+  .dot-warn { background: var(--warn); }
+  .dot-miss { background: var(--muted); }
+  .dot-dup { background: var(--danger); }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--ok);
+    color: #001a0a;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mezclador de Calificaciones</h1>
+  <p>Fusiona tablas de notas respetando las actas oficiales · matching inteligente por DNI + nombre</p>
+</header>
+
+<div class="grid">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="tag tag-1">TABLA 1</span>
+      <span>Destino · Acta oficial (filas sagradas)</span>
+    </div>
+    <textarea id="table1" placeholder="Pega aquí la tabla 1 (copia/pega desde Excel)..."></textarea>
+    <div class="info-bar" id="info1">— sin datos —</div>
+  </div>
+  <div class="panel">
+    <div class="panel-header">
+      <span class="tag tag-2">TABLA 2</span>
+      <span>Fuente · Calificaciones a importar</span>
+    </div>
+    <textarea id="table2" placeholder="Pega aquí la tabla 2 (copia/pega desde Excel)..."></textarea>
+    <div class="info-bar" id="info2">— sin datos —</div>
+  </div>
+</div>
+
+<div class="mapping-section">
+  <div class="mapping-header">
+    <span>Mapeo de columnas</span>
+    <span class="hint">¿Qué columna de Tabla 2 → a qué columna de Tabla 1?</span>
+  </div>
+  <div class="mapping-body">
+    <div id="mapping-rows">
+      <!-- rows inserted by JS -->
+    </div>
+    <button class="btn-add" id="btn-add-mapping">+ Añadir columna</button>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn-merge" id="btn-merge">⚡ MEZCLAR</button>
+  <button class="btn-copy" id="btn-copy">📋 Copiar resultado</button>
+  <div class="stats" id="stats"></div>
+</div>
+
+<div class="result-panel">
+  <div class="result-header">
+    <span class="tag tag-3">TABLA 3</span>
+    <span style="font-size:0.78rem;color:var(--muted)">Resultado fusionado · listo para Excel</span>
+  </div>
+  <textarea id="result-area" readonly placeholder="El resultado aparecerá aquí tras pulsar MEZCLAR..."></textarea>
+  <div class="legend">
+    <span><span class="dot dot-ok"></span> Match seguro (ID)</span>
+    <span><span class="dot dot-warn"></span> Match probable (nombre)</span>
+    <span><span class="dot dot-miss"></span> Sin coincidencia en Tabla 2</span>
+    <span><span class="dot dot-dup"></span> Posible duplicado / ambigüedad</span>
+    <span style="margin-left:auto; font-style:italic">La columna ESTADO se añade al final del resultado</span>
+  </div>
+</div>
+
+<div class="toast" id="toast">¡Copiado!</div>
+
+<script>
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function parseTable(raw) {
+  const lines = raw.trim().split('\n').filter(l => l.trim());
+  if (!lines.length) return { headers: [], rows: [] };
+  const headers = lines[0].split('\t').map(h => h.trim());
+  const rows = lines.slice(1).map(l => l.split('\t').map(c => (c||'').trim()));
+  return { headers, rows };
+}
+
+function normalizeId(id) {
+  if (!id) return '';
+  return id.trim().toUpperCase().replace(/^U/, '');
+}
+
+function normalizeName(name) {
+  if (!name) return '';
+  return name.trim().toUpperCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^A-Z0-9 ]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function similarityScore(a, b) {
+  a = normalizeName(a); b = normalizeName(b);
+  if (a === b) return 1.0;
+  // token overlap
+  const tokA = new Set(a.split(' ').filter(Boolean));
+  const tokB = new Set(b.split(' ').filter(Boolean));
+  const inter = [...tokA].filter(t => tokB.has(t)).length;
+  const union = new Set([...tokA, ...tokB]).size;
+  return union ? inter / union : 0;
+}
+
+// Detect which columns are "identity" columns (ID-like, name-like)
+function detectIdCol(headers, rows) {
+  // look for header containing DNI / ID / USUARIO / NIF / NIE
+  const idKeywords = ['DNI','NIF','NIE','USUARIO','USER','ID','NOMBRE DE USUARIO'];
+  for (let i = 0; i < headers.length; i++) {
+    const h = headers[i].toUpperCase();
+    if (idKeywords.some(k => h.includes(k))) return i;
+  }
+  // fallback: column whose values look like IDs (digits + maybe letters)
+  for (let i = 0; i < Math.min(3, headers.length); i++) {
+    const vals = rows.map(r => normalizeId(r[i] || ''));
+    const idLike = vals.filter(v => /^[A-Z0-9]{6,12}$/.test(v)).length;
+    if (idLike > rows.length * 0.5) return i;
+  }
+  return 0;
+}
+
+function detectNameCols(headers, rows, idCol) {
+  // name columns: first 3 cols that aren't idCol
+  const nameKw = ['NOMBRE','NAME','APELLIDO','SURNAME','ALUMNO'];
+  const candidates = [];
+  for (let i = 0; i < Math.min(4, headers.length); i++) {
+    if (i === idCol) continue;
+    const h = headers[i].toUpperCase();
+    if (nameKw.some(k => h.includes(k))) candidates.push(i);
+  }
+  if (candidates.length) return candidates;
+  // fallback: up to 2 non-id cols in first 3
+  const fallback = [];
+  for (let i = 0; i < Math.min(3, headers.length); i++) {
+    if (i !== idCol) fallback.push(i);
+  }
+  return fallback.slice(0, 2);
+}
+
+// ─── State ────────────────────────────────────────────────────────────────────
+let t1 = { headers: [], rows: [] };
+let t2 = { headers: [], rows: [] };
+let mappings = []; // {src: colIdx in t2, dst: colIdx in t1}
+
+function updateInfo(id, t, infoId) {
+  const el = document.getElementById(infoId);
+  if (!t.headers.length) { el.textContent = '— sin datos —'; return; }
+  el.textContent = `${t.headers.length} columnas · ${t.rows.length} filas · cabeceras: ${t.headers.join(' | ')}`;
+}
+
+function rebuildMappingSelects() {
+  const container = document.getElementById('mapping-rows');
+  container.innerHTML = '';
+
+  if (!t1.headers.length || !t2.headers.length) {
+    container.innerHTML = '<div style="font-size:0.72rem;color:var(--muted);padding:0.3rem 0">Pega ambas tablas primero para configurar el mapeo.</div>';
+    return;
+  }
+
+  // Default: try to auto-suggest one mapping (calificación)
+  if (!mappings.length) {
+    // guess: last non-identity column of t2 → first empty-looking col of t1
+    const gradeKw = ['FINAL','NOTA','CALIFICACION','GRADE','SCORE','RESULTADO'];
+    let srcGuess = t2.headers.length - 1;
+    for (let i = 0; i < t2.headers.length; i++) {
+      if (gradeKw.some(k => t2.headers[i].toUpperCase().includes(k))) { srcGuess = i; break; }
+    }
+    let dstGuess = t1.headers.length - 1;
+    for (let i = 0; i < t1.headers.length; i++) {
+      if (gradeKw.some(k => t1.headers[i].toUpperCase().includes(k))) { dstGuess = i; break; }
+    }
+    mappings = [{ src: srcGuess, dst: dstGuess }];
+  }
+
+  mappings.forEach((m, idx) => {
+    const row = document.createElement('div');
+    row.className = 'mapping-row';
+
+    const sel2 = document.createElement('select');
+    t2.headers.forEach((h, i) => {
+      const o = document.createElement('option');
+      o.value = i; o.textContent = `[T2] ${h}`;
+      if (i === m.src) o.selected = true;
+      sel2.appendChild(o);
+    });
+    sel2.addEventListener('change', () => { mappings[idx].src = +sel2.value; });
+
+    const arrow = document.createElement('span');
+    arrow.className = 'arrow'; arrow.textContent = '→';
+
+    const sel1 = document.createElement('select');
+    t1.headers.forEach((h, i) => {
+      const o = document.createElement('option');
+      o.value = i; o.textContent = `[T1] ${h}`;
+      if (i === m.dst) o.selected = true;
+      sel1.appendChild(o);
+    });
+    sel1.addEventListener('change', () => { mappings[idx].dst = +sel1.value; });
+
+    const label2 = document.createElement('label'); label2.textContent = 'De:';
+    const label1 = document.createElement('label'); label1.textContent = 'A:';
+
+    const btnRm = document.createElement('button');
+    btnRm.className = 'btn-remove'; btnRm.textContent = '✕';
+    btnRm.title = 'Eliminar mapeo';
+    btnRm.addEventListener('click', () => { mappings.splice(idx, 1); rebuildMappingSelects(); });
+
+    row.appendChild(label2); row.appendChild(sel2);
+    row.appendChild(arrow);
+    row.appendChild(label1); row.appendChild(sel1);
+    row.appendChild(btnRm);
+    container.appendChild(row);
+  });
+}
+
+document.getElementById('btn-add-mapping').addEventListener('click', () => {
+  mappings.push({ src: 0, dst: 0 });
+  rebuildMappingSelects();
+});
+
+document.getElementById('table1').addEventListener('input', function() {
+  t1 = parseTable(this.value);
+  updateInfo('t1', t1, 'info1');
+  mappings = [];
+  rebuildMappingSelects();
+});
+
+document.getElementById('table2').addEventListener('input', function() {
+  t2 = parseTable(this.value);
+  updateInfo('t2', t2, 'info2');
+  mappings = [];
+  rebuildMappingSelects();
+});
+
+// ─── Merge ────────────────────────────────────────────────────────────────────
+
+document.getElementById('btn-merge').addEventListener('click', merge);
+
+function merge() {
+  if (!t1.headers.length || !t2.headers.length) {
+    alert('Pega ambas tablas antes de mezclar.');
+    return;
+  }
+  if (!mappings.length) {
+    alert('Define al menos un mapeo de columna.');
+    return;
+  }
+
+  // Detect identity columns
+  const t1IdCol = detectIdCol(t1.headers, t1.rows);
+  const t2IdCol = detectIdCol(t2.headers, t2.rows);
+  const t1NameCols = detectNameCols(t1.headers, t1.rows, t1IdCol);
+  const t2NameCols = detectNameCols(t2.headers, t2.rows, t2IdCol);
+
+  // Build lookup from t2 by normalized ID
+  const t2ById = {};
+  const t2ByName = [];
+
+  t2.rows.forEach((row, idx) => {
+    const nid = normalizeId(row[t2IdCol] || '');
+    if (nid) {
+      if (t2ById[nid]) {
+        if (!Array.isArray(t2ById[nid])) t2ById[nid] = [t2ById[nid]];
+        t2ById[nid].push({ row, idx });
+      } else {
+        t2ById[nid] = { row, idx };
+      }
+    }
+    const fullName = t2NameCols.map(c => row[c] || '').join(' ');
+    t2ByName.push({ row, idx, name: normalizeName(fullName) });
+  });
+
+  const usedT2 = new Set();
+
+  // Build result headers: t1 headers + mapped cols renamed + ESTADO
+  // For mapped cols that already exist in t1, we overwrite; otherwise add
+  const resultHeaders = [...t1.headers];
+  const extraColIdxMap = {}; // mapping dst -> final col idx in result (may be same as t1)
+
+  mappings.forEach(m => {
+    extraColIdxMap[m.dst] = m.dst; // overwrite in-place
+  });
+
+  resultHeaders.push('ESTADO_MEZCLA');
+  const statusColIdx = resultHeaders.length - 1;
+
+  let countOk = 0, countWarn = 0, countMiss = 0, countDup = 0;
+
+  const resultRows = t1.rows.map(row1 => {
+    const result = [...row1];
+    // Ensure result has at least resultHeaders.length-1 cols
+    while (result.length < t1.headers.length) result.push('');
+
+    const id1 = normalizeId(row1[t1IdCol] || '');
+    const name1 = normalizeName(t1NameCols.map(c => row1[c] || '').join(' '));
+
+    let matched = null;
+    let matchType = '';
+
+    // 1) Exact ID match
+    if (id1 && t2ById[id1]) {
+      const m = t2ById[id1];
+      if (Array.isArray(m)) {
+        // Multiple rows with same ID → duplicate warning
+        matched = m[0].row;
+        usedT2.add(m[0].idx);
+        matchType = '⚠️ ID duplicado en T2';
+        countDup++;
+      } else {
+        matched = m.row;
+        usedT2.add(m.idx);
+        // Cross-check name
+        const name2 = normalizeName(t2NameCols.map(c => m.row[c] || '').join(' '));
+        const sim = similarityScore(name1, name2);
+        if (sim >= 0.5) {
+          matchType = '✅ Match ID+nombre';
+          countOk++;
+        } else {
+          matchType = '⚠️ Match ID / nombre difiere';
+          countWarn++;
+        }
+      }
+    }
+
+    // 2) Fallback: name similarity
+    if (!matched && name1) {
+      let best = null, bestScore = 0;
+      t2ByName.forEach(entry => {
+        if (usedT2.has(entry.idx)) return;
+        const s = similarityScore(name1, entry.name);
+        if (s > bestScore) { bestScore = s; best = entry; }
+      });
+      if (best && bestScore >= 0.6) {
+        matched = best.row;
+        usedT2.add(best.idx);
+        if (bestScore >= 0.85) {
+          matchType = '⚠️ Match nombre (sin ID)';
+          countWarn++;
+        } else {
+          matchType = '⚠️ Match parcial nombre — revisar';
+          countDup++;
+        }
+      }
+    }
+
+    if (!matched) {
+      matchType = '— Sin coincidencia en T2';
+      countMiss++;
+    } else {
+      // Apply mappings
+      mappings.forEach(m => {
+        result[m.dst] = matched[m.src] || '';
+      });
+    }
+
+    result[statusColIdx] = matchType;
+    return result;
+  });
+
+  // Build TSV output
+  const lines = [resultHeaders.join('\t')];
+  resultRows.forEach(r => {
+    while (r.length < resultHeaders.length) r.push('');
+    lines.push(r.join('\t'));
+  });
+
+  document.getElementById('result-area').value = lines.join('\n');
+  document.getElementById('stats').innerHTML =
+    `<span class="ok">✅ ${countOk} seguros</span> &nbsp;` +
+    `<span class="warn">⚠️ ${countWarn + countDup} con aviso</span> &nbsp;` +
+    `<span class="miss">— ${countMiss} sin datos</span>`;
+}
+
+// ─── Copy ─────────────────────────────────────────────────────────────────────
+
+document.getElementById('btn-copy').addEventListener('click', () => {
+  const ta = document.getElementById('result-area');
+  if (!ta.value) return;
+  navigator.clipboard.writeText(ta.value).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  });
+});
+</script>
+</body>
+</html>
