@@ -310,7 +310,6 @@
         }
 
         function extractVideoID(url) {
-            // Expresión regular para extraer el ID de cualquier URL de YouTube
             const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
             const match = url.match(regExp);
             return (match && match[7].length == 11) ? match[7] : null;
@@ -323,14 +322,12 @@
 
             rows.forEach((row, rawIndex) => {
                 const url = row[0];
-                if (!url) return; // Fila vacía
+                if (!url) return; 
 
                 const videoId = extractVideoID(url);
                 if (videoId) {
                     currentPlaylistData.push({ id: videoId, originalUrl: url });
                     
-                    // Generamos el HTML del elemento de la lista. 
-                    // Usamos la miniatura por defecto de YouTube.
                     const thumbUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
                     
                     html += `
@@ -359,12 +356,10 @@
         }
 
         // ==========================================
-        // REPRODUCTOR YOUTUBE (IFRAME API)
+        // REPRODUCTOR YOUTUBE E INTEGRACIÓN MÓVIL
         // ==========================================
 
-        // Esta función es llamada automáticamente por la API de YouTube cuando está lista
         function onYouTubeIframeAPIReady() {
-            // No iniciamos el reproductor hasta que el usuario elija un vídeo
             console.log("YouTube API Lista");
         }
 
@@ -374,35 +369,30 @@
             currentIndex = index;
             const videoId = currentPlaylistData[index].id;
 
-            // Guardar el progreso para esta lista específica
             localStorage.setItem(`progress_${currentPlaylistName}_index`, index);
             
-            // Si el usuario hace clic manualmente en un vídeo de la lista, empezamos desde el principio
             if (isManualVideoClick) {
                 startTime = 0;
                 localStorage.setItem(`progress_${currentPlaylistName}_time`, 0);
             }
 
-            // Actualizar interfaz visual
             updateActiveVideoStyle(index);
             
-            // Mostrar reproductor, ocultar placeholder
             playerPlaceholder.classList.add('hidden');
             playerContainer.classList.remove('hidden');
 
             if (!player) {
-                // Inicializar el reproductor por primera vez
                 player = new YT.Player('yt-player', {
                     height: '100%',
                     width: '100%',
                     videoId: videoId,
-                    host: 'https://www.youtube-nocookie.com', // Privacidad aumentada
+                    host: 'https://www.youtube-nocookie.com',
                     playerVars: {
                         'autoplay': 1,
                         'start': Math.floor(startTime),
-                        'rel': 0,            // No mostrar vídeos relacionados de otros canales
-                        'modestbranding': 1, // Reducir logos de YouTube
-                        'playsinline': 1,    // Para móviles
+                        'rel': 0,
+                        'modestbranding': 1,
+                        'playsinline': 1, // Crucial para móviles (evita pantalla completa automática)
                         'enablejsapi': 1
                     },
                     events: {
@@ -411,7 +401,6 @@
                     }
                 });
             } else {
-                // Cargar nuevo vídeo si el reproductor ya existe
                 player.loadVideoById({
                     videoId: videoId,
                     startSeconds: startTime
@@ -420,8 +409,10 @@
         }
 
         function onPlayerStateChange(event) {
-            // Guardar el tiempo de reproducción periódicamente (cada 3 segundos)
             if (event.data === YT.PlayerState.PLAYING) {
+                // Notificar al sistema operativo (Android/iOS) para la pantalla de bloqueo
+                updateMediaSession();
+
                 timeTrackerInterval = setInterval(() => {
                     if (player && player.getCurrentTime) {
                         localStorage.setItem(`progress_${currentPlaylistName}_time`, player.getCurrentTime());
@@ -431,7 +422,6 @@
                 clearInterval(timeTrackerInterval);
             }
 
-            // Cuando el vídeo termina (Estado 0)
             if (event.data === YT.PlayerState.ENDED) {
                 localStorage.setItem(`progress_${currentPlaylistName}_time`, 0);
                 playNextVideo();
@@ -440,26 +430,72 @@
 
         function onPlayerError(event) {
             console.warn("Error en el reproductor:", event.data);
-            // Si el vídeo tiene restricción de edad, fue borrado, etc., saltamos al siguiente
             setTimeout(playNextVideo, 2000);
         }
 
         function playNextVideo() {
             if (currentIndex + 1 < currentPlaylistData.length) {
                 playVideo(currentIndex + 1);
-            } else {
-                // Fin de la lista
-                console.log("Lista finalizada");
+            }
+        }
+
+        // ==========================================
+        // INTEGRACIÓN CON LA PANTALLA DE BLOQUEO
+        // ==========================================
+        function updateMediaSession() {
+            if ('mediaSession' in navigator) {
+                let videoTitle = `Vídeo ${currentIndex + 1}`;
+                let videoAuthor = 'SheetsTube Player';
+                
+                // Intentar extraer el título original del iframe de YouTube (funciona a veces dependiendo de CORS)
+                try {
+                    const data = player.getVideoData();
+                    if (data && data.title) videoTitle = data.title;
+                    if (data && data.author) videoAuthor = data.author;
+                } catch(e) {}
+
+                const videoId = currentPlaylistData[currentIndex].id;
+
+                // Actualizar los metadatos visuales en la pantalla de bloqueo
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: videoTitle,
+                    artist: videoAuthor,
+                    album: currentPlaylistName || 'Lista de reproducción',
+                    artwork: [
+                        { src: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`, sizes: '320x180', type: 'image/jpeg' },
+                        { src: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, sizes: '480x360', type: 'image/jpeg' }
+                    ]
+                });
+
+                // Conectar los botones de la pantalla de bloqueo con las funciones de nuestro JS
+                navigator.mediaSession.setActionHandler('play', () => {
+                    if (player && player.playVideo) player.playVideo();
+                });
+                navigator.mediaSession.setActionHandler('pause', () => {
+                    if (player && player.pauseVideo) player.pauseVideo();
+                });
+                
+                // Botón "Anterior" en el móvil
+                if (currentIndex > 0) {
+                    navigator.mediaSession.setActionHandler('previoustrack', () => playVideo(currentIndex - 1));
+                } else {
+                    navigator.mediaSession.setActionHandler('previoustrack', null);
+                }
+
+                // Botón "Siguiente" en el móvil
+                if (currentIndex < currentPlaylistData.length - 1) {
+                    navigator.mediaSession.setActionHandler('nexttrack', () => playNextVideo());
+                } else {
+                    navigator.mediaSession.setActionHandler('nexttrack', null);
+                }
             }
         }
 
         function updateActiveVideoStyle(activeIndex) {
-            // Quitar estilos activos de todos
             document.querySelectorAll('.video-item').forEach((el, idx) => {
                 if (idx === activeIndex) {
                     el.classList.add('bg-gray-700', 'border-red-500');
                     el.classList.remove('border-transparent', 'hover:bg-gray-700');
-                    // Hacer scroll para asegurar que el vídeo activo es visible
                     el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 } else {
                     el.classList.remove('bg-gray-700', 'border-red-500');
