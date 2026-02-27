@@ -110,6 +110,28 @@
             } else {
                 fetchPlaylists();
             }
+
+            // Sincronización nativa del Audio Fantasma con los controles del Sistema Operativo
+            // Esto asegura que al tocar Play/Pause en el móvil, despierte a YouTube
+            const dummyAudio = document.getElementById('dummy-audio');
+            
+            dummyAudio.addEventListener('play', () => {
+                if (player && player.getPlayerState && player.getPlayerState() !== YT.PlayerState.PLAYING) {
+                    player.playVideo();
+                }
+                if ('mediaSession' in navigator) {
+                    navigator.mediaSession.playbackState = 'playing';
+                }
+            });
+
+            dummyAudio.addEventListener('pause', () => {
+                if (player && player.getPlayerState && player.getPlayerState() !== YT.PlayerState.PAUSED) {
+                    player.pauseVideo();
+                }
+                if ('mediaSession' in navigator) {
+                    navigator.mediaSession.playbackState = 'paused';
+                }
+            });
         });
 
         // ==========================================
@@ -349,8 +371,10 @@
             const dummyAudio = document.getElementById('dummy-audio');
 
             if (event.data === YT.PlayerState.PLAYING) {
-                // Forzar que el audio principal esté corriendo para mantener el icono en pantalla de bloqueo
-                dummyAudio.play().catch(e => {}); 
+                // Sincronizar audio fantasma para que la sesión de fondo se mantenga viva
+                if (dummyAudio.paused) {
+                    dummyAudio.play().catch(e => {}); 
+                }
                 
                 updateMediaSession('playing');
 
@@ -371,12 +395,17 @@
                     }
                 }, 3000); 
             } else if (event.data === YT.PlayerState.PAUSED) {
-                // Pausamos también el audio fantasma para que el SO entienda que la reproducción paró de verdad
-                dummyAudio.pause();
+                // Al pausar YT, pausamos el audio nativo. Si la pantalla está bloqueada, 
+                // darle a Play en el móvil lo reactivará nativamente y despertará nuestro JS
+                if (!dummyAudio.paused) {
+                    dummyAudio.pause();
+                }
                 updateMediaSession('paused');
                 clearInterval(timeTrackerInterval);
             } else if (event.data === YT.PlayerState.ENDED) {
-                dummyAudio.pause();
+                if (!dummyAudio.paused) {
+                    dummyAudio.pause();
+                }
                 updateMediaSession('none');
                 clearInterval(timeTrackerInterval);
                 playNextVideo();
@@ -421,20 +450,9 @@
                     ]
                 });
 
-                // Controladores conectados directamente a la API de YouTube y al Audio Fantasma
-                navigator.mediaSession.setActionHandler('play', async () => {
-                    try {
-                        await document.getElementById('dummy-audio').play();
-                    } catch (e) {}
-                    if (player && player.playVideo) player.playVideo();
-                    navigator.mediaSession.playbackState = 'playing';
-                });
-                
-                navigator.mediaSession.setActionHandler('pause', () => {
-                    document.getElementById('dummy-audio').pause();
-                    if (player && player.pauseVideo) player.pauseVideo();
-                    navigator.mediaSession.playbackState = 'paused';
-                });
+                // NOTA: Hemos eliminado deliberadamente los setActionHandler de 'play' y 'pause'.
+                // Así obligamos a que el sistema operativo actúe sobre el elemento nativo <audio>.
+                // Los EventListeners de ese elemento (configurados arriba) se encargarán del resto.
                 
                 if (currentIndex > 0) {
                     navigator.mediaSession.setActionHandler('previoustrack', () => playVideo(currentIndex - 1, 0, true));
