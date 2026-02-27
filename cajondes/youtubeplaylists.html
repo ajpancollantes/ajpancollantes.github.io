@@ -371,10 +371,12 @@
                     }
                 }, 3000); 
             } else if (event.data === YT.PlayerState.PAUSED) {
-                // Al pausar, marcamos la sesión pero dejamos el audio fantasma quieto para no perder el control
+                // Pausamos también el audio fantasma para que el SO entienda que la reproducción paró de verdad
+                dummyAudio.pause();
                 updateMediaSession('paused');
                 clearInterval(timeTrackerInterval);
             } else if (event.data === YT.PlayerState.ENDED) {
+                dummyAudio.pause();
                 updateMediaSession('none');
                 clearInterval(timeTrackerInterval);
                 playNextVideo();
@@ -420,14 +422,18 @@
                 });
 
                 // Controladores conectados directamente a la API de YouTube y al Audio Fantasma
-                navigator.mediaSession.setActionHandler('play', () => {
+                navigator.mediaSession.setActionHandler('play', async () => {
+                    try {
+                        await document.getElementById('dummy-audio').play();
+                    } catch (e) {}
                     if (player && player.playVideo) player.playVideo();
-                    document.getElementById('dummy-audio').play().catch(e=>{});
+                    navigator.mediaSession.playbackState = 'playing';
                 });
                 
                 navigator.mediaSession.setActionHandler('pause', () => {
+                    document.getElementById('dummy-audio').pause();
                     if (player && player.pauseVideo) player.pauseVideo();
-                    // Importante: No pausamos dummy-audio aquí para evitar que el SO destruya la notificación
+                    navigator.mediaSession.playbackState = 'paused';
                 });
                 
                 if (currentIndex > 0) {
