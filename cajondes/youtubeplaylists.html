@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor de Listas - Sheets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos personalizados mínimos para el scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1f2937; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4b5563; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #6b7280; 
+        }
+        .aspect-w-16 {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        .aspect-w-16 iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white h-screen flex flex-col font-sans overflow-hidden">
+
+    <!-- Barra Superior -->
+    <header class="bg-gray-800 p-4 shadow-md flex justify-between items-center z-10">
+        <div class="flex items-center gap-3">
+            <svg class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M9.667,15.333V8.667L15.667,12L9.667,15.333z"/></svg>
+            <h1 class="text-xl font-bold tracking-wide">SheetsTube Player</h1>
+        </div>
+        <button onclick="openConfig()" class="text-gray-400 hover:text-white transition-colors" title="Configuración">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        </button>
+    </header>
+
+    <!-- Contenedor Principal -->
+    <main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+        
+        <!-- Área del Reproductor (Izquierda) -->
+        <div class="w-full md:w-2/3 lg:w-3/4 bg-black flex flex-col justify-center">
+            <div id="player-container" class="aspect-w-16 hidden w-full">
+                <!-- El iframe de YouTube se insertará aquí -->
+                <div id="yt-player"></div>
+            </div>
+            <div id="player-placeholder" class="flex-1 flex flex-col items-center justify-center text-gray-500 p-8 text-center h-full">
+                <svg class="w-20 h-20 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                <p class="text-lg">Selecciona una lista y un vídeo para empezar a reproducir.</p>
+            </div>
+        </div>
+
+        <!-- Área de la Lista de Reproducción (Derecha) -->
+        <div class="w-full md:w-1/3 lg:w-1/4 bg-gray-800 flex flex-col border-l border-gray-700 h-[50vh] md:h-auto">
+            
+            <!-- Selector de Listas -->
+            <div class="p-4 bg-gray-900 border-b border-gray-700">
+                <label for="playlist-selector" class="block text-sm font-medium text-gray-400 mb-2">Seleccionar Lista (Pestaña)</label>
+                <select id="playlist-selector" class="w-full bg-gray-800 text-white border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors disabled:opacity-50" disabled onchange="loadPlaylist(this.value)">
+                    <option value="">Cargando listas...</option>
+                </select>
+            </div>
+
+            <!-- Lista de Vídeos -->
+            <div id="video-list" class="flex-1 overflow-y-auto custom-scrollbar p-2">
+                <!-- Los elementos de la lista se inyectarán aquí -->
+            </div>
+            
+            <!-- Estado de carga de la lista -->
+            <div id="list-loading" class="hidden flex-1 flex items-center justify-center text-gray-400">
+                <svg class="animate-spin h-8 w-8 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Configuración -->
+    <div id="config-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden backdrop-blur-sm p-4">
+        <div class="bg-gray-800 rounded-xl shadow-2xl w-full max-w-md p-6 border border-gray-700">
+            <h2 class="text-2xl font-bold mb-4 text-white">Configuración de Conexión</h2>
+            <p class="text-gray-400 text-sm mb-6">Introduce los datos de tu Google Sheet. Esta información se guarda solo en tu navegador.</p>
+            
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-300 mb-1">ID del Spreadsheet</label>
+                <input type="text" id="input-sheet-id" placeholder="Ej: 1BxiMvs0XRYFgwnAKB..." class="w-full bg-gray-900 text-white border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500">
+                <p class="text-xs text-gray-500 mt-1">Es la cadena larga en la URL de tu hoja de Google.</p>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-300 mb-1">Google API Key</label>
+                <input type="password" id="input-api-key" placeholder="AIzaSyB..." class="w-full bg-gray-900 text-white border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500">
+                <p class="text-xs text-gray-500 mt-1">Clave con acceso a la API de Google Sheets.</p>
+            </div>
+            
+            <div id="config-error" class="hidden mb-4 p-3 bg-red-900 text-red-200 text-sm rounded-md border border-red-700"></div>
+
+            <div class="flex justify-end gap-3">
+                <button onclick="closeConfig()" id="btn-cancel-config" class="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors hidden">Cancelar</button>
+                <button onclick="saveConfig()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md shadow transition-colors">Guardar y Conectar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cargar la API IFrame de YouTube de forma asíncrona -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    
+    <script>
+        // Variables globales
+        let config = {
+            spreadsheetId: localStorage.getItem('sheets_id') || '',
+            apiKey: localStorage.getItem('sheets_api_key') || ''
+        };
+        
+        let player = null;
+        let currentPlaylistData = [];
+        let currentIndex = -1;
+        let timeTrackerInterval = null;
+        let currentPlaylistName = '';
+
+        // Elementos del DOM
+        const configModal = document.getElementById('config-modal');
+        const inputSheetId = document.getElementById('input-sheet-id');
+        const inputApiKey = document.getElementById('input-api-key');
+        const btnCancelConfig = document.getElementById('btn-cancel-config');
+        const configError = document.getElementById('config-error');
+        const playlistSelector = document.getElementById('playlist-selector');
+        const videoList = document.getElementById('video-list');
+        const listLoading = document.getElementById('list-loading');
+        const playerContainer = document.getElementById('player-container');
+        const playerPlaceholder = document.getElementById('player-placeholder');
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!config.spreadsheetId || !config.apiKey) {
+                openConfig(true);
+            } else {
+                fetchPlaylists();
+            }
+        });
+
+        // ==========================================
+        // LÓGICA DE CONFIGURACIÓN Y UI
+        // ==========================================
+
+        function openConfig(isInitial = false) {
+            inputSheetId.value = config.spreadsheetId;
+            inputApiKey.value = config.apiKey;
+            configError.classList.add('hidden');
+            
+            if (!isInitial) {
+                btnCancelConfig.classList.remove('hidden');
+            } else {
+                btnCancelConfig.classList.add('hidden');
+            }
+            
+            configModal.classList.remove('hidden');
+        }
+
+        function closeConfig() {
+            configModal.classList.add('hidden');
+        }
+
+        function saveConfig() {
+            const newId = inputSheetId.value.trim();
+            const newKey = inputApiKey.value.trim();
+
+            if (!newId || !newKey) {
+                showConfigError('Por favor, rellena ambos campos.');
+                return;
+            }
+
+            // Guardar en localStorage
+            localStorage.setItem('sheets_id', newId);
+            localStorage.setItem('sheets_api_key', newKey);
+            
+            config.spreadsheetId = newId;
+            config.apiKey = newKey;
+            
+            closeConfig();
+            
+            // Reiniciar UI
+            playlistSelector.innerHTML = '<option value="">Cargando listas...</option>';
+            playlistSelector.disabled = true;
+            videoList.innerHTML = '';
+            
+            fetchPlaylists();
+        }
+
+        function showConfigError(msg) {
+            configError.textContent = msg;
+            configError.classList.remove('hidden');
+        }
+
+        function showErrorInSelector(msg) {
+            playlistSelector.innerHTML = `<option value="">Error: ${msg}</option>`;
+            playlistSelector.disabled = true;
+        }
+
+        // ==========================================
+        // COMUNICACIÓN CON GOOGLE SHEETS API
+        // ==========================================
+
+        // 1. Obtener los nombres de las pestañas (Listas)
+        async function fetchPlaylists() {
+            try {
+                const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}?fields=sheets.properties.title&key=${config.apiKey}`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.error) {
+                    if (data.error.code === 403 || data.error.code === 400) {
+                        openConfig();
+                        showConfigError('API Key o Spreadsheet ID inválidos. Revisa los permisos.');
+                    } else {
+                        showErrorInSelector('Permiso denegado o no encontrado');
+                    }
+                    return;
+                }
+
+                if (data.sheets && data.sheets.length > 0) {
+                    const sheetNames = data.sheets.map(sheet => sheet.properties.title);
+                    populateSelector(sheetNames);
+                    
+                    // Restaurar la última sesión si existe
+                    const lastPlaylist = localStorage.getItem('last_playlist');
+                    if (lastPlaylist && sheetNames.includes(lastPlaylist)) {
+                        playlistSelector.value = lastPlaylist;
+                        loadPlaylist(lastPlaylist, true);
+                    }
+                } else {
+                    showErrorInSelector('El documento está vacío');
+                }
+            } catch (error) {
+                console.error("Error al obtener las pestañas:", error);
+                showErrorInSelector('Fallo de conexión');
+            }
+        }
+
+        // 2. Obtener las URLs de la pestaña seleccionada
+        async function loadPlaylist(sheetName, isAutoLoad = false) {
+            if (!sheetName) return;
+            
+            // Guardar la última lista seleccionada y su nombre
+            currentPlaylistName = sheetName;
+            localStorage.setItem('last_playlist', sheetName);
+
+            videoList.innerHTML = '';
+            videoList.classList.add('hidden');
+            listLoading.classList.remove('hidden');
+            currentPlaylistData = [];
+            
+            try {
+                // Pedimos solo la columna A
+                const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${encodeURIComponent(sheetName)}!A:A?key=${config.apiKey}`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                listLoading.classList.add('hidden');
+                videoList.classList.remove('hidden');
+
+                if (data.error) {
+                    videoList.innerHTML = `<div class="p-4 text-red-400">Error al cargar datos: ${data.error.message}</div>`;
+                    return;
+                }
+
+                if (data.values && data.values.length > 0) {
+                    processVideos(data.values);
+
+                    // Recuperar el progreso específico de ESTA lista
+                    const savedIndex = parseInt(localStorage.getItem(`progress_${currentPlaylistName}_index`)) || 0;
+                    const savedTime = parseFloat(localStorage.getItem(`progress_${currentPlaylistName}_time`)) || 0;
+                    
+                    if (savedIndex >= 0 && savedIndex < currentPlaylistData.length) {
+                        playVideo(savedIndex, savedTime);
+                    }
+                } else {
+                    videoList.innerHTML = '<div class="p-4 text-gray-400">Esta lista está vacía.</div>';
+                }
+            } catch (error) {
+                console.error("Error al obtener los vídeos:", error);
+                listLoading.classList.add('hidden');
+                videoList.classList.remove('hidden');
+                videoList.innerHTML = '<div class="p-4 text-red-400">Error de red al cargar los vídeos.</div>';
+            }
+        }
+
+        // ==========================================
+        // PROCESAMIENTO Y RENDERIZADO DE VÍDEOS
+        // ==========================================
+
+        function populateSelector(sheetNames) {
+            playlistSelector.innerHTML = '<option value="" disabled selected>Elige una lista...</option>';
+            sheetNames.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                playlistSelector.appendChild(option);
+            });
+            playlistSelector.disabled = false;
+        }
+
+        function extractVideoID(url) {
+            // Expresión regular para extraer el ID de cualquier URL de YouTube
+            const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[7].length == 11) ? match[7] : null;
+        }
+
+        function processVideos(rows) {
+            let html = '';
+            currentPlaylistData = [];
+            let validIndex = 0;
+
+            rows.forEach((row, rawIndex) => {
+                const url = row[0];
+                if (!url) return; // Fila vacía
+
+                const videoId = extractVideoID(url);
+                if (videoId) {
+                    currentPlaylistData.push({ id: videoId, originalUrl: url });
+                    
+                    // Generamos el HTML del elemento de la lista. 
+                    // Usamos la miniatura por defecto de YouTube.
+                    const thumbUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                    
+                    html += `
+                        <div id="video-item-${validIndex}" onclick="playVideo(${validIndex}, 0, true)" class="video-item flex gap-3 p-2 mb-2 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors border border-transparent">
+                            <div class="relative w-32 h-20 flex-shrink-0 bg-black rounded overflow-hidden">
+                                <img src="${thumbUrl}" alt="Miniatura" class="w-full h-full object-cover opacity-80" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 16 9\\'><rect width=\\'16\\' height=\\'9\\' fill=\\'%23333\\'/></svg>'">
+                                <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-40 transition-opacity">
+                                    <svg class="w-8 h-8 text-white opacity-0 hover:opacity-100 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                            <div class="flex-1 flex flex-col justify-center overflow-hidden">
+                                <h3 class="text-sm font-semibold text-gray-200 line-clamp-2">Vídeo ${validIndex + 1}</h3>
+                                <p class="text-xs text-gray-500 truncate mt-1">${videoId}</p>
+                            </div>
+                        </div>
+                    `;
+                    validIndex++;
+                }
+            });
+
+            if (currentPlaylistData.length > 0) {
+                videoList.innerHTML = html;
+            } else {
+                videoList.innerHTML = '<div class="p-4 text-yellow-400">No se encontraron URLs válidas de YouTube en esta pestaña (Columna A).</div>';
+            }
+        }
+
+        // ==========================================
+        // REPRODUCTOR YOUTUBE (IFRAME API)
+        // ==========================================
+
+        // Esta función es llamada automáticamente por la API de YouTube cuando está lista
+        function onYouTubeIframeAPIReady() {
+            // No iniciamos el reproductor hasta que el usuario elija un vídeo
+            console.log("YouTube API Lista");
+        }
+
+        function playVideo(index, startTime = 0, isManualVideoClick = false) {
+            if (index < 0 || index >= currentPlaylistData.length) return;
+            
+            currentIndex = index;
+            const videoId = currentPlaylistData[index].id;
+
+            // Guardar el progreso para esta lista específica
+            localStorage.setItem(`progress_${currentPlaylistName}_index`, index);
+            
+            // Si el usuario hace clic manualmente en un vídeo de la lista, empezamos desde el principio
+            if (isManualVideoClick) {
+                startTime = 0;
+                localStorage.setItem(`progress_${currentPlaylistName}_time`, 0);
+            }
+
+            // Actualizar interfaz visual
+            updateActiveVideoStyle(index);
+            
+            // Mostrar reproductor, ocultar placeholder
+            playerPlaceholder.classList.add('hidden');
+            playerContainer.classList.remove('hidden');
+
+            if (!player) {
+                // Inicializar el reproductor por primera vez
+                player = new YT.Player('yt-player', {
+                    height: '100%',
+                    width: '100%',
+                    videoId: videoId,
+                    host: 'https://www.youtube-nocookie.com', // Privacidad aumentada
+                    playerVars: {
+                        'autoplay': 1,
+                        'start': Math.floor(startTime),
+                        'rel': 0,            // No mostrar vídeos relacionados de otros canales
+                        'modestbranding': 1, // Reducir logos de YouTube
+                        'playsinline': 1,    // Para móviles
+                        'enablejsapi': 1
+                    },
+                    events: {
+                        'onStateChange': onPlayerStateChange,
+                        'onError': onPlayerError
+                    }
+                });
+            } else {
+                // Cargar nuevo vídeo si el reproductor ya existe
+                player.loadVideoById({
+                    videoId: videoId,
+                    startSeconds: startTime
+                });
+            }
+        }
+
+        function onPlayerStateChange(event) {
+            // Guardar el tiempo de reproducción periódicamente (cada 3 segundos)
+            if (event.data === YT.PlayerState.PLAYING) {
+                timeTrackerInterval = setInterval(() => {
+                    if (player && player.getCurrentTime) {
+                        localStorage.setItem(`progress_${currentPlaylistName}_time`, player.getCurrentTime());
+                    }
+                }, 3000); 
+            } else {
+                clearInterval(timeTrackerInterval);
+            }
+
+            // Cuando el vídeo termina (Estado 0)
+            if (event.data === YT.PlayerState.ENDED) {
+                localStorage.setItem(`progress_${currentPlaylistName}_time`, 0);
+                playNextVideo();
+            }
+        }
+
+        function onPlayerError(event) {
+            console.warn("Error en el reproductor:", event.data);
+            // Si el vídeo tiene restricción de edad, fue borrado, etc., saltamos al siguiente
+            setTimeout(playNextVideo, 2000);
+        }
+
+        function playNextVideo() {
+            if (currentIndex + 1 < currentPlaylistData.length) {
+                playVideo(currentIndex + 1);
+            } else {
+                // Fin de la lista
+                console.log("Lista finalizada");
+            }
+        }
+
+        function updateActiveVideoStyle(activeIndex) {
+            // Quitar estilos activos de todos
+            document.querySelectorAll('.video-item').forEach((el, idx) => {
+                if (idx === activeIndex) {
+                    el.classList.add('bg-gray-700', 'border-red-500');
+                    el.classList.remove('border-transparent', 'hover:bg-gray-700');
+                    // Hacer scroll para asegurar que el vídeo activo es visible
+                    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    el.classList.remove('bg-gray-700', 'border-red-500');
+                    el.classList.add('border-transparent', 'hover:bg-gray-700');
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
