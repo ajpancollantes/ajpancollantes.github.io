@@ -92,6 +92,7 @@
         let currentIndex = -1;
         let timeTrackerInterval = null;
         let currentPlaylistName = '';
+        let isManualPause = false; // Variable para diferenciar pausas del sistema de las del usuario
 
         const configModal = document.getElementById('config-modal');
         const inputSheetId = document.getElementById('input-sheet-id');
@@ -110,28 +111,6 @@
             } else {
                 fetchPlaylists();
             }
-
-            // Sincronización nativa del Audio Fantasma con los controles del Sistema Operativo
-            // Esto asegura que al tocar Play/Pause en el móvil, despierte a YouTube
-            const dummyAudio = document.getElementById('dummy-audio');
-            
-            dummyAudio.addEventListener('play', () => {
-                if (player && player.getPlayerState && player.getPlayerState() !== YT.PlayerState.PLAYING) {
-                    player.playVideo();
-                }
-                if ('mediaSession' in navigator) {
-                    navigator.mediaSession.playbackState = 'playing';
-                }
-            });
-
-            dummyAudio.addEventListener('pause', () => {
-                if (player && player.getPlayerState && player.getPlayerState() !== YT.PlayerState.PAUSED) {
-                    player.pauseVideo();
-                }
-                if ('mediaSession' in navigator) {
-                    navigator.mediaSession.playbackState = 'paused';
-                }
-            });
         });
 
         // ==========================================
@@ -371,6 +350,7 @@
             const dummyAudio = document.getElementById('dummy-audio');
 
             if (event.data === YT.PlayerState.PLAYING) {
+                isManualPause = false; // Reiniciamos el control de pausa manual
                 // Sincronizar audio fantasma para que la sesión de fondo se mantenga viva
                 if (dummyAudio.paused) {
                     dummyAudio.play().catch(e => {}); 
@@ -395,8 +375,16 @@
                     }
                 }, 3000); 
             } else if (event.data === YT.PlayerState.PAUSED) {
-                // Al pausar YT, pausamos el audio nativo. Si la pantalla está bloqueada, 
-                // darle a Play en el móvil lo reactivará nativamente y despertará nuestro JS
+                // TRUCO ANDROID: Si la pantalla se apaga o cambias de pestaña, Chrome auto-pausa el iframe.
+                // Si la página está oculta y no fue una pausa manual, forzamos que siga reproduciendo.
+                if (document.hidden && !isManualPause) {
+                    player.playVideo();
+                    dummyAudio.play().catch(e => {});
+                    return; // Ignoramos esta pausa forzada para que no se corte el audio
+                }
+
+                isManualPause = false; // Reset
+                // Al pausar YT de forma intencionada, pausamos el audio nativo.
                 if (!dummyAudio.paused) {
                     dummyAudio.pause();
                 }
@@ -450,9 +438,18 @@
                     ]
                 });
 
-                // NOTA: Hemos eliminado deliberadamente los setActionHandler de 'play' y 'pause'.
-                // Así obligamos a que el sistema operativo actúe sobre el elemento nativo <audio>.
-                // Los EventListeners de ese elemento (configurados arriba) se encargarán del resto.
+                // Controladores explícitos conectados al Sistema Operativo
+                navigator.mediaSession.setActionHandler('play', () => {
+                    isManualPause = false;
+                    document.getElementById('dummy-audio').play().catch(e=>{});
+                    if (player && typeof player.playVideo === 'function') player.playVideo();
+                });
+                
+                navigator.mediaSession.setActionHandler('pause', () => {
+                    isManualPause = true;
+                    document.getElementById('dummy-audio').pause();
+                    if (player && typeof player.pauseVideo === 'function') player.pauseVideo();
+                });
                 
                 if (currentIndex > 0) {
                     navigator.mediaSession.setActionHandler('previoustrack', () => playVideo(currentIndex - 1, 0, true));
