@@ -12,6 +12,8 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6b7280; }
         .aspect-w-16 { position: relative; padding-bottom: 56.25%; }
         .aspect-w-16 iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        /* Transición suave para cuando los vídeos cambian a estado "visto" */
+        .video-item { transition: all 0.3s ease; }
     </style>
 </head>
 <body class="bg-gray-900 text-white h-screen flex flex-col font-sans overflow-hidden">
@@ -86,7 +88,7 @@
         let currentIndex = -1;
         let timeTrackerInterval = null;
         let currentPlaylistName = '';
-        let isManualPause = false; // Variable para diferenciar pausas del sistema de las del usuario
+        let isManualPause = false;
 
         const configModal = document.getElementById('config-modal');
         const inputSheetId = document.getElementById('input-sheet-id');
@@ -98,6 +100,9 @@
         const listLoading = document.getElementById('list-loading');
         const playerContainer = document.getElementById('player-container');
         const playerPlaceholder = document.getElementById('player-placeholder');
+
+        // Configuración para el progreso
+        const COMPLETED_THRESHOLD = 10; // Segundos restantes para considerarse "visto"
 
         document.addEventListener('DOMContentLoaded', () => {
             if (!config.spreadsheetId || !config.apiKey) {
@@ -212,10 +217,9 @@
                 if (data.values && data.values.length > 0) {
                     processVideos(data.values);
                     const savedIndex = parseInt(localStorage.getItem(`progress_${currentPlaylistName}_index`)) || 0;
-                    const savedTime = parseFloat(localStorage.getItem(`progress_${currentPlaylistName}_time`)) || 0;
                     
                     if (savedIndex >= 0 && savedIndex < currentPlaylistData.length) {
-                        playVideo(savedIndex, savedTime);
+                        playVideo(savedIndex, false); // Carga automática, sin forzar reinicio por clic manual
                     }
                 } else {
                     videoList.innerHTML = '<div class="p-4 text-gray-400">Esta lista está vacía.</div>';
@@ -261,12 +265,30 @@
                     currentPlaylistData.push({ id: videoId, originalUrl: url });
                     const thumbUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
                     
+                    // Recuperar el progreso específico de este vídeo
+                    const progData = JSON.parse(localStorage.getItem(`yt_prog_${videoId}`) || 'null');
+                    let progressPct = 0;
+                    let isCompleted = false;
+                    
+                    if (progData && progData.d > 0) {
+                        progressPct = (progData.t / progData.d) * 100;
+                        isCompleted = (progData.d - progData.t) <= COMPLETED_THRESHOLD;
+                    }
+                    
                     html += `
-                        <div id="video-item-${validIndex}" onclick="playVideo(${validIndex}, 0, true)" class="video-item flex gap-3 p-2 mb-2 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors border border-transparent">
+                        <div id="video-item-${validIndex}" onclick="playVideo(${validIndex}, true)" class="video-item flex gap-3 p-2 mb-2 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors border border-transparent ${isCompleted ? 'opacity-50' : ''}">
                             <div class="relative w-32 h-20 flex-shrink-0 bg-black rounded overflow-hidden">
                                 <img src="${thumbUrl}" alt="Miniatura" class="w-full h-full object-cover opacity-80">
                                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-40 transition-opacity">
                                     <svg class="w-8 h-8 text-white opacity-0 hover:opacity-100 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                                
+                                <!-- Barra de progreso inferior -->
+                                <div class="absolute bottom-0 left-0 h-1 bg-red-600 z-10 video-progress-bar" style="width: ${progressPct}%"></div>
+                                
+                                <!-- Icono de "Visto" -->
+                                <div class="absolute top-1 right-1 bg-black bg-opacity-70 rounded-full p-0.5 watched-check ${isCompleted ? '' : 'hidden'}">
+                                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                 </div>
                             </div>
                             <div class="flex-1 flex flex-col justify-center overflow-hidden">
@@ -287,24 +309,58 @@
         }
 
         // ==========================================
+        // ACTUALIZADOR VISUAL DE PROGRESO
+        // ==========================================
+        function updateVideoUI(index, time, duration) {
+            const el = document.getElementById(`video-item-${index}`);
+            if (!el) return;
+
+            const progressPct = (time / duration) * 100;
+            const isCompleted = (duration - time) <= COMPLETED_THRESHOLD;
+
+            const progressBar = el.querySelector('.video-progress-bar');
+            if (progressBar) progressBar.style.width = `${progressPct}%`;
+
+            const check = el.querySelector('.watched-check');
+            if (isCompleted) {
+                el.classList.add('opacity-50');
+                if (check) check.classList.remove('hidden');
+            } else {
+                el.classList.remove('opacity-50');
+                if (check) check.classList.add('hidden');
+            }
+        }
+
+        // ==========================================
         // REPRODUCTOR YOUTUBE E INTEGRACIÓN MÓVIL
         // ==========================================
         function onYouTubeIframeAPIReady() {
             console.log("YouTube API Lista");
         }
 
-        function playVideo(index, startTime = 0, isManualVideoClick = false) {
+        function playVideo(index, isManualVideoClick = false) {
             if (index < 0 || index >= currentPlaylistData.length) return;
             
             currentIndex = index;
             const videoId = currentPlaylistData[index].id;
 
+            // Guardar el índice del último vídeo reproducido de esta lista
             localStorage.setItem(`progress_${currentPlaylistName}_index`, index);
             
+            // Cargar el tiempo de progreso individual de ESTE vídeo
+            let startTime = 0;
+            const progData = JSON.parse(localStorage.getItem(`yt_prog_${videoId}`) || 'null');
+            if (progData && progData.d > 0) {
+                // Si faltan menos de 10 segundos para el final, se asume visto y reinicia desde 0
+                if (progData.d - progData.t <= COMPLETED_THRESHOLD) {
+                    startTime = 0; 
+                } else {
+                    startTime = progData.t;
+                }
+            }
+
             // Activar explícitamente el audio fantasma tras el toque del usuario
             if (isManualVideoClick) {
-                startTime = 0;
-                localStorage.setItem(`progress_${currentPlaylistName}_time`, 0);
                 document.getElementById('dummy-audio').play().catch(e => console.log("Audio bloqueado temporalmente", e));
             }
 
@@ -344,15 +400,14 @@
             const dummyAudio = document.getElementById('dummy-audio');
 
             if (event.data === YT.PlayerState.PLAYING) {
-                isManualPause = false; // Reiniciamos el control de pausa manual
-                // Sincronizar audio fantasma para que la sesión de fondo se mantenga viva
+                isManualPause = false; 
+                
                 if (dummyAudio.paused) {
                     dummyAudio.play().catch(e => {}); 
                 }
                 
                 updateMediaSession('playing');
 
-                // Sincronizar duración con la barra de progreso del sistema operativo
                 if ('mediaSession' in navigator && player.getDuration) {
                     try {
                         navigator.mediaSession.setPositionState({
@@ -363,16 +418,21 @@
                     } catch (e) {}
                 }
 
+                // Guardar progreso del vídeo actual de forma constante
                 timeTrackerInterval = setInterval(() => {
-                    if (player && player.getCurrentTime) {
-                        localStorage.setItem(`progress_${currentPlaylistName}_time`, player.getCurrentTime());
+                    if (player && player.getCurrentTime && player.getDuration) {
+                        const t = player.getCurrentTime();
+                        const d = player.getDuration();
+                        if (d > 0) {
+                            const videoId = currentPlaylistData[currentIndex].id;
+                            localStorage.setItem(`yt_prog_${videoId}`, JSON.stringify({t: t, d: d}));
+                            updateVideoUI(currentIndex, t, d);
+                        }
                     }
-                }, 3000); 
+                }, 2000); 
+
             } else if (event.data === YT.PlayerState.PAUSED) {
-                isManualPause = false; // Reset
-                // Al apagar la pantalla, Chrome pausará el iframe.
-                // Lo aceptamos y pausamos el audio fantasma para que el sistema 
-                // operativo registre el estado "Pausado" correctamente.
+                isManualPause = false; 
                 if (!dummyAudio.paused) {
                     dummyAudio.pause();
                 }
@@ -384,6 +444,15 @@
                 }
                 updateMediaSession('none');
                 clearInterval(timeTrackerInterval);
+                
+                // Forzar guardado como "completado" al llegar al final exacto
+                if (player && player.getDuration) {
+                    const d = player.getDuration();
+                    const videoId = currentPlaylistData[currentIndex].id;
+                    localStorage.setItem(`yt_prog_${videoId}`, JSON.stringify({t: d, d: d}));
+                    updateVideoUI(currentIndex, d, d);
+                }
+
                 playNextVideo();
             }
         }
@@ -394,7 +463,7 @@
 
         function playNextVideo() {
             if (currentIndex + 1 < currentPlaylistData.length) {
-                playVideo(currentIndex + 1, 0, true);
+                playVideo(currentIndex + 1, true);
             }
         }
 
@@ -426,12 +495,8 @@
                     ]
                 });
 
-                // Controladores explícitos conectados al Sistema Operativo
                 navigator.mediaSession.setActionHandler('play', async () => {
                     isManualPause = false;
-                    
-                    // IMPORTANTE: Esperamos (await) a que el audio nativo gane el 
-                    // "Audio Focus" de Android antes de despertar a YouTube.
                     try {
                         await document.getElementById('dummy-audio').play();
                     } catch(e) { console.log("Error al reclamar el foco de audio", e); }
@@ -450,7 +515,7 @@
                 });
                 
                 if (currentIndex > 0) {
-                    navigator.mediaSession.setActionHandler('previoustrack', () => playVideo(currentIndex - 1, 0, true));
+                    navigator.mediaSession.setActionHandler('previoustrack', () => playVideo(currentIndex - 1, true));
                 } else {
                     navigator.mediaSession.setActionHandler('previoustrack', null);
                 }
