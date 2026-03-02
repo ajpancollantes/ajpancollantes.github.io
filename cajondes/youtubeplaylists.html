@@ -12,9 +12,8 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6b7280; }
         .aspect-w-16 { position: relative; padding-bottom: 56.25%; background: black; }
-        .aspect-w-16 iframe, .aspect-w-16 video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .aspect-w-16 iframe, .aspect-w-16 video, .audio-visualizer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         .video-item { transition: all 0.3s ease; }
-        /* Prevent elastic scrolling on mobile */
         html, body { overscroll-behavior-y: contain; }
     </style>
 </head>
@@ -22,7 +21,6 @@
 
     <audio id="dummy-audio" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA" loop playsinline></audio>
 
-    <!-- Header Fix: Ensure visibility on mobile -->
     <header class="bg-gray-800 px-4 py-3 shadow-md flex justify-between items-center z-50 shrink-0 border-b border-gray-700">
         <div class="flex items-center gap-2 min-w-0">
             <svg class="w-6 h-6 md:w-8 md:h-8 text-red-500 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-1.768,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M9.667,15.333V8.667L15.667,12L9.667,15.333z"/></svg>
@@ -30,26 +28,31 @@
         </div>
         
         <div class="flex items-center gap-3 md:gap-5 shrink-0">
-            <!-- Upload Button -->
-            <button onclick="document.getElementById('local-file-input').click()" class="p-1 text-gray-400 hover:text-white transition-colors active:scale-95" title="Upload Local Video">
+            <button onclick="document.getElementById('local-file-input').click()" class="p-1 text-gray-400 hover:text-white transition-colors active:scale-95" title="Subir Vídeo o MP3">
                 <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
             </button>
-            <input type="file" id="local-file-input" class="hidden" accept="video/*" onchange="handleLocalFileUpload(event)">
+            <!-- Acepta audio y video ahora -->
+            <input type="file" id="local-file-input" class="hidden" accept="video/*,audio/*" onchange="handleLocalFileUpload(event)">
             
-            <!-- Settings Button -->
-            <button onclick="openConfig()" class="p-1 text-gray-400 hover:text-white transition-colors active:scale-95" title="Settings">
+            <button onclick="openConfig()" class="p-1 text-gray-400 hover:text-white transition-colors active:scale-95" title="Configuración">
                 <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37-1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             </button>
         </div>
     </header>
 
     <main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
-        <!-- Player Area -->
         <div class="w-full md:w-2/3 lg:w-3/4 bg-black flex flex-col justify-start overflow-hidden">
             <div id="player-wrapper" class="hidden w-full flex flex-col h-full">
                 <div id="player-container" class="aspect-w-16 w-full shadow-2xl shrink-0">
                     <div id="yt-player"></div>
-                    <video id="local-player" class="hidden" controls playsinline></video>
+                    <video id="local-player" class="hidden" controls playsinline></audio>
+                    <!-- Visualizador para MP3 -->
+                    <div id="audio-visualizer" class="hidden audio-visualizer flex flex-col items-center justify-center bg-gray-900 border-b border-gray-800">
+                        <div class="p-8 bg-red-600/10 rounded-full mb-4 animate-pulse">
+                            <svg class="w-20 h-20 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        </div>
+                        <p id="audio-filename" class="text-gray-400 font-medium px-4 text-center"></p>
+                    </div>
                 </div>
                 
                 <div class="w-full bg-gray-900 py-4 flex justify-center items-center gap-8 md:gap-12 border-t border-gray-800 shrink-0">
@@ -72,17 +75,16 @@
 
             <div id="player-placeholder" class="flex flex-col items-center justify-center text-gray-500 p-10 text-center h-full">
                 <svg class="w-16 h-16 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                <p class="text-base font-medium">Select a playlist or a local video</p>
-                <p class="text-xs mt-2 opacity-50">Local files work without internet connection.</p>
+                <p class="text-base font-medium">Selecciona una lista o sube un archivo local</p>
+                <p class="text-xs mt-2 opacity-50">Soporta Vídeos y MP3 para reproducir sin conexión.</p>
             </div>
         </div>
 
-        <!-- Sidebar / List Area -->
         <div class="w-full md:w-1/3 lg:w-1/4 bg-gray-800 flex flex-col border-l border-gray-700 h-[40vh] md:h-auto shrink-0">
             <div class="p-4 bg-gray-900 border-b border-gray-700 shrink-0">
-                <label for="playlist-selector" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Playlist Selection</label>
+                <label for="playlist-selector" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Selección de Playlist</label>
                 <select id="playlist-selector" class="w-full bg-gray-800 text-white border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50 text-sm" disabled onchange="loadPlaylist(this.value)">
-                    <option value="">Loading...</option>
+                    <option value="">Cargando...</option>
                 </select>
             </div>
             <div id="video-list" class="flex-1 overflow-y-auto custom-scrollbar p-2 bg-gray-800"></div>
@@ -95,8 +97,8 @@
     <!-- Modal Settings -->
     <div id="config-modal" class="fixed inset-0 bg-black/90 flex items-center justify-center z-[100] hidden backdrop-blur-sm p-4">
         <div class="bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-6 border border-gray-700">
-            <h2 class="text-xl font-bold mb-2 text-white">Settings</h2>
-            <p class="text-gray-400 text-xs mb-6 uppercase tracking-wider font-semibold">Google Sheets Sync</p>
+            <h2 class="text-xl font-bold mb-2 text-white">Configuración</h2>
+            <p class="text-gray-400 text-xs mb-6 uppercase tracking-wider font-semibold">Sincronización con Google Sheets</p>
             <div class="mb-4">
                 <label class="block text-xs font-medium text-gray-400 mb-1">Spreadsheet ID</label>
                 <input type="text" id="input-sheet-id" class="w-full bg-gray-900 text-white border border-gray-600 rounded-lg py-2.5 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
@@ -107,8 +109,8 @@
             </div>
             <div id="config-error" class="hidden mb-4 p-3 bg-red-900/50 text-red-200 text-xs rounded-lg border border-red-700/50"></div>
             <div class="flex flex-col gap-2">
-                <button onclick="saveConfig()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl shadow-lg transition-all active:scale-95">Save & Connect</button>
-                <button onclick="closeConfig()" id="btn-cancel-config" class="w-full py-2 text-xs font-medium text-gray-400 hover:text-white transition-colors hidden">Cancel</button>
+                <button onclick="saveConfig()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl shadow-lg transition-all active:scale-95">Guardar y Conectar</button>
+                <button onclick="closeConfig()" id="btn-cancel-config" class="w-full py-2 text-xs font-medium text-gray-400 hover:text-white transition-colors hidden">Cancelar</button>
             </div>
         </div>
     </div>
@@ -174,6 +176,8 @@
         let player = null;
         const localPlayer = document.getElementById('local-player');
         const ytPlaceholder = document.getElementById('yt-player');
+        const audioVisualizer = document.getElementById('audio-visualizer');
+        const audioFilenameText = document.getElementById('audio-filename');
         
         let currentPlaylistData = [];
         let currentIndex = -1;
@@ -219,7 +223,7 @@
         }
 
         async function fetchPlaylists() {
-            let names = ["Local Files"];
+            let names = ["Archivos Locales"];
             try {
                 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}?fields=sheets.properties.title&key=${config.apiKey}`;
                 const response = await fetch(url);
@@ -249,7 +253,7 @@
             document.getElementById('video-list').innerHTML = '';
             document.getElementById('list-loading').classList.remove('hidden');
             
-            if (sheetName === "Local Files") {
+            if (sheetName === "Archivos Locales") {
                 const localVideos = await getLocalVideos();
                 document.getElementById('list-loading').classList.add('hidden');
                 processLocalVideos(localVideos);
@@ -272,7 +276,7 @@
 
         function populateSelector(names) {
             const selector = document.getElementById('playlist-selector');
-            selector.innerHTML = '<option value="" disabled selected>Select Playlist...</option>';
+            selector.innerHTML = '<option value="" disabled selected>Seleccionar Playlist...</option>';
             names.forEach(n => {
                 const opt = document.createElement('option');
                 opt.value = opt.textContent = n;
@@ -301,7 +305,7 @@
                     validIndex++;
                 }
             });
-            document.getElementById('video-list').innerHTML = html || '<p class="text-center text-gray-500 py-10 text-sm">No valid YouTube links found.</p>';
+            document.getElementById('video-list').innerHTML = html || '<p class="text-center text-gray-500 py-10 text-sm">No se encontraron enlaces de YouTube.</p>';
         }
 
         function processLocalVideos(videos) {
@@ -311,17 +315,21 @@
                 currentPlaylistData.push({ ...v, type: 'local' });
                 const progData = JSON.parse(localStorage.getItem(`yt_prog_${v.id}`) || 'null');
                 const isCompleted = progData && (progData.d - progData.t <= COMPLETED_THRESHOLD);
+                const isAudio = v.type.startsWith('audio/');
                 
                 html += `
                 <div id="video-item-${i}" onclick="playVideo(${i}, true)" class="video-item flex gap-3 p-3 mb-2 rounded-xl cursor-pointer hover:bg-gray-700/50 border border-transparent ${isCompleted ? 'opacity-40' : ''}">
                     <div class="relative w-24 h-16 shrink-0 bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center border border-gray-600">
-                        <svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        ${isAudio ? 
+                          '<svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>' : 
+                          '<svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
+                        }
                         <div class="absolute bottom-0 left-0 h-1 bg-red-600 video-progress-bar" style="width: ${progData ? (progData.t/progData.d*100) : 0}%"></div>
                     </div>
                     <div class="flex-1 flex flex-col justify-center overflow-hidden min-w-0">
                         <h3 class="text-sm font-semibold text-gray-200 truncate">${v.name}</h3>
                         <div class="flex justify-between items-center mt-1">
-                             <p class="text-[10px] text-gray-500 uppercase font-bold tracking-tight">Offline File</p>
+                             <p class="text-[10px] text-gray-500 uppercase font-bold tracking-tight">${isAudio ? 'Archivo Audio' : 'Archivo Vídeo'}</p>
                              <button onclick="event.stopPropagation(); removeLocal(${i})" class="text-gray-500 hover:text-red-500 p-1">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                              </button>
@@ -329,14 +337,14 @@
                     </div>
                 </div>`;
             });
-            document.getElementById('video-list').innerHTML = html || '<p class="text-center text-gray-500 py-10 text-sm">No local videos stored.</p>';
+            document.getElementById('video-list').innerHTML = html || '<p class="text-center text-gray-500 py-10 text-sm">No hay archivos locales guardados.</p>';
         }
 
         async function removeLocal(idx) {
             const vid = currentPlaylistData[idx];
-            if (confirm(`Remove "${vid.name}"?`)) {
+            if (confirm(`¿Eliminar "${vid.name}"?`)) {
                 await deleteLocalVideo(vid.id);
-                loadPlaylist("Local Files");
+                loadPlaylist("Archivos Locales");
             }
         }
 
@@ -374,8 +382,12 @@
             document.getElementById('player-placeholder').classList.add('hidden');
             document.getElementById('player-wrapper').classList.remove('hidden');
 
+            // Reset visibility
+            ytPlaceholder.classList.add('hidden');
+            localPlayer.classList.add('hidden');
+            audioVisualizer.classList.add('hidden');
+
             if (video.type === 'youtube') {
-                localPlayer.classList.add('hidden');
                 localPlayer.pause();
                 ytPlaceholder.classList.remove('hidden');
                 
@@ -401,9 +413,16 @@
                     else player.cueVideoById({ videoId: video.id, startSeconds: startTime });
                 }
             } else {
-                ytPlaceholder.classList.add('hidden');
                 if (player) player.pauseVideo();
-                localPlayer.classList.remove('hidden');
+                
+                const isAudio = video.type.startsWith('audio/');
+                if (isAudio) {
+                    audioVisualizer.classList.remove('hidden');
+                    audioFilenameText.textContent = video.name;
+                    // El audio se reproduce a través del elemento video pero sin mostrarlo
+                } else {
+                    localPlayer.classList.remove('hidden');
+                }
                 
                 const url = URL.createObjectURL(video.blob);
                 localPlayer.src = url;
