@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,8 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #1f2937; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6b7280; }
-        .aspect-w-16 { position: relative; padding-bottom: 56.25%; }
-        .aspect-w-16 iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .aspect-w-16 { position: relative; padding-bottom: 56.25%; background: black; }
+        .aspect-w-16 iframe, .aspect-w-16 video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .video-item { transition: all 0.3s ease; }
     </style>
 </head>
@@ -25,31 +25,39 @@
             <svg class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M9.667,15.333V8.667L15.667,12L9.667,15.333z"/></svg>
             <h1 class="text-xl font-bold tracking-wide">SheetsTube Player</h1>
         </div>
-        <button onclick="openConfig()" class="text-gray-400 hover:text-white transition-colors" title="Configuración">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37-1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-        </button>
+        <div class="flex items-center gap-4">
+            <button onclick="document.getElementById('local-file-input').click()" class="text-gray-400 hover:text-white transition-colors" title="Upload Local Video">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+            </button>
+            <input type="file" id="local-file-input" class="hidden" accept="video/*" onchange="handleLocalFileUpload(event)">
+            
+            <button onclick="openConfig()" class="text-gray-400 hover:text-white transition-colors" title="Settings">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37-1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </button>
+        </div>
     </header>
 
     <main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
         <div class="w-full md:w-2/3 lg:w-3/4 bg-black flex flex-col justify-start">
             
             <div id="player-wrapper" class="hidden w-full flex-col">
-                <div id="player-container" class="aspect-w-16 w-full shadow-2xl bg-black">
+                <div id="player-container" class="aspect-w-16 w-full shadow-2xl">
                     <div id="yt-player"></div>
+                    <video id="local-player" class="hidden" controls playsinline></video>
                 </div>
                 
                 <div class="w-full bg-gray-900 py-3 md:py-4 flex justify-center items-center gap-8 md:gap-12 border-t border-gray-800">
-                    <button onclick="seekVideo(-20)" class="text-gray-400 hover:text-white flex items-center gap-1 md:gap-2 transition group" title="Retroceder 20 segundos">
+                    <button onclick="seekVideo(-20)" class="text-gray-400 hover:text-white flex items-center gap-1 md:gap-2 transition group" title="Rewind 20s">
                         <svg class="w-7 h-7 md:w-8 md:h-8 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path></svg>
                         <span class="text-sm font-bold">20s</span>
                     </button>
                     
-                    <button onclick="togglePlayPause()" class="w-14 h-14 md:w-16 md:h-16 bg-red-600 hover:bg-red-700 text-white rounded-full flex justify-center items-center shadow-lg transition-transform hover:scale-105" title="Reproducir / Pausar">
+                    <button onclick="togglePlayPause()" class="w-14 h-14 md:w-16 md:h-16 bg-red-600 hover:bg-red-700 text-white rounded-full flex justify-center items-center shadow-lg transition-transform hover:scale-105" title="Play / Pause">
                         <svg id="icon-play" class="w-7 h-7 md:w-8 md:h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <svg id="icon-pause" class="w-7 h-7 md:w-8 md:h-8 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                     </button>
                     
-                    <button onclick="seekVideo(20)" class="text-gray-400 hover:text-white flex items-center gap-1 md:gap-2 transition group" title="Avanzar 20 segundos">
+                    <button onclick="seekVideo(20)" class="text-gray-400 hover:text-white flex items-center gap-1 md:gap-2 transition group" title="Forward 20s">
                         <span class="text-sm font-bold">20s</span>
                         <svg class="w-7 h-7 md:w-8 md:h-8 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
                     </button>
@@ -58,15 +66,16 @@
 
             <div id="player-placeholder" class="flex flex-col items-center justify-start text-gray-500 p-20 text-center h-full">
                 <svg class="w-20 h-20 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                <p class="text-lg">Selecciona una lista y un vídeo para empezar.</p>
+                <p class="text-lg">Select a playlist or a local video to start.</p>
+                <p class="text-sm mt-2 opacity-60">Local files are saved in your browser and work offline.</p>
             </div>
         </div>
 
         <div class="w-full md:w-1/3 lg:w-1/4 bg-gray-800 flex flex-col border-l border-gray-700 h-[50vh] md:h-auto">
             <div class="p-4 bg-gray-900 border-b border-gray-700">
-                <label for="playlist-selector" class="block text-sm font-medium text-gray-400 mb-2">Seleccionar Lista (Pestaña)</label>
+                <label for="playlist-selector" class="block text-sm font-medium text-gray-400 mb-2">Select Playlist (Sheet Tab)</label>
                 <select id="playlist-selector" class="w-full bg-gray-800 text-white border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors disabled:opacity-50" disabled onchange="loadPlaylist(this.value)">
-                    <option value="">Cargando listas...</option>
+                    <option value="">Loading playlists...</option>
                 </select>
             </div>
             <div id="video-list" class="flex-1 overflow-y-auto custom-scrollbar p-2"></div>
@@ -78,20 +87,20 @@
 
     <div id="config-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden backdrop-blur-sm p-4">
         <div class="bg-gray-800 rounded-xl shadow-2xl w-full max-w-md p-6 border border-gray-700">
-            <h2 class="text-2xl font-bold mb-4 text-white">Configuración</h2>
-            <p class="text-gray-400 text-sm mb-6">Introduce los datos de conexión.</p>
+            <h2 class="text-2xl font-bold mb-4 text-white">Settings</h2>
+            <p class="text-gray-400 text-sm mb-6">Enter your Google Sheets connection details.</p>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-300 mb-1">ID del Documento (Spreadsheet ID)</label>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Spreadsheet ID</label>
                 <input type="text" id="input-sheet-id" class="w-full bg-gray-900 text-white border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500">
             </div>
             <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-300 mb-1">Clave de API (Google API Key)</label>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Google API Key</label>
                 <input type="password" id="input-api-key" class="w-full bg-gray-900 text-white border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500">
             </div>
             <div id="config-error" class="hidden mb-4 p-3 bg-red-900 text-red-200 text-sm rounded-md border border-red-700"></div>
             <div class="flex justify-end gap-3">
-                <button onclick="closeConfig()" id="btn-cancel-config" class="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors hidden">Cancelar</button>
-                <button onclick="saveConfig()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md shadow transition-colors">Guardar y Conectar</button>
+                <button onclick="closeConfig()" id="btn-cancel-config" class="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors hidden">Cancel</button>
+                <button onclick="saveConfig()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md shadow transition-colors">Save & Connect</button>
             </div>
         </div>
     </div>
@@ -99,22 +108,84 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     
     <script>
+        // IndexedDB Logic for Local Persistent Files
+        const DB_NAME = "SheetsTubeLocalDB";
+        const STORE_NAME = "videos";
+        let db;
+
+        const initDB = () => {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, 1);
+                request.onupgradeneeded = (e) => {
+                    db = e.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME, { keyPath: "id" });
+                    }
+                };
+                request.onsuccess = (e) => {
+                    db = e.target.result;
+                    resolve(db);
+                };
+                request.onerror = (e) => reject(e);
+            });
+        };
+
+        const saveLocalVideo = async (file) => {
+            const videoId = "local_" + Date.now();
+            const videoData = {
+                id: videoId,
+                name: file.name,
+                type: file.type,
+                blob: file,
+                addedAt: new Date().getTime()
+            };
+            const tx = db.transaction(STORE_NAME, "readwrite");
+            tx.objectStore(STORE_NAME).add(videoData);
+            return new Promise((resolve) => tx.oncomplete = () => resolve(videoId));
+        };
+
+        const getLocalVideos = async () => {
+            const tx = db.transaction(STORE_NAME, "readonly");
+            const store = tx.objectStore(STORE_NAME);
+            const request = store.getAll();
+            return new Promise((resolve) => request.onsuccess = () => resolve(request.result));
+        };
+
+        const deleteLocalVideo = async (id) => {
+            const tx = db.transaction(STORE_NAME, "readwrite");
+            tx.objectStore(STORE_NAME).delete(id);
+            return new Promise((resolve) => tx.oncomplete = () => resolve());
+        };
+
+        // App Logic
         let config = {
             spreadsheetId: localStorage.getItem('sheets_id') || '',
             apiKey: localStorage.getItem('sheets_api_key') || ''
         };
         
         let player = null;
+        const localPlayer = document.getElementById('local-player');
+        const ytPlaceholder = document.getElementById('yt-player');
+        
         let currentPlaylistData = [];
         let currentIndex = -1;
         let timeTrackerInterval = null;
         let currentPlaylistName = '';
         const COMPLETED_THRESHOLD = 10;
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initDB();
             if (!config.spreadsheetId || !config.apiKey) openConfig(true);
             else fetchPlaylists();
         });
+
+        async function handleLocalFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            await saveLocalVideo(file);
+            alert("Video saved locally! You can find it in the 'Local Files' playlist.");
+            fetchPlaylists(); // Refresh list to show "Local Files" option if not there
+        }
 
         function openConfig(isInitial = false) {
             document.getElementById('input-sheet-id').value = config.spreadsheetId;
@@ -138,20 +209,27 @@
         }
 
         async function fetchPlaylists() {
+            let names = ["Local Files"];
             try {
                 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}?fields=sheets.properties.title&key=${config.apiKey}`;
                 const response = await fetch(url);
-                const data = await response.json();
-                if (data.sheets) {
-                    const names = data.sheets.map(s => s.properties.title);
-                    populateSelector(names);
-                    const last = localStorage.getItem('last_playlist');
-                    if (last && names.includes(last)) {
-                        document.getElementById('playlist-selector').value = last;
-                        loadPlaylist(last);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.sheets) {
+                        const sheetNames = data.sheets.map(s => s.properties.title);
+                        names = [...names, ...sheetNames];
                     }
                 }
-            } catch (e) { console.error("Error al obtener listas:", e); }
+            } catch (e) { 
+                console.warn("Could not fetch remote playlists, offline mode active.");
+            }
+            
+            populateSelector(names);
+            const last = localStorage.getItem('last_playlist');
+            if (last && names.includes(last)) {
+                document.getElementById('playlist-selector').value = last;
+                loadPlaylist(last);
+            }
         }
 
         async function loadPlaylist(sheetName) {
@@ -161,6 +239,16 @@
             document.getElementById('video-list').innerHTML = '';
             document.getElementById('list-loading').classList.remove('hidden');
             
+            if (sheetName === "Local Files") {
+                const localVideos = await getLocalVideos();
+                document.getElementById('list-loading').classList.add('hidden');
+                processLocalVideos(localVideos);
+                let savedIndex = parseInt(localStorage.getItem(`progress_${currentPlaylistName}_index`));
+                if (isNaN(savedIndex)) savedIndex = findNextAutoIndex(currentPlaylistData.length);
+                if (savedIndex >= 0) playVideo(savedIndex, false);
+                return;
+            }
+
             try {
                 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${encodeURIComponent(sheetName)}!A:A?key=${config.apiKey}`;
                 const response = await fetch(url);
@@ -169,19 +257,18 @@
 
                 if (data.values) {
                     processVideos(data.values);
-                    // Al cargar, buscamos el primer no visto de abajo a arriba
                     let savedIndex = parseInt(localStorage.getItem(`progress_${currentPlaylistName}_index`));
-                    if (isNaN(savedIndex)) {
-                        savedIndex = findNextAutoIndex(currentPlaylistData.length);
-                    }
+                    if (isNaN(savedIndex)) savedIndex = findNextAutoIndex(currentPlaylistData.length);
                     if (savedIndex >= 0) playVideo(savedIndex, false); 
                 }
-            } catch (e) { document.getElementById('list-loading').classList.add('hidden'); }
+            } catch (e) { 
+                document.getElementById('list-loading').classList.add('hidden');
+            }
         }
 
         function populateSelector(names) {
             const selector = document.getElementById('playlist-selector');
-            selector.innerHTML = '<option value="" disabled selected>Elige una lista...</option>';
+            selector.innerHTML = '<option value="" disabled selected>Select a list...</option>';
             names.forEach(n => {
                 const opt = document.createElement('option');
                 opt.value = opt.textContent = n;
@@ -203,39 +290,77 @@
             rows.forEach((row) => {
                 const videoId = extractVideoID(row[0] || '');
                 if (videoId) {
-                    currentPlaylistData.push({ id: videoId });
+                    currentPlaylistData.push({ id: videoId, type: 'youtube' });
                     const progData = JSON.parse(localStorage.getItem(`yt_prog_${videoId}`) || 'null');
                     const isCompleted = progData && (progData.d - progData.t <= COMPLETED_THRESHOLD);
                     
-                    html += `
-                        <div id="video-item-${validIndex}" onclick="playVideo(${validIndex}, true)" class="video-item flex gap-3 p-2 mb-2 rounded-lg cursor-pointer hover:bg-gray-700 border border-transparent ${isCompleted ? 'opacity-50' : ''}">
-                            <div class="relative w-32 h-20 flex-shrink-0 bg-black rounded overflow-hidden">
-                                <img src="https://img.youtube.com/vi/${videoId}/mqdefault.jpg" class="w-full h-full object-cover opacity-80">
-                                <div class="absolute bottom-0 left-0 h-1 bg-red-600 video-progress-bar" style="width: ${progData ? (progData.t/progData.d*100) : 0}%"></div>
-                            </div>
-                            <div class="flex-1 flex flex-col justify-center">
-                                <h3 class="text-sm font-semibold text-gray-200">Vídeo ${validIndex + 1}</h3>
-                                <p class="text-xs text-gray-500">${videoId}</p>
-                            </div>
-                        </div>`;
+                    html += generateVideoItemHtml(validIndex, videoId, `Video ${validIndex + 1}`, videoId, progData, isCompleted, true);
                     validIndex++;
                 }
             });
             document.getElementById('video-list').innerHTML = html;
         }
 
-        // ==========================================
-        // LÓGICA DE REPRODUCCIÓN (ORDEN INVERSO)
-        // ==========================================
+        function processLocalVideos(videos) {
+            let html = '';
+            currentPlaylistData = [];
+            videos.forEach((v, i) => {
+                currentPlaylistData.push({ ...v, type: 'local' });
+                const progData = JSON.parse(localStorage.getItem(`yt_prog_${v.id}`) || 'null');
+                const isCompleted = progData && (progData.d - progData.t <= COMPLETED_THRESHOLD);
+                
+                html += `
+                <div id="video-item-${i}" onclick="playVideo(${i}, true)" class="video-item flex gap-3 p-2 mb-2 rounded-lg cursor-pointer hover:bg-gray-700 border border-transparent ${isCompleted ? 'opacity-50' : ''}">
+                    <div class="relative w-32 h-20 flex-shrink-0 bg-gray-700 rounded overflow-hidden flex items-center justify-center">
+                        <svg class="w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <div class="absolute bottom-0 left-0 h-1 bg-red-600 video-progress-bar" style="width: ${progData ? (progData.t/progData.d*100) : 0}%"></div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center overflow-hidden">
+                        <h3 class="text-sm font-semibold text-gray-200 truncate">${v.name}</h3>
+                        <div class="flex justify-between items-center mt-1">
+                             <p class="text-xs text-gray-500">Local File</p>
+                             <button onclick="event.stopPropagation(); removeLocal(${i})" class="text-gray-600 hover:text-red-500 p-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                             </button>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            document.getElementById('video-list').innerHTML = html;
+        }
+
+        async function removeLocal(idx) {
+            const vid = currentPlaylistData[idx];
+            if (confirm(`Delete "${vid.name}" from local storage?`)) {
+                await deleteLocalVideo(vid.id);
+                loadPlaylist("Local Files");
+            }
+        }
+
+        function generateVideoItemHtml(index, id, title, subtitle, progData, isCompleted, isYoutube) {
+            const thumb = isYoutube ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : '';
+            return `
+                <div id="video-item-${index}" onclick="playVideo(${index}, true)" class="video-item flex gap-3 p-2 mb-2 rounded-lg cursor-pointer hover:bg-gray-700 border border-transparent ${isCompleted ? 'opacity-50' : ''}">
+                    <div class="relative w-32 h-20 flex-shrink-0 bg-black rounded overflow-hidden">
+                        ${isYoutube ? `<img src="${thumb}" class="w-full h-full object-cover opacity-80">` : `<div class="w-full h-full bg-gray-700"></div>`}
+                        <div class="absolute bottom-0 left-0 h-1 bg-red-600 video-progress-bar" style="width: ${progData ? (progData.t/progData.d*100) : 0}%"></div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center">
+                        <h3 class="text-sm font-semibold text-gray-200">${title}</h3>
+                        <p class="text-xs text-gray-500">${subtitle}</p>
+                    </div>
+                </div>`;
+        }
+
         function playVideo(index, isManualVideoClick = false) {
             if (index < 0 || index >= currentPlaylistData.length) return;
             
             currentIndex = index;
-            const videoId = currentPlaylistData[index].id;
+            const video = currentPlaylistData[index];
             localStorage.setItem(`progress_${currentPlaylistName}_index`, index);
             
             let startTime = 0;
-            const progData = JSON.parse(localStorage.getItem(`yt_prog_${videoId}`) || 'null');
+            const progData = JSON.parse(localStorage.getItem(`yt_prog_${video.id}`) || 'null');
             if (progData && (progData.d - progData.t > COMPLETED_THRESHOLD)) {
                 startTime = progData.t;
             }
@@ -248,25 +373,66 @@
             document.getElementById('player-placeholder').classList.add('hidden');
             document.getElementById('player-wrapper').classList.remove('hidden');
 
-            if (!player) {
-                player = new YT.Player('yt-player', {
-                    height: '100%', width: '100%', videoId: videoId,
-                    host: 'https://www.youtube-nocookie.com',
-                    playerVars: {
-                        'autoplay': isManualVideoClick ? 1 : 0,
-                        'start': Math.floor(startTime),
-                        'playsinline': 1,
-                        'enablejsapi': 1
-                    },
-                    events: {
-                        'onStateChange': onPlayerStateChange,
-                        'onError': () => setTimeout(playPreviousVideo, 2000)
-                    }
-                });
+            if (video.type === 'youtube') {
+                localPlayer.classList.add('hidden');
+                localPlayer.pause();
+                ytPlaceholder.classList.remove('hidden');
+                
+                if (!player) {
+                    player = new YT.Player('yt-player', {
+                        height: '100%', width: '100%', videoId: video.id,
+                        host: 'https://www.youtube-nocookie.com',
+                        playerVars: {
+                            'autoplay': isManualVideoClick ? 1 : 0,
+                            'start': Math.floor(startTime),
+                            'playsinline': 1,
+                            'enablejsapi': 1
+                        },
+                        events: {
+                            'onStateChange': onPlayerStateChange,
+                            'onError': () => setTimeout(playPreviousVideo, 2000)
+                        }
+                    });
+                } else {
+                    if (isManualVideoClick) player.loadVideoById({ videoId: video.id, startSeconds: startTime });
+                    else player.cueVideoById({ videoId: video.id, startSeconds: startTime });
+                }
             } else {
-                if (isManualVideoClick) player.loadVideoById({ videoId, startSeconds: startTime });
-                else player.cueVideoById({ videoId, startSeconds: startTime });
+                // Local Video Playback
+                ytPlaceholder.classList.add('hidden');
+                if (player) player.pauseVideo();
+                localPlayer.classList.remove('hidden');
+                
+                const url = URL.createObjectURL(video.blob);
+                localPlayer.src = url;
+                localPlayer.currentTime = startTime;
+                
+                if (isManualVideoClick) localPlayer.play();
+
+                localPlayer.onplay = () => {
+                    updatePlayPauseUI(true);
+                    startLocalTracking();
+                };
+                localPlayer.onpause = () => {
+                    updatePlayPauseUI(false);
+                    clearInterval(timeTrackerInterval);
+                };
+                localPlayer.onended = () => {
+                    playPreviousVideo();
+                };
             }
+        }
+
+        function startLocalTracking() {
+            clearInterval(timeTrackerInterval);
+            timeTrackerInterval = setInterval(() => {
+                const t = localPlayer.currentTime;
+                const d = localPlayer.duration;
+                if (d > 0) {
+                    localStorage.setItem(`yt_prog_${currentPlaylistData[currentIndex].id}`, JSON.stringify({t, d}));
+                    updateVideoUI(currentIndex, t, d);
+                }
+            }, 2000);
         }
 
         function onPlayerStateChange(event) {
@@ -274,6 +440,7 @@
             if (event.data === YT.PlayerState.PLAYING) {
                 updatePlayPauseUI(true);
                 if (dummyAudio.paused) dummyAudio.play().catch(() => {});
+                clearInterval(timeTrackerInterval);
                 timeTrackerInterval = setInterval(() => {
                     const t = player.getCurrentTime();
                     const d = player.getDuration();
@@ -287,12 +454,10 @@
                 dummyAudio.pause();
                 clearInterval(timeTrackerInterval);
             } else if (event.data === YT.PlayerState.ENDED) {
-                // Al terminar, vamos hacia ARRIBA
                 playPreviousVideo();
             }
         }
 
-        // Lógica para ir de Abajo a Arriba saltando vistos
         function playPreviousVideo() {
             const nextIdx = findNextAutoIndex(currentIndex);
             if (nextIdx !== -1) {
@@ -301,24 +466,35 @@
         }
 
         function findNextAutoIndex(fromIndex) {
-            // Buscamos hacia arriba (índice decreciente)
             for (let i = fromIndex - 1; i >= 0; i--) {
-                const vId = currentPlaylistData[i].id;
-                const progData = JSON.parse(localStorage.getItem(`yt_prog_${vId}`) || 'null');
+                const vid = currentPlaylistData[i];
+                const progData = JSON.parse(localStorage.getItem(`yt_prog_${vid.id}`) || 'null');
                 const isCompleted = progData && (progData.d - progData.t <= COMPLETED_THRESHOLD);
                 if (!isCompleted) return i;
             }
-            return -1; // No hay más pendientes arriba
+            return -1;
         }
 
         function togglePlayPause() {
-            if (!player) return;
-            player.getPlayerState() === YT.PlayerState.PLAYING ? player.pauseVideo() : player.playVideo();
+            const video = currentPlaylistData[currentIndex];
+            if (!video) return;
+            if (video.type === 'youtube') {
+                if (!player) return;
+                player.getPlayerState() === YT.PlayerState.PLAYING ? player.pauseVideo() : player.playVideo();
+            } else {
+                localPlayer.paused ? localPlayer.play() : localPlayer.pause();
+            }
         }
 
         function seekVideo(s) {
-            if (!player) return;
-            player.seekTo(player.getCurrentTime() + s, true);
+            const video = currentPlaylistData[currentIndex];
+            if (!video) return;
+            if (video.type === 'youtube') {
+                if (!player) return;
+                player.seekTo(player.getCurrentTime() + s, true);
+            } else {
+                localPlayer.currentTime += s;
+            }
         }
 
         function updatePlayPauseUI(isPlaying) {
@@ -342,7 +518,7 @@
             });
         }
 
-        function onYouTubeIframeAPIReady() { console.log("API Lista"); }
+        function onYouTubeIframeAPIReady() { console.log("YT API Ready"); }
     </script>
 </body>
 </html>
