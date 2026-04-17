@@ -25,15 +25,18 @@
         <div class="flex items-center gap-2 min-w-0">
             <svg class="w-6 h-6 md:w-8 md:h-8 text-red-500 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-1.768,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M9.667,15.333V8.667L15.667,12L9.667,15.333z"/></svg>
             <h1 class="text-base md:text-xl font-bold tracking-tight truncate">SheetsTube</h1>
+            <div id="cloud-sync-indicator" class="hidden ml-2 flex items-center justify-center w-5 h-5 rounded-full bg-green-500/20 text-green-500" title="Sincronizado con la nube">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            </div>
         </div>
         
         <div class="flex items-center gap-3 md:gap-5 shrink-0">
             <button onclick="document.getElementById('local-file-input').click()" class="p-1 text-gray-400 hover:text-white transition-colors active:scale-95" title="Subir Vídeo o MP3">
                 <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
             </button>
-            <input type="file" id="local-file-input" class="hidden" accept="video/*,audio/*" onchange="handleLocalFileUpload(event)">
+            <input type="file" id="local-file-input" class="hidden" accept="video/*,audio/*" onchange="window.handleLocalFileUpload(event)">
             
-            <button onclick="openConfig()" class="p-1 text-gray-400 hover:text-white transition-colors active:scale-95" title="Configuración">
+            <button onclick="window.openConfig()" class="p-1 text-gray-400 hover:text-white transition-colors active:scale-95" title="Configuración">
                 <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37-1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             </button>
         </div>
@@ -44,7 +47,7 @@
             <div id="player-wrapper" class="hidden w-full flex flex-col h-full">
                 <div id="player-container" class="aspect-w-16 w-full shadow-2xl shrink-0">
                     <div id="yt-player"></div>
-                    <video id="local-player" class="hidden" controls playsinline></audio>
+                    <video id="local-player" class="hidden" controls playsinline></video>
                     <div id="audio-visualizer" class="hidden audio-visualizer flex flex-col items-center justify-center bg-gray-900 border-b border-gray-800">
                         <div class="p-8 bg-red-600/10 rounded-full mb-4 animate-pulse">
                             <svg class="w-20 h-20 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
@@ -54,17 +57,17 @@
                 </div>
                 
                 <div class="w-full bg-gray-900 py-4 flex justify-center items-center gap-8 md:gap-12 border-t border-gray-800 shrink-0">
-                    <button onclick="seekVideo(-20)" class="text-gray-400 hover:text-white flex items-center gap-2 transition group p-2">
+                    <button onclick="window.seekVideo(-20)" class="text-gray-400 hover:text-white flex items-center gap-2 transition group p-2">
                         <svg class="w-7 h-7 md:w-8 md:h-8 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path></svg>
                         <span class="text-xs font-bold">20s</span>
                     </button>
                     
-                    <button onclick="togglePlayPause()" class="w-14 h-14 md:w-16 md:h-16 bg-red-600 hover:bg-red-700 text-white rounded-full flex justify-center items-center shadow-lg transition-transform hover:scale-105 active:scale-90">
+                    <button onclick="window.togglePlayPause()" class="w-14 h-14 md:w-16 md:h-16 bg-red-600 hover:bg-red-700 text-white rounded-full flex justify-center items-center shadow-lg transition-transform hover:scale-105 active:scale-90">
                         <svg id="icon-play" class="w-7 h-7 md:w-8 md:h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <svg id="icon-pause" class="w-7 h-7 md:w-8 md:h-8 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                     </button>
                     
-                    <button onclick="seekVideo(20)" class="text-gray-400 hover:text-white flex items-center gap-2 transition group p-2">
+                    <button onclick="window.seekVideo(20)" class="text-gray-400 hover:text-white flex items-center gap-2 transition group p-2">
                         <span class="text-xs font-bold">20s</span>
                         <svg class="w-7 h-7 md:w-8 md:h-8 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
                     </button>
@@ -87,7 +90,7 @@
                         <span id="watched-time" class="font-bold text-gray-300 tracking-wide">0m</span>
                     </div>
                 </div>
-                <select id="playlist-selector" class="w-full bg-gray-800 text-white border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50 text-sm" disabled onchange="loadPlaylist(this.value)">
+                <select id="playlist-selector" class="w-full bg-gray-800 text-white border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50 text-sm" disabled onchange="window.loadPlaylist(this.value)">
                     <option value="">Cargando...</option>
                 </select>
             </div>
@@ -99,61 +102,96 @@
     </main>
 
     <!-- Modal Settings -->
-    <div id="config-modal" class="fixed inset-0 bg-black/90 flex items-center justify-center z-[100] hidden backdrop-blur-sm p-4">
-        <div class="bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-6 border border-gray-700">
-            <h2 class="text-xl font-bold mb-2 text-white">Configuración</h2>
-            <p class="text-gray-400 text-xs mb-6 uppercase tracking-wider font-semibold">Sincronización con Google Sheets</p>
-            <div class="mb-4">
+    <div id="config-modal" class="fixed inset-0 bg-black/90 flex items-center justify-center z-[100] hidden backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-6 border border-gray-700 my-auto">
+            <h2 class="text-xl font-bold mb-4 text-white">Configuración</h2>
+            
+            <!-- Google Sheets Config -->
+            <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-semibold">Datos: Google Sheets</p>
+            <div class="mb-3">
                 <label class="block text-xs font-medium text-gray-400 mb-1">Spreadsheet ID</label>
-                <input type="text" id="input-sheet-id" class="w-full bg-gray-900 text-white border border-gray-600 rounded-lg py-2.5 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
+                <input type="text" id="input-sheet-id" class="w-full bg-gray-900 text-white border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
             </div>
-            <div class="mb-6">
+            <div class="mb-5">
                 <label class="block text-xs font-medium text-gray-400 mb-1">Google API Key</label>
-                <input type="password" id="input-api-key" class="w-full bg-gray-900 text-white border border-gray-600 rounded-lg py-2.5 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
+                <input type="password" id="input-api-key" class="w-full bg-gray-900 text-white border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
             </div>
+
+            <!-- Firebase Config -->
+            <hr class="border-gray-700 my-4">
+            <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-semibold text-green-400">Nube: Firebase Database</p>
+            <div class="mb-3">
+                <label class="block text-xs font-medium text-gray-400 mb-1">Sync ID (Para conectar otros dispositivos)</label>
+                <input type="text" id="input-sync-id" class="w-full bg-gray-900 text-white border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm font-mono tracking-widest uppercase">
+            </div>
+            <div class="mb-5">
+                <label class="block text-xs font-medium text-gray-400 mb-1">Configuración Firebase (Objeto JSON)</label>
+                <textarea id="input-firebase-config" class="w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-[10px] font-mono h-20" placeholder='{"apiKey": "...", "projectId": "...", ...}'></textarea>
+                <p class="text-[10px] text-gray-500 mt-1">Pega aquí el bloque JSON de tu consola de Firebase.</p>
+            </div>
+
             <div id="config-error" class="hidden mb-4 p-3 bg-red-900/50 text-red-200 text-xs rounded-lg border border-red-700/50"></div>
             
             <hr class="border-gray-700 my-4">
-            <p class="text-gray-400 text-xs mb-3 uppercase tracking-wider font-semibold">Respaldo de Datos</p>
+            <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-semibold">Respaldo Local (Offline)</p>
             <div class="flex gap-2 mb-6">
-                <button onclick="exportData()" class="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2" title="Descargar progreso y configuración">
+                <button onclick="window.exportData()" class="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2" title="Descargar progreso y configuración">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     Exportar
                 </button>
-                <button onclick="triggerImport()" class="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2" title="Restaurar progreso de un archivo">
+                <button onclick="window.triggerImport()" class="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2" title="Restaurar progreso de un archivo">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                     Importar
                 </button>
-                <input type="file" id="import-data-input" class="hidden" accept=".json" onchange="importData(event)">
+                <input type="file" id="import-data-input" class="hidden" accept=".json" onchange="window.importData(event)">
             </div>
 
             <div class="flex flex-col gap-2">
-                <button onclick="saveConfig()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl shadow-lg transition-all active:scale-95">Guardar y Conectar</button>
-                <button onclick="closeConfig()" id="btn-cancel-config" class="w-full py-2 text-xs font-medium text-gray-400 hover:text-white transition-colors hidden">Cancelar</button>
+                <button onclick="window.saveConfig()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl shadow-lg transition-all active:scale-95">Guardar Configuración</button>
+                <button onclick="window.closeConfig()" id="btn-cancel-config" class="w-full py-2 text-xs font-medium text-gray-400 hover:text-white transition-colors hidden">Cancelar</button>
             </div>
         </div>
     </div>
 
+    <!-- YouTube API Load -->
     <script src="https://www.youtube.com/iframe_api"></script>
-    
-    <script>
+
+    <!-- Main Logic + Firebase as Module -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase Globals
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        let isFirebaseReady = false;
+
+        // Ensure we always have a sync ID
+        let syncId = localStorage.getItem('sheetstube_sync_id');
+        if (!syncId) {
+            syncId = Math.random().toString(36).substring(2, 8).toUpperCase();
+            localStorage.setItem('sheetstube_sync_id', syncId);
+        }
+
         // IndexedDB Persistence Logic
         const DB_NAME = "SheetsTubeLocalDB";
         const STORE_NAME = "videos";
-        let db;
+        let localdb;
 
         const initDB = () => {
             return new Promise((resolve, reject) => {
                 const request = indexedDB.open(DB_NAME, 1);
                 request.onupgradeneeded = (e) => {
-                    db = e.target.result;
-                    if (!db.objectStoreNames.contains(STORE_NAME)) {
-                        db.createObjectStore(STORE_NAME, { keyPath: "id" });
+                    localdb = e.target.result;
+                    if (!localdb.objectStoreNames.contains(STORE_NAME)) {
+                        localdb.createObjectStore(STORE_NAME, { keyPath: "id" });
                     }
                 };
                 request.onsuccess = (e) => {
-                    db = e.target.result;
-                    resolve(db);
+                    localdb = e.target.result;
+                    resolve(localdb);
                 };
                 request.onerror = (e) => reject(e);
             });
@@ -168,20 +206,20 @@
                 blob: file,
                 addedAt: new Date().getTime()
             };
-            const tx = db.transaction(STORE_NAME, "readwrite");
+            const tx = localdb.transaction(STORE_NAME, "readwrite");
             tx.objectStore(STORE_NAME).add(videoData);
             return new Promise((resolve) => tx.oncomplete = () => resolve(videoId));
         };
 
         const getLocalVideos = async () => {
-            const tx = db.transaction(STORE_NAME, "readonly");
+            const tx = localdb.transaction(STORE_NAME, "readonly");
             const store = tx.objectStore(STORE_NAME);
             const request = store.getAll();
             return new Promise((resolve) => request.onsuccess = () => resolve(request.result));
         };
 
         const deleteLocalVideo = async (id) => {
-            const tx = db.transaction(STORE_NAME, "readwrite");
+            const tx = localdb.transaction(STORE_NAME, "readwrite");
             tx.objectStore(STORE_NAME).delete(id);
             return new Promise((resolve) => tx.oncomplete = () => resolve());
         };
@@ -189,7 +227,8 @@
         // App Core
         let config = {
             spreadsheetId: localStorage.getItem('sheets_id') || '',
-            apiKey: localStorage.getItem('sheets_api_key') || ''
+            apiKey: localStorage.getItem('sheets_api_key') || '',
+            firebaseConfig: localStorage.getItem('firebase_config') || ''
         };
         
         let player = null;
@@ -197,6 +236,7 @@
         const ytPlaceholder = document.getElementById('yt-player');
         const audioVisualizer = document.getElementById('audio-visualizer');
         const audioFilenameText = document.getElementById('audio-filename');
+        const cloudIndicator = document.getElementById('cloud-sync-indicator');
         
         let currentPlaylistData = [];
         let currentIndex = -1;
@@ -206,11 +246,86 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             await initDB();
-            if (!config.spreadsheetId || !config.apiKey) openConfig(true);
+            initFirebase(); // Attempt to connect to cloud
+            
+            if (!config.spreadsheetId || !config.apiKey) window.openConfig(true);
             else fetchPlaylists();
         });
 
-        async function handleLocalFileUpload(event) {
+        // ----- FIREBASE LOGIC -----
+        async function initFirebase() {
+            if (!config.firebaseConfig) return;
+            try {
+                const fbConfigObj = JSON.parse(config.firebaseConfig);
+                const app = initializeApp(fbConfigObj);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                const initAuth = async () => {
+                    await signInAnonymously(auth);
+                };
+                
+                await initAuth();
+                
+                onAuthStateChanged(auth, async (user) => {
+                    currentUser = user;
+                    if (user) {
+                        isFirebaseReady = true;
+                        cloudIndicator.classList.remove('hidden');
+                        await downloadFromFirebase(); // Sync down on load
+                        if (config.spreadsheetId) fetchPlaylists(); // Refresh UI after data arrives
+                    }
+                });
+            } catch (e) {
+                console.error("Firebase init failed:", e);
+                window.showConfigMessage("Error conectando a Firebase. Revisa tu JSON.", true);
+                isFirebaseReady = false;
+                cloudIndicator.classList.add('hidden');
+            }
+        }
+
+        async function saveToFirebase() {
+            if (!isFirebaseReady || !currentUser || !db) return;
+            
+            const dataToSync = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                // Only sync progress and state, NOT API keys or full json backup strings
+                if (key.startsWith('yt_prog_') || key === 'last_playlist' || key.startsWith('progress_')) {
+                    dataToSync[key] = localStorage.getItem(key);
+                }
+            }
+
+            try {
+                // Guaranteed secure path structure
+                const docRef = doc(db, 'artifacts', 'sheetstube', 'users', syncId, 'data', 'progress');
+                await setDoc(docRef, dataToSync);
+                console.log("Cloud Sync OK");
+            } catch (e) {
+                console.error("Cloud Sync Error", e);
+            }
+        }
+
+        async function downloadFromFirebase() {
+            if (!isFirebaseReady || !currentUser || !db) return;
+            try {
+                const docRef = doc(db, 'artifacts', 'sheetstube', 'users', syncId, 'data', 'progress');
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    for (const key in data) {
+                        localStorage.setItem(key, data[key]);
+                    }
+                    console.log("Cloud Download OK");
+                }
+            } catch (e) {
+                console.error("Cloud Download Error", e);
+            }
+        }
+        // --------------------------
+
+        window.handleLocalFileUpload = async function(event) {
             const file = event.target.files[0];
             if (!file) return;
             const btn = event.target.previousElementSibling;
@@ -220,23 +335,25 @@
             fetchPlaylists(); 
         }
 
-        function openConfig(isInitial = false) {
+        window.openConfig = function(isInitial = false) {
             document.getElementById('input-sheet-id').value = config.spreadsheetId;
             document.getElementById('input-api-key').value = config.apiKey;
+            document.getElementById('input-sync-id').value = syncId;
+            document.getElementById('input-firebase-config').value = config.firebaseConfig;
+            
             document.getElementById('btn-cancel-config').classList.toggle('hidden', isInitial);
             document.getElementById('config-modal').classList.remove('hidden');
         }
 
-        function closeConfig() { 
+        window.closeConfig = function() { 
             document.getElementById('config-modal').classList.add('hidden'); 
             document.getElementById('config-error').classList.add('hidden');
         }
 
-        function showConfigMessage(msg, isError = false) {
+        window.showConfigMessage = function(msg, isError = false) {
             const el = document.getElementById('config-error');
             el.textContent = msg;
-            
-            el.className = "mb-4 p-3 text-xs rounded-lg border"; 
+            el.className = "mb-4 p-3 text-xs rounded-lg border block"; 
             if (isError) {
                 el.classList.add('bg-red-900/50', 'text-red-200', 'border-red-700/50');
             } else {
@@ -244,16 +361,52 @@
             }
         }
 
-        function saveConfig() {
+        window.saveConfig = function() {
             const newId = document.getElementById('input-sheet-id').value.trim();
             const newKey = document.getElementById('input-api-key').value.trim();
-            if (!newId || !newKey) return;
+            const newSyncId = document.getElementById('input-sync-id').value.trim().toUpperCase();
+            const newFbConfig = document.getElementById('input-firebase-config').value.trim();
+            
+            if (!newId || !newKey) {
+                window.showConfigMessage("Faltan credenciales de Google Sheets", true);
+                return;
+            }
+
             localStorage.setItem('sheets_id', newId);
             localStorage.setItem('sheets_api_key', newKey);
+            
+            if (newSyncId) {
+                syncId = newSyncId;
+                localStorage.setItem('sheetstube_sync_id', syncId);
+            }
+            
+            if (newFbConfig) {
+                try {
+                    JSON.parse(newFbConfig); // test valid json
+                    localStorage.setItem('firebase_config', newFbConfig);
+                    config.firebaseConfig = newFbConfig;
+                } catch(e) {
+                    window.showConfigMessage("El JSON de Firebase no es válido", true);
+                    return;
+                }
+            } else {
+                localStorage.removeItem('firebase_config');
+                config.firebaseConfig = '';
+            }
+
             config.spreadsheetId = newId;
             config.apiKey = newKey;
-            closeConfig();
-            fetchPlaylists();
+            
+            window.closeConfig();
+            
+            // Re-initialize app logic
+            if (config.firebaseConfig) {
+                initFirebase();
+            } else {
+                isFirebaseReady = false;
+                cloudIndicator.classList.add('hidden');
+                fetchPlaylists();
+            }
         }
 
         async function fetchPlaylists() {
@@ -276,11 +429,11 @@
             const last = localStorage.getItem('last_playlist');
             if (last && names.includes(last)) {
                 document.getElementById('playlist-selector').value = last;
-                loadPlaylist(last);
+                window.loadPlaylist(last);
             }
         }
 
-        async function loadPlaylist(sheetName) {
+        window.loadPlaylist = async function(sheetName) {
             if (!sheetName) return;
             currentPlaylistName = sheetName;
             localStorage.setItem('last_playlist', sheetName);
@@ -353,7 +506,7 @@
                 const isAudio = v.type.startsWith('audio/');
                 
                 html += `
-                <div id="video-item-${i}" onclick="playVideo(${i}, true)" class="video-item flex gap-3 p-3 mb-2 rounded-xl cursor-pointer hover:bg-gray-700/50 border border-transparent ${isCompleted ? 'opacity-40' : ''}">
+                <div id="video-item-${i}" onclick="window.playVideo(${i}, true)" class="video-item flex gap-3 p-3 mb-2 rounded-xl cursor-pointer hover:bg-gray-700/50 border border-transparent ${isCompleted ? 'opacity-40' : ''}">
                     <div class="relative w-24 h-16 shrink-0 bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center border border-gray-600">
                         ${isAudio ? 
                           '<svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>' : 
@@ -365,7 +518,7 @@
                         <h3 class="text-sm font-semibold text-gray-200 truncate">${v.name}</h3>
                         <div class="flex justify-between items-center mt-1">
                              <p class="text-[10px] text-gray-500 uppercase font-bold tracking-tight">${isAudio ? 'Archivo Audio' : 'Archivo Vídeo'}</p>
-                             <button onclick="event.stopPropagation(); removeLocal(${i})" class="text-gray-500 hover:text-red-500 p-1">
+                             <button onclick="event.stopPropagation(); window.removeLocal(${i})" class="text-gray-500 hover:text-red-500 p-1">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                              </button>
                         </div>
@@ -376,18 +529,18 @@
             updatePlaylistStats();
         }
 
-        async function removeLocal(idx) {
+        window.removeLocal = async function(idx) {
             const vid = currentPlaylistData[idx];
             if (confirm(`¿Eliminar "${vid.name}"?`)) {
                 await deleteLocalVideo(vid.id);
-                loadPlaylist("Archivos Locales");
+                window.loadPlaylist("Archivos Locales");
             }
         }
 
         function generateVideoItemHtml(index, id, title, subtitle, progData, isCompleted, isYoutube) {
             const thumb = isYoutube ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : '';
             return `
-                <div id="video-item-${index}" onclick="playVideo(${index}, true)" class="video-item flex gap-3 p-3 mb-2 rounded-xl cursor-pointer hover:bg-gray-700/50 border border-transparent ${isCompleted ? 'opacity-40' : ''}">
+                <div id="video-item-${index}" onclick="window.playVideo(${index}, true)" class="video-item flex gap-3 p-3 mb-2 rounded-xl cursor-pointer hover:bg-gray-700/50 border border-transparent ${isCompleted ? 'opacity-40' : ''}">
                     <div class="relative w-24 h-16 shrink-0 bg-black rounded-lg overflow-hidden border border-gray-700">
                         ${isYoutube ? `<img src="${thumb}" class="w-full h-full object-cover opacity-70">` : `<div class="w-full h-full bg-gray-800"></div>`}
                         <div class="absolute bottom-0 left-0 h-1 bg-red-600 video-progress-bar" style="width: ${progData ? (progData.t/progData.d*100) : 0}%"></div>
@@ -399,8 +552,11 @@
                 </div>`;
         }
 
-        function playVideo(index, isManual = false) {
+        window.playVideo = function(index, isManual = false) {
             if (index < 0 || index >= currentPlaylistData.length) return;
+            
+            // Sync to cloud when switching videos if we were watching something
+            if (currentIndex !== -1 && isFirebaseReady) saveToFirebase();
             
             currentIndex = index;
             const video = currentPlaylistData[index];
@@ -418,7 +574,6 @@
             document.getElementById('player-placeholder').classList.add('hidden');
             document.getElementById('player-wrapper').classList.remove('hidden');
 
-            // Reset visibility
             ytPlaceholder.classList.add('hidden');
             localPlayer.classList.add('hidden');
             audioVisualizer.classList.add('hidden');
@@ -449,7 +604,7 @@
                     else player.cueVideoById({ videoId: video.id, startSeconds: startTime });
                 }
             } else {
-                if (player) player.pauseVideo();
+                if (player && player.pauseVideo) player.pauseVideo();
                 
                 const isAudio = video.type.startsWith('audio/');
                 if (isAudio) {
@@ -472,8 +627,12 @@
                 localPlayer.onpause = () => {
                     updatePlayPauseUI(false);
                     clearInterval(timeTrackerInterval);
+                    saveToFirebase(); // Sync on pause
                 };
-                localPlayer.onended = () => playPreviousVideo();
+                localPlayer.onended = () => {
+                    saveToFirebase(); // Sync on end
+                    playPreviousVideo();
+                };
             }
         }
 
@@ -508,14 +667,16 @@
                 updatePlayPauseUI(false);
                 document.getElementById('dummy-audio').pause();
                 clearInterval(timeTrackerInterval);
+                saveToFirebase(); // Sync on pause
             } else if (event.data === YT.PlayerState.ENDED) {
+                saveToFirebase(); // Sync on end
                 playPreviousVideo();
             }
         }
 
         function playPreviousVideo() {
             const nextIdx = findNextAutoIndex(currentIndex);
-            if (nextIdx !== -1) playVideo(nextIdx, true);
+            if (nextIdx !== -1) window.playVideo(nextIdx, true);
         }
 
         function findNextAutoIndex(fromIndex) {
@@ -527,7 +688,7 @@
             return -1;
         }
 
-        function togglePlayPause() {
+        window.togglePlayPause = function() {
             const video = currentPlaylistData[currentIndex];
             if (!video) return;
             if (video.type === 'youtube') {
@@ -538,7 +699,7 @@
             }
         }
 
-        function seekVideo(s) {
+        window.seekVideo = function(s) {
             const video = currentPlaylistData[currentIndex];
             if (!video) return;
             if (video.type === 'youtube') {
@@ -570,7 +731,6 @@
             });
         }
         
-        // Función que calcula y muestra el tiempo total visualizado
         function updatePlaylistStats() {
             let totalSeconds = 0;
             currentPlaylistData.forEach(video => {
@@ -584,9 +744,7 @@
             const minutes = Math.floor((totalSeconds % 3600) / 60);
 
             let timeString = '';
-            if (hours > 0) {
-                timeString += `${hours}h `;
-            }
+            if (hours > 0) timeString += `${hours}h `;
             timeString += `${minutes}m`;
 
             const statsContainer = document.getElementById('playlist-stats');
@@ -598,10 +756,11 @@
             }
         }
 
-        function onYouTubeIframeAPIReady() {}
+        // Dummy assignment for YouTube API to hook into
+        window.onYouTubeIframeAPIReady = function() {}
 
-        // --- Backup and Restore Logic ---
-        function exportData() {
+        // --- Backup and Restore Logic (Local) ---
+        window.exportData = function() {
             try {
                 const data = {};
                 for (let i = 0; i < localStorage.length; i++) {
@@ -615,17 +774,17 @@
                 document.body.appendChild(downloadAnchorNode);
                 downloadAnchorNode.click();
                 downloadAnchorNode.remove();
-                showConfigMessage("Datos exportados correctamente.", false);
+                window.showConfigMessage("Datos exportados correctamente.", false);
             } catch (err) {
-                showConfigMessage("Error al exportar los datos.", true);
+                window.showConfigMessage("Error al exportar los datos.", true);
             }
         }
 
-        function triggerImport() {
+        window.triggerImport = function() {
             document.getElementById('import-data-input').click();
         }
 
-        function importData(event) {
+        window.importData = function(event) {
             const file = event.target.files[0];
             if (!file) return;
             
@@ -636,15 +795,14 @@
                     for (const key in data) {
                         localStorage.setItem(key, data[key]);
                     }
-                    
-                    showConfigMessage("Datos importados correctamente. Recargando...", false);
+                    window.showConfigMessage("Datos importados correctamente. Recargando...", false);
                     setTimeout(() => location.reload(), 1500);
                 } catch (err) {
-                    showConfigMessage("Error: El archivo no es un respaldo válido.", true);
+                    window.showConfigMessage("Error: El archivo no es un respaldo válido.", true);
                 }
             };
             reader.readAsText(file);
-            event.target.value = ''; // Reset input
+            event.target.value = ''; 
         }
     </script>
 </body>
