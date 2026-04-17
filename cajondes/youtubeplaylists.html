@@ -112,6 +112,21 @@
                 <input type="password" id="input-api-key" class="w-full bg-gray-900 text-white border border-gray-600 rounded-lg py-2.5 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
             </div>
             <div id="config-error" class="hidden mb-4 p-3 bg-red-900/50 text-red-200 text-xs rounded-lg border border-red-700/50"></div>
+            
+            <hr class="border-gray-700 my-4">
+            <p class="text-gray-400 text-xs mb-3 uppercase tracking-wider font-semibold">Respaldo de Datos</p>
+            <div class="flex gap-2 mb-6">
+                <button onclick="exportData()" class="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2" title="Descargar progreso y configuración">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Exportar
+                </button>
+                <button onclick="triggerImport()" class="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2" title="Restaurar progreso de un archivo">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    Importar
+                </button>
+                <input type="file" id="import-data-input" class="hidden" accept=".json" onchange="importData(event)">
+            </div>
+
             <div class="flex flex-col gap-2">
                 <button onclick="saveConfig()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl shadow-lg transition-all active:scale-95">Guardar y Conectar</button>
                 <button onclick="closeConfig()" id="btn-cancel-config" class="w-full py-2 text-xs font-medium text-gray-400 hover:text-white transition-colors hidden">Cancelar</button>
@@ -212,7 +227,22 @@
             document.getElementById('config-modal').classList.remove('hidden');
         }
 
-        function closeConfig() { document.getElementById('config-modal').classList.add('hidden'); }
+        function closeConfig() { 
+            document.getElementById('config-modal').classList.add('hidden'); 
+            document.getElementById('config-error').classList.add('hidden');
+        }
+
+        function showConfigMessage(msg, isError = false) {
+            const el = document.getElementById('config-error');
+            el.textContent = msg;
+            
+            el.className = "mb-4 p-3 text-xs rounded-lg border"; 
+            if (isError) {
+                el.classList.add('bg-red-900/50', 'text-red-200', 'border-red-700/50');
+            } else {
+                el.classList.add('bg-green-900/50', 'text-green-200', 'border-green-700/50');
+            }
+        }
 
         function saveConfig() {
             const newId = document.getElementById('input-sheet-id').value.trim();
@@ -569,6 +599,53 @@
         }
 
         function onYouTubeIframeAPIReady() {}
+
+        // --- Backup and Restore Logic ---
+        function exportData() {
+            try {
+                const data = {};
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    data[key] = localStorage.getItem(key);
+                }
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+                const downloadAnchorNode = document.createElement('a');
+                downloadAnchorNode.setAttribute("href", dataStr);
+                downloadAnchorNode.setAttribute("download", `sheetstube_backup_${new Date().toISOString().split('T')[0]}.json`);
+                document.body.appendChild(downloadAnchorNode);
+                downloadAnchorNode.click();
+                downloadAnchorNode.remove();
+                showConfigMessage("Datos exportados correctamente.", false);
+            } catch (err) {
+                showConfigMessage("Error al exportar los datos.", true);
+            }
+        }
+
+        function triggerImport() {
+            document.getElementById('import-data-input').click();
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    for (const key in data) {
+                        localStorage.setItem(key, data[key]);
+                    }
+                    
+                    showConfigMessage("Datos importados correctamente. Recargando...", false);
+                    setTimeout(() => location.reload(), 1500);
+                } catch (err) {
+                    showConfigMessage("Error: El archivo no es un respaldo válido.", true);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = ''; // Reset input
+        }
     </script>
 </body>
 </html>
