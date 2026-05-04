@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación de cuestionarios Moodle | Innovación Docente UCA</title>
+    <meta name="description" content="Optimiza el tiempo de creación de exámenes en Moodle eliminando el trabajo manual.">
+    <!-- Tailwind CSS vía CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        uca: {
+                            blue: '#003366', // Azul académico (inspirado en tonos institucionales)
+                            light: '#e6edf5'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-uca-blue selection:text-white">
+
+    <!-- Header / Hero Section -->
+    <header class="w-full max-w-4xl mx-auto px-6 pt-12 pb-8 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        <div class="flex-1">
+            <span class="inline-block py-1 px-3 rounded-full bg-uca-light text-uca-blue text-xs font-semibold tracking-wide uppercase mb-4">
+                Innovación Docente
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-4">
+                Creación de cuestionarios Moodle<br class="hidden md:block"/> desde hoja de cálculo
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto md:mx-0">
+                Optimiza el tiempo de creación de exámenes en Moodle eliminando el trabajo manual.
+            </p>
+        </div>
+        <!-- QR Code Placeholder (Sin texto) -->
+        <div class="w-32 h-32 shrink-0 bg-white border border-slate-200 shadow-sm rounded-xl flex items-center justify-center p-3">
+            <!-- Reemplazar el <svg> por <img src="ruta-de-tu-qr.png" alt="QR" class="w-full h-full object-contain"> -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="3"></rect><rect x="14" y="7" width="3" height="3"></rect><rect x="7" y="14" width="3" height="3"></rect><rect x="14" y="14" width="3" height="3"></rect></svg>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full max-w-4xl mx-auto px-6 flex-grow flex flex-col gap-10">
+        
+        <!-- Workflow / How it works -->
+        <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+            <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider text-center mb-6">Flujo de trabajo</h2>
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative">
+                <!-- Paso 1 -->
+                <div class="flex flex-row sm:flex-col items-center sm:text-center gap-3 w-full sm:w-1/3">
+                    <div class="w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-sm shrink-0 z-10">1</div>
+                    <p class="text-sm font-medium text-slate-700">Rellena plantilla en Google Sheets</p>
+                </div>
+                
+                <!-- Conector (Desktop) -->
+                <div class="hidden sm:block absolute top-5 left-1/6 right-1/6 h-[2px] bg-slate-100 -z-0"></div>
+                <!-- Conector (Mobile) -->
+                <div class="sm:hidden absolute left-5 top-10 bottom-10 w-[2px] bg-slate-100 -z-0"></div>
+
+                <!-- Paso 2 -->
+                <div class="flex flex-row sm:flex-col items-center sm:text-center gap-3 w-full sm:w-1/3">
+                    <div class="w-10 h-10 rounded-full bg-uca-light text-uca-blue flex items-center justify-center font-bold text-sm shrink-0 z-10">2</div>
+                    <p class="text-sm font-medium text-slate-700">Procesa datos en Editor XML</p>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="flex flex-row sm:flex-col items-center sm:text-center gap-3 w-full sm:w-1/3">
+                    <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-sm shrink-0 z-10">3</div>
+                    <p class="text-sm font-medium text-slate-700">Importa el archivo en Moodle</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actions / Buttons -->
+        <section class="flex flex-col sm:flex-row gap-4">
+            <!-- Botón 1: Google Sheets -->
+            <a href="https://docs.google.com/spreadsheets/d/1qX9rBXpk1gOaTwaFm5dvWb_PB9Cc0KTRWut-S1JccCY/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer" class="group relative flex-1 bg-white border-2 border-slate-200 hover:border-green-500 rounded-2xl p-6 transition-all duration-200 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-green-50 focus:border-green-500 flex flex-col items-center text-center">
+                <div class="w-14 h-14 bg-green-50 text-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="3" y1="9" x2="21" y2="9"></line>
+                        <line x1="9" y1="21" x2="9" y2="9"></line>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 mb-2">Acceder a la Plantilla</h3>
+                <p class="text-sm text-slate-500">Google Sheets pre-configurado con el formato requerido.</p>
+                
+                <!-- Indicador visual de acción -->
+                <div class="mt-4 flex items-center text-green-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
+                    Abrir documento
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- Botón 2: Editor XML -->
+            <a href="https://ajpancollantes.github.io/cajondes/editorxml.html" target="_blank" rel="noopener noreferrer" class="group relative flex-1 bg-white border-2 border-slate-200 hover:border-uca-blue rounded-2xl p-6 transition-all duration-200 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-uca-light focus:border-uca-blue flex flex-col items-center text-center">
+                <div class="w-14 h-14 bg-uca-light text-uca-blue rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 mb-2">Abrir Editor de XML</h3>
+                <p class="text-sm text-slate-500">Valida y ajusta el formato final para importar a Moodle.</p>
+                
+                <!-- Indicador visual de acción -->
+                <div class="mt-4 flex items-center text-uca-blue font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
+                    Iniciar aplicación
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-8 mt-8 border-t border-slate-200">
+        <p class="text-sm text-slate-500 font-medium">
+            Desarrollado por <span class="text-slate-800 font-semibold">Antonio J. Pan Collantes</span>
+        </p>
+        <p class="text-xs text-slate-400 mt-1">
+            Universidad de Cádiz
+        </p>
+    </footer>
+
+</body>
+</html>
