@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creación de cuestionarios Moodle | Innovación Docente UCA</title>
+    <title>Creación de cuestionarios Moodle | V Jornadas Innovación Docente UCA</title>
     <meta name="description" content="Optimiza el tiempo de creación de exámenes en Moodle eliminando el trabajo manual.">
-    <!-- Tailwind CSS vía CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -13,7 +12,7 @@
                 extend: {
                     colors: {
                         uca: {
-                            blue: '#003366', // Azul académico (inspirado en tonos institucionales)
+                            blue: '#003366',
                             light: '#e6edf5'
                         }
                     },
@@ -27,7 +26,6 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-uca-blue selection:text-white">
 
-    <!-- Header / Hero Section -->
     <header class="w-full max-w-4xl mx-auto px-6 pt-12 pb-8 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
         <div class="flex-1">
             <span class="inline-block py-1 px-3 rounded-full bg-uca-light text-uca-blue text-xs font-semibold tracking-wide uppercase mb-4">
@@ -40,38 +38,26 @@
                 Optimiza el tiempo de creación de exámenes en Moodle eliminando el trabajo manual.
             </p>
         </div>
-        <!-- QR Code Placeholder (Sin texto) -->
         <div class="w-32 h-32 shrink-0 bg-white border border-slate-200 shadow-sm rounded-xl flex items-center justify-center p-3">
-            <!-- Reemplazar el <svg> por <img src="ruta-de-tu-qr.png" alt="QR" class="w-full h-full object-contain"> -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="3"></rect><rect x="14" y="7" width="3" height="3"></rect><rect x="7" y="14" width="3" height="3"></rect><rect x="14" y="14" width="3" height="3"></rect></svg>
+            <img src="data:image/png;base64,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" alt="QR Code - jid26.html" class="w-full h-full object-contain">
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="w-full max-w-4xl mx-auto px-6 flex-grow flex flex-col gap-10">
         
-        <!-- Workflow / How it works -->
         <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
             <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider text-center mb-6">Flujo de trabajo</h2>
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative">
-                <!-- Paso 1 -->
                 <div class="flex flex-row sm:flex-col items-center sm:text-center gap-3 w-full sm:w-1/3">
                     <div class="w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-sm shrink-0 z-10">1</div>
                     <p class="text-sm font-medium text-slate-700">Rellena plantilla en Google Sheets</p>
                 </div>
-                
-                <!-- Conector (Desktop) -->
                 <div class="hidden sm:block absolute top-5 left-1/6 right-1/6 h-[2px] bg-slate-100 -z-0"></div>
-                <!-- Conector (Mobile) -->
                 <div class="sm:hidden absolute left-5 top-10 bottom-10 w-[2px] bg-slate-100 -z-0"></div>
-
-                <!-- Paso 2 -->
                 <div class="flex flex-row sm:flex-col items-center sm:text-center gap-3 w-full sm:w-1/3">
                     <div class="w-10 h-10 rounded-full bg-uca-light text-uca-blue flex items-center justify-center font-bold text-sm shrink-0 z-10">2</div>
                     <p class="text-sm font-medium text-slate-700">Procesa datos en Editor XML</p>
                 </div>
-
-                <!-- Paso 3 -->
                 <div class="flex flex-row sm:flex-col items-center sm:text-center gap-3 w-full sm:w-1/3">
                     <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-sm shrink-0 z-10">3</div>
                     <p class="text-sm font-medium text-slate-700">Importa el archivo en Moodle</p>
@@ -79,9 +65,7 @@
             </div>
         </section>
 
-        <!-- Actions / Buttons -->
         <section class="flex flex-col sm:flex-row gap-4">
-            <!-- Botón 1: Google Sheets -->
             <a href="https://docs.google.com/spreadsheets/d/1qX9rBXpk1gOaTwaFm5dvWb_PB9Cc0KTRWut-S1JccCY/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer" class="group relative flex-1 bg-white border-2 border-slate-200 hover:border-green-500 rounded-2xl p-6 transition-all duration-200 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-green-50 focus:border-green-500 flex flex-col items-center text-center">
                 <div class="w-14 h-14 bg-green-50 text-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -92,15 +76,12 @@
                 </div>
                 <h3 class="text-lg font-bold text-slate-800 mb-2">Acceder a la Plantilla</h3>
                 <p class="text-sm text-slate-500">Google Sheets pre-configurado con el formato requerido.</p>
-                
-                <!-- Indicador visual de acción -->
                 <div class="mt-4 flex items-center text-green-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
                     Abrir documento
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
 
-            <!-- Botón 2: Editor XML -->
             <a href="https://ajpancollantes.github.io/cajondes/editorxml.html" target="_blank" rel="noopener noreferrer" class="group relative flex-1 bg-white border-2 border-slate-200 hover:border-uca-blue rounded-2xl p-6 transition-all duration-200 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-uca-light focus:border-uca-blue flex flex-col items-center text-center">
                 <div class="w-14 h-14 bg-uca-light text-uca-blue rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -110,10 +91,23 @@
                 </div>
                 <h3 class="text-lg font-bold text-slate-800 mb-2">Abrir Editor de XML</h3>
                 <p class="text-sm text-slate-500">Valida y ajusta el formato final para importar a Moodle.</p>
-                
-                <!-- Indicador visual de acción -->
                 <div class="mt-4 flex items-center text-uca-blue font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
                     Iniciar aplicación
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <a href="https://campusvirtual.uca.es/" target="_blank" rel="noopener noreferrer" class="group relative flex-1 bg-white border-2 border-slate-200 hover:border-orange-500 rounded-2xl p-6 transition-all duration-200 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-orange-50 focus:border-orange-500 flex flex-col items-center text-center">
+                <div class="w-14 h-14 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 mb-2">Campus Virtual UCA</h3>
+                <p class="text-sm text-slate-500">Accede al campus para importar el cuestionario en tu asignatura.</p>
+                <div class="mt-4 flex items-center text-orange-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
+                    Ir al campus
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
@@ -121,7 +115,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="w-full text-center py-8 mt-8 border-t border-slate-200">
         <p class="text-sm text-slate-500 font-medium">
             Desarrollado por <span class="text-slate-800 font-semibold">Antonio J. Pan Collantes</span>
