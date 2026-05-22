@@ -1,0 +1,864 @@
+markdown:R⁴ Foliation Stack (Oriented):r4_foliation_stack.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R⁴ Foliation: Custom Coordinate Stack</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #050508;
+            color: #e1e1e6;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        /* Floating Glass Panel UI */
+        #control-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 380px;
+            max-height: calc(100vh - 40px);
+            background: rgba(15, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+        }
+        #control-panel.collapsed {
+            transform: translateX(-400px);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .panel-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .panel-header h1 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+        .panel-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .section {
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 14px;
+            border-radius: 8px;
+        }
+        .section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #4da6ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        label {
+            display: block;
+            font-size: 0.78rem;
+            color: #a0a0b0;
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+        input, select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #4da6ff;
+        }
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .slider-row input[type="range"] {
+            flex: 1;
+            padding: 0;
+            cursor: pointer;
+        }
+        .slider-val {
+            font-size: 0.8rem;
+            font-family: monospace;
+            width: 32px;
+            text-align: right;
+            color: #4da6ff;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+        input[type="color"] {
+            height: 34px;
+            padding: 2px;
+            cursor: pointer;
+        }
+        button {
+            width: 100%;
+            background: #0088ff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0076dd;
+        }
+        /* Toggle Sidebar Button */
+        #toggle-panel-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 11;
+            background: #14141f;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            display: none;
+        }
+        .panel-close-btn {
+            background: transparent;
+            border: none;
+            color: #8f8f9e;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            width: auto;
+        }
+        .panel-close-btn:hover {
+            color: #ffffff;
+        }
+        .object-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
+            border-left: 4px solid #fff;
+        }
+        .delete-btn {
+            background: #ff4444;
+            padding: 4px 8px;
+            font-size: 0.7rem;
+            margin: 0;
+            width: auto;
+            border-radius: 4px;
+        }
+        .delete-btn:hover {
+            background: #cc3333;
+        }
+        #info-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(10, 10, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.78rem;
+            color: #a0a0b0;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+    <!-- Three.js + OrbitControls -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+
+    <button id="toggle-panel-btn" onclick="togglePanel(false)">☰ Show Menu</button>
+
+    <div id="control-panel">
+        <div class="panel-header">
+            <h1>R⁴ Foliation (Oriented)</h1>
+            <button class="panel-close-btn" onclick="togglePanel(true)">✕</button>
+        </div>
+        <div class="panel-body">
+            
+            <!-- Book Sheet Dimensions Section -->
+            <div class="section">
+                <div class="section-title">Visual Layout</div>
+                <p style="font-size:0.75rem; color:#8f8f9e; line-height:1.3; margin-bottom:10px;">
+                    Orientation mapping:<br>
+                    • <b>y</b>: horizontal (left to right)<br>
+                    • <b>z</b>: vertical (bottom to top)<br>
+                    • <b>x</b>: out of screen (towards you)<br>
+                    • <b>w</b>: deep into screen (pages stack backwards)
+                </p>
+                
+                <label>y-span (horizontal width)</label>
+                <div class="slider-row">
+                    <input type="range" id="dim-y" min="2" max="15" step="0.5" value="10" oninput="updateDimensions()">
+                    <span class="slider-val" id="val-y">10</span>
+                </div>
+
+                <label>z-span (vertical height)</label>
+                <div class="slider-row">
+                    <input type="range" id="dim-z" min="2" max="15" step="0.5" value="10" oninput="updateDimensions()">
+                    <span class="slider-val" id="val-z">10</span>
+                </div>
+
+                <label>x-span (depth/thickness)</label>
+                <div class="slider-row">
+                    <input type="range" id="dim-x" min="0.2" max="4" step="0.1" value="1.0" oninput="updateDimensions()">
+                    <span class="slider-val" id="val-x">1.0</span>
+                </div>
+
+                <label>Separation (dw spacing along depth)</label>
+                <div class="slider-row">
+                    <input type="range" id="dim-spacing" min="3" max="12" step="0.5" value="5" oninput="updateDimensions()">
+                    <span class="slider-val" id="val-spacing">5</span>
+                </div>
+            </div>
+
+            <!-- Geometric Input Section -->
+            <div class="section">
+                <div class="section-title">Add Equation / Shape</div>
+                <label for="obj-type">Shape Category</label>
+                <select id="obj-type" onchange="toggleFormFields()">
+                    <option value="point">Point (x, y, z, w)</option>
+                    <option value="line">Line (P₀ + t·V)</option>
+                    <option value="plane">Plane (P₀ + s·U + t·V)</option>
+                    <option value="hyperplane">Hyperplane (Ax+By+Cz+Dw=E)</option>
+                </select>
+
+                <label>Color</label>
+                <input type="color" id="obj-color" value="#39ff14">
+
+                <!-- Point Input UI -->
+                <div id="fields-point">
+                    <label>Coordinates (x, y, z, w)</label>
+                    <div class="grid-4">
+                        <div><span style="font-size:0.7rem; color:#a0a0b0">x</span><input type="number" id="pt-x" value="0" step="0.5"></div>
+                        <div><span style="font-size:0.7rem; color:#a0a0b0">y</span><input type="number" id="pt-y" value="1" step="0.5"></div>
+                        <div><span style="font-size:0.7rem; color:#a0a0b0">z</span><input type="number" id="pt-z" value="1" step="0.5"></div>
+                        <div><span style="font-size:0.7rem; color:#a0a0b0">w</span><input type="number" id="pt-w" value="0" min="0" max="3" step="1"></div>
+                    </div>
+                </div>
+
+                <!-- Line Input UI -->
+                <div id="fields-line" style="display:none;">
+                    <label>Base Point P₀ (x, y, z, w)</label>
+                    <div class="grid-4">
+                        <input type="number" id="ln-x0" value="0" step="0.5">
+                        <input type="number" id="ln-y0" value="0" step="0.5">
+                        <input type="number" id="ln-z0" value="0" step="0.5">
+                        <input type="number" id="ln-w0" value="0.5" step="0.5">
+                    </div>
+                    <label>Direction V (vx, vy, vz, vw)</label>
+                    <div class="grid-4">
+                        <input type="number" id="ln-vx" value="0" step="0.5">
+                        <input type="number" id="ln-vy" value="1" step="0.5">
+                        <input type="number" id="ln-vz" value="1" step="0.5">
+                        <input type="number" id="ln-vw" value="1" step="0.5">
+                    </div>
+                </div>
+
+                <!-- Plane Input UI -->
+                <div id="fields-plane" style="display:none;">
+                    <label>Base Point P₀ (x, y, z, w)</label>
+                    <div class="grid-4">
+                        <input type="number" id="pl-x0" value="0" step="0.5">
+                        <input type="number" id="pl-y0" value="0" step="0.5">
+                        <input type="number" id="pl-z0" value="0" step="0.5">
+                        <input type="number" id="pl-w0" value="0" step="0.5">
+                    </div>
+                    <label>Span Vector U (ux, uy, uz, uw)</label>
+                    <div class="grid-4">
+                        <input type="number" id="pl-ux" value="0" step="0.5">
+                        <input type="number" id="pl-uy" value="3" step="0.5">
+                        <input type="number" id="pl-uz" value="0" step="0.5">
+                        <input type="number" id="pl-uw" value="0" step="0.5">
+                    </div>
+                    <label>Span Vector V (vx, vy, vz, vw)</label>
+                    <div class="grid-4">
+                        <input type="number" id="pl-vx" value="0" step="0.5">
+                        <input type="number" id="pl-vy" value="0" step="0.5">
+                        <input type="number" id="pl-vz" value="3" step="0.5">
+                        <input type="number" id="pl-vw" value="1" step="0.5">
+                    </div>
+                </div>
+
+                <!-- Hyperplane Input UI -->
+                <div id="fields-hyperplane" style="display:none;">
+                    <label>Coefficients (Ax + By + Cz + Dw = E)</label>
+                    <div class="grid-4">
+                        <input type="number" id="hp-a" value="0" step="0.5">
+                        <input type="number" id="hp-b" value="0" step="0.5">
+                        <input type="number" id="hp-c" value="0" step="0.5">
+                        <input type="number" id="hp-d" value="1" step="0.5">
+                    </div>
+                    <label>Constant Term (E)</label>
+                    <input type="number" id="hp-e" value="2" step="0.5">
+                </div>
+
+                <button onclick="addObjectFromUI()">Add Object</button>
+            </div>
+
+            <!-- List of Shapes -->
+            <div class="section">
+                <div class="section-title">Active Foliations</div>
+                <div id="objects-list"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="canvas-container"></div>
+    
+    <div id="info-badge">
+        Arranque Inicial Coordenado: Eje x (hacia fuera) | Eje y (izq-der) | Eje z (arriba) | Eje w (hacia fondo)
+    </div>
+
+    <script>
+        // --- Geometry & Space Parameters ---
+        let scene, camera, renderer, controls;
+        let objectsList = [];
+        let sheetMeshes = [];
+        
+        const wSlices = [0, 1, 2, 3];
+        
+        // Custom Alignment Parameters
+        // Physical screen mapping:
+        // x-axis of system  = Z-axis of Three.js (Out of screen)
+        // y-axis of system  = X-axis of Three.js (Left to Right)
+        // z-axis of system  = Y-axis of Three.js (Bottom to Top)
+        // w-axis of system  = Negative Z-axis of Three.js (Deep into screen)
+        
+        let ySize = 10.0; // Horizontal Width
+        let zSize = 10.0; // Vertical Height
+        let xSize = 1.0;  // Depth (sheet thickness)
+        let pageSpacing = 5.0; // Separation along the negative Z-axis (w direction)
+
+        const container = document.getElementById('canvas-container');
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x050508);
+
+            // Camera Setup
+            camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 1000);
+            
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.localClippingEnabled = true; 
+            container.appendChild(renderer.domElement);
+
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+
+            // Ambient + Directional Lights
+            const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+            scene.add(ambient);
+
+            const light1 = new THREE.DirectionalLight(0xffffff, 0.65);
+            light1.position.set(30, 40, 40);
+            scene.add(light1);
+
+            const light2 = new THREE.DirectionalLight(0x4da6ff, 0.3);
+            light2.position.set(-30, -20, -30);
+            scene.add(light2);
+
+            // Build structural sheets & center camera
+            rebuildFoliationSheets();
+            loadDefaultMathematicalObjects();
+            centerCameraOnBook();
+
+            window.addEventListener('resize', onWindowResize);
+            animate();
+        }
+
+        // --- Camera Orientation Setup ---
+        function centerCameraOnBook() {
+            const avgW = ((wSlices.length - 1) * pageSpacing) / 2;
+            const centerX = 0;  // y-axis center
+            const centerY = 0;  // z-axis center
+            const centerZ = -avgW; // w-axis center (going deep)
+
+            controls.target.set(centerX, centerY, centerZ);
+
+            // Position camera slightly offset to the side and looking down the tunnel of pages (into -Z)
+            camera.position.set(centerX + 16, centerY + 12, centerZ + 18);
+            controls.update();
+        }
+
+        // --- Visualizing the Parallel Sheets (Piled Vertically inside screen) ---
+        function rebuildFoliationSheets() {
+            // Remove old sheets
+            sheetMeshes.forEach(mesh => scene.remove(mesh));
+            sheetMeshes = [];
+
+            wSlices.forEach(w => {
+                // Mapping w to deep -Z coordinates
+                const cx = 0; // system y = physical X
+                const cy = 0; // system z = physical Y
+                const cz = -w * pageSpacing; // system w = physical -Z
+
+                // Transparent Glass Body of the slice
+                // Width = ySize, Height = zSize, Thickness = xSize
+                const geom = new THREE.BoxGeometry(ySize, zSize, xSize);
+                const mat = new THREE.MeshPhongMaterial({
+                    color: 0x8899af,
+                    transparent: true,
+                    opacity: 0.05,
+                    depthWrite: false,
+                    side: THREE.DoubleSide
+                });
+                const mesh = new THREE.Mesh(geom, mat);
+                mesh.position.set(cx, cy, cz);
+                scene.add(mesh);
+                sheetMeshes.push(mesh);
+
+                // Wireframe border outline
+                const edges = new THREE.EdgesGeometry(geom);
+                const wireframe = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ 
+                    color: 0x4da6ff, 
+                    transparent: true,
+                    opacity: 0.35 
+                }));
+                wireframe.position.set(cx, cy, cz);
+                scene.add(wireframe);
+                sheetMeshes.push(wireframe);
+
+                // Grid inside each page (on YZ system plane, which translates to XY physical plane)
+                const grid = new THREE.GridHelper(ySize, 10, 0x334466, 0x1a2436);
+                grid.position.set(cx, cy, cz);
+                grid.rotation.x = Math.PI / 2; // Flat facing the viewer
+                scene.add(grid);
+                sheetMeshes.push(grid);
+
+                // Slice indexing Label
+                const label = createLabelSprite(`w = ${w}`, "88aaff");
+                label.position.set(-ySize/2 - 1.2, zSize/2 + 0.3, cz);
+                scene.add(label);
+                sheetMeshes.push(label);
+            });
+
+            // Vector arrow representing the dw-axis stacking deep into the screen
+            const startPt = new THREE.Vector3(-ySize/2 - 2, -zSize/2 - 1, 2);
+            const endPt = new THREE.Vector3(-ySize/2 - 2, -zSize/2 - 1, -wSlices.length * pageSpacing + pageSpacing/2);
+            const direction = new THREE.Vector3().subVectors(endPt, startPt).normalize();
+            const arrowLength = startPt.distanceTo(endPt);
+            
+            const arrow = new THREE.ArrowHelper(direction, startPt, arrowLength, 0x0088ff, 0.8, 0.4);
+            scene.add(arrow);
+            sheetMeshes.push(arrow);
+
+            const textSprite = createLabelSprite("dw (fondo)", "0088ff");
+            textSprite.position.copy(endPt).add(new THREE.Vector3(-0.5, 0.8, -1.5));
+            scene.add(textSprite);
+            sheetMeshes.push(textSprite);
+        }
+
+        function createLabelSprite(text, colorHex) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 160;
+            canvas.height = 48;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, 160, 48);
+            ctx.font = "Bold 24px -apple-system, sans-serif";
+            ctx.fillStyle = "#" + colorHex;
+            ctx.fillText(text, 5, 32);
+
+            const texture = new THREE.CanvasTexture(canvas);
+            const material = new THREE.SpriteMaterial({ map: texture, transparent: true });
+            const sprite = new THREE.Sprite(material);
+            sprite.scale.set(3.0, 1.0, 1);
+            return sprite;
+        }
+
+        // --- Geometric Solver Engine ---
+        function solveGeometricFoliations() {
+            // Clear previous math objects
+            objectsList.forEach(obj => {
+                if (obj.meshes) {
+                    obj.meshes.forEach(m => scene.remove(m));
+                }
+                obj.meshes = [];
+            });
+
+            wSlices.forEach(w => {
+                const cx = 0; // physical X (system y)
+                const cy = 0; // physical Y (system z)
+                const cz = -w * pageSpacing; // physical Z (system w)
+
+                const yLim = ySize / 2; // system y half
+                const zLim = zSize / 2; // system z half
+                const xLim = xSize / 2; // system x half
+
+                // Set up local clipping boundaries for each stacked page
+                const localClips = [
+                    new THREE.Plane(new THREE.Vector3(1, 0, 0), -(cx - yLim)),
+                    new THREE.Plane(new THREE.Vector3(-1, 0, 0), (cx + yLim)),
+                    new THREE.Plane(new THREE.Vector3(0, 1, 0), -(cy - zLim)),
+                    new THREE.Plane(new THREE.Vector3(0, -1, 0), (cy + zLim)),
+                    new THREE.Plane(new THREE.Vector3(0, 0, 1), -(cz - xLim)),
+                    new THREE.Plane(new THREE.Vector3(0, 0, -1), (cz + xLim))
+                ];
+
+                objectsList.forEach(obj => {
+                    if (obj.type === 'point') {
+                        // Point matches if w matches
+                        if (Math.abs(obj.w - w) < 0.01) {
+                            if (Math.abs(obj.y) <= yLim && Math.abs(obj.z) <= zLim && Math.abs(obj.x) <= xLim) {
+                                const geo = new THREE.SphereGeometry(0.32, 32, 32);
+                                const mat = new THREE.MeshPhongMaterial({ color: obj.color, emissive: obj.color, emissiveIntensity: 0.2 });
+                                const mesh = new THREE.Mesh(geo, mat);
+                                mesh.position.set(cx + obj.y, cy + obj.z, cz + obj.x);
+                                scene.add(mesh);
+                                obj.meshes.push(mesh);
+                            }
+                        }
+                    } 
+                    else if (obj.type === 'line') {
+                        // Intersection parameter of line P0 + t*V with w-sheet: w0 + t*vw = w
+                        if (Math.abs(obj.vw) > 0.0001) {
+                            const t = (w - obj.w0) / obj.vw;
+                            const x = obj.x0 + t * obj.vx;
+                            const y = obj.y0 + t * obj.vy;
+                            const z = obj.z0 + t * obj.vz;
+                            
+                            // Check if point coordinate is within the current sheet bounds
+                            if (Math.abs(y) <= yLim && Math.abs(z) <= zLim && Math.abs(x) <= xLim) {
+                                const geo = new THREE.SphereGeometry(0.28, 32, 32);
+                                const mat = new THREE.MeshPhongMaterial({ color: obj.color, emissive: obj.color, emissiveIntensity: 0.3 });
+                                const mesh = new THREE.Mesh(geo, mat);
+                                mesh.position.set(cx + y, cy + z, cz + x);
+                                scene.add(mesh);
+                                obj.meshes.push(mesh);
+                            }
+                        } else {
+                            // Line parallel to the w-slices
+                            if (Math.abs(obj.w0 - w) < 0.01) {
+                                const pts = [
+                                    new THREE.Vector3(cx + obj.y0 - obj.vy * 30, cy + obj.z0 - obj.vz * 30, cz + obj.x0 - obj.vx * 30),
+                                    new THREE.Vector3(cx + obj.y0 + obj.vy * 30, cy + obj.z0 + obj.vz * 30, cz + obj.x0 + obj.vx * 30)
+                                ];
+                                const geo = new THREE.BufferGeometry().setFromPoints(pts);
+                                const mat = new THREE.LineBasicMaterial({ color: obj.color, linewidth: 3, clippingPlanes: localClips });
+                                const lineMesh = new THREE.Line(geo, mat);
+                                scene.add(lineMesh);
+                                obj.meshes.push(lineMesh);
+                            }
+                        }
+                    } 
+                    else if (obj.type === 'plane') {
+                        // Plane intersection: solve s*uw + t*vw = w - w0
+                        if (Math.abs(obj.uw) < 0.0001 && Math.abs(obj.vw) < 0.0001) {
+                            // Plane lies flat within a single w-slice
+                            if (Math.abs(obj.w0 - w) < 0.05) {
+                                const geom = new THREE.PlaneGeometry(ySize * 1.5, zSize * 1.5);
+                                const mat = new THREE.MeshStandardMaterial({ 
+                                    color: obj.color, side: THREE.DoubleSide, transparent: true, opacity: 0.55,
+                                    clippingPlanes: localClips, depthWrite: false
+                                });
+                                const mesh = new THREE.Mesh(geom, mat);
+                                
+                                // Map vectors from system space (x, y, z) to physical (y, z, x)
+                                const uVec = new THREE.Vector3(obj.uy, obj.uz, obj.ux);
+                                const vVec = new THREE.Vector3(obj.vy, obj.vz, obj.vx);
+                                const normal = new THREE.Vector3().crossVectors(uVec, vVec).normalize();
+                                mesh.lookAt(normal);
+                                mesh.position.set(cx + obj.y0, cy + obj.z0, cz + obj.x0);
+                                scene.add(mesh);
+                                obj.meshes.push(mesh);
+                            }
+                        } else {
+                            // Intersects as a 1D line inside the sheet
+                            const pts = [];
+                            if (Math.abs(obj.vw) > 0.0001) {
+                                for (let s of [-30, 30]) {
+                                    const t = (w - obj.w0 - s * obj.uw) / obj.vw;
+                                    pts.push(new THREE.Vector3(
+                                        cx + obj.y0 + s * obj.uy + t * obj.vy,
+                                        cy + obj.z0 + s * obj.uz + t * obj.vz,
+                                        cz + obj.x0 + s * obj.ux + t * obj.vx
+                                    ));
+                                }
+                            } else {
+                                for (let t of [-30, 30]) {
+                                    const s = (w - obj.w0 - t * obj.vw) / obj.uw;
+                                    pts.push(new THREE.Vector3(
+                                        cx + obj.y0 + s * obj.uy + t * obj.vy,
+                                        cy + obj.z0 + s * obj.uz + t * obj.vz,
+                                        cz + obj.x0 + s * obj.ux + t * obj.vx
+                                    ));
+                                }
+                            }
+                            if (pts.length >= 2) {
+                                const geo = new THREE.BufferGeometry().setFromPoints(pts);
+                                const mat = new THREE.LineBasicMaterial({ color: obj.color, linewidth: 3, clippingPlanes: localClips });
+                                const lineMesh = new THREE.Line(geo, mat);
+                                scene.add(lineMesh);
+                                obj.meshes.push(lineMesh);
+                            }
+                        }
+                    } 
+                    else if (obj.type === 'hyperplane') {
+                        // Hyperplane: Ax + By + Cz + Dw = E
+                        const normal = new THREE.Vector3(obj.B, obj.C, obj.A); // normal coordinates matching (y, z, x) system
+                        const normLen = normal.length();
+                        
+                        // MATHEMATICAL CORRECTION: Check if the hyperplane is of the form w = k (i.e., A = B = C = 0)
+                        if (normLen < 0.0001) {
+                            if (Math.abs(obj.D) > 0.0001) {
+                                const targetW = obj.E / obj.D;
+                                // If current w-slice matches the constant value, fill the ENTIRE volumetric 3D box
+                                if (Math.abs(targetW - w) < 0.01) {
+                                    const geom = new THREE.BoxGeometry(ySize, zSize, xSize);
+                                    const mat = new THREE.MeshStandardMaterial({
+                                        color: obj.color,
+                                        transparent: true,
+                                        opacity: 0.5,
+                                        side: THREE.DoubleSide,
+                                        depthWrite: false
+                                    });
+                                    const mesh = new THREE.Mesh(geom, mat);
+                                    mesh.position.set(cx, cy, cz);
+                                    scene.add(mesh);
+                                    obj.meshes.push(mesh);
+                                }
+                            }
+                        } else {
+                            // Standard oblique 3D hyperplane: intersects each 3D sheet as a 2D plane face
+                            const geom = new THREE.PlaneGeometry(ySize * 3, zSize * 3);
+                            const mat = new THREE.MeshStandardMaterial({ 
+                                color: obj.color, side: THREE.DoubleSide, transparent: true, opacity: 0.4,
+                                clippingPlanes: localClips, depthWrite: false
+                            });
+                            const mesh = new THREE.Mesh(geom, mat);
+                            
+                            normal.normalize();
+                            const rhs = obj.E - obj.D * w;
+                            const dist = rhs / normLen;
+                            
+                            mesh.position.copy(normal).multiplyScalar(dist).add(new THREE.Vector3(cx, cy, cz));
+                            const lookTarget = new THREE.Vector3().copy(mesh.position).add(normal);
+                            mesh.lookAt(lookTarget);
+                            
+                            scene.add(mesh);
+                            obj.meshes.push(mesh);
+                        }
+                    }
+                });
+            });
+        }
+
+        // --- Interaction Handler Functions ---
+        function updateDimensions() {
+            ySize = parseFloat(document.getElementById('dim-y').value);
+            zSize = parseFloat(document.getElementById('dim-z').value);
+            xSize = parseFloat(document.getElementById('dim-x').value);
+            pageSpacing = parseFloat(document.getElementById('dim-spacing').value);
+
+            document.getElementById('val-y').innerText = ySize;
+            document.getElementById('val-z').innerText = zSize;
+            document.getElementById('val-x').innerText = xSize;
+            document.getElementById('val-spacing').innerText = pageSpacing;
+
+            rebuildFoliationSheets();
+            solveGeometricFoliations();
+        }
+
+        function toggleFormFields() {
+            const type = document.getElementById('obj-type').value;
+            document.getElementById('fields-point').style.display = type === 'point' ? 'block' : 'none';
+            document.getElementById('fields-line').style.display = type === 'line' ? 'block' : 'none';
+            document.getElementById('fields-plane').style.display = type === 'plane' ? 'block' : 'none';
+            document.getElementById('fields-hyperplane').style.display = type === 'hyperplane' ? 'block' : 'none';
+        }
+
+        function togglePanel(collapsed) {
+            const panel = document.getElementById('control-panel');
+            const showBtn = document.getElementById('toggle-panel-btn');
+            if (collapsed) {
+                panel.classList.add('collapsed');
+                showBtn.style.display = 'block';
+            } else {
+                panel.classList.remove('collapsed');
+                showBtn.style.display = 'none';
+            }
+        }
+
+        function addObjectFromUI() {
+            const type = document.getElementById('obj-type').value;
+            const color = document.getElementById('obj-color').value;
+            let obj = { id: Date.now(), type, color, name: '', meshes: [] };
+
+            if (type === 'point') {
+                obj.x = parseFloat(document.getElementById('pt-x').value);
+                obj.y = parseFloat(document.getElementById('pt-y').value);
+                obj.z = parseFloat(document.getElementById('pt-z').value);
+                obj.w = parseFloat(document.getElementById('pt-w').value);
+                obj.name = `Pt (x=${obj.x}, y=${obj.y}, z=${obj.z}, w=${obj.w})`;
+            } 
+            else if (type === 'line') {
+                obj.x0 = parseFloat(document.getElementById('ln-x0').value);
+                obj.y0 = parseFloat(document.getElementById('ln-y0').value);
+                obj.z0 = parseFloat(document.getElementById('ln-z0').value);
+                obj.w0 = parseFloat(document.getElementById('ln-w0').value);
+                obj.vx = parseFloat(document.getElementById('ln-vx').value);
+                obj.vy = parseFloat(document.getElementById('ln-vy').value);
+                obj.vz = parseFloat(document.getElementById('ln-vz').value);
+                obj.vw = parseFloat(document.getElementById('ln-vw').value);
+                obj.name = `Line (Parametric)`;
+            } 
+            else if (type === 'plane') {
+                obj.x0 = parseFloat(document.getElementById('pl-x0').value);
+                obj.y0 = parseFloat(document.getElementById('pl-y0').value);
+                obj.z0 = parseFloat(document.getElementById('pl-z0').value);
+                obj.w0 = parseFloat(document.getElementById('pl-w0').value);
+                obj.ux = parseFloat(document.getElementById('pl-ux').value);
+                obj.uy = parseFloat(document.getElementById('pl-uy').value);
+                obj.uz = parseFloat(document.getElementById('pl-uz').value);
+                obj.uw = parseFloat(document.getElementById('pl-uw').value);
+                obj.vx = parseFloat(document.getElementById('pl-vx').value);
+                obj.vy = parseFloat(document.getElementById('pl-vy').value);
+                obj.vz = parseFloat(document.getElementById('pl-vz').value);
+                obj.vw = parseFloat(document.getElementById('pl-vw').value);
+                obj.name = `Plane (Parametric)`;
+            } 
+            else if (type === 'hyperplane') {
+                obj.A = parseFloat(document.getElementById('hp-a').value);
+                obj.B = parseFloat(document.getElementById('hp-b').value);
+                obj.C = parseFloat(document.getElementById('hp-c').value);
+                obj.D = parseFloat(document.getElementById('hp-d').value);
+                obj.E = parseFloat(document.getElementById('hp-e').value);
+                obj.name = `Hyperplane [${obj.A}x + ${obj.B}y + ${obj.C}z + ${obj.D}w = ${obj.E}]`;
+            }
+
+            objectsList.push(obj);
+            updateObjectListUI();
+            solveGeometricFoliations();
+        }
+
+        function loadDefaultMathematicalObjects() {
+            // Preset 1: Green Diagonal Plane (intersects as a line trace in y-z plane in each w-slice)
+            objectsList.push({
+                id: 201, type: 'plane', color: '#39ff14', name: 'Green Diagonal Plane',
+                x0: 0, y0: -2, z0: -2, w0: 0,
+                ux: 0, uy: 4, uz: 0, uw: 0,
+                vx: 0, vy: 0, vz: 4, vw: 1, meshes: []
+            });
+
+            // Preset 2: Pink Flat Plane (Flat within the w = 0 slab)
+            objectsList.push({
+                id: 202, type: 'plane', color: '#ff007f', name: 'Pink Flat Plane (w=0)',
+                x0: 0, y0: -2, z0: -2, w0: 0,
+                ux: 0, uy: 4, uz: 0, uw: 0,
+                vx: 0, vy: 0, vz: 4, vw: 0, meshes: []
+            });
+
+            // Preset 3: Blue Transversal Line (punctures through the sheets)
+            objectsList.push({
+                id: 203, type: 'line', color: '#1f51ff', name: 'Blue Transversal Line',
+                x0: 0, y0: 2, z0: 2, w0: 0,
+                vx: 0, vy: -1.2, vz: -1.2, vw: 1, meshes: []
+            });
+
+            // Preset 4: Amber Hyperplane w = 2 (0x + 0y + 0z + 1w = 2)
+            // This is the w = k hyperplane filling the entire sheet w = 2
+            objectsList.push({
+                id: 204, type: 'hyperplane', color: '#ffa500', name: 'Amber Hyperplane (w=2)',
+                A: 0, B: 0, C: 0, D: 1, E: 2, meshes: []
+            });
+
+            updateObjectListUI();
+            solveGeometricFoliations();
+        }
+
+        function updateObjectListUI() {
+            const listDiv = document.getElementById('objects-list');
+            listDiv.innerHTML = '';
+            objectsList.forEach(obj => {
+                const div = document.createElement('div');
+                div.className = 'object-item';
+                div.style.borderLeftColor = obj.color;
+                div.innerHTML = `
+                    <span><strong>${obj.type.toUpperCase()}:</strong> ${obj.name}</span>
+                    <button class="delete-btn" onclick="deleteObject(${obj.id})">Delete</button>
+                `;
+                listDiv.appendChild(div);
+            });
+        }
+
+        function deleteObject(id) {
+            const idx = objectsList.findIndex(obj => obj.id === id);
+            if (idx !== -1) {
+                objectsList[idx].meshes.forEach(m => scene.remove(m));
+                objectsList.splice(idx, 1);
+                updateObjectListUI();
+                solveGeometricFoliations();
+            }
+        }
+
+        function onWindowResize() {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
