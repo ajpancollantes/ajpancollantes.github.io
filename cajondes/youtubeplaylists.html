@@ -90,11 +90,9 @@
             <div class="p-4 bg-gray-900 border-b border-gray-700 shrink-0">
                 <div class="flex justify-between items-center mb-2">
                     <label for="playlist-selector" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider m-0">Selección de Playlist</label>
-                    <div id="playlist-stats" class="text-xs text-gray-400 flex items-center gap-1.5 hidden bg-gray-800 px-2 py-0.5 rounded border border-gray-700 shadow-inner" title="Tiempo visualizado y permanencia en esta lista">
+                    <div id="playlist-stats" class="text-xs text-gray-400 flex items-center gap-1.5 hidden bg-gray-800 px-2 py-0.5 rounded border border-gray-700 shadow-inner" title="Tiempo total visualizado en esta lista">
                         <svg class="w-3.5 h-3.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <span id="watched-time" class="font-bold text-gray-300 tracking-wide">0m</span>
-                        <span class="text-gray-600">·</span>
-                        <span id="permanence-time" class="text-gray-500 tracking-wide">0m</span>
                     </div>
                 </div>
                 <select id="playlist-selector" class="w-full bg-gray-800 text-white border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50 text-sm" disabled onchange="window.loadPlaylist(this.value)">
@@ -276,16 +274,6 @@
             
             if (!config.spreadsheetId || !config.apiKey) window.openConfig(true);
             else fetchPlaylists();
-
-            // C key to toggle subtitles (like YouTube)
-            document.addEventListener('keydown', (e) => {
-                if (e.key.toLowerCase() === 'c' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                    const tag = document.activeElement?.tagName?.toLowerCase();
-                    if (tag !== 'input' && tag !== 'textarea' && tag !== 'select') {
-                        window.toggleSubtitles();
-                    }
-                }
-            });
         });
 
         // ----- FIREBASE LOGIC -----
@@ -530,7 +518,6 @@
             });
             document.getElementById('video-list').innerHTML = html || '<p class="text-center text-gray-500 py-10 text-sm">No se encontraron enlaces de YouTube.</p>';
             updatePlaylistStats();
-            fetchYouTubeDurations(currentPlaylistData.map(v => v.id)).then(() => updatePlaylistStats());
         }
 
         function processLocalVideos(videos) {
@@ -564,7 +551,6 @@
             });
             document.getElementById('video-list').innerHTML = html || '<p class="text-center text-gray-500 py-10 text-sm">No hay archivos locales guardados.</p>';
             updatePlaylistStats();
-            fetchLocalDurations(videos).then(() => updatePlaylistStats());
         }
 
         window.removeLocal = async function(idx) {
@@ -774,94 +760,28 @@
             });
         }
         
-        // Duration & remaining-time helpers
-        function parseISO8601Duration(iso) {
-            const m = iso.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-            return (parseInt(m[1]) || 0) * 3600 + (parseInt(m[2]) || 0) * 60 + (parseInt(m[3]) || 0);
-        }
-
-        async function fetchYouTubeDurations(videoIds) {
-            const idsToFetch = videoIds.filter(id => !localStorage.getItem(`duration_${id}`) && id.length === 11);
-            if (idsToFetch.length === 0) return;
-            const batchSize = 50;
-            for (let i = 0; i < idsToFetch.length; i += batchSize) {
-                const batch = idsToFetch.slice(i, i + batchSize);
-                try {
-                    const res = await fetch(
-                        `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batch.join(',')}&key=${config.apiKey}`
-                    );
-                    const data = await res.json();
-                    if (data.items) {
-                        data.items.forEach(item => {
-                            localStorage.setItem(`duration_${item.id}`, parseISO8601Duration(item.contentDetails.duration).toString());
-                        });
-                    }
-                } catch (e) {
-                    console.warn('Failed to fetch durations:', e);
-                }
-            }
-        }
-
-        async function fetchLocalDurations(videos) {
-            for (const video of videos) {
-                if (localStorage.getItem(`duration_${video.id}`)) continue;
-                try {
-                    const url = URL.createObjectURL(video.blob);
-                    const el = document.createElement(video.type.startsWith('audio/') ? 'audio' : 'video');
-                    el.preload = 'metadata';
-                    el.src = url;
-                    await new Promise(resolve => {
-                        el.onloadedmetadata = () => {
-                            localStorage.setItem(`duration_${video.id}`, el.duration.toString());
-                            URL.revokeObjectURL(url);
-                            resolve();
-                        };
-                        el.onerror = () => { URL.revokeObjectURL(url); resolve(); };
-                    });
-                } catch (e) { console.warn('Failed to get local duration:', e); }
-            }
-        }
-
-        function formatTime(seconds) {
-            const h = Math.floor(seconds / 3600);
-            const m = Math.floor((seconds % 3600) / 60);
-            if (h > 0) return `${h}h ${m}m`;
-            return `${m}m`;
-        }
-
         function updatePlaylistStats() {
-            let watchedSeconds = 0;
-            let remainingSeconds = 0;
-            let unknownCount = 0;
-
+            let totalSeconds = 0;
             currentPlaylistData.forEach(video => {
                 const progData = JSON.parse(localStorage.getItem(`yt_prog_${video.id}`) || 'null');
-                const duration = progData?.d || parseInt(localStorage.getItem(`duration_${video.id}`) || '0');
-
                 if (progData && progData.t) {
-                    watchedSeconds += progData.t;
-                }
-
-                if (duration > 0) {
-                    const t = progData?.t || 0;
-                    if (duration - t > COMPLETED_THRESHOLD) {
-                        remainingSeconds += duration - t;
-                    }
-                } else {
-                    unknownCount++;
+                    totalSeconds += progData.t;
                 }
             });
 
-            const watchedSpan = document.getElementById('watched-time');
-            const remainingSpan = document.getElementById('permanence-time');
-            const statsContainer = document.getElementById('playlist-stats');
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
 
-            if (statsContainer && watchedSpan && remainingSpan) {
+            let timeString = '';
+            if (hours > 0) timeString += `${hours}h `;
+            timeString += `${minutes}m`;
+
+            const statsContainer = document.getElementById('playlist-stats');
+            const timeSpan = document.getElementById('watched-time');
+            
+            if (statsContainer && timeSpan) {
                 statsContainer.classList.remove('hidden');
-                watchedSpan.textContent = formatTime(watchedSeconds);
-                let remainingText = formatTime(remainingSeconds);
-                if (unknownCount > 0) remainingText += ` (${unknownCount} sin duración)`;
-                remainingSpan.textContent = '▸ ' + remainingText;
+                timeSpan.textContent = timeString;
             }
         }
 
@@ -931,4 +851,84 @@
             if (subtitleTrack && subtitleTrack.parentNode) {
                 subtitleTrack.parentNode.removeChild(subtitleTrack);
             }
-       
+            subtitleTrack = null;
+            subtitleActive = false;
+            updateCcButtonState();
+        }
+
+        function loadSubtitleTrack(vttContent) {
+            cleanupTrack();
+            if (!vttContent) return;
+
+            const blob = new Blob([vttContent], { type: 'text/vtt' });
+            subtitleBlobUrl = URL.createObjectURL(blob);
+
+            const track = document.createElement('track');
+            track.kind = 'subtitles';
+            track.label = 'Subtítulos';
+            track.srclang = 'es';
+            track.src = subtitleBlobUrl;
+            track.default = true;
+
+            localPlayer.appendChild(track);
+            subtitleTrack = track;
+            subtitleActive = true;
+
+            for (let i = 0; i < localPlayer.textTracks.length; i++) {
+                localPlayer.textTracks[i].mode = 'showing';
+            }
+            updateCcButtonState();
+        }
+
+        function updateCcButtonState() {
+            const btn = document.getElementById('cc-button');
+            if (!btn) return;
+            if (subtitleActive) {
+                btn.classList.add('text-red-500');
+                btn.classList.remove('text-gray-400');
+            } else {
+                btn.classList.remove('text-red-500');
+                btn.classList.add('text-gray-400');
+            }
+        }
+
+        window.toggleSubtitles = async function() {
+            if (!currentPlaylistData[currentIndex] || currentPlaylistData[currentIndex].type !== 'local') return;
+            const video = currentPlaylistData[currentIndex];
+
+            if (subtitleTrack) {
+                subtitleActive = !subtitleActive;
+                for (let i = 0; i < localPlayer.textTracks.length; i++) {
+                    localPlayer.textTracks[i].mode = subtitleActive ? 'showing' : 'hidden';
+                }
+                updateCcButtonState();
+            } else {
+                const content = await getSubtitle(video.id);
+                if (content) {
+                    loadSubtitleTrack(content);
+                } else {
+                    document.getElementById('subtitle-file-input').click();
+                }
+            }
+        };
+
+        window.handleSubtitleUpload = async function(event) {
+            const file = event.target.files[0];
+            if (!file || !currentPlaylistData[currentIndex]) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                let content = e.target.result;
+                if (file.name.endsWith('.srt')) {
+                    content = srtToVtt(content);
+                }
+                const videoId = currentPlaylistData[currentIndex].id;
+                await saveSubtitle(videoId, content);
+                loadSubtitleTrack(content);
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        };
+    </script>
+</body>
+</html>
