@@ -887,4 +887,48 @@
             } catch (err) {
                 window.showConfigMessage("Error al exportar los datos.", true);
             }
-      
+        }
+
+        window.triggerImport = function() {
+            document.getElementById('import-data-input').click();
+        }
+
+        window.importData = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    for (const key in data) {
+                        localStorage.setItem(key, data[key]);
+                    }
+                    window.showConfigMessage("Datos importados correctamente. Recargando...", false);
+                    setTimeout(() => location.reload(), 1500);
+                } catch (err) {
+                    window.showConfigMessage("Error: El archivo no es un respaldo válido.", true);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = ''; 
+        }
+
+        // --- Subtitle / CC Management ---
+        function srtToVtt(srt) {
+            if (srt.charCodeAt(0) === 0xFEFF) srt = srt.slice(1);
+            let vtt = srt.replace(/\r\n/g, '\n');
+            vtt = vtt.replace(/^(\d{2}:\d{2}:\d{2}),(\d{3})/gm, '$1.$2');
+            vtt = 'WEBVTT\n\n' + vtt;
+            return vtt;
+        }
+
+        function cleanupTrack() {
+            if (subtitleBlobUrl) {
+                URL.revokeObjectURL(subtitleBlobUrl);
+                subtitleBlobUrl = null;
+            }
+            if (subtitleTrack && subtitleTrack.parentNode) {
+                subtitleTrack.parentNode.removeChild(subtitleTrack);
+            }
+       
