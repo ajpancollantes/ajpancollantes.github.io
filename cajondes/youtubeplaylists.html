@@ -71,6 +71,11 @@
                         <span class="text-xs font-bold">20s</span>
                         <svg class="w-7 h-7 md:w-8 md:h-8 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
                     </button>
+
+                    <button onclick="window.toggleSubtitles()" id="cc-button" class="text-gray-400 hover:text-white transition-colors p-2" title="Subtítulos (CC)">
+                        <svg class="w-6 h-6 md:w-7 md:h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 8.5c-.28 0-.5.22-.5.5v6c0 .28.22.5.5.5h3c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5H7.5v-4h2c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-3zm8 0c-.28 0-.5.22-.5.5v6c0 .28.22.5.5.5h3c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-2v-4h2c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-3z"/></svg>
+                    </button>
+                    <input type="file" id="subtitle-file-input" class="hidden" accept=".vtt,.srt" onchange="window.handleSubtitleUpload(event)">
                 </div>
             </div>
 
@@ -182,11 +187,14 @@
 
         const initDB = () => {
             return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, 1);
+                const request = indexedDB.open(DB_NAME, 2);
                 request.onupgradeneeded = (e) => {
                     localdb = e.target.result;
                     if (!localdb.objectStoreNames.contains(STORE_NAME)) {
                         localdb.createObjectStore(STORE_NAME, { keyPath: "id" });
+                    }
+                    if (!localdb.objectStoreNames.contains("subtitles")) {
+                        localdb.createObjectStore("subtitles", { keyPath: "videoId" });
                     }
                 };
                 request.onsuccess = (e) => {
@@ -224,6 +232,19 @@
             return new Promise((resolve) => tx.oncomplete = () => resolve());
         };
 
+        const saveSubtitle = async (videoId, content) => {
+            const tx = localdb.transaction("subtitles", "readwrite");
+            tx.objectStore("subtitles").put({ videoId, content });
+            return new Promise((resolve) => tx.oncomplete = () => resolve());
+        };
+
+        const getSubtitle = async (videoId) => {
+            const tx = localdb.transaction("subtitles", "readonly");
+            const store = tx.objectStore("subtitles");
+            const request = store.get(videoId);
+            return new Promise((resolve) => request.onsuccess = () => resolve(request.result?.content || null));
+        };
+
         // App Core
         let config = {
             spreadsheetId: localStorage.getItem('sheets_id') || '',
@@ -243,6 +264,9 @@
         let timeTrackerInterval = null;
         let currentPlaylistName = '';
         const COMPLETED_THRESHOLD = 10;
+        let subtitleTrack = null;
+        let subtitleBlobUrl = null;
+        let subtitleActive = false;
 
         document.addEventListener('DOMContentLoaded', async () => {
             await initDB();
@@ -552,7 +576,7 @@
                 </div>`;
         }
 
-        window.playVideo = function(index, isManual = false) {
+        window.playVideo = async function(index, isManual = false) {
             if (index < 0 || index >= currentPlaylistData.length) return;
             
             // Sync to cloud when switching videos if we were watching something
@@ -577,6 +601,7 @@
             ytPlaceholder.classList.add('hidden');
             localPlayer.classList.add('hidden');
             audioVisualizer.classList.add('hidden');
+            cleanupTrack();
 
             if (video.type === 'youtube') {
                 localPlayer.pause();
@@ -616,6 +641,10 @@
                 
                 const url = URL.createObjectURL(video.blob);
                 localPlayer.src = url;
+                const subContent = await getSubtitle(video.id);
+                if (subContent) {
+                    loadSubtitleTrack(subContent);
+                }
                 localPlayer.currentTime = startTime;
                 
                 if (isManual) localPlayer.play();
@@ -804,6 +833,102 @@
             reader.readAsText(file);
             event.target.value = ''; 
         }
+
+        // --- Subtitle / CC Management ---
+        function srtToVtt(srt) {
+            if (srt.charCodeAt(0) === 0xFEFF) srt = srt.slice(1);
+            let vtt = srt.replace(/\r\n/g, '\n');
+            vtt = vtt.replace(/^(\d{2}:\d{2}:\d{2}),(\d{3})/gm, '$1.$2');
+            vtt = 'WEBVTT\n\n' + vtt;
+            return vtt;
+        }
+
+        function cleanupTrack() {
+            if (subtitleBlobUrl) {
+                URL.revokeObjectURL(subtitleBlobUrl);
+                subtitleBlobUrl = null;
+            }
+            if (subtitleTrack && subtitleTrack.parentNode) {
+                subtitleTrack.parentNode.removeChild(subtitleTrack);
+            }
+            subtitleTrack = null;
+            subtitleActive = false;
+            updateCcButtonState();
+        }
+
+        function loadSubtitleTrack(vttContent) {
+            cleanupTrack();
+            if (!vttContent) return;
+
+            const blob = new Blob([vttContent], { type: 'text/vtt' });
+            subtitleBlobUrl = URL.createObjectURL(blob);
+
+            const track = document.createElement('track');
+            track.kind = 'subtitles';
+            track.label = 'Subtítulos';
+            track.srclang = 'es';
+            track.src = subtitleBlobUrl;
+            track.default = true;
+
+            localPlayer.appendChild(track);
+            subtitleTrack = track;
+            subtitleActive = true;
+
+            for (let i = 0; i < localPlayer.textTracks.length; i++) {
+                localPlayer.textTracks[i].mode = 'showing';
+            }
+            updateCcButtonState();
+        }
+
+        function updateCcButtonState() {
+            const btn = document.getElementById('cc-button');
+            if (!btn) return;
+            if (subtitleActive) {
+                btn.classList.add('text-red-500');
+                btn.classList.remove('text-gray-400');
+            } else {
+                btn.classList.remove('text-red-500');
+                btn.classList.add('text-gray-400');
+            }
+        }
+
+        window.toggleSubtitles = async function() {
+            if (!currentPlaylistData[currentIndex] || currentPlaylistData[currentIndex].type !== 'local') return;
+            const video = currentPlaylistData[currentIndex];
+
+            if (subtitleTrack) {
+                subtitleActive = !subtitleActive;
+                for (let i = 0; i < localPlayer.textTracks.length; i++) {
+                    localPlayer.textTracks[i].mode = subtitleActive ? 'showing' : 'hidden';
+                }
+                updateCcButtonState();
+            } else {
+                const content = await getSubtitle(video.id);
+                if (content) {
+                    loadSubtitleTrack(content);
+                } else {
+                    document.getElementById('subtitle-file-input').click();
+                }
+            }
+        };
+
+        window.handleSubtitleUpload = async function(event) {
+            const file = event.target.files[0];
+            if (!file || !currentPlaylistData[currentIndex]) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                let content = e.target.result;
+                if (file.name.endsWith('.srt')) {
+                    content = srtToVtt(content);
+                }
+                const videoId = currentPlaylistData[currentIndex].id;
+                await saveSubtitle(videoId, content);
+                loadSubtitleTrack(content);
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        };
     </script>
 </body>
 </html>
