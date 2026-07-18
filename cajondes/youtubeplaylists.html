@@ -33,7 +33,7 @@
         </div>
         
         <div class="flex items-center gap-3 md:gap-5 shrink-0">
-            <!-- New Local Folder Connector button to highlight that we read directly from physical drive -->
+            <!-- Local Folder Connector button to map physical drives -->
             <button onclick="window.selectLocalFolder()" class="flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-all active:scale-95 shadow-md" title="Conectar directorio local">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                 <span class="hidden sm:inline">Carpeta Local</span>
@@ -102,11 +102,20 @@
         <!-- Sidebar Playlist -->
         <div class="w-full md:w-1/3 lg:w-1/4 bg-gray-800 flex flex-col border-l border-gray-700 h-[40vh] md:h-auto shrink-0">
             <div class="p-4 bg-gray-900 border-b border-gray-700 shrink-0">
-                <div class="flex justify-between items-center mb-2">
-                    <label for="playlist-selector" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider m-0">Selección de Playlist</label>
-                    <div id="playlist-stats" class="text-xs text-gray-400 flex items-center gap-1.5 hidden bg-gray-800 px-2 py-0.5 rounded border border-gray-700 shadow-inner" title="Tiempo total visualizado en esta lista">
-                        <svg class="w-3.5 h-3.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span id="watched-time" class="font-bold text-gray-300 tracking-wide">0m</span>
+                <div class="flex justify-between items-center mb-2 min-w-0 gap-1">
+                    <label for="playlist-selector" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider m-0 truncate">Playlist</label>
+                    
+                    <!-- Advanced Dual-Badge Stats Container (Visto / Restante) -->
+                    <div id="playlist-stats" class="text-[10px] text-gray-400 flex items-center gap-2 hidden bg-gray-800 px-2 py-1 rounded-lg border border-gray-700 shadow-inner shrink-0" title="Tiempo total visualizado y restante en esta lista">
+                        <div class="flex items-center gap-0.5">
+                            <span class="text-green-500 font-extrabold">✓</span>
+                            <span id="watched-time" class="font-bold text-gray-300">0m</span>
+                        </div>
+                        <div class="w-[1px] h-3 bg-gray-700"></div>
+                        <div class="flex items-center gap-0.5">
+                            <span class="text-red-400 font-extrabold">⌛</span>
+                            <span id="remaining-time" class="font-bold text-red-400">0m</span>
+                        </div>
                     </div>
                 </div>
                 <select id="playlist-selector" class="w-full bg-gray-800 text-white border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50 text-sm" disabled onchange="window.loadPlaylist(this.value)">
@@ -261,7 +270,7 @@
             });
         };
 
-        // App Core
+        // App Core Configuration Globals
         let config = {
             spreadsheetId: localStorage.getItem('sheets_id') || '',
             apiKey: localStorage.getItem('sheets_api_key') || '',
@@ -283,6 +292,9 @@
         let subtitleTrack = null;
         let subtitleBlobUrl = null;
         let subtitleActive = false;
+
+        // Multi-thread safety token to cancel pending metadata scanning loops
+        let currentMetadataScannerToken = 0;
 
         // Dialog / Prompt System
         let alertResolve = null;
@@ -394,6 +406,29 @@
             }
         }
 
+        // Stable local file ID generator based strictly on file content references (Name + ModDate)
+        function getStableLocalId(filename, lastModified) {
+            const cleanName = filename.replace(/[^a-zA-Z0-9-_]/g, "");
+            return `local_${cleanName}_${lastModified}`;
+        }
+
+        // Lazy background metadata extractor to retrieve offline video dimensions & duration values
+        function getLocalVideoDuration(file) {
+            return new Promise((resolve) => {
+                const video = document.createElement('video');
+                video.preload = 'metadata';
+                video.src = URL.createObjectURL(file);
+                video.onloadedmetadata = () => {
+                    URL.revokeObjectURL(video.src);
+                    resolve(video.duration);
+                };
+                video.onerror = () => {
+                    URL.revokeObjectURL(video.src);
+                    resolve(0);
+                };
+            });
+        }
+
         // Directory Selection Logic
         window.selectLocalFolder = async function() {
             if (!('showDirectoryPicker' in window)) {
@@ -444,17 +479,20 @@
                 }
             }
 
-            // ORDER BY FILE CREATION / MODIFICATION DATE (descending: newest first)
+            // ORDER BY FILE CREATION / MODIFICATION DATE (newest first)
             videoFiles.sort((a, b) => b.lastModified - a.lastModified);
 
-            currentPlaylistData = videoFiles.map((v, i) => ({
-                id: `fallback_file_${i}_${v.lastModified}`,
-                name: v.name,
-                type: v.type,
-                blob: v.file,
-                subtitleFile: subtitleFiles[v.baseName.toLowerCase()] || null,
-                isLocal: true
-            }));
+            currentPlaylistData = videoFiles.map((v) => {
+                const stableId = getStableLocalId(v.name, v.lastModified);
+                return {
+                    id: stableId,
+                    name: v.name,
+                    type: v.type,
+                    blob: v.file,
+                    subtitleFile: subtitleFiles[v.baseName.toLowerCase()] || null,
+                    isLocal: true
+                };
+            });
 
             // Force visual selection
             const selector = document.getElementById('playlist-selector');
@@ -500,18 +538,21 @@
                     }
                 }
 
-                // ORDER BY FILE CREATION / MODIFICATION DATE (descending: newest first)
+                // ORDER BY FILE CREATION / MODIFICATION DATE (newest first)
                 videoFiles.sort((a, b) => b.lastModified - a.lastModified);
 
-                // Map files to matches
-                currentPlaylistData = videoFiles.map((v, i) => ({
-                    id: `local_folder_${i}_${v.lastModified}`,
-                    name: v.name,
-                    type: v.type,
-                    blob: v.file,
-                    subtitleFile: subtitleFiles[v.baseName.toLowerCase()] || null,
-                    isLocal: true
-                }));
+                // Map files to matches using fully stable keys
+                currentPlaylistData = videoFiles.map((v) => {
+                    const stableId = getStableLocalId(v.name, v.lastModified);
+                    return {
+                        id: stableId,
+                        name: v.name,
+                        type: v.type,
+                        blob: v.file,
+                        subtitleFile: subtitleFiles[v.baseName.toLowerCase()] || null,
+                        isLocal: true
+                    };
+                });
 
                 document.getElementById('list-loading').classList.add('hidden');
                 
@@ -526,6 +567,30 @@
                 await window.showAlert("Error de Acceso", "No se pudo leer la carpeta local seleccionada. Conéctala de nuevo.", "Reconectar");
                 await removeFolderHandle();
                 fetchPlaylists();
+            }
+        }
+
+        // Background loop that sequentially reads duration values without blocking main thread
+        async function runBackgroundDurationScanner(token) {
+            for (let i = 0; i < currentPlaylistData.length; i++) {
+                if (token !== currentMetadataScannerToken) return; // Terminate if folder changed
+                const v = currentPlaylistData[i];
+                if (!v.isLocal) continue;
+
+                const progKey = `yt_prog_${v.id}`;
+                let progData = JSON.parse(localStorage.getItem(progKey) || 'null');
+                
+                // If duration is unknown, scan and store it
+                if (!progData || !progData.d) {
+                    const d = await getLocalVideoDuration(v.blob);
+                    if (token !== currentMetadataScannerToken) return;
+                    if (d > 0) {
+                        const t = progData ? progData.t : 0;
+                        localStorage.setItem(progKey, JSON.stringify({ t, d }));
+                        updateVideoUI(i, t, d);
+                        updatePlaylistStats();
+                    }
+                }
             }
         }
 
@@ -565,7 +630,12 @@
                     <p class="mb-2">Carpeta vacía o sin archivos reproducibles.</p>
                     <p class="text-[10px] opacity-75">Formatos soportados: mp4, mkv, webm, mp3, m4a</p>
                 </div>`;
+            
             updatePlaylistStats();
+
+            // Cancel any prior scanner and start a fresh worker sweep
+            currentMetadataScannerToken = Date.now();
+            runBackgroundDurationScanner(currentMetadataScannerToken);
 
             // Auto resume position logic
             const lastSavedIndex = localStorage.getItem(`progress_Carpeta Local_index`);
@@ -968,27 +1038,43 @@
         }
         
         function updatePlaylistStats() {
-            let totalSeconds = 0;
+            let totalWatched = 0;
+            let totalRemaining = 0;
+            let hasValidStats = false;
+
             currentPlaylistData.forEach(video => {
                 const progData = JSON.parse(localStorage.getItem(`yt_prog_${video.id}`) || 'null');
-                if (progData && progData.t) {
-                    totalSeconds += progData.t;
+                if (progData && progData.d > 0) {
+                    hasValidStats = true;
+                    totalWatched += progData.t;
+                    const diff = progData.d - progData.t;
+                    if (diff > COMPLETED_THRESHOLD) {
+                        totalRemaining += diff;
+                    }
                 }
             });
 
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-
-            let timeString = '';
-            if (hours > 0) timeString += `${hours}h `;
-            timeString += `${minutes}m`;
+            const formatDuration = (totalSeconds) => {
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                let text = '';
+                if (hours > 0) text += `${hours}h `;
+                text += `${minutes}m`;
+                return text;
+            };
 
             const statsContainer = document.getElementById('playlist-stats');
-            const timeSpan = document.getElementById('watched-time');
+            const watchedSpan = document.getElementById('watched-time');
+            const remainingSpan = document.getElementById('remaining-time');
             
-            if (statsContainer && timeSpan) {
-                statsContainer.classList.remove('hidden');
-                timeSpan.textContent = timeString;
+            if (statsContainer && watchedSpan && remainingSpan) {
+                if (hasValidStats) {
+                    statsContainer.classList.remove('hidden');
+                    watchedSpan.textContent = formatDuration(totalWatched);
+                    remainingSpan.textContent = formatDuration(totalRemaining);
+                } else {
+                    statsContainer.classList.add('hidden');
+                }
             }
         }
 
