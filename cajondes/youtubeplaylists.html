@@ -406,10 +406,17 @@
             }
         }
 
-        // Stable local file ID generator based strictly on file content references (Name + ModDate)
-        function getStableLocalId(filename, lastModified) {
-            const cleanName = filename.replace(/[^a-zA-Z0-9-_]/g, "");
-            return `local_${cleanName}_${lastModified}`;
+        // Stable local file ID generator based strictly on file name (completely immune to modification date resets!)
+        function getStableLocalId(filename) {
+            // Generate a simple, safe numeric hash of the filename
+            let hash = 0;
+            for (let i = 0; i < filename.length; i++) {
+                const char = filename.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash |= 0; // Convert to 32bit integer
+            }
+            const cleanName = filename.replace(/[^a-zA-Z0-9-_]/g, "").substring(0, 30);
+            return `local_${cleanName}_${Math.abs(hash)}`;
         }
 
         // Lazy background metadata extractor to retrieve offline video dimensions & duration values
@@ -432,10 +439,10 @@
         // Directory Selection Logic
         window.selectLocalFolder = async function() {
             if (!('showDirectoryPicker' in window)) {
-                // Fallback for Safari/Firefox
+                // Fallback for Safari/Firefox/HTTP non-secure connections
                 await window.showAlert(
-                    "Navegador no compatible",
-                    "Tu navegador no soporta el acceso directo a carpetas del disco duro de forma persistente. Usaremos el selector de archivos por defecto.",
+                    "Navegador no compatible (o sin HTTPS)",
+                    "Para vincular carpetas persistentes, se requiere un navegador compatible (Chrome/Edge/Opera) accediendo mediante conexión segura HTTPS o localhost. En su lugar usaremos el cargador manual.",
                     "Seleccionar Carpeta"
                 );
                 document.getElementById('fallback-directory-input').click();
@@ -453,7 +460,7 @@
             }
         };
 
-        // Fallback for Firefox and Safari
+        // Fallback for Firefox, Safari, and Non-HTTPS sites
         window.handleFallbackDirectory = async function(event) {
             const files = Array.from(event.target.files);
             if (files.length === 0) return;
@@ -483,7 +490,7 @@
             videoFiles.sort((a, b) => b.lastModified - a.lastModified);
 
             currentPlaylistData = videoFiles.map((v) => {
-                const stableId = getStableLocalId(v.name, v.lastModified);
+                const stableId = getStableLocalId(v.name);
                 return {
                     id: stableId,
                     name: v.name,
@@ -543,7 +550,7 @@
 
                 // Map files to matches using fully stable keys
                 currentPlaylistData = videoFiles.map((v) => {
-                    const stableId = getStableLocalId(v.name, v.lastModified);
+                    const stableId = getStableLocalId(v.name);
                     return {
                         id: stableId,
                         name: v.name,
@@ -637,10 +644,17 @@
             currentMetadataScannerToken = Date.now();
             runBackgroundDurationScanner(currentMetadataScannerToken);
 
-            // Auto resume position logic
-            const lastSavedIndex = localStorage.getItem(`progress_Carpeta Local_index`);
-            if (lastSavedIndex !== null && currentPlaylistData[lastSavedIndex]) {
-                window.playVideo(parseInt(lastSavedIndex), false);
+            // Auto resume last played video (Identified securely by unique stable file ID)
+            const lastSavedId = localStorage.getItem(`progress_Carpeta Local_last_played_id`);
+            let resumeIndex = -1;
+            if (lastSavedId) {
+                resumeIndex = currentPlaylistData.findIndex(v => v.id === lastSavedId);
+            }
+            if (resumeIndex !== -1) {
+                window.playVideo(resumeIndex, false);
+            } else if (currentPlaylistData.length > 0) {
+                // If last played isn't found, default cue first item without autoplaying
+                window.playVideo(0, false);
             }
         }
 
@@ -815,10 +829,16 @@
             document.getElementById('video-list').innerHTML = html || '<p class="text-center text-gray-500 py-10 text-sm">No se encontraron enlaces de YouTube.</p>';
             updatePlaylistStats();
 
-            // Auto resume position logic for online playlists
-            const lastSavedIndex = localStorage.getItem(`progress_${currentPlaylistName}_index`);
-            if (lastSavedIndex !== null && currentPlaylistData[lastSavedIndex]) {
-                window.playVideo(parseInt(lastSavedIndex), false);
+            // Secure resume by Unique ID logic for online playlists
+            const lastSavedId = localStorage.getItem(`progress_${currentPlaylistName}_last_played_id`);
+            let resumeIndex = -1;
+            if (lastSavedId) {
+                resumeIndex = currentPlaylistData.findIndex(v => v.id === lastSavedId);
+            }
+            if (resumeIndex !== -1) {
+                window.playVideo(resumeIndex, false);
+            } else if (currentPlaylistData.length > 0) {
+                window.playVideo(0, false);
             }
         }
 
@@ -845,7 +865,9 @@
             
             currentIndex = index;
             const video = currentPlaylistData[index];
-            localStorage.setItem(`progress_${currentPlaylistName}_index`, index);
+            
+            // Store active play state by STABLE ID instead of fragile numeric array index!
+            localStorage.setItem(`progress_${currentPlaylistName}_last_played_id`, video.id);
             
             let startTime = 0;
             const progData = JSON.parse(localStorage.getItem(`yt_prog_${video.id}`) || 'null');
