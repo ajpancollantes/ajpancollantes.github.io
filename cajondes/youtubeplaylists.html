@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SheetsTube Player</title>
+    <title>SheetsTube Player Pro</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23ef4444%22/><path d=%22M40 30 L70 50 L40 70 Z%22 fill=%22white%22/></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -19,8 +19,10 @@
 </head>
 <body class="bg-gray-900 text-white h-screen flex flex-col font-sans overflow-hidden">
 
+    <!-- Dummy audio element to keep iOS/Android playback alive in background if needed -->
     <audio id="dummy-audio" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA" loop playsinline></audio>
 
+    <!-- Main Header -->
     <header class="bg-gray-800 px-4 py-3 shadow-md flex justify-between items-center z-50 shrink-0 border-b border-gray-700">
         <div class="flex items-center gap-2 min-w-0">
             <svg class="w-6 h-6 md:w-8 md:h-8 text-red-500 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-1.768,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M9.667,15.333V8.667L15.667,12L9.667,15.333z"/></svg>
@@ -31,10 +33,13 @@
         </div>
         
         <div class="flex items-center gap-3 md:gap-5 shrink-0">
-            <button onclick="document.getElementById('local-file-input').click()" class="p-1 text-gray-400 hover:text-white transition-colors active:scale-95" title="Subir Vídeo o MP3">
-                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+            <!-- New Local Folder Connector button to highlight that we read directly from physical drive -->
+            <button onclick="window.selectLocalFolder()" class="flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-all active:scale-95 shadow-md" title="Conectar directorio local">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                <span class="hidden sm:inline">Carpeta Local</span>
             </button>
-            <input type="file" id="local-file-input" class="hidden" accept="video/*,audio/*" onchange="window.handleLocalFileUpload(event)">
+            <!-- Fallback input directory picker for non-chrome browsers -->
+            <input type="file" id="fallback-directory-input" class="hidden" webkitdirectory directory multiple onchange="window.handleFallbackDirectory(event)">
             
             <button onclick="window.openConfig()" class="p-1 text-gray-400 hover:text-white transition-colors active:scale-95" title="Configuración">
                 <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37-1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -43,11 +48,13 @@
     </header>
 
     <main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+        <!-- Player Container -->
         <div class="w-full md:w-2/3 lg:w-3/4 bg-black flex flex-col justify-start overflow-hidden">
             <div id="player-wrapper" class="hidden w-full flex flex-col h-full">
                 <div id="player-container" class="aspect-w-16 w-full shadow-2xl shrink-0">
                     <div id="yt-player"></div>
                     <video id="local-player" class="hidden" controls playsinline></video>
+                    <!-- Audio Player View -->
                     <div id="audio-visualizer" class="hidden audio-visualizer flex flex-col items-center justify-center bg-gray-900 border-b border-gray-800">
                         <div class="p-8 bg-red-600/10 rounded-full mb-4 animate-pulse">
                             <svg class="w-20 h-20 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
@@ -56,6 +63,7 @@
                     </div>
                 </div>
                 
+                <!-- Player controls -->
                 <div class="w-full bg-gray-900 py-4 flex justify-center items-center gap-8 md:gap-12 border-t border-gray-800 shrink-0">
                     <button onclick="window.seekVideo(-20)" class="text-gray-400 hover:text-white flex items-center gap-2 transition group p-2">
                         <svg class="w-7 h-7 md:w-8 md:h-8 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path></svg>
@@ -79,13 +87,19 @@
                 </div>
             </div>
 
+            <!-- Dashboard / Placeholder Screen -->
             <div id="player-placeholder" class="flex flex-col items-center justify-center text-gray-500 p-10 text-center h-full">
                 <svg class="w-16 h-16 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                <p class="text-base font-medium">Selecciona una lista o sube un archivo local</p>
-                <p class="text-xs mt-2 opacity-50">Soporta Vídeos y MP3 para reproducir sin conexión.</p>
+                <p class="text-base font-medium">Selecciona una lista o conecta un directorio local</p>
+                <p class="text-xs mt-2 opacity-50">Ordenación automática por fecha y sincronización de subtítulos.</p>
+                <button onclick="window.selectLocalFolder()" class="mt-6 px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm font-semibold transition-all active:scale-95 shadow-md flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    Elegir Carpeta del Disco Duro
+                </button>
             </div>
         </div>
 
+        <!-- Sidebar Playlist -->
         <div class="w-full md:w-1/3 lg:w-1/4 bg-gray-800 flex flex-col border-l border-gray-700 h-[40vh] md:h-auto shrink-0">
             <div class="p-4 bg-gray-900 border-b border-gray-700 shrink-0">
                 <div class="flex justify-between items-center mb-2">
@@ -158,6 +172,18 @@
         </div>
     </div>
 
+    <!-- Custom Modal System to entirely replace blocking alerts/confirms -->
+    <div id="custom-alert-modal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-[200] hidden backdrop-blur-xs p-4">
+        <div class="bg-gray-800 rounded-xl shadow-xl w-full max-w-sm p-5 border border-gray-700 text-center">
+            <h3 id="custom-alert-title" class="text-base font-bold text-white mb-2">Aviso</h3>
+            <p id="custom-alert-message" class="text-xs text-gray-300 mb-5"></p>
+            <div class="flex gap-2 justify-center">
+                <button id="custom-alert-btn-cancel" onclick="window.closeAlert(false)" class="hidden px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-semibold rounded-lg transition-colors"></button>
+                <button id="custom-alert-btn-confirm" onclick="window.closeAlert(true)" class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg transition-colors"></button>
+            </div>
+        </div>
+    </div>
+
     <!-- YouTube API Load -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
@@ -180,14 +206,14 @@
             localStorage.setItem('sheetstube_sync_id', syncId);
         }
 
-        // IndexedDB Persistence Logic
+        // IndexedDB Persistence Logic (Upgraded schema for directory pointers only)
         const DB_NAME = "SheetsTubeLocalDB";
-        const STORE_NAME = "videos";
+        const STORE_NAME = "videos"; // Legacy key, unused now to avoid database duplication
         let localdb;
 
         const initDB = () => {
             return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, 2);
+                const request = indexedDB.open(DB_NAME, 3); // Upgraded to v3 to support settings/folder handles
                 request.onupgradeneeded = (e) => {
                     localdb = e.target.result;
                     if (!localdb.objectStoreNames.contains(STORE_NAME)) {
@@ -195,6 +221,9 @@
                     }
                     if (!localdb.objectStoreNames.contains("subtitles")) {
                         localdb.createObjectStore("subtitles", { keyPath: "videoId" });
+                    }
+                    if (!localdb.objectStoreNames.contains("settings")) {
+                        localdb.createObjectStore("settings", { keyPath: "key" });
                     }
                 };
                 request.onsuccess = (e) => {
@@ -205,44 +234,31 @@
             });
         };
 
-        const saveLocalVideo = async (file) => {
-            const videoId = "local_" + Date.now();
-            const videoData = {
-                id: videoId,
-                name: file.name,
-                type: file.type,
-                blob: file,
-                addedAt: new Date().getTime()
-            };
-            const tx = localdb.transaction(STORE_NAME, "readwrite");
-            tx.objectStore(STORE_NAME).add(videoData);
-            return new Promise((resolve) => tx.oncomplete = () => resolve(videoId));
+        // Saving persistent Directory Handles
+        const saveFolderHandle = async (handle) => {
+            const tx = localdb.transaction("settings", "readwrite");
+            await new Promise((resolve, reject) => {
+                const req = tx.objectStore("settings").put({ key: "local_folder_handle", handle });
+                req.onsuccess = () => resolve();
+                req.onerror = () => reject(req.error);
+            });
         };
 
-        const getLocalVideos = async () => {
-            const tx = localdb.transaction(STORE_NAME, "readonly");
-            const store = tx.objectStore(STORE_NAME);
-            const request = store.getAll();
-            return new Promise((resolve) => request.onsuccess = () => resolve(request.result));
+        const getFolderHandle = async () => {
+            const tx = localdb.transaction("settings", "readonly");
+            return new Promise((resolve) => {
+                const req = tx.objectStore("settings").get("local_folder_handle");
+                req.onsuccess = () => resolve(req.result?.handle || null);
+                req.onerror = () => resolve(null);
+            });
         };
 
-        const deleteLocalVideo = async (id) => {
-            const tx = localdb.transaction(STORE_NAME, "readwrite");
-            tx.objectStore(STORE_NAME).delete(id);
-            return new Promise((resolve) => tx.oncomplete = () => resolve());
-        };
-
-        const saveSubtitle = async (videoId, content) => {
-            const tx = localdb.transaction("subtitles", "readwrite");
-            tx.objectStore("subtitles").put({ videoId, content });
-            return new Promise((resolve) => tx.oncomplete = () => resolve());
-        };
-
-        const getSubtitle = async (videoId) => {
-            const tx = localdb.transaction("subtitles", "readonly");
-            const store = tx.objectStore("subtitles");
-            const request = store.get(videoId);
-            return new Promise((resolve) => request.onsuccess = () => resolve(request.result?.content || null));
+        const removeFolderHandle = async () => {
+            const tx = localdb.transaction("settings", "readwrite");
+            await new Promise((resolve) => {
+                const req = tx.objectStore("settings").delete("local_folder_handle");
+                req.onsuccess = () => resolve();
+            });
         };
 
         // App Core
@@ -268,12 +284,43 @@
         let subtitleBlobUrl = null;
         let subtitleActive = false;
 
+        // Dialog / Prompt System
+        let alertResolve = null;
+        window.showAlert = function(title, message, confirmText = "Aceptar", cancelText = "") {
+            return new Promise((resolve) => {
+                alertResolve = resolve;
+                document.getElementById('custom-alert-title').textContent = title;
+                document.getElementById('custom-alert-message').textContent = message;
+                
+                const confirmBtn = document.getElementById('custom-alert-btn-confirm');
+                confirmBtn.textContent = confirmText;
+                
+                const cancelBtn = document.getElementById('custom-alert-btn-cancel');
+                if (cancelText) {
+                    cancelBtn.textContent = cancelText;
+                    cancelBtn.classList.remove('hidden');
+                } else {
+                    cancelBtn.classList.add('hidden');
+                }
+                
+                document.getElementById('custom-alert-modal').classList.remove('hidden');
+            });
+        };
+
+        window.closeAlert = function(isConfirm) {
+            document.getElementById('custom-alert-modal').classList.add('hidden');
+            if (alertResolve) alertResolve(isConfirm);
+        };
+
         document.addEventListener('DOMContentLoaded', async () => {
             await initDB();
             initFirebase(); // Attempt to connect to cloud
             
-            if (!config.spreadsheetId || !config.apiKey) window.openConfig(true);
-            else fetchPlaylists();
+            if (!config.spreadsheetId || !config.apiKey) {
+                window.openConfig(true);
+            } else {
+                fetchPlaylists();
+            }
         });
 
         // ----- FIREBASE LOGIC -----
@@ -321,7 +368,6 @@
             }
 
             try {
-                // Guaranteed secure path structure
                 const docRef = doc(db, 'artifacts', 'sheetstube', 'users', syncId, 'data', 'progress');
                 await setDoc(docRef, dataToSync);
                 console.log("Cloud Sync OK");
@@ -347,16 +393,185 @@
                 console.error("Cloud Download Error", e);
             }
         }
-        // --------------------------
 
-        window.handleLocalFileUpload = async function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const btn = event.target.previousElementSibling;
-            btn.classList.add('animate-pulse', 'text-red-500');
-            await saveLocalVideo(file);
-            btn.classList.remove('animate-pulse', 'text-red-500');
-            fetchPlaylists(); 
+        // Directory Selection Logic
+        window.selectLocalFolder = async function() {
+            if (!('showDirectoryPicker' in window)) {
+                // Fallback for Safari/Firefox
+                await window.showAlert(
+                    "Navegador no compatible",
+                    "Tu navegador no soporta el acceso directo a carpetas del disco duro de forma persistente. Usaremos el selector de archivos por defecto.",
+                    "Seleccionar Carpeta"
+                );
+                document.getElementById('fallback-directory-input').click();
+                return;
+            }
+
+            try {
+                const handle = await window.showDirectoryPicker({
+                    mode: 'read'
+                });
+                await saveFolderHandle(handle);
+                await scanLocalDirectory(handle);
+            } catch (err) {
+                console.warn("Folder picker cancelled or failed", err);
+            }
+        };
+
+        // Fallback for Firefox and Safari
+        window.handleFallbackDirectory = async function(event) {
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
+
+            const videoFiles = [];
+            const subtitleFiles = {};
+
+            for (const file of files) {
+                const name = file.name;
+                const ext = name.split('.').pop().toLowerCase();
+                const baseName = name.substring(0, name.lastIndexOf('.'));
+
+                if (['mp4', 'mkv', 'webm', 'avi', 'mov', 'mp3', 'm4a'].includes(ext)) {
+                    videoFiles.push({
+                        name: name,
+                        baseName: baseName,
+                        type: file.type || `video/${ext}`,
+                        file: file,
+                        lastModified: file.lastModified
+                    });
+                } else if (['srt', 'vtt'].includes(ext)) {
+                    subtitleFiles[baseName.toLowerCase()] = file;
+                }
+            }
+
+            // ORDER BY FILE CREATION / MODIFICATION DATE (descending: newest first)
+            videoFiles.sort((a, b) => b.lastModified - a.lastModified);
+
+            currentPlaylistData = videoFiles.map((v, i) => ({
+                id: `fallback_file_${i}_${v.lastModified}`,
+                name: v.name,
+                type: v.type,
+                blob: v.file,
+                subtitleFile: subtitleFiles[v.baseName.toLowerCase()] || null,
+                isLocal: true
+            }));
+
+            // Force visual selection
+            const selector = document.getElementById('playlist-selector');
+            selector.value = "Carpeta Local";
+            localStorage.setItem('last_playlist', 'Carpeta Local');
+            renderLocalVideosUI();
+        };
+
+        async function scanLocalDirectory(handle) {
+            document.getElementById('video-list').innerHTML = '';
+            document.getElementById('list-loading').classList.remove('hidden');
+
+            try {
+                // Verify permissions
+                if (await handle.queryPermission({ mode: 'read' }) !== 'granted') {
+                    if (await handle.requestPermission({ mode: 'read' }) !== 'granted') {
+                        throw new Error("Permisos denegados por el usuario.");
+                    }
+                }
+
+                const videoFiles = [];
+                const subtitleFiles = {};
+
+                for await (const entry of handle.values()) {
+                    if (entry.kind === 'file') {
+                        const name = entry.name;
+                        const ext = name.split('.').pop().toLowerCase();
+                        const baseName = name.substring(0, name.lastIndexOf('.'));
+
+                        if (['mp4', 'mkv', 'webm', 'avi', 'mov', 'mp3', 'm4a'].includes(ext)) {
+                            const file = await entry.getFile();
+                            videoFiles.push({
+                                name: name,
+                                baseName: baseName,
+                                type: file.type || `video/${ext}`,
+                                file: file,
+                                lastModified: file.lastModified
+                            });
+                        } else if (['srt', 'vtt'].includes(ext)) {
+                            const file = await entry.getFile();
+                            subtitleFiles[baseName.toLowerCase()] = file;
+                        }
+                    }
+                }
+
+                // ORDER BY FILE CREATION / MODIFICATION DATE (descending: newest first)
+                videoFiles.sort((a, b) => b.lastModified - a.lastModified);
+
+                // Map files to matches
+                currentPlaylistData = videoFiles.map((v, i) => ({
+                    id: `local_folder_${i}_${v.lastModified}`,
+                    name: v.name,
+                    type: v.type,
+                    blob: v.file,
+                    subtitleFile: subtitleFiles[v.baseName.toLowerCase()] || null,
+                    isLocal: true
+                }));
+
+                document.getElementById('list-loading').classList.add('hidden');
+                
+                const selector = document.getElementById('playlist-selector');
+                selector.value = "Carpeta Local";
+                localStorage.setItem('last_playlist', 'Carpeta Local');
+
+                renderLocalVideosUI();
+            } catch (err) {
+                console.error("Scanning failed", err);
+                document.getElementById('list-loading').classList.add('hidden');
+                await window.showAlert("Error de Acceso", "No se pudo leer la carpeta local seleccionada. Conéctala de nuevo.", "Reconectar");
+                await removeFolderHandle();
+                fetchPlaylists();
+            }
+        }
+
+        function renderLocalVideosUI() {
+            let html = '';
+            currentPlaylistData.forEach((v, i) => {
+                const progData = JSON.parse(localStorage.getItem(`yt_prog_${v.id}`) || 'null');
+                const isCompleted = progData && (progData.d - progData.t <= COMPLETED_THRESHOLD);
+                const isAudio = v.type.startsWith('audio/');
+                
+                // Format file modification date nicely for user
+                const dateStr = new Date(v.blob.lastModified).toLocaleString('es-ES', {
+                    day: 'numeric', month: 'short', year: '2-digit', hour: '2-digit', minute: '2-digit'
+                });
+                
+                html += `
+                <div id="video-item-${i}" onclick="window.playVideo(${i}, true)" class="video-item flex gap-3 p-3 mb-2 rounded-xl cursor-pointer hover:bg-gray-700/50 border border-transparent ${isCompleted ? 'opacity-40' : ''}">
+                    <div class="relative w-24 h-16 shrink-0 bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center border border-gray-600">
+                        ${isAudio ? 
+                          '<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>' : 
+                          '<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
+                        }
+                        <div class="absolute bottom-0 left-0 h-1 bg-red-600 video-progress-bar" style="width: ${progData ? (progData.t/progData.d*100) : 0}%"></div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center overflow-hidden min-w-0">
+                        <h3 class="text-sm font-semibold text-gray-200 truncate" title="${v.name}">${v.name}</h3>
+                        <div class="flex flex-col gap-0.5 mt-1">
+                             <p class="text-[9px] text-gray-500 font-medium">${isAudio ? 'Audio' : 'Vídeo'} • ${v.subtitleFile ? 'CC Match' : 'Sin subtítulos'}</p>
+                             <p class="text-[9px] text-red-400/80 font-mono">${dateStr}</p>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            document.getElementById('video-list').innerHTML = html || `
+                <div class="text-center text-gray-500 py-10 text-sm">
+                    <p class="mb-2">Carpeta vacía o sin archivos reproducibles.</p>
+                    <p class="text-[10px] opacity-75">Formatos soportados: mp4, mkv, webm, mp3, m4a</p>
+                </div>`;
+            updatePlaylistStats();
+
+            // Auto resume position logic
+            const lastSavedIndex = localStorage.getItem(`progress_Carpeta Local_index`);
+            if (lastSavedIndex !== null && currentPlaylistData[lastSavedIndex]) {
+                window.playVideo(parseInt(lastSavedIndex), false);
+            }
         }
 
         window.openConfig = function(isInitial = false) {
@@ -434,7 +649,7 @@
         }
 
         async function fetchPlaylists() {
-            let names = ["Archivos Locales"];
+            let names = ["Carpeta Local"];
             try {
                 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}?fields=sheets.properties.title&key=${config.apiKey}`;
                 const response = await fetch(url);
@@ -454,6 +669,10 @@
             if (last && names.includes(last)) {
                 document.getElementById('playlist-selector').value = last;
                 window.loadPlaylist(last);
+            } else {
+                // If no last playlist, default select local folder if available
+                document.getElementById('playlist-selector').value = "Carpeta Local";
+                window.loadPlaylist("Carpeta Local");
             }
         }
 
@@ -462,15 +681,22 @@
             currentPlaylistName = sheetName;
             localStorage.setItem('last_playlist', sheetName);
             document.getElementById('video-list').innerHTML = '';
-            document.getElementById('list-loading').classList.remove('hidden');
             
-            if (sheetName === "Archivos Locales") {
-                const localVideos = await getLocalVideos();
-                document.getElementById('list-loading').classList.add('hidden');
-                processLocalVideos(localVideos);
+            if (sheetName === "Carpeta Local") {
+                const handle = await getFolderHandle();
+                if (handle) {
+                    await scanLocalDirectory(handle);
+                } else {
+                    document.getElementById('video-list').innerHTML = `
+                        <div class="text-center p-6 text-gray-500 text-xs">
+                            <p class="mb-4">No hay ninguna carpeta vinculada al reproductor.</p>
+                            <button onclick="window.selectLocalFolder()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold transition-all active:scale-95">Conectar Carpeta</button>
+                        </div>`;
+                }
                 return;
             }
 
+            document.getElementById('list-loading').classList.remove('hidden');
             try {
                 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${encodeURIComponent(sheetName)}!A:A?key=${config.apiKey}`;
                 const response = await fetch(url);
@@ -518,46 +744,11 @@
             });
             document.getElementById('video-list').innerHTML = html || '<p class="text-center text-gray-500 py-10 text-sm">No se encontraron enlaces de YouTube.</p>';
             updatePlaylistStats();
-        }
 
-        function processLocalVideos(videos) {
-            let html = '';
-            currentPlaylistData = [];
-            videos.forEach((v, i) => {
-                currentPlaylistData.push({ ...v, type: 'local' });
-                const progData = JSON.parse(localStorage.getItem(`yt_prog_${v.id}`) || 'null');
-                const isCompleted = progData && (progData.d - progData.t <= COMPLETED_THRESHOLD);
-                const isAudio = v.type.startsWith('audio/');
-                
-                html += `
-                <div id="video-item-${i}" onclick="window.playVideo(${i}, true)" class="video-item flex gap-3 p-3 mb-2 rounded-xl cursor-pointer hover:bg-gray-700/50 border border-transparent ${isCompleted ? 'opacity-40' : ''}">
-                    <div class="relative w-24 h-16 shrink-0 bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center border border-gray-600">
-                        ${isAudio ? 
-                          '<svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>' : 
-                          '<svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
-                        }
-                        <div class="absolute bottom-0 left-0 h-1 bg-red-600 video-progress-bar" style="width: ${progData ? (progData.t/progData.d*100) : 0}%"></div>
-                    </div>
-                    <div class="flex-1 flex flex-col justify-center overflow-hidden min-w-0">
-                        <h3 class="text-sm font-semibold text-gray-200 truncate">${v.name}</h3>
-                        <div class="flex justify-between items-center mt-1">
-                             <p class="text-[10px] text-gray-500 uppercase font-bold tracking-tight">${isAudio ? 'Archivo Audio' : 'Archivo Vídeo'}</p>
-                             <button onclick="event.stopPropagation(); window.removeLocal(${i})" class="text-gray-500 hover:text-red-500 p-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                             </button>
-                        </div>
-                    </div>
-                </div>`;
-            });
-            document.getElementById('video-list').innerHTML = html || '<p class="text-center text-gray-500 py-10 text-sm">No hay archivos locales guardados.</p>';
-            updatePlaylistStats();
-        }
-
-        window.removeLocal = async function(idx) {
-            const vid = currentPlaylistData[idx];
-            if (confirm(`¿Eliminar "${vid.name}"?`)) {
-                await deleteLocalVideo(vid.id);
-                window.loadPlaylist("Archivos Locales");
+            // Auto resume position logic for online playlists
+            const lastSavedIndex = localStorage.getItem(`progress_${currentPlaylistName}_index`);
+            if (lastSavedIndex !== null && currentPlaylistData[lastSavedIndex]) {
+                window.playVideo(parseInt(lastSavedIndex), false);
             }
         }
 
@@ -639,15 +830,31 @@
                     localPlayer.classList.remove('hidden');
                 }
                 
+                // Pure stream reader pointer mapping -- completely avoids browser DB and memory cache copies!
                 const url = URL.createObjectURL(video.blob);
                 localPlayer.src = url;
-                const subContent = await getSubtitle(video.id);
-                if (subContent) {
-                    loadSubtitleTrack(subContent);
-                }
-                localPlayer.currentTime = startTime;
                 
-                if (isManual) localPlayer.play();
+                // Read and sync matched folder subtitles immediately
+                if (video.subtitleFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        let content = e.target.result;
+                        if (video.subtitleFile.name.endsWith('.srt')) {
+                            content = srtToVtt(content);
+                        }
+                        loadSubtitleTrack(content);
+                    };
+                    reader.readAsText(video.subtitleFile);
+                } else {
+                    // Try fallback manually uploaded DB subtitles
+                    const subContent = await getSubtitle(video.id);
+                    if (subContent) {
+                        loadSubtitleTrack(subContent);
+                    }
+                }
+
+                localPlayer.currentTime = startTime;
+                if (isManual) localPlayer.play().catch(e => console.warn("Auto-play blocked", e));
 
                 localPlayer.onplay = () => {
                     updatePlayPauseUI(true);
@@ -785,7 +992,6 @@
             }
         }
 
-        // Dummy assignment for YouTube API to hook into
         window.onYouTubeIframeAPIReady = function() {}
 
         // --- Backup and Restore Logic (Local) ---
@@ -893,7 +1099,7 @@
         }
 
         window.toggleSubtitles = async function() {
-            if (!currentPlaylistData[currentIndex] || currentPlaylistData[currentIndex].type !== 'local') return;
+            if (!currentPlaylistData[currentIndex] || !currentPlaylistData[currentIndex].isLocal) return;
             const video = currentPlaylistData[currentIndex];
 
             if (subtitleTrack) {
@@ -928,6 +1134,19 @@
             };
             reader.readAsText(file);
             event.target.value = '';
+        };
+
+        const saveSubtitle = async (videoId, content) => {
+            const tx = localdb.transaction("subtitles", "readwrite");
+            tx.objectStore("subtitles").put({ videoId, content });
+            return new Promise((resolve) => tx.oncomplete = () => resolve());
+        };
+
+        const getSubtitle = async (videoId) => {
+            const tx = localdb.transaction("subtitles", "readonly");
+            const store = tx.objectStore("subtitles");
+            const request = store.get(videoId);
+            return new Promise((resolve) => request.onsuccess = () => resolve(request.result?.content || null));
         };
     </script>
 </body>
