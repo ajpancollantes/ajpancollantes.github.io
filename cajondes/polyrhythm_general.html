@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Tick Separation Metronome</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            user-select: none;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <header class="border-b border-slate-800 bg-slate-900/90 px-4 py-3 sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                    Δt
+                </div>
+                <div>
+                    <h1 class="text-base md:text-lg font-bold text-white tracking-tight">
+                        Direct Tick Separation ($\Delta t = x$)
+                    </h1>
+                    <p class="text-xs text-slate-400">Direct seconds spacing — no logarithms used</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button id="btn-audio-enable" class="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-volume-high"></i> <span id="lbl-audio-status">Enable Sound</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl w-full mx-auto p-4 md:p-6 space-y-6 flex-1">
+
+        <section class="glass-card rounded-2xl p-4 md:p-5 shadow-xl space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <span id="badge-status" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-mono bg-slate-800 text-slate-300 border border-slate-700">
+                        <span class="w-2 h-2 rounded-full bg-slate-500 mr-2" id="dot-status"></span>
+                        Timeline: <span id="val-time-display" class="text-blue-400 font-bold ml-1">t = 0.00s</span>
+                    </span>
+                </div>
+
+                <!-- Playback controls -->
+                <div class="flex items-center gap-2">
+                    <button id="btn-toggle-play" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-play" id="icon-play"></i>
+                        <span id="lbl-play">Start Timeline</span>
+                    </button>
+                    <button id="btn-reset-time" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs" title="Reset to t = 0s">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                    <button id="btn-zoom-in" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs" title="Zoom In Timeline">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                    </button>
+                    <button id="btn-zoom-out" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs" title="Zoom Out Timeline">
+                        <i class="fa-solid fa-magnifying-glass-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Canvas Display -->
+            <div class="relative w-full h-[320px] md:h-[380px] bg-slate-900 rounded-xl overflow-hidden border border-slate-800 shadow-inner">
+                <canvas id="timeline-canvas" class="w-full h-full cursor-crosshair"></canvas>
+                
+                <div class="absolute bottom-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800 text-xs font-mono text-slate-400 pointer-events-none">
+                    Spikes occur at integer multiples: $t = 1 \cdot x, 2 \cdot x, 3 \cdot x \dots$
+                </div>
+
+                <div class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800 text-xs font-mono text-slate-300 pointer-events-none">
+                    Active Hit: <span id="lbl-last-hit" class="text-amber-400 font-bold">None</span>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+                <span>View range: [<span id="lbl-range-min">0.00</span>s, <span id="lbl-range-max">6.00</span>s]</span>
+                <span class="text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i> Direct Linear Scaling ($\Delta t = x$)</span>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Custom Add Input Column -->
+            <div class="lg:col-span-2 glass-card rounded-2xl p-5 space-y-5">
+                <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-2">
+                    <i class="fa-solid fa-plus text-blue-400"></i> Add Tick Sequence
+                </h2>
+
+                <form id="form-add-val" class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex-1 space-y-1">
+                        <label for="input-sep-val" class="text-xs font-semibold text-slate-300">
+                            Separation between ticks ($x$ seconds):
+                        </label>
+                        <input type="number" id="input-sep-val" step="any" min="0.1" value="2.0" placeholder="e.g., 2 for 2-second gaps" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div class="flex items-end">
+                        <button type="submit" class="w-full sm:w-auto px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition shadow-md flex items-center justify-center gap-2 h-[38px]">
+                            <i class="fa-solid fa-plus"></i> Add Sequence
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Presets -->
+                <div class="space-y-2">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Quick Presets</span>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="btn-preset px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700" data-vals="2">
+                            Single 2-second tick ($\Delta t = 2\text{s}$)
+                        </button>
+                        <button class="btn-preset px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700" data-vals="2,3">
+                            2s and 3s Polyrhythm
+                        </button>
+                        <button class="btn-preset px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700" data-vals="0.5,1,1.5">
+                            Sub-seconds (0.5s, 1s, 1.5s)
+                        </button>
+                        <button class="btn-preset px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700" data-vals="1,2,4">
+                            1s, 2s, 4s Powers
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sound and Speed Options -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-800">
+                    <div class="space-y-1">
+                        <label for="select-sound" class="text-xs font-semibold text-slate-300">Sound Instrument</label>
+                        <select id="select-sound" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
+                            <option value="woodblock" selected>Marimba / Woodblock</option>
+                            <option value="metronome">Metronome Click</option>
+                            <option value="chimes">Crystal Chime</option>
+                            <option value="synth">Synth Pluck</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs">
+                            <label for="slider-speed" class="font-semibold text-slate-300">Playback Speed</label>
+                            <span id="val-speed-lbl" class="font-mono text-emerald-400 font-bold">1.00x</span>
+                        </div>
+                        <input type="range" id="slider-speed" min="0.2" max="3.0" step="0.1" value="1.0" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generators Active List -->
+            <div class="glass-card rounded-2xl p-5 space-y-4 flex flex-col">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-blue-400"></i> Active Sequences
+                    </h2>
+                    <button id="btn-clear-all" class="text-xs text-rose-400 hover:text-rose-300">Clear All</button>
+                </div>
+
+                <p class="text-xs text-slate-400">
+                    Ticks fire strictly at intervals of $x$ seconds:
+                </p>
+
+                <div id="container-sequences" class="space-y-2 overflow-y-auto max-h-[260px] pr-1 flex-1">
+                    <!-- Sequences rendered here -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        const state = {
+            sequences: [
+                { id: 1, val: 2 },
+                { id: 2, val: 3 }
+            ],
+            nextId: 3,
+            muted: new Set(),
+            soundMode: 'woodblock',
+            speedMultiplier: 1.0,
+            currentTime: 0.0,
+            viewSpanWidth: 6.0,
+            isPlaying: false,
+            audioEnabled: false,
+            hitEvents: []
+        };
+
+        let audioCtx = null;
+        let masterGain = null;
+        const scheduledIds = new Set();
+
+        const canvas = document.getElementById('timeline-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function getSequenceColor(val, index) {
+            const hue = Math.round((val * 73 + index * 120) % 360);
+            return `hsl(${hue}, 85%, 60%)`;
+        }
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioClass();
+                masterGain = audioCtx.createGain();
+                masterGain.gain.value = 0.5;
+                masterGain.connect(audioCtx.destination);
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            state.audioEnabled = true;
+            document.getElementById('lbl-audio-status').innerText = 'Audio Ready';
+            document.getElementById('dot-status').className = 'w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse';
+        }
+
+        function playSound(val, time) {
+            if (!state.audioEnabled || !audioCtx) return;
+
+            const t = time || audioCtx.currentTime;
+            const pitchOctave = (val * 1.2) % 3;
+            const freq = 180 * Math.pow(2, pitchOctave);
+
+            if (state.soundMode === 'metronome') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq * 2, t);
+                osc.frequency.exponentialRampToValueAtTime(100, t + 0.04);
+                gain.gain.setValueAtTime(0.8, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+                osc.connect(gain);
+                gain.connect(masterGain);
+                osc.start(t);
+                osc.stop(t + 0.06);
+
+            } else if (state.soundMode === 'woodblock') {
+                const osc = audioCtx.createOscillator();
+                const osc2 = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc2.type = 'sine';
+                osc.frequency.setValueAtTime(freq, t);
+                osc2.frequency.setValueAtTime(freq * 3.5, t);
+                gain.gain.setValueAtTime(0.6, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+                osc.connect(gain);
+                osc2.connect(gain);
+                gain.connect(masterGain);
+                osc.start(t);
+                osc2.start(t);
+                osc.stop(t + 0.22);
+                osc2.stop(t + 0.22);
+
+            } else if (state.soundMode === 'chimes') {
+                const carrier = audioCtx.createOscillator();
+                const mod = audioCtx.createOscillator();
+                const modGain = audioCtx.createGain();
+                const gain = audioCtx.createGain();
+
+                carrier.frequency.setValueAtTime(freq * 1.5, t);
+                mod.frequency.setValueAtTime(freq * 2.8, t);
+                modGain.gain.setValueAtTime(freq * 2, t);
+                modGain.gain.exponentialRampToValueAtTime(1, t + 0.4);
+
+                gain.gain.setValueAtTime(0.5, t);
+                gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.6);
+
+                mod.connect(modGain);
+                modGain.connect(carrier.frequency);
+                carrier.connect(gain);
+                gain.connect(masterGain);
+
+                mod.start(t);
+                carrier.start(t);
+                mod.stop(t + 0.62);
+                carrier.stop(t + 0.62);
+
+            } else if (state.soundMode === 'synth') {
+                const osc = audioCtx.createOscillator();
+                const filter = audioCtx.createBiquadFilter();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(freq, t);
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(freq * 4, t);
+                filter.frequency.exponentialRampToValueAtTime(freq * 0.8, t + 0.25);
+
+                gain.gain.setValueAtTime(0.4, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(masterGain);
+
+                osc.start(t);
+                osc.stop(t + 0.32);
+            }
+        }
+
+        function getTicksInRange(tStart, tEnd) {
+            const ticks = [];
+            state.sequences.forEach((seq, idx) => {
+                if (state.muted.has(seq.id)) return;
+                const interval = seq.val;
+                if (interval <= 0) return;
+
+                const kMin = Math.max(1, Math.ceil(tStart / interval));
+                const kMax = Math.floor(tEnd / interval);
+
+                for (let k = kMin; k <= kMax; k++) {
+                    const time = k * interval;
+                    ticks.push({
+                        id: `${seq.id}_k${k}`,
+                        seqId: seq.id,
+                        val: interval,
+                        k: k,
+                        time: time,
+                        index: idx
+                    });
+                }
+            });
+            ticks.sort((a, b) => a.time - b.time);
+            return ticks;
+        }
+
+        function scheduleAudioEvents() {
+            if (!state.isPlaying || !state.audioEnabled || !audioCtx) return;
+
+            const lookAheadSec = 0.15;
+            const tStart = state.currentTime;
+            const tEnd = tStart + (lookAheadSec * state.speedMultiplier);
+
+            const ticks = getTicksInRange(tStart, tEnd);
+            ticks.forEach(tick => {
+                if (!scheduledIds.has(tick.id)) {
+                    scheduledIds.add(tick.id);
+
+                    const delayInT = tick.time - tStart;
+                    const delayInRealSec = delayInT / state.speedMultiplier;
+                    const targetAudioTime = audioCtx.currentTime + delayInRealSec;
+
+                    playSound(tick.val, targetAudioTime);
+
+                    setTimeout(() => {
+                        state.hitEvents.push({
+                            tickId: tick.id,
+                            time: performance.now(),
+                            duration: 350
+                        });
+                        document.getElementById('lbl-last-hit').innerText = `Tick at t = ${tick.time.toFixed(2)}s (Δt = ${tick.val}s)`;
+                    }, Math.max(0, delayInRealSec * 1000));
+                }
+            });
+
+            if (scheduledIds.size > 400) scheduledIds.clear();
+        }
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        }
+
+        function drawCanvas() {
+            const w = canvas.getBoundingClientRect().width;
+            const h = canvas.getBoundingClientRect().height;
+
+            ctx.fillStyle = '#090d16';
+            ctx.fillRect(0, 0, w, h);
+
+            const pad = { top: 60, bottom: 40, left: 50, right: 25 };
+            const graphW = w - pad.left - pad.right;
+            const graphH = h - pad.top - pad.bottom;
+
+            let tMin, tMax;
+            if (state.currentTime <= state.viewSpanWidth * 0.25) {
+                tMin = 0;
+                tMax = state.viewSpanWidth;
+            } else {
+                tMin = state.currentTime - (state.viewSpanWidth * 0.25);
+                tMax = tMin + state.viewSpanWidth;
+            }
+
+            document.getElementById('lbl-range-min').innerText = tMin.toFixed(2);
+            document.getElementById('lbl-range-max').innerText = tMax.toFixed(2);
+
+            const timeToX = (t) => pad.left + ((t - tMin) / (tMax - tMin)) * graphW;
+
+            // Draw grid lines
+            ctx.strokeStyle = 'rgba(51, 65, 85, 0.4)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([3, 3]);
+
+            const step = state.viewSpanWidth > 10 ? 2.0 : 1.0;
+            const firstGrid = Math.floor(tMin / step) * step;
+            for (let t = firstGrid; t <= tMax; t += step) {
+                if (t < tMin) continue;
+                const x = timeToX(t);
+                ctx.beginPath();
+                ctx.moveTo(x, pad.top);
+                ctx.lineTo(x, h - pad.bottom);
+                ctx.stroke();
+
+                ctx.fillStyle = '#64748b';
+                ctx.font = '11px monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText(`t = ${t.toFixed(1)}s`, x, h - pad.bottom + 18);
+            }
+            ctx.setLineDash([]);
+
+            // Baseline
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, h - pad.bottom);
+            ctx.lineTo(w - pad.right, h - pad.bottom);
+            ctx.stroke();
+
+            // Arrow Spans (Separation Indicators)
+            let yArrow = pad.top - 35;
+            state.sequences.slice(0, 3).forEach((seq, idx) => {
+                if (state.muted.has(seq.id)) return;
+                const interval = seq.val;
+                const color = getSequenceColor(interval, idx);
+
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color;
+                ctx.lineWidth = 1.2;
+
+                const kStart = Math.max(0, Math.floor(tMin / interval));
+                const kEnd = Math.ceil(tMax / interval);
+
+                for (let k = kStart; k < kEnd; k++) {
+                    const t1 = k * interval;
+                    const t2 = (k + 1) * interval;
+                    const x1 = timeToX(t1);
+                    const x2 = timeToX(t2);
+
+                    if (x2 < pad.left || x1 > w - pad.right) continue;
+
+                    ctx.beginPath();
+                    ctx.moveTo(Math.max(pad.left, x1 + 3), yArrow);
+                    ctx.lineTo(Math.min(w - pad.right, x2 - 3), yArrow);
+                    ctx.stroke();
+
+                    if ((x2 - x1) > 25) {
+                        ctx.font = '10px monospace';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(`Δt = ${interval}s`, (x1 + x2) / 2, yArrow - 4);
+                    }
+                }
+                yArrow += 20;
+            });
+
+            // Draw Tick Spikes
+            const visibleTicks = getTicksInRange(tMin - 0.1, tMax + 0.1);
+            const now = performance.now();
+
+            visibleTicks.forEach(tick => {
+                const x = timeToX(tick.time);
+                if (x < pad.left || x > w - pad.right) return;
+
+                const yBase = h - pad.bottom;
+                const spikeH = Math.min(180, Math.max(60, tick.val * 35));
+                const yTop = yBase - spikeH;
+
+                const activeHit = state.hitEvents.find(e => e.tickId === tick.id && (now - e.time) < e.duration);
+                const isHit = !!activeHit;
+
+                const color = getSequenceColor(tick.val, tick.index);
+
+                ctx.strokeStyle = isHit ? '#ffffff' : color;
+                ctx.lineWidth = isHit ? 3.5 : 2;
+                ctx.beginPath();
+                ctx.moveTo(x, yBase);
+                ctx.lineTo(x, yTop);
+                ctx.stroke();
+
+                // Top diamond marker
+                const sz = isHit ? 6 : 4;
+                ctx.fillStyle = isHit ? '#ffffff' : color;
+                ctx.beginPath();
+                ctx.moveTo(x, yTop - sz);
+                ctx.lineTo(x + sz, yTop);
+                ctx.lineTo(x, yTop + sz);
+                ctx.lineTo(x - sz, yTop);
+                ctx.closePath();
+                ctx.fill();
+
+                // Text
+                ctx.fillStyle = isHit ? '#ffffff' : '#cbd5e1';
+                ctx.font = 'bold 11px system-ui';
+                ctx.textAlign = 'center';
+                ctx.fillText(`${tick.time.toFixed(1)}s`, x, yTop - 8);
+            });
+
+            // Clean old hit events
+            state.hitEvents = state.hitEvents.filter(e => (now - e.time) < e.duration);
+
+            // Draw Cursor
+            const cursorX = timeToX(state.currentTime);
+            if (cursorX >= pad.left && cursorX <= w - pad.right) {
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(cursorX, pad.top - 15);
+                ctx.lineTo(cursorX, h - pad.bottom);
+                ctx.stroke();
+
+                ctx.fillStyle = '#ef4444';
+                ctx.beginPath();
+                ctx.moveTo(cursorX - 5, pad.top - 18);
+                ctx.lineTo(cursorX + 5, pad.top - 18);
+                ctx.lineTo(cursorX, pad.top - 10);
+                ctx.fill();
+            }
+        }
+
+        let lastTimestamp = performance.now();
+
+        function animateLoop(timestamp) {
+            const deltaSec = (timestamp - lastTimestamp) / 1000;
+            lastTimestamp = timestamp;
+
+            if (state.isPlaying) {
+                state.currentTime += deltaSec * state.speedMultiplier;
+                document.getElementById('val-time-display').innerText = `t = ${state.currentTime.toFixed(2)}s`;
+                scheduleAudioEvents();
+            }
+
+            drawCanvas();
+            requestAnimationFrame(animateLoop);
+        }
+
+        function renderSequenceList() {
+            const container = document.getElementById('container-sequences');
+            container.innerHTML = '';
+
+            state.sequences.forEach((seq, idx) => {
+                const color = getSequenceColor(seq.val, idx);
+                const isMuted = state.muted.has(seq.id);
+
+                const item = document.createElement('div');
+                item.className = `flex items-center justify-between p-2.5 rounded-xl border ${
+                    isMuted ? 'bg-slate-900/40 border-slate-800 opacity-50' : 'bg-slate-900 border-slate-800'
+                }`;
+
+                item.innerHTML = `
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-3 h-3 rounded-full" style="background-color: ${color}"></span>
+                        <div>
+                            <span class="text-xs font-bold text-white font-mono">Separation Δt = ${seq.val}s</span>
+                            <div class="text-[10px] text-slate-400 font-mono">Ticks at t = ${seq.val}s, ${seq.val*2}s, ${seq.val*3}s...</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <button class="btn-sound p-1.5 text-xs text-blue-400 hover:bg-slate-800 rounded" data-id="${seq.id}" title="Test Sound">
+                            <i class="fa-solid fa-volume-low"></i>
+                        </button>
+                        <button class="btn-mute p-1.5 text-xs ${isMuted ? 'text-rose-400' : 'text-slate-400 hover:text-white'} rounded" data-id="${seq.id}">
+                            <i class="fa-solid ${isMuted ? 'fa-volume-xmark' : 'fa-volume-high'}"></i>
+                        </button>
+                        <button class="btn-del p-1.5 text-xs text-slate-500 hover:text-rose-400 rounded" data-id="${seq.id}">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+
+            container.querySelectorAll('.btn-sound').forEach(btn => {
+                btn.onclick = (e) => {
+                    initAudio();
+                    const id = parseInt(e.currentTarget.dataset.id);
+                    const seq = state.sequences.find(s => s.id === id);
+                    if (seq) playSound(seq.val);
+                };
+            });
+
+            container.querySelectorAll('.btn-mute').forEach(btn => {
+                btn.onclick = (e) => {
+                    const id = parseInt(e.currentTarget.dataset.id);
+                    if (state.muted.has(id)) state.muted.delete(id);
+                    else state.muted.add(id);
+                    renderSequenceList();
+                };
+            });
+
+            container.querySelectorAll('.btn-del').forEach(btn => {
+                btn.onclick = (e) => {
+                    const id = parseInt(e.currentTarget.dataset.id);
+                    state.sequences = state.sequences.filter(s => s.id !== id);
+                    state.muted.delete(id);
+                    renderSequenceList();
+                };
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            document.getElementById('form-add-val').onsubmit = (e) => {
+                e.preventDefault();
+                const input = document.getElementById('input-sep-val');
+                const val = parseFloat(input.value);
+                if (!isNaN(val) && val > 0) {
+                    state.sequences.push({ id: state.nextId++, val: val });
+                    input.value = '';
+                    renderSequenceList();
+                }
+            };
+
+            document.querySelectorAll('.btn-preset').forEach(btn => {
+                btn.onclick = (e) => {
+                    const vals = e.currentTarget.dataset.vals.split(',').map(v => parseFloat(v));
+                    state.sequences = vals.map((v, i) => ({ id: i + 1, val: v }));
+                    state.nextId = vals.length + 1;
+                    state.muted.clear();
+                    scheduledIds.clear();
+                    renderSequenceList();
+                };
+            });
+
+            document.getElementById('btn-clear-all').onclick = () => {
+                state.sequences = [];
+                state.muted.clear();
+                renderSequenceList();
+            };
+
+            document.getElementById('select-sound').onchange = (e) => {
+                state.soundMode = e.target.value;
+            };
+
+            document.getElementById('slider-speed').oninput = (e) => {
+                state.speedMultiplier = parseFloat(e.target.value);
+                document.getElementById('val-speed-lbl').innerText = `${state.speedMultiplier.toFixed(2)}x`;
+            };
+
+            document.getElementById('btn-toggle-play').onclick = () => {
+                initAudio();
+                state.isPlaying = !state.isPlaying;
+                const icon = document.getElementById('icon-play');
+                const lbl = document.getElementById('lbl-play');
+                if (state.isPlaying) {
+                    icon.className = 'fa-solid fa-pause';
+                    lbl.innerText = 'Pause';
+                } else {
+                    icon.className = 'fa-solid fa-play';
+                    lbl.innerText = 'Resume';
+                }
+            };
+
+            document.getElementById('btn-reset-time').onclick = () => {
+                state.currentTime = 0;
+                scheduledIds.clear();
+                document.getElementById('val-time-display').innerText = 't = 0.00s';
+            };
+
+            document.getElementById('btn-zoom-in').onclick = () => {
+                if (state.viewSpanWidth > 2.0) state.viewSpanWidth -= 1.0;
+            };
+            document.getElementById('btn-zoom-out').onclick = () => {
+                if (state.viewSpanWidth < 20.0) state.viewSpanWidth += 2.0;
+            };
+
+            document.getElementById('btn-audio-enable').onclick = initAudio;
+
+            renderSequenceList();
+            lastTimestamp = performance.now();
+            requestAnimationFrame(animateLoop);
+        });
+    </script>
+</body>
+</html>

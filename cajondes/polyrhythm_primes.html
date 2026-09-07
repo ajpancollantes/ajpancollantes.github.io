@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chebyshev Polyphony: Distributional Rhythms of ψ(eᵗ)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX for crisp mathematical rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            user-select: none;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-30 backdrop-blur-md px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-500/20">
+                    ψ
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">
+                        Chebyshev Rhythms: <span class="font-mono text-blue-400">d/dt ψ(eᵗ)</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Endless distributional prime power percussion spaced by Δt = ln(p)</p>
+                </div>
+            </div>
+
+            <!-- Header Quick Action Controls -->
+            <div class="flex items-center gap-2">
+                <button id="btn-math-info" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-medium transition flex items-center gap-2 border border-slate-700/60">
+                    <i class="fa-solid fa-square-root-variable text-blue-400"></i> Math Theory
+                </button>
+                <button id="btn-audio-init" class="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition shadow-md shadow-blue-600/30 flex items-center gap-2">
+                    <i class="fa-solid fa-volume-high"></i> Enable Audio
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6 flex-1">
+
+        <!-- Main Interactive Visualization Canvas Box -->
+        <section class="glass-panel rounded-2xl p-4 md:p-6 shadow-2xl relative overflow-hidden flex flex-col gap-4">
+            
+            <!-- Canvas Header & Status Bar -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 pb-3">
+                <div class="flex items-center gap-3">
+                    <span id="status-indicator" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-800 text-slate-400 border border-slate-700">
+                        <span class="w-2 h-2 rounded-full bg-slate-500 mr-1.5" id="status-dot"></span>
+                        <span id="status-text">Audio Ready</span>
+                    </span>
+                    <span class="text-xs text-slate-400 font-mono hidden sm:inline">
+                        Time <span id="val-time-display" class="text-blue-400 font-bold">t = 0.000</span> (x = <span id="val-x-display" class="text-emerald-400 font-bold">1.000</span>)
+                    </span>
+                </div>
+
+                <!-- Playback Transport Buttons -->
+                <div class="flex items-center gap-2">
+                    <button id="btn-play-pause" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-lg shadow-emerald-600/30 flex items-center gap-2">
+                        <i class="fa-solid fa-play" id="icon-play-pause"></i>
+                        <span id="lbl-play-pause">Start Continuous Play</span>
+                    </button>
+                    <button id="btn-reset" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition border border-slate-700/60" title="Reset Timeline to t = 0">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                    <button id="btn-zoom-in" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition border border-slate-700/60" title="Zoom In Timeline View">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                    </button>
+                    <button id="btn-zoom-out" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition border border-slate-700/60" title="Zoom Out Timeline View">
+                        <i class="fa-solid fa-magnifying-glass-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Canvas Container -->
+            <div class="relative w-full h-[320px] md:h-[400px] bg-slate-900/90 rounded-xl overflow-hidden border border-slate-800 shadow-inner group">
+                <canvas id="chebyshev-canvas" class="w-full h-full cursor-crosshair"></canvas>
+                
+                <!-- On-Canvas HUD Overlay -->
+                <div class="absolute bottom-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] font-mono text-slate-400 space-y-0.5 pointer-events-none">
+                    <div><span class="text-blue-400">Blue Spikes:</span> Powers of 2 ($2^k$, $\Delta t = \ln 2 \approx 0.693$)</div>
+                    <div><span class="text-emerald-400">Green Spikes:</span> Powers of 3 ($3^k$, $\Delta t = \ln 3 \approx 1.098$)</div>
+                    <div><span class="text-amber-400">Amber / Rose Spikes:</span> Powers of $p$ ($p^k$, $\Delta t = \ln p$)</div>
+                </div>
+
+                <div class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800 text-xs font-mono text-slate-300 pointer-events-none">
+                    Active Impulse Hit: <span id="active-hit-tag" class="text-amber-400 font-bold">None</span>
+                </div>
+            </div>
+
+            <!-- Interactive Timeline Window Display -->
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400 px-1">
+                <span>View Range: [<span id="lbl-view-min" class="text-slate-200">0.00</span>s, <span id="lbl-view-max" class="text-slate-200">6.00</span>s]</span>
+                <span class="text-slate-500"><i class="fa-solid fa-infinity text-blue-400 mr-1"></i> Continuous Endless Mode Active</span>
+            </div>
+        </section>
+
+        <!-- Primary Control Panel: Slider & Presets -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Left Column: Main Prime Selector Slider & Sound Preset Controls -->
+            <div class="lg:col-span-2 glass-panel rounded-2xl p-5 md:p-6 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-blue-400"></i> Active Prime Configuration
+                    </h2>
+                    <span class="text-xs text-blue-400 font-mono bg-blue-950/80 px-2.5 py-1 rounded-full border border-blue-800/50" id="lbl-prime-count-badge">
+                        1 Prime Selected (p = 2)
+                    </span>
+                </div>
+
+                <!-- Number of Primes Main Slider -->
+                <div class="space-y-3 bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+                    <div class="flex items-center justify-between">
+                        <label for="slider-prime-count" class="text-sm font-semibold text-slate-200">
+                            Number of Primes ($N$): <span id="val-prime-count" class="text-blue-400 font-mono text-lg font-bold ml-1">1</span>
+                        </label>
+                        <span class="text-xs font-mono text-slate-400" id="lbl-primes-list">
+                            Primes: [ 2 ]
+                        </span>
+                    </div>
+
+                    <input type="range" id="slider-prime-count" min="1" max="15" step="1" value="1" class="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+
+                    <!-- Quick Preset Buttons -->
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <button class="preset-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-blue-600/30 hover:border-blue-500 text-xs font-medium text-slate-300 border border-slate-700 transition" data-primes="1">
+                            Only 2 ($\Delta t = \ln 2$)
+                        </button>
+                        <button class="preset-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-blue-600/30 hover:border-blue-500 text-xs font-medium text-slate-300 border border-slate-700 transition" data-primes="2">
+                            2 & 3 Polyrhythm
+                        </button>
+                        <button class="preset-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-blue-600/30 hover:border-blue-500 text-xs font-medium text-slate-300 border border-slate-700 transition" data-primes="3">
+                            First 3 (2, 3, 5)
+                        </button>
+                        <button class="preset-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-blue-600/30 hover:border-blue-500 text-xs font-medium text-slate-300 border border-slate-700 transition" data-primes="5">
+                            First 5 (2..11)
+                        </button>
+                        <button class="preset-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-blue-600/30 hover:border-blue-500 text-xs font-medium text-slate-300 border border-slate-700 transition" data-primes="10">
+                            First 10 Primes
+                        </button>
+                        <button class="preset-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-blue-600/30 hover:border-blue-500 text-xs font-medium text-slate-300 border border-slate-700 transition" data-primes="15">
+                            Max (15 Primes)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Audio Sound Engine Controls -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    
+                    <!-- Sound Mode / Timbre Selector -->
+                    <div class="space-y-2 bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+                        <label class="text-xs font-semibold text-slate-300 uppercase tracking-wider block">Instrument Timbre</label>
+                        <select id="select-sound-mode" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                            <option value="percussion">Percussive Ticks & Clicks (Metronome)</option>
+                            <option value="marimba" selected>Tuned Wooden Percussion (Marimba/Wood)</option>
+                            <option value="bells">Harmonic Crystal Chimes (FM Synthesis)</option>
+                            <option value="drums">Acoustic Percussion Set (Kick, Snare, Toms, Cymbals)</option>
+                        </select>
+                        <p class="text-[11px] text-slate-400">All powers of prime $p$ ($p, p^2, p^3\dots$) share the exact same pitch sound signature.</p>
+                    </div>
+
+                    <!-- Tempo / Time Speed Multiplier -->
+                    <div class="space-y-2 bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+                        <div class="flex justify-between items-center">
+                            <label for="slider-speed" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Playback Speed</label>
+                            <span id="val-speed" class="text-xs font-mono text-emerald-400 font-bold">1.00x</span>
+                        </div>
+                        <input type="range" id="slider-speed" min="0.2" max="3.0" step="0.05" value="1.0" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right Column: Individual Prime Matrix / Solo Panel -->
+            <div class="glass-panel rounded-2xl p-5 md:p-6 space-y-4 flex flex-col">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-blue-400"></i> Prime Inspector
+                    </h2>
+                    <span class="text-xs text-slate-400">Toggle & Preview</span>
+                </div>
+
+                <p class="text-xs text-slate-400">
+                    Each prime $p$ creates an endless pulse train with period $\Delta t = \ln(p)$ seconds (at 1x speed).
+                </p>
+
+                <!-- Prime Badges Container -->
+                <div id="prime-matrix-container" class="space-y-2 overflow-y-auto max-h-[260px] pr-1 flex-1">
+                    <!-- Populated dynamically by JS -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Collapsible Math & Information Drawer -->
+        <section id="math-drawer" class="glass-panel rounded-2xl p-6 space-y-4 hidden border border-blue-900/40">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 class="text-lg font-bold text-blue-400 flex items-center gap-2">
+                    <i class="fa-solid fa-square-root-variable"></i> Mathematical Foundations: Chebyshev's $\psi(x)$
+                </h3>
+                <button id="btn-close-math" class="text-slate-400 hover:text-white text-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-300 leading-relaxed">
+                <div class="space-y-3">
+                    <h4 class="font-bold text-white text-base">1. The Second Chebyshev Function</h4>
+                    <p>
+                        The Chebyshev function $\psi(x)$ is defined as the sum of the von Mangoldt function $\Lambda(n)$:
+                    </p>
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 font-mono text-center text-blue-300" id="katex-eq-1">
+                        \psi(x) = \sum_{n \le x} \Lambda(n) = \sum_{p^k \le x} \ln(p)
+                    </div>
+                    <p>
+                        It increases by a step of height $\ln(p)$ whenever $x$ reaches a prime power $x = p, p^2, p^3, \dots$.
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-bold text-white text-base">2. Logarithmic Transformation $t = \ln(x)$</h4>
+                    <p>
+                        In original variable $x$, prime power events get exponentially spread out. By taking $t = \ln(x)$ (or $x = e^t$), prime powers occur at $t = k \cdot \ln(p)$.
+                    </p>
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 font-mono text-center text-emerald-300" id="katex-eq-2">
+                        \frac{d}{dt} \psi(e^t) = \sum_{p} \sum_{k=1}^{\infty} \ln(p) \cdot \delta\left(t - k\ln(p)\right)
+                    </div>
+                    <p>
+                        Taking the distributional derivative yields a sum of Dirac delta impulses. Notice that for <strong>each fixed prime $p$</strong>, the impulses occur at equal intervals $\Delta t = \ln(p)$, forming a perfect periodic percussion train infinitely into $t \to \infty$!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-4 text-center text-xs text-slate-500">
+        Interactive Chebyshev Polyphony • Continuous Web Audio API & Canvas Audio Visualizer
+    </footer>
+
+    <script>
+        // List of first 25 primes
+        const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
+        
+        // Color palette for primes
+        const PRIME_COLORS = {
+            2: { main: '#3b82f6', light: '#93c5fd', name: 'blue' },     // Blue
+            3: { main: '#10b981', light: '#6ee7b7', name: 'emerald' },  // Emerald
+            5: { main: '#f59e0b', light: '#fde047', name: 'amber' },    // Amber
+            7: { main: '#a855f7', light: '#d8b4fe', name: 'purple' },   // Purple
+            11: { main: '#f43f5e', light: '#fda4af', name: 'rose' },    // Rose
+            13: { main: '#06b6d4', light: '#67e8f9', name: 'cyan' },    // Cyan
+            17: { main: '#84cc16', light: '#bef264', name: 'lime' },    // Lime
+            19: { main: '#ec4899', light: '#f472b6', name: 'pink' },    // Pink
+            23: { main: '#6366f1', light: '#a5b4fc', name: 'indigo' },  // Indigo
+            29: { main: '#14b8a6', light: '#5eead4', name: 'teal' }     // Teal
+        };
+
+        function getPrimeColor(p) {
+            if (PRIME_COLORS[p]) return PRIME_COLORS[p];
+            const hue = (p * 47) % 360;
+            return {
+                main: `hsl(${hue}, 80%, 60%)`,
+                light: `hsl(${hue}, 90%, 75%)`,
+                name: 'custom'
+            };
+        }
+
+        // Global State
+        const state = {
+            numPrimesSelected: 1,
+            activePrimes: [2],
+            mutedPrimes: new Set(),
+            soundMode: 'marimba', // percussion, marimba, bells, drums
+            speedMultiplier: 1.0,
+            currentTime: 0.0,
+            viewWindowWidth: 6.0, // Visible span of time in canvas window
+            isPlaying: false,
+            audioEnabled: false,
+            hitAnimations: [] // Active flash effects on canvas
+        };
+
+        // Web Audio API Context
+        let audioCtx = null;
+        let masterGain = null;
+        let animationFrameId = null;
+        let scheduledImpulseIds = new Set();
+
+        // Canvas Elements
+        const canvas = document.getElementById('chebyshev-canvas');
+        const ctx = canvas.getContext('2d');
+
+        /**
+         * Calculates all prime power impulses falling within range [tStart, tEnd] on the fly
+         */
+        function getImpulsesInRange(tStart, tEnd) {
+            const impulses = [];
+            
+            state.activePrimes.forEach(p => {
+                if (state.mutedPrimes.has(p)) return;
+
+                const lnP = Math.log(p);
+                // Calculate integer k range for k * ln(p) in [tStart, tEnd]
+                const kStart = Math.max(1, Math.ceil(tStart / lnP));
+                const kEnd = Math.floor(tEnd / lnP);
+
+                for (let k = kStart; k <= kEnd; k++) {
+                    const t = k * lnP;
+                    impulses.push({
+                        p: p,
+                        k: k,
+                        val: Math.pow(p, k),
+                        t: t,
+                        height: lnP,
+                        id: `${p}^${k}`
+                    });
+                }
+            });
+
+            // Sort ascending by time t
+            impulses.sort((a, b) => a.t - b.t);
+            return impulses;
+        }
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContextClass();
+                masterGain = audioCtx.createGain();
+                masterGain.gain.value = 0.5;
+                masterGain.connect(audioCtx.destination);
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            state.audioEnabled = true;
+            updateAudioStatusUI();
+        }
+
+        /**
+         * Synthesizes an impulse sound.
+         * REQUIREMENT: All powers of a prime p (p, p^2, p^3...) produce the EXACT same pitch/sound signature for p.
+         */
+        function triggerImpulseSound(impulse, targetAudioTime) {
+            if (!state.audioEnabled || !audioCtx) return;
+
+            const p = impulse.p;
+            const lnP = Math.log(p);
+            
+            // Base pitch mapping purely derived from prime p (independent of power k)
+            const primeIndex = PRIMES.indexOf(p);
+            const baseFreq = 180 * Math.pow(1.12, primeIndex + 1);
+
+            const now = targetAudioTime || audioCtx.currentTime;
+
+            if (state.soundMode === 'percussion') {
+                // Sharp Woodblock / Metronome Click
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(baseFreq * 2, now);
+                osc.frequency.exponentialRampToValueAtTime(100, now + 0.05);
+
+                gain.gain.setValueAtTime(0.7 * Math.min(1.2, lnP), now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+                osc.connect(gain);
+                gain.connect(masterGain);
+
+                osc.start(now);
+                osc.stop(now + 0.09);
+
+            } else if (state.soundMode === 'marimba') {
+                // Resonant Tuned Marimba / Wooden Bar
+                const osc = audioCtx.createOscillator();
+                const oscHarmonic = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                oscHarmonic.type = 'sine';
+
+                osc.frequency.setValueAtTime(baseFreq, now);
+                oscHarmonic.frequency.setValueAtTime(baseFreq * 3.8, now); // Wooden overtone
+
+                const dur = 0.25 + (lnP * 0.15);
+                gain.gain.setValueAtTime(0.6, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+                osc.connect(gain);
+                oscHarmonic.connect(gain);
+                gain.connect(masterGain);
+
+                osc.start(now);
+                oscHarmonic.start(now);
+                osc.stop(now + dur + 0.01);
+                oscHarmonic.stop(now + dur + 0.01);
+
+            } else if (state.soundMode === 'bells') {
+                // FM Synthesizer Chime / Crystal Bell
+                const carrier = audioCtx.createOscillator();
+                const modulator = audioCtx.createOscillator();
+                const modGain = audioCtx.createGain();
+                const gain = audioCtx.createGain();
+
+                carrier.type = 'sine';
+                modulator.type = 'sine';
+
+                const carrierFreq = baseFreq * 1.5;
+                const modFreq = carrierFreq * 2.4;
+
+                carrier.frequency.setValueAtTime(carrierFreq, now);
+                modulator.frequency.setValueAtTime(modFreq, now);
+
+                modGain.gain.setValueAtTime(carrierFreq * 1.5, now);
+                modGain.gain.exponentialRampToValueAtTime(1, now + 0.5);
+
+                gain.gain.setValueAtTime(0.5, now);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.8);
+
+                modulator.connect(modGain);
+                modGain.connect(carrier.frequency);
+                carrier.connect(gain);
+                gain.connect(masterGain);
+
+                modulator.start(now);
+                carrier.start(now);
+                modulator.stop(now + 0.82);
+                carrier.stop(now + 0.82);
+
+            } else if (state.soundMode === 'drums') {
+                // Drum Kit Mapping based on prime p
+                if (p === 2) {
+                    // Kick Drum
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.frequency.setValueAtTime(140, now);
+                    osc.frequency.exponentialRampToValueAtTime(38, now + 0.12);
+                    gain.gain.setValueAtTime(0.9, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.connect(gain);
+                    gain.connect(masterGain);
+                    osc.start(now);
+                    osc.stop(now + 0.26);
+                } else if (p === 3) {
+                    // Snare
+                    const noise = audioCtx.createBufferSource();
+                    const bufferSize = audioCtx.sampleRate * 0.1;
+                    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+                    noise.buffer = buffer;
+
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'highpass';
+                    filter.frequency.setValueAtTime(1000, now);
+
+                    const gain = audioCtx.createGain();
+                    gain.gain.setValueAtTime(0.5, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+
+                    noise.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(masterGain);
+                    noise.start(now);
+                } else {
+                    // Percussion Tom / Pluck
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(200 + p * 30, now);
+                    gain.gain.setValueAtTime(0.5, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                    osc.connect(gain);
+                    gain.connect(masterGain);
+                    osc.start(now);
+                    osc.stop(now + 0.16);
+                }
+            }
+        }
+
+        /**
+         * Schedules audio events dynamically for continuous playback into t -> infinity
+         */
+        function scheduleAudioEvents() {
+            if (!state.isPlaying || !state.audioEnabled || !audioCtx) return;
+
+            const lookAheadTimeSec = 0.15; // 150ms lookahead
+            const audioCurrentTime = audioCtx.currentTime;
+            
+            const tStart = state.currentTime;
+            const tEnd = tStart + (lookAheadTimeSec * state.speedMultiplier);
+
+            const upcomingImpulses = getImpulsesInRange(tStart, tEnd);
+
+            upcomingImpulses.forEach(impulse => {
+                if (!scheduledImpulseIds.has(impulse.id)) {
+                    scheduledImpulseIds.add(impulse.id);
+                    
+                    const delayInT = impulse.t - tStart;
+                    const delayInSeconds = delayInT / state.speedMultiplier;
+                    const targetAudioTime = audioCurrentTime + delayInSeconds;
+
+                    triggerImpulseSound(impulse, targetAudioTime);
+
+                    // Trigger visual hit animation on canvas
+                    setTimeout(() => {
+                        addHitAnimation(impulse);
+                        document.getElementById('active-hit-tag').innerHTML = `${impulse.p}<sup>${impulse.k}</sup> (t = ${impulse.t.toFixed(3)})`;
+                    }, Math.max(0, delayInSeconds * 1000));
+                }
+            });
+
+            // Prevent set memory leak during infinite playback
+            if (scheduledImpulseIds.size > 500) {
+                // Keep only IDs for t >= current time - 10
+                scheduledImpulseIds.clear();
+            }
+        }
+
+        function addHitAnimation(impulse) {
+            state.hitAnimations.push({
+                impulse: impulse,
+                startTime: performance.now(),
+                duration: 400
+            });
+        }
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        }
+
+        function renderCanvas() {
+            const w = canvas.getBoundingClientRect().width;
+            const h = canvas.getBoundingClientRect().height;
+
+            // Clear background
+            ctx.fillStyle = '#090d16';
+            ctx.fillRect(0, 0, w, h);
+
+            // Padding and graph bounds
+            const padding = { top: 70, bottom: 40, left: 55, right: 30 };
+            const graphWidth = w - padding.left - padding.right;
+            const graphHeight = h - padding.top - padding.bottom;
+
+            // Camera view window calculation for endless continuous scrolling
+            let tMin, tMax;
+            const leadRatio = 0.25; // Playhead positioned at 25% from left when moving
+            if (state.currentTime <= state.viewWindowWidth * leadRatio) {
+                tMin = 0;
+                tMax = state.viewWindowWidth;
+            } else {
+                tMin = state.currentTime - (state.viewWindowWidth * leadRatio);
+                tMax = tMin + state.viewWindowWidth;
+            }
+
+            // Update UI view labels
+            document.getElementById('lbl-view-min').innerText = tMin.toFixed(2);
+            document.getElementById('lbl-view-max').innerText = tMax.toFixed(2);
+
+            const yMax = Math.log(13) * 1.35; // Maximum impulse height scale (~3.5)
+
+            const tToX = (t) => padding.left + ((t - tMin) / (tMax - tMin)) * graphWidth;
+            const yToCanvas = (val) => h - padding.bottom - (val / yMax) * graphHeight;
+
+            // 1. Draw Grid lines
+            ctx.strokeStyle = 'rgba(51, 65, 85, 0.4)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([3, 3]);
+
+            // Vertical t grid lines based on view range
+            const gridStep = state.viewWindowWidth > 10 ? 2.0 : 1.0;
+            const firstGrid = Math.floor(tMin / gridStep) * gridStep;
+            for (let t = firstGrid; t <= tMax; t += gridStep) {
+                if (t < tMin) continue;
+                const x = tToX(t);
+                ctx.beginPath();
+                ctx.moveTo(x, padding.top);
+                ctx.lineTo(x, h - padding.bottom);
+                ctx.stroke();
+
+                ctx.fillStyle = '#64748b';
+                ctx.font = '11px monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText(`t=${t.toFixed(1)}`, x, h - padding.bottom + 18);
+            }
+
+            // Horizontal impulse strength grid
+            for (let y = 1; y <= 3; y += 1) {
+                const yPos = yToCanvas(y);
+                ctx.beginPath();
+                ctx.moveTo(padding.left, yPos);
+                ctx.lineTo(w - padding.right, yPos);
+                ctx.stroke();
+
+                ctx.fillStyle = '#64748b';
+                ctx.font = '10px monospace';
+                ctx.textAlign = 'right';
+                ctx.fillText(`${y}`, padding.left - 8, yPos + 3);
+            }
+            ctx.setLineDash([]);
+
+            // Axis Lines
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(padding.left, padding.top);
+            ctx.lineTo(padding.left, h - padding.bottom);
+            ctx.lineTo(w - padding.right, h - padding.bottom);
+            ctx.stroke();
+
+            // Axis Titles
+            ctx.save();
+            ctx.translate(16, h / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '11px system-ui';
+            ctx.textAlign = 'center';
+            ctx.fillText('Impulse Strength ln(p)', 0, 0);
+            ctx.restore();
+
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '11px system-ui';
+            ctx.textAlign = 'center';
+            ctx.fillText('Logarithmic Time t = ln(x)', padding.left + graphWidth / 2, h - 8);
+
+            // 2. Draw Interval Arrows for active primes
+            const activePrimesSorted = [...state.activePrimes].sort((a,b)=>a-b);
+            let arrowYOffset = padding.top - 45;
+
+            activePrimesSorted.slice(0, 3).forEach((p) => {
+                if (state.mutedPrimes.has(p)) return;
+                const lnP = Math.log(p);
+                const colorObj = getPrimeColor(p);
+                const yArrow = arrowYOffset;
+                arrowYOffset += 20;
+
+                ctx.strokeStyle = colorObj.main;
+                ctx.fillStyle = colorObj.main;
+                ctx.lineWidth = 1.2;
+                ctx.setLineDash([2, 2]);
+
+                // Calculate visible interval range
+                const kStart = Math.max(1, Math.floor(tMin / lnP));
+                const kEnd = Math.ceil(tMax / lnP);
+
+                for (let k = kStart; k < kEnd; k++) {
+                    const t1 = k * lnP;
+                    const t2 = (k + 1) * lnP;
+                    const x1 = tToX(t1);
+                    const x2 = tToX(t2);
+
+                    if (x2 < padding.left || x1 > w - padding.right) continue;
+
+                    // Draw interval line
+                    ctx.beginPath();
+                    ctx.moveTo(Math.max(padding.left, x1 + 4), yArrow);
+                    ctx.lineTo(Math.min(w - padding.right, x2 - 4), yArrow);
+                    ctx.stroke();
+
+                    // Arrow tips if within graph boundary
+                    if (x1 >= padding.left) {
+                        ctx.beginPath();
+                        ctx.moveTo(x1 + 6, yArrow - 3);
+                        ctx.lineTo(x1 + 1, yArrow);
+                        ctx.lineTo(x1 + 6, yArrow + 3);
+                        ctx.fill();
+                    }
+
+                    if (x2 <= w - padding.right) {
+                        ctx.beginPath();
+                        ctx.moveTo(x2 - 6, yArrow - 3);
+                        ctx.lineTo(x2 - 1, yArrow);
+                        ctx.lineTo(x2 - 6, yArrow + 3);
+                        ctx.fill();
+                    }
+
+                    // Label above arrow
+                    if (x1 + 20 < x2 && x1 > padding.left - 30 && x2 < w - padding.right + 30) {
+                        ctx.font = '10px monospace';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(`Δt = ln(${p})`, (x1 + x2) / 2, yArrow - 4);
+                    }
+                }
+                ctx.setLineDash([]);
+            });
+
+            // 3. Render Dirac Delta Impulse Spikes in range [tMin, tMax]
+            const visibleImpulses = getImpulsesInRange(tMin - 0.1, tMax + 0.1);
+
+            visibleImpulses.forEach((impulse) => {
+                const x = tToX(impulse.t);
+                if (x < padding.left || x > w - padding.right) return;
+
+                const yBase = yToCanvas(0);
+                const yTop = yToCanvas(impulse.height);
+                const colorObj = getPrimeColor(impulse.p);
+
+                // Check hit animation state
+                const now = performance.now();
+                const activeHit = state.hitAnimations.find(a => a.impulse.id === impulse.id && (now - a.startTime) < a.duration);
+                let isHit = !!activeHit;
+
+                // Spike stem
+                ctx.strokeStyle = isHit ? '#ffffff' : colorObj.main;
+                ctx.lineWidth = isHit ? 3.5 : 2;
+                ctx.beginPath();
+                ctx.moveTo(x, yBase);
+                ctx.lineTo(x, yTop);
+                ctx.stroke();
+
+                // Glowing background highlight if hit
+                if (isHit) {
+                    const progress = (now - activeHit.startTime) / activeHit.duration;
+                    const radius = 6 + progress * 20;
+                    const alpha = 1 - progress;
+
+                    ctx.fillStyle = colorObj.main;
+                    ctx.globalAlpha = alpha * 0.4;
+                    ctx.beginPath();
+                    ctx.arc(x, yTop, radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalAlpha = 1.0;
+                }
+
+                // Diamond Marker at top of spike
+                const diamondSize = isHit ? 7 : 4.5;
+                ctx.fillStyle = isHit ? '#ffffff' : colorObj.main;
+                ctx.beginPath();
+                ctx.moveTo(x, yTop - diamondSize);
+                ctx.lineTo(x + diamondSize, yTop);
+                ctx.lineTo(x, yTop + diamondSize);
+                ctx.lineTo(x - diamondSize, yTop);
+                ctx.closePath();
+                ctx.fill();
+
+                // Spike Label (e.g. 2, 3, 2², 5, 2³...)
+                ctx.fillStyle = isHit ? '#ffffff' : colorObj.light;
+                ctx.font = 'bold 11px system-ui';
+                ctx.textAlign = 'center';
+                
+                const textY = yTop - 8;
+                if (impulse.k > 1) {
+                    ctx.fillText(`${impulse.p}²`, x, textY);
+                } else {
+                    ctx.fillText(`${impulse.p}`, x, textY);
+                }
+            });
+
+            // Clean expired hit animations
+            const now = performance.now();
+            state.hitAnimations = state.hitAnimations.filter(a => (now - a.startTime) < a.duration);
+
+            // 4. Draw Playhead / Cursor
+            const cursorX = tToX(state.currentTime);
+            if (cursorX >= padding.left && cursorX <= w - padding.right) {
+                // Vertical cursor line
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 2;
+                ctx.shadowColor = '#ef4444';
+                ctx.shadowBlur = 8;
+
+                ctx.beginPath();
+                ctx.moveTo(cursorX, padding.top - 15);
+                ctx.lineTo(cursorX, h - padding.bottom);
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                // Top Cursor Pointer Triangle
+                ctx.fillStyle = '#ef4444';
+                ctx.beginPath();
+                ctx.moveTo(cursorX - 6, padding.top - 20);
+                ctx.lineTo(cursorX + 6, padding.top - 20);
+                ctx.lineTo(cursorX, padding.top - 12);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        // Animation Loop for Endless Playback
+        let lastFrameTime = performance.now();
+
+        function mainLoop(timestamp) {
+            const deltaSec = (timestamp - lastFrameTime) / 1000;
+            lastFrameTime = timestamp;
+
+            if (state.isPlaying) {
+                // Advance mathematical time t indefinitely into infinity
+                state.currentTime += deltaSec * state.speedMultiplier;
+
+                // Sync UI text displays
+                document.getElementById('val-time-display').innerText = state.currentTime.toFixed(3);
+                
+                const expVal = Math.exp(state.currentTime);
+                document.getElementById('val-x-display').innerText = expVal > 100000 ? expVal.toExponential(3) : expVal.toFixed(3);
+
+                // Audio scheduling
+                scheduleAudioEvents();
+            }
+
+            // Render continuous visual frame
+            renderCanvas();
+
+            animationFrameId = requestAnimationFrame(mainLoop);
+        }
+
+        function updatePrimeSelection(count) {
+            state.numPrimesSelected = count;
+            state.activePrimes = PRIMES.slice(0, count);
+
+            // Update UI elements
+            document.getElementById('val-prime-count').innerText = count;
+            document.getElementById('slider-prime-count').value = count;
+            document.getElementById('lbl-prime-count-badge').innerText = `${count} Prime${count > 1 ? 's' : ''} Selected`;
+            document.getElementById('lbl-primes-list').innerText = `Primes: [ ${state.activePrimes.join(', ')} ]`;
+
+            renderPrimeInspector();
+        }
+
+        function renderPrimeInspector() {
+            const container = document.getElementById('prime-matrix-container');
+            container.innerHTML = '';
+
+            state.activePrimes.forEach(p => {
+                const lnP = Math.log(p);
+                const colorObj = getPrimeColor(p);
+                const isMuted = state.mutedPrimes.has(p);
+
+                const card = document.createElement('div');
+                card.className = `flex items-center justify-between p-2.5 rounded-xl border transition ${
+                    isMuted ? 'bg-slate-900/40 border-slate-800 opacity-50' : 'bg-slate-900 border-slate-800'
+                }`;
+
+                card.innerHTML = `
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-3 h-3 rounded-full" style="background-color: ${colorObj.main}"></span>
+                        <div>
+                            <span class="text-xs font-bold text-white font-mono">Prime p = ${p}</span>
+                            <div class="text-[10px] text-slate-400 font-mono">Δt = ln(${p}) ≈ ${lnP.toFixed(3)}s</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button class="btn-test-prime p-1.5 text-xs text-blue-400 hover:bg-slate-800 rounded-lg" data-p="${p}" title="Test Sound">
+                            <i class="fa-solid fa-volume-low"></i>
+                        </button>
+                        <button class="btn-toggle-mute p-1.5 text-xs ${isMuted ? 'text-rose-400' : 'text-slate-400 hover:text-white'} rounded-lg" data-p="${p}" title="Toggle Mute">
+                            <i class="fa-solid ${isMuted ? 'fa-volume-xmark' : 'fa-volume-high'}"></i>
+                        </button>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            // Attach Inspector Listeners
+            container.querySelectorAll('.btn-test-prime').forEach(btn => {
+                btn.onclick = (e) => {
+                    const p = parseInt(e.currentTarget.dataset.p);
+                    initAudio();
+                    triggerImpulseSound({ p: p, k: 1, val: p }, audioCtx.currentTime);
+                };
+            });
+
+            container.querySelectorAll('.btn-toggle-mute').forEach(btn => {
+                btn.onclick = (e) => {
+                    const p = parseInt(e.currentTarget.dataset.p);
+                    if (state.mutedPrimes.has(p)) {
+                        state.mutedPrimes.delete(p);
+                    } else {
+                        state.mutedPrimes.add(p);
+                    }
+                    renderPrimeInspector();
+                };
+            });
+        }
+
+        function updateAudioStatusUI() {
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('status-text');
+
+            if (state.audioEnabled) {
+                statusDot.className = 'w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse';
+                statusText.innerText = 'Audio Active';
+            } else {
+                statusDot.className = 'w-2 h-2 rounded-full bg-amber-500 mr-1.5';
+                statusText.innerText = 'Click Enable Audio';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            // Render LaTeX Equations with KaTeX
+            try {
+                katex.render('\\psi(x) = \\sum_{n \\le x} \\Lambda(n) = \\sum_{p^k \\le x} \\ln(p)', document.getElementById('katex-eq-1'));
+                katex.render('\\frac{d}{dt} \\psi(e^t) = \\sum_{p, k} \\ln(p) \\cdot \\delta(t - k\\ln p)', document.getElementById('katex-eq-2'));
+            } catch (err) {
+                console.warn('KaTeX render notice:', err);
+            }
+
+            // Controls Setup
+            const sliderPrime = document.getElementById('slider-prime-count');
+            sliderPrime.oninput = (e) => updatePrimeSelection(parseInt(e.target.value));
+
+            // Presets
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.onclick = (e) => updatePrimeSelection(parseInt(e.currentTarget.dataset.primes));
+            });
+
+            // Sound Mode & Speed
+            document.getElementById('select-sound-mode').onchange = (e) => {
+                state.soundMode = e.target.value;
+            };
+
+            const sliderSpeed = document.getElementById('slider-speed');
+            sliderSpeed.oninput = (e) => {
+                state.speedMultiplier = parseFloat(e.target.value);
+                document.getElementById('val-speed').innerText = `${state.speedMultiplier.toFixed(2)}x`;
+            };
+
+            // Transport Controls
+            const btnPlayPause = document.getElementById('btn-play-pause');
+            btnPlayPause.onclick = () => {
+                initAudio();
+                state.isPlaying = !state.isPlaying;
+                
+                const icon = document.getElementById('icon-play-pause');
+                const lbl = document.getElementById('lbl-play-pause');
+
+                if (state.isPlaying) {
+                    icon.className = 'fa-solid fa-pause';
+                    lbl.innerText = 'Pause';
+                } else {
+                    icon.className = 'fa-solid fa-play';
+                    lbl.innerText = 'Resume';
+                }
+            };
+
+            document.getElementById('btn-reset').onclick = () => {
+                state.currentTime = 0;
+                scheduledImpulseIds.clear();
+                document.getElementById('val-time-display').innerText = '0.000';
+                document.getElementById('val-x-display').innerText = '1.000';
+            };
+
+            // Audio Init
+            document.getElementById('btn-audio-init').onclick = initAudio;
+
+            // Math Theory Drawer Toggle
+            const mathDrawer = document.getElementById('math-drawer');
+            document.getElementById('btn-math-info').onclick = () => mathDrawer.classList.toggle('hidden');
+            document.getElementById('btn-close-math').onclick = () => mathDrawer.classList.add('hidden');
+
+            // Zoom Timeline View Width
+            document.getElementById('btn-zoom-in').onclick = () => {
+                if (state.viewWindowWidth > 2.0) {
+                    state.viewWindowWidth -= 1.0;
+                }
+            };
+            document.getElementById('btn-zoom-out').onclick = () => {
+                if (state.viewWindowWidth < 20.0) {
+                    state.viewWindowWidth += 2.0;
+                }
+            };
+
+            // Initial setup
+            updatePrimeSelection(1);
+            lastFrameTime = performance.now();
+            requestAnimationFrame(mainLoop);
+        });
+    </script>
+</body>
+</html>
