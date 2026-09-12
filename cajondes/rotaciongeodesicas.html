@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODE Surface Geodesics & Jacobi Twist Diagnostics</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#09090b',
+                        cardBg: '#121215',
+                        cardBorder: '#27272a',
+                        accentCyan: '#06b6d4',
+                        accentPurple: '#a855f7',
+                        accentRose: '#f43f5e',
+                        accentAmber: '#f59e0b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- KaTeX for crisp LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Three.js & OrbitControls -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <!-- Chart.js for 2D diagnostics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        body {
+            background-color: #09090b;
+            color: #f4f4f5;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+
+        .glass-panel {
+            background: rgba(18, 18, 21, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+        }
+        
+        .glow-rose {
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.25);
+        }
+
+        /* OpenAI aesthetic custom range sliders */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: #27272a;
+            height: 4px;
+            border-radius: 2px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background: #06b6d4;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: #38bdf8;
+        }
+
+        canvas {
+            outline: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-200">
+
+    <header class="w-full border-b border-white/10 bg-black/60 backdrop-blur-md sticky top-0 z-50 px-4 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <div class="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+                <i data-lucide="orbit" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg tracking-tight text-white flex items-center gap-2">
+                    Nearby Geodesics on ODE Surfaces <span class="text-xs font-mono font-normal px-2 py-0.5 rounded bg-white/10 text-cyan-300">$\Sigma_s$</span>
+                </h1>
+                <p class="text-xs text-slate-400">Twist & Rotation Diagnostic: Complex vs Real Curvature $K(x) = \frac{s(1-s)}{x^2}$</p>
+            </div>
+        </div>
+
+        <!-- Presets Buttons -->
+        <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs text-slate-400 font-medium mr-1">Presets:</span>
+            <button id="preset-complex" onclick="loadPreset('complex')" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-cyan-500/40 bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20 transition-all flex items-center gap-1.5 shadow-sm">
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                Complex Curvature ($s=0.3+3i$)
+            </button>
+            <button id="preset-critical" onclick="loadPreset('critical')" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 transition-all flex items-center gap-1.5 shadow-sm">
+                <i data-lucide="scale" class="w-3.5 h-3.5"></i>
+                Critical Line ($s=0.5+3i$)
+            </button>
+            <button id="preset-real" onclick="loadPreset('real')" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-purple-500/40 bg-purple-500/10 text-purple-300 hover:bg-purple-500/20 transition-all flex items-center gap-1.5 shadow-sm">
+                <i data-lucide="minus-circle" class="w-3.5 h-3.5"></i>
+                Real Eigenvalue ($s=0.3$)
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-[1920px] mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-12 gap-5">
+        
+        <!-- LEFT COLUMN: 3D Visualization Viewport (7 Cols on LG) -->
+        <section class="lg:col-span-7 flex flex-col gap-4">
+            <div class="glass-panel rounded-2xl relative overflow-hidden flex-1 min-h-[520px] lg:min-h-[640px] flex flex-col border border-white/10 shadow-2xl">
+                
+                <!-- Overlay HUD Top Bar -->
+                <div class="absolute top-4 left-4 right-4 z-10 flex items-center justify-between pointer-events-none">
+                    <!-- Status Badge -->
+                    <div id="twist-status-badge" class="pointer-events-auto px-3.5 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md flex items-center gap-2 border bg-emerald-500/10 border-emerald-500/40 text-emerald-300">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span id="twist-status-text">ROTATING TWIST (Im K ≠ 0)</span>
+                    </div>
+
+                    <!-- Camera / Control Quick Actions -->
+                    <div class="pointer-events-auto flex items-center gap-1.5 bg-black/60 p-1 rounded-xl backdrop-blur-md border border-white/10">
+                        <button onclick="resetCamera('perspective')" title="Perspective View" class="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition">
+                            <i data-lucide="box" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="resetCamera('top')" title="Top Normal Plane View (Re u vs Im u)" class="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition">
+                            <i data-lucide="square-arrow-out-up-right" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="toggleAutoRotate()" id="btn-auto-rotate" title="Toggle Auto Rotation" class="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3D WebGL Canvas Container -->
+                <div id="canvas-3d-container" class="w-full h-full flex-1 relative cursor-grab active:cursor-grabbing">
+                    <canvas id="webgl-canvas" class="w-full h-full block"></canvas>
+                </div>
+
+                <!-- Overlay HUD Bottom Info Legend -->
+                <div class="absolute bottom-4 left-4 right-4 z-10 pointer-events-none flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2 bg-black/40 backdrop-blur-md p-2.5 rounded-xl border border-white/5">
+                    <div class="flex items-center gap-4">
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-slate-100 rounded"></span> Central Geodesic $u_0(x)$</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-gradient-to-r from-emerald-400 to-indigo-500 rounded"></span> Bundle $u_C(x)$</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-0.5 bg-rose-500 rounded"></span> Jacobi Arrow $\delta(x)$</span>
+                    </div>
+                    <div class="font-mono text-[11px] text-slate-300" id="hud-s-val">
+                        $s = 0.30 + 3.00i$ | $K(1) = 9.21 + 1.20i$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: Diagnostic Charts & Math Inspector (5 Cols on LG) -->
+        <section class="lg:col-span-5 flex flex-col gap-4">
+            
+            <!-- Panel 1: Parameter Control Panel -->
+            <div class="glass-panel p-4 rounded-2xl border border-white/10 flex flex-col gap-3">
+                <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+                    <h2 class="font-semibold text-sm text-white flex items-center gap-2">
+                        <i data-lucide="sliders" class="w-4 h-4 text-cyan-400"></i> Surface Parameters
+                    </h2>
+                    <span class="text-xs font-mono text-cyan-400" id="live-s-display">$s = 0.30 + 3.00i$</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                    <!-- Real Part Sigma -->
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span>$\sigma = \text{Re}(s)$</span>
+                            <input type="number" id="input-sigma" min="0.00" max="1.00" step="0.01" value="0.30" class="w-20 px-1.5 py-0.5 rounded bg-black/60 border border-white/10 text-cyan-300 font-mono text-right text-xs focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <input type="range" id="slider-sigma" min="0.05" max="0.95" step="0.01" value="0.30" class="w-full">
+                    </div>
+
+                    <!-- Imag Part Tau -->
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span>$\tau = \text{Im}(s)$</span>
+                            <input type="number" id="input-tau" min="-10.00" max="10.00" step="0.05" value="3.00" class="w-20 px-1.5 py-0.5 rounded bg-black/60 border border-white/10 text-cyan-300 font-mono text-right text-xs focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <input type="range" id="slider-tau" min="-6.00" max="6.00" step="0.05" value="3.00" class="w-full">
+                    </div>
+
+                    <!-- Bundle Radius -->
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span>Bundle Radius $r$</span>
+                            <input type="number" id="input-radius" min="0.01" max="1.00" step="0.01" value="0.15" class="w-20 px-1.5 py-0.5 rounded bg-black/60 border border-white/10 text-cyan-300 font-mono text-right text-xs focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <input type="range" id="slider-radius" min="0.02" max="0.40" step="0.01" value="0.15" class="w-full">
+                    </div>
+
+                    <!-- Max X Distance -->
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span>Domain Max $x_{\text{max}}$</span>
+                            <input type="number" id="input-xmax" min="2" max="100" step="1" value="30" class="w-20 px-1.5 py-0.5 rounded bg-black/60 border border-white/10 text-cyan-300 font-mono text-right text-xs focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <input type="range" id="slider-xmax" min="5" max="50" step="1" value="30" class="w-full">
+                    </div>
+
+                    <!-- Jacobi Fields Density / Count -->
+                    <div class="flex flex-col gap-1.5 sm:col-span-2">
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Jacobi Fields Count (Arrows)</span>
+                            <input type="number" id="input-arrows" min="0" max="30" step="1" value="6" class="w-20 px-1.5 py-0.5 rounded bg-black/60 border border-white/10 text-rose-300 font-mono text-right text-xs focus:outline-none focus:border-rose-500">
+                        </div>
+                        <input type="range" id="slider-arrows" min="0" max="25" step="1" value="6" class="w-full">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 2: Jacobi Vector Normal Plane Trajectory (Chart.js) -->
+            <div class="glass-panel p-4 rounded-2xl border border-white/10 flex flex-col gap-2">
+                <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                    <h2 class="font-semibold text-xs text-white flex items-center gap-2">
+                        <i data-lucide="compass" class="w-4 h-4 text-purple-400"></i> Jacobi Field Normal Trajectory $(\text{Re }\delta, \text{Im }\delta)$
+                    </h2>
+                    <span class="text-[11px] text-slate-400">Initial: $\delta(1)=1, \delta'(1)=0$</span>
+                </div>
+                <div class="w-full h-44 relative">
+                    <canvas id="chart-normal-plane"></canvas>
+                </div>
+            </div>
+
+            <!-- Panel 3: Rotation Diagnostic Im(delta) vs x -->
+            <div class="glass-panel p-4 rounded-2xl border border-white/10 flex flex-col gap-2">
+                <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                    <h2 class="font-semibold text-xs text-white flex items-center gap-2">
+                        <i data-lucide="activity" class="w-4 h-4 text-rose-400"></i> Rotation Diagnostic: $\text{Im }\delta(x)$
+                    </h2>
+                    <span class="text-[11px] font-mono text-rose-300" id="im-delta-summary">$\text{Im } K \neq 0 \implies \text{Twist}$</span>
+                </div>
+                <div class="w-full h-40 relative">
+                    <canvas id="chart-im-delta"></canvas>
+                </div>
+            </div>
+
+            <!-- Panel 4: Numerical Attestation & Grid Sweep -->
+            <div class="glass-panel p-4 rounded-2xl border border-white/10 flex flex-col gap-3">
+                <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                    <h2 class="font-semibold text-xs text-white flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> Numerical Attestation & Verification
+                    </h2>
+                    <button onclick="runNumericalSweep()" class="px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/20 text-[11px] font-mono transition">
+                        Run Numerical Grid Sweep
+                    </button>
+                </div>
+
+                <!-- Attestation Statement Box -->
+                <div id="attestation-banner" class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-700/50 text-[11px] text-slate-300 leading-snug">
+                    <div class="font-semibold text-white mb-1 flex items-center gap-1.5">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i> Numerical Attestation Verdict:
+                    </div>
+                    <span id="attestation-text">Evaluating parameters...</span>
+                </div>
+
+                <!-- Real-time Metrics -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 font-mono text-[11px]">
+                    <div class="p-2 rounded bg-black/40 border border-white/5 flex flex-col">
+                        <span class="text-slate-400 text-[10px]">Max $|\text{Im } \delta(x)|$</span>
+                        <span id="metric-max-im-delta" class="text-emerald-400 font-bold mt-0.5">0.000e+00</span>
+                    </div>
+                    <div class="p-2 rounded bg-black/40 border border-white/5 flex flex-col">
+                        <span class="text-slate-400 text-[10px]">Max $|\text{Im } K(1)|$</span>
+                        <span id="metric-max-im-k" class="text-cyan-400 font-bold mt-0.5">0.000e+00</span>
+                    </div>
+                    <div class="p-2 rounded bg-black/40 border border-white/5 flex flex-col col-span-2 sm:col-span-1">
+                        <span class="text-slate-400 text-[10px]">State Classification</span>
+                        <span id="metric-state-class" class="text-purple-300 font-semibold mt-0.5">Zero Twist</span>
+                    </div>
+                </div>
+
+                <!-- Sweep Heatmap Container -->
+                <div id="sweep-container" class="hidden flex-col gap-1.5 pt-1 border-t border-white/5">
+                    <div class="flex items-center justify-between text-[11px] text-slate-400">
+                        <span>Numerical Evaluation Matrix $(\sigma \text{ vs } \tau)$</span>
+                        <span class="text-[10px] text-slate-500">Purple = No Twist ($0.00$), Cyan = Twisting ($>0$)</span>
+                    </div>
+                    <div id="sweep-grid" class="grid grid-cols-9 gap-1 text-[9px] font-mono text-center"></div>
+                </div>
+            </div>
+
+            <!-- Panel 5: Mathematical Theory Brief -->
+            <div class="glass-panel p-4 rounded-2xl border border-white/10 flex flex-col gap-2.5 text-xs text-slate-300">
+                <h3 class="font-semibold text-white flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4 text-amber-400"></i> Theoretical Insight
+                </h3>
+                <div id="math-explanation" class="leading-relaxed text-slate-400 space-y-1">
+                    <!-- Dynamic KaTeX rendered text will go here -->
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        // Complex Number Arithmetic Helpers
+        function complex(re, im = 0) { return { re, im }; }
+        function cAdd(a, b) { return { re: a.re + b.re, im: a.im + b.im }; }
+        function cSub(a, b) { return { re: a.re - b.re, im: a.im - b.im }; }
+        function cMul(a, b) { return { re: a.re * b.re - a.im * b.im, im: a.re * b.im + a.im * b.re }; }
+        function cDiv(a, b) {
+            const d = b.re * b.re + b.im * b.im;
+            if (d === 0) return { re: 0, im: 0 };
+            return { re: (a.re * b.re + a.im * b.im) / d, im: (a.im * b.re - a.re * b.im) / d };
+        }
+        function cPowReal(x, s) {
+            // x^s where x > 0 real, s = sigma + i*tau
+            // x^s = x^sigma * e^(i * tau * ln(x))
+            const r = Math.pow(x, s.re);
+            const theta = s.im * Math.log(x);
+            return { re: r * Math.cos(theta), im: r * Math.sin(theta) };
+        }
+
+        // ODE Curvature K(x) = s(1-s)/x^2
+        function calcCurvature(s, x = 1.0) {
+            const oneMinusS = { re: 1.0 - s.re, im: -s.im };
+            const prod = cMul(s, oneMinusS);
+            const xSq = x * x;
+            return { re: prod.re / xSq, im: prod.im / xSq };
+        }
+
+        // Geodesic u_C(x) = C * x^s
+        function calcGeodesic(x, s, C = { re: 1.0, im: 0.0 }) {
+            const xs = cPowReal(x, s);
+            return cMul(C, xs);
+        }
+
+        // Jacobi equation coefficients for delta(1)=1, delta'(1)=0
+        // delta(x) = A x^s + B x^(1-s)
+        function calcJacobiCoefficients(s) {
+            const denom = { re: 1.0 - 2.0 * s.re, im: -2.0 * s.im };
+            const denomMagSq = denom.re * denom.re + denom.im * denom.im;
+            
+            // Handle s = 1/2 degeneracy check
+            if (denomMagSq < 1e-8) {
+                return { 
+                    A: { re: 0.5, im: 0.0 }, 
+                    B: { re: 0.5, im: 0.0 } 
+                };
+            }
+
+            const oneMinusS = { re: 1.0 - s.re, im: -s.im };
+            const A = cDiv(oneMinusS, denom);
+            const negS = { re: -s.re, im: -s.im };
+            const B = cDiv(negS, denom);
+
+            return { A, B };
+        }
+
+        // Exact Jacobi field delta(x)
+        function calcJacobiField(x, s, A, B) {
+            const xs = cPowReal(x, s);
+            const oneMinusS = { re: 1.0 - s.re, im: -s.im };
+            const x1s = cPowReal(x, oneMinusS);
+            
+            const term1 = cMul(A, xs);
+            const term2 = cMul(B, x1s);
+            return cAdd(term1, term2);
+        }
+
+        // Global Application State
+        const state = {
+            sigma: 0.30,
+            tau: 3.00,
+            radius: 0.15,
+            nBundle: 8,
+            arrowCount: 6,
+            xmax: 30.0,
+            autoRotate: false, // Disabled default camera rotation
+            samplePoints: 400,
+        };
+
+        // DOM Element Cache
+        const sliderSigma = document.getElementById('slider-sigma');
+        const sliderTau = document.getElementById('slider-tau');
+        const sliderRadius = document.getElementById('slider-radius');
+        const sliderXmax = document.getElementById('slider-xmax');
+        const sliderArrows = document.getElementById('slider-arrows');
+
+        const inputSigma = document.getElementById('input-sigma');
+        const inputTau = document.getElementById('input-tau');
+        const inputRadius = document.getElementById('input-radius');
+        const inputXmax = document.getElementById('input-xmax');
+        const inputArrows = document.getElementById('input-arrows');
+        let bundleGroup, ringGroup, arrowGroup, centralCurveMesh, axisGroup;
+
+        function initThreeJS() {
+            const container = document.getElementById('canvas-3d-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x09090b);
+
+            // Camera Setup
+            camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
+            camera.position.set(7.5, 9.5, 8.5);
+
+            // Renderer Setup
+            renderer = new THREE.WebGLRenderer({
+                canvas: document.getElementById('webgl-canvas'),
+                antialias: true,
+                alpha: true
+            });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Orbit Controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.autoRotate = state.autoRotate;
+            controls.autoRotateSpeed = 1.2;
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(10, 20, 15);
+            scene.add(dirLight);
+
+            // Groups
+            bundleGroup = new THREE.Group();
+            ringGroup = new THREE.Group();
+            arrowGroup = new THREE.Group();
+            axisGroup = new THREE.Group();
+
+            scene.add(bundleGroup);
+            scene.add(ringGroup);
+            scene.add(arrowGroup);
+            scene.add(axisGroup);
+
+            build3DAxes();
+
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function build3DAxes() {
+            // Clear existing axes
+            while(axisGroup.children.length > 0) { 
+                axisGroup.remove(axisGroup.children[0]); 
+            }
+
+            const uvLim = 3.5;
+            const maxLogX = Math.log(state.xmax);
+
+            // Base Grid (Re u, Im u) plane at x=1 (z=0)
+            const gridHelper = new THREE.GridHelper(uvLim * 2, 14, 0x27272a, 0x18181b);
+            gridHelper.position.y = 0;
+            axisGroup.add(gridHelper);
+
+            // Vertical axis line (Log x height)
+            const axisMat = new THREE.LineBasicMaterial({ color: 0x52525b, transparent: true, opacity: 0.6 });
+            const points = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, maxLogX * 1.5, 0)];
+            const axisGeo = new THREE.BufferGeometry().setFromPoints(points);
+            const verticalAxis = new THREE.Line(axisGeo, axisMat);
+            axisGroup.add(verticalAxis);
+        }
+
+        function getViridisColor(t) {
+            // t normalized from 0 to 1
+            const c0 = { r: 0.267, g: 0.004, b: 0.329 };
+            const c1 = { r: 0.127, g: 0.566, b: 0.550 };
+            const c2 = { r: 0.993, g: 0.906, b: 0.143 };
+
+            let r, g, b;
+            if (t < 0.5) {
+                const f = t * 2.0;
+                r = c0.r + (c1.r - c0.r) * f;
+                g = c0.g + (c1.g - c0.g) * f;
+                b = c0.b + (c1.b - c0.b) * f;
+            } else {
+                const f = (t - 0.5) * 2.0;
+                r = c1.r + (c2.r - c1.r) * f;
+                g = c1.g + (c2.g - c1.g) * f;
+                b = c1.b + (c2.b - c1.b) * f;
+            }
+            return new THREE.Color(r, g, b);
+        }
+
+        function update3DScene() {
+            // Clear dynamic groups
+            while(bundleGroup.children.length > 0) bundleGroup.remove(bundleGroup.children[0]);
+            while(ringGroup.children.length > 0) ringGroup.remove(ringGroup.children[0]);
+            while(arrowGroup.children.length > 0) arrowGroup.remove(arrowGroup.children[0]);
+
+            build3DAxes();
+
+            const s = complex(state.sigma, state.tau);
+            const xmax = state.xmax;
+            const logXmax = Math.log(xmax);
+            const numSamples = state.samplePoints;
+
+            // Generate x array (log space)
+            const xVals = [];
+            const logXVals = [];
+            for (let i = 0; i < numSamples; i++) {
+                const t = i / (numSamples - 1);
+                const logX = t * logXmax;
+                const x = Math.exp(logX);
+                xVals.push(x);
+                logXVals.push(logX);
+            }
+
+            // 1. Central Geodesic C = (1, 0)
+            const centralPoints = [];
+            const centralColors = [];
+            for (let i = 0; i < numSamples; i++) {
+                const x = xVals[i];
+                const u = calcGeodesic(x, s, complex(1.0, 0.0));
+                const zHeight = logXVals[i] * 1.5; // Scale height for visual aspect
+                centralPoints.push(new THREE.Vector3(u.re, zHeight, u.im));
+                
+                const col = getViridisColor(i / numSamples);
+                centralColors.push(col.r, col.g, col.b);
+            }
+
+            const centralGeo = new THREE.BufferGeometry().setFromPoints(centralPoints);
+            centralGeo.setAttribute('color', new THREE.Float32BufferAttribute(centralColors, 3));
+            
+            const centralMat = new THREE.LineBasicMaterial({
+                vertexColors: true,
+                linewidth: 3,
+            });
+            centralCurveMesh = new THREE.Line(centralGeo, centralMat);
+            bundleGroup.add(centralCurveMesh);
+
+            // 2. Family of Geodesics (Bundle on a small circle C = 1 + r e^(i theta))
+            const nBundle = state.nBundle;
+            const rBundle = state.radius;
+
+            for (let b = 0; b < nBundle; b++) {
+                const theta = (2.0 * Math.PI * b) / nBundle;
+                const C = complex(1.0 + rBundle * Math.cos(theta), rBundle * Math.sin(theta));
+                
+                const bPoints = [];
+                for (let i = 0; i < numSamples; i++) {
+                    const x = xVals[i];
+                    const u = calcGeodesic(x, s, C);
+                    const zHeight = logXVals[i] * 1.5;
+                    bPoints.push(new THREE.Vector3(u.re, zHeight, u.im));
+                }
+
+                const bGeo = new THREE.BufferGeometry().setFromPoints(bPoints);
+                const hue = b / nBundle;
+                const bMat = new THREE.LineBasicMaterial({
+                    color: new THREE.Color().setHSL(hue, 0.8, 0.6),
+                    transparent: true,
+                    opacity: 0.75,
+                    linewidth: 1.5
+                });
+                const bLine = new THREE.Line(bGeo, bMat);
+                bundleGroup.add(bLine);
+            }
+
+            // 3. Cross-Section Rings at specified sample x heights
+            const ringXValues = [1.0, 2.2, 5.5, 13.0, 30.0].filter(x => x <= xmax);
+            const ringThetaSegments = 64;
+
+            ringXValues.forEach(xr => {
+                const zHeight = Math.log(xr) * 1.5;
+                const centerU = calcGeodesic(xr, s, complex(1.0, 0.0));
+                const ringRadius = rBundle * Math.pow(xr, s.re);
+
+                const ringPoints = [];
+                for (let k = 0; k <= ringThetaSegments; k++) {
+                    const th = (2.0 * Math.PI * k) / ringThetaSegments;
+                    // Rotation angle tau * ln(x)
+                    const rotAngle = s.im * Math.log(xr);
+                    const uRe = centerU.re + ringRadius * Math.cos(th + rotAngle);
+                    const uIm = centerU.im + ringRadius * Math.sin(th + rotAngle);
+                    ringPoints.push(new THREE.Vector3(uRe, zHeight, uIm));
+                }
+
+                const ringGeo = new THREE.BufferGeometry().setFromPoints(ringPoints);
+                const ringMat = new THREE.LineDashedMaterial({
+                    color: 0x94a3b8,
+                    dashSize: 0.1,
+                    gapSize: 0.05,
+                    transparent: true,
+                    opacity: 0.7
+                });
+                const ringLine = new THREE.Line(ringGeo, ringMat);
+                ringLine.computeLineDistances();
+                ringGroup.add(ringLine);
+            });
+
+            // 4. Jacobi Field Arrows delta(x)
+            const { A, B } = calcJacobiCoefficients(s);
+            const count = state.arrowCount;
+            const arrowXValues = [];
+
+            if (count > 0) {
+                const logXmax = Math.log(xmax);
+                const logXmin = Math.log(1.1);
+                for (let k = 0; k < count; k++) {
+                    const t = count === 1 ? 0.5 : k / (count - 1);
+                    const logX = logXmin + t * (logXmax - logXmin);
+                    arrowXValues.push(Math.exp(logX));
+                }
+            }
+
+            arrowXValues.forEach(xa => {
+                const zHeight = Math.log(xa) * 1.5;
+                const anchorU = calcGeodesic(xa, s, complex(1.0, 0.0));
+                const deltaVec = calcJacobiField(xa, s, A, B);
+
+                // Arrow direction vector in 3D (horizontal plane)
+                const dir = new THREE.Vector3(deltaVec.re, 0, deltaVec.im);
+                const length = dir.length();
+                if (length > 1e-6) {
+                    dir.normalize();
+                    const scaledLength = Math.min(length * 0.45, 1.8);
+
+                    const arrowHelper = new THREE.ArrowHelper(
+                        dir,
+                        new THREE.Vector3(anchorU.re, zHeight, anchorU.im),
+                        scaledLength,
+                        0xf43f5e, // Rose accent arrow
+                        scaledLength * 0.25,
+                        scaledLength * 0.18
+                    );
+                    arrowGroup.add(arrowHelper);
+                }
+            });
+        }
+
+        let chartNormalPlane, chartImDelta;
+
+        function initCharts() {
+            // Chart 1: Normal Plane Trajectory (Re delta vs Im delta)
+            const ctxNormal = document.getElementById('chart-normal-plane').getContext('2d');
+            chartNormalPlane = new Chart(ctxNormal, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Trajectory δ(x)',
+                            data: [],
+                            showLine: true,
+                            borderColor: '#06b6d4',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            pointHoverRadius: 4,
+                            tension: 0.2
+                        },
+                        {
+                            label: 'Start (x=1)',
+                            data: [{ x: 1, y: 0 }],
+                            backgroundColor: '#f43f5e',
+                            pointRadius: 5,
+                            pointHoverRadius: 7
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: { display: true, text: 'Re δ(x)', color: '#94a3b8', font: { size: 10 } },
+                            grid: { color: 'rgba(255,255,255,0.06)' },
+                            ticks: { color: '#64748b', font: { size: 9 } }
+                        },
+                        y: {
+                            type: 'linear',
+                            title: { display: true, text: 'Im δ(x)', color: '#94a3b8', font: { size: 10 } },
+                            grid: { color: 'rgba(255,255,255,0.06)' },
+                            ticks: { color: '#64748b', font: { size: 9 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Chart 2: Im(delta) vs x
+            const ctxIm = document.getElementById('chart-im-delta').getContext('2d');
+            chartImDelta = new Chart(ctxIm, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'Im δ(x)',
+                            data: [],
+                            borderColor: '#f43f5e',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            fill: {
+                                target: 'origin',
+                                above: 'rgba(244, 63, 94, 0.08)',
+                                below: 'rgba(6, 182, 212, 0.08)'
+                            }
+                        },
+                        {
+                            label: 'Zero Line',
+                            data: [],
+                            borderColor: 'rgba(255,255,255,0.2)',
+                            borderWidth: 1,
+                            borderDash: [4, 4],
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'x (log scale)', color: '#94a3b8', font: { size: 10 } },
+                            grid: { color: 'rgba(255,255,255,0.06)' },
+                            ticks: { color: '#64748b', font: { size: 9 }, maxTicksLimit: 8 }
+                        },
+                        y: {
+                            title: { display: true, text: 'Im δ(x)', color: '#94a3b8', font: { size: 10 } },
+                            grid: { color: 'rgba(255,255,255,0.06)' },
+                            ticks: { color: '#64748b', font: { size: 9 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function updateChartsAndMath() {
+            const s = complex(state.sigma, state.tau);
+            const { A, B } = calcJacobiCoefficients(s);
+            const K1 = calcCurvature(s, 1.0);
+
+            const numPoints = 250;
+            const xmax = state.xmax;
+            const logXmax = Math.log(xmax);
+
+            const trajectoryData = [];
+            const imDeltaData = [];
+            const xLabels = [];
+            const zeroLineData = [];
+
+            let maxImVal = 0;
+
+            for (let i = 0; i < numPoints; i++) {
+                const t = i / (numPoints - 1);
+                const x = Math.exp(t * logXmax);
+                const delta = calcJacobiField(x, s, A, B);
+
+                trajectoryData.push({ x: delta.re, y: delta.im });
+                imDeltaData.push(delta.im);
+                xLabels.push(x.toFixed(1));
+                zeroLineData.push(0);
+
+                if (Math.abs(delta.im) > maxImVal) {
+                    maxImVal = Math.abs(delta.im);
+                }
+            }
+
+            // Update Chart 1 (Normal Plane)
+            chartNormalPlane.data.datasets[0].data = trajectoryData;
+            chartNormalPlane.update();
+
+            // Update Chart 2 (Im delta)
+            chartImDelta.data.labels = xLabels;
+            chartImDelta.data.datasets[0].data = imDeltaData;
+            chartImDelta.data.datasets[1].data = zeroLineData;
+            chartImDelta.update();
+
+            // Update Numerical Attestation Metrics
+            const metricMaxImDelta = document.getElementById('metric-max-im-delta');
+            const metricMaxImK = document.getElementById('metric-max-im-k');
+            const metricStateClass = document.getElementById('metric-state-class');
+            const attestationText = document.getElementById('attestation-text');
+
+            metricMaxImDelta.textContent = maxImVal < 1e-12 ? '0.000 (Exact 0)' : maxImVal.toExponential(3);
+            metricMaxImK.textContent = Math.abs(K1.im) < 1e-12 ? '0.000 (Exact 0)' : Math.abs(K1.im).toFixed(3);
+
+            // Update Status Badge & HUD
+            const badge = document.getElementById('twist-status-badge');
+            const badgeText = document.getElementById('twist-status-text');
+            const imDeltaSummary = document.getElementById('im-delta-summary');
+            const hudSVal = document.getElementById('hud-s-val');
+            const liveSDisplay = document.getElementById('live-s-display');
+
+            const isImZero = Math.abs(K1.im) < 1e-4 || maxImVal < 1e-4;
+
+            if (isImZero) {
+                badge.className = "pointer-events-auto px-3.5 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md flex items-center gap-2 border bg-purple-500/10 border-purple-500/40 text-purple-300";
+                badgeText.innerHTML = "ZERO TWIST / LOCKED (Im K = 0)";
+                imDeltaSummary.innerHTML = "$\\mathrm{Im}\\,\\delta(x) \\equiv 0$ (No Twist)";
+                imDeltaSummary.className = "text-[11px] font-mono text-purple-300";
+                metricStateClass.textContent = "Zero Twist (Locked)";
+                metricStateClass.className = "text-purple-300 font-semibold mt-0.5";
+                
+                if (Math.abs(state.sigma - 0.5) < 1e-4) {
+                    attestationText.innerHTML = "<strong>ATTESTED:</strong> On the critical line ($\sigma = 1/2$), $K(x) = (1/4 + \\tau^2)/x^2 \\in \\mathbb{R}$. $B = \\bar{A}$, yielding $\\operatorname{Im}\\delta(x) = 0$ everywhere to machine precision.";
+                } else {
+                    attestationText.innerHTML = "<strong>ATTESTED:</strong> For real parameter $\\tau = 0$, $K(x) \\in \\mathbb{R}$. The Jacobi vector remains aligned in a fixed plane; rotation is strictly zero.";
+                }
+            } else {
+                badge.className = "pointer-events-auto px-3.5 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md flex items-center gap-2 border bg-emerald-500/10 border-emerald-500/40 text-emerald-300";
+                badgeText.innerHTML = "ROTATING TWIST (Im K ≠ 0)";
+                imDeltaSummary.innerHTML = "$\\mathrm{Im}\\,\\delta(x) \\neq 0$ (Rotates/Spirals)";
+                imDeltaSummary.className = "text-[11px] font-mono text-emerald-300";
+                metricStateClass.textContent = "Rotating / Spiraling";
+                metricStateClass.className = "text-emerald-400 font-semibold mt-0.5";
+
+                attestationText.innerHTML = "<strong>ATTESTED:</strong> Complex curvature $\\operatorname{Im} K(1) = " + K1.im.toFixed(2) + " \\neq 0$ breaks plane symmetry ($B \\neq \\bar{A}$), generating continuous phase twist $\\max |\\operatorname{Im}\\delta| = " + maxImVal.toFixed(3) + "$.";
+            }
+
+            const sSign = s.im >= 0 ? '+' : '';
+            const KSign = K1.im >= 0 ? '+' : '';
+            const sStr = `$s = ${s.re.toFixed(2)} ${sSign} ${s.im.toFixed(2)}i$`;
+            const KStr = `$K(1) = ${K1.re.toFixed(2)} ${KSign} ${K1.im.toFixed(2)}i$`;
+
+            liveSDisplay.innerHTML = sStr;
+            hudSVal.innerHTML = `${sStr} | ${KStr}`;
+
+            // Render Mathematical Explanation Box with KaTeX
+            const mathBox = document.getElementById('math-explanation');
+            let explanationHTML = '';
+
+            if (Math.abs(state.sigma - 0.5) < 1e-4 && Math.abs(state.tau) > 1e-4) {
+                explanationHTML = `
+                    <p class="text-amber-300 font-medium">Critical Line Case ($\sigma = 1/2$):</p>
+                    <p>Curvature is strictly real: $K(x) = \\frac{1/4 + \\tau^2}{x^2} \\in \\mathbb{R}$.</p>
+                    <p>Since $B = \\bar{A}$, the Jacobi field reduces to $\\delta(x) = 2 \\operatorname{Re}(A x^{1/2 + i\\tau})$. Thus, <strong class="text-white">$\\operatorname{Im}\\delta(x) \\equiv 0$</strong> identically, keeping normal vectors locked along the real axis!</p>
+                `;
+            } else if (Math.abs(state.tau) < 1e-4) {
+                explanationHTML = `
+                    <p class="text-purple-300 font-medium">Real Eigenvalue Case ($\tau = 0$):</p>
+                    <p>The ODE surface reduces to a planar foliation. Both $s$ and $K(x)$ are real numbers.</p>
+                    <p>All geodesics stay in fixed phase planes, resulting in <strong class="text-white">zero rotation</strong>.</p>
+                `;
+            } else {
+                explanationHTML = `
+                    <p class="text-cyan-300 font-medium">Complex Curvature Case ($\operatorname{Im} K \\neq 0$):</p>
+                    <p>Because $\\sigma \\neq 1/2$ and $\\tau \\neq 0$, $B \\neq \\bar{A}$.</p>
+                    <p>The asymmetric growth of $x^s$ and $x^{1-s}$ induces an continuous frame rotation: <strong class="text-white">$\\operatorname{Im}\\delta(x) \\neq 0$</strong> spirals in the normal plane.</p>
+                `;
+            }
+
+            mathBox.innerHTML = explanationHTML;
+            renderMathInElement(mathBox, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+            renderMathInElement(liveSDisplay, { delimiters: [{left: "$", right: "$", display: false}] });
+            renderMathInElement(hudSVal, { delimiters: [{left: "$", right: "$", display: false}] });
+            renderMathInElement(imDeltaSummary, { delimiters: [{left: "$", right: "$", display: false}] });
+        }
+
+        function runNumericalSweep() {
+            const container = document.getElementById('sweep-container');
+            const grid = document.getElementById('sweep-grid');
+            container.classList.remove('hidden');
+            grid.innerHTML = '';
+
+            const sigmas = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
+            const taus = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0];
+
+            sigmas.forEach(sig => {
+                taus.forEach(tau => {
+                    const s = complex(sig, tau);
+                    const { A, B } = calcJacobiCoefficients(s);
+                    let maxIm = 0;
+                    for (let i = 0; i < 100; i++) {
+                        const x = Math.exp((i / 99) * Math.log(state.xmax));
+                        const d = calcJacobiField(x, s, A, B);
+                        if (Math.abs(d.im) > maxIm) maxIm = Math.abs(d.im);
+                    }
+
+                    const isZero = maxIm < 1e-10;
+                    const cell = document.createElement('div');
+                    cell.className = `p-1.5 rounded border ${isZero ? 'bg-purple-500/20 border-purple-500/40 text-purple-300' : 'bg-cyan-500/10 border-cyan-500/30 text-cyan-300'}`;
+                    cell.title = `σ=${sig}, τ=${tau} => Max |Im δ| = ${maxIm.toExponential(2)}`;
+                    cell.innerHTML = `<div class="font-bold">${sig.toFixed(1)},${tau.toFixed(0)}</div><div>${isZero ? '0.00' : maxIm.toFixed(1)}</div>`;
+                    grid.appendChild(cell);
+                });
+            });
+        }
+
+        function updateAll() {
+            update3DScene();
+            updateChartsAndMath();
+        }
+
+        function bindControls() {
+            // Helper to sync slider, number input, and state property
+            function setupControlPair(slider, input, key, isFloat = true) {
+                const updateVal = (val) => {
+                    const parsed = isFloat ? parseFloat(val) : parseInt(val, 10);
+                    if (isNaN(parsed)) return;
+                    state[key] = parsed;
+                    slider.value = parsed;
+                    input.value = isFloat ? (key === 'xmax' ? parsed.toFixed(0) : parsed.toFixed(2)) : parsed;
+                    updateAll();
+                };
+
+                slider.addEventListener('input', (e) => {
+                    const val = isFloat ? parseFloat(e.target.value) : parseInt(e.target.value, 10);
+                    state[key] = val;
+                    input.value = isFloat ? (key === 'xmax' ? val.toFixed(0) : val.toFixed(2)) : val;
+                    updateAll();
+                });
+
+                input.addEventListener('change', (e) => updateVal(e.target.value));
+                input.addEventListener('keyup', (e) => {
+                    if (e.key === 'Enter') updateVal(e.target.value);
+                });
+            }
+
+            setupControlPair(sliderSigma, inputSigma, 'sigma', true);
+            setupControlPair(sliderTau, inputTau, 'tau', true);
+            setupControlPair(sliderRadius, inputRadius, 'radius', true);
+            setupControlPair(sliderXmax, inputXmax, 'xmax', true);
+            setupControlPair(sliderArrows, inputArrows, 'arrowCount', false);
+        }
+
+        // Preset Loader
+        function loadPreset(type) {
+            if (type === 'complex') {
+                state.sigma = 0.30;
+                state.tau = 3.00;
+            } else if (type === 'critical') {
+                state.sigma = 0.50;
+                state.tau = 3.00;
+            } else if (type === 'real') {
+                state.sigma = 0.30;
+                state.tau = 0.00;
+            }
+
+            sliderSigma.value = state.sigma;
+            sliderTau.value = state.tau;
+            inputSigma.value = state.sigma.toFixed(2);
+            inputTau.value = state.tau.toFixed(2);
+
+            updateAll();
+        }
+
+        // Camera Control Helpers
+        function resetCamera(mode) {
+            if (mode === 'perspective') {
+                camera.position.set(7.5, 9.5, 8.5);
+                controls.target.set(0, 2.5, 0);
+            } else if (mode === 'top') {
+                camera.position.set(0, 16, 0.001);
+                controls.target.set(0, 0, 0);
+            }
+            controls.update();
+        }
+
+        function toggleAutoRotate() {
+            state.autoRotate = !state.autoRotate;
+            controls.autoRotate = state.autoRotate;
+            const btn = document.getElementById('btn-auto-rotate');
+            btn.classList.toggle('text-cyan-400', state.autoRotate);
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('canvas-3d-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(width, height);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        window.onload = function() {
+            initThreeJS();
+            initCharts();
+            bindControls();
+            
+            // Render initial equations
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+
+            updateAll();
+            animate();
+
+            // Initialize Lucide icons
+            lucide.createIcons();
+        };
+    </script>
+</body>
+</html>
