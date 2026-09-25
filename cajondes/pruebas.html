@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mollified Zeta Zeros vs Prime-Power Impulse Weights</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #222;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: #111;
+        }
+        p {
+            line-height: 1.5;
+            color: #555;
+        }
+        .controls {
+            margin: 20px 0;
+            padding: 16px;
+            background: #f1f3f5;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            align-items: center;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        input[type=range] {
+            width: 100%;
+            cursor: pointer;
+        }
+        #chart {
+            width: 100%;
+            height: 650px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Mollified Explicit Formula vs. Impulse Weights &Lambda;(n) = ln(p)</h1>
+    <p>The pink shaded background represents the target mollified impulse train with peak heights equal to <strong>ln(p)</strong>. As you add non-trivial zeros <em>&gamma;<sub>k</sub></em>, Gaussian windowing prevents infinite spikes and forces the blue spectral curve to converge directly onto the target weights.</p>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label for="nZeros">Zeros count (N): <span id="nDisplay">0</span> / 100</label>
+            <input type="range" id="nZeros" min="0" max="100" value="0" step="1">
+        </div>
+        <div class="control-group">
+            <label for="sigmaVal">Smoothing width (&sigma;): <span id="sigmaDisplay">0.050</span></label>
+            <input type="range" id="sigmaVal" min="0.015" max="0.120" value="0.050" step="0.005">
+        </div>
+    </div>
+
+    <div id="chart"></div>
+</div>
+
+<script>
+    // 100 Non-trivial zeros (imaginary parts gamma)
+    const gammas = [
+        14.1347, 21.0220, 25.0109, 30.4249, 32.9351, 37.5862, 40.9187, 43.3271, 48.0052, 49.7738,
+        52.9703, 56.4462, 59.3470, 60.8318, 65.1125, 67.0798, 69.5464, 72.0672, 75.7047, 77.1448,
+        79.3374, 82.9104, 84.7361, 87.4253, 88.8091, 92.4919, 94.6513, 95.8706, 98.8312, 101.3179,
+        105.4466, 107.5209, 111.0296, 111.8747, 114.3202, 116.2267, 118.7908, 121.3701, 122.9468, 124.2568,
+        127.5167, 129.5787, 131.0877, 133.2065, 134.7565, 138.1160, 139.7362, 141.1237, 143.1118, 146.0010,
+        147.4228, 150.0535, 150.9253, 153.0247, 156.1129, 157.5976, 158.8500, 161.1890, 163.0307, 165.5373,
+        167.1844, 169.0945, 169.9120, 173.3204, 174.7542, 176.4414, 178.3774, 179.9165, 182.2071, 184.8745,
+        185.9528, 187.2289, 189.2205, 192.0528, 193.0797, 195.2654, 196.8765, 198.0153, 201.2648, 202.4936,
+        204.1897, 205.3946, 207.9063, 209.5765, 211.6909, 213.3480, 214.5470, 216.1695, 219.0676, 220.7149,
+        221.4307, 224.0070, 224.9833, 227.4214, 229.3374, 231.2502, 231.9872, 233.6934, 236.5242, 237.5262
+    ];
+
+    // Helper to check prime
+    function isPrime(num) {
+        if (num < 2) return false;
+        for (let i = 2; i * i <= num; i++) {
+            if (num % i === 0) return false;
+        }
+        return true;
+    }
+
+    // Generate prime powers up to n = 220
+    function getPrimePowers(maxN) {
+        let pps = [];
+        for (let n = 2; n <= maxN; n++) {
+            for (let d = 2; d <= n; d++) {
+                if (isPrime(d)) {
+                    let temp = n;
+                    let k = 0;
+                    while (temp % d === 0) {
+                        temp /= d;
+                        k++;
+                    }
+                    if (temp === 1) {
+                        let weight = Math.log(d);
+                        let t = Math.log(n);
+                        let label = (k === 1) ? `${d}` : `${d}<sup>${k}</sup>`;
+                        let color = (d === 2) ? '#0077cc' : (d === 3) ? '#009966' : '#cc0033';
+                        pps.push({ n, p: d, k, t, weight, label, color });
+                        break;
+                    }
+                }
+            }
+        }
+        return pps;
+    }
+
+    const primePowers = getPrimePowers(220);
+
+    // Setup domain for t
+    const t_min = 0.4;
+    const t_max = 5.3;
+    const num_points = 2500;
+    const t_vals = [];
+    for (let i = 0; i <= num_points; i++) {
+        t_vals.push(t_min + (t_max - t_min) * (i / num_points));
+    }
+
+    // Build target mollified background curve
+    function computeTargetCurve(sigma) {
+        return t_vals.map(t => {
+            let sum = 0;
+            for (let pp of primePowers) {
+                let dt = t - pp.t;
+                sum += pp.weight * Math.exp(-(dt * dt) / (2 * sigma * sigma));
+            }
+            return sum;
+        });
+    }
+
+    // Build spectral explicit formula curve
+    function computeExplicitFormula(N, sigma) {
+        const factor = Math.sqrt(2 * Math.PI) * sigma;
+        return t_vals.map(t => {
+            let mainTerm = Math.exp(t);
+            let trivialTerm = 1 / (Math.exp(2 * t) - 1);
+            
+            let zeroSum = 0;
+            for (let i = 0; i < N; i++) {
+                let g = gammas[i];
+                let window = Math.exp(-0.5 * sigma * sigma * g * g);
+                zeroSum += window * Math.cos(g * t);
+            }
+            let nonTrivial = 2 * Math.exp(t / 2) * zeroSum;
+            
+            return factor * (mainTerm - trivialTerm - nonTrivial);
+        });
+    }
+
+    // Create Plotly shapes & annotations for reference image styling
+    function createShapesAndAnnotations() {
+        let shapes = [];
+        let annotations = [];
+
+        // Stem lines for prime powers
+        primePowers.forEach(pp => {
+            if (pp.t >= t_min && pp.t <= t_max) {
+                shapes.push({
+                    type: 'line',
+                    x0: pp.t, x1: pp.t,
+                    y0: 0, y1: pp.weight,
+                    line: { color: pp.color, width: 1.2 }
+                });
+            }
+        });
+
+        // Add interval arrows for delta_t = ln(2)
+        const p2_powers = primePowers.filter(pp => pp.p === 2 && pp.t <= t_max);
+        for (let i = 0; i < p2_powers.length - 1; i++) {
+            annotations.push({
+                x: (p2_powers[i].t + p2_powers[i+1].t) / 2,
+                y: 6.4,
+                text: 'Δt = ln(2)',
+                showarrow: false,
+                font: { size: 10, color: '#0077cc' }
+            });
+            shapes.push({
+                type: 'line',
+                x0: p2_powers[i].t, x1: p2_powers[i+1].t,
+                y0: 6.2, y1: 6.2,
+                line: { color: '#0077cc', width: 1, dash: 'solid' }
+            });
+        }
+
+        // Add interval arrows for delta_t = ln(3)
+        const p3_powers = primePowers.filter(pp => pp.p === 3 && pp.t <= t_max);
+        for (let i = 0; i < p3_powers.length - 1; i++) {
+            annotations.push({
+                x: (p3_powers[i].t + p3_powers[i+1].t) / 2,
+                y: 5.7,
+                text: 'Δt = ln(3)',
+                showarrow: false,
+                font: { size: 10, color: '#009966' }
+            });
+            shapes.push({
+                type: 'line',
+                x0: p3_powers[i].t, x1: p3_powers[i+1].t,
+                y0: 5.5, y1: 5.5,
+                line: { color: '#009966', width: 1, dash: 'dash' }
+            });
+        }
+
+        return { shapes, annotations };
+    }
+
+    // Build traces
+    const currentSigma = 0.050;
+    
+    // Trace 0: Shaded Target Background
+    const targetTrace = {
+        x: t_vals,
+        y: computeTargetCurve(currentSigma),
+        type: 'scatter',
+        mode: 'lines',
+        fill: 'tozeroy',
+        fillcolor: 'rgba(255, 192, 203, 0.45)',
+        line: { color: 'rgba(230, 100, 130, 0.3)', width: 1 },
+        name: 'Target Envelope'
+    };
+
+    // Trace 1: Diamond markers at peak heads
+    const diamondTrace = {
+        x: primePowers.map(pp => pp.t),
+        y: primePowers.map(pp => pp.weight),
+        text: primePowers.map(pp => pp.label),
+        mode: 'markers+text',
+        textposition: 'top center',
+        textfont: { size: 11, color: primePowers.map(pp => pp.color) },
+        marker: {
+            symbol: 'diamond',
+            size: 7,
+            color: primePowers.map(pp => pp.color)
+        },
+        name: 'Impulse Weights ln(p)'
+    };
+
+    // Trace 2: Spectral Formula Approximation
+    const spectralTrace = {
+        x: t_vals,
+        y: computeExplicitFormula(0, currentSigma),
+        type: 'scatter',
+        mode: 'lines',
+        line: { color: '#1a365d', width: 2 },
+        name: 'Mollified Formula'
+    };
+
+    const extraLayout = createShapesAndAnnotations();
+
+    const layout = {
+        title: 'Distributional Derivative Convergence to Impulse Weights',
+        xaxis: { title: 't = ln(n)', range: [0.4, 5.3], gridcolor: '#eaeaea' },
+        yaxis: { title: 'Fuerza del impulso (ln p)', range: [0, 7.0], gridcolor: '#eaeaea' },
+        shapes: extraLayout.shapes,
+        annotations: extraLayout.annotations,
+        hovermode: 'closest',
+        plot_bgcolor: '#ffffff',
+        paper_bgcolor: '#ffffff',
+        margin: { t: 60, b: 50, l: 60, r: 30 },
+        legend: { orientation: 'h', y: -0.15 }
+    };
+
+    Plotly.newPlot('chart', [targetTrace, diamondTrace, spectralTrace], layout, {responsive: true});
+
+    // Control handlers
+    const nSlider = document.getElementById('nZeros');
+    const nDisplay = document.getElementById('nDisplay');
+    const sigmaSlider = document.getElementById('sigmaVal');
+    const sigmaDisplay = document.getElementById('sigmaDisplay');
+
+    function updatePlot() {
+        const N = parseInt(nSlider.value);
+        const sigma = parseFloat(sigmaSlider.value);
+        
+        nDisplay.textContent = N;
+        sigmaDisplay.textContent = sigma.toFixed(3);
+
+        const newTargetY = computeTargetCurve(sigma);
+        const newSpectralY = computeExplicitFormula(N, sigma);
+
+        Plotly.update('chart', {
+            y: [newTargetY, primePowers.map(pp => pp.weight), newSpectralY]
+        }, {}, [0, 1, 2]);
+    }
+
+    nSlider.addEventListener('input', updatePlot);
+    sigmaSlider.addEventListener('input', updatePlot);
+</script>
+
+</body>
+</html>
