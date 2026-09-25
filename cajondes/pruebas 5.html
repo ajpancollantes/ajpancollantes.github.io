@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Impulse Trains: Exponential Fourier Convergence</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #222;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: #111;
+        }
+        p {
+            line-height: 1.5;
+            color: #555;
+        }
+        .controls {
+            margin: 20px 0;
+            padding: 16px;
+            background: #f1f3f5;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            align-items: center;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        input[type=range] {
+            width: 100%;
+            cursor: pointer;
+        }
+        #chart {
+            width: 100%;
+            height: 650px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Dirac Impulse Trains via Inverse Laplace / Exponential Fourier Series</h1>
+    <p>Sum of two Dirac delta trains with periods <strong>T₁ = 1.00s</strong> (blue) and <strong>T₂ = 0.75s</strong> (green). The exponential residue expansion reconstructed via Laplace inverse transforms converges to sharp spikes as you increase the harmonic count <em>N</em>. Notice double-amplitude coincidences at multiples of <strong>t = 3.0s</strong>.</p>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label for="nHarmonics">Harmonics count (N): <span id="nDisplay">0</span> / 120</label>
+            <input type="range" id="nHarmonics" min="0" max="120" value="0" step="1">
+        </div>
+        <div class="control-group">
+            <label for="sigmaVal">Smoothing width (&sigma;): <span id="sigmaDisplay">0.030</span></label>
+            <input type="range" id="sigmaVal" min="0.005" max="0.080" value="0.030" step="0.002">
+        </div>
+    </div>
+
+    <div id="chart"></div>
+</div>
+
+<script>
+    // System Parameters
+    const T1 = 1.00; // 1 second tick
+    const T2 = 0.75; // 0.75 second tick
+    const t_min = 0.0;
+    const t_max = 5.5;
+    const num_points = 2500;
+
+    // Generate discrete tick locations up to t_max
+    function generateTicks() {
+        let ticks = [];
+        // T1 ticks
+        for (let t = T1; t <= t_max + 1e-5; t += T1) {
+            ticks.push({ t: parseFloat(t.toFixed(4)), period: 1.0, weight: 1.0, color: '#0077cc', label: '1.0s tick' });
+        }
+        // T2 ticks
+        for (let t = T2; t <= t_max + 1e-5; t += T2) {
+            let existing = ticks.find(item => Math.abs(item.t - t) < 1e-4);
+            if (existing) {
+                existing.weight += 4/3; // Coincidence tick weight adjustment
+                existing.label = 'Coincidence (3.0s)';
+                existing.color = '#cc0033';
+            } else {
+                ticks.push({ t: parseFloat(t.toFixed(4)), period: 0.75, weight: 4/3, color: '#009966', label: '0.75s tick' });
+            }
+        }
+        return ticks.sort((a, b) => a.t - b.t);
+    }
+
+    const ticks = generateTicks();
+
+    // Domain grid
+    const t_vals = [];
+    for (let i = 0; i <= num_points; i++) {
+        t_vals.push(t_min + (t_max - t_min) * (i / num_points));
+    }
+
+    // Gaussian target background curve
+    function computeTargetCurve(sigma) {
+        return t_vals.map(t => {
+            let sum = 0;
+            ticks.forEach(tick => {
+                let dt = t - tick.t;
+                sum += tick.weight * Math.exp(-(dt * dt) / (2 * sigma * sigma));
+            });
+            return sum;
+        });
+    }
+
+    // Truncated Exponential / Fourier Cosine Sum Curve
+    function computeFourierSum(N, sigma) {
+        const w1 = (2 * Math.PI) / T1;
+        const w2 = (2 * Math.PI) / T2;
+
+        return t_vals.map(t => {
+            // Series 1 (T1 = 1.0s) -> amplitude scale 1/T1 = 1.0
+            let sum1 = 1.0; 
+            for (let k = 1; k <= N; k++) {
+                let freq = k * w1;
+                let window = Math.exp(-0.5 * sigma * sigma * freq * freq);
+                sum1 += 2 * window * Math.cos(freq * t);
+            }
+            
+            // Series 2 (T2 = 0.75s) -> amplitude scale 1/T2 = 4/3
+            let sum2 = 1.0; 
+            for (let m = 1; m <= N; m++) {
+                let freq = m * w2;
+                let window = Math.exp(-0.5 * sigma * sigma * freq * freq);
+                sum2 += 2 * window * Math.cos(freq * t);
+            }
+            sum2 *= (1 / T2); // Weight by 4/3
+
+            return sum1 + sum2;
+        });
+    }
+
+    // Stem lines and annotations
+    function createShapesAndAnnotations() {
+        let shapes = [];
+        let annotations = [];
+
+        ticks.forEach(tick => {
+            shapes.push({
+                type: 'line',
+                x0: tick.t, x1: tick.t,
+                y0: 0, y1: tick.weight * 2.5,
+                line: { color: tick.color, width: 1.2, dash: tick.color === '#cc0033' ? 'solid' : 'dot' }
+            });
+
+            annotations.push({
+                x: tick.t,
+                y: tick.weight * 2.5 + 0.3,
+                text: `${tick.t}s`,
+                showarrow: false,
+                font: { size: 10, color: tick.color }
+            });
+        });
+
+        return { shapes, annotations };
+    }
+
+    const currentSigma = 0.030;
+
+    // Trace 0: Shaded Target Background Envelope
+    const targetTrace = {
+        x: t_vals,
+        y: computeTargetCurve(currentSigma),
+        type: 'scatter',
+        mode: 'lines',
+        fill: 'tozeroy',
+        fillcolor: 'rgba(255, 192, 203, 0.45)',
+        line: { color: 'rgba(230, 100, 130, 0.3)', width: 1 },
+        name: 'Target Impulse Envelope'
+    };
+
+    // Trace 1: Impulse markers
+    const markerTrace = {
+        x: ticks.map(k => k.t),
+        y: ticks.map(k => k.weight * 2.5),
+        mode: 'markers',
+        marker: {
+            symbol: 'diamond',
+            size: 8,
+            color: ticks.map(k => k.color)
+        },
+        name: 'Delta Ticks (T₁=1.0s, T₂=0.75s)'
+    };
+
+    // Trace 2: Reconstructed Series
+    const spectralTrace = {
+        x: t_vals,
+        y: computeFourierSum(0, currentSigma),
+        type: 'scatter',
+        mode: 'lines',
+        line: { color: '#1a365d', width: 2 },
+        name: 'Truncated Exponential Sum S_N(t)'
+    };
+
+    const extraLayout = createShapesAndAnnotations();
+
+    const layout = {
+        title: 'Exponential Series Approximation of Dual Dirac Combs',
+        xaxis: { title: 'Time t (seconds)', range: [0, 5.5], gridcolor: '#eaeaea' },
+        yaxis: { title: 'Amplitude S_N(t)', range: [-1.5, 10.0], gridcolor: '#eaeaea' },
+        shapes: extraLayout.shapes,
+        annotations: extraLayout.annotations,
+        hovermode: 'closest',
+        plot_bgcolor: '#ffffff',
+        paper_bgcolor: '#ffffff',
+        margin: { t: 60, b: 50, l: 60, r: 30 },
+        legend: { orientation: 'h', y: -0.15 }
+    };
+
+    Plotly.newPlot('chart', [targetTrace, markerTrace, spectralTrace], layout, {responsive: true});
+
+    // Event controls
+    const nSlider = document.getElementById('nHarmonics');
+    const nDisplay = document.getElementById('nDisplay');
+    const sigmaSlider = document.getElementById('sigmaVal');
+    const sigmaDisplay = document.getElementById('sigmaDisplay');
+
+    function updatePlot() {
+        const N = parseInt(nSlider.value);
+        const sigma = parseFloat(sigmaSlider.value);
+        
+        nDisplay.textContent = N;
+        sigmaDisplay.textContent = sigma.toFixed(3);
+
+        const newTargetY = computeTargetCurve(sigma);
+        const newSpectralY = computeFourierSum(N, sigma);
+
+        Plotly.update('chart', {
+            y: [newTargetY, ticks.map(k => k.weight * 2.5), newSpectralY]
+        }, {}, [0, 1, 2]);
+    }
+
+    nSlider.addEventListener('input', updatePlot);
+    sigmaSlider.addEventListener('input', updatePlot);
+</script>
+
+</body>
+</html>
